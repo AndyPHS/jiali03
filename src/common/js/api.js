@@ -53,6 +53,8 @@ const apiUrl = {
   updateCase: baseURL + 'case/update_case_data',
   // 新增案由
   addCaseAction: baseURL + 'case_action/add',
+  // 获取案由
+  selectCaseAction: baseURL + 'case_action/select',
   // 新增法院信息
   creatCaseCourtMsg: baseURL + 'case_court/create',
   // 获取法院信息

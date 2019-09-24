@@ -81,6 +81,17 @@ export const addCaseAction = params => {
   });
 };
 
+// 查询案由
+export const selectCaseAction = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectCaseAction,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+
 // 新增法院信息
 export const creatCaseCourtMsg = params => {
   return axios({
