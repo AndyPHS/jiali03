@@ -42,7 +42,7 @@
                                 <el-input v-model="pageInfo.master_number"  @blur="updateInfo({master_number: pageInfo.master_number})"></el-input>
                             </el-form-item>
                             <el-form-item label="文书类型：">
-                                <el-select v-model="pageInfo.status" placeholder="文书类型" @change="updateInfo({status:pageInfo.status})" >
+                                <el-select id="case_type" v-model="pageInfo.status" placeholder="文书类型" @change="updateInfo({status:pageInfo.status})" >
                                     <el-option label="判决书" value="1"></el-option>
                                     <el-option label="裁定书" value="2"></el-option>
                                     <el-option label="调解书" value="3"></el-option>
@@ -462,6 +462,12 @@
 </script>
 
 <style scoped lang="less">
+    #case_type{
+        width:100%;
+    }
+    .el-select{
+        width: 100%;
+    }
     .el-form-item{
         margin-bottom:12px !important;
     }
