@@ -49,21 +49,33 @@
                                     <el-option label="其他" value="4"></el-option>
                                 </el-select>
                             </el-form-item>
-                            <el-form-item label="法院层级">
-                                <el-select v-model="pageInfo.court" placeholder="法院层级" @change="updateInfo({court:pageInfo.court})">
-                                    <el-option label="基层人民法院" value="1"></el-option>
-                                    <el-option label="中级人民法院" value="2"></el-option>
-                                    <el-option label="高级人民法院" value="3"></el-option>
-                                    <el-option label="最高人民法院" value="4"></el-option>
-                                </el-select>
+                            <el-form-item label="法院：" class="text-base">
+                                <el-input v-model="pageInfo.court" placeholder="法院信息"></el-input>
+                                <div>
+                                    <el-select v-model="pageInfo.court" placeholder="法院" @change="updateInfo({court:pageInfo.court})">
+                                        <el-option v-for="item of court" :label="item.name" :value="item.id" :key="item.id">{{item.name}}</el-option>
+                                    </el-select>
+                                </div>
+                                <!--<el-select v-model="value" filterable placeholder="请选择">-->
+                                    <!--<el-option-->
+                                            <!--v-for="item in options"-->
+                                            <!--:key="item.value"-->
+                                            <!--:label="item.label"-->
+                                            <!--:value="item.value">-->
+                                    <!--</el-option>-->
+                                <!--</el-select>-->
+
                             </el-form-item>
-                            <el-form-item label="案由：(待和后台商议)" class="text-base">
+                            <!--<el-form-item label="法院: ">-->
+                                <!--<el-select v-model="pageInfo.court" placeholder="法院层级" @change="updateInfo({court:pageInfo.court})">-->
+                                    <!--<el-option label="基层人民法院" value="1"></el-option>-->
+                                    <!--<el-option label="中级人民法院" value="2"></el-option>-->
+                                    <!--<el-option label="高级人民法院" value="3"></el-option>-->
+                                    <!--<el-option label="最高人民法院" value="4"></el-option>-->
+                                <!--</el-select>-->
+                            <!--</el-form-item>-->
+                            <el-form-item label="案由：" class="text-base">
                                 <el-input v-model="pageInfo.case_action"></el-input>
-                            </el-form-item>
-                            <el-form-item label="法庭：" class="text-base">
-                                <el-select v-model="pageInfo.scourt" placeholder="法院层级" @change="updateInfo({scourt:pageInfo.scourt})">
-                                    <el-option v-for="item of scourt" :label="item.name" :value="item.id" :key="item.id">{{item.name}}</el-option>
-                                </el-select>
                             </el-form-item>
                             <el-form-item label="审判程序：" class="text-base">
                                 <el-select v-model="pageInfo.subject" placeholder="法院层级" @change="updateInfo({subject:pageInfo.subject})">
@@ -192,7 +204,7 @@
   import {selectCaseData} from '@/api/api/requestLogin.js'
   import {updateCaseData} from '@/api/api/requestLogin.js'   // 修改页面信息
   import {addCaseAction} from '@/api/api/requestLogin.js'
-  import {getCaseCourtMsg} from '@/api/api/requestLogin.js'  // 查询法庭信息
+  import {getCaseCourtMsg} from '@/api/api/requestLogin.js'  // 查询法院信息
   import legal_basis from '@/components/partials/legal_basis'  // 标签组件
   export default {
     components: {
@@ -233,12 +245,13 @@
           cid: 2,
           content: '',       // 判决书内容
           imgs: '',          // 判决书图片
-          json_content: ''
+          json_content: '',
+          label_case: "[{\"lid\":6}]"   // 标签
         },
         case_action: {
           name:''
         },
-        scourt: null,
+        court: null,
         activeName: 'first'
       }
     },
@@ -304,7 +317,7 @@
       },
       //添加证据摘要
       addEvidence(type){
-        console.log(type)
+        // console.log(type)
         this.pageInfo.case_evidence[type].push({
           evidence: '',
           [type]: ''
@@ -326,7 +339,7 @@
       },
       updateInfo (e) {
         updateCaseData(e).then((data) =>{
-          console.log(JSON.parse(data.config.data))
+          // console.log(JSON.parse(data.config.data))
         })
       },
       // 增加案由
@@ -359,7 +372,7 @@
       // 查询法庭信息
       getCaseCourtMsg () {
         getCaseCourtMsg().then((data) =>{
-          this.scourt = data.data.data;
+          this.court = data.data.data;
         })
       },
       // 生成页面

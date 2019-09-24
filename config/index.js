@@ -15,7 +15,7 @@ module.exports = {
         target:'http://office365.aladdinlaw.com/api/jiali_api/v1',
         changeOrigin:true,//允许跨域
         pathRewrite:{
-          '^/api': ''
+          '/api':''
         }
       }
     },

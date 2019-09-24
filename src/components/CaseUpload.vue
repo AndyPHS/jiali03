@@ -42,7 +42,7 @@
 
                     </form>
                     <div class="my-6">
-                        <a class="text-blue-500">查看已上传的文件</a>
+                        <a class="text-blue-500" @click="getList()">查看已上传的文件</a>
                     </div>
                 </div>
             </div>
@@ -61,9 +61,9 @@
    data(){
      return{
         msg:localStorage.getItem('name'),
-        formData:{
-          title:'',
-          imgs:[]
+        formData: {
+          title: '',
+          file: ''
         },
        isShow:false,
        filename:'',
@@ -75,7 +75,7 @@
      }
    },
     methods:{
-      submitClick:function () {
+      submitClick () {
         creatCase(this.formData).then((data)=>{
           console.log(typeof this.formData.imgs)
           this.$router.replace("/FileList");
@@ -141,6 +141,9 @@
         dome.value == ''
         this.fileList.splice(index, 1);
         this.Files.splice(index, 1);
+      },
+      getList () {
+        this.$router.replace("/FileList");
       }
     }
 

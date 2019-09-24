@@ -2,7 +2,7 @@
     <div>
         <div>
             <ul class="flex flex-wrap my-4 overflow-wrap">
-                <li class="px-2 py-1 bg-green-500 rounded text-white mx-2 my-2" v-for="(item,index) in oldlabel" :key="item.id" @click="addLabelarr(item.title)">{{item.title}}</li>
+                <li class="px-2 py-1 bg-green-500 rounded text-white mx-2 my-2" v-for="(item,index) in oldlabel" :key="item.id" @click="addLabelarr(item.title,item.id)">{{item.title}}</li>
             </ul>
 
         </div>
@@ -29,8 +29,9 @@
 </template>
 
 <script>
-    import {selectCaseLable} from "@/api/api/requestLogin.js";    // 查询标签接口
-    import {updateCaseData} from '@/api/api/requestLogin.js'   // 修改页面信息
+  import {selectCaseData} from '@/api/api/requestLogin.js'     // 获取案件信息
+  import {selectCaseLable} from "@/api/api/requestLogin.js";    // 查询标签接口
+  import {updateCaseData} from '@/api/api/requestLogin.js'   // 修改页面信息
   export default {
     name: 'legal_basis',
     props: {
@@ -45,58 +46,54 @@
       return {
         currentval: '',
         labelarr: [],
-        oldlabel: ''
+        oldlabel: [],
+        label_case: []
       }
     },
     mounted () {
       this.getCaseLable();    // 获取标签
-    },
-    watch: {
-      labelarr (old, cur) {
-        this.$emit('on-change', this.labelarr)
-      },
-      parentarr () {
-        if (this.parentarr.length > 0) {
-          this.labelarr = this.oldlabel
-          for (let i = 0; i < this.parentarr.length; i++) {
-            this.labelarr.push(this.parentarr[i])
-          }
-        } else {
-          this.labelarr = []
-        }
-      }
+      this.getInfo();  // 获取本案标签
     },
     methods: {
       // 移除标签
       removeitem (index, item) {
         this.labelarr.splice(index, 1)
       },
-      // input回车加入labelarr中
+      // input回车加入labelarr中 添加新标签
       addlabel () {
         let count = this.oldlabel.indexOf(this.currentval)
         if (count === -1) {
           this.labelarr.push(this.currentval)
-          this.oldlabel.push(this.currentval)
         }
         this.currentval = ''
       },
       // 获取标签
       getCaseLable () {
         selectCaseLable().then((data) =>{
-          // console.log(data.data)
+          // this.oldlabel = data.data.data;
           this.oldlabel = data.data.data;
-          let cloneData = JSON.parse(JSON.stringify(data.data.data))  ;
-          console.log(cloneData)
-          return cloneData.filter(father=>{
-            let branchArr = cloneData.filter(child=>father.id == child.parentId)    //返回每一项的子级数组
-            branchArr.length>0 ? father.children = branchArr : ''   //如果存在子级，则给父级添加一个children属性，并赋值
-            return father.parentId==0;      //返回第一层
-          });
         })
       },
-      addLabelarr (e) {
-        this.labelarr.push(e);
-        updateCaseData().then((data) =>{
+      getInfo () {
+        selectCaseData().then((data) => {
+          this.labelarr = JSON.parse(data.data.label_case); // 标签格式摘要
+          if(data.data.label_case == null) {
+            this.labelarr = [{
+              lid: ''
+            }]
+          };
+        }).catch((data)=>{
+          // this.$message.error(err);
+          alert(data)
+        });
+      },
+      addLabelarr (t,id) {   // 从标签池选择添加标签
+        this.labelarr.push({json_label:id});
+        this.label_case.push({name:t});
+        console.log(this.labelarr)
+        console.log(this.label_case)
+
+        updateCaseData({json_label:id,type:1}).then((data) =>{
           console.log(JSON.parse(data.config.data))
         })
       }
