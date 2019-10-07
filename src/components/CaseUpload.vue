@@ -14,7 +14,7 @@
             <div>
                 <div class="">
                     <h2 class="md:text-3xl text-orange-500 py-4">案例上传</h2>
-                    <form action="" class="w-2/3 mx-auto" enctype="multipart/form-data">
+                    <form action="" name="myForm" id="myForm" class="w-2/3 mx-auto" enctype="multipart/form-data">
                         <div class="text-left">
                             <span class="md:text-xl">文件名称</span>
                             <input type="text" name="title" id="name" placeholder="请输入文件名称" v-model="formMsg.title"
@@ -27,9 +27,8 @@
                                            accept='image/jpeg, image/png, image/jpg' class="pl-2" @change="selectFile"
                                            multiple></li>
                                 <li class="my-2 text-red-500">(注意：图片必须以1234……命名，切按顺序上传如：1.jpg)</li>
+                                <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
                             </ul>
-                        </div>
-                        <div id="previewImg">
                         </div>
                         <div>
                             <ul>
@@ -45,7 +44,6 @@
                                     @click.prevent="submitClick()">确认上传
                             </button>
                         </div>
-
                     </form>
                     <div class="my-6">
                         <a class="text-blue-500" @click="getList()">查看已上传的文件</a>
@@ -59,7 +57,7 @@
 <script>
   import HeadMenu from '@/components/HeadMenu'
   import {creatCase} from '@/api/api/requestLogin.js'
-
+  // import {apiUrl} from '@/common/js/api.js'
   export default {
     name: 'caseupload',
     components: {
@@ -70,7 +68,7 @@
         msg: localStorage.getItem('name'),
         formMsg: {
           title: '',
-          imgs: ''
+          imgs: []
         },
         isShow: false,
         filename: '',
@@ -89,13 +87,28 @@
         }
         formData.append('title',this.formMsg.title)
         creatCase(formData).then((data) => {
+          console.log(data)
           this.$router.replace('/FileList')
         }).catch((data) => {
+
         })
       },
       selectFile: function () {
 
 
+      },
+      update(e){
+        let file = e.target.files[0];
+        let param = new FormData();
+        param.append('imgs',file,file.name);//通过append向form对象添加数据
+        param.append('title',this.formMsg.title);//添加form表单中其他数据
+        console.log(param.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
+        let config = {
+          headers: {'Content-Type':'multipart/form-data', Authorization: 'bearer ' + localStorage.getItem('token')}
+        };
+        this.$axios.post(apiUrl.creatCase,param,config).then(responsive=>{
+          console.log(responsive.data)
+        })
       },
       uploadImg () {
         var files = document.getElementById('file').files

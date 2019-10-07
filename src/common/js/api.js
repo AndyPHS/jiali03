@@ -66,13 +66,13 @@ const apiUrl = {
   // 修改法院信息
   updateCaseCourtMsg: baseURL + '/case_court/update/{$courtId}',
   // 新增法院人员信息
-  addCaseCourtPersonnel: baseURL + '/case_court_personnel/add',
+  addCaseCourtPersonnel: baseURL + 'case_court_personnel/add/',
   // 删除法院人员信息
-  deleteCaseCourtPersonnel: baseURL + '/case_court_personnel/delete/{$cpId}',
+  deleteCaseCourtPersonnel: baseURL + 'case_court_personnel/delete/',
   // 修改法院人员信息
-  updateCaseCourtPersonnel: baseURL + '/case_court_personnel/update/{$cpId}',
+  updateCaseCourtPersonnel: baseURL + 'case_court_personnel/update/',
   // 获取法院人员信息
-  selectCaseCourtPersonnel: baseURL + '/case_court_personnel/select',
+  selectCaseCourtPersonnel: baseURL + 'case_court_personnel/select/',
   // 新增标签
   addCaseLable: baseURL + '/case_label/add',
   // 删除标签
@@ -82,21 +82,21 @@ const apiUrl = {
   // 查找标签
   selectCaseLable: baseURL + 'case_label/select',
   // 新增律师信息
-  addCaseLawyer: baseURL + '/case_lawyer/add',
+  addCaseLawyer: baseURL + 'case_lawyer/add',
   // 删除律师信息
   deleteCaseLawyer: baseURL + '/case_lawyer/delete/{$lid}',
   // 修改律师信息
   updateCaseLawyer: baseURL + '/case_lawyer/update/{$lid}',
   // 查看律师信息
-  selectCaseLawyer: baseURL + '/case_lawyer/select',
+  selectCaseLawyer: baseURL + 'case_lawyer/select/',
   // 新增律所信息
-  addCaseLawyerOffice: baseURL + '/case_lawyer_office/add',
+  addCaseLawyerOffice: baseURL + 'case_lawyer_office/add',
   // 删除律所信息
   deleteCaseLawyerOffice: baseURL + '/case_lawyer_office/delete{$loid}',
   // 修改律所信息
-  updateCaseLawyerOffice: baseURL + '/case_lawyer_office/update{$loid}',
+  updateCaseLawyerOffice: baseURL + 'case_lawyer_office/update/',
   // 查看律所信息
-  selectCaseLawyerOffice: baseURL + '/case_lawyer_office/select',
+  selectCaseLawyerOffice: baseURL + 'case_lawyer_office/select',
   // 新增案件类型
   addCaseType: baseURL + '/case_type/add',
   // 删除案件类型

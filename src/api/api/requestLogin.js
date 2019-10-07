@@ -14,7 +14,7 @@ export const verifyCode = params => {
 // 登录
 export const requestLogin = params => {
   return axios({
-    method: "post",
+    method: 'post',
     dataType: 'json',
     url: apiUrl.login,
     data: params
@@ -24,24 +24,25 @@ export const requestLogin = params => {
 // 新增案件信息
 export const creatCase = params => {
   return axios({
-    method: "post",
+    method: 'POST',
     dataType: 'json',
-    cache:false,
+    cache: true,
+    async: false,
     timeout: 5000,
-    contentType: false,
+    processData: false,
     url: apiUrl.creatCase,
-    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    headers: { Authorization: 'bearer ' + localStorage.getItem('token'), 'Content-Type': 'multipart/form-data:charset=UTF-8' },
     data: params
-  });
+  })
 };
 
 // 修改案件基本信息
 export const updateCaseData = params => {
   return axios({
-    method: "put",
+    method: 'put',
     dataType: 'json',
-    url: apiUrl.updateCase + "/" + localStorage.getItem('id'),
-    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    url: apiUrl.updateCase + '/' + localStorage.getItem('id'),
+    headers: {Authorization: 'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
@@ -103,12 +104,13 @@ export const creatCaseCourtMsg = params => {
 };
 // 修改法院信息
 export const updateCaseCourtMsg = params => {
-  return axios({
-    method: "put",
-    dataType: 'json',
-    url: apiUrl.updateCaseCourtMsg+params.cpid,
-    data: qs.stringify(params)
-  });
+  alert(params)
+  // return axios({
+  //   method: "put",
+  //   dataType: 'json',
+  //   url: apiUrl.updateCaseCourtMsg+params.cpid,
+  //   data: qs.stringify(params)
+  // });
 };
 
 // 删除法院信息
@@ -141,3 +143,107 @@ export const selectCaseLable = params => {
     data: params
   });
 };
+//查询法院人员
+export const getCourtPersonnels = params => {
+
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectCaseCourtPersonnel+params.courtId,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')}
+  });
+};
+
+
+//新增法院人员
+export const addCourtPersonnels = params => {
+
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addCaseCourtPersonnel,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+
+//修改法院人员
+export const updateCourtPersonnels = params => {
+
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateCaseCourtPersonnel+params.cpid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+
+//删除法院人员
+export const delCourtPersonnels = params => {
+
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteCaseCourtPersonnel+params.cpid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')}
+  });
+};
+
+
+// 查询律所信息
+export const getCourtData = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectCaseLawyerOffice,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+
+// 查询律师
+export const getLawyerData = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectCaseLawyer+params.loid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')}
+  });
+};
+
+
+// 新增律所
+export const addLawyerOffice = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addCaseLawyerOffice,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data:params
+  });
+};
+// 修改律所
+export const updateLawyerOffice = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateCaseLawyerOffice+params.loid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data:params
+  });
+};
+
+// 新增律师
+export const addLawyer = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addCaseLawyer,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data:params
+  });
+};
+

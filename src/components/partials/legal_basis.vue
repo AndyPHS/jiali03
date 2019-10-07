@@ -1,25 +1,25 @@
 <template>
     <div>
         <div>
-            <ul class="flex flex-wrap my-4 overflow-wrap">
-                <li class="px-2 py-1 bg-green-500 rounded text-white mx-2 my-2" v-for="(item,index) in oldlabel" :key="item.id" @click="addLabelarr(item.title,item.id)">{{item.title}}</li>
+            <ul class="flex flex-wrap my-2 overflow-wrap">
+                <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in oldlabel" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
             </ul>
 
         </div>
         <div class="inputbox">
             <div class="arrbox">
-                <div v-for="(item,index) in labelarr" :key="index" class="spanbox">
-                    <span>{{item}}</span>
-                    <i class="spanclose" @click="removeitem(index,item)"></i>
+                <div v-for="(item,index) in labelarr" @change="addLabelarr" :key="index" class="spanbox">
+                    <span>{{item.title}}</span>
+                    <i class="spanclose" @click="removeitem(index, item)"></i>
                 </div>
-                <input
-                        placeholder="输入后回车"
-                        size="5"
-                        v-model="currentval"
-                        @keyup.enter="addlabel"
-                        class="input"
-                        type="text"
-                />
+                <!--<input-->
+                <!--placeholder="输入后回车"-->
+                <!--size="5"-->
+                <!--v-model="currentval"-->
+                <!--@keyup.enter="addlabel"-->
+                <!--class="input"-->
+                <!--type="text"-->
+                <!--/>-->
             </div>
         </div>
 
@@ -33,7 +33,7 @@
   import {selectCaseLable} from "@/api/api/requestLogin.js";    // 查询标签接口
   import {updateCaseData} from '@/api/api/requestLogin.js'   // 修改页面信息
   export default {
-    name: 'legal_basis',
+    name: 'label_case',
     props: {
       parentarr: {
         type: Array,
@@ -58,43 +58,40 @@
       // 移除标签
       removeitem (index, item) {
         this.labelarr.splice(index, 1)
+        this.label_case.splice(index, 1)
+        updateCaseData({json_label:item.lid, type: 3}).then((data) =>{
+          // console.log(JSON.parse(data.config.data))
+        })
       },
       // input回车加入labelarr中 添加新标签
-      addlabel () {
-        let count = this.oldlabel.indexOf(this.currentval)
-        if (count === -1) {
-          this.labelarr.push(this.currentval)
-        }
-        this.currentval = ''
-      },
+      // addlabel () {
+      //   let count = this.oldlabel.indexOf(this.currentval)
+      //   if (count === -1) {
+      //     this.labelarr.push(this.currentval)
+      //   }
+      //   this.currentval = ''
+      // },
       // 获取标签
       getCaseLable () {
         selectCaseLable().then((data) =>{
-          // this.oldlabel = data.data.data;
+          // console.log(data.data.data)
           this.oldlabel = data.data.data;
         })
       },
       getInfo () {
         selectCaseData().then((data) => {
           this.labelarr = JSON.parse(data.data.label_case); // 标签格式摘要
-          if(data.data.label_case == null) {
-            this.labelarr = [{
-              lid: ''
-            }]
-          };
+          // console.log(this.labelarr)
         }).catch((data)=>{
           // this.$message.error(err);
           alert(data)
         });
       },
-      addLabelarr (t,id) {   // 从标签池选择添加标签
-        this.labelarr.push({json_label:id});
-        this.label_case.push({name:t});
-        console.log(this.labelarr)
-        console.log(this.label_case)
-
-        updateCaseData({json_label:id,type:1}).then((data) =>{
-          console.log(JSON.parse(data.config.data))
+      addLabelarr (t, id) {   // 从标签池选择添加标签
+        this.labelarr.push({title:t,id: id});
+        this.label_case.push({title:t,id: id});
+        updateCaseData({json_label:id,type: 1}).then((data) =>{
+          // console.log(JSON.parse(data.config.data))
         })
       }
     }
