@@ -32,6 +32,9 @@
                             <el-form-item label="律所案号：" class="text-base">
                                 <el-input v-model="pageInfo.master_number"  @blur="updateInfo({master_number: pageInfo.master_number})"></el-input>
                             </el-form-item>
+                            <el-form-item label="案号：" class="text-base">
+                                <el-input v-model="pageInfo.case_number"  @blur="updateInfo({case_number: pageInfo.case_number})"></el-input>
+                            </el-form-item>
                             <el-form-item label="文书类型：">
                                 <el-select id="case_type" v-model="status_h1"  placeholder="文书类型" @change="updateInfo({case_status:status_h1})" >
                                     <el-option label="判决书" value="1"></el-option>
@@ -83,7 +86,7 @@
                                 </el-row>
                             </el-form-item>
                             <el-form-item label="审判程序：" class="text-base">
-                                <el-select v-model="subject" placeholder="审判程序" @change="updateInfo({subject:pageInfo.subject})">
+                                <el-select v-model="subject" placeholder="审判程序" @change="updateInfo({subject:subject})">
                                     <el-option label="一审" value="1"></el-option>
                                     <el-option label="二审" value="2"></el-option>
                                     <el-option label="再审" value="3"></el-option>
