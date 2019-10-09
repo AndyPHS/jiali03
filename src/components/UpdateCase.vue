@@ -10,7 +10,7 @@
                             <div>
                                 <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
-                                <div class="info_content mr-2">{{pageInfo.content}}</div>
+                                <div id="caseMsg" class="info_content mr-2">{{pageInfo.content}}</div>
                             </div>
                         </el-tab-pane>
                         <el-tab-pane label="查看图片版本" name="second">
@@ -542,7 +542,7 @@
       this.getCourt();
     },
     updated () {
-      // this.highlightMsg ()  // 高亮显示关键字
+      this.highlightMsg ()  // 高亮显示关键字
       this.changeLegal_basis_type () //将法律依据转换为文字
       // this.parts ()   // 判决书首行缩
     },
@@ -981,18 +981,18 @@
       // 生成页面
       goNewPage () {
         this.$router.replace("/CaseCompleted");
-      }
+      },
       // 高亮显示关键字
-      // highlightMsg () {
-      //   let searchVal = ['向本院提出诉讼请求', '事实与理由', '本院认定如下', '本院认为', '判决如下', '依据', '辩称']
-      //   let text = document.getElementById('caseMsg').innerHTML;
-      //   for (var i = 0 ; i < searchVal.length ; i++) {
-      //     let reg = new RegExp('(' + searchVal[i] + ')', 'ig');
-      //     text = text.replace(reg, '<b class="text-white bg-green-500">$1</b>');
-      //     caseMsg.innerHTML = text;
-      //   }
-      //   // console.log(text)
-      // }
+      highlightMsg () {
+        let searchVal = ['向本院提出诉讼请求', '事实与理由', '本院认定如下', '本院认为', '判决如下', '依据', '辩称']
+        let text = document.getElementById('caseMsg').innerHTML;
+        for (var i = 0 ; i < searchVal.length ; i++) {
+          let reg = new RegExp('(' + searchVal[i] + ')', 'ig');
+          text = text.replace(reg, '<b class="text-white bg-green-500">$1</b>');
+          caseMsg.innerHTML = text;
+        }
+        // console.log(text)
+      }
     }
 }
 </script>
