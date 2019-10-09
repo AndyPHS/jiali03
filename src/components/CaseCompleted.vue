@@ -1,15 +1,6 @@
 <template>
     <div>
         <head-menu></head-menu>
-        <dl class="container mx-auto text-left flex items-center border-b pb-2">
-            <dt>
-                <img src="@/assets/images/logo.png" alt="">
-            </dt>
-            <dd class="ml-5">
-                <h2 class="text-xl text-orange-500">北京家理律师事务所</h2>
-                <h2>你好！{{user}}</h2>
-            </dd>
-        </dl>
         <div class="container mx-auto flex pb-10">
             <div class="w-2/3">
                 <div class="text-left mt-5">

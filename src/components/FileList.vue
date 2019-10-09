@@ -2,7 +2,6 @@
     <div>
         <head-menu></head-menu>
         <div class="container mx-auto">
-            
             <div class="pb-10">
                 <table class="w-full mt-2">
                     <thead>
