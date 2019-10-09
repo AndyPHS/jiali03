@@ -2,20 +2,12 @@
     <div>
         <head-menu></head-menu>
         <div class="container mx-auto">
-            <dl class="text-left flex items-center border-b pb-2">
-                <dt>
-                    <img src="@/assets/images/logo.png" alt="">
-                </dt>
-                <dd class="ml-5">
-                    <h2 class="text-xl text-orange-500">北京家理律师事务所</h2>
-                    <h2>你好！{{msg}}</h2>
-                </dd>
-            </dl>
+            
             <div class="pb-10">
-                <table class="w-full mt-10">
+                <table class="w-full mt-2">
                     <thead>
                     <tr>
-                        <td class="headstyle w-1/6 text-center border text-black font-bold py-5" v-for="item of list" :key="item.index">{{item}}</td>
+                        <td class="headstyle w-1/6 text-center border text-black font-bold py-3" v-for="item of list" :key="item.index">{{item}}</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +29,7 @@
             </div>
             <el-pagination
                     background
-                    class="mb-2"
+                    class="mb-10"
                     layout="prev, pager, next"
                     @current-change="handleUserList"
                     :page-size="pagesize" 

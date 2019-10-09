@@ -1,21 +1,12 @@
 <template>
     <div>
         <head-menu></head-menu>
-        <dl class="mx-10 text-left flex items-center border-b py-10 pb-2">
-            <dt>
-                <img src="@/assets/images/logo.png" alt="">
-            </dt>
-            <dd class="ml-5">
-                <h2 class="text-xl text-orange-500">北京家理律师事务所</h2>
-                <h2>你好！{{user}}</h2>
-            </dd>
-        </dl>
         <div class="mx-10 px-2 pb-10">
             <div class="w-1/2 panjue float-left pb-10">
                 <div class="py-6">
                     <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-                        <el-tab-pane label="查看world版本" name="first">
+                        <el-tab-pane label="查看word版本" name="first">
                             <div>
                                 <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
@@ -122,7 +113,7 @@
                             </div>
                             <!--审判辅助-->
                             <div v-for="(v,k) in court_personnel2" :key="'v2-'+k">
-                                <el-form-item  label="审判辅助：" class="text-base">
+                                <el-form-item  label="陪审员：" class="text-base">
                                     <div class="flex">
                                         <div class="mr-1">
                                             <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,2)" filterable placeholder="请选择">
@@ -468,7 +459,6 @@
         status_h1: '',  //文书类型
         status: '',
         subject: '',
-        user: localStorage.getItem('name'),
         pageInfo:{
           id: '',
           tid: null,

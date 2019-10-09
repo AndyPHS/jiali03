@@ -30,6 +30,20 @@
             <el-menu-item index="3"><router-link to="FileList">案件列表</router-link></el-menu-item>
             <el-menu-item index="4">案例检索</el-menu-item>
         </el-menu>
+        <div class="container mx-auto">
+            <dl class="text-left flex items-center py-2">
+                <dt>
+                    <img class="w-1/2" src="@/assets/images/logo.png" alt="">
+                </dt>
+                <dd class="ml-2">
+                    <h2 class="text-xl text-orange-500">北京家理律师事务所</h2>
+                    
+                </dd>
+                <dd class="ml-3">
+                    <h2>你好！{{user}}</h2>
+                </dd>
+            </dl>
+        </div>
     </div>
 
 </template>
@@ -39,7 +53,8 @@
     name: 'HeadMenu.vue',
     data() {
       return {
-        activeIndex: '1'
+        activeIndex: '1',
+        user: localStorage.getItem('name')
       };
     },
     methods: {
