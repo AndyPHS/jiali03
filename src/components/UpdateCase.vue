@@ -102,46 +102,62 @@
                             <!--审判人员-->
                             <div v-for="(v,k) in court_personnel1" :key="'v1-'+k">
                             <el-form-item  label="审判人员：" class="text-base">
-                            <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,1)" filterable placeholder="请选择">
-                                <el-option
-                                        v-for="(item, index) in case_court_personnel"
-                                        :key="index"
-                                        :label="item.name"
-                                        :value="item.id">
-                                </el-option>
-                            </el-select>
-                                <el-button type="primary" v-on:click="cp_add(k,1,v)"  icon="el-icon-edit" circle></el-button>
-                                <el-button type="danger" v-on:click="cp_del(k,1)" icon="el-icon-delete" circle></el-button>
+                                <div class="flex">
+                                    <div class="mr-1">
+                                        <el-select v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,1)" filterable placeholder="请选择">
+                                        <el-option
+                                                v-for="(item, index) in case_court_personnel"
+                                                :key="index"
+                                                :label="item.name"
+                                                :value="item.id">
+                                        </el-option>
+                                    </el-select>
+                                    </div>
+                                    
+                                    <el-button type="primary" v-on:click="cp_add(k,1,v)"  icon="el-icon-edit" circle></el-button>
+                                    <el-button type="danger" v-on:click="cp_del(k,1)" icon="el-icon-delete" circle></el-button>
+                                </div>
+                                
                             </el-form-item>
                             </div>
                             <!--审判辅助-->
                             <div v-for="(v,k) in court_personnel2" :key="'v2-'+k">
                                 <el-form-item  label="审判辅助：" class="text-base">
-                                    <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,2)" filterable placeholder="请选择">
-                                        <el-option
-                                                v-for="(item, index) in case_court_personnel"
-                                                :key="'fuzhu-'+index"
-                                                :label="item.name"
-                                                :value="item.id">
-                                        </el-option>
-                                    </el-select>
-                                    <el-button type="primary" v-on:click="cp_add(k,2,v)"  icon="el-icon-edit" circle></el-button>
-                                    <el-button type="danger" v-on:click="cp_del(k,2)" icon="el-icon-delete" circle></el-button>
+                                    <div class="flex">
+                                        <div class="mr-1">
+                                            <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,2)" filterable placeholder="请选择">
+                                                <el-option
+                                                        v-for="(item, index) in case_court_personnel"
+                                                        :key="'fuzhu-'+index"
+                                                        :label="item.name"
+                                                        :value="item.id">
+                                                </el-option>
+                                            </el-select>
+                                        </div>
+                                        
+                                        <el-button type="primary" v-on:click="cp_add(k,2,v)"  icon="el-icon-edit" circle></el-button>
+                                        <el-button type="danger" v-on:click="cp_del(k,2)" icon="el-icon-delete" circle></el-button>
+                                    </div>
+                                    
                                 </el-form-item>
                             </div>
                             <!--书记员-->
                             <div v-for="(v,k) in court_personnel3" :key="'v3-'+k">
                                 <el-form-item  label="书记员：" class="text-base">
-                                    <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,3)" filterable placeholder="请选择">
-                                        <el-option
-                                                v-for="item in case_court_personnel"
-                                                :key="item.id"
-                                                :label="item.name"
-                                                :value="item.id">
-                                        </el-option>
-                                    </el-select>
-                                    <el-button type="primary" v-on:click="cp_add(k,3,v)"  icon="el-icon-edit" circle></el-button>
-                                    <el-button type="danger" v-on:click="cp_del(k,3)" icon="el-icon-delete" circle></el-button>
+                                    <div class="flex">
+                                        <div class="mr-1">
+                                            <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,3)" filterable placeholder="请选择">
+                                                <el-option
+                                                        v-for="item in case_court_personnel"
+                                                        :key="item.id"
+                                                        :label="item.name"
+                                                        :value="item.id">
+                                                </el-option>
+                                            </el-select>
+                                        </div>
+                                        <el-button type="primary" v-on:click="cp_add(k,3,v)"  icon="el-icon-edit" circle></el-button>
+                                        <el-button type="danger" v-on:click="cp_del(k,3)" icon="el-icon-delete" circle></el-button>
+                                    </div>
                                 </el-form-item>
                             </div>
 
@@ -194,8 +210,8 @@
                             <el-button  @click="dialogTableVisible_lawyer=true">新增律师</el-button>
                             <el-button  @click="lo_update=true">律所管理</el-button>
                             <el-table :data="pageInfo.lawyer">
-                            <el-table-column property="lawyerName" label="律师" width="200"></el-table-column>
-                            <el-table-column property="lawyerOfficeName" label="律所" width="400"></el-table-column>
+                            <el-table-column property="lawyerName" label="律师" width="100"></el-table-column>
+                            <el-table-column property="lawyerOfficeName" label="律所" width="200"></el-table-column>
                             <el-table-column
                             fixed="right"
                             label="操作"
