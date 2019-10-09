@@ -10,6 +10,7 @@
                             <div>
                                 <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
+                                <!-- <el-input type="textarea" id="caseMsg" :rows="80" class="textarea" placeholder="" v-model="pageInfo.content"  @blur="updateInfo({content:pageInfo.content})"></el-input> -->
                                 <div id="caseMsg" class="info_content mr-2">{{pageInfo.content}}</div>
                             </div>
                         </el-tab-pane>
@@ -305,24 +306,21 @@
                                     <el-form-item label="原告观点：" class="text-base">
                                         <el-input v-model="item.data.y.viewpoint" placeholder="原告观点" @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
-                                    <!--<el-form-item :label=" '依据' + (index+1) +':' " class="text-orange-500" v-for="(itemY, index) in item.data.y.basis" :key="itemY.index">-->
-                                        <!--<el-input class="textarea" v-model="itemY.view"></el-input>-->
-                                    <!--</el-form-item>-->
                                     <el-form-item label=" 依据 ： " class="text-orange-500" >
-                                        <el-input type="textarea" :rows="4" class="textarea" placeholder="原告依据" v-model="item.data.y.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
+                                        <el-input type="textarea" :rows="4" class="textarea" placeholder="原告依据，请分条换行填写，如：1、2、" v-model="item.data.y.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
                                     <el-form-item label="被告观点" class="text-orange-500">
                                         <el-input  v-model="item.data.b.viewpoint" placeholder="被告观点" @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
-                                    <el-form-item  label="  依据 ： " class="text-orange-500" >
-                                        <el-input type="textarea" :rows="4" class="textarea" placeholder="被告依据" v-model="item.data.b.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
+                                    <el-form-item  label="依据 ： " class="text-orange-500" >
+                                        <el-input type="textarea" :rows="4" class="textarea" placeholder="被告依据，请分条换行填写，如：1、2、" v-model="item.data.b.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
 
                                     </el-form-item>
                                     <el-form-item label="法院观点" class="text-orange-500">
                                         <el-input  v-model="item.data.f.viewpoint" placeholder="法院观点"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
-                                    <el-form-item  label=" 依据 ： " class="text-orange-500">
-                                        <el-input type="textarea" :rows="4" class="textarea" placeholder="法院依据" v-model="item.data.f.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
+                                    <el-form-item  label="依据 ： " class="text-orange-500">
+                                        <el-input type="textarea" :rows="4" class="textarea" placeholder="法院依据，请分条换行填写，如：1、2、" v-model="item.data.f.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
                                 </li>
                             </ul>
@@ -632,11 +630,11 @@
             this.pageInfo.case_evidence = {
               y: [
                 {
-                  evidence: '孩子是我的',
+                  evidence: '',
                   f: 0
                 },
                 {
-                  evidence: '孩子bu是我的',
+                  evidence: '',
                   f: 1
                 }
               ],
@@ -1062,6 +1060,9 @@
     }
     b{
         color:red;
+    }
+    #caseMsg{
+        line-height:30px !important;
     }
 
 </style>

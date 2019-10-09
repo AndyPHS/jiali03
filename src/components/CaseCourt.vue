@@ -7,31 +7,41 @@
     <thead>
     <tr class="py-1">
      <th>法院名称</th>
-     <th>法院等级</th>
+     <th>法院id</th>
      <th>操作</th>
     </tr>
     </thead>
     <tbody>
-    <template v-for="(row,index) in rows ">
-     <tr><td class="border">{{row.name}}</td>
-      <td class="border">{{row.status}}</td>
-      <td class="border"><a href="#" @click="Edit(row)">编辑</a>&nbsp;&nbsp;<a href="#" @click="Delete(row,index)">删除</a></td>
+    <template>
+     <tr v-for="(item,index) in this.rows.data" :key="item.id">
+      <td class="border w-1/2">{{item.name}}</td>
+      <td class="border w-1/4">{{item.id}}</td>
+      <td class="border w-1/4"><a href="#" @click="Edit(item)">编辑</a>&nbsp;&nbsp;<a href="#" @click="Delete(item,index)">删除</a></td>
      </tr>
     </template>
     <tr>
      <td ><input type="text" class="form-control border text-center mt-4" v-model="rowtemplate.name" /></td>
-     <td ><input type="text" class="form-control border text-center mt-4" v-model="rowtemplate.status" /></td>
+     <td ><input type="text" class="form-control border text-center mt-4" v-model="rowtemplate.id" /></td>
      <td ><button type="button" class="btn btn-primary mt-4 px-2 text-white bg-blue-500" @click="Save">保存</button></td>
     </tr>
     </tbody>
    </table>
+   <el-pagination
+                    background
+                    class="my-10"
+                    layout="prev, pager, next"
+                    @current-change="getCaseCourtMsg"
+                    :page-size="pagesize" 
+                    :current-page.sync="currentPage"
+                    :total="this.rows.total">
+            </el-pagination>
   </div>
  </div>
 </template>
 
 <script>
  import HeadMenu from '@/components/HeadMenu'
- import {creatCaseCourtMsg,updateCaseCourtMsg,deleteCaseCourtMsg} from '@/api/api/requestLogin.js'
+ import {creatCaseCourtMsg,updateCaseCourtMsg,deleteCaseCourtMsg,getCaseCourtMsg} from '@/api/api/requestLogin.js'
   export default {
   components:{
    HeadMenu,
@@ -39,45 +49,77 @@
    data(){
     return {
      rows: [
-      { cpid: 1, name: '初级人民法院', status: 1 },
-      { cpid: 2, name: '中级人民法院', status: 2 },
-      { cpid: 3, name: '高级人民法院', status: 3 },
-      { cpid: 4, name: '超级人民法院', status: 4 },
+      { id: 1, name: '初级人民法院', status: 1 }
      ],
-     rowtemplate: { name: '', status: '' }
+     rowtemplate: { name: '', id: '' },
+     // 分页
+     first_page_url: '',
+      last_page_url: '',
+      next_page_url: '',
+      path: '',
+      from: 1,
+      per_page: null,
+      last_page: null,
+      userList: [],
+      currentPage:1, //初始页
+      pagesize:50,    //    每页的数据
+      area: '', // 擅长领域
+      total: 0, // 总页数
+      pageNum: 1, // 第几页
+      isloading: false,
     }
    },
    mounted () {
+    this.getCaseCourtMsg ();  // 获取法院信息
    },
    methods:{
-    Save: function (event) {
-     if (!this.rowtemplate.cpid) {
+     getCaseCourtMsg () {
+        getCaseCourtMsg({page:this.currentPage}).then((data) =>{
+          this.rows = data.data.data;
+          // console.log(this.rows)
+          this.userList = data.data.data.data
+          this.isShow = false
+        })
+      },
+    Save (event) {
+     if (!this.rowtemplate.id) {
       creatCaseCourtMsg(this.rowtemplate).then((data)=>{
-        this.rows = data.data.result;
+        this.rows.push(this.rowtemplate)
        //还原模板
-       this.rowtemplate = { name: '', status: '' }
+       this.rowtemplate = { name: '', id: '' }
       })
      }else{
       updateCaseCourtMsg(this.rowtemplate).then((data)=>{
-       this.rows = data.data.result;
+       this.rows = data.data.data;
        //还原模板
-       this.rowtemplate = { name: '', status: '' }
+       this.rowtemplate = { name: '', id: '' }
       })
      }
-
-
     },
-    Delete: function (row,index) {
-     //实际项目中参数操作肯定会涉及到id去后台删除，这里只是展示，先这么处理。
-     deleteCaseCourtMsg({cpid:row.cpid}).then((data)=>{
+     nextClick () {
+        console.log("下一页")
+      },
+      prevClick () {
+        console.log("上一页")
+      },
+      handleSizeChange (size) {
+         this.pagesize = size;
+         console.log(this.pagesize)
+      },
+      handleCurrentChange (currentPage) {
+        this.currentPage = currentPage;
+        console.log(this.currentPage)  //点击第几页
+      },
+    Delete (item,index) {
+     deleteCaseCourtMsg({id:item.id}).then((data)=>{
       this.rows = data.data.result;
       //还原模板
       this.rowtemplate = { name: '', status: '' }
      })
-     this.rows.splice(index, 1);
+     this.item.splice(index, 1);
     },
-    Edit: function (row) {
-     this.rowtemplate = row;
+    Edit (item) {
+     this.rowtemplate = item;
     }
    }
   }

@@ -4,15 +4,15 @@
         <div class="container mx-auto flex pb-10">
             <div class="w-2/3">
                 <div class="text-left mt-5">
-                    <h2 class="text-lg">{{pageInfo.title}}{{status}}</h2>
+                    <h2 class="text-lg">{{pageInfo.court}}{{status}}</h2>
                     <h2 id="xinxi" class="py-2 text-orange-500">一、基本信息</h2>
                     <p class="my-1">律所案号：<span>{{ pageInfo.master_number }}</span></p>
-                    <p class="my-1">裁判文书：<span>{{  pageInfo.title }}</span></p>
+                    <p class="my-1">裁判文书：<span>{{  pageInfo.case_number }}</span></p>
                     <p class="my-1">案由：<span>{{ pageInfo.case_action }}</span></p>
-                    <p class="my-1">案号：<span>{{pageInfo.case_number}}</span></p>
+                    <p class="my-1">文书类型：<span>{{status}}</span></p>
                     <p class="my-1">法院：<span>{{ pageInfo.scourt }}</span></p>
                     <p class="my-1">审理程序：<span>{{ subject }}</span></p>
-                    <!-- <p class="my-1">
+                    <p class="my-1">
                 
                       <div v-for="(item, index) in pageInfo.courtPersonnel" :key="item.index">
                         <div v-if="item.status ===1" class="text-base">
@@ -25,7 +25,7 @@
                           <p class="my-1">书记员：<span>{{item.name}}</span></p>
                         </div>
                       </div>
-                    </p> -->
+                    </p>
                     <div class="my-1 flex">
                       <div>代理律师：</div>
                       <div class="mx-2" v-for="(item, index) in pageInfo.lawyer" :key="item.index">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="pr-10">
                         <h2 id="zhaiyao" class="py-2 text-orange-500">五、证据适用摘要</h2>
-                        <table class="evidence_table w-full">
+                        <table class="evidence_table w-full"  v-if="pageInfo.case_evidence != null">
                             <thead>
                             <tr>
                                 <td class="w-1/3">身份</td>
@@ -100,6 +100,9 @@
                                 <td>{{item.f}}</td>
                             </tr>
                             </tbody>
+                        </table>
+                        <table v-else>
+                          <span>无</span>
                         </table>
                     </div>
                     <div>
