@@ -19,7 +19,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="item of minlist" :key="item.id" >
+                    <tr v-for="item of minlist" :key="item.id">
                         <td class="border text-black py-2">{{item.id}}</td>
                         <td class="border text-black">{{item.title}}</td>
                         <td class="border text-black">{{item.create_time}}</td>
@@ -35,13 +35,15 @@
                     </tbody>
                 </table>
             </div>
-            <!--<el-pagination-->
-                    <!--background-->
-                    <!--layout="prev, pager, next"-->
-                    <!--page-size="20"-->
-                    <!--current-change="1"-->
-                    <!--:total="1000">-->
-            <!--</el-pagination>-->
+            <el-pagination
+                    background
+                    class="mb-2"
+                    layout="prev, pager, next"
+                    @current-change="handleUserList"
+                    :page-size="pagesize" 
+                    :current-page.sync="currentPage"
+                    :total="this.min.total">
+            </el-pagination>
             <el-table
                     v-show="isShow"
                     v-loading="true"
@@ -80,6 +82,7 @@
       return {
         isShow: true,
         msg: localStorage.getItem('name'),
+        min: {},
         list: {
             id: '案件序号',
             filename: '文件名称',
@@ -112,17 +115,35 @@
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }],
-        loading: true
+        loading: true,
+        // 分页
+        first_page_url: '',
+        last_page_url: '',
+        next_page_url: '',
+        path: '',
+        from: 1,
+        per_page: null,
+        last_page: null,
+        userList: [],
+        currentPage:1, //初始页
+        pagesize:20,    //    每页的数据
+        area: '', // 擅长领域
+        total: 0, // 总页数
+        pageNum: 1, // 第几页
+        isloading: false,
+        
       }
     },
     mounted () {
-      this.getlist();
+      this.handleUserList();
     },
     methods:{
-      getlist () {
-        fileList().then((data)=>{
+      handleUserList () {
+        fileList({page:this.currentPage}).then((data)=>{
           this.minlist = data.data.data
-         this.isShow = false
+          this.min = data.data
+          this.userList = data.data
+          this.isShow = false
         })
       },
       handleClick (e) {
@@ -140,6 +161,22 @@
           }
         })
         //
+      },
+      // 初始页currentPage、初始每页数据数pagesize和数据data
+      // 上一页
+      nextClick () {
+        console.log("下一页")
+      },
+      prevClick () {
+        console.log("上一页")
+      },
+      handleSizeChange (size) {
+         this.pagesize = size;
+         console.log(this.pagesize)
+      },
+      handleCurrentChange (currentPage) {
+        this.currentPage = currentPage;
+        console.log(this.currentPage)  //点击第几页
       }
     }
   }

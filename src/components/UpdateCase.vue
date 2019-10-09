@@ -13,7 +13,7 @@
         <div class="mx-10 px-2 pb-10">
             <div class="w-1/2 panjue float-left pb-10">
                 <div class="py-6">
-                    <h2 class="text-xl mb-2">{{pageInfo.title}}{{status}}</h2>
+                    <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
                         <el-tab-pane label="查看world版本" name="first">
                             <div>
@@ -54,7 +54,7 @@
                                     <el-col :span="12" class="w-full">
                                         <el-autocomplete
                                                 popper-class="my-autocomplete"
-                                                v-model="state"
+                                                v-model="pageInfo.court"
                                                 :fetch-suggestions="querySearch"
                                                 placeholder="请输入法院"
                                                 @select="handleSelect">
@@ -75,7 +75,7 @@
                                     <el-col :span="12" class="w-full">
                                         <el-autocomplete
                                                 popper-class="my-autocomplete"
-                                                v-model="state1"
+                                                v-model="pageInfo.case_action"
                                                 :fetch-suggestions="querySearchCaseAction"
                                                 placeholder="请输入案由"
                                                 @select="handleSelectCaseAction">
@@ -100,12 +100,12 @@
                                 </el-select>
                             </el-form-item>
                             <!--审判人员-->
-                            <div v-for="(v,k) in court_personnel1" :key="k">
+                            <div v-for="(v,k) in court_personnel1" :key="'v1-'+k">
                             <el-form-item  label="审判人员：" class="text-base">
                             <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,1)" filterable placeholder="请选择">
                                 <el-option
-                                        v-for="item in case_court_personnel"
-                                        :key="item.id"
+                                        v-for="(item, index) in case_court_personnel"
+                                        :key="index"
                                         :label="item.name"
                                         :value="item.id">
                                 </el-option>
@@ -115,12 +115,12 @@
                             </el-form-item>
                             </div>
                             <!--审判辅助-->
-                            <div v-for="(v,k) in court_personnel2" :key="k">
+                            <div v-for="(v,k) in court_personnel2" :key="'v2-'+k">
                                 <el-form-item  label="审判辅助：" class="text-base">
                                     <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,2)" filterable placeholder="请选择">
                                         <el-option
-                                                v-for="item in case_court_personnel"
-                                                :key="item.id"
+                                                v-for="(item, index) in case_court_personnel"
+                                                :key="'fuzhu-'+index"
                                                 :label="item.name"
                                                 :value="item.id">
                                         </el-option>
@@ -130,7 +130,7 @@
                                 </el-form-item>
                             </div>
                             <!--书记员-->
-                            <div v-for="(v,k) in court_personnel3" :key="k">
+                            <div v-for="(v,k) in court_personnel3" :key="'v3-'+k">
                                 <el-form-item  label="书记员：" class="text-base">
                                     <el-select  v-model="v.cpid" @change="update_cp(v.cpid,v.oldcpid,k,3)" filterable placeholder="请选择">
                                         <el-option
@@ -279,16 +279,6 @@
                                 </el-dialog>
 
                             </el-form-item>
-
-                            <!--代理律师-->
-                            <!--<div v-for="item in plaintiff" :key="item.status" >-->
-                                <!--<el-form-item label="原告：" v-if="item.status ===1" class="text-base">-->
-                                    <!--<el-input  v-model="item.name"   @blur="updateInfo({plaintiff: plaintiff})">{{item.name}}</el-input>-->
-                                <!--</el-form-item>-->
-                                <!--<el-form-item label="被告：" v-if="item.status ===2" class="text-base">-->
-                                    <!--<el-input  v-model="item.name"   @blur="updateInfo({plaintiff: plaintiff})">{{item.name}}</el-input>-->
-                                <!--</el-form-item>-->
-                            <!--</div>-->
                             <h2 class="text-left text-base pb-2 text-orange-500">二、基本案情</h2>
                             <el-form-item label="案情概述" class="text-orange-500" >
                                 <el-input type="textarea" :rows="4" class="textarea" v-model="pageInfo.description" @blur="updateInfo({description:pageInfo.description})"></el-input>
@@ -367,21 +357,21 @@
                             <div>
                                 <ul>
                                     <li class="flex justify-between b-1 py-2" v-for="(item, index) in pageInfo.legal_basis" :key="index">
-                                        <span>{{ item.lawId }}第{{item.number}}条</span>
-                                        <span class="ml-2 px-1 py-1 cursor-pointer hover:text-white hover:bg-green-500" @click="deleteLegal_basis(item,index)">删除</span>
+                                        <span class="w-4/5 overflow-hidden text-left">{{ item.name }}第{{item.number}}条</span>
+                                        <span class="ml-2 px-1 py-1 cursor-pointer hover:text-white hover:bg-green-500 w-1/5" @click="deleteLegal_basis(item,index)">删除</span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="dial-header">
                                 <el-dialog title="添加法律依据" :visible.sync="showFlag">
                                     <div class="adp">
-                                        <el-select v-model="legal_basis.legal_basis">
-                                            <el-option v-for="item in lawContent.lawList" :label="item.name" :key="item.id" :value="item.id"></el-option>
+                                        <el-select v-model="legal_basis.legal_basis" @change="console(legal_basis)">
+                                            <el-option v-for="(item,index) in lawContent.lawList" :label="item.name" :key="index" :value="item.id"></el-option>
                                         </el-select>
                                         <el-input class="py-2" type="text" v-model="legal_basis.number" placeholder="第几条法律，填写数字即可，如：3"></el-input>
                                         <div>
                                             <el-button type="text" size="small" @click="showFlag = false">取消</el-button>
-                                            <el-button type="primary" size="small" @click="radioEvent()">确定</el-button>
+                                            <el-button type="primary" size="small" @click="radioEvent">确定</el-button>
                                         </div>
                                     </div>
                                 </el-dialog>
@@ -454,17 +444,18 @@
         legal_basis: {
           legal_basis: '',
           number: '',
-          type: 1
+          type: 1,
+          name:''
         },
         legal_basis_choose: [],
         imgs: [],
         status: '',
         user: localStorage.getItem('name'),
-        plaintiff: '',
         pageInfo:{
           id: '',
           tid: null,
           court: null,      // 法院
+          courtId: null,    // 
           scourt: null,
           title: "王宝强于马蓉婚姻纠纷",   // 标题
           master_number: '',        // 律所案号
@@ -543,7 +534,7 @@
       this.getCourt();
     },
     updated () {
-      this.highlightMsg ()  // 高亮显示关键字
+      // this.highlightMsg ()  // 高亮显示关键字
       this.changeLegal_basis_type () //将法律依据转换为文字
       // this.parts ()   // 判决书首行缩
     },
@@ -577,7 +568,7 @@
           }
 
 
-          console.log(this.court_personnel3,this.court_personnel2,this.court_personnel1)
+          // console.log(this.court_personnel3,this.court_personnel2,this.court_personnel1)
 
           this.pageInfo.imgs = JSON.parse(data.data.imgs)
           this.pageInfo.case_epitome = JSON.parse(data.data.case_epitome)
@@ -609,18 +600,6 @@
             case 3: this.status = '调解书'; break
             case 4: this.status = '其他'; break
           }
-          // 原告/被告代理律师
-          this.plaintiff = JSON.parse(data.data.plaintiff)
-          if(data.data.plaintiff == null){
-            this.plaintiff = [{
-              age: '',
-              cid: '',
-              id: '',
-              name: '',
-              sex: '',
-              status: ''
-            }]
-          };
           this.pageInfo.case_evidence = JSON.parse(data.data.case_evidence); //证据摘要格式定义
           if(data.data.case_evidence == null) {
             this.pageInfo.case_evidence = {
@@ -661,8 +640,8 @@
         };
       },
       handleSelect(item) {   // 法院模块
-        this.pageInfo.court = '';
-        this.state = item.name;
+        // this.pageInfo.court = '';
+        this.pageInfo.court = item.name;
         updateCaseData({court: item.id}).then((data) =>{
           // console.log(JSON.parse(data.config.data))
         })
@@ -689,8 +668,8 @@
         };
       },
       handleSelectCaseAction(item) {   // 案由模块
-        this.pageInfo.case_action = '';
-        this.state1 = item.name;
+        // this.pageInfo.case_action = '';
+        this.pageInfo.case_action = item.name;
         updateCaseData({case_action: item.id}).then((data) =>{
           // console.log(JSON.parse(data.config.data))
         })
@@ -712,33 +691,35 @@
       },
       // 添加法律依据
       radioEvent () {
+        console.log(this.pageInfo.legal_basis)
         this.showFlag = false;
         this.updateInfo(this.legal_basis);
-        this.pageInfo.legal_basis.push({lawId: this.legal_basis.legal_basis, number: this.legal_basis.number})
-
+        this.pageInfo.legal_basis.push({lawId: this.legal_basis.legal_basis, number: this.legal_basis.number,name:this.legal_basis.name})
         this.adapterSelected = this.radio;
       },
       // 将法律数字变成文字
       changeLegal_basis_type () {
         let legal_basis_n = this.pageInfo.legal_basis;
         let legal_basis_text = this.lawContent.lawList;
+        this.legal_basis_choose = this.legal_basis_choose;
+
         legal_basis_n.forEach(function (item1) {
           legal_basis_text.forEach(function (item2) {
             if (item1.lawId == item2.id) {
-              console.log(item2.name)
+               item1.name =  item2.name;
             }
           })
         })
       },
+      console (e) {
+        console.log(e)
+      },
       deleteLegal_basis (item, index) {
         this.pageInfo.legal_basis.splice(index, 1);
-        let a = String(item.lawId);
-        let b = String(item.number);
-        this.updateInfo({legal_basis: a, number: b, type: 3});
+        this.updateInfo({legal_basis: item.lawId, number: item.number, type: 3});
       },
       updateInfo (e) {
         updateCaseData(e).then((data) =>{
-          // console.log(JSON.parse(data.config.data))
         })
       },
       cp_add(key,status,value){
@@ -973,18 +954,18 @@
       // 生成页面
       goNewPage () {
         this.$router.replace("/CaseCompleted");
-      },
-      // 高亮显示关键字
-      highlightMsg () {
-        let searchVal = ['向本院提出诉讼请求', '事实与理由', '本院认定如下', '本院认为', '判决如下', '依据', '辩称']
-        let text = document.getElementById('caseMsg').innerHTML;
-        for (var i = 0 ; i < searchVal.length ; i++) {
-          let reg = new RegExp('(' + searchVal[i] + ')', 'ig');
-          text = text.replace(reg, '<b class="text-white bg-green-500">$1</b>');
-          caseMsg.innerHTML = text;
-        }
-        // console.log(text)
       }
+      // 高亮显示关键字
+      // highlightMsg () {
+      //   let searchVal = ['向本院提出诉讼请求', '事实与理由', '本院认定如下', '本院认为', '判决如下', '依据', '辩称']
+      //   let text = document.getElementById('caseMsg').innerHTML;
+      //   for (var i = 0 ; i < searchVal.length ; i++) {
+      //     let reg = new RegExp('(' + searchVal[i] + ')', 'ig');
+      //     text = text.replace(reg, '<b class="text-white bg-green-500">$1</b>');
+      //     caseMsg.innerHTML = text;
+      //   }
+      //   // console.log(text)
+      // }
     }
 }
 </script>

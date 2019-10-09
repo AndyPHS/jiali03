@@ -12,8 +12,8 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-        target:'http://office365.aladdinlaw.com:3921/api/jiali_api/v1',
-        // target: 'http://case.net/api/jiali_api/v1/',
+        // target:'http://office365.aladdinlaw.com:3921/api/jiali_api/v1',
+        target: 'http://case.net/api/jiali_api/v1/',
         changeOrigin:true,//允许跨域
         pathRewrite:{
           '/api':''
@@ -22,8 +22,8 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: 'jiali_ui.com', // can be overwritten by process.env.HOST
+    port: 80, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

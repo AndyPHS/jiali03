@@ -17,11 +17,30 @@
                     <h2 id="xinxi" class="py-2 text-orange-500">一、基本信息</h2>
                     <p class="my-1">律所案号：<span>{{ pageInfo.master_number }}</span></p>
                     <p class="my-1">裁判文书：<span>{{  pageInfo.title }}</span></p>
-                    <p class="my-1">案由：<span>{{ case_action }}</span></p>
+                    <p class="my-1">案由：<span>{{ pageInfo.case_action }}</span></p>
                     <p class="my-1">案号：<span>{{pageInfo.case_number}}</span></p>
                     <p class="my-1">法院：<span>{{ pageInfo.scourt }}</span></p>
                     <p class="my-1">审理程序：<span>{{ subject }}</span></p>
-                    <p class="my-1">审判人员：审判员：<span>王五</span>；书记员：<span>赵柳</span></p>
+                    <!-- <p class="my-1">
+                
+                      <div v-for="(item, index) in pageInfo.courtPersonnel" :key="item.index">
+                        <div v-if="item.status ===1" class="text-base">
+                          <p class="my-1">审判员：<span>{{item.name}}</span></p>
+                        </div>
+                        <div v-if="item.status ===2" class="text-base">
+                          <p class="my-1">审判辅助：<span>{{item.name}}</span></p>
+                        </div>
+                        <div v-if="item.status ===3" class="text-base">
+                          <p class="my-1">书记员：<span>{{item.name}}</span></p>
+                        </div>
+                      </div>
+                    </p> -->
+                    <div class="my-1 flex">
+                      <div>代理律师：</div>
+                      <div class="mx-2" v-for="(item, index) in pageInfo.lawyer" :key="item.index">
+                        <span>{{ item.lawyerName }}</span>
+                      </div>
+                    </div>
                     <div v-for="item in plaintiff" :key="item.status" >
                         <div v-if="item.status ===1" class="text-base">
                             <p class="my-1">原告：<span>{{item.name}}</span></p>
@@ -96,7 +115,7 @@
                         <h2 id="falv" class="py-2 text-orange-500">六、法律依据</h2>
                         <ul>
                             <li v-for="(item,index) in pageInfo.legal_basis" :key="index" >
-                                {{item.lawId}}第{{item.number}}条
+                                {{item.name}}第{{item.number}}条
                             </li>
                         </ul>
                     </div>
@@ -137,6 +156,29 @@
         case_action: '',
         subject: '',
         status: '',    // 判决书类型
+        lawContent: {
+          lawList: [
+            {'name': '《中华人民共和国婚姻法》', 'id': '1'},
+            {'name': '《中华人民共和国民事诉讼法》', 'id': '2'},
+            {'name': '《中华人民共和国继承法》', 'id': '3'},
+            {'name': '《中华人民共和国民法总则》', 'id': '4'},
+            {'name': '《中华人民共和国民法通则》', 'id': '5'},
+            {'name': '《中华人民共和国合同法》', 'id': '6'},
+            {'name': '《中华人民共和国涉外民事关系法律适用法》', 'id': '7'},
+            {'name': '《最高人民法院关于适用<中华人民共和国婚姻法>若干问题的解释(一)》', 'id': '8'},
+            {'name': '《最高人民法院关于适用<中华人民共和国婚姻法>若干问题的解释(二)》', 'id': '9'},
+            {'name': '《最高人民法院关于适用<中华人民共和国婚姻法>若干问题的解释(三)》', 'id': '10'},
+            {'name': '《最高人民法院关于适用<中华人民共和国婚姻法>若干问题的解释（二）的补充规定》', 'id': '11'},
+            {'name': '《最高人民法院关于贯彻执行<中华人民共和国民法通则>若干问题的意见（试行）》', 'id': '12'},
+            {'name': '《最高人民法院关于适用<中华人民共和国民事诉讼法>的解释》', 'id': '13'},
+            {'name': '《最高人民法院关于人民法院审理离婚案件处理财产分割问题的若干具体意见》', 'id': '14'},
+            {'name': '《最高人民法院关于人民法院审理离婚案件处理子女抚养问题的若干具体意见》', 'id': '15'},
+            {'name': '《最高人民法院关于人民法院审理离婚案件如何认定夫妻感情确已破裂的若干具体意见》', 'id': '16'},
+            {'name': '《最高人民法院关于民事诉讼证据的若干规定》', 'id': '17'}
+          ],
+          lawList_num: '',
+          type: ''
+        },
         pageInfo: {
           bad: null,
           case_action: null,
@@ -190,8 +232,11 @@
           this.pageInfo.case_epitome = JSON.parse(data.data.case_epitome);
           this.pageInfo.case_evidence = JSON.parse(data.data.case_evidence);
           this.pageInfo.legal_basis = data.data.legal_basis;
+          this.changeLegal_basis_type();
           this.pageInfo.label_case = JSON.parse(data.data.label_case);
           this.plaintiff = JSON.parse(data.data.plaintiff);
+          this.pageInfo.lawyer = JSON.parse(data.data.lawyer);  // 代理律师
+          this.pageInfo.courtPersonnel = JSON.parse(data.data.courtPersonnel)  
           let subjectNum = this.pageInfo.subject;
           switch (subjectNum) {
             case 1: this.subject = '一审'; break
@@ -221,6 +266,18 @@
             }
           }
         });
+      },
+      // 将法律数字变成文字
+      changeLegal_basis_type () {
+        let legal_basis_n = this.pageInfo.legal_basis;
+        let legal_basis_text = this.lawContent.lawList;
+        legal_basis_n.forEach(function (item1) {
+          legal_basis_text.forEach(function (item2) {
+            if (item1.lawId == item2.id) {
+               item1.name =  item2.name;
+            }
+          })
+        })
       },
       goBack () {
         this.$router.replace("/UpdateCase");

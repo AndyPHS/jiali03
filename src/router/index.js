@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/login'
-import LoginSuccess from '@/components/loginsuccess'
+import LoginSuccess from '@/components/loginSuccess'
 import CaseCourt from '@/components/CaseCourt'
 import CaseUpload from '@/components/CaseUpload'   // 案例上传页面
 import FileList from '@/components/FileList'   // 案例展示列表页面

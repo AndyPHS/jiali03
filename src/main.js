@@ -9,6 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'tailwindcss/base.css'
 import 'tailwindcss/components.css'
 import 'tailwindcss/utilities.css'
+import VueResource from 'vue-resource' 
 
 Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = '/api'
@@ -16,7 +17,7 @@ Axios.defaults.baseURL = '/api'
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 Vue.config.productionTip = false
-
+Vue.use(VueResource)
 Vue.use(ElementUI)
 Vue.component('button01', Button);
 Vue.component('select01', Select);

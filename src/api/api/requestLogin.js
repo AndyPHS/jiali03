@@ -64,10 +64,8 @@ export const fileList = params => {
     method: "GET",
     dataType: 'json',
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
-    // url: apiUrl.login+'?token=localStorage.getItem(\'token\')',
-    // headers:localStorage.getItem('token'),
-    url: apiUrl.selectCaseLlist,
-    data: params
+    url: apiUrl.selectCaseLlist+'?page='+params.page,
+    data:params
   });
 };
 
