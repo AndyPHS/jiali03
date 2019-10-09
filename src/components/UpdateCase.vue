@@ -42,7 +42,7 @@
                                 <el-input v-model="pageInfo.master_number"  @blur="updateInfo({master_number: pageInfo.master_number})"></el-input>
                             </el-form-item>
                             <el-form-item label="文书类型：">
-                                <el-select id="case_type" v-model="pageInfo.status"  placeholder="文书类型" @change="updateInfo({status:pageInfo.status})" >
+                                <el-select id="case_type" v-model="status_h1"  placeholder="文书类型" @change="updateInfo({status:pageInfo.status})" >
                                     <el-option label="判决书" value="1"></el-option>
                                     <el-option label="裁定书" value="2"></el-option>
                                     <el-option label="调解书" value="3"></el-option>
@@ -92,7 +92,7 @@
                                 </el-row>
                             </el-form-item>
                             <el-form-item label="审判程序：" class="text-base">
-                                <el-select v-model="pageInfo.subject" placeholder="法院层级" @change="updateInfo({subject:pageInfo.subject})">
+                                <el-select v-model="subject" placeholder="审判程序" @change="updateInfo({subject:pageInfo.subject})">
                                     <el-option label="一审" value="1"></el-option>
                                     <el-option label="二审" value="2"></el-option>
                                     <el-option label="再审" value="3"></el-option>
@@ -449,7 +449,9 @@
         },
         legal_basis_choose: [],
         imgs: [],
+        status_h1: '',  //文书类型
         status: '',
+        subject: '',
         user: localStorage.getItem('name'),
         pageInfo:{
           id: '',
@@ -592,6 +594,14 @@
               }
             }]
           };
+          // 右侧文书类型
+          let status_h = this.pageInfo.status;
+          switch (status_h) {
+            case 1: this.status_h1 = '判决书'; break
+            case 2: this.status_h1 = '裁定书'; break
+            case 3: this.status_h1 = '调解书'; break
+            case 4: this.status_h1 = '其他'; break
+          }
           // 左侧展示判决书类型
           let statusNum = this.pageInfo.status;
           switch (statusNum) {
@@ -599,6 +609,14 @@
             case 2: this.status = '裁定书'; break
             case 3: this.status = '调解书'; break
             case 4: this.status = '其他'; break
+          }
+           // 右侧审判程序
+           let subjectNum = this.pageInfo.subject;
+           switch (subjectNum) {
+            case 1: this.subject = '一审'; break
+            case 2: this.subject = '二审'; break
+            case 3: this.subject = '再审'; break
+            case 4: this.subject = '其他'; break
           }
           this.pageInfo.case_evidence = JSON.parse(data.data.case_evidence); //证据摘要格式定义
           if(data.data.case_evidence == null) {
@@ -854,7 +872,10 @@
           courtId:this.pageInfo.courtId
         }).then((data)=>{
             this.case_court_personnel = data.data.data//案件审判人员列表
-
+            this.case_court_personnel.push({
+                name:'请选择',
+                id:0
+            })
         })
       },
       updateCp(row){
