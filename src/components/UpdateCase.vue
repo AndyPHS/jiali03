@@ -3,15 +3,17 @@
         <head-menu></head-menu>
         <div class="mx-10 px-2 pb-10">
             <div class="w-1/2 panjue float-left pb-10">
-                <div class="py-6">
+                <div class="py-6 relative" >
                     <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
+                    <div class="w-full text-right cursor-pointer absolute t-5 z-10"><el-button type="primary" @click="goArrangementCase">返回修改判决书样式</el-button></div>
+                    
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
                         <el-tab-pane label="查看word版本" name="first">
                             <div>
                                 <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
-                                <!-- <el-input type="textarea" id="caseMsg" :rows="80" class="textarea" placeholder="" v-model="pageInfo.content"  @blur="updateInfo({content:pageInfo.content})"></el-input> -->
-                                <div id="caseMsg" class="info_content mr-2">{{pageInfo.content}}</div>
+                               <textarea :rows="80" id="caseMsg" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly" disabled="disabled" @blur="updateInfo({content:pageInfo.content})"></textarea>
+                               <!--  <div id="caseMsg" class="info_content mr-2">{{pageInfo.content}}</div> -->
                             </div>
                         </el-tab-pane>
                         <el-tab-pane label="查看图片版本" name="second">
@@ -554,6 +556,9 @@
     methods: {
       handleClick(tab, event) {
       },
+      goArrangementCase () {
+        this.$router.replace("/ArrangementCase");
+      },
       getInfo () {
         selectCaseData().then((data) => {
           this.pageInfo = data.data;
@@ -1015,6 +1020,7 @@
 </script>
 
 <style scoped lang="less">
+ textarea{outline:none;resize:none;overflow-y:visible}
     #case_type{
         width:100%;
     }

@@ -8,6 +8,7 @@ import FileList from '@/components/FileList'   // 案例展示列表页面
 import CaseCompleted from '@/components/CaseCompleted'  // 案件信息填写页面
 import HeadMenu from '@/components/HeadMenu'  // 添加头部导航按钮
 import UpdateCase from '@/components/UpdateCase' // 修改案件基本信息
+import ArrangementCase from '@/components/ArrangementCase'  // 整理案件样式页面
 // import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
@@ -56,6 +57,12 @@ export default new Router({
       path: '/HeadMenu',
       name: 'HeadMenu',
       component: HeadMenu
+    },
+    //整理案件样式页面
+    {
+      path: '/ArrangementCase',
+      name: 'ArrangementCase',
+      component: ArrangementCase
     }
   ]
 })
