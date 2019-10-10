@@ -60,11 +60,11 @@ const apiUrl = {
   // 获取法院信息
   getCaseCourtMsg: baseURL + 'case_court/select',
   // 提交法院信息
-  addCaseCourtMsg: baseURL + '/case_court/add',
+  addCaseCourtMsg: baseURL + 'case_court/add',
   // 删除法院信息
-  deleteCaseCourtMsg: baseURL + '/case_court/delete/',
+  deleteCaseCourtMsg: baseURL + 'case_court/delete/',
   // 修改法院信息
-  updateCaseCourtMsg: baseURL + '/case_court/update/{$courtId}',
+  updateCaseCourtMsg: baseURL + 'case_court/update/{$courtId}',
   // 新增法院人员信息
   addCaseCourtPersonnel: baseURL + 'case_court_personnel/add/',
   // 删除法院人员信息
@@ -74,37 +74,37 @@ const apiUrl = {
   // 获取法院人员信息
   selectCaseCourtPersonnel: baseURL + 'case_court_personnel/select/',
   // 新增标签
-  addCaseLable: baseURL + '/case_label/add',
+  addCaseLable: baseURL + 'case_label/add',
   // 删除标签
-  deleteCaseLable: baseURL + '/case_label/delete/{id}',
+  deleteCaseLable: baseURL + 'case_label/delete/{id}',
   // 修改标签
-  updateCaseLable: baseURL + '/case_label/update/{id}',
+  updateCaseLable: baseURL + 'case_label/update/{id}',
   // 查找标签
   selectCaseLable: baseURL + 'case_label/select',
   // 新增律师信息
   addCaseLawyer: baseURL + 'case_lawyer/add',
   // 删除律师信息
-  deleteCaseLawyer: baseURL + '/case_lawyer/delete/{$lid}',
+  deleteCaseLawyer: baseURL + 'case_lawyer/delete/{$lid}',
   // 修改律师信息
-  updateCaseLawyer: baseURL + '/case_lawyer/update/{$lid}',
+  updateCaseLawyer: baseURL + 'case_lawyer/update/{$lid}',
   // 查看律师信息
   selectCaseLawyer: baseURL + 'case_lawyer/select/',
   // 新增律所信息
   addCaseLawyerOffice: baseURL + 'case_lawyer_office/add',
   // 删除律所信息
-  deleteCaseLawyerOffice: baseURL + '/case_lawyer_office/delete{$loid}',
+  deleteCaseLawyerOffice: baseURL + 'case_lawyer_office/delete{$loid}',
   // 修改律所信息
   updateCaseLawyerOffice: baseURL + 'case_lawyer_office/update/',
   // 查看律所信息
   selectCaseLawyerOffice: baseURL + 'case_lawyer_office/select',
   // 新增案件类型
-  addCaseType: baseURL + '/case_type/add',
+  addCaseType: baseURL + 'case_type/add',
   // 删除案件类型
-  deleteCaseType: baseURL + '/case_type/delete/{id}',
+  deleteCaseType: baseURL + 'case_type/delete/{id}',
   // 修改案件类型
-  updateCaseType: baseURL + '/case_type/update',
+  updateCaseType: baseURL + 'case_type/update',
   // 查找案件类型
-  selectCaseType: baseURL + '/case_type/select'
+  selectCaseType: baseURL + 'case_type/select'
 }
 export{
   apiUrl

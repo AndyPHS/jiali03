@@ -2,17 +2,8 @@
     <div>
         <head-menu></head-menu>
         <div class="container mx-auto ">
-            <dl class="text-left flex items-center border-b pb-2">
-                <dt>
-                    <img src="@/assets/images/logo.png" alt="">
-                </dt>
-                <dd class="ml-5">
-                    <h2 class="text-xl text-orange-500">北京家理律师事务所</h2>
-                    <h2>你好！{{msg}}</h2>
-                </dd>
-            </dl>
             <div>
-                <div class="">
+                <div >
                     <h2 class="md:text-3xl text-orange-500 py-4">案例上传</h2>
                     <form action="" name="myForm" id="myForm" class="w-2/3 mx-auto" enctype="multipart/form-data">
                         <div class="text-left">

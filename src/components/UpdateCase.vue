@@ -52,6 +52,7 @@
                                                 v-model="pageInfo.court"
                                                 :fetch-suggestions="querySearch"
                                                 placeholder="请输入法院"
+                                                 @input='checkCourt(pageInfo.court)'
                                                 @select="handleSelect">
                                             <i
                                                     class="el-icon-edit el-input__icon"
@@ -169,7 +170,7 @@
                                                 width="100">
                                             <template slot-scope="scope">
                                                 <el-button type="text" @click="updateCp(scope.row)" size="small">修改</el-button>
-                                                <el-button type="text" @click="del_cp(scope.row)" size="small">删除</el-button>
+                                                <!-- <el-button type="text" @click="del_cp(scope.row)" size="small">删除</el-button> -->
                                             </template>
                                         </el-table-column>
                                     </el-table>
@@ -303,7 +304,7 @@
                                     <el-form-item :label="'争议焦点'+ (index+1) + '：' " class="text-base">
                                         <el-input v-model="item.title" placeholder="争议焦点"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
-                                    <el-form-item label="原告观点：" class="text-base">
+                                    <el-form-item id='yuangao' label="原告观点：" class="text-base">
                                         <el-input v-model="item.data.y.viewpoint" placeholder="原告观点" @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
                                     <el-form-item label=" 依据 ： " class="text-orange-500" >
@@ -542,6 +543,9 @@
       this.selectCaseAction ();  // 获取案由
       this.getCourt();
     },
+    created(){
+        
+    },
     updated () {
       this.highlightMsg ()  // 高亮显示关键字
       this.changeLegal_basis_type () //将法律依据转换为文字
@@ -647,9 +651,15 @@
       // 修改判决书
 
       // 查询法院信息
+      checkCourt (e) {
+        getCaseCourtMsg(e).then((data) =>{
+            this.restaurants = data.data.data.data 
+        })
+      },
       getCaseCourtMsg () {
         getCaseCourtMsg().then((data) =>{
-          this.restaurants = data.data.data ;
+          this.restaurants = data.data.data.data ;
+          console.log(this.restaurants)
         })
       },
       // 法院模块
@@ -664,6 +674,7 @@
           return (restaurant.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
+
       handleSelect(item) {   // 法院模块
         // this.pageInfo.court = '';
         this.pageInfo.court = item.name;
@@ -716,7 +727,7 @@
       },
       // 添加法律依据
       radioEvent () {
-        console.log(this.pageInfo.legal_basis)
+        // console.log(this.pageInfo.legal_basis)
         this.showFlag = false;
         this.updateInfo(this.legal_basis);
         this.pageInfo.legal_basis.push({lawId: this.legal_basis.legal_basis, number: this.legal_basis.number,name:this.legal_basis.name})

@@ -93,13 +93,22 @@ export const selectCaseAction = params => {
 
 // 新增法院信息
 export const creatCaseCourtMsg = params => {
-  console.log(params)
   return axios({
     method: "get",
     dataType: 'json',
     url: apiUrl.creatCaseCourtMsg,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: qs.stringify(params)
+  });
+};
+// 提交法院信息
+export const addCaseCourtMsg = params => {
+  return axios({
+    method: "POST",
+    dataType: 'json',
+    url: apiUrl.addCaseCourtMsg,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
   });
 };
 // 修改法院信息
@@ -114,10 +123,13 @@ export const updateCaseCourtMsg = params => {
 
 // 删除法院信息
 export const deleteCaseCourtMsg = params => {
+  console.log(params)
   return axios({
-    method: "put",
+    method: "delete",
     dataType: 'json',
-    url: apiUrl.deleteCaseCourtMsg+params.cpid,
+    url: apiUrl.deleteCaseCourtMsg + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
   });
 };
 
@@ -126,9 +138,20 @@ export const getCaseCourtMsg = params => {
   return axios({
     method: "get",
     dataType: 'json',
+    url: apiUrl.getCaseCourtMsg+'/?name='+params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询法庭信息（信息列表页面）
+export const getCaseCourtMsgList = params => {
+  // console.log(params)
+  return axios({
+    method: "get",
+    dataType: 'json',
     url: apiUrl.getCaseCourtMsg+'?page='+params.page,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
-    data: qs.stringify(params)
+    data: params
   });
 };
 

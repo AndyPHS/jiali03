@@ -30,7 +30,7 @@
                     background
                     class="my-10"
                     layout="prev, pager, next"
-                    @current-change="getCaseCourtMsg"
+                    @current-change="getCaseCourtMsgList"
                     :page-size="pagesize" 
                     :current-page.sync="currentPage"
                     :total="this.rows.total">
@@ -41,7 +41,7 @@
 
 <script>
  import HeadMenu from '@/components/HeadMenu'
- import {creatCaseCourtMsg,updateCaseCourtMsg,deleteCaseCourtMsg,getCaseCourtMsg} from '@/api/api/requestLogin.js'
+ import {addCaseCourtMsg,updateCaseCourtMsg,deleteCaseCourtMsg,getCaseCourtMsgList} from '@/api/api/requestLogin.js'
   export default {
   components:{
    HeadMenu,
@@ -51,7 +51,7 @@
      rows: [
       { id: 1, name: '初级人民法院', status: 1 }
      ],
-     rowtemplate: { name: '', id: '' },
+     rowtemplate: { name: '', id: '', status: 1 },
      // 分页
      first_page_url: '',
       last_page_url: '',
@@ -70,11 +70,11 @@
     }
    },
    mounted () {
-    this.getCaseCourtMsg ();  // 获取法院信息
+    this.getCaseCourtMsgList ();  // 获取法院信息
    },
    methods:{
-     getCaseCourtMsg () {
-        getCaseCourtMsg({page:this.currentPage}).then((data) =>{
+     getCaseCourtMsgList () {
+        getCaseCourtMsgList({page:this.currentPage}).then((data) =>{
           this.rows = data.data.data;
           // console.log(this.rows)
           this.userList = data.data.data.data
@@ -83,10 +83,12 @@
       },
     Save (event) {
      if (!this.rowtemplate.id) {
-      creatCaseCourtMsg(this.rowtemplate).then((data)=>{
-        this.rows.push(this.rowtemplate)
+        this.rows = this.rows
+      addCaseCourtMsg(this.rowtemplate).then((data)=>{
+        this.rows = data.data.data;
        //还原模板
-       this.rowtemplate = { name: '', id: '' }
+       this.rowtemplate = { name: '', status: 1, id: '' }
+       this.getCaseCourtMsgList ();
       })
      }else{
       updateCaseCourtMsg(this.rowtemplate).then((data)=>{
@@ -111,12 +113,13 @@
         console.log(this.currentPage)  //点击第几页
       },
     Delete (item,index) {
-     deleteCaseCourtMsg({id:item.id}).then((data)=>{
-      this.rows = data.data.result;
+     deleteCaseCourtMsg(item.id).then((data)=>{
+      this.rows = data.data.data;
       //还原模板
-      this.rowtemplate = { name: '', status: '' }
+      this.rowtemplate = { name: '', status: 1, id: '' }
+      this.getCaseCourtMsgList ();
      })
-     this.item.splice(index, 1);
+     // this.item.splice(index, 1);
     },
     Edit (item) {
      this.rowtemplate = item;
