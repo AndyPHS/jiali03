@@ -854,8 +854,13 @@
           name:this.cp_from.name,
           courtId:this.pageInfo.courtId
         }).then((data)=>{
-          this.getCourtPersonnel();  //获取法院人员信息
-          this.dialogTableVisible_add=false
+            if(data.data.status_code ==200){
+                this.getCourtPersonnel();  //获取法院人员信息
+                this.dialogTableVisible_add=false
+            }else{
+                alert(data.data.message)
+            }
+          
 
         })
       },
@@ -898,7 +903,7 @@
       },
       updateCp(row){
         this.cp_from_update=row
-        this.dialogTableVisible_update=false
+        this.dialogTableVisible_update=true
       },
       update_cp_add(){
         updateCourtPersonnels({
