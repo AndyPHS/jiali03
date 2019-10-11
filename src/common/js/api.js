@@ -9,7 +9,7 @@ var environment = {
   onLine: "线上地址",
   // dev:"测试环境地址",
   dev: '/',
-  devOfflin:"http://192.168.1.204/h5"
+  devOfflin:"http://192.168.1.242/h5"
 }
 // 接口前缀
 var host = location.host,

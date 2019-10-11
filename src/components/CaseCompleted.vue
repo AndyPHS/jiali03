@@ -16,20 +16,20 @@
                 
                       <div v-for="(item, index) in pageInfo.courtPersonnel" :key="item.index">
                         <div v-if="item.status ===1" class="text-base">
-                          <p class="my-1">审判员：<span>{{item.name}}</span></p>
+                          <p v-if="item.name !=null " class="my-1">审判员：<span>{{item.name}}</span></p>
                         </div>
                         <div v-if="item.status ===2" class="text-base">
-                          <p class="my-1">审判辅助：<span>{{item.name}}</span></p>
+                          <p v-if="item.name !=null " class="my-1">审判辅助：<span>{{item.name}}</span></p>
                         </div>
                         <div v-if="item.status ===3" class="text-base">
-                          <p class="my-1">书记员：<span>{{item.name}}</span></p>
+                          <p v-if="item.name !=null " class="my-1">书记员：<span>{{item.name}}</span></p>
                         </div>
                       </div>
                     </p>
-                    <div class="my-1 flex">
+                    <div class="my-1">
                       <div>代理律师：</div>
-                      <div class="mx-2" v-for="(item, index) in pageInfo.lawyer" :key="item.index">
-                        <span>{{ item.lawyerName }}</span>
+                      <div class="mx-2 pl-5" v-for="(item, index) in pageInfo.lawyer" :key="item.index">
+                        <span>{{ item.lawyerName }}</span><span class="ml-5">《{{ item.lawyerOfficeName }}》</span>
                       </div>
                     </div>
                     <div v-for="item in plaintiff" :key="item.status" >
@@ -42,11 +42,19 @@
                     </div>
                     <!--<p class="my-1">被告代理律师：<span>张三</span></p>-->
                     <h2 id="anqing" class="py-2 text-orange-500">二、基本案情</h2>
-                    <p class="pr-10 my-1"><span class="text-orange-500">案情概述：</span><span>{{pageInfo.description}}</span></p>
-                    <p class="pr-10 my-1"><span class="text-orange-500">案情看点：</span><span>{{pageInfo.description_spot}}</span></p>
+                    <p class="pr-10 my-1">
+                      <span class="text-orange-500">案情概述：</span>
+                      <span v-if="pageInfo.description !=null">{{pageInfo.description}}</span>
+                      <span v-else>无</span>
+                    </p>
+                    <p class="pr-10 my-1">
+                      <span class="text-orange-500">案情看点：</span>
+                      <span v-if="pageInfo.description_spot !=null">{{pageInfo.description_spot}}</span>
+                      <span v-else>无</span>
+                    </p>
                     <div class="pr-10">
                         <h2 id="suoying" class="py-2 text-orange-500">三、案件缩影</h2>
-                        <table class="suoying_table">
+                        <table class="suoying_table" v-if="pageInfo.case_epitome != null">
                             <thead>
                             <tr>
                                 <td class="w-1/4">争议焦点</td>
@@ -69,13 +77,19 @@
                             </tr>
                             </tbody>
                         </table>
+                        <table v-else>
+                          <span>无</span>
+                        </table>
                     </div>
                     <div class="pr-10">
                         <h2 id="biaoqian" class="py-2 text-orange-500">四、标签池</h2>
-                        <div class="h-12">
+                        <div class="h-12" v-if="pageInfo.label_case !='' ">
                             <ul class="">
                                 <li class="mx-2 float-left"  v-for="item in pageInfo.label_case" :key="item.index">{{item.title}}</li>
                             </ul>
+                        </div>
+                        <div v-else>
+                          <span>无</span>
                         </div>
                     </div>
                     <div class="pr-10">

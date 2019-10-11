@@ -1,10 +1,23 @@
 <template>
     <div>
         <div>
-            <ul class="flex flex-wrap my-2 overflow-wrap">
-                <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in oldlabel" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
-            </ul>
-
+            <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+                <el-tab-pane label="子女关系" name="first">
+                    <ul class="flex flex-wrap my-2 overflow-wrap">
+                        <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in lessonSec" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
+                    </ul>
+                </el-tab-pane>
+                <el-tab-pane label="财产关系" name="second">
+                    <ul class="flex flex-wrap my-2 overflow-wrap">
+                        <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in lessonThi" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
+                    </ul>
+                </el-tab-pane>
+                <el-tab-pane label="婚姻关系" name="third">
+                    <ul class="flex flex-wrap my-2 overflow-wrap">
+                        <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in lessonFor" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
+                    </ul>
+                </el-tab-pane>
+            </el-tabs>
         </div>
         <div class="inputbox">
             <div class="arrbox">
@@ -44,24 +57,26 @@
     },
     data () {
       return {
+        activeName: 'first',
         currentval: '',
         labelarr: [],
         oldlabel: [],
+        lessonOne: [],
+        lessonSec: [],
+        lessonThi: [],
+        lessonFor: [],
         label_case: []
       }
     },
     mounted () {
       this.getCaseLable();    // 获取标签
-      this.getInfo();  // 获取本案标签
+      // this.getInfo();  // 获取本案标签
+    },
+    created(){
+      this.getInfo();
     },
     methods: {
-      // 移除标签
-      removeitem (index, item) {
-        this.labelarr.splice(index, 1)
-        this.label_case.splice(index, 1)
-        updateCaseData({json_label:item.lid, type: 3}).then((data) =>{
-          // console.log(JSON.parse(data.config.data))
-        })
+      handleClick(tab, event) {
       },
       // input回车加入labelarr中 添加新标签
       // addlabel () {
@@ -71,17 +86,36 @@
       //   }
       //   this.currentval = ''
       // },
-      // 获取标签
-      getCaseLable () {
+      selectThisBox (e) {
+        alert(e)
+      },
+      getCaseLable () {    // 获取标签池标签
         selectCaseLable().then((data) =>{
-          // console.log(data.data.data)
           this.oldlabel = data.data.data;
+          console.log()
+          for (var i = 0; i <this.oldlabel.length -1; i++) {
+            // console.log(this.oldlabel[i])
+            switch(this.oldlabel[i].tid){
+              case 0:
+              this.lessonOne.push(this.oldlabel[i])
+              break;
+            case 10:
+              this.lessonFor.push(this.oldlabel[i])
+              break;
+            case 11:
+              this.lessonSec.push(this.oldlabel[i])
+              break;
+            case 12:
+              this.lessonThi.push(this.oldlabel[i])
+              break;
+            }
+          }
+
         })
       },
-      getInfo () {
+      getInfo () {    // 获取本案标签
         selectCaseData().then((data) => {
           this.labelarr = JSON.parse(data.data.label_case); // 标签格式摘要
-          // console.log(this.labelarr)
         }).catch((data)=>{
           // this.$message.error(err);
           alert(data)
@@ -91,6 +125,14 @@
         this.labelarr.push({title:t,id: id});
         this.label_case.push({title:t,id: id});
         updateCaseData({json_label:id,type: 1}).then((data) =>{
+          // console.log(JSON.parse(data.config.data))
+        })
+      },
+      // 移除标签
+      removeitem (index, item) {
+        this.labelarr.splice(index, 1)
+        this.label_case.splice(index, 1)
+        updateCaseData({json_label:item.lid, type: 3}).then((data) =>{
           // console.log(JSON.parse(data.config.data))
         })
       }
