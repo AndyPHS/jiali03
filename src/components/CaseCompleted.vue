@@ -16,13 +16,25 @@
                 
                       <div v-for="(item, index) in pageInfo.courtPersonnel" :key="item.index">
                         <div v-if="item.status ===1" class="text-base">
-                          <p v-if="item.name !=null " class="my-1">审判员：<span>{{item.name}}</span></p>
+                          <p v-if="item.name !=null " class="my-1">审判长：<span>{{item.name}}</span></p>
                         </div>
                         <div v-if="item.status ===2" class="text-base">
-                          <p v-if="item.name !=null " class="my-1">审判辅助：<span>{{item.name}}</span></p>
+                          <p v-if="item.name !=null " class="my-1">审判员：<span>{{item.name}}</span></p>
                         </div>
                         <div v-if="item.status ===3" class="text-base">
+                          <p v-if="item.name !=null " class="my-1">代理审判员：<span>{{item.name}}</span></p>
+                        </div>
+                        <div v-if="item.status ===4" class="text-base">
+                          <p v-if="item.name !=null " class="my-1">人民陪审员：<span>{{item.name}}</span></p>
+                        </div>
+                        <div v-if="item.status ===5" class="text-base">
+                          <p v-if="item.name !=null " class="my-1">法官助理：<span>{{item.name}}</span></p>
+                        </div>
+                        <div v-if="item.status ===6" class="text-base">
                           <p v-if="item.name !=null " class="my-1">书记员：<span>{{item.name}}</span></p>
+                        </div>
+                        <div v-if="item.status ===7" class="text-base">
+                          <p v-if="item.name !=null " class="my-1">代理书记员：<span>{{item.name}}</span></p>
                         </div>
                       </div>
                     </p>

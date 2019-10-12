@@ -139,7 +139,7 @@
       },
       handleClick (e) {
         localStorage.setItem('id', e);
-        this.$router.replace("/UpdateCase");
+        this.$router.replace("/ArrangementCase");
       },
       checkMsg (e) {
         localStorage.setItem('id', e);

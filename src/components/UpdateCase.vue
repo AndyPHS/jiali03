@@ -1,7 +1,7 @@
 <template>
     <div>
         <head-menu></head-menu>
-        <div class="mx-10 px-2 pb-10">
+        <div class="mx-10 px-2 pb-10 w-full">
             <div class="w-1/2 panjue float-left pb-10">
                 <div class="py-6 relative" >
                     <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
@@ -98,9 +98,10 @@
                                     <el-option label="其他" value="4"></el-option>
                                 </el-select>
                             </el-form-item>
-                            <!--审判人员-->
+                            
+                            <!-- 审判长 -->
                             <div v-for="(v,k,index) in court_personnel1" :key="'v1-'+k">
-                                <el-form-item  label="审判人员：" class="text-base">
+                                <el-form-item  label="审判长：" class="text-base">
                                     <div class="flex">
                                         <div class="mr-1 w-2/3">
                                             <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,1)" filterable >
@@ -114,7 +115,7 @@
                                              </el-select>
                                         </div>
                                         <div class="flex w-1/3 justify-around">
-                                            <span v-on:click="cp_add_icon(1)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span>
+                                           <!--  <span v-on:click="cp_add_icon(1)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
                                             <span v-on:click="cp_del(k,1,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
                                         </div>
                                         
@@ -122,9 +123,7 @@
                                     
                                 </el-form-item>
                             </div>
-                           
-                                     
-                            <!--审判辅助-->
+                            <!--审判审判员-->
                             <div v-for="(v,k) in court_personnel2" :key="'v2-'+k">
                                 <el-form-item  label="陪审员：" class="text-base">
                                     <div class="flex">
@@ -140,16 +139,16 @@
                                              </el-select>
                                         </div>
                                         <div class="flex w-1/3 justify-around">
-                                            <span v-on:click="cp_add_icon(2)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span>
+                                            <!-- <span v-on:click="cp_add_icon(2)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
                                             <span v-on:click="cp_del(k,2,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
                                         </div>
                                     </div>
                                     
                                 </el-form-item>
                             </div>
-                            <!--书记员-->
+                            <!--代理审判员-->
                             <div v-for="(v,k) in court_personnel3" :key="'v3-'+k">
-                                <el-form-item  label="书记员：" class="text-base">
+                                <el-form-item  label="代理审判员：" class="text-base">
                                     <div class="flex">
                                     <div class="mr-1 w-2/3">
                                         <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,3)" filterable >
@@ -163,12 +162,131 @@
                                          </el-select>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
-                                            <span v-on:click="cp_add_icon(3)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span>
+                                            <!-- <span v-on:click="cp_add_icon(3)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
                                             <span v-on:click="cp_del(k,3,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
                                         </div>
                                 </div>
                                 </el-form-item>
                             </div>
+                            <!-- 人民陪审员 -->
+                            <div v-for="(v,k) in court_personnel4" :key="'v4-'+k">
+                                <el-form-item  label="人民陪审员：" class="text-base">
+                                    <div class="flex">
+                                    <div class="mr-1 w-2/3">
+                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,4)" filterable >
+                                            <el-option 
+                                                v-for="item in case_court_personnel" 
+                                                :key="item.id"
+                                                :value="item.name" 
+                                                :label="item.name"
+                                                 >{{ item.name}}
+                                             </el-option>
+                                         </el-select>
+                                    </div>
+                                    <div class="flex w-1/3 justify-around">
+                                           <!--  <span v-on:click="cp_add_icon(4)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
+                                            <span v-on:click="cp_del(k,4,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                        </div>
+                                </div>
+                                </el-form-item>
+                            </div>
+                            <!-- 法官助理 -->
+                            <div v-for="(v,k) in court_personnel5" :key="'v5-'+k">
+                                <el-form-item  label="法官助理：" class="text-base">
+                                    <div class="flex">
+                                    <div class="mr-1 w-2/3">
+                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,5)" filterable >
+                                            <el-option 
+                                                v-for="item in case_court_personnel" 
+                                                :key="item.id"
+                                                :value="item.name" 
+                                                :label="item.name"
+                                                 >{{ item.name}}
+                                             </el-option>
+                                         </el-select>
+                                    </div>
+                                    <div class="flex w-1/3 justify-around">
+                                            <!-- <span v-on:click="cp_add_icon(5)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
+                                            <span v-on:click="cp_del(k,5,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                        </div>
+                                </div>
+                                </el-form-item>
+                            </div>
+                            <!-- 书记员 -->
+                            <div v-for="(v,k) in court_personnel6" :key="'v6-'+k">
+                                <el-form-item  label="书记员：" class="text-base">
+                                    <div class="flex">
+                                    <div class="mr-1 w-2/3">
+                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,6)" filterable >
+                                            <el-option 
+                                                v-for="item in case_court_personnel" 
+                                                :key="item.id"
+                                                :value="item.name" 
+                                                :label="item.name"
+                                                 >{{ item.name}}
+                                             </el-option>
+                                         </el-select>
+                                    </div>
+                                    <div class="flex w-1/3 justify-around">
+                                            <!-- <span v-on:click="cp_add_icon(6)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
+                                            <span v-on:click="cp_del(k,6,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                        </div>
+                                </div>
+                                </el-form-item>
+                            </div>
+                            <!-- 代理书记员 -->
+                            <div v-for="(v,k) in court_personnel7" :key="'v7-'+k">
+                                <el-form-item  label="代理书记员：" class="text-base">
+                                    <div class="flex">
+                                    <div class="mr-1 w-2/3">
+                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,7)" filterable >
+                                            <el-option 
+                                                v-for="item in case_court_personnel" 
+                                                :key="item.id"
+                                                :value="item.name" 
+                                                :label="item.name"
+                                                 >{{ item.name}}
+                                             </el-option>
+                                         </el-select>
+                                    </div>
+                                    <div class="flex w-1/3 justify-around">
+                                            <!-- <span v-on:click="cp_add_icon(7)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
+                                            <span v-on:click="cp_del(k,7,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                        </div>
+                                </div>
+                                </el-form-item>
+                            </div>
+                            <!--审判人员-->
+                            <el-form-item  label="新增法院人员：" class="text-base">
+                                <div class="flex">
+                                    <div class="w-1/3"> 
+                                        <el-select v-model="judge_type" placeholder="审判程序">
+                                            <el-option label="审判长" value="1"></el-option>
+                                            <el-option label="审判员" value="2"></el-option>
+                                            <el-option label="代理审判员" value="3"></el-option>
+                                            <el-option label="人民陪审员" value="4"></el-option>
+                                            <el-option label="法官助理" value="5"></el-option>
+                                            <el-option label="书记员" value="6"></el-option>
+                                            <el-option label="代理书记员" value="7"></el-option>
+                                        </el-select>
+                                    </div>
+                                    <div class="w-1/3 ml-2">
+                                        <el-select v-model="judge_select" ref="setSelect1" filterable >
+                                            <el-option 
+                                                v-for="item in case_court_personnel" 
+                                                :key="item.id"
+                                                :value="item.name" 
+                                                :label="item.name"
+                                                 >{{ item.name}}
+                                             </el-option>
+                                         </el-select>
+                                    </div>
+                                    <div class="w-1/3 flex justify-around">
+                                        <span @click="add_update_cp()" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">确认</span>
+                                        <!-- <span class="whitespace-no-wrap px-1 bg-green-500" @click="add_update_cp()" >确认</span> -->
+                                    </div>
+                                </div>
+                            </el-form-item>
                              <!-- 新增法院人员 -->
                             <div class="newaddcourtperson">
                                 <el-form ref="form" :model="cp_from" >
@@ -180,20 +298,19 @@
                                     </div>
                                  </el-form>   
                             </div>
-                            
-                        <!-- 代理律师 -->
-                        <el-form-item  label="代理律师：" class="text-base">
-                            <el-table :data="pageInfo.lawyer" >
-                                <el-table-column property="lawyerName" label="律师" class="text-center"></el-table-column>
-                                <el-table-column property="lawyerOfficeName" label="律所" class="text-center"></el-table-column>
-                                <el-table-column
-                                label="操作"
-                                >
-                                <template slot-scope="scope">
-                                <el-button type="text" @click="delete_vase_lawyer(scope.row)" class="text-base text-right">删除</el-button>
-                                </template>
-                                </el-table-column>
-                            </el-table>
+                            <!-- 代理律师 -->
+                            <el-form-item  label="代理律师：" class="text-base">
+                                <el-table :data="pageInfo.lawyer" >
+                                    <el-table-column property="lawyerName" label="律师" class="text-center"></el-table-column>
+                                    <el-table-column property="lawyerOfficeName" label="律所" class="text-center"></el-table-column>
+                                    <el-table-column
+                                    label="操作"
+                                    >
+                                    <template slot-scope="scope">
+                                    <el-button type="text" @click="delete_vase_lawyer(scope.row)" class="text-base text-right">删除</el-button>
+                                    </template>
+                                    </el-table-column>
+                                </el-table>
                             </el-form-item>
                             <!-- 添加律师 -->
                             <div class="newaddcourtperson">
@@ -210,6 +327,7 @@
                                     </div>
                                  </el-form>   
                             </div>
+                            <!-- 基本案情 -->
                             <h2 class="text-left text-base pb-2 text-orange-500">二、基本案情</h2>
                             <el-form-item label="案情概述" class="text-orange-500" >
                                 <el-input type="textarea" :rows="4" class="textarea" v-model="pageInfo.description" @blur="updateInfo({description:pageInfo.description})"></el-input>
@@ -436,9 +554,15 @@
         showFlag: false,
         radio: '',
         activeName: 'first',
-        court_personnel1:[],
-        court_personnel2:[],
-        court_personnel3:[],
+        judge_type: null,        // 审判角色类型number
+        judge_select: '',      // 选择添加的审判人员
+        court_personnel1:[],   // 审判长
+        court_personnel2:[],    // 审判员
+        court_personnel3:[],    // 代理审判员
+        court_personnel4:[],    // 人民陪审员
+        court_personnel5:[],    // 法官助理
+        court_personnel6:[],    // 书记员
+        court_personnel7:[],    // 代理书记员
         court_personnel1Value:"",
         court_personnel2Value:"",
         court_personnel3Value:"",
@@ -508,10 +632,13 @@
         selectCaseData().then((data) => {
           this.pageInfo = data.data;
           this.getCourtPersonnel();  //获取法院人员信息
-
           this.court_personnel1=[]
           this.court_personnel2=[]
           this.court_personnel3=[]
+          this.court_personnel4=[]
+          this.court_personnel5=[]
+          this.court_personnel6=[]
+          this.court_personnel7=[]
 
           this.pageInfo.courtPersonnel=JSON.parse( this.pageInfo.courtPersonnel )
           this.pageInfo.lawyer=JSON.parse( this.pageInfo.lawyer )
@@ -526,6 +653,18 @@
                 break;
               case 3:
                 this.court_personnel3.push(this.pageInfo.courtPersonnel[v])
+                break;
+              case 4:
+                this.court_personnel4.push(this.pageInfo.courtPersonnel[v])
+                break;
+              case 5:
+                this.court_personnel5.push(this.pageInfo.courtPersonnel[v])
+                break;
+              case 6:
+                this.court_personnel6.push(this.pageInfo.courtPersonnel[v])
+                break;
+              case 7:
+                this.court_personnel7.push(this.pageInfo.courtPersonnel[v])
                 break;
             }
           }
@@ -730,6 +869,34 @@
                 name: ''
               })
               break;
+            case 4:
+              this.court_personnel4.push({
+                cid: '',
+                status: '',
+                name: ''
+              })
+              break;
+            case 5:
+              this.court_personnel5.push({
+                cid: '',
+                status: '',
+                name: ''
+              })
+              break;
+            case 6:
+              this.court_personnel6.push({
+                cid: '',
+                status: '',
+                name: ''
+              })
+              break;
+            case 7:
+              this.court_personnel7.push({
+                cid: '',
+                status: '',
+                name: ''
+              })
+              break;
           }
       },
       cp_add(key,status,value,courtId){
@@ -744,29 +911,57 @@
              this.$message(data.data.message);
           }
 
-          switch (status) {
-            case 1:
-              this.court_personnel1.push({
-                cpid:0,
-                oldcpid:0,
-                name:"请选择"
-              })
-              break;
-            case 2:
-              this.court_personnel2.push({
-                cpid:0,
-                oldcpid:0,
-                name:"请选择"
-              })
-              break;
-            case 3:
-              this.court_personnel3.push({
-                cpid:0,
-                oldcpid:0,
-                name:"请选择"
-              })
-              break;
-          }
+          // switch (status) {
+          //   case 1:
+          //     this.court_personnel1.push({
+          //       cpid:0,
+          //       oldcpid:0,
+          //       name:"请选择"
+          //     })
+          //     break;
+          //   case 2:
+          //     this.court_personnel2.push({
+          //       cpid:0,
+          //       oldcpid:0,
+          //       name:"请选择"
+          //     })
+          //     break;
+          //   case 3:
+          //     this.court_personnel3.push({
+          //       cpid:0,
+          //       oldcpid:0,
+          //       name:"请选择"
+          //     })
+          //     break;
+          //   case 4:
+          //     this.court_personnel4.push({
+          //       cpid:0,
+          //       oldcpid:0,
+          //       name:"请选择"
+          //     })
+          //     break;
+          //     case 5:
+          //     this.court_personnel5.push({
+          //       cpid:0,
+          //       oldcpid:0,
+          //       name:"请选择"
+          //     })
+          //     break;
+          //     case 6:
+          //     this.court_personnel6.push({
+          //       cpid:0,
+          //       oldcpid:0,
+          //       name:"请选择"
+          //     })
+          //     break;
+          //     case 7:
+          //     this.court_personnel7.push({
+          //       cpid:0,
+          //       oldcpid:0,
+          //       name:"请选择"
+          //     })
+          //     break;
+          // }
 
         })
       },
@@ -781,6 +976,18 @@
               break;
             case 3:
              var cpid = this.court_personnel3[k].cpid
+              break;
+            case 4:
+             var cpid = this.court_personnel4[k].cpid
+              break;
+            case 5:
+             var cpid = this.court_personnel5[k].cpid
+              break;
+            case 6:
+             var cpid = this.court_personnel6[k].cpid
+              break;
+            case 7:
+             var cpid = this.court_personnel7[k].cpid
               break;
           }
 
@@ -801,6 +1008,18 @@
             case 3:
               this.court_personnel3[k].splice(k,1)
               break;
+            case 4:
+              this.court_personnel4[k].splice(k,1)
+              break;
+            case 5:
+              this.court_personnel5[k].splice(k,1)
+              break;
+            case 6:
+              this.court_personnel6[k].splice(k,1)
+              break;
+            case 7:
+              this.court_personnel7[k].splice(k,1)
+              break;
           }
 
         })
@@ -810,20 +1029,39 @@
           type:1,
           json_courtPersonnel:value,
           status:status,
-          courtId:this.pageInfo.cid
+          courtId:this.pageInfo.courtId
         }).then((data) =>{
-            // switch (status) {
-            //   case 1:
-            //     this.court_personnel1[k].oldcpid=cpid
-            //     break;
-            //   case 2:
-            //     this.court_personnel2[k].oldcpid=cpid
-            //     break;
-            //   case 3:
-            //     this.court_personnel3[k].oldcpid=cpid
-            //     break;
-            // }
+            switch (status) {
+              case 1:
+                this.court_personnel1[k].oldcpid=cpid
+                break;
+              case 2:
+                this.court_personnel2[k].oldcpid=cpid
+                break;
+              case 3:
+                this.court_personnel3[k].oldcpid=cpid
+                break;
+              case 4:
+                this.court_personnel4[k].oldcpid=cpid
+                break;
+              case 5:
+                this.court_personnel5[k].oldcpid=cpid
+                break;
+              case 6:
+                this.court_personnel6[k].oldcpid=cpid
+                break;
+              case 7:
+                this.court_personnel7[k].oldcpid=cpid
+                break;
+            }
         })
+      },
+      add_update_cp () {   // 确认新增法院人员
+        this.update_cp(this.judge_select, this.judge_type);
+        this.getInfo();
+        this.judge_select = '';
+        this.judge_type = '';
+        this.addCourtPersonnelsSuccess('法院人员添加成功')
       },
       submit_cp(){
         addCourtPersonnels({
@@ -872,10 +1110,7 @@
           courtId:this.pageInfo.courtId
         }).then((data)=>{
             this.case_court_personnel = data.data.data//案件审判人员列表
-            this.case_court_personnel.push({
-                name:'请选择',
-                id:0
-            })
+            this.case_court_personnel.push()
         })
       },
       updateCp(row){

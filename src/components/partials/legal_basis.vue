@@ -1,23 +1,44 @@
 <template>
     <div>
         <div>
-            <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-                <el-tab-pane label="子女关系" name="first">
-                    <ul class="flex flex-wrap my-2 overflow-wrap">
-                        <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in lessonSec" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
-                    </ul>
-                </el-tab-pane>
-                <el-tab-pane label="财产关系" name="second">
-                    <ul class="flex flex-wrap my-2 overflow-wrap">
-                        <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in lessonThi" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
-                    </ul>
-                </el-tab-pane>
-                <el-tab-pane label="婚姻关系" name="third">
-                    <ul class="flex flex-wrap my-2 overflow-wrap">
-                        <li class="px-2 py-1 text-xs bg-green-500 rounded text-white mx-1 my-1 " v-for="(item, index) in lessonFor" :key="item.id" @click="addLabelarr(item.title, item.id)">{{item.title}}</li>
-                    </ul>
-                </el-tab-pane>
-            </el-tabs>
+          <el-collapse v-model="activeNames" @change="handleChange">
+            <el-collapse-item title="婚姻关系" name="1">
+              <div class="text-left">
+                <el-tag
+                  class="mx-1 my-1 hover:bg-green-500 hidden"
+                   v-for="(item, index) in lessonFor" 
+                   :key="item.id" 
+                   @click="addLabelarr(item.title, item.id)"
+                   effect="dark">
+                  {{ item.title }}
+                </el-tag>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="子女关系" name="2">
+              <div class="text-left">
+                <el-tag
+                  class="mx-1 my-1 hover:bg-green-500 hidden"
+                   v-for="(item, index) in lessonSec" 
+                   :key="item.id" 
+                   @click="addLabelarr(item.title, item.id)"
+                   effect="dark">
+                  {{ item.title }}
+                </el-tag>
+              </div>
+            </el-collapse-item>
+            <el-collapse-item title="财产关系" name="3">
+              <div class="text-left">
+                <el-tag
+                  class="mx-1 my-1 hover:bg-green-500 hidden"
+                   v-for="(item, index) in lessonThi" 
+                   :key="item.id" 
+                   @click="addLabelarr(item.title, item.id)"
+                   effect="dark">
+                  {{ item.title }}
+                </el-tag>
+              </div>
+            </el-collapse-item>
+          </el-collapse>
         </div>
         <div class="inputbox">
             <div class="arrbox">
@@ -57,7 +78,7 @@
     },
     data () {
       return {
-        activeName: 'first',
+        activeNames: ['1'], 
         currentval: '',
         labelarr: [],
         oldlabel: [],
@@ -76,7 +97,8 @@
       this.getInfo();
     },
     methods: {
-      handleClick(tab, event) {
+      handleChange(val) {
+        console.log(val);
       },
       // input回车加入labelarr中 添加新标签
       // addlabel () {
@@ -86,9 +108,7 @@
       //   }
       //   this.currentval = ''
       // },
-      selectThisBox (e) {
-        alert(e)
-      },
+      
       getCaseLable () {    // 获取标签池标签
         selectCaseLable().then((data) =>{
           this.oldlabel = data.data.data;
@@ -141,6 +161,12 @@
 </script>
 
 <style scoped lang="less">
+    .el-tag {
+      padding:0 5px;
+    }
+    .el-collapse-item__content {
+      padding-bottom:10px !important;
+    }
     .inputbox {
         background-color: white;
         font-size: 12px;
