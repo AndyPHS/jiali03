@@ -154,7 +154,7 @@
                     <li class="text-base py-2"><a href="#anqing">二、基本案情</a></li>
                     <li class="text-base py-2"><a href="#suoying">三、案件缩影</a></li>
                     <li class="text-base py-2"><a href="#biaoqian">四、标签池</a></li>
-                    <li class="text-base py-2"><a href="#zhaiyao">五、适用证据摘要</a></li>
+                    <li class="text-base py-2"><a href="#zhaiyao">五、证据适用摘要</a></li>
                     <li class="text-base py-2"><a href="#falv">六、法律依据</a></li>
                 </ul>
             </div>

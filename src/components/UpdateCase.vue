@@ -104,15 +104,7 @@
                                 <el-form-item  label="审判长：" class="text-base">
                                     <div class="flex">
                                         <div class="mr-1 w-2/3">
-                                            <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,1)" filterable >
-                                                <el-option 
-                                                    v-for="item in case_court_personnel" 
-                                                    :key="item.id"
-                                                    :value="item.name" 
-                                                    :label="item.name"
-                                                     >{{ item.name}}
-                                                 </el-option>
-                                             </el-select>
+                                             <el-input v-model="v.name" :disabled="true"></el-input>
                                         </div>
                                         <div class="flex w-1/3 justify-around">
                                            <!--  <span v-on:click="cp_add_icon(1)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
@@ -125,21 +117,12 @@
                             </div>
                             <!--审判审判员-->
                             <div v-for="(v,k) in court_personnel2" :key="'v2-'+k">
-                                <el-form-item  label="陪审员：" class="text-base">
+                                <el-form-item  label="审判员：" class="text-base">
                                     <div class="flex">
                                         <div class="mr-1 w-2/3">
-                                            <!-- <el-input v-model="v.name" @blur="update_cp(v.name,2)"></el-input> -->
-                                            <el-select v-model="v.name"  ref="setSelect" @change="update_cp(v.name,2)" filterable >
-                                                <el-option 
-                                                v-for="item in case_court_personnel" 
-                                                :key="item.id"
-                                                :value="item.name" 
-                                                :label="item.name"
-                                                 >{{ item.name}}</el-option>
-                                             </el-select>
+                                            <el-input v-model="v.name" :disabled="true"></el-input>
                                         </div>
                                         <div class="flex w-1/3 justify-around">
-                                            <!-- <span v-on:click="cp_add_icon(2)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
                                             <span v-on:click="cp_del(k,2,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
                                         </div>
                                     </div>
@@ -151,15 +134,7 @@
                                 <el-form-item  label="代理审判员：" class="text-base">
                                     <div class="flex">
                                     <div class="mr-1 w-2/3">
-                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,3)" filterable >
-                                            <el-option 
-                                                v-for="item in case_court_personnel" 
-                                                :key="item.id"
-                                                :value="item.name" 
-                                                :label="item.name"
-                                                 >{{ item.name}}
-                                             </el-option>
-                                         </el-select>
+                                         <el-input v-model="v.name" :disabled="true"></el-input>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
                                             <!-- <span v-on:click="cp_add_icon(3)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
@@ -173,15 +148,7 @@
                                 <el-form-item  label="人民陪审员：" class="text-base">
                                     <div class="flex">
                                     <div class="mr-1 w-2/3">
-                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,4)" filterable >
-                                            <el-option 
-                                                v-for="item in case_court_personnel" 
-                                                :key="item.id"
-                                                :value="item.name" 
-                                                :label="item.name"
-                                                 >{{ item.name}}
-                                             </el-option>
-                                         </el-select>
+                                         <el-input v-model="v.name" :disabled="true"></el-input>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
                                            <!--  <span v-on:click="cp_add_icon(4)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
@@ -195,15 +162,7 @@
                                 <el-form-item  label="法官助理：" class="text-base">
                                     <div class="flex">
                                     <div class="mr-1 w-2/3">
-                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,5)" filterable >
-                                            <el-option 
-                                                v-for="item in case_court_personnel" 
-                                                :key="item.id"
-                                                :value="item.name" 
-                                                :label="item.name"
-                                                 >{{ item.name}}
-                                             </el-option>
-                                         </el-select>
+                                         <el-input v-model="v.name" :disabled="true"></el-input>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
                                             <!-- <span v-on:click="cp_add_icon(5)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
@@ -217,18 +176,9 @@
                                 <el-form-item  label="书记员：" class="text-base">
                                     <div class="flex">
                                     <div class="mr-1 w-2/3">
-                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,6)" filterable >
-                                            <el-option 
-                                                v-for="item in case_court_personnel" 
-                                                :key="item.id"
-                                                :value="item.name" 
-                                                :label="item.name"
-                                                 >{{ item.name}}
-                                             </el-option>
-                                         </el-select>
+                                         <el-input v-model="v.name" :disabled="true"></el-input>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
-                                            <!-- <span v-on:click="cp_add_icon(6)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
                                             <span v-on:click="cp_del(k,6,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
                                         </div>
                                 </div>
@@ -239,18 +189,9 @@
                                 <el-form-item  label="代理书记员：" class="text-base">
                                     <div class="flex">
                                     <div class="mr-1 w-2/3">
-                                        <el-select v-model="v.name" ref="setSelect1" @change="update_cp(v.name,7)" filterable >
-                                            <el-option 
-                                                v-for="item in case_court_personnel" 
-                                                :key="item.id"
-                                                :value="item.name" 
-                                                :label="item.name"
-                                                 >{{ item.name}}
-                                             </el-option>
-                                         </el-select>
+                                        <el-input v-model="v.name" :disabled="true"></el-input>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
-                                            <!-- <span v-on:click="cp_add_icon(7)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
                                             <span v-on:click="cp_del(k,7,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
                                         </div>
                                 </div>
@@ -260,7 +201,7 @@
                             <el-form-item  label="新增法院人员：" class="text-base">
                                 <div class="flex">
                                     <div class="w-2/5"> 
-                                        <el-select v-model="judge_type" placeholder="审判程序">
+                                        <el-select v-model="judge_type" placeholder="请选择">
                                             <el-option label="审判长" value="1"></el-option>
                                             <el-option label="审判员" value="2"></el-option>
                                             <el-option label="代理审判员" value="3"></el-option>
@@ -388,7 +329,7 @@
                                     <el-radio label="法院未表态" value="2"></el-radio>
                                 </el-radio-group>
                             </div>
-                            <div class="py-2 px-3 whitespace-no-wrap my-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('b')">添加被告证据</div>
+                            <div class="py-2 px-3 whitespace-no-wrap my-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" v-if="pageInfo.case_evidence.b.length == 0" @click="addEvidence('b')">添加被告证据</div>
                             <div class="py-4" v-for="(item, index) in pageInfo.case_evidence.b" :key="'b'+index">
                                 <el-form-item label="被告">
                                     <div class="flex">
