@@ -95,7 +95,7 @@ export default {
               localStorage.setItem('name', this.loginForm.name);
               localStorage.setItem('password', this.loginForm.password);
               localStorage.setItem('token',data.data.data.token)
-              this.$router.replace("/CaseUpload");
+              this.$router.replace("/FileList");
               this.showDialog = true
             }).catch((data)=>{
               // this.$message.error(err);
