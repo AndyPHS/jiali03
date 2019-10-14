@@ -108,7 +108,7 @@
                                         </div>
                                         <div class="flex w-1/3 justify-around">
                                            <!--  <span v-on:click="cp_add_icon(1)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
-                                            <span v-on:click="cp_del(k,1,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                            <span v-on:click="cp_del(k,1,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                         
                                     </div>
@@ -123,7 +123,7 @@
                                             <el-input v-model="v.name" :disabled="true"></el-input>
                                         </div>
                                         <div class="flex w-1/3 justify-around">
-                                            <span v-on:click="cp_del(k,2,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                            <span v-on:click="cp_del(k,2,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                     </div>
                                     
@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="flex w-1/3 justify-around">
                                             <!-- <span v-on:click="cp_add_icon(3)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
-                                            <span v-on:click="cp_del(k,3,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                            <span v-on:click="cp_del(k,3,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                 </div>
                                 </el-form-item>
@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="flex w-1/3 justify-around">
                                            <!--  <span v-on:click="cp_add_icon(4)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
-                                            <span v-on:click="cp_del(k,4,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                            <span v-on:click="cp_del(k,4,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                 </div>
                                 </el-form-item>
@@ -166,7 +166,7 @@
                                     </div>
                                     <div class="flex w-1/3 justify-around">
                                             <!-- <span v-on:click="cp_add_icon(5)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
-                                            <span v-on:click="cp_del(k,5,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                            <span v-on:click="cp_del(k,5,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                 </div>
                                 </el-form-item>
@@ -179,7 +179,7 @@
                                          <el-input v-model="v.name" :disabled="true"></el-input>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
-                                            <span v-on:click="cp_del(k,6,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                            <span v-on:click="cp_del(k,6,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                 </div>
                                 </el-form-item>
@@ -192,7 +192,7 @@
                                         <el-input v-model="v.name" :disabled="true"></el-input>
                                     </div>
                                     <div class="flex w-1/3 justify-around">
-                                            <span v-on:click="cp_del(k,7,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white">删除</span>
+                                            <span v-on:click="cp_del(k,7,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                 </div>
                                 </el-form-item>
@@ -223,7 +223,7 @@
                                          </el-select>
                                     </div>
                                     <div class="w-1/5 flex justify-around">
-                                        <span @click="add_update_cp()" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">确认</span>
+                                        <span @click="add_update_cp()" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer">确认</span>
                                         <!-- <span class="whitespace-no-wrap px-1 bg-green-500" @click="add_update_cp()" >确认</span> -->
                                     </div>
                                 </div>
@@ -235,7 +235,7 @@
                                        <el-form-item label="" class="w-2/3">
                                             <el-input v-model="cp_from.name" placeholder="新增录入法院人员"></el-input>
                                         </el-form-item>
-                                         <span class="ml-1 w-1/3 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white" @click="submit_cp()">确认添加</span>
+                                         <span class="ml-1 w-1/3 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="submit_cp()">确认添加</span>
                                     </div>
                                  </el-form>   
                             </div>
@@ -265,7 +265,7 @@
                                             
                                         </el-form-item>
                                          
-                                         <span class="ml-1 w-1/3 mb-3 py-1 text-base text-blue-500 px-2 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="add_case_lawyer()">添加律师</span>
+                                         <span class="ml-1 w-1/3 mb-3 py-1 text-base text-blue-500 px-2 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="add_case_lawyer()">添加律师</span>
                                     </div>
                                  </el-form>   
                             </div>
@@ -302,23 +302,23 @@
                                     <el-form-item  label="依据 ： " class="text-orange-500">
                                         <el-input type="textarea" :rows="4" class="textarea" placeholder="法院依据，请分条换行填写，如：1、2、" v-model="item.data.f.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
-                                    <span class="ml-1 mb-3 py-1 text-base text-blue-500 px-3 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white" @click="del_case_epitome(index)">删除焦点</span>
+                                    <span class="ml-1 mb-3 py-1 text-base text-blue-500 px-3 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="del_case_epitome(index)">删除焦点</span>
                                 </li>
                             </ul>
                             <div>
-                                <span class="ml-1 mb-3 py-1 text-base text-blue-500 px-3 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="add_case_epitome">新增焦点</span>
+                                <span class="ml-1 mb-3 py-1 text-base text-blue-500 px-3 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="add_case_epitome">新增焦点</span>
                             </div>
                             <h2 class="text-left text-base pb-2 text-orange-500">四、标签池</h2>
                             <label_case></label_case>
                             <h2 class="text-left text-base pb-2 text-orange-500 mt-4">五、证据适用摘要</h2>
-                            <div class="py-2 px-3 whitespace-no-wrap my-3 mr-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('y')">添加原告证据</div>
+                            <div class="py-2 px-3 whitespace-no-wrap my-3 mr-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('y')">添加原告证据</div>
                             <div v-for="(item, index) in pageInfo.case_evidence.y" :key="'y'+index" class="my-4">
                                 <el-form-item label="原告">
                                     <div class="flex">
                                         <el-input class="mr-2 w-1/2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
                                         <div class="w-1/2">
-                                            <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="addEvidence('y')">添加</span>
-                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white" @click="delEvidence(index,'y')">删除</span>
+                                            <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addEvidence('y')">添加</span>
+                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="delEvidence(index,'y')">删除</span>
                                         </div>
                                         
                                     </div>
@@ -329,14 +329,14 @@
                                     <el-radio label="法院未表态" value="2"></el-radio>
                                 </el-radio-group>
                             </div>
-                            <div class="py-2 px-3 whitespace-no-wrap my-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" v-if="pageInfo.case_evidence.b.length == 0" @click="addEvidence('b')">添加被告证据</div>
+                            <div class="py-2 px-3 whitespace-no-wrap my-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" v-if="pageInfo.case_evidence.b.length == 0" @click="addEvidence('b')">添加被告证据</div>
                             <div class="py-4" v-for="(item, index) in pageInfo.case_evidence.b" :key="'b'+index">
                                 <el-form-item label="被告">
                                     <div class="flex">
                                         <el-input class="mr-2 w-1/2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
                                         <div class="w-1/2">
-                                            <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="addEvidence('b')">添加</span>
-                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white" @click="delEvidence(index,'b')">删除</span>
+                                            <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addEvidence('b')">添加</span>
+                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="delEvidence(index,'b')">删除</span>
                                         </div>
                                         
                                     </div>
@@ -380,7 +380,7 @@
                                     <el-button type="primary" @click="radioEvent">确定</el-button>
 
                                 </div> -->
-                                <div class="pt-2 px-2 whitespace-no-wrap text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="radioEvent">确定</div>
+                                <div class="pt-2 px-2 whitespace-no-wrap text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="radioEvent">确定</div>
                             </div>
                         </el-form>
                         <el-row class="my-5">
@@ -573,6 +573,9 @@
           message: mes,
           type: 'success'
         });
+      },
+      errorMesAlert (e) {
+        this.$message.error(e);
       },
       getInfo () {
         selectCaseData().then((data) => {
@@ -1011,20 +1014,26 @@
         this.addCourtPersonnelsSuccess('法院人员添加成功')
       },
       submit_cp(){
-        addCourtPersonnels({
-          name:this.cp_from.name,
-          courtId:this.pageInfo.courtId
-        }).then((data)=>{
-            if(data.data.status_code ==200){
-                this.getCourtPersonnel();  //获取法院人员信息
-                // this.dialogTableVisible_add=false
-                this.addCourtPersonnelsSuccess('恭喜，法院人员添加成功') // 添加法院人员成功提醒
-            }else{
-                alert(data.data.message)
-            }
-          this.cp_from.name = ''
+        if(this.cp_from.name != '' ){
+            addCourtPersonnels({
+              name:this.cp_from.name,
+              courtId:this.pageInfo.courtId
+            }).then((data)=>{
+                if(data.data.status_code ==200){
+                    this.getCourtPersonnel();  //获取法院人员信息
+                    // this.dialogTableVisible_add=false
+                    this.addCourtPersonnelsSuccess('恭喜，法院人员添加成功') // 添加法院人员成功提醒
+                }else{
+                    // alert(data.data.message)
+                    this.errorMesAlert(data.data.message)
+                }
+              this.cp_from.name = ''
 
-        })
+            })
+        }else{
+            this.errorMesAlert('新增人员不能为空')
+        }
+        
       },
       // 增加案由
       // addCaseAction (e) {
@@ -1099,20 +1108,25 @@
           })
       },
       add_case_lawyer () {
-         updateCaseData({
-          type:1,
-          json_y:this.lv_from.lawyerValue,
-          lawyerOffice:this.lv_from.lawerOfficeValue
-        }).then((data) =>{
-            if(data.data.status_code==200){
-                this.getInfo()
-                this.lv_from.lawyerValue = '';
-                this.lv_from.lawerOfficeValue = '';
-                this.addCourtPersonnelsSuccess('恭喜，代理律师添加成功'); // 添加律师成功提醒
-            }else{
-                this.addCourtPersonnelsSuccess('请正确填写法院及律师名');
-            }
-        })
+        if(this.lv_from.lawyerValue != '' ){
+            updateCaseData({
+              type:1,
+              json_y:this.lv_from.lawyerValue,
+              lawyerOffice:this.lv_from.lawerOfficeValue
+            }).then((data) =>{
+                if(data.data.status_code==200){
+                    this.getInfo()
+                    this.lv_from.lawyerValue = '';
+                    this.lv_from.lawerOfficeValue = '';
+                    this.addCourtPersonnelsSuccess('恭喜，代理律师添加成功'); // 添加律师成功提醒
+                }else{
+                    this.addCourtPersonnelsSuccess('请正确填写法院及律师名');
+                }
+            })
+        }else{
+            this.errorMesAlert('律所或律师不能为空');
+        }
+         
       },
       delete_vase_lawyer(row){
         updateCaseData({

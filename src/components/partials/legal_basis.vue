@@ -5,7 +5,7 @@
             <el-collapse-item title="婚姻关系" name="1">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
                    v-for="(item, index) in lessonFor" 
                    :key="item.id" 
                    @click="addLabelarr(item.title, item.id)"
@@ -17,7 +17,7 @@
             <el-collapse-item title="子女关系" name="2">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
                    v-for="(item, index) in lessonSec" 
                    :key="item.id" 
                    @click="addLabelarr(item.title, item.id)"
@@ -29,7 +29,7 @@
             <el-collapse-item title="财产关系" name="3">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
                    v-for="(item, index) in lessonThi" 
                    :key="item.id" 
                    @click="addLabelarr(item.title, item.id)"
