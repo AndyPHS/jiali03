@@ -370,21 +370,16 @@
                             <h2 class="text-left text-base pb-2 text-orange-500">四、标签池</h2>
                             <label_case></label_case>
                             <h2 class="text-left text-base pb-2 text-orange-500 mt-4">五、证据适用摘要</h2>
-                            <el-button type="primary" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('y')">添加原告证据</el-button>
+                            <div class="py-2 px-3 whitespace-no-wrap my-3 mr-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('y')">添加原告证据</div>
                             <div v-for="(item, index) in pageInfo.case_evidence.y" :key="'y'+index" class="my-4">
                                 <el-form-item label="原告">
                                     <div class="flex">
-                                        <el-input class="mr-2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
-                                        <el-button 
-                                            type="primary" 
-                                            @click="addEvidence('y')"
-                                            >添加
-                                        </el-button>
-                                        <el-button 
-                                            type="danger" 
-                                            @click="delEvidence(index,'y')"
-                                            >删除
-                                        </el-button>
+                                        <el-input class="mr-2 w-1/2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
+                                        <div class="w-1/2">
+                                            <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="addEvidence('y')">添加</span>
+                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white" @click="delEvidence(index,'y')">删除</span>
+                                        </div>
+                                        
                                     </div>
                                 </el-form-item>
                                 <el-radio-group v-model="item.f" class="ml-20" @change="updateInfo({case_evidence:pageInfo.case_evidence})">
@@ -393,24 +388,16 @@
                                     <el-radio label="法院未表态" value="2"></el-radio>
                                 </el-radio-group>
                             </div>
-                            <el-button v-if="pageInfo.case_evidence.b.length == 0" @click="addEvidence('b')">添加被告证据</el-button>
+                            <div class="py-2 px-3 whitespace-no-wrap my-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('b')">添加被告证据</div>
                             <div class="py-4" v-for="(item, index) in pageInfo.case_evidence.b" :key="'b'+index">
                                 <el-form-item label="被告">
                                     <div class="flex">
-                                        <el-input 
-                                            class="mr-2" v-model="item.evidence"  
-                                            @blur="updateInfo({case_evidence:pageInfo.case_evidence})"
-                                            ></el-input>
-                                        <el-button 
-                                            type="primary" 
-                                            @click="addEvidence('b')"
-                                            >添加
-                                        </el-button>
-                                        <el-button 
-                                            type="danger" 
-                                            @click="delEvidence(index,'b')"
-                                            >删除
-                                        </el-button>
+                                        <el-input class="mr-2 w-1/2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
+                                        <div class="w-1/2">
+                                            <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="addEvidence('b')">添加</span>
+                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white" @click="delEvidence(index,'b')">删除</span>
+                                        </div>
+                                        
                                     </div>
                                 </el-form-item>
                                 <el-radio-group v-model="item.f" class="ml-20" @change="updateInfo({case_evidence:pageInfo.case_evidence})">
@@ -424,8 +411,8 @@
                             <div>
                                 <ul>
                                     <li class="flex justify-between b-1 py-2" v-for="(item, index) in pageInfo.legal_basis" :key="index">
-                                        <span class="w-4/5 overflow-hidden text-left">{{ item.name }}第{{item.number}}条</span>
-                                        <span class="ml-2 px-1 py-1 cursor-pointer hover:text-white hover:bg-green-500 w-1/5" @click="deleteLegal_basis(item,index)">删除</span>
+                                        <span class="w-4/5 overflow-hidden text-sm text-left">{{ item.name }}第{{item.number}}条</span>
+                                        <span class="ml-2 px-1 py-1 cursor-pointer text-sm rounded border border-1 hover:text-white hover:bg-orange-500 w-1/5" @click="deleteLegal_basis(item,index)">删除</span>
                                     </li>
                                 </ul>
                             </div>
@@ -434,6 +421,7 @@
                                     v-model="legal_basis.legal_basis" 
                                     @change="console(legal_basis)" 
                                     placeholder="请选择法律"
+                                    size="medium"
                                 >
                                     <el-option v-for="(item,index) in lawContent.lawList" :label="item.name" :key="index" :value="item.id"></el-option>
                                 </el-select>
@@ -444,11 +432,14 @@
                                         placeholder="第几条法律，填写数字即可，如：3"
                                         maxlength="4"
                                         show-word-limit
+                                        size="medium"
                                     ></el-input>
                                 </div>
-                                <div>
+                                <!-- <div>
                                     <el-button type="primary" @click="radioEvent">确定</el-button>
-                                </div>
+
+                                </div> -->
+                                <div class="pt-2 px-2 whitespace-no-wrap text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="radioEvent">确定</div>
                             </div>
                         </el-form>
                         <el-row class="my-5">
@@ -1010,7 +1001,7 @@
           type:3,
           json_courtPersonnel:value.name,
           status:status,
-          courtId:this.pageInfo.courtId
+          courtId:value.courtId
         }).then((data) =>{
           this.getInfo();
           switch (status) {

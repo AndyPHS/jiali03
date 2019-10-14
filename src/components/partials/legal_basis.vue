@@ -5,11 +5,11 @@
             <el-collapse-item title="婚姻关系" name="1">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 hidden"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white"
                    v-for="(item, index) in lessonFor" 
                    :key="item.id" 
                    @click="addLabelarr(item.title, item.id)"
-                   effect="dark">
+                   >
                   {{ item.title }}
                 </el-tag>
               </div>
@@ -17,11 +17,11 @@
             <el-collapse-item title="子女关系" name="2">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 hidden"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white"
                    v-for="(item, index) in lessonSec" 
                    :key="item.id" 
                    @click="addLabelarr(item.title, item.id)"
-                   effect="dark">
+                   >
                   {{ item.title }}
                 </el-tag>
               </div>
@@ -29,33 +29,37 @@
             <el-collapse-item title="财产关系" name="3">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 hidden"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white"
                    v-for="(item, index) in lessonThi" 
                    :key="item.id" 
                    @click="addLabelarr(item.title, item.id)"
-                   effect="dark">
+                   >
                   {{ item.title }}
                 </el-tag>
               </div>
             </el-collapse-item>
           </el-collapse>
         </div>
-        <div class="inputbox">
-            <div class="arrbox">
-                <div v-for="(item,index) in labelarr" @change="addLabelarr" :key="index" class="spanbox">
-                    <span>{{item.title}}</span>
-                    <i class="spanclose" @click="removeitem(index, item)"></i>
-                </div>
-                <!--<input-->
-                <!--placeholder="输入后回车"-->
-                <!--size="5"-->
-                <!--v-model="currentval"-->
-                <!--@keyup.enter="addlabel"-->
-                <!--class="input"-->
-                <!--type="text"-->
-                <!--/>-->
-            </div>
+        <div class="selectBox flex mt-3">
+          <span class="whitespace-no-wrap text-sm mt-2">选定标签：</span>
+          <div class="inputbox">
+              <div class="arrbox">
+                  <div v-for="(item,index) in labelarr" @change="addLabelarr" :key="index" class="spanbox">
+                      <span>{{item.title}}</span>
+                      <i class="spanclose" @click="removeitem(index, item)"></i>
+                  </div>
+                  <!--<input-->
+                  <!--placeholder="输入后回车"-->
+                  <!--size="5"-->
+                  <!--v-model="currentval"-->
+                  <!--@keyup.enter="addlabel"-->
+                  <!--class="input"-->
+                  <!--type="text"-->
+                  <!--/>-->
+              </div>
+          </div>
         </div>
+        
 
         <!-- 常用label展示 -->
         <div></div>
@@ -167,16 +171,15 @@
     .el-collapse-item__content {
       padding-bottom:10px !important;
     }
+    .selectBox{border: 1px solid #dcdee2; border-radius: 6px;padding: 6px 1px 1px 6px;}
     .inputbox {
         background-color: white;
         font-size: 12px;
-        border: 1px solid #dcdee2;
-        border-radius: 6px;
+       
         margin-bottom: 18px;
-        padding: 6px 1px 1px 6px;
+        
         text-align: left;
         font-size: 0;
-        margin-bottom: 0;
     }
     .input {
         font-size: 14px;
@@ -206,8 +209,8 @@
         line-height: 30px;
         margin: 2px;
         padding: 0 10px;
-        background-color: #1abc9c;
-        color: white;
+        background-color: #ecf5ff;
+        color: #409EFF;
         border-radius: 4px;
         font-size: 13px;
         cursor: pointer;
@@ -219,9 +222,10 @@
     }
     .spanbox:hover {
         padding: 0px 17px 0 3px;
+
     }
     .spanclose {
-        color: white;
+        color: #409EFF;
         padding: 0 10px 0 0;
         cursor: pointer;
         font-size: 12px;
