@@ -4,7 +4,7 @@
         <div class="mx-10 px-2 pb-10 w-full">
             <div class="w-1/2 panjue float-left pb-10">
                 <div class="py-6 relative" >
-                    <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
+                    <h2 class="text-xl mb-2">{{pageInfo.court}}{{pageInfo.case_action}}{{status}}</h2>
                     <div class="w-1/3 text-right cursor-pointer absolute t-5 right-0 z-10"><el-button type="primary" @click="goArrangementCase">返回修改判决书样式</el-button></div>
                     
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
@@ -259,7 +259,7 @@
                             <!--审判人员-->
                             <el-form-item  label="新增法院人员：" class="text-base">
                                 <div class="flex">
-                                    <div class="w-1/3"> 
+                                    <div class="w-2/5"> 
                                         <el-select v-model="judge_type" placeholder="审判程序">
                                             <el-option label="审判长" value="1"></el-option>
                                             <el-option label="审判员" value="2"></el-option>
@@ -270,7 +270,7 @@
                                             <el-option label="代理书记员" value="7"></el-option>
                                         </el-select>
                                     </div>
-                                    <div class="w-1/3 ml-2">
+                                    <div class="w-2/5 ml-2">
                                         <el-select v-model="judge_select" ref="setSelect1" filterable >
                                             <el-option 
                                                 v-for="item in case_court_personnel" 
@@ -281,7 +281,7 @@
                                              </el-option>
                                          </el-select>
                                     </div>
-                                    <div class="w-1/3 flex justify-around">
+                                    <div class="w-1/5 flex justify-around">
                                         <span @click="add_update_cp()" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">确认</span>
                                         <!-- <span class="whitespace-no-wrap px-1 bg-green-500" @click="add_update_cp()" >确认</span> -->
                                     </div>
@@ -323,7 +323,8 @@
                                             </div>
                                             
                                         </el-form-item>
-                                         <span class="ml-1 mb-3 py-1 text-base text-blue-500 px-2 rounded border border-1 hover:bg-green-500 hover:text-white" @click="add_case_lawyer()">添加律师</span>
+                                         
+                                         <span class="ml-1 w-1/3 mb-3 py-1 text-base text-blue-500 px-2 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="add_case_lawyer()">添加律师</span>
                                     </div>
                                  </el-form>   
                             </div>
@@ -360,11 +361,12 @@
                                     <el-form-item  label="依据 ： " class="text-orange-500">
                                         <el-input type="textarea" :rows="4" class="textarea" placeholder="法院依据，请分条换行填写，如：1、2、" v-model="item.data.f.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
+                                    <span class="ml-1 mb-3 py-1 text-base text-blue-500 px-3 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white" @click="del_case_epitome(index)">删除焦点</span>
                                 </li>
                             </ul>
-                            <el-row>
-                                <el-button type="primary" @click="add_case_epitome">新增焦点</el-button>
-                            </el-row>
+                            <div>
+                                <span class="ml-1 mb-3 py-1 text-base text-blue-500 px-3 inline-block rounded border border-1 hover:bg-green-500 hover:text-white" @click="add_case_epitome">新增焦点</span>
+                            </div>
                             <h2 class="text-left text-base pb-2 text-orange-500">四、标签池</h2>
                             <label_case></label_case>
                             <h2 class="text-left text-base pb-2 text-orange-500 mt-4">五、证据适用摘要</h2>
@@ -373,8 +375,16 @@
                                 <el-form-item label="原告">
                                     <div class="flex">
                                         <el-input class="mr-2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
-                                        <el-button type="primary" v-if="index === pageInfo.case_evidence.y.length-1" @click="addEvidence('y')">添加</el-button>
-                                        <el-button type="danger" v-else @click="delEvidence(index,'y')">删除</el-button>
+                                        <el-button 
+                                            type="primary" 
+                                            @click="addEvidence('y')"
+                                            >添加
+                                        </el-button>
+                                        <el-button 
+                                            type="danger" 
+                                            @click="delEvidence(index,'y')"
+                                            >删除
+                                        </el-button>
                                     </div>
                                 </el-form-item>
                                 <el-radio-group v-model="item.f" class="ml-20" @change="updateInfo({case_evidence:pageInfo.case_evidence})">
@@ -393,10 +403,14 @@
                                             ></el-input>
                                         <el-button 
                                             type="primary" 
-                                            v-if="index === pageInfo.case_evidence.b.length-1" 
                                             @click="addEvidence('b')"
-                                            >添加</el-button>
-                                        <el-button type="danger" v-else @click="delEvidence(index,'b')">删除</el-button>
+                                            >添加
+                                        </el-button>
+                                        <el-button 
+                                            type="danger" 
+                                            @click="delEvidence(index,'b')"
+                                            >删除
+                                        </el-button>
                                     </div>
                                 </el-form-item>
                                 <el-radio-group v-model="item.f" class="ml-20" @change="updateInfo({case_evidence:pageInfo.case_evidence})">
@@ -811,6 +825,7 @@
       //删除证据摘要
       delEvidence(index,type){
         this.pageInfo.case_evidence[type].splice(index,1);
+        this.updateInfo({case_evidence: this.pageInfo.case_evidence});
       },
       // 添加法律依据
       radioEvent () {
@@ -995,7 +1010,7 @@
           type:3,
           json_courtPersonnel:value.name,
           status:status,
-          courtId:this.pageInfo.cid
+          courtId:this.pageInfo.courtId
         }).then((data) =>{
           this.getInfo();
           switch (status) {
@@ -1104,6 +1119,10 @@
             }
           }
         })
+      },
+      del_case_epitome (index) {
+        this.pageInfo.case_epitome.splice(index ,1)
+        this.updateInfo({case_epitome: this.pageInfo.case_epitome});
       },
       getCourtPersonnel () {
         getCourtPersonnels({

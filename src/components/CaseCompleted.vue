@@ -4,7 +4,7 @@
         <div class="container mx-auto flex pb-10">
             <div class="w-2/3">
                 <div class="text-left mt-5">
-                    <h2 class="text-lg">{{pageInfo.court}}{{status}}</h2>
+                    <h2 class="text-lg">{{pageInfo.court}}{{ pageInfo.case_action }}{{status}}</h2>
                     <h2 id="xinxi" class="py-2 text-orange-500">一、基本信息</h2>
                     <p class="my-1">律所案号：<span>{{ pageInfo.master_number }}</span></p>
                     <p class="my-1">裁判文书：<span>{{  pageInfo.case_number }}</span></p>
@@ -41,7 +41,7 @@
                     <div class="my-1">
                       <div>代理律师：</div>
                       <div class="mx-2 pl-5" v-for="(item, index) in pageInfo.lawyer" :key="item.index">
-                        <span>{{ item.lawyerName }}</span><span class="ml-5">《{{ item.lawyerOfficeName }}》</span>
+                        <span>{{ item.lawyerName }}</span><span class="ml-5">{{ item.lawyerOfficeName }}</span>
                       </div>
                     </div>
                     <div v-for="item in plaintiff" :key="item.status" >
@@ -76,17 +76,17 @@
                             </tr>
                             </thead>
                             <tbody v-for="item in pageInfo.case_epitome" :key="item.index">
-                            <tr>
-                                <td rowspan="2">{{item.title}}</td>
-                                <td>{{item.data.y.viewpoint}}</td>
-                                <td>{{item.data.b.viewpoint}}</td>
-                                <td>{{item.data.f.viewpoint}}</td>
-                            </tr>
-                            <tr>
-                                <td>依据：{{item.data.y.basis}}</td>
-                                <td>依据：{{item.data.b.basis}}</td>
-                                <td>依据：{{item.data.f.basis}}</td>
-                            </tr>
+                              <tr>
+                                  <td rowspan="2">{{item.title}}</td>
+                                  <td><h3 v-if="item.data.y.viewpoint != null "></h3><h3 v-else>无</h3>{{item.data.y.viewpoint}}</td>
+                                  <td><h3 v-if="item.data.b.viewpoint != null "></h3><h3 v-else>无</h3>{{item.data.b.viewpoint}}</td>
+                                  <td><h3 v-if="item.data.f.viewpoint != null "></h3><h3 v-else>无</h3>{{item.data.f.viewpoint}}</td>
+                              </tr>
+                              <tr>
+                                  <td><h3 v-if="item.data.y.basis != null ">依据：</h3><h3 v-else>依据：无</h3>{{item.data.y.basis}}</td>
+                                  <td><h3 v-if="item.data.b.basis != null ">依据：</h3><h3 v-else>依据：无</h3>{{item.data.b.basis}}</td>
+                                  <td><h3 v-if="item.data.f.basis != null ">依据：</h3><h3 v-else>依据：无</h3>{{item.data.f.basis}}</td>
+                              </tr>
                             </tbody>
                         </table>
                         <table v-else>
@@ -106,21 +106,24 @@
                     </div>
                     <div class="pr-10">
                         <h2 id="zhaiyao" class="py-2 text-orange-500">五、证据适用摘要</h2>
-                        <table class="evidence_table w-full"  v-if="pageInfo.case_evidence != null">
-                            <thead>
+                        <table class="evidence_table w-full"  v-if="pageInfo.case_evidence.y.length-1 == 0 || pageInfo.case_evidence.b.length-1 == 0">
+                            <thead  v-if="pageInfo.case_evidence.y.length-1 == 0 || pageInfo.case_evidence.b.length-1 == 0">
                             <tr>
                                 <td class="w-1/3">身份</td>
                                 <td class="w-1/3">证据名称</td>
                                 <td class="w-1/3">法院认定</td>
                             </tr>
                             </thead>
-                            <tbody v-if="pageInfo.case_evidence != null">
-                            <tr v-for="item in pageInfo.case_evidence.y" :key="item.index">
+                            <thead v-else>
+                              <span>无</span>
+                            </thead>
+                            <tbody>
+                            <tr v-if="pageInfo.case_evidence.y.length-1 == 0" v-for="item in pageInfo.case_evidence.y" :key="item.index">
                                 <td class="w-1/3">原告</td>
                                 <td class="w-1/3">{{ item.evidence }}</td>
                                 <td class="w-1/3">{{item.f}}</td>
                             </tr>
-                            <tr v-for="item in pageInfo.case_evidence.b" :key="item.index">
+                            <tr v-if="pageInfo.case_evidence.b.length-1 == 0"  v-for="item in pageInfo.case_evidence.b" :key="item.index">
                                 <td>被告</td>
                                 <td>{{ item.evidence }}</td>
                                 <td>{{item.f}}</td>
