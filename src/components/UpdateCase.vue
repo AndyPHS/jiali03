@@ -764,8 +764,13 @@
       },
       // 添加法律依据
       radioEvent () {
-        this.updateInfo(this.legal_basis);
-        this.pageInfo.legal_basis.push({lawId: this.legal_basis.legal_basis, number: this.legal_basis.number,name:this.legal_basis.name});
+        if (this.legal_basis.name != "" && this.legal_basis.number != "" ) {
+            this.updateInfo(this.legal_basis);
+            this.pageInfo.legal_basis.push({lawId: this.legal_basis.legal_basis, number: this.legal_basis.number,name:this.legal_basis.name});
+        }else{
+            this.errorMesAlert('请先选择相关法律');
+        }
+        
       },
       // 将法律数字变成文字
       changeLegal_basis_type () {
@@ -1007,14 +1012,19 @@
         })
       },
       add_update_cp () {   // 确认新增法院人员
-        this.update_cp(this.judge_select, this.judge_type);
-        this.getInfo();
-        this.judge_select = '';
-        this.judge_type = '';
-        this.addCourtPersonnelsSuccess('法院人员添加成功')
+        if (this.judge_select != "" && this.judge_type != "" ) {
+            this.update_cp(this.judge_select, this.judge_type);
+            this.getInfo();
+            this.judge_select = '';
+            this.judge_type = '';
+            this.addCourtPersonnelsSuccess('法院人员添加成功')
+        }else{
+            this.errorMesAlert('新增人员不能为空')
+        }
+        
       },
       submit_cp(){
-        if(this.cp_from.name != '' ){
+        if(this.cp_from.name != "" ){
             addCourtPersonnels({
               name:this.cp_from.name,
               courtId:this.pageInfo.courtId
@@ -1025,9 +1035,9 @@
                     this.addCourtPersonnelsSuccess('恭喜，法院人员添加成功') // 添加法院人员成功提醒
                 }else{
                     // alert(data.data.message)
-                    this.errorMesAlert(data.data.message)
+                    this.errorMesAlert('新增人员不能为空')
                 }
-              this.cp_from.name = ''
+              this.cp_from.name = ""
 
             })
         }else{
