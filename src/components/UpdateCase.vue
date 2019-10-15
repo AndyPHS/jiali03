@@ -25,11 +25,11 @@
                 </div>
             </div>
             <div class="w-1/2 write float-right pb-10">
-                <div class="w-4/5 mx-auto">
+                <div class="w-5/6 mx-auto">
                     <h2 class="my-4 py-2 text-xl text-left border-b border-1">
                         <span class="">案件信息填写</span>
                     </h2>
-                    <div class="pl-5">
+                    <div class="mr-4">
                         <el-form ref="pageInfo" :model="pageInfo" label-width="120px" >
                             <h2 class="text-left text-base pb-2 text-orange-500">一、案件基本信息</h2>
                             <el-form-item label="律所案号：" class="text-base">
@@ -1250,6 +1250,12 @@
     .panjue ,.write{
         height:800px;
         overflow-y: scroll;
+    }
+    .panjue::-webkit-scrollbar {
+        display: none;
+    }
+    .write::-webkit-scrollbar {
+        display: none;
     }
     .my-autocomplete {
         li {

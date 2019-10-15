@@ -2,7 +2,7 @@
     <div>
         <head-menu></head-menu>
         <div class="mx-10 px-2 pb-10">
-            <div class="w-1/2 panjue float-left pb-10">
+            <div class="w-1/2 panjue float-left pb-10 border-1 border-r pr-1">
                 <div class="py-6">
                     <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
@@ -16,8 +16,7 @@
                                 <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
                             
-                                <!-- <div id="caseMsg" class="info_content mr-2">{{pageInfo.content}}</div> -->
-                                <textarea :rows="80" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly"  @blur="updateInfo({content:pageInfo.content})"></textarea>
+                                <textarea  :rows='80' id="textarea_left" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                             </div>
                         </el-tab-pane>
                         
@@ -58,6 +57,7 @@
       return {
         imgs: [],
         status: '',
+        textarea1: '',
         pageInfo:{
           id: '',
           tid: null,
@@ -108,14 +108,14 @@
       this.getInfo(); // 获取页面信息
     },
     created(){
-        
+ 
     },
     updated () {
     },
     methods: {
-      handleClick(tab, event) {
+      handleClick(tab, event) {   // 图片和文本切换
       },
-      getInfo () {
+      getInfo () {  // 获取页面信息
         selectCaseData().then((data) => {
           this.pageInfo = data.data;
           this.pageInfo.imgs = JSON.parse(data.data.imgs)
@@ -155,7 +155,12 @@
 </script>
 
 <style scoped lang="less">
- textarea{outline:none;resize:none;line-height:2.0}
+
+    textarea{
+      outline:0 none;
+      resize:none;
+      line-height:2.0;
+    }
     .el-select{
         width: 100%;
     }
@@ -165,17 +170,6 @@
     .el-textarea__inner{
         min-height: 120px !important;
         line-height: 30px !important;
-    }
-    .textarea textarea{
-        min-height:120px !important;
-    }
-    .info_content{
-        white-space: pre-line;
-        text-align:left;
-    }
-    .panjue ,.write{
-        height:800px;
-        overflow-y: scroll;
     }
     .el-col-12{
         width: 100% !important;
