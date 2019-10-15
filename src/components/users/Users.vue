@@ -2,7 +2,7 @@
     <div>
         <head-menu></head-menu>
         <div class="container mx-auto">
-            <div class="py-2 text-lg relative my-2">用户列表<el-button type="primary" plain class="absolute top-0 right-0 bottom-0" @click="addNewUser">添加用户</el-button></div>
+            <div class="py-2 text-lg relative my-2">用户列表<el-button type="primary" plain class="absolute top-0 right-0 bottom-0" @click="handleUserAdd">添加用户</el-button></div>
                 <div class="text-center">
                     <table>
                         <thead>
@@ -29,12 +29,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <ul>
-                        <li 
-                            v-for="item in pageInfo"
-                            :key="item.id"
-                        ></li>
-                    </ul>
+                    
                 </div>
                 <el-pagination
                     background
@@ -46,7 +41,30 @@
                     :total="this.min.total">
                 </el-pagination>
             </div>
-            <el-dialog title="更新用户" :visible.sync="dialogFormVisible">
+            <el-dialog title="新增用户" :visible.sync="dialogUserAdd">
+              <el-form :model="user">
+                <el-form-item label="姓名" :label-width="formLabelWidth">
+                  <el-input v-model="user.name" class="w-1/2" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="邮箱" :label-width="formLabelWidth">
+                  <el-input v-model="user.email" class="w-1/2" autocomplete="off"></el-input>
+                </el-form-item>
+                <!-- <el-form-item v-if="hasOf(localStorage.getItem('userId'))" label="密码" :label-width="formLabelWidth">
+                  <el-input type="password" v-model="user.password" class="w-1/2" placeholder="如不需修改密码可不填" autocomplete="off"></el-input>
+                </el-form-item> -->
+                <el-form-item label="密码" :label-width="formLabelWidth">
+                  <el-input type="password" v-model="user.password" class="w-1/2" placeholder="如不需修改密码可不填" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-checkbox-group v-model="user.roles">
+                    <el-checkbox v-for='item in UserRole' :key="item.id" :label="item.id">{{item.name}}</el-checkbox>
+                </el-checkbox-group>
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogUserAdd = false">取 消</el-button>
+                <el-button type="primary" @click="addNewUser">确 定</el-button>
+              </div>
+            </el-dialog>
+            <el-dialog title="修改用户" :visible.sync="dialogFormVisible">
               <el-form :model="user">
                 <el-form-item label="姓名" :label-width="formLabelWidth">
                   <el-input v-model="user.name" class="w-1/2" autocomplete="off"></el-input>
@@ -112,6 +130,7 @@
                 UserRole: [],
                 min: '',
                 dialogFormVisible: false,
+                dialogUserAdd: false,
                 formLabelWidth: '80px',
                  // 分页
                 first_page_url: '',
@@ -147,22 +166,26 @@
             handleCurrentChange (currentPage) {    //点击哪一页
                 this.currentPage = currentPage;
             },
-            handleClick (item) {
+            handleClick (item) {    // 点击修改角色
                 this.dialogFormVisible = true
                 this.user.name = item.name;
                 this.user.email = item.email;
                 this.user.password = item.password;
                 localStorage.setItem('userId',item.id)
             },
+            handleUserAdd () {    // 点击新增
+                this.dialogUserAdd = true
+            },
             addNewUser () {   // 新增用户
-                this.dialogFormVisible = true
+                this.user.roles = JSON.stringify(this.user.roles)
                 addUsers({
                     name: this.user.name,
                     email: this.user.email,
                     password: this.user.password,
                     roles: this.user.roles
                 }).then((data)=>{
-
+                    this.handleUserList()
+                    this.dialogUserAdd = false
                 }).catch((data)=>{
 
                 })
@@ -181,7 +204,6 @@
             getUserRole () {  // 获取权限列表
                 selectUserRole().then((data)=>{
                     this.UserRole = data.data.data;
-                    console.log(this.UserRole)
                 })
             },
             deleteUser (e) {   // 删除用户

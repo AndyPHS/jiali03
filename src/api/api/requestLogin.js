@@ -27,7 +27,7 @@ export const addUsers = params => {
     dataType: 'json',
     url: apiUrl.addUsers,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
-    data: qs.stringify(params)
+    data: params
   });
 };
 // 删除用户
@@ -66,6 +66,46 @@ export const selectUserRole = params => {
     method: "get",
     dataType: 'json',
     url: apiUrl.selectUserRole,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增权限
+export const addPermission = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addPermission,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除权限
+export const deletePermission = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deletePermission + '/' + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 修改权限
+export const updatePermission = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updatePermission + '/' + localStorage.getItem('permissionId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询权限
+export const selectPermission = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectPermission,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
