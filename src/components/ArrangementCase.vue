@@ -16,7 +16,7 @@
                                 <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
                             
-                                <textarea  :rows='80' id="textarea_left" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly"  @blur="updateInfo({content:pageInfo.content})"></textarea>
+                                <textarea :rows='80' id="textarea_left" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                             </div>
                         </el-tab-pane>
                         
@@ -155,7 +155,11 @@
 </script>
 
 <style scoped lang="less">
-
+    .panjue, .write{
+      height: 800px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+    }
     textarea{
       outline:0 none;
       resize:none;
