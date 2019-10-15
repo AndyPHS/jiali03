@@ -764,7 +764,7 @@
       },
       // 添加法律依据
       radioEvent () {
-        if (this.legal_basis.name != "" && this.legal_basis.number != "" ) {
+        if (this.legal_basis.name != "" || this.legal_basis.number != "" ) {
             this.updateInfo(this.legal_basis);
             this.pageInfo.legal_basis.push({lawId: this.legal_basis.legal_basis, number: this.legal_basis.number,name:this.legal_basis.name});
         }else{

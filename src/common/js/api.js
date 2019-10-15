@@ -36,11 +36,27 @@ const apiUrl = {
   // 新增用户
   addUsers: baseURL + 'users/add_user',
   // 删除用户
-  deleteUser: baseURL + 'users/delete_user/{UserId}',
+  deleteUser: baseURL + 'users/delete_user/',
   // 修改用户
-  updateUser: baseURL + 'users/update_user/{userId}',
+  updateUser: baseURL + 'users/update_user',
   // 查找用户
   selectUser: baseURL + 'users/select_user',
+  // 新增权限
+  addPermission: baseURL + 'users/add_permission',
+  // 删除权限
+  deletePermission: baseURL + 'users/delete_permission/',
+  // 修改权限
+  updatePermission: baseURL + 'users/update_permission/',
+  // 查询权限
+  selectPermission: baseURL + 'users/select_permission',
+  // 添加角色
+  addUsersRole: baseURL + 'users/add_role',
+  // 删除角色
+  deleteUserRole: baseURL + 'users/delete_role/',
+  // 修改角色
+  updateUserRole: baseURL + 'users/update_role/',
+  // 查询角色
+  selectUserRole: baseURL + 'users/select_role',
 
   // 上传列表页
   selectCaseLlist: baseURL + 'case/select_case_list',

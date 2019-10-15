@@ -9,6 +9,9 @@ import CaseCompleted from '@/components/CaseCompleted'  // 案件信息填写页
 import HeadMenu from '@/components/HeadMenu'  // 添加头部导航按钮
 import UpdateCase from '@/components/UpdateCase' // 修改案件基本信息
 import ArrangementCase from '@/components/ArrangementCase'  // 整理案件样式页面
+import Users from '@/components/users/Users'  // 用户页面
+import UsersPermission from '@/components/users/UsersPermission'  // 用户权限页面
+import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 // import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
@@ -53,16 +56,35 @@ export default new Router({
       name: 'CaseCompleted',
       component: CaseCompleted
     },
+    // 导航列表
     {
       path: '/HeadMenu',
       name: 'HeadMenu',
       component: HeadMenu
     },
-    //整理案件样式页面
+    // 整理案件样式页面
     {
       path: '/ArrangementCase',
       name: 'ArrangementCase',
       component: ArrangementCase
+    },
+    // 用户列表
+    {
+      path: '/Users',
+      name: 'Users',
+      component: Users
+    },
+    // 用户权限列表
+    {
+      path: '/UsersPermission',
+      name: 'UsersPermission',
+      component: UsersPermission
+    },
+    // 用户角色列表
+    {
+      path: '/UsersRole',
+      name: 'UsersRole',
+      component: UsersRole
     }
   ]
 })

@@ -20,7 +20,56 @@ export const requestLogin = params => {
     data: params
   });
 };
-
+// 新增用户
+export const addUsers = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addUsers,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 删除用户
+export const deleteUser = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteUser + '/' + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 修改用户
+export const updateUser = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateUser + '/' + localStorage.getItem('userId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询用户
+export const selectUser = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectUser+'?page='+params.page,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询角色
+export const selectUserRole = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectUserRole,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 新增案件信息
 export const creatCase = params => {
   return axios({

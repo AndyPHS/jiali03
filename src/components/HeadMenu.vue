@@ -11,9 +11,9 @@
             <!--<el-menu-item index="1">用户管理</el-menu-item>-->
             <el-submenu index="1">
                 <template slot="title">用户管理</template>
-                <el-menu-item index="2-1">管理员列表</el-menu-item>
-                <el-menu-item index="2-2">权限列表</el-menu-item>
-                <el-menu-item index="2-3">角色列表</el-menu-item>
+                <el-menu-item index="2-1"><router-link  to="Users">管理员列表</router-link></el-menu-item>
+                <el-menu-item index="2-2"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
+                <el-menu-item index="2-3"><router-link  to="UsersRole">角色列表</router-link></el-menu-item>
             </el-submenu>
             <el-submenu index="2" collapse-transition>
                 <template slot="title">我的工作台</template>
@@ -38,7 +38,7 @@
                 </dt>
                 <dd class="ml-2">
                     <h2 class="text-xl text-orange-500">北京家理律师事务所</h2>
-                    
+
                 </dd>
                 <dd class="ml-3">
                     <h2>你好！{{user}}</h2>
