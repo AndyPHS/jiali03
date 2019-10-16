@@ -12,8 +12,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr 
-                            v-for="(item, index) in PermissionInfo"
+                        <tr v-for="(item, index) in PermissionInfo"
                             :key="index"
                         >
                             <td class="border text-black">{{ item.name }}</td>
@@ -68,7 +67,6 @@
         </el-dialog>
     </div>
 </template>
-
 <script>
     import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
     import {addPermission} from '@/api/api/requestLogin.js' // 新增权限
@@ -170,7 +168,7 @@
                   this.$message({
                     type: 'info',
                     message: '已取消删除'
-                  });          
+                  });
                 });
             }
         }

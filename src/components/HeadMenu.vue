@@ -9,7 +9,7 @@
                 text-color="#fff"
                 active-text-color="#ffd04b">
             <!--<el-menu-item index="1">用户管理</el-menu-item>-->
-            <el-submenu index="1">
+            <el-submenu index="1" class="hidden">
                 <template slot="title">用户管理</template>
                 <el-menu-item index="2-1"><router-link  to="Users">管理员列表</router-link></el-menu-item>
                 <el-menu-item index="2-2"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
@@ -19,7 +19,7 @@
                 <template slot="title">我的工作台</template>
                 <el-menu-item index="2-1"><router-link to="CaseUpload">上传案件</router-link></el-menu-item>
                 <el-menu-item index="2-2"><router-link to="FileList">案件列表</router-link></el-menu-item>
-                 <el-menu-item index="2-3"><router-link to="CaseCourt">法院管理</router-link></el-menu-item>
+                 <el-menu-item index="2-3" class="hidden"><router-link to="CaseCourt">法院管理</router-link></el-menu-item>
                 <!--<el-menu-item index="2-3"></el-menu-item>-->
                 <!--<el-submenu index="2-4">-->
                     <!--<template slot="title">选项4</template>-->
