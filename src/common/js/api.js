@@ -52,9 +52,9 @@ const apiUrl = {
   // 添加角色
   addUsersRole: baseURL + 'users/add_role',
   // 删除角色
-  deleteUserRole: baseURL + 'users/delete_role/',
+  deleteUserRole: baseURL + 'users/delete_role',
   // 修改角色
-  updateUserRole: baseURL + 'users/update_role/',
+  updateUserRole: baseURL + 'users/update_role',
   // 查询角色
   selectUserRole: baseURL + 'users/select_role',
 

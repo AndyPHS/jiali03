@@ -60,6 +60,36 @@ export const selectUser = params => {
     data: params
   });
 };
+// 新增角色
+export const addUsersRole = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addUsersRole,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除角色
+export const deleteUserRole = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteUserRole + '/' + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 修改角色
+export const updateUserRole = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateUserRole + '/' + localStorage.getItem('roleId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 查询角色
 export const selectUserRole = params => {
   return axios({

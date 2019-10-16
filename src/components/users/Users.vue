@@ -72,9 +72,6 @@
                 <el-form-item label="邮箱" :label-width="formLabelWidth">
                   <el-input v-model="user.email" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
-                <!-- <el-form-item v-if="hasOf(localStorage.getItem('userId'))" label="密码" :label-width="formLabelWidth">
-                  <el-input type="password" v-model="user.password" class="w-1/2" placeholder="如不需修改密码可不填" autocomplete="off"></el-input>
-                </el-form-item> -->
                 <el-form-item label="密码" :label-width="formLabelWidth">
                   <el-input type="password" v-model="user.password" class="w-1/2" placeholder="如不需修改密码可不填" autocomplete="off"></el-input>
                 </el-form-item>
@@ -166,13 +163,7 @@
             handleCurrentChange (currentPage) {    //点击哪一页
                 this.currentPage = currentPage;
             },
-            handleClick (item) {    // 点击修改角色
-                this.dialogFormVisible = true
-                this.user.name = item.name;
-                this.user.email = item.email;
-                this.user.password = item.password;
-                localStorage.setItem('userId',item.id)
-            },
+            
             handleUserAdd () {    // 点击新增
                 this.dialogUserAdd = true
             },
@@ -190,7 +181,14 @@
 
                 })
             },
-            updataUserMsg () {   // 修改用户信息
+            handleClick (item) {    // 点击修改角色
+                this.dialogFormVisible = true
+                this.user.name = item.name;
+                this.user.email = item.email;
+                this.user.password = item.password;
+                localStorage.setItem('userId',item.id)
+            },
+            updataUserMsg () {   // 确定修改用户信息
                 this.user.roles = JSON.stringify(this.user.roles)
                 updateUser({
                     name: this.user.name,
@@ -198,6 +196,7 @@
                     password: this.user.password,
                     roles: this.user.roles
                 }).then((data)=>{
+                    localStorage.removeItem('userId');
                     this.dialogFormVisible = false
                 })
             },

@@ -148,6 +148,7 @@
                     this.userPermission.name = ''
                     this.userPermission.display_name = ''
                     this.userPermission.description = ''
+                    localStorage.removeItem('permissionId');
                     this.getUserPermission() // 修改成功后重新获取权限
                 })
             },
