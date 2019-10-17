@@ -113,7 +113,7 @@
             getUserPermission () {  // 查询权限
                 selectPermission().then((data)=>{
                     this.PermissionInfo = data.data.data
-                    console.log(this.PermissionInfo)
+                    // console.log(this.PermissionInfo)
                 }).catch((data)=>{
                     this.$router.replace("/");
                 })
@@ -128,6 +128,9 @@
                     description: this.userPermission.description
                 }).then((data)=>{
                     this.dialogUserPermissionAdd = false
+                    this.userPermission.name = '';
+                    this.userPermission.display_name = '';
+                    this.userPermission.description = '';
                     this.getUserPermission() // 添加成功后重新获取权限
                 })
             },

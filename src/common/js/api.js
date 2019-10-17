@@ -41,12 +41,14 @@ const apiUrl = {
   updateUser: baseURL + 'users/update_user',
   // 查找用户
   selectUser: baseURL + 'users/select_user',
+  // 查找用户角色
+  selectUserRoles: baseURL + 'users/select_user_roles',
   // 新增权限
   addPermission: baseURL + 'users/add_permission',
   // 删除权限
-  deletePermission: baseURL + 'users/delete_permission/',
-  // 修改权限
-  updatePermission: baseURL + 'users/update_permission/',
+  deletePermission: baseURL + 'users/delete_permission',
+  // 修改权限s
+  updatePermission: baseURL + 'users/update_permission',
   // 查询权限
   selectPermission: baseURL + 'users/select_permission',
   // 添加角色

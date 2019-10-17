@@ -29,7 +29,7 @@
                 <!--</el-submenu>-->
             </el-submenu>
             <el-menu-item index="3"><router-link to="FileList">案件列表</router-link></el-menu-item>
-            <el-menu-item index="4">案例检索</el-menu-item>
+            <el-menu-item index="4"><router-link to="SearchCase">案例检索</router-link></el-menu-item>
         </el-menu>
         <div class="container mx-auto">
             <dl class="text-left flex items-center py-2">

@@ -80,8 +80,8 @@ export default {
   },
     methods: {
       loginSubmit(formName) {
-        if(this.loginForm === " " ){
-          alert("用户名或密码不正确")
+        if(this.loginForm.name == "" || this.loginForm.password == ""){
+          this.errorAlert('用户名和密码不能为空')
         }else{
           this.denglu = '登录中……'
         }
@@ -98,16 +98,16 @@ export default {
               this.$router.replace("/FileList");
               this.showDialog = true
             }).catch((data)=>{
-              // this.$message.error(err);
-              alert(data.message)
+              this.errorAlert('验证码错误')
             });
-
           } else {
             return false;
           };
         });
       },
-
+      errorAlert(e) {
+        this.$message.error(e);
+      },
       changeCode (val) {
         verifyCode({cache:new Date().getTime()}).then((data)=>{
           this.identifyCodeMsg.codeUrl = data.data.img;

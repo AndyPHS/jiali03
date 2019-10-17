@@ -49,14 +49,11 @@
                 <el-form-item label="邮箱" :label-width="formLabelWidth">
                   <el-input v-model="user.email" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
-                <!-- <el-form-item v-if="hasOf(localStorage.getItem('userId'))" label="密码" :label-width="formLabelWidth">
-                  <el-input type="password" v-model="user.password" class="w-1/2" placeholder="如不需修改密码可不填" autocomplete="off"></el-input>
-                </el-form-item> -->
                 <el-form-item label="密码" :label-width="formLabelWidth">
                   <el-input type="password" v-model="user.password" class="w-1/2" placeholder="如不需修改密码可不填" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-checkbox-group v-model="user.roles">
-                    <el-checkbox v-for='item in UserRole' :key="item.id" :label="item.id">{{item.name}}</el-checkbox>
+                    <el-checkbox v-for='item in UserRole' :key="item.id" :label="item.id">{{item.display_name}}</el-checkbox>
                 </el-checkbox-group>
               </el-form>
               <div slot="footer" class="dialog-footer">
@@ -75,8 +72,8 @@
                 <el-form-item label="密码" :label-width="formLabelWidth">
                   <el-input type="password" v-model="user.password" class="w-1/2" placeholder="如不需修改密码可不填" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-checkbox-group v-model="user.roles">
-                    <el-checkbox v-for='item in UserRole' :key="item.id" :label="item.id">{{item.name}}</el-checkbox>
+                <el-checkbox-group v-model="chooseUserRole"  @change="handleCheckedCitiesChange">
+                    <el-checkbox v-for='item in UserRole' :key="item.id" :label="item.id">{{item.display_name}}</el-checkbox>
                 </el-checkbox-group>
               </el-form>
               <div slot="footer" class="dialog-footer">
@@ -95,6 +92,7 @@
     import {updateUser} from '@/api/api/requestLogin.js'   // 修改用户
     import {deleteUser} from '@/api/api/requestLogin.js'   // 删除用户
     import {selectUserRole} from '@/api/api/requestLogin.js'    // 查询角色
+    import {selectUserRoles} from '@/api/api/requestLogin.js'    // 查询用户角色
     export default {
         components:{
             HeadMenu,
@@ -125,6 +123,7 @@
                     roles: []
                 },
                 UserRole: [],
+                chooseUserRole: [],
                 min: '',
                 dialogFormVisible: false,
                 dialogUserAdd: false,
@@ -175,6 +174,10 @@
                     password: this.user.password,
                     roles: this.user.roles
                 }).then((data)=>{
+                    this.user.name = '';
+                    this.user.email = '';
+                    this.user.password = '';
+                    this.user.roles = '';
                     this.handleUserList()
                     this.dialogUserAdd = false
                 }).catch((data)=>{
@@ -182,20 +185,37 @@
                 })
             },
             handleClick (item) {    // 点击修改角色
+                let chooseUserRoleArr = [];
                 this.dialogFormVisible = true
                 this.user.name = item.name;
                 this.user.email = item.email;
                 this.user.password = item.password;
-                localStorage.setItem('userId',item.id)
+                this.chooseUserRole = chooseUserRoleArr;
+                localStorage.setItem('userId',item.id);
+                selectUserRoles().then((data)=>{
+                    let chooseUserRoleList = data.data
+                    for (var i = chooseUserRoleList.length - 1; i >= 0; i--) {
+                        chooseUserRoleArr.push(chooseUserRoleList[i].id);
+                    }
+                    return chooseUserRoleArr;
+                })
+            },
+            handleCheckedCitiesChange (value) {
+                this.chooseUserRole = value
+                
             },
             updataUserMsg () {   // 确定修改用户信息
-                this.user.roles = JSON.stringify(this.user.roles)
+                this.chooseUserRole = JSON.stringify(this.chooseUserRole)
                 updateUser({
                     name: this.user.name,
                     email: this.user.email,
                     password: this.user.password,
-                    roles: this.user.roles
+                    roles: this.chooseUserRole
                 }).then((data)=>{
+                    this.user.name = '';
+                    this.user.email = '';
+                    this.user.password = '';
+                    this.chooseUserRole = '';
                     localStorage.removeItem('userId');
                     this.dialogFormVisible = false
                 })

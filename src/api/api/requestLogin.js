@@ -60,6 +60,16 @@ export const selectUser = params => {
     data: params
   });
 };
+// 查询用户角色
+export const selectUserRoles = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectUserRoles + '/' + localStorage.getItem('userId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 新增角色
 export const addUsersRole = params => {
   return axios({

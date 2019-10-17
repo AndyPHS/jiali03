@@ -43,9 +43,9 @@
               <el-input v-model="userRole.description" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
             <el-checkbox-group v-model="userRole.perms">
-                <el-checkbox v-for='item in userPermission' :key="item.id" :label="item.id">{{item.name}}</el-checkbox>
+                <el-checkbox v-for='item in userPermission' :key="item.id" :label="item.id">{{item.display_name}}</el-checkbox>
             </el-checkbox-group>
-          </el-form>
+          </el-form>s
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogUserRoleAdd = false">取 消</el-button>
             <el-button type="primary" @click="addNewUserRole">确 定</el-button>
@@ -63,7 +63,7 @@
               <el-input v-model="userRole.description" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
             <el-checkbox-group v-model="userRole.perms">
-                <el-checkbox v-for='item in userPermission' :key="item.id" :label="item.id">{{item.name}}</el-checkbox>
+                <el-checkbox v-for='item in userPermission' :key="item.id" :label="item.id">{{item.display_name}}</el-checkbox>
             </el-checkbox-group>
           </el-form>
           <div slot="footer" class="dialog-footer">
@@ -142,8 +142,11 @@
                     description: this.userRole.description,
                     perms: this.userRole.perms
                 }).then((data)=>{
-                    this.dialogUserRoleAdd = false
-                    this.getUserRole()    // 重新获取角色列表
+                    this.dialogUserRoleAdd = false;
+                    this.getUserRole();    // 重新获取角色列表
+                    this.userRole.name = '';
+                    this.userRole.display_name = '';
+                    this.userRoles.description = '';
                 }).catch((data)=>{
 
                 })
@@ -153,7 +156,6 @@
                 this.userRole.name = item.name;
                 this.userRole.display_name = item.display_name;
                 this.userRole.description = item.description;
-                // this.userRole.perms = item.perms;
                 localStorage.setItem('roleId',item.id)
             },
             UpdateNewUserRole () {  // 点击确认修改角色
@@ -165,10 +167,10 @@
                     perms: this.userRole.perms
                 }).then((data)=>{
                     this.dialogUserRoleUpdate = false;
+                    this.getUserRole();
                     this.userRole.name = ''
                     this.userRole.display_name = ''
                     this.userRoles.description = ''
-                    this.getUserRole() 
                     localStorage.removeItem('roleId');
                 }).catch((data)=>{
 
