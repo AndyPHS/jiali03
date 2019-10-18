@@ -113,7 +113,6 @@
             getUserPermission () {  // 查询权限
                 selectPermission().then((data)=>{
                     this.PermissionInfo = data.data.data
-                    // console.log(this.PermissionInfo)
                 }).catch((data)=>{
                     this.$router.replace("/");
                 })
