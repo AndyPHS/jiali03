@@ -186,7 +186,16 @@ export const selectCaseData = params => {
     data: params
   });
 };
-
+// 查询案件列表s
+export const selectCaseList = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectCaseList+'/?'+params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
 // 文件上传列表接口
 export const fileList = params => {
   return axios({
@@ -361,10 +370,10 @@ export const getLawyerData = params => {
     method: "get",
     dataType: 'json',
     url: apiUrl.selectCaseLawyer+params.loid,
-    headers: {Authorization:'bearer ' + localStorage.getItem('token')}
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
   });
 };
-
 
 // 新增律所
 export const addLawyerOffice = params => {

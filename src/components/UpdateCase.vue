@@ -38,6 +38,16 @@
                             <el-form-item label="案号：" class="text-base">
                                 <el-input v-model="pageInfo.case_number"  @blur="updateInfo({case_number: pageInfo.case_number})"></el-input>
                             </el-form-item>
+                            <el-form-item label="审判时间：" class="text-base">
+                                <el-date-picker
+                                  v-model="pageInfo.case_time"
+                                  type="datetime"
+                                  value-format="yyyy-MM-dd HH:mm:ss"
+                                  @change="updateInfo({case_time: pageInfo.case_time})"
+                                  placeholder="选择日期时间">
+                                </el-date-picker>
+                                <!-- <el-input v-model="pageInfo.case_time"  @blur="updateInfo({case_time: pageInfo.case_time})"></el-input> -->
+                            </el-form-item>
                             <el-form-item label="文书类型：">
                                 <el-select id="case_type" v-model="status_h1"  placeholder="文书类型" @change="updateInfo({case_status:status_h1})" >
                                     <el-option label="判决书" value="1"></el-option>
@@ -376,12 +386,14 @@
                                         size="medium"
                                     ></el-input>
                                 </div>
-                                <!-- <div>
-                                    <el-button type="primary" @click="radioEvent">确定</el-button>
-
-                                </div> -->
                                 <div class="pt-2 px-2 whitespace-no-wrap text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="radioEvent">确定</div>
                             </div>
+                            <h2 class="text-left text-base pb-2 mt-2 text-orange-500">七、案件填写状态</h2>
+                            <el-radio-group v-model="pageInfo.bool" class="" @change="updataStatus">
+                                <el-radio label="1">已完成</el-radio>
+                                <el-radio label="0">未完成</el-radio>
+                            </el-radio-group>
+                                
                         </el-form>
                         <el-row class="my-5">
                             <el-button type="primary" round @click="goNewPage()">生成页面</el-button>
@@ -588,7 +600,6 @@
           this.court_personnel5=[]
           this.court_personnel6=[]
           this.court_personnel7=[]
-
           this.pageInfo.courtPersonnel=JSON.parse( this.pageInfo.courtPersonnel )
           this.pageInfo.lawyer=JSON.parse( this.pageInfo.lawyer )
           for(var v in this.pageInfo.courtPersonnel){
@@ -620,7 +631,6 @@
 
 
           // console.log(this.court_personnel3,this.court_personnel2,this.court_personnel1)
-
           this.pageInfo.imgs = JSON.parse(data.data.imgs)
           this.pageInfo.case_epitome = JSON.parse(data.data.case_epitome)
           if(data.data.case_epitome == null) {
@@ -786,7 +796,12 @@
           })
         })
       },
-
+      updataStatus () {
+        // this.pageInfo.bool = Number(this.pageInfo.bool)
+        this.updateInfo ({
+            bool: this.pageInfo.bool
+        })
+      },
        // 法院人员列表
 
       deleteLegal_basis (item, index) {

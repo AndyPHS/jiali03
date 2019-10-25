@@ -47,7 +47,7 @@ const apiUrl = {
   addPermission: baseURL + 'users/add_permission',
   // 删除权限
   deletePermission: baseURL + 'users/delete_permission',
-  // 修改权限s
+  // 修改权限
   updatePermission: baseURL + 'users/update_permission',
   // 查询权限
   selectPermission: baseURL + 'users/select_permission',
@@ -67,6 +67,8 @@ const apiUrl = {
   creatCase: baseURL + 'case/add',
   // 查询案件
   selectCase: baseURL + 'case/select_case',
+  // 查询案件列表
+  selectCaseList: baseURL + 'case/select_case_list',
   // 修改案件基本信息
   updateCase: baseURL + 'case/update_case_data',
   // 新增案由

@@ -5,8 +5,11 @@
  * You can see the styles here:
  * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
  */
-@tailwind base;
-@tailwind preflight;
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
 /**
  * This injects any component classes registered by plugins.
  *
@@ -14,7 +17,7 @@
  *
  * @import "tailwindcss/components";
  */
-@tailwind components;
+/*@tailwind components;*/
 
 /**
  * Here you would add any of your custom component classes; stuff that you'd
@@ -50,7 +53,7 @@ ul,ol {
  *
  * @import "tailwindcss/utilities";
  */
-@tailwind utilities;
+/*@tailwind utilities;*/
 /**
  * Here you would add any custom utilities you need that don't come out of the
  * box with Tailwind.

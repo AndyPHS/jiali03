@@ -6,7 +6,7 @@
                 <table class="w-full mt-2">
                     <thead>
                     <tr>
-                        <td class="headstyle w-1/6 text-center border text-black font-bold py-3" v-for="item of list" :key="item.index">{{item}}</td>
+                        <td class="headstyle w-1/7 text-center border text-black font-bold py-3" v-for="item of list" :key="item.index">{{item}}</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -16,6 +16,7 @@
                         <td class="border text-black">{{item.create_time}}</td>
                         <td class="border text-black">{{item.name}}</td>
                         <td class="border text-black">{{item.case_number}}</td>
+                        <td class="border text-black">{{bool}}</td>
                         <td class="border text-black flex justify-around">
                             <div class="flex justify-around py-2 w-2/3 mx-auto">
                                 <el-button type="primary" icon="el-icon-edit" circle @click="handleClick(item.id)"></el-button>
@@ -80,6 +81,7 @@
             uploadtime: '上传时间',
             uploadpeople: '上传人',
             filestatus: '案号',
+            bool: '完成状态',
             control: '操作'
 
         },
@@ -90,6 +92,7 @@
             id: 1,
             case_number_time: 1,
             name: '',
+            bool: '',
             case_number: ''
           }
         ],
@@ -107,6 +110,7 @@
           address: '上海市普陀区金沙江路 1518 弄'
         }],
         loading: true,
+        bool:'',
         // 分页
         first_page_url: '',
         last_page_url: '',
@@ -135,6 +139,15 @@
           this.min = data.data
           this.userList = data.data
           this.isShow = false
+          let bool1 = this.minlist
+          for (var  i = 0;i < bool1.length ;i++) {
+            if(bool1[i].bool == 1){
+              this.bool = "已完成"
+            }else{
+              this.bool = '未完成'
+            }
+          }
+          
         })
       },
       handleClick (e) {
