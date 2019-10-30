@@ -13,7 +13,26 @@
                         <img class="rounded cursor-pointer" src="@/assets/images/maxsearch.png">
                     </div>
                     <div class="w-full h-full mx-2 searchBox relative">
-                        <input class='h-full w-full' v-model="headSearch" placeholder="输入案由、关键词、法院、当事人、律师">
+                        <el-row class="demo-autocomplete">
+                          <el-col :span="12" class="w-full input-w">
+                            <el-autocomplete
+                                  class="w-full border-none"
+                                  popper-class="my-autocomplete"
+                                  v-model="selectCase_action"
+                                  :fetch-suggestions="querySearchCaseAction"
+                                  placeholder="请输入案由"
+                                  @select="handleSelectCaseAction">
+                                <i
+                                  class="el-icon-edit el-input__icon"
+                                  slot="suffix"
+                                  @click="handleIconClickCaseAction">
+                                </i>
+                                <template slot-scope="{ item }">
+                                    <div class="name">{{ item.name }}</div>
+                                </template>
+                            </el-autocomplete>
+                          </el-col>
+                        </el-row>
                         <div class="searchChoose text-left hidden">
                           <div>
                             <h2 class="py-2 pl-5 bg-gray-500 text-white">案由</h2>
@@ -36,7 +55,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-2/12 pt-2 bg-red-600 text-white -ml-1  border-2 border-red-600 cursor-pointer text-lg searchBtn" v-show='isSearchBtn' @click="normalSearch">搜索</div>
+                <div class="w-2/12 pt-2 bg-red-600 text-white -ml-1  border-2 border-red-600 cursor-pointer text-lg searchBtn" v-show='isSearchBtn'  @click="searchList()">搜索</div>
                 <div class="border-2 rounded border-red-600 betterBox absolute" v-show='isShow'>
                    <div class="">
                         <el-form :model="this.selectCaseListMsg"  label-width="120px">
@@ -169,27 +188,32 @@
                                </div>
                                
                             </div>
-                            <div class="adp flex">
-                              <select  
-                                  class="w-2/3"
-                                  v-model="law.lawId" 
-                                  @change="console(legal_basis)" 
-                                  placeholder="请选择法律"
-                                  size="medium"
-                              >
-                                  <option v-for="(item,index) in lawContent.lawList" :label="item.name" :key="index" :value="item.id"></option>
-                              </select>
-                              <div id="lawyer_list">
-                                  <el-input 
-                                      class="w-1/3"
-                                      type="number" 
-                                      v-model="law.number" 
-                                      placeholder="第几条法律，填写数字即可，如：3"
-                                      maxlength="4"
-                                      show-word-limit
-                                      size="medium"
-                                  ></el-input>
-                              </div>
+                            <div class="flex">
+                                <el-form-item label="法律依据" class="text-base flex" >
+                                  <div class="flex w-full justify-around" id="falv">
+                                    <el-select  
+                                      class="legal_basis"
+                                      v-model="law.lawId" 
+                                      @change="console(law.lawId)" 
+                                      placeholder="请选择法律"
+                                      size="small"
+                                    >
+                                        <el-option v-for="(item,index) in lawContent.lawList" :label="item.name" :key="index" :value="item.id"></el-option>
+                                    </el-select>
+                                    <div id="lawyer_list">
+                                        <el-input 
+                                            class="ml-2"
+                                            type="number" 
+                                            v-model="law.number" 
+                                            placeholder="第几条法律，填写数字即可，如：3"
+                                            show-word-limit
+                                            size="small"
+                                            @blur="setLawNum(law.number)"
+                                        ></el-input>
+                                    </div>
+                                  </div>
+                                  
+                                </el-form-item>
                             </div>
                         </el-form>
                         <div class="w-1/3 mx-auto flex justify-around py-5">
@@ -272,15 +296,15 @@
                </div>
            </div>
        </div>
-       <!-- <el-pagination
+       <el-pagination
           background
           class="mb-10"
           layout="prev, pager, next"
-          @current-change="handleUserList"
+          @current-change="searchList"
           :page-size="pagesize" 
           :current-page.sync="currentPage"
           :total="this.total">
-      </el-pagination> -->
+      </el-pagination>
     </div>
 </template>
 
@@ -299,6 +323,7 @@
             return {
               isShow: false,
               isSearchBtn: true,
+              label:[],
               title_search: [    // 头部搜索的案由链接
                 {'name':'离婚纠纷', id:204},
                 {'name':'继承纠纷', id:218},
@@ -358,6 +383,7 @@
                 lawId: null,
                 number: null
               },
+              lawOk: [],
               case_list: [],
               searchChoose: [],
               case_type: [
@@ -388,6 +414,10 @@
                 ],
                 lawList_num: '',
                 type: ''
+              },
+              judge_select_law: {
+                lawname: '',
+                lawnumber: ''
               },
               judge_select_case_type: '', // 选择添加的案件类型
               // 分页
@@ -646,29 +676,112 @@
             })
           },
           case_lableClick (e) {
-            alert(e.id)
+            this.label.push(e.id);
+            this.selectCaseListMsg.label = this.label;
+            this.searchChoose.push({
+              name: '标签',
+              type: 'label',
+              value: e.title,
+              id: e.id
+            })
+            this.searchList()
           },
+          console (e) {
+            this.lawOk.push(e)
+          },
+          setLawNum (e) {
+            this.lawOk.push(e)
+            this.selectCaseListMsg.law = this.lawOk;
+            // var lawName
 
-
-
-          serialize (obj, prefix) {   // 将检索条件拼接成字符串方法
-            var str = [], p;
-              for(p in obj){
-                if(obj.hasOwnProperty(p)){
-                  var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
-                  str.push((v !==null && typeof v ==="object") ? 
-                    serialize(v, k) :
-                    encodeURIComponent(k) + "=" + encodeURIComponent(v));
-                }
+            // for(let k in this.lawContent.lawList){
+            //   if(this.lawContent.lawList[k].id == this.law.lawId){
+            //     this.judge_select_law.lawname = this.lawContent.lawList[k].name
+            //   }
+            // }
+            this.searchChoose.push({
+              name:'法律依据', 
+              type: 'law',
+              value: this.judge_select_law.lawname + '第' +this.law.number+ '条'
+            })
+          },
+          
+          encodeSearchParams(obj) {
+            const params = [];
+            Object.keys(obj).forEach((key) => {
+              let value = obj[key];
+              // 如果值为undefined置空
+              if (typeof value === 'undefined') {
+                value = '';
+              }else if (Object.prototype.toString.call(obj[key]) === '[object Object]') {//类型为对象的时候
+                Object.keys(obj[key]).forEach(item => {
+                  params.push([item, encodeURIComponent(obj[key][item])].join('='));
+                })
+              }else if(Array.isArray(obj[key])){
+                params.push(key+'='+ '['+obj[key]+']');
+              }else {
+                params.push([key, encodeURIComponent(value)].join('='));
               }
-              return str.join("&");
-          },
+              //使用encodeURIComponent进行编码
+              // if () {//类型为数组的时候
+              //   console.log(obj[key])
+              //   params.push([key, obj[key]].join('='));
+              // }
+              
+              
+            });
+            return params.join('&');
+          },  
+          // initParams(obj){
+          //   var arr = [];
+          //   function fun(obj) {
+          //    for (var key in obj) {
+          //     if (typeof obj[key] == "object" && obj[key] !== null) {
+          //      fun(obj[key])
+          //     }else {
+          //      obj[key] = obj[key] || '';
+          //      arr.push([key,encodeURIComponent(obj[key])].join('='))
+          //     }
+          //    }
+          //   }
+          //   fun(obj);
+          //   return arr.join('&');
+          //  },
+          
+          // initParams(obj) {
+          //     var arr = [];
+          //     function fun(obj) {
+          //         for (var key in obj) {
+          //             if (typeof obj[key] == "object" && obj[key] !== null) {
+          //                 // console.log(obj[key])
+          //                 if(Array.isArray(obj[key])){
+          //                     fun(obj[key])
+          //                 }else{
+          //                     for(var $key in obj[key]){
+          //                         obj[key][key+'.'+$key] = obj[key][$key]
+          //                         delete obj[key][$key];
+          //                     }
+          //                     fun(obj[key])
+          //                 }
+          //             } else {
+          //                 obj[key] = obj[key] || '';
+          //                 arr.push([key, encodeURIComponent(obj[key])].join('='))
+          //             }
+          //         }
+          //     }
+          //     fun(obj);
+          //     return arr.join('&');
+          // },
+
           searchList () {  // 点击检索，查找案件
-            let param = this.serialize(this.selectCaseListMsg)
+            this.selectCaseListMsg.page = this.currentPage
+            let param = this.encodeSearchParams(this.selectCaseListMsg)
             selectCaseList(param).then((data)=>{
                 this.case_list = data.data.data
                 this.isShow = false
                 this.isSearchBtn = true
+                this.selectCase_action = ''
+                this.total = data.data.total
             }).catch((data)=>{
                 console.log(data)
             })
@@ -686,11 +799,34 @@
             this.searchChoose.splice(index,1)
             let selectCaseListMsg = this.selectCaseListMsg
             for(var k in selectCaseListMsg){
+
               if(k == item.type){
-                delete selectCaseListMsg[k]
-              } 
+                if(selectCaseListMsg[k] instanceof String||selectCaseListMsg[k] instanceof Number||selectCaseListMsg[k] instanceof Boolean){
+                  delete selectCaseListMsg[k]
+                    this.searchList()
+                }else if(selectCaseListMsg[k] instanceof Array){
+                  if(item.type == 'law'){
+                    delete selectCaseListMsg[k]
+                    this.searchList()
+                  }
+                  for(var $key in selectCaseListMsg[k]){
+                    if(selectCaseListMsg[k][$key] == item.id){
+                      if(selectCaseListMsg[k].length !=0 ){
+                        selectCaseListMsg[k].splice(index,1)
+                        this.searchList()
+                      }
+                      if(selectCaseListMsg[k].length == 0){
+                       delete selectCaseListMsg[k]
+                       this.searchList()
+                      }
+                    }
+                  }
+                }else{
+                  delete selectCaseListMsg[k]
+                  this.searchList()
+                }
+              }
             }
-           this.searchList()
           },
           subjectClick (e) {    // 左侧审判程序列表
             var search = this.searchChoose;
@@ -745,7 +881,7 @@
           prevClick () {
             console.log("上一页")
           },
-          handleSizeChange (size) {
+          pagesizeClick (size) {
              this.pagesize = size;
              console.log(this.pagesize)
           },
@@ -758,6 +894,7 @@
     }
 </script>
 <style scoped>
+.border-none{border:none!important;}
 .title{
     margin-left:110px;
 }
@@ -801,4 +938,6 @@
 }
 .choose{height: 100px;}
 .time-width{width:100% !important;}
+.legal_basis{width:100% !important;display: flex !important;}
+#falv{margin-left:-120px;width: 175%;}
 </style>

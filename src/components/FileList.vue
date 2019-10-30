@@ -16,7 +16,8 @@
                         <td class="border text-black">{{item.create_time}}</td>
                         <td class="border text-black">{{item.name}}</td>
                         <td class="border text-black">{{item.case_number}}</td>
-                        <td class="border text-black">{{bool}}</td>
+                        <td class="border text-black" v-if="item.bool == '1'">已完成</td>
+                        <td class="border text-black" v-else>未完成</td>
                         <td class="border text-black flex justify-around">
                             <div class="flex justify-around py-2 w-2/3 mx-auto">
                                 <el-button type="primary" icon="el-icon-edit" circle @click="handleClick(item.id)"></el-button>
@@ -141,8 +142,10 @@
           this.isShow = false
           let bool1 = this.minlist
           for (var  i = 0;i < bool1.length ;i++) {
-            if(bool1[i].bool == 1){
+            if(bool1[i].bool == '1'){
               this.bool = "已完成"
+            }else if(bool1[i].bool == null){
+              this.bool = '未完成'
             }else{
               this.bool = '未完成'
             }
@@ -174,7 +177,7 @@
       prevClick () {
         console.log("上一页")
       },
-      handleSizeChange (size) {
+      pagesize (size) {
          this.pagesize = size;
          console.log(this.pagesize)
       },
