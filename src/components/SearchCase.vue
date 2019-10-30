@@ -200,16 +200,17 @@
                                     >
                                         <el-option v-for="(item,index) in lawContent.lawList" :label="item.name" :key="index" :value="item.id"></el-option>
                                     </el-select>
-                                    <div id="lawyer_list">
+                                    <div id="lawyer_list" class="flex">
+                                      <span class="ml-3 mr-1">第</span>
                                         <el-input 
-                                            class="ml-2"
                                             type="number" 
                                             v-model="law.number" 
-                                            placeholder="第几条法律，填写数字即可，如：3"
+                                            placeholder="第几条法律"
                                             show-word-limit
                                             size="small"
                                             @blur="setLawNum(law.number)"
                                         ></el-input>
+                                        <span class="ml-1">条</span>
                                     </div>
                                   </div>
                                   
@@ -473,9 +474,6 @@
             this.isShow = !this.isShow
             this.isSearchBtn = !this.isSearchBtn
           },
-          normalSearch () {
-            alert(1)
-          },
           selectCaseAction () {   // 查询案由
               selectCaseAction().then((data) =>{
                 this.case_action = data.data.data;
@@ -701,11 +699,9 @@
           console (e) {
             this.lawOk.push(e)
           },
-          setLawNum (e) {
+          setLawNum (e) {   // 法院筛选条件
             this.lawOk.push(e)
             this.selectCaseListMsg.law = this.lawOk;
-            // var lawName
-
             for(let k in this.lawContent.lawList){
               if(this.lawContent.lawList[k].id == this.law.lawId){
                 this.judge_select_law.lawname = this.lawContent.lawList[k].name
@@ -733,58 +729,10 @@
                 params.push(key+'='+ '['+obj[key]+']');
               }else {
                 params.push([key, encodeURIComponent(value)].join('='));
-              }
-              //使用encodeURIComponent进行编码
-              // if () {//类型为数组的时候
-              //   console.log(obj[key])
-              //   params.push([key, obj[key]].join('='));
-              // }
-              
-              
+              }  
             });
             return params.join('&');
-          },  
-          // initParams(obj){
-          //   var arr = [];
-          //   function fun(obj) {
-          //    for (var key in obj) {
-          //     if (typeof obj[key] == "object" && obj[key] !== null) {
-          //      fun(obj[key])
-          //     }else {
-          //      obj[key] = obj[key] || '';
-          //      arr.push([key,encodeURIComponent(obj[key])].join('='))
-          //     }
-          //    }
-          //   }
-          //   fun(obj);
-          //   return arr.join('&');
-          //  },
-          
-          // initParams(obj) {
-          //     var arr = [];
-          //     function fun(obj) {
-          //         for (var key in obj) {
-          //             if (typeof obj[key] == "object" && obj[key] !== null) {
-          //                 // console.log(obj[key])
-          //                 if(Array.isArray(obj[key])){
-          //                     fun(obj[key])
-          //                 }else{
-          //                     for(var $key in obj[key]){
-          //                         obj[key][key+'.'+$key] = obj[key][$key]
-          //                         delete obj[key][$key];
-          //                     }
-          //                     fun(obj[key])
-          //                 }
-          //             } else {
-          //                 obj[key] = obj[key] || '';
-          //                 arr.push([key, encodeURIComponent(obj[key])].join('='))
-          //             }
-          //         }
-          //     }
-          //     fun(obj);
-          //     return arr.join('&');
-          // },
-
+          },
           searchList () {  // 点击检索，查找案件
             this.selectCaseListMsg.page = this.currentPage
             let param = this.encodeSearchParams(this.selectCaseListMsg)
@@ -793,6 +741,8 @@
                 this.isShow = false
                 this.isSearchBtn = true
                 this.selectCase_action = ''
+                this.law.lawId = ''
+                this.law.number = ''
                 this.total = data.data.total
             }).catch((data)=>{
                 console.log(data)
@@ -819,6 +769,7 @@
                 }else if(selectCaseListMsg[k] instanceof Array){
                   if(item.type == 'law'){
                     delete selectCaseListMsg[k]
+                    this.lawOk=[]
                     this.searchList()
                   }
                   for(var $key in selectCaseListMsg[k]){
@@ -950,6 +901,7 @@
 }
 .choose{height: 100px;}
 .time-width{width:100% !important;}
-.legal_basis{width:100% !important;display: flex !important;}
+.legal_basis{width:65% !important;display: flex !important;}
 #falv{margin-left:-120px;width: 175%;}
+#lawyer_list .el-input{width:50% !important;}
 </style>
