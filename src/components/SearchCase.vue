@@ -85,13 +85,13 @@
                                       </el-row>
                                     </el-form-item>
                                     <el-form-item label="标题" class="text-base">
-                                        <el-input v-model="selectCaseListMsg.title" size="small" @blur="addChooseList({name:'标题', type: 'title',value: selectCaseListMsg.title})"></el-input>
+                                        <el-input v-model="selectCaseListMsg.title" size="small" @blur="addChooseTitle({name:'标题', type: 'title',value: selectCaseListMsg.title})"></el-input>
                                     </el-form-item>
                                     <el-form-item label="案号" class="text-base">
-                                        <el-input v-model="selectCaseListMsg.case_number" size="small" @blur="addChooseList({name:'案号', type: 'case_number',value: selectCaseListMsg.case_number})"></el-input>
+                                        <el-input v-model="selectCaseListMsg.case_number" size="small" @blur="addChooseCaseNumber({name:'案号', type: 'case_number',value: selectCaseListMsg.case_number})"></el-input>
                                     </el-form-item>
                                     <el-form-item label="律所案号" class="text-base">
-                                        <el-input v-model="selectCaseListMsg.master_number" size="small" @blur="addChooseList({name:'律所案号', type: 'master_number',value: selectCaseListMsg.master_number})"></el-input>
+                                        <el-input v-model="selectCaseListMsg.master_number" size="small" @blur="addChooseMasterNumber({name:'律所案号', type: 'master_number',value: selectCaseListMsg.master_number})"></el-input>
                                     </el-form-item>
                                    <el-form-item label="法院" class="text-base">
                                         <el-row class="demo-autocomplete">
@@ -181,7 +181,7 @@
                                           type="datetime"
                                           size="small"
                                           value-format="yyyy-MM-dd HH:mm:ss"
-                                          @change="addChooseList({name:'审判时间', type: 'case_time',value: selectCaseListMsg.case_time})"
+                                          @change="addChooseCaseTime({name:'审判时间', type: 'case_time',value: selectCaseListMsg.case_time})"
                                           placeholder="选择日期时间">
                                         </el-date-picker>
                                     </el-form-item>
@@ -636,6 +636,12 @@
             this.searchChoose.push({name:'法院人员', type: 'courtPersonnel',value: judge_select})
           },
           addlawyerOfficeList () {  // 添加法院筛选条件
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "律所"){
+                search.splice(i,1)
+              }
+            }
             let lawyerOffice = this.selectCaseListMsg.lawyerOffice
             let bb = this.courtList;
             var judge_select_lawyerOffice;
@@ -659,6 +665,12 @@
               })
           },
           addlawyerList () {    // 添加律师筛选条件
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "律师"){
+                search.splice(i,1)
+              }
+            }
             let lawyer = this.selectCaseListMsg.lawyer
             let bb = this.lawyerList;
             var judge_select_lawyer;
@@ -672,6 +684,12 @@
           },
 
           addSubjectList () { // 选择审判程序
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "审判程序"){
+                search.splice(i,1)
+              }
+            }
             let subject = this.selectCaseListMsg.subject;
             let bb = this.subjectList
             var judge_select_subject;
@@ -689,6 +707,12 @@
             })
           },
           addCaseTypeList () {
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "文书类型"){
+                search.splice(i,1)
+              }
+            }
             let case_type = this.selectCaseListMsg.case_type;
             let bb = this.case_type
             var judge_select_case_type;
@@ -779,15 +803,47 @@
           resetSearch () {   // 重置筛选
             this.searchChoose =[]
             this.selectCaseListMsg =[]
-            this.addChooseList =[]
+            // this.addChooseList =[]
             this.law.lawId = ''
             this.law.number = ''
             this.selectCourt = ''
             this.selectCase_action = ''
           },
-          addChooseList (e) {  // 点击添加到筛选条件
+          addChooseTitle (e) {
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "标题"){
+                search.splice(i,1)
+              }
+            }
             this.searchChoose.push(e)
-
+          },
+          addChooseCaseNumber (e) {
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "案号"){
+                search.splice(i,1)
+              }
+            }
+            this.searchChoose.push(e)
+          },
+          addChooseMasterNumber (e) {
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "律所案号"){
+                search.splice(i,1)
+              }
+            }
+            this.searchChoose.push(e)
+          },
+          addChooseCaseTime (e) {
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "审判时间"){
+                search.splice(i,1)
+              }
+            }
+            this.searchChoose.push(e)
           },
           clearChoose () {   // 清空筛选
             this.selectCaseListMsg =[]
