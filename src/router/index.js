@@ -6,6 +6,7 @@ import CaseCourt from '@/components/CaseCourt'
 import CaseUpload from '@/components/CaseUpload'   // 案例上传页面
 import FileList from '@/components/FileList'   // 案例展示列表页面
 import CaseCompleted from '@/components/CaseCompleted'  // 案件信息填写页面
+import CaseCompletedView from '@/components/CaseCompletedView'  // 搜索案件信息填写页面
 import HeadMenu from '@/components/HeadMenu'  // 添加头部导航按钮
 import UpdateCase from '@/components/UpdateCase' // 修改案件基本信息
 import ArrangementCase from '@/components/ArrangementCase'  // 整理案件样式页面
@@ -52,10 +53,17 @@ export default new Router({
       name: 'UpdateCase',
       component: UpdateCase
     },
+    // 完成页面
     {
       path: '/CaseCompleted',
       name: 'CaseCompleted',
       component: CaseCompleted
+    },
+    // 搜索查看完成页面
+    {
+      path: '/CaseCompletedView',
+      name: 'CaseCompletedView',
+      component: CaseCompletedView
     },
     // 导航列表
     {

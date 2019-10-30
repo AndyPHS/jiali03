@@ -141,12 +141,15 @@
                             </li>
                         </ul>
                     </div>
+                    <div>
+                      <h2 class="py-2 text-orange-500">七、查看图片版本</h2>
+                      <ul>
+                        <li v-for="item in pageInfo.imgs" :key="item.id"><img :src="item" alt=""></li>
+                      </ul>
+                    </div>
                 </div>
             </div>
             <div class="w-1/3 pl-10 fixed top-10 right-0 text-left">
-                <div class="mt-5">
-                    <el-button class="" type="primary" @click="goBack">返回继续填写</el-button>
-                </div>
                 <h2 class="text-left text-lg text-black mt-10">快速目录</h2>
                 <ul class="text-left">
                     <li class="text-base py-2"><a href="#xinxi">一、基本信息</a></li>
@@ -251,6 +254,7 @@
       getInfo () {
         selectCaseData().then((data) => {
           this.pageInfo = data.data;
+          this.pageInfo.imgs = JSON.parse(data.data.imgs);
           this.pageInfo.case_epitome = JSON.parse(data.data.case_epitome);
           this.pageInfo.case_evidence = JSON.parse(data.data.case_evidence);
           this.pageInfo.legal_basis = data.data.legal_basis;
@@ -300,9 +304,6 @@
             }
           })
         })
-      },
-      goBack () {
-        this.$router.replace("/UpdateCase");
       }
     }
   }

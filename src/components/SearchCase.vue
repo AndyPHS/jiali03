@@ -16,7 +16,7 @@
                         <el-row class="demo-autocomplete">
                           <el-col :span="12" class="w-full input-w">
                             <el-autocomplete
-                                  class="w-full border-none"
+                                  class="w-full border-none sousuo"
                                   popper-class="my-autocomplete"
                                   v-model="selectCase_action"
                                   :fetch-suggestions="querySearchCaseAction"
@@ -93,7 +93,7 @@
                                     <el-form-item label="律所案号" class="text-base">
                                         <el-input v-model="selectCaseListMsg.master_number" size="small" @blur="addChooseList({name:'律所案号', type: 'master_number',value: selectCaseListMsg.master_number})"></el-input>
                                     </el-form-item>
-                                   <el-form-item label="法院：" class="text-base">
+                                   <el-form-item label="法院" class="text-base">
                                         <el-row class="demo-autocomplete">
                                             <el-col :span="12" class="w-full input-w">
                                                 <el-autocomplete
@@ -119,10 +119,10 @@
                                     </el-form-item>
                                     <el-form-item label="法院人员" class="text-base">
                                        <el-select class="w-full" v-model="selectCaseListMsg.courtPersonnel" size="small" filterable @change="addPersonalList()" >
-                                            <el-option 
-                                                v-for="item in case_court_personnel" 
+                                            <el-option
+                                                v-for="item in case_court_personnel"
                                                 :key="item.id"
-                                                :value="item.id" 
+                                                :value="item.id"
                                                 :label="item.name"
                                                  >{{ item.name}}
                                              </el-option>
@@ -132,10 +132,10 @@
                                <div class="w-1/2">
                                     <el-form-item label="律所" class="text-base">
                                        <el-select class="w-full" v-model="selectCaseListMsg.lawyerOffice" size="small" filterable @change="addlawyerOfficeList()" >
-                                            <el-option 
-                                                v-for="item in courtList" 
+                                            <el-option
+                                                v-for="item in courtList"
                                                 :key="item.id"
-                                                :value="item.id" 
+                                                :value="item.id"
                                                 :label="item.name"
                                                  >{{ item.name}}
                                              </el-option>
@@ -143,10 +143,10 @@
                                     </el-form-item>
                                     <el-form-item label="律师" class="text-base">
                                        <el-select class="w-full" v-model="selectCaseListMsg.lawyer" size="small" filterable @change="addlawyerList()" >
-                                            <el-option 
-                                                v-for="(item,index) in lawyerList" 
+                                            <el-option
+                                                v-for="(item,index) in lawyerList"
                                                 :key="index"
-                                                :value="item.id" 
+                                                :value="item.id"
                                                 :label="item.name"
                                                  >{{ item.name}}
                                              </el-option>
@@ -154,27 +154,27 @@
                                     </el-form-item>
                                     <el-form-item label="审判程序" class="text-base">
                                       <el-select class="w-full" v-model="selectCaseListMsg.subject" placeholder="审判程序" size="small" @change="addSubjectList()">
-                                          <el-option 
-                                                v-for="(item,index) in subjectList" 
+                                          <el-option
+                                                v-for="(item,index) in subjectList"
                                                 :key="index"
-                                                :value="item.id" 
+                                                :value="item.id"
                                                 :label="item.name"
                                                  >{{ item.name}}
                                              </el-option>
                                       </el-select>
                                     </el-form-item>
-                                    <el-form-item label="案件类型" class="text-base">
-                                      <el-select class="w-full" v-model="selectCaseListMsg.case_type" placeholder="案件类型" size="small" @change="addCaseTypeList()">
-                                          <el-option 
-                                                v-for="(item,index) in case_type" 
+                                    <el-form-item label="文书类型" class="text-base">
+                                      <el-select class="w-full" v-model="selectCaseListMsg.case_type" placeholder="文书类型" size="small" @change="addCaseTypeList()">
+                                          <el-option
+                                                v-for="(item,index) in case_type"
                                                 :key="index"
-                                                :value="item.type" 
+                                                :value="item.type"
                                                 :label="item.name"
                                                  >{{ item.name}}
                                              </el-option>
                                       </el-select>
                                     </el-form-item>
-                                    <el-form-item label="审判时间：" class="text-base">
+                                    <el-form-item label="审判时间" class="text-base">
                                         <el-date-picker
                                          class="time-width"
                                           v-model="selectCaseListMsg.case_time"
@@ -186,15 +186,15 @@
                                         </el-date-picker>
                                     </el-form-item>
                                </div>
-                               
+
                             </div>
                             <div class="flex">
                                 <el-form-item label="法律依据" class="text-base flex" >
                                   <div class="flex w-full justify-around" id="falv">
-                                    <el-select  
+                                    <el-select
                                       class="legal_basis"
-                                      v-model="law.lawId" 
-                                      @change="console(law.lawId)" 
+                                      v-model="law.lawId"
+                                      @change="console(law.lawId)"
                                       placeholder="请选择法律"
                                       size="small"
                                     >
@@ -202,9 +202,9 @@
                                     </el-select>
                                     <div id="lawyer_list" class="flex">
                                       <span class="ml-3 mr-1">第</span>
-                                        <el-input 
-                                            type="number" 
-                                            v-model="law.number" 
+                                        <el-input
+                                            type="number"
+                                            v-model="law.number"
                                             placeholder="第几条法律"
                                             show-word-limit
                                             size="small"
@@ -213,7 +213,7 @@
                                         <span class="ml-1">条</span>
                                     </div>
                                   </div>
-                                  
+
                                 </el-form-item>
                             </div>
                         </el-form>
@@ -224,13 +224,13 @@
                    </div>
                </div>
            </div>
-           
+
        </div>
        <div class="w-full px-10 my-5 flex">
            <div class="w-1/4 border">
                <div class="text-left border-b-2 my-2 px-2 pb-2">
                    <h3 class="text-lg font-bold">标签池</h3>
-                   <div class="left_part"> 
+                   <div class="left_part">
                       <ul v-for="item in lableList" :key="item.id" >
                         <li @click="case_lableClick(item)" class="text-sm cursor-pointer">{{ item.title }}</li>
                       </ul>
@@ -238,25 +238,25 @@
                </div>
                <div class="text-left border-b-2 my-2 px-2 pb-2">
                    <h3 class="text-lg font-bold">案由</h3>
-                   <div class="left_part"> 
+                   <div class="left_part">
                       <ul v-for="item in case_action" :key="item.id" >
                         <li @click="case_actionClick(item)" class="text-sm cursor-pointer">{{ item.name }}</li>
                       </ul>
                    </div>
-                   
+
                </div>
                <div class="text-left border-b-2 my-2 px-2 pb-2">
                    <h3 class="text-lg font-bold">地域及法院</h3>
-                   <div class="left_part"> 
+                   <div class="left_part">
                       <ul v-for="item in courtBeijing" :key="item.id" >
-                        <li @click="handleSelect(item)" class="text-sm cursor-pointer">{{ item.name }}</li>
+                        <li @click="handleSelectLeft(item)" class="text-sm cursor-pointer">{{ item.name }}</li>
                       </ul>
                    </div>
                </div>
-               
+
                <div class="text-left border-b-2 my-2 px-2 pb-2">
                    <h3 class="text-lg font-bold">审理程序</h3>
-                   <div> 
+                   <div>
                       <ul v-for="(item,index) in subjectList" :key="index" >
                         <li @click="subjectClick(item)" class="text-sm cursor-pointer">{{ item.name }}</li>
                       </ul>
@@ -264,7 +264,7 @@
                </div>
                <div class="text-left border-b-2 my-2 px-2 pb-2">
                    <h3 class="text-lg font-bold">文书类型</h3>
-                   <div class="left_part"> 
+                   <div class="left_part">
                       <ul v-for="(item,index) in case_type" :key="index" >
                         <li @click="case_typeClick(item)" class="text-sm cursor-pointer">{{ item.name }}</li>
                       </ul>
@@ -273,7 +273,11 @@
            </div>
            <div class="w-3/4 text-left ml-5">
                <div>
-                  <span class="text-red-600">已选条件：</span> 
+                  <div class="flex justify-between">
+                    <span class="text-red-600">已选条件：</span>
+                    <div @click='clearChoose'>清空条件</div>
+                  </div>
+
                   <div class="pb-2 border-b-2 border-red-600 choose">
                     <div class="tiaojian flex float-left border px-1 my-2 mx-2" v-for="(item,index) in searchChoose" :key="index">
                       <span class="block text-sm">{{item.name}}:</span>
@@ -302,7 +306,7 @@
           class="mb-10"
           layout="prev, pager, next"
           @current-change="searchList"
-          :page-size="pagesize" 
+          :page-size="pagesize"
           :current-page.sync="currentPage"
           :total="this.total">
       </el-pagination>
@@ -312,6 +316,7 @@
 <script>
     import _ from 'lodash';
     import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
+    import {selectCaseData} from '@/api/api/requestLogin.js'   // 查询案件
     import {selectCaseAction} from '@/api/api/requestLogin.js'  // 查询案由信息
     import {selectCaseList} from '@/api/api/requestLogin.js'  // 查询案件列表
     import {selectCaseLable} from "@/api/api/requestLogin.js";    // 查询标签接口
@@ -337,7 +342,7 @@
               case_court_personnel:[],
               courtList: [],  // 查找律所
               judge_select_lawyerOffice: '', // 选择添加的律所
-              lawyerList: [],  // 查找律师 
+              lawyerList: [],  // 查找律师
               judge_select_lawyer: '',  // 选择添加的律师
               subjectList: [
                 {'name':'一审',id: 1},
@@ -347,10 +352,10 @@
               ], // 审判程序
               judge_select_subject: '', // 选择添加的审判程序
               headSearch: '',
-              selectCase_action: '',  
+              selectCase_action: '',
               selectCourt: '',
               selectCaseListMsg:{
-                
+
               },
               courtBeijing: [
                 {"name":"北京市高级人民法院", id:280},
@@ -541,7 +546,7 @@
           // 查询法院信息
           checkCourt (e) {
             getCaseCourtMsg(e).then((data) =>{
-                this.restaurants = data.data.data.data 
+                this.restaurants = data.data.data.data
             })
           },
           getCaseCourtMsg () {
@@ -564,7 +569,7 @@
           handleIconClick(ev) {  // 法院模块
             console.log(ev);
           },
-          handleSelect(item) {   // 法院模块
+          handleSelectLeft(item) {   // 法院模块
             var search = this.searchChoose;
             for (var i = 0;i<search.length;i++){
               if(search[i].name == "法院"){
@@ -585,6 +590,29 @@
               value: this.selectCourt
             })
             this.searchList ()
+            this.getCourtPersonnel();  //获取法院人员信息
+          },
+          handleSelect(item) {   // 法院模块
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "法院"){
+                search.splice(i,1)
+              }
+            }
+            _.forEach(this.selectCaseListMsg, function(value, key) {
+              if(key == 'court'){
+                value = item.id;
+              }
+            });
+            this.selectCaseListMsg.court = item.id;
+            this.selectCourt = item.name;
+            this.searchChoose.push({
+              type: 'court',
+              id: this.selectCaseListMsg.court,
+              name: '法院',
+              value: this.selectCourt
+            })
+            // this.searchList ()
             this.getCourtPersonnel();  //获取法院人员信息
           },
           getCourtPersonnel () {    // 获取法院人员
@@ -642,7 +670,7 @@
             this.judge_select_lawyer = judge_select_lawyer
             this.searchChoose.push({name:'律师', type: 'lawyer',value: judge_select_lawyer})
           },
-        
+
           addSubjectList () { // 选择审判程序
             let subject = this.selectCaseListMsg.subject;
             let bb = this.subjectList
@@ -655,7 +683,7 @@
             // console.log(subject)
             this.judge_select_subject = judge_select_subject
             this.searchChoose.push({
-              name:'审判程序', 
+              name:'审判程序',
               type: 'subject',
               value: judge_select_subject
             })
@@ -671,7 +699,7 @@
             }
             this.judge_select_case_type = judge_select_case_type
             this.searchChoose.push({
-              name:'审判程序', 
+              name:'文书类型',
               type: 'case_type',
               value: judge_select_case_type
             })
@@ -708,12 +736,12 @@
               }
             }
             this.searchChoose.push({
-              name:'法律依据', 
+              name:'法律依据',
               type: 'law',
               value: this.judge_select_law.lawname + '第' +this.law.number+ '条'
             })
           },
-          
+
           encodeSearchParams(obj) {
             const params = [];
             Object.keys(obj).forEach((key) => {
@@ -729,7 +757,7 @@
                 params.push(key+'='+ '['+obj[key]+']');
               }else {
                 params.push([key, encodeURIComponent(value)].join('='));
-              }  
+              }
             });
             return params.join('&');
           },
@@ -740,7 +768,7 @@
                 this.case_list = data.data.data
                 this.isShow = false
                 this.isSearchBtn = true
-                this.selectCase_action = ''
+                // this.selectCase_action = ''
                 this.law.lawId = ''
                 this.law.number = ''
                 this.total = data.data.total
@@ -749,14 +777,23 @@
             })
           },
           resetSearch () {   // 重置筛选
+            this.searchChoose =[]
             this.selectCaseListMsg =[]
-            this.addChooseList = []
+            this.addChooseList =[]
+            this.law.lawId = ''
+            this.law.number = ''
+            this.selectCourt = ''
+            this.selectCase_action = ''
           },
           addChooseList (e) {  // 点击添加到筛选条件
             this.searchChoose.push(e)
-            
+
           },
-          
+          clearChoose () {   // 清空筛选
+            this.selectCaseListMsg =[]
+            this.searchChoose = []
+            this.searchList()
+          },
           removeList (item,index) {   // 点击删除条件
             this.searchChoose.splice(index,1)
             let selectCaseListMsg = this.selectCaseListMsg
@@ -833,8 +870,14 @@
           },
           openCase (e) {  // 点击查看判决书内容
               localStorage.setItem('id', e);
-              const { href } = this.$router.resolve({name:"CaseCompleted",params:{id:0}});
-              window.open(href, '_blank')
+              selectCaseData().then((data) => {
+                if(data.data.view != null || data.data.master_number != null || data.data.case_evidence != null) {
+                  const { href } = this.$router.resolve({name:"CaseCompletedView",params:{id:0}});
+                  window.open(href, '_blank')
+                }else{
+                  alert('该案件尚未录入，无法查看')
+                }
+              })
           },
           // 初始页currentPage、初始每页数据数pagesize和数据data
           // 上一页
@@ -852,7 +895,7 @@
             this.currentPage = currentPage;
             console.log(this.currentPage)  //点击第几页
           }
-          
+
         }
     }
 </script>
@@ -904,4 +947,5 @@
 .legal_basis{width:65% !important;display: flex !important;}
 #falv{margin-left:-120px;width: 175%;}
 #lawyer_list .el-input{width:50% !important;}
+.sousuo{margin-top:2px;}
 </style>
