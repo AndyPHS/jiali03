@@ -516,6 +516,18 @@
             };
           },
           handleSelectCaseAction(item) {   // 案由模块
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "案由"){
+                search.splice(i,1)
+              }
+            }
+            _.forEach(this.selectCaseListMsg, function(value, key) {
+
+              if(key == 'case_action'){
+                value = item.id;
+              }
+            });
             this.selectCaseListMsg.case_action = item.id;
             this.selectCase_action = item.name;
             this.searchChoose.push({
@@ -694,11 +706,11 @@
             this.selectCaseListMsg.law = this.lawOk;
             // var lawName
 
-            // for(let k in this.lawContent.lawList){
-            //   if(this.lawContent.lawList[k].id == this.law.lawId){
-            //     this.judge_select_law.lawname = this.lawContent.lawList[k].name
-            //   }
-            // }
+            for(let k in this.lawContent.lawList){
+              if(this.lawContent.lawList[k].id == this.law.lawId){
+                this.judge_select_law.lawname = this.lawContent.lawList[k].name
+              }
+            }
             this.searchChoose.push({
               name:'法律依据', 
               type: 'law',
