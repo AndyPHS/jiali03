@@ -15,11 +15,9 @@
                             <div>
                                 <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
-                            
                                 <textarea :rows='80' id="textarea_left" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                             </div>
                         </el-tab-pane>
-                        
                     </el-tabs>
                 </div>
             </div>
@@ -29,7 +27,7 @@
                         <span class="">案件样式编辑</span>
                     </h2>
                     <div class="pl-5">
-                        <textarea :rows="1" class="text-xl text-center py-2 w-full" v-model="pageInfo.title" @blur="updateInfo({title:pageInfo.title})"></textarea>
+                        <textarea :rows="2" class="text-xl text-center py-2 w-full" v-model="pageInfo.title" @blur="updateInfo({title:pageInfo.title})"></textarea>
                         <textarea :rows="1" class="text-right py-2 mr-5 w-full" v-model="pageInfo.case_number" @blur="updateInfo({title:pageInfo.case_number})"></textarea>
                         <textarea :rows="80" class="textarea w-full" placeholder="" v-model="pageInfo.content"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                         <el-row class="my-5">
@@ -62,7 +60,7 @@
           id: '',
           tid: null,
           court: null,      // 法院
-          courtId: null,    // 
+          courtId: null,    //
           scourt: null,
           title: "王宝强于马蓉婚姻纠纷",   // 标题
           master_number: '',        // 律所案号
@@ -108,7 +106,7 @@
       this.getInfo(); // 获取页面信息
     },
     created(){
- 
+
     },
     updated () {
     },
@@ -119,7 +117,7 @@
         selectCaseData().then((data) => {
           this.pageInfo = data.data;
           this.pageInfo.imgs = JSON.parse(data.data.imgs)
-          
+
           // 左侧展示判决书类型
           let statusNum = this.pageInfo.status;
           switch (statusNum) {
