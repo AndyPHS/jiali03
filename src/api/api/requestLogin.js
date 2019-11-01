@@ -395,7 +395,6 @@ export const updateLawyerOffice = params => {
     data:params
   });
 };
-
 // 新增律师
 export const addLawyer = params => {
   return axios({
@@ -406,4 +405,23 @@ export const addLawyer = params => {
     data:params
   });
 };
-
+// 问卷问题接口
+export const question = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: 'http://jiali_ui.com:81/static/mock/question.json',
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data:params
+  });
+};
+// 问卷答案接口
+export const answer = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: 'http://jiali_ui.com:81/static/mock/answer.json',
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data:params
+  });
+};
