@@ -162,6 +162,7 @@
       outline:0 none;
       resize:none;
       line-height:2.0;
+      text-indent:2em;
     }
     .el-select{
         width: 100%;
