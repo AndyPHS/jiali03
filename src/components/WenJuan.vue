@@ -2,7 +2,7 @@
   <div class="container mx-auto">
     <div>
       <el-form >
-        <div class="text-left">子女问题</div>
+        <div class="text-left mt-5 text-orange-500 text-bolder">子女问题</div>
         <div class="ml-5">
           <el-form-item label="您与配偶有几个子女" class="w-1/2 mx-auto">
             <el-select v-model="childNum" placeholder="几个孩子" @change="childList(childNum)">
@@ -31,10 +31,10 @@
                     value-format="yyyy-MM-dd">
                   </el-date-picker>
                 </el-form-item>
-                <el-form-item label="2、孩子的出生日期是" class="text-base">
+                <el-form-item label="2、孩子的姓名是" class="text-base">
                   <el-input class="ban" v-model="item.name" size="small" @blur="addChildName(item.name)"></el-input>
                 </el-form-item>
-                <el-form-item label="3、孩子的出生日期是" class="text-base">
+                <el-form-item label="3、孩子的性别是" class="text-base">
                   <el-select v-model="item.sex" placeholder="孩子性别" @change="addChildSex(item.sex)">
                     <el-option label="男" value="1"></el-option>
                     <el-option label="女" value="2"></el-option>
@@ -367,7 +367,6 @@
           </div>
         </div>
       </el-form>
-      <!--<h2>{{answerMsg}}</h2>-->
     </div>
   </div>
 </template>
@@ -474,19 +473,15 @@ export default {
       console.log(this.childAll)
     },
     addChildName (e) {    // 添加姓名
-      alert(e)
       console.log(this.childAll)
     },
     addChildSex (e) {
-      alert(e)
       console.log(this.childAll)
     },
     addChildId (e) {
-      alert(e)
       console.log(this.childAll)
     },
     custody (e) {
-      alert(e)
     }
   }
 }
