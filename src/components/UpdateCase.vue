@@ -6,7 +6,7 @@
                 <div class="py-6 relative" >
                     <h2 class="text-xl mb-2">{{pageInfo.court}}{{pageInfo.case_action}}{{status}}</h2>
                     <div class="w-1/3 text-right cursor-pointer absolute t-5 right-0 z-10"><el-button type="primary" @click="goArrangementCase">返回修改判决书样式</el-button></div>
-                    
+
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
                         <el-tab-pane label="查看word版本" name="first">
                             <div>
@@ -108,7 +108,7 @@
                                     <el-option label="其他" value="4"></el-option>
                                 </el-select>
                             </el-form-item>
-                            
+
                             <!-- 审判长 -->
                             <div v-for="(v,k,index) in court_personnel1" :key="'v1-'+k">
                                 <el-form-item  label="审判长：" class="text-base">
@@ -120,9 +120,9 @@
                                            <!--  <span v-on:click="cp_add_icon(1)" class="px-1 rounded border border-1 hover:bg-green-500 hover:text-white">添加</span> -->
                                             <span v-on:click="cp_del(k,1,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </el-form-item>
                             </div>
                             <!--审判审判员-->
@@ -136,7 +136,7 @@
                                             <span v-on:click="cp_del(k,2,v,courtId)" class="px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer">删除</span>
                                         </div>
                                     </div>
-                                    
+
                                 </el-form-item>
                             </div>
                             <!--代理审判员-->
@@ -210,7 +210,7 @@
                             <!--审判人员-->
                             <el-form-item  label="新增法院人员：" class="text-base">
                                 <div class="flex">
-                                    <div class="w-2/5"> 
+                                    <div class="w-2/5">
                                         <el-select v-model="judge_type" placeholder="请选择">
                                             <el-option label="审判长" value="1"></el-option>
                                             <el-option label="审判员" value="2"></el-option>
@@ -223,10 +223,10 @@
                                     </div>
                                     <div class="w-2/5 ml-2">
                                         <el-select v-model="judge_select" ref="setSelect1" filterable >
-                                            <el-option 
-                                                v-for="item in case_court_personnel" 
+                                            <el-option
+                                                v-for="item in case_court_personnel"
                                                 :key="item.id"
-                                                :value="item.name" 
+                                                :value="item.name"
                                                 :label="item.name"
                                                  >{{ item.name}}
                                              </el-option>
@@ -247,7 +247,7 @@
                                         </el-form-item>
                                          <span class="ml-1 w-1/3 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="submit_cp()">确认添加</span>
                                     </div>
-                                 </el-form>   
+                                 </el-form>
                             </div>
                             <!-- 代理律师 -->
                             <el-form-item  label="代理律师：" class="text-base">
@@ -272,12 +272,12 @@
                                             <div class="mt-2">
                                                 <el-input v-model="lv_from.lawyerValue" placeholder="请填写律师"></el-input>
                                             </div>
-                                            
+
                                         </el-form-item>
-                                         
+
                                          <span class="ml-1 w-1/3 mb-3 py-1 text-base text-blue-500 px-2 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="add_case_lawyer()">添加律师</span>
                                     </div>
-                                 </el-form>   
+                                 </el-form>
                             </div>
                             <!-- 基本案情 -->
                             <h2 class="text-left text-base pb-2 text-orange-500">二、基本案情</h2>
@@ -330,7 +330,7 @@
                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addEvidence('y')">添加</span>
                                              <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="delEvidence(index,'y')">删除</span>
                                         </div>
-                                        
+
                                     </div>
                                 </el-form-item>
                                 <el-radio-group v-model="item.f" class="ml-20" @change="updateInfo({case_evidence:pageInfo.case_evidence})">
@@ -348,7 +348,7 @@
                                             <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addEvidence('b')">添加</span>
                                              <span class="px-2 whitespace-no-wrap ml-1 mb-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="delEvidence(index,'b')">删除</span>
                                         </div>
-                                        
+
                                     </div>
                                 </el-form-item>
                                 <el-radio-group v-model="item.f" class="ml-20" @change="updateInfo({case_evidence:pageInfo.case_evidence})">
@@ -368,18 +368,18 @@
                                 </ul>
                             </div>
                             <div class="adp flex">
-                                <el-select  
-                                    v-model="legal_basis.legal_basis" 
-                                    @change="console(legal_basis)" 
+                                <el-select
+                                    v-model="legal_basis.legal_basis"
+                                    @change="console(legal_basis)"
                                     placeholder="请选择法律"
                                     size="medium"
                                 >
                                     <el-option v-for="(item,index) in lawContent.lawList" :label="item.name" :key="index" :value="item.id"></el-option>
                                 </el-select>
                                 <div id="lawyer_list">
-                                    <el-input 
-                                        type="number" 
-                                        v-model="legal_basis.number" 
+                                    <el-input
+                                        type="number"
+                                        v-model="legal_basis.number"
                                         placeholder="第几条法律，填写数字即可，如：3"
                                         maxlength="4"
                                         show-word-limit
@@ -393,7 +393,7 @@
                                 <el-radio label="1">已完成</el-radio>
                                 <el-radio label="0">未完成</el-radio>
                             </el-radio-group>
-                                
+
                         </el-form>
                         <el-row class="my-5">
                             <el-button type="primary" round @click="goNewPage()">生成页面</el-button>
@@ -473,7 +473,7 @@
           id: '',
           tid: null,
           court: null,      // 法院
-          courtId: null,    // 
+          courtId: null,    //
           scourt: null,
           title: "王宝强于马蓉婚姻纠纷",   // 标题
           master_number: '',        // 律所案号
@@ -542,7 +542,7 @@
             lawyerValue:"",
             lawerOfficeValue: ''
         },
-        
+
         lo_from:{
           name:""
         },
@@ -562,7 +562,7 @@
       this.getCourt();
     },
     created(){
-        
+
     },
     watch:{
      searchVal:function(){    //法院人员模糊搜索
@@ -700,7 +700,7 @@
       // 查询法院信息
       checkCourt (e) {
         getCaseCourtMsg(e).then((data) =>{
-            this.restaurants = data.data.data.data 
+            this.restaurants = data.data.data.data
         })
       },
       getCaseCourtMsg () {
@@ -780,7 +780,7 @@
         }else{
             this.errorMesAlert('请先选择相关法律');
         }
-        
+
       },
       // 将法律数字变成文字
       changeLegal_basis_type () {
@@ -816,7 +816,7 @@
 
       },
       cp_add_icon (status) {
-        
+
         switch (status) {
             case 1:
               this.court_personnel1.push({
@@ -1036,7 +1036,7 @@
         }else{
             this.errorMesAlert('新增人员不能为空')
         }
-        
+
       },
       submit_cp(){
         if(this.cp_from.name != "" ){
@@ -1058,7 +1058,7 @@
         }else{
             this.errorMesAlert('新增人员不能为空')
         }
-        
+
       },
       // 增加案由
       // addCaseAction (e) {
@@ -1151,7 +1151,7 @@
         }else{
             this.errorMesAlert('律所或律师不能为空');
         }
-         
+
       },
       delete_vase_lawyer(row){
         updateCaseData({
@@ -1312,6 +1312,7 @@
     }
     #caseMsg{
         line-height:30px !important;
+        text-indent:2em;
     }
     #lawyer_list{
         width:150px !important;
