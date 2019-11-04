@@ -4,7 +4,7 @@
         <div class="mx-10 px-2 pb-10">
             <div class="w-1/2 panjue float-left pb-10 border-1 border-r pr-1">
                 <div class="py-6">
-                    <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
+                    <h2 class="text-xl mb-2">{{pageInfo.title}}</h2>
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
                         <el-tab-pane label="查看图片版本" name="first">
                             <ul>
@@ -13,7 +13,7 @@
                         </el-tab-pane>
                         <el-tab-pane label="查看word版本" name="second">
                             <div>
-                                <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
+                                <h2 class="text-xl py-2">{{pageInfo.court}}{{status}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
                                 <textarea :rows='80' id="textarea_left" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                             </div>
@@ -27,7 +27,7 @@
                         <span class="">案件样式编辑</span>
                     </h2>
                     <div class="pl-5">
-                        <textarea :rows="2" class="text-xl text-center py-2 w-full" v-model="pageInfo.title" @blur="updateInfo({title:pageInfo.title})"></textarea>
+                        <textarea :rows="2" class="text-xl text-center py-2 w-full" v-model="pageInfo.court+status" @blur="updateInfo({title:pageInfo.title})"></textarea>
                         <textarea :rows="1" class="text-right py-2 mr-5 w-full" v-model="pageInfo.case_number" @blur="updateInfo({title:pageInfo.case_number})"></textarea>
                         <textarea :rows="80" class="textarea w-full" placeholder="" v-model="pageInfo.content"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                         <el-row class="my-5">
