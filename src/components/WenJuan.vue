@@ -5,19 +5,19 @@
         <div class="text-left mt-5 text-orange-500 text-bolder">子女问题</div>
         <div class="ml-5">
           <el-form-item label="您与配偶有几个子女" class="w-1/2 mx-auto">
-            <el-select v-model="childNum" placeholder="几个孩子" @change="childList(childNum)">
-              <el-option label="一个孩子" value="1"></el-option>
-              <el-option label="两个孩子" value="2"></el-option>
-              <el-option label="三个孩子" value="3"></el-option>
-              <el-option label="四个孩子" value="4"></el-option>
-              <el-option label="五个孩子" value="5"></el-option>
-              <el-option label="六个孩子" value="6"></el-option>
+            <el-select v-model="childNum" placeholder="几个孩子" size="small" @change="childList(childNum)">
+              <el-option label="1" value="1"></el-option>
+              <el-option label="2" value="2"></el-option>
+              <el-option label="3" value="3"></el-option>
+              <el-option label="4" value="4"></el-option>
+              <el-option label="5" value="5"></el-option>
+              <el-option label="6" value="6"></el-option>
             </el-select>
           </el-form-item>
         </div>
         <div class="ml-5">
           <div v-for="(item, index) in childAll" :key="index" :id="getId(index)">
-            <h2 class="text-left ml-5">子女{{index+1}}</h2>
+            <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">第{{index+1}}个孩子</h2>
             <h2 class="text-left">问题一：基本信息</h2>
               <div  class="w-2/3 mx-auto">
                 <!--孩子的出生日期-->
@@ -25,6 +25,7 @@
                   <el-date-picker
                     v-model="item.birthday"
                     type="date"
+                    size="small"
                     placeholder="选择日期"
                     format="yyyy 年 MM 月 dd 日"
                     @change="changeFunc(item, index)"
@@ -32,16 +33,30 @@
                   </el-date-picker>
                 </el-form-item>
                 <el-form-item label="2、孩子的姓名是" class="text-base">
-                  <el-input class="ban" v-model="item.name" size="small" @blur="addChildName(item.name)"></el-input>
+                  <el-input
+                    class="ban"
+                    v-model="item.name"
+                    size="small"
+                    placeholder="请输入姓名"
+                    @blur="addChildName(item.name)"
+                  ></el-input>
                 </el-form-item>
                 <el-form-item label="3、孩子的性别是" class="text-base">
-                  <el-select v-model="item.sex" placeholder="孩子性别" @change="addChildSex(item.sex)">
-                    <el-option label="男" value="1"></el-option>
-                    <el-option label="女" value="2"></el-option>
-                  </el-select>
+                  <el-radio-group v-model="item.sex" @change="addChildSex(item.sex)">
+                    <el-radio :label="1">男</el-radio>
+                    <el-radio :label="2">女</el-radio>
+                  </el-radio-group>
                 </el-form-item>
                 <el-form-item label="4、孩子的身份证号是" class="text-base">
-                  <el-input type="number" class="ban" v-model="item.ID" size="small" @blur="addChildId(item.ID)"></el-input>
+                  <el-input
+                    type="number"
+                    class="ban"
+                    v-model="item.ID"
+                    maxlength="18"
+                    size="small"
+                    placeholder="请输入18位身份证号"
+                    @blur="addChildId(item.ID)"
+                  ></el-input>
                 </el-form-item>
               </div>
             <div>
@@ -76,6 +91,7 @@
                       <el-date-picker
                         v-model="item.HowPay.data.onceTime"
                         type="date"
+                        size="small"
                         placeholder="选择日期"
                         format="yyyy 年 MM 月 dd 日"
                         @change="changeFunc(item, index)"
@@ -88,7 +104,7 @@
                   </div>
                   <div v-if="item.HowPay.value=='2' && item.womanMainten =='1'">
                      <span>每月
-                         <el-select v-model="item.HowPay.data.MonthPay" placeholder="请选择">
+                         <el-select v-model="item.HowPay.data.MonthPay" size="small" placeholder="请选择">
                           <el-option
                             v-for="ite in days"
                             :key="ite"
@@ -104,12 +120,12 @@
                   </div>
                   <div v-if="item.HowPay.value=='3' && item.womanMainten =='1'">
                      <span>每季度
-                         <el-select v-model="item.HowPay.data.Quarter[0]" placeholder="请选择">
+                         <el-select v-model="item.HowPay.data.Quarter[0]" size="small" placeholder="请选择">
                            <el-option :value="1">1</el-option>
                            <el-option :value="2">2</el-option>
                            <el-option :value="3">3</el-option>
                         </el-select>月
-                       <el-select v-model="item.HowPay.data.Quarter[1]" placeholder="请选择">
+                       <el-select v-model="item.HowPay.data.Quarter[1]" size="small" placeholder="请选择">
                            <el-option
                              v-for="ite in days"
                              :key="ite"
@@ -125,7 +141,7 @@
                   </div>
                   <div v-if="item.HowPay.value=='4' && item.womanMainten =='1'">
                      <span>每年
-                         <el-select v-model="item.HowPay.data.yearPay[0]" placeholder="请选择">
+                         <el-select v-model="item.HowPay.data.yearPay[0]" size="small" placeholder="请选择">
                            <el-option
                              v-for="mo in mon"
                              :key="mo"
@@ -133,7 +149,7 @@
                              :value="mo">
                           </el-option>
                         </el-select>月
-                       <el-select v-model="item.HowPay.data.yearPay[1]" placeholder="请选择">
+                       <el-select v-model="item.HowPay.data.yearPay[1]" size="small" placeholder="请选择">
                            <el-option
                              v-for="ite in days"
                              :key="ite"
@@ -159,6 +175,7 @@
                       <el-date-picker
                         v-model="item.PayTimeOther"
                         type="date"
+                        size="small"
                         placeholder="选择日期"
                         format="yyyy 年 MM 月 dd 日"
                         @change="changeFunc(item, index)"
@@ -189,6 +206,7 @@
                       <el-date-picker
                         v-model="item.HowPay.data.onceTime"
                         type="date"
+                        size="small"
                         placeholder="选择日期"
                         format="yyyy 年 MM 月 dd 日"
                         @change="changeFunc(item, index)"
@@ -201,7 +219,7 @@
                   </div>
                   <div v-if="item.HowPay.value=='2' && item.manMainten =='1'">
                      <span>每月
-                         <el-select v-model="item.HowPay.data.MonthPay" placeholder="请选择">
+                         <el-select v-model="item.HowPay.data.MonthPay" size="small" placeholder="请选择">
                           <el-option
                             v-for="ite in days"
                             :key="ite"
@@ -217,12 +235,12 @@
                   </div>
                   <div v-if="item.HowPay.value=='3' && item.manMainten =='1'">
                      <span>每季度
-                         <el-select v-model="item.HowPay.data.Quarter[0]" placeholder="请选择">
+                         <el-select v-model="item.HowPay.data.Quarter[0]" size="small" placeholder="请选择">
                            <el-option :value="1">1</el-option>
                            <el-option :value="2">2</el-option>
                            <el-option :value="3">3</el-option>
                         </el-select>月
-                       <el-select v-model="item.HowPay.data.Quarter[1]" placeholder="请选择">
+                       <el-select v-model="item.HowPay.data.Quarter[1]" size="small" placeholder="请选择">
                            <el-option
                              v-for="ite in days"
                              :key="ite"
@@ -238,7 +256,7 @@
                   </div>
                   <div v-if="item.HowPay.value=='4' && item.manMainten =='1'">
                      <span>每年
-                         <el-select v-model="item.HowPay.data.yearPay[0]" placeholder="请选择">
+                         <el-select v-model="item.HowPay.data.yearPay[0]" size="small" placeholder="请选择">
                            <el-option
                              v-for="mo in mon"
                              :key="mo"
@@ -246,7 +264,7 @@
                              :value="mo">
                           </el-option>
                         </el-select>月
-                       <el-select v-model="item.HowPay.data.yearPay[1]" placeholder="请选择">
+                       <el-select v-model="item.HowPay.data.yearPay[1]" size="small" placeholder="请选择">
                            <el-option
                              v-for="ite in days"
                              :key="ite"
@@ -272,6 +290,7 @@
                       <el-date-picker
                         v-model="item.PayTimeOther"
                         type="date"
+                        size="small"
                         placeholder="选择日期"
                         format="yyyy 年 MM 月 dd 日"
                         @change="changeFunc(item, index)"
@@ -342,10 +361,61 @@
                   </el-form-item>
                   <div v-if="item.SettingWomenVisitingHours =='1' ">
                     <h2 class="text-left">11、怎么探望？</h2>
-                    <el-radio-group v-model="item.HowSetting" @change="custody(item.HowSetting)">
-                      <el-radio :label="1">随时探望</el-radio>
-                      <el-radio :label="2">定时探望</el-radio>
-                    </el-radio-group>
+                    <el-form-item label="（1）日常探望时间：" class="text-base">
+                      <el-radio-group v-model="item.DailyVisits.value" @change="custody(item.DailyVisits.value)">
+                        <el-radio :label="1">随时探望</el-radio>
+                        <el-radio :label="2">定时探望</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                    <div v-if="item.DailyVisits.value=='2'">
+                      <span>
+                        每
+                        <el-select v-model="item.DailyVisits.RegularVisits[0]" placeholder="请选择" size="small">
+                          <el-option label="周" :value="1">周</el-option>
+                          <el-option label="月" :value="2">月</el-option>
+                          <el-option label="年" :value="3">年</el-option>
+                        </el-select>
+                        探望
+                        <el-select v-model="item.DailyVisits.RegularVisits[1]" placeholder="请选择" size="small">
+                           <el-option
+                             v-for="ite in days"
+                             :key="ite"
+                             :label="ite"
+                             :value="ite">
+                          </el-option>
+                        </el-select>
+                        次
+                      </span>
+                      <br/>
+                      <span class="my-2 inline-block">
+                         每次
+                        <el-time-picker
+                          is-range
+                          v-model="item.DailyVisits.RegularVisitsTime"
+                          range-separator="至"
+                          start-placeholder="开始时间"
+                          end-placeholder="结束时间"
+                          placeholder="选择时间范围">
+                         </el-time-picker>
+                      </span>
+                    </div>
+                    <el-form-item label="（1）寒暑假探望时间：" class="text-base">
+                      <el-radio-group v-model="item.HolidayVisits.value" @change="custody(item.HolidayVisits.value)">
+                        <el-radio :label="1" value="1">双方协商确定</el-radio>
+                        <el-radio :label="2" value="2">具体日期</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                    <div v-if="item.HolidayVisits.value =='2' ">
+                      <el-date-picker
+                        v-model="item.HolidayVisits.HolidayVisitsTime"
+                        type="daterange"
+                        size="small"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                        @change="printMsg(item)"
+                      ></el-date-picker>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -360,6 +430,62 @@
                   </el-form-item>
                   <div v-if="item.SettingManVisitingHours =='1' ">
                     <h2 class="text-left">11、怎么探望？</h2>
+                    <el-form-item label="（1）日常探望时间：" class="text-base">
+                      <el-radio-group v-model="item.DailyVisits.value" @change="custody(item.DailyVisits.value)">
+                        <el-radio :label="1">随时探望</el-radio>
+                        <el-radio :label="2">定时探望</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                    <div v-if="item.DailyVisits.value=='2'">
+                      <span>
+                        每
+                        <el-select v-model="item.DailyVisits.RegularVisits[0]" placeholder="请选择" size="small">
+                          <el-option label="周" :value="1">周</el-option>
+                          <el-option label="月" :value="2">月</el-option>
+                          <el-option label="年" :value="3">年</el-option>
+                        </el-select>
+                        探望
+                        <el-select v-model="item.DailyVisits.RegularVisits[1]" placeholder="请选择" size="small">
+                           <el-option
+                             v-for="ite in days"
+                             :key="ite"
+                             :label="ite"
+                             :value="ite">
+                          </el-option>
+                        </el-select>
+                        次
+                      </span>
+                      <br/>
+                      <span class="my-2 inline-block">
+                         每次
+                         <el-time-picker
+                           is-range
+                           v-model="item.DailyVisits.RegularVisitsTime"
+                           size="small"
+                           range-separator="至"
+                           start-placeholder="开始时间"
+                           end-placeholder="结束时间"
+                           placeholder="选择时间范围">
+                         </el-time-picker>
+                      </span>
+                    </div>
+                    <el-form-item label="（1）寒暑假探望时间：" class="text-base">
+                      <el-radio-group v-model="item.HolidayVisits.value" @change="custody(item.HolidayVisits.value)">
+                        <el-radio :label="1">双方协商确定</el-radio>
+                        <el-radio :label="2">具体日期</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                    <div v-if="item.HolidayVisits.value =='2' ">
+                      <el-date-picker
+                        v-model="item.HolidayVisits.HolidayVisitsTime"
+                        size="small"
+                        type="daterange"
+                        range-separator="至"
+                        start-placeholder="开始日期"
+                        end-placeholder="结束日期"
+                        @change="printMsg(item)"
+                      ></el-date-picker>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -371,11 +497,12 @@
   </div>
 </template>
 <script>
-import {question} from '@/api/api/requestLogin.js'
-import {answer} from '@/api/api/requestLogin.js'
+// import {question} from '@/api/api/requestLogin.js'
+// import {answer} from '@/api/api/requestLogin.js'
 export default {
   data () {
     return {
+      hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
       days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
       mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
       childNum: '',
@@ -394,26 +521,26 @@ export default {
 
   },
   mounted () {
-    this.getAnswer() // 获取答案
-    this.getQuestion() // 获取问题
+    // this.getAnswer() // 获取答案
+    // this.getQuestion() // 获取问题
   },
   methods: {
-    getQuestion () {     // 获取问题标题
-      question().then((data) => {
-        let getData = data.data
-        this.questionMsg = eval('(' + getData + ')')
-        // console.log(this.questionMsg)
-      }).catch((data) => {
-      })
-    },
-    getAnswer () {
-      answer().then((data) => {
-        let getData = data.data
-        this.answerMsg = eval('(' + getData + ')')
-        // console.log(this.answerMsg)
-      }).catch((data) =>{
-      })
-    },
+    // getQuestion () {     // 获取问题标题
+    //   question().then((data) => {
+    //     let getData = data.data
+    //     this.questionMsg = eval('(' + getData + ')')
+    //     // console.log(this.questionMsg)
+    //   }).catch((data) => {
+    //   })
+    // },
+    // getAnswer () {
+    //   answer().then((data) => {
+    //     let getData = data.data
+    //     this.answerMsg = eval('(' + getData + ')')
+    //     // console.log(this.answerMsg)
+    //   }).catch((data) =>{
+    //   })
+    // },
     getId (index) {
       return 'box_' + index
     },
@@ -450,7 +577,15 @@ export default {
         PayTimeOther: '',   //具体支付时间
         SettingWomenVisitingHours: '',   // 是否明确约定女方探望时间 1是 0否
         SettingManVisitingHours: '',      // 是否明确约定男方探望时间 1是 0否
-        HowSetting: ''  // 1、随时探望 2、定时探望
+        DailyVisits: {
+          value: '',     // 1、随时探望 2、定时探望
+          RegularVisits: [],  //每多久探望几次
+          RegularVisitsTime: ''   //每次几点到几点
+        },
+        HolidayVisits: {
+          value: '',  // 寒暑假探望时间
+          HolidayVisitsTime: []  // 假期探望具体时间
+        }
       }
     },
     childList (e) {
@@ -482,10 +617,14 @@ export default {
       console.log(this.childAll)
     },
     custody (e) {
+    },
+    printMsg (e) {
+      console.log(e)
     }
   }
 }
 </script>
 <style scoped>
 .ban{width:220px !important;}
+.el-form-item{margin-bottom:10px !important;}
 </style>
