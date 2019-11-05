@@ -50,9 +50,9 @@
                             </el-form-item>
                             <el-form-item label="文书类型：">
                                 <el-select id="case_type" v-model="status_h1"  placeholder="文书类型" @change="updateInfo({case_status:status_h1})" >
-                                    <el-option label="判决书" value="1"></el-option>
-                                    <el-option label="裁定书" value="2"></el-option>
-                                    <el-option label="调解书" value="3"></el-option>
+                                    <el-option label="民事判决书" value="1"></el-option>
+                                    <el-option label="民事裁定书" value="2"></el-option>
+                                    <el-option label="民事调解书" value="3"></el-option>
                                     <el-option label="其他" value="4"></el-option>
                                 </el-select>
                             </el-form-item>
@@ -656,17 +656,17 @@
           // 右侧文书类型
           let status_h = this.pageInfo.status;
           switch (status_h) {
-            case 1: this.status_h1 = '判决书'; break
-            case 2: this.status_h1 = '裁定书'; break
-            case 3: this.status_h1 = '调解书'; break
+            case 1: this.status_h1 = '民事判决书'; break
+            case 2: this.status_h1 = '民事裁定书'; break
+            case 3: this.status_h1 = '民事调解书'; break
             case 4: this.status_h1 = '其他'; break
           }
           // 左侧展示判决书类型
           let statusNum = this.pageInfo.status;
           switch (statusNum) {
-            case 1: this.status = '判决书'; break
-            case 2: this.status = '裁定书'; break
-            case 3: this.status = '调解书'; break
+            case 1: this.status = '民事判决书'; break
+            case 2: this.status = '民事裁定书'; break
+            case 3: this.status = '民事调解书'; break
             case 4: this.status = '其他'; break
           }
            // 右侧审判程序

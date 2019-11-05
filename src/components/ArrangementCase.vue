@@ -27,8 +27,9 @@
                         <span class="">案件样式编辑</span>
                     </h2>
                     <div class="pl-5">
-                        <textarea :rows="2" class="text-xl text-center py-2 w-full" v-model="pageInfo.court+status" @blur="updateInfo({title:pageInfo.title})"></textarea>
-                        <textarea :rows="1" class="text-right py-2 mr-5 w-full" v-model="pageInfo.case_number" @blur="updateInfo({title:pageInfo.case_number})"></textarea>
+                        <textarea :rows="1" class="text-xl text-center py-2 w-full" v-model="pageInfo.court" @blur="updateInfo({court:pageInfo.court})"></textarea>
+                        <textarea :rows="1" class="text-xl text-center py-2 w-full" v-model="status" @blur="updateInfo({status:pageInfo.status})"></textarea>
+                        <textarea :rows="1" class="text-right py-2 mr-5 w-full" v-model="pageInfo.case_number" @blur="updateInfo({case_number:pageInfo.case_number})"></textarea>
                         <textarea :rows="80" class="textarea w-full" placeholder="" v-model="pageInfo.content"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                         <el-row class="my-5">
                             <el-button type="primary" round @click="goNewPage()">前往修改页面</el-button>
@@ -121,9 +122,9 @@
           // 左侧展示判决书类型
           let statusNum = this.pageInfo.status;
           switch (statusNum) {
-            case 1: this.status = '判决书'; break
-            case 2: this.status = '裁定书'; break
-            case 3: this.status = '调解书'; break
+            case 1: this.status = '民事判决书'; break
+            case 2: this.status = '民事裁定书'; break
+            case 3: this.status = '民事调解书'; break
             case 4: this.status = '其他'; break
           }
         }).catch((data)=>{
