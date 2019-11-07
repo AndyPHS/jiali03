@@ -6,8 +6,8 @@
               <div class="text-left">
                 <el-tag
                   class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
-                   v-for="(item, index) in lessonFor" 
-                   :key="item.id" 
+                   v-for="(item, index) in lessonFor"
+                   :key="item.id"
                    @click="addLabelarr(item.title, item.id)"
                    >
                   {{ item.title }}
@@ -18,8 +18,8 @@
               <div class="text-left">
                 <el-tag
                   class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
-                   v-for="(item, index) in lessonSec" 
-                   :key="item.id" 
+                   v-for="(item, index) in lessonSec"
+                   :key="item.id"
                    @click="addLabelarr(item.title, item.id)"
                    >
                   {{ item.title }}
@@ -30,8 +30,8 @@
               <div class="text-left">
                 <el-tag
                   class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
-                   v-for="(item, index) in lessonThi" 
-                   :key="item.id" 
+                   v-for="(item, index) in lessonThi"
+                   :key="item.id"
                    @click="addLabelarr(item.title, item.id)"
                    >
                   {{ item.title }}
@@ -59,9 +59,7 @@
               </div>
           </div>
         </div>
-        
-
-        <!-- 常用label展示 -->
+      <!-- 常用label展示 -->
         <div></div>
     </div>
 </template>
@@ -82,7 +80,7 @@
     },
     data () {
       return {
-        activeNames: ['1'], 
+        activeNames: ['1'],
         currentval: '',
         labelarr: [],
         oldlabel: [],
@@ -112,14 +110,14 @@
       //   }
       //   this.currentval = ''
       // },
-      
+
       getCaseLable () {    // 获取标签池标签
         selectCaseLable().then((data) =>{
           this.oldlabel = data.data.data;
           console.log()
           for (var i = 0; i <this.oldlabel.length -1; i++) {
             // console.log(this.oldlabel[i])
-            switch(this.oldlabel[i].tid){
+            switch(this.oldlabel[i].tid) {
               case 0:
               this.lessonOne.push(this.oldlabel[i])
               break;
@@ -131,10 +129,9 @@
               break;
             case 12:
               this.lessonThi.push(this.oldlabel[i])
-              break;
+              break
             }
           }
-
         })
       },
       getInfo () {    // 获取本案标签
@@ -175,9 +172,9 @@
     .inputbox {
         background-color: white;
         font-size: 12px;
-       
+
         margin-bottom: 18px;
-        
+
         text-align: left;
         font-size: 0;
     }

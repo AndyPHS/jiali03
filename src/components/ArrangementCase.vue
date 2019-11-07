@@ -4,7 +4,7 @@
         <div class="mx-10 px-2 pb-10">
             <div class="w-1/2 panjue float-left pb-10 border-1 border-r pr-1">
                 <div class="py-6">
-                    <h2 class="text-xl mb-2">{{pageInfo.court}}{{status}}</h2>
+                    <h2 class="text-xl mb-2">{{pageInfo.title}}</h2>
                     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
                         <el-tab-pane label="查看图片版本" name="first">
                             <ul>
@@ -13,13 +13,11 @@
                         </el-tab-pane>
                         <el-tab-pane label="查看word版本" name="second">
                             <div>
-                                <h2 class="text-xl py-2">{{pageInfo.title}}</h2>
+                                <h2 class="text-xl py-2">{{pageInfo.court}}{{status}}</h2>
                                 <p class="text-right py-2 mr-5">{{pageInfo.case_number}}</p>
-                            
                                 <textarea :rows='80' id="textarea_left" class="textarea w-full" placeholder="" v-model="pageInfo.content" readonly="readonly"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                             </div>
                         </el-tab-pane>
-                        
                     </el-tabs>
                 </div>
             </div>
@@ -29,8 +27,9 @@
                         <span class="">案件样式编辑</span>
                     </h2>
                     <div class="pl-5">
-                        <textarea :rows="1" class="text-xl text-center py-2 w-full" v-model="pageInfo.title" @blur="updateInfo({title:pageInfo.title})"></textarea>
-                        <textarea :rows="1" class="text-right py-2 mr-5 w-full" v-model="pageInfo.case_number" @blur="updateInfo({title:pageInfo.case_number})"></textarea>
+                        <textarea :rows="1" class="text-xl text-center py-2 w-full" v-model="pageInfo.court" @blur="updateInfo({court:pageInfo.court})"></textarea>
+                        <textarea :rows="1" class="text-xl text-center py-2 w-full" v-model="status" @blur="updateInfo({status:pageInfo.status})"></textarea>
+                        <textarea :rows="1" class="text-right py-2 mr-5 w-full" v-model="pageInfo.case_number" @blur="updateInfo({case_number:pageInfo.case_number})"></textarea>
                         <textarea :rows="80" class="textarea w-full" placeholder="" v-model="pageInfo.content"  @blur="updateInfo({content:pageInfo.content})"></textarea>
                         <el-row class="my-5">
                             <el-button type="primary" round @click="goNewPage()">前往修改页面</el-button>
@@ -62,7 +61,7 @@
           id: '',
           tid: null,
           court: null,      // 法院
-          courtId: null,    // 
+          courtId: null,    //
           scourt: null,
           title: "王宝强于马蓉婚姻纠纷",   // 标题
           master_number: '',        // 律所案号
@@ -108,7 +107,7 @@
       this.getInfo(); // 获取页面信息
     },
     created(){
- 
+
     },
     updated () {
     },
@@ -119,13 +118,13 @@
         selectCaseData().then((data) => {
           this.pageInfo = data.data;
           this.pageInfo.imgs = JSON.parse(data.data.imgs)
-          
+
           // 左侧展示判决书类型
           let statusNum = this.pageInfo.status;
           switch (statusNum) {
-            case 1: this.status = '判决书'; break
-            case 2: this.status = '裁定书'; break
-            case 3: this.status = '调解书'; break
+            case 1: this.status = '民事判决书'; break
+            case 2: this.status = '民事裁定书'; break
+            case 3: this.status = '民事调解书'; break
             case 4: this.status = '其他'; break
           }
         }).catch((data)=>{
@@ -164,6 +163,7 @@
       outline:0 none;
       resize:none;
       line-height:2.0;
+      text-indent:2em;
     }
     .el-select{
         width: 100%;

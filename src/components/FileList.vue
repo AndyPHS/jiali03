@@ -15,7 +15,7 @@
                         <td class="border text-black">{{item.title}}</td>
                         <td class="border text-black">{{item.create_time}}</td>
                         <td class="border text-black">{{item.name}}</td>
-                        <td class="border text-black">{{item.case_number}}</td>
+                        <td class="border text-black">{{item.master_number}}</td>
                         <td class="border text-black" v-if="item.bool == '1'">已完成</td>
                         <td class="border text-black" v-else>未完成</td>
                         <td class="border text-black flex justify-around">
@@ -33,7 +33,7 @@
                     class="mb-10"
                     layout="prev, pager, next"
                     @current-change="handleUserList"
-                    :page-size="pagesize" 
+                    :page-size="pagesize"
                     :current-page.sync="currentPage"
                     :total="this.min.total">
             </el-pagination>
@@ -81,7 +81,7 @@
             filename: '文件名称',
             uploadtime: '上传时间',
             uploadpeople: '上传人',
-            filestatus: '案号',
+            filestatus: '律所案号',
             bool: '完成状态',
             control: '操作'
 
@@ -94,7 +94,7 @@
             case_number_time: 1,
             name: '',
             bool: '',
-            case_number: ''
+            master_number: ''
           }
         ],
         tableData: [{
@@ -127,7 +127,7 @@
         total: 0, // 总页数
         pageNum: 1, // 第几页
         isloading: false,
-        
+
       }
     },
     mounted () {
@@ -150,7 +150,7 @@
               this.bool = '未完成'
             }
           }
-          
+
         })
       },
       handleClick (e) {

@@ -2,116 +2,139 @@
   <div class="container mx-auto">
     <div>
       <el-form >
-        <div class="text-left">{{answerMsg[2].title}}</div>
+        <div class="text-left"></div>
         <div class="ml-5">
-          <el-form-item :label="questionMsg[0].title" class="w-1/2 mx-auto">
-            <el-select v-model="answerMsg[2].data[0].value" placeholder="几个孩子" @change="childList(answerMsg[2].data[0])">
-              <el-option label="一个孩子" value="1"></el-option>
-              <el-option label="两个孩子" value="2"></el-option>
-              <el-option label="三个孩子" value="3"></el-option>
-              <el-option label="四个孩子" value="4"></el-option>
-              <el-option label="五个孩子" value="5"></el-option>
-              <el-option label="六个孩子" value="6"></el-option>
+          <el-form-item label="您与配偶有几个子女" class="w-1/2 mx-auto">
+            <el-select v-model="childNum" placeholder="几个孩子" size="small" @change="childList(childNum)">
+              <el-option label="1" value="1"></el-option>
+              <el-option label="2" value="2"></el-option>
+              <el-option label="3" value="3"></el-option>
+              <el-option label="4" value="4"></el-option>
+              <el-option label="5" value="5"></el-option>
+              <el-option label="6" value="6"></el-option>
             </el-select>
           </el-form-item>
         </div>
         <div class="ml-5">
-          <div v-for="(item, index) in answerMsg[2].data[0].problemValue" :key="index+1" >
-            <!--<h2 class="text-left ml-5">{{answerMsg[2].data[0].problemRepeatName}}{{index+1}}</h2>-->
-            <!--<h2 class="text-left">问题一：{{item.data[0].title}}</h2>-->
-              <div  class="w-2/3 mx-auto">
-                <!--孩子的出生日期-->
-                <el-form-item :label="'1、'+questionMsg[1].title" class="text-base">
-                  <el-date-picker
-                    v-model="item[0].data[0].value"
-                    type="date"
-                    size="small"
-                    placeholder="选择日期">
-                  </el-date-picker>
-                </el-form-item>
-                <!--<el-form-item :label="'2、'+questionMsg[2].title" class="text-base">-->
-                  <!--<el-input class="ban" v-model="answerMsg[2].data[0].problemValue[index][0].data[1].value" size="small" @blur="addChildName(answerMsg[2].data[0].problemValue[index][0].data[1].value)"></el-input>-->
-                <!--</el-form-item>-->
-                <!--<el-form-item :label="'3、'+questionMsg[3].title" class="text-base">-->
-                  <!--<el-select v-model="answerMsg[2].data[0].problemValue[index][0].data[2].value" placeholder="孩子性别" @change="addChildSex(answerMsg[2].data[0].problemValue[index][0].data[2].value)">-->
-                    <!--<el-option label="男" value="1"></el-option>-->
-                    <!--<el-option label="女" value="2"></el-option>-->
-                  <!--</el-select>-->
-                <!--</el-form-item>-->
-                <!--<el-form-item :label="'4、'+questionMsg[4].title" class="text-base">-->
-                  <!--<el-input type="number" class="ban" v-model="answerMsg[2].data[0].problemValue[index][0].data[3].value" size="small" @blur="addChildId(answerMsg[2].data[0].problemValue[index][0].data[3].value)"></el-input>-->
-                <!--</el-form-item>-->
-              </div>
-            <!--<div>-->
-              <!--<h2 class="text-left">问题二：{{item.data[1].title}}</h2>-->
-              <!--<div  class="w-2/3 mx-auto">-->
-                <!--<el-form-item :label="'5、'+questionMsg[5].title" class="text-base">-->
-                  <!--<el-radio-group v-model="answerMsg[2].data[0].problemValue[index][1].data[0].value">-->
-                    <!--<el-radio :label="1">男方</el-radio>-->
-                    <!--<el-radio :label="2">女方</el-radio>-->
-                    <!--<el-radio :label="3">共同抚养</el-radio>-->
-                  <!--</el-radio-group>-->
-                <!--</el-form-item>-->
-                <!--<div v-if="answerMsg[2].data[0].problemValue[index][1].data[0].value == '3'">-->
-                  <!--<div>-->
-                    <!--<el-form-item :label="'6、'+questionMsg[6].title" class="text-base">-->
-                      <!--<el-radio-group v-model="answerMsg[2].data[0].problemValue[index][1].data[1].value">-->
-                        <!--<el-radio :label="1">轮流循环抚养</el-radio>-->
-                        <!--<el-radio :label="2">按阶段分别抚养</el-radio>-->
-                      <!--</el-radio-group>-->
-                    <!--</el-form-item>-->
-                    <!--&lt;!&ndash;<div class="w-1/2 mx-auto" v-if="answerMsg[2].data[0].problemValue[index][1].data[1].value != null">&ndash;&gt;-->
-                      <!--&lt;!&ndash;<el-form-item :label="questionMsg[7].title" class="text-base">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<el-date-picker&ndash;&gt;-->
-                          <!--&lt;!&ndash;v-model="answerMsg[2].data[0].problemValue[index][1].data[1].data[0].value[0]"&ndash;&gt;-->
-                          <!--&lt;!&ndash;type="date"&ndash;&gt;-->
-                          <!--&lt;!&ndash;size="small"&ndash;&gt;-->
-                          <!--&lt;!&ndash;@change="addChildBirthday(answerMsg[2].data[0].problemValue[index][1].data[1].data[0].value[0])"&ndash;&gt;-->
-                          <!--&lt;!&ndash;placeholder="选择日期">&ndash;&gt;-->
-                        <!--&lt;!&ndash;</el-date-picker>&ndash;&gt;-->
-                      <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
-                      <!--&lt;!&ndash;<el-form-item :label="questionMsg[8].title" class="text-base">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<el-date-picker&ndash;&gt;-->
-                          <!--&lt;!&ndash;v-model="answerMsg[2].data[0].problemValue[index][1].data[1].data[0].value[1]"&ndash;&gt;-->
-                          <!--&lt;!&ndash;type="date"&ndash;&gt;-->
-                          <!--&lt;!&ndash;size="small"&ndash;&gt;-->
-                          <!--&lt;!&ndash;@change="addChildBirthday(answerMsg[2].data[0].problemValue[index][1].data[1].data[0].value[1])"&ndash;&gt;-->
-                          <!--&lt;!&ndash;placeholder="选择日期">&ndash;&gt;-->
-                        <!--&lt;!&ndash;</el-date-picker>&ndash;&gt;-->
-                      <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--遍历有几个孩子-->
+          <div  v-for="(item, index) in childAll" :key="index" :id="getId(index)" ref="childMsg">
+            <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">第{{index+1}}个孩子</h2>
+            <!--遍历孩子的基本信息-->
+            <div v-for="($item,$index) in item" :key="$index">
+              <h2 class="text-left">{{$item.title}}</h2>
+              <!--遍历问题一中的子问题-->
+              <div v-for="($$item,$$index) in $item.questionList" :key="$$index">
+                <div  class="w-2/3 mx-auto">
+                  <!--孩子的出生日期-->
+                  <el-form-item :label="$$item.title" class="text-base" v-if="$$item.type=='dateTime_day'">
+                    <el-date-picker
+                      v-model="$$item.value"
+                      type="date"
+                      size="small"
+                      placeholder="选择日期"
+                      format="yyyy 年 MM 月 dd 日"
+                      value-format="yyyy-MM-dd">
+                    </el-date-picker>
+                  </el-form-item>
+                  <el-form-item :label="$$item.title" class="text-base" v-if="$$item.type=='input' && $$item.input_type=='text' ">
+                    <el-input
+                      type="text"
+                      class="ban"
+                      v-model="$$item.value"
+                      size="small"
+                      placeholder="请输入姓名"
+                      @blur="addChildName($$item.value)"
+                    ></el-input>
+                  </el-form-item>
+                  <el-form-item :label="$$item.title" class="text-base"  v-if="$$item.type=='input' && $$item.input_type=='number' ">
+                    <el-input
+                      type="number"
+                      class="ban"
+                      v-model="$$item.value"
+                      maxlength="18"
+                      size="small"
+                      placeholder="请输入18位身份证号"
+                      @blur="addChildId(item.ID)"
+                    ></el-input>
+                  </el-form-item>
+                  <el-form-item :label="$$item.title" v-if="$$item.type=='select'">
+                    <el-radio-group v-model="$$item.value" @change="addChildSex($$item.value)">
+                      <el-radio :label="list.value" v-for="(list , listIndex) in $$item.data" :key="'list'+listIndex">{{list.title}}</el-radio>
+                    </el-radio-group>
+                  </el-form-item>
+                  <div v-if="$$item.child && $$item.child[$$item.value] && $$item.type=='select'">
+                    <el-form-item :label="$$$item.title" class="text-base" v-for="($$$item, $$$index) in $$item.child[$$item.value]" :key="$$$index">
+                      <el-radio-group v-model="$$$item.value" @change="custody($$$item.value)"  v-for="($$$$item, $$$$index) in $$$item.data" :key="$$$$index">
+                        <el-radio :label="$$$$item.value">{{$$$$item.title}}</el-radio>
+                      </el-radio-group>
+                    </el-form-item>
+                  </div>
+                </div>
 
-                  <!--</div>-->
-                <!--</div>-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div>-->
-              <!--<h2 class="text-left">问题三：{{item.data[2].title}}</h2>-->
-              <!--<h2 class="text-left">{{item.data[2].data[0].title}}</h2>-->
-              <!--&lt;!&ndash;<div>&ndash;&gt;-->
-                <!--&lt;!&ndash;<el-form-item :label="'7、'+questionMsg[8].title" class="text-base">&ndash;&gt;-->
-                  <!--&lt;!&ndash;<el-radio-group v-model="text">&ndash;&gt;-->
-                    <!--&lt;!&ndash;<el-radio :label="1">是</el-radio>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<el-radio :label="2">否</el-radio>&ndash;&gt;-->
-                  <!--&lt;!&ndash;</el-radio-group>&ndash;&gt;-->
-                <!--&lt;!&ndash;</el-form-item>&ndash;&gt;-->
-              <!--&lt;!&ndash;</div>&ndash;&gt;-->
-            <!--</div>-->
+              </div>
+            </div>
 
           </div>
         </div>
       </el-form>
-      <!--<h2>{{answerMsg}}</h2>-->
     </div>
   </div>
 </template>
 <script>
   import {question} from '@/api/api/requestLogin.js'
   import {answer} from '@/api/api/requestLogin.js'
+  import label_case from '@/components/partials/legal_basis'  // 标签组件
   export default {
+    components:{
+      label_case,
+    },
       data () {
           return {
-            questionMsg: [],
+            childNum: '',
+            questionMsg: [
+              {
+                title: '女方是否支付抚养费？',
+                value: '',
+                class: 'IsWomanPay',
+                type: 'select',
+                id: 3,
+                data: [{
+                  title:'是',
+                  value:'1',
+                },{
+                  title:'否',
+                  value:'0',
+                }]
+              },
+              {
+                title: '是否明确女方探望时间？',
+                value: '',
+                class: 'IsWomanVisited',
+                type: 'select',
+                id: 3,
+                data: [{
+                  title:'是',
+                  value:'1',
+                },{
+                  title:'否',
+                  value:'0',
+                }]
+              },
+              {
+                title: '怎么探望？',
+                value: '',
+                class: 'HowVisited',
+                type: 'select',
+                id: 3,
+                data: [{
+                  title:'是',
+                  value:'1',
+                },{
+                  title:'否',
+                  value:'0',
+                }]
+              }
+            ],
             answerMsg: [],
             childAll: [],
             ChildBirthday: '',
@@ -119,17 +142,14 @@
           }
       },
       name: 'WenJuan',
-      components: {
-
-      },
-      mounted(){
+      mounted () {
         this.getQuestion() //获取问题
         this.getAnswer()   // 获取答案
       },
       methods: {
         getQuestion () {     // 获取问题标题
           question().then((data) => {
-            let getData = data.data
+            let getData = data.data.data
             this.questionMsg = eval('(' + getData + ')')
             console.log(this.questionMsg)
           }).catch((data) => {
@@ -143,30 +163,121 @@
           }).catch((data)=>{
           })
         },
-        childList (e) {
-          for(let i = 0; i < e.value; i++) {
-            e.problemValue[i]=[]
-            for(let a = 0;a<e.data.length; a++){
-              if(e.data[a].class == 'title'){
-                e.problemValue[i][a]={
-                  'data':[]
+        getId (index) {
+          return 'box_' + index
+        },
+        childMsg1 () {
+          return [
+            {
+              title:'问题一：基本信息',
+              questionList:[
+                {
+                  title: '孩子的出生日期是？',
+                  value: '',
+                  type: 'dateTime_day',
+                  id: 1
+                },
+                {
+                  title: '孩子的姓名是？',
+                  input_type: 'text',
+                  value: '',
+                  type: 'input',
+                  id: 2
+                },
+                {
+                  title: '孩子的性别是？',
+                  value: '',
+                  type: 'select',
+                  id: 3,
+                  data: [{
+                    title:'男',
+                    value:'M',
+                  },{
+                    title:'女',
+                    value:'F',
+                  }]
+                },
+                {
+                  title: '孩子的身份证号是？',
+                  maxLineLen: '18',
+                  input_type: 'number',
+                  value: '',
+                  type: 'input',
+                  id: 3
                 }
-                for(let b = 0;b<e.data[a].data.length; b++){
-                  e.problemValue[i][a].data.push({
-                    'value':""
-                  })
+              ]
+            },
+            {
+              title:'问题二：抚养权归属',
+              questionList:[
+                {
+                  title: '孩子归谁抚养？',
+                  belongsTo:'Custody',
+                  value: '',
+                  type: 'select',
+                  id: 3,
+                  data: [{
+                    title:'男方',
+                    value:'M',
+                  },{
+                    title:'女方',
+                    value:'F',
+                  },{
+                    title:'共同抚养',
+                    value:'G',
+                  }],
+                  child:{
+                    M:[{
+                      title: '女方是否支付抚养费？',
+                      value: '',
+                      type: 'select',
+                      id: 3,
+                      data: [{
+                        title:'是',
+                        value:'M',
+                      },{
+                        title:'否',
+                        value:'F',
+                      }]
+                    }],
+                    F:[{
+                      title: '男方是否支付抚养费？',
+                      value: '',
+                      type: 'select',
+                      id: 3,
+                      data: [{
+                        title:'是',
+                        value:'M',
+                      },{
+                        title:'否',
+                        value:'F',
+                      }]
+                    }],
+                    G:[{
+                      title: '共同抚养怎么规定？',
+                      value: '',
+                      type: 'select',
+                      id: 3,
+                      data: [{
+                        title:'轮流循环抚养',
+                        value:'M',
+                      },{
+                        title:'按阶段分别抚养',
+                        value:'F',
+                      }]
+                    }]
+                  }
                 }
-              }
+              ]
             }
-          }
+          ]
+        },
+        childList (e) {
           this.$forceUpdate();
-
-          let childs = this.answerMsg[2].data[0];
-          this.childAll = []
-          for (let i = 0; i < e.value; i++) {
-            this.childAll.push(childs)
+          this.childAll = [];
+          for (let i = 0; i < e; i++) {
+            this.$set(this.childAll, i, this.childMsg1())
           }
-          console.log(e)
         },
         addChildBirthday1 (e) {
            console.log(e,12312313)
@@ -175,13 +286,13 @@
           console.log(e,12312313)
         },
         addChildName (e) {    // 添加姓名
-           alert(e)
+          console.log(e)
         },
         addChildSex (e) {
-          alert(e)
+          console.log(e)
         },
         addChildId (e) {
-          alert(e)
+          console.log(e)
         }
       }
     }

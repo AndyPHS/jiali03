@@ -15,6 +15,7 @@ import UsersPermission from '@/components/users/UsersPermission'  // 用户权�
 import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 import SearchCase from '@/components/SearchCase'   // 案例搜索
 import WenJuan from '@/components/WenJuan'         // 添加问卷测试页面
+import WenJuan1 from '@/components/WenJuan1'         // 添加问卷测试页面
 
 Vue.use(Router)
 
@@ -106,6 +107,12 @@ export default new Router({
       path: '/WenJuan',
       name: 'WenJuan',
       component: WenJuan
+    },
+    // 问卷测试页面
+    {
+      path: '/WenJuan1',
+      name: 'WenJuan1',
+      component: WenJuan1
     }
   ]
 })
