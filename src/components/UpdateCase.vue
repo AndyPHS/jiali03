@@ -293,14 +293,14 @@
                                     <el-form-item :label="'争议焦点'+ (index+1) + '：' " class="text-base">
                                         <el-input v-model="item.title" placeholder="争议焦点"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
-                                    <el-form-item id='yuangao' label="原告观点：" class="text-base">
-                                        <el-input v-model="item.data.y.viewpoint" placeholder="原告观点" @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
+                                    <el-form-item id='yuangao' label="原告/上诉人观点：" class="text-base">
+                                        <el-input v-model="item.data.y.viewpoint" placeholder="原告/上诉人观点" @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
                                     <el-form-item label=" 依据 ： " class="text-orange-500" >
                                         <el-input type="textarea" :rows="4" class="textarea" placeholder="原告依据，请分条换行填写，如：1、2、" v-model="item.data.y.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
-                                    <el-form-item label="被告观点" class="text-orange-500">
-                                        <el-input  v-model="item.data.b.viewpoint" placeholder="被告观点" @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
+                                    <el-form-item label="被告/被上诉人观点" class="text-orange-500">
+                                        <el-input  v-model="item.data.b.viewpoint" placeholder="被告/被上诉人观点" @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
                                     </el-form-item>
                                     <el-form-item  label="依据 ： " class="text-orange-500" >
                                         <el-input type="textarea" :rows="4" class="textarea" placeholder="被告依据，请分条换行填写，如：1、2、" v-model="item.data.b.basis"  @blur="updateInfo({case_epitome:pageInfo.case_epitome})"></el-input>
@@ -321,9 +321,9 @@
                             <h2 class="text-left text-base pb-2 text-orange-500">四、标签池</h2>
                             <label_case></label_case>
                             <h2 class="text-left text-base pb-2 text-orange-500 mt-4">五、证据适用摘要</h2>
-                            <div class="py-2 px-3 whitespace-no-wrap my-3 mr-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('y')">添加原告证据</div>
+                            <div class="py-2 px-3 whitespace-no-wrap my-3 mr-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" v-if="pageInfo.case_evidence.y.length == 0" @click="addEvidence('y')">添加原告/上诉人证据</div>
                             <div v-for="(item, index) in pageInfo.case_evidence.y" :key="'y'+index" class="my-4">
-                                <el-form-item label="原告">
+                                <el-form-item label="原告/上诉人">
                                     <div class="flex">
                                         <el-input class="mr-2 w-1/2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
                                         <div class="w-1/2">
@@ -339,9 +339,9 @@
                                     <el-radio label="法院未表态" value="2"></el-radio>
                                 </el-radio-group>
                             </div>
-                            <div class="py-2 px-3 whitespace-no-wrap my-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" v-if="pageInfo.case_evidence.b.length == 0" @click="addEvidence('b')">添加被告证据</div>
+                            <div class="py-2 px-3 whitespace-no-wrap my-3 text-sm text-blue-500 inline-block rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" v-if="pageInfo.case_evidence.b.length == 0" @click="addEvidence('b')">添加被告/被上诉人证据</div>
                             <div class="py-4" v-for="(item, index) in pageInfo.case_evidence.b" :key="'b'+index">
-                                <el-form-item label="被告">
+                                <el-form-item label="被告/被上诉人">
                                     <div class="flex">
                                         <el-input class="mr-2 w-1/2" v-model="item.evidence" @blur="updateInfo({case_evidence:pageInfo.case_evidence})" ></el-input>
                                         <div class="w-1/2">
