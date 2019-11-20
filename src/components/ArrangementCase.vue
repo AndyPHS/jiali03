@@ -63,12 +63,12 @@
           court: null,      // 法院
           courtId: null,    //
           scourt: null,
-          title: "王宝强于马蓉婚姻纠纷",   // 标题
+          title: '',   // 标题
           master_number: '',        // 律所案号
           time: null,
           status: null,           // 文书类型
           case_action: null,      // 案由
-          case_number: "(2017)京0106民初17500号",
+          case_number: '',
           subject: null,
           lawyer_type: null,
           case_costs: null,
