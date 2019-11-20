@@ -16,6 +16,13 @@ import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 import SearchCase from '@/components/SearchCase'   // 案例搜索
 import WenJuan from '@/components/WenJuan'         // 添加问卷测试页面
 import WenJuan1 from '@/components/WenJuan1'         // 添加问卷测试页面
+import ZiNv from '@/components/ZiNv'         // 添加离婚协议书子女页面
+import FangChan from '@/components/FangChan'         // 添加离婚协议书房产页面
+import CunKuan from '@/components/CunKuan'         // 添加离婚协议书存款页面
+import Car from '@/components/Car'         // 添加离婚协议书车子页面
+import LiCai from '@/components/LiCai'         // 添加离婚协议书理财页面
+import JiaDian from '@/components/JiaDian'         // 添加离婚协议书家电页面
+import BaoXian from '@/components/BaoXian'         // 添加离婚协议书家电页面
 
 Vue.use(Router)
 
@@ -113,6 +120,48 @@ export default new Router({
       path: '/WenJuan1',
       name: 'WenJuan1',
       component: WenJuan1
+    },
+    // 问卷测试页面2
+    {
+      path: '/ZiNv',
+      name: 'ZiNv',
+      component: ZiNv
+    },
+    // 房产页面
+    {
+      path: '/FangChan',
+      name: 'FangChan',
+      component: FangChan
+    },
+    // 存款页面
+    {
+      path: '/CunKuan',
+      name: 'CunKuan',
+      component: CunKuan
+    },
+    // 车子页面
+    {
+      path: '/Car',
+      name: 'Car',
+      component: Car
+    },
+    // 理财页面
+    {
+      path: '/LiCai',
+      name: 'LiCai',
+      component: LiCai
+    },
+    // 家电页面
+    {
+      path: '/JiaDian',
+      name: 'JiaDian',
+      component: JiaDian
+    },
+    // 保险页面
+    {
+      path: '/BaoXian',
+      name: 'BaoXian',
+      component: BaoXian
     }
   ]
 })
