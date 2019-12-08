@@ -12,6 +12,9 @@ import UpdateCase from '@/components/UpdateCase' // 修改案件基本信息
 import ArrangementCase from '@/components/ArrangementCase'  // 整理案件样式页面
 import Users from '@/components/users/Users'  // 用户页面
 import UsersPermission from '@/components/users/UsersPermission'  // 用户权限页面
+import QuestionManagement from '@/components/QuestionManagement'         // 问题管理页面
+import GuanLianManagement from '@/components/GuanLianManagement'         // 关联管理页面
+import ZuHeManagement from '@/components/ZuHeManagement'         // 组合管理页面
 import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 import SearchCase from '@/components/SearchCase'   // 案例搜索
 import WenJuan from '@/components/WenJuan'         // 添加问卷测试页面
@@ -109,6 +112,24 @@ export default new Router({
       path: '/UsersRole',
       name: 'UsersRole',
       component: UsersRole
+    },
+    // 问题管理页面
+    {
+      path: '/QuestionManagement',
+      name: 'QuestionManagement',
+      component: QuestionManagement
+    },
+    // 关联管理
+    {
+      path: '/GuanLianManagement',
+      name: 'GuanLianManagement',
+      component: GuanLianManagement
+    },
+    // 组合管理
+    {
+      path: '/ZuHeManagement',
+      name: 'ZuHeManagement',
+      component: ZuHeManagement
     },
     // 搜索页面
     {
