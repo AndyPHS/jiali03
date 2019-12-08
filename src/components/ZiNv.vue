@@ -49,7 +49,7 @@
                           v-model="$$item.answer"
                           size="small"
                           :placeholder="$$item.placeholder"
-                          @blur="addChildName($$item.answer)"
+                          @blur="addChildName($$item.id)"
                         ></el-input>
                       </el-form-item>
                     </div>
@@ -73,6 +73,32 @@
                           <el-radio :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                         </el-radio-group>
                       </el-form-item>
+                    </div>
+                    <!-- 多选框 -->
+                    <div v-if="$$item.type == 'checkbox'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                        <el-checkbox-group v-model="$$item.answer">
+                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                        </el-checkbox-group>
+                      </el-form-item>
+                      <div v-if="$$item.grandson">
+                        <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
+                          <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
+                            <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                              <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                <el-input
+                                  type="text"
+                                  class="ban"
+                                  v-model="$$$$item.answer"
+                                  size="small"
+                                  :placeholder="$$$$item.placeholder"
+                                  @blur="addChildName($$$$item.answer)"
+                                ></el-input>
+                              </el-form-item>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <!--下拉框-->
                     <div v-if="$$item.type == 'select'">
@@ -167,7 +193,33 @@
                              </el-radio-group>
                            </el-form-item>
                          </div>
-                         <!--下拉框-->
+                         <!-- 多选框 -->
+                          <div v-if="$$$item.type == 'checkbox'">
+                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                              <el-checkbox-group v-model="$$$item.answer">
+                                <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                              </el-checkbox-group>
+                            </el-form-item>
+                            <div v-if="$$$item.grandson">
+                              <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                                <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                  <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                    <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                      <el-input
+                                        type="text"
+                                        class="ban"
+                                        v-model="$$$$$item.answer"
+                                        size="small"
+                                        :placeholder="$$$$$item.placeholder"
+                                        @blur="addChildName($$$$$item.answer)"
+                                      ></el-input>
+                                    </el-form-item>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                         <!-- 下拉单选 -->
                          <div v-if="$$$item.type == 'select'">
                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
                              <el-select v-model="$$$item.answer">
@@ -272,12 +324,42 @@
                                     </el-select>
                                   </el-form-item>
                                 </div>
+                                <!-- 下拉框多选 -->
+                                <div v-if="$$$$item.type == 'select_multiple'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                    <el-select v-model="$$$$item.answer" multiple placeholder="请选择">
+                                      <el-option
+                                        size="small"
+                                        v-for="(s,i) in $$$$item.listData"
+                                        :key="i"
+                                        :label="s.label"
+                                        :value="s.value">
+                                      </el-option>
+                                    </el-select>
+                                  </el-form-item>
+                                </div>
                               </div>
                            </div>
                          </div>
+                         <!-- 下拉多选 -->
+                         <div v-if="$$$item.type == 'select_multiple'">
+                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                              <el-select v-model="$$$item.answer" multiple placeholder="请选择">
+                                <el-option
+                                  size="small"
+                                  v-for="(s,i) in $$$item.listData"
+                                  :key="i"
+                                  :label="s.label"
+                                  :value="s.value">
+                                </el-option>
+                              </el-select>
+                            </el-form-item>
+                          </div>
                        </div>
                     </div>
+
                     <!-- 二级问题块 -->
+
                     <div v-if="$$item.childQuestion && $$item.childQuestion[$$item.answer]">
                       <div v-for="($$$item,$$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
                         <!--日期-精确到日-->
@@ -1261,7 +1343,7 @@
           }
         },
         UpPage () {
-          this.$router.replace("/HunYin");
+          this.$router.replace("/HunYinStatus");
         },
         NextPage () {
           this.$router.replace("/FangChan");
@@ -1274,6 +1356,7 @@
         },
         addChildName (e) {    // 添加姓名
           console.log(e)
+          alert(e)
         },
         addChildSex (e) {
           console.log(e)

@@ -16,13 +16,20 @@ import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 import SearchCase from '@/components/SearchCase'   // 案例搜索
 import WenJuan from '@/components/WenJuan'         // 添加问卷测试页面
 import WenJuan1 from '@/components/WenJuan1'         // 添加问卷测试页面
+import ChuShi from '@/components/ChuShi'         // 小问卷初始页面
+import QueDing from '@/components/QueDing'         // 确定初始页面
+import BasicInformation from '@/components/BasicInformation'         // 添加离婚协议书双方基本信息页面HunYinStatus
+import HunYinStatus from '@/components/HunYinStatus'         // 添加离婚协议书婚姻情况页面
 import ZiNv from '@/components/ZiNv'         // 添加离婚协议书子女页面
 import FangChan from '@/components/FangChan'         // 添加离婚协议书房产页面
 import CunKuan from '@/components/CunKuan'         // 添加离婚协议书存款页面
 import Car from '@/components/Car'         // 添加离婚协议书车子页面
 import LiCai from '@/components/LiCai'         // 添加离婚协议书理财页面
 import JiaDian from '@/components/JiaDian'         // 添加离婚协议书家电页面
-import BaoXian from '@/components/BaoXian'         // 添加离婚协议书家电页面
+import BaoXian from '@/components/BaoXian'         // 添加离婚协议书保险页面
+import QiTaCaiChan from '@/components/QiTaCaiChan'         // 添加离婚协议书其他财产页面
+import ZhaiQuan from '@/components/ZhaiQuan'         // 添加离婚协议书债权页面
+import ZhaiWu from '@/components/ZhaiWu'         // 添加离婚协议书债务页面
 
 Vue.use(Router)
 
@@ -121,7 +128,31 @@ export default new Router({
       name: 'WenJuan1',
       component: WenJuan1
     },
-    // 问卷测试页面2
+    // 小问卷 初始页面
+    {
+      path: '/ChuShi',
+      name: 'ChuShi',
+      component: ChuShi
+    },
+    // 确定初始页面
+    {
+      path: '/QueDing',
+      name: 'QueDing',
+      component: QueDing
+    },
+    // 基本信息页面
+    {
+      path: '/BasicInformation',
+      name: 'BasicInformation',
+      component: BasicInformation
+    },
+    // 婚姻情况页面
+    {
+      path: '/HunYinStatus',
+      name: 'HunYinStatus',
+      component: HunYinStatus
+    },
+    // 子女页面
     {
       path: '/ZiNv',
       name: 'ZiNv',
@@ -162,6 +193,25 @@ export default new Router({
       path: '/BaoXian',
       name: 'BaoXian',
       component: BaoXian
+    },
+    // 其他财产页面
+    {
+      path: '/QiTaCaiChan',
+      name: 'QiTaCaiChan',
+      component: QiTaCaiChan
+    },
+    // 债权页面
+    {
+      path: '/ZhaiQuan',
+      name: 'ZhaiQuan',
+      component: ZhaiQuan
+    },
+    // 债务页面
+    {
+      path: '/ZhaiWu',
+      name: 'ZhaiWu',
+      component: ZhaiWu
     }
+
   ]
 })

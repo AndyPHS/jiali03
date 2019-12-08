@@ -4,8 +4,8 @@
       <el-form >
         <div class="text-left"></div>
         <div class="ml-5">
-          <el-form-item label="待处置的保险" class="w-1/2 mx-auto">
-            <el-select v-model="childNum" placeholder="保险" size="small" @change="childList(childNum)">
+          <el-form-item label="待处置的债务" class="w-1/2 mx-auto">
+            <el-select v-model="childNum" placeholder="债务" size="small" @change="childList(childNum)">
               <el-option label="1" value="1"></el-option>
               <el-option label="2" value="2"></el-option>
               <el-option label="3" value="3"></el-option>
@@ -16,11 +16,11 @@
           </el-form-item>
         </div>
         <div class="ml-5">
-          <!--遍历有几辆保险-->
+          <!--遍历有几辆债务-->
           <div >
             <!--遍历孩子的基本信息-->
             <div v-for="(item,index) in childAll" :key="index">
-              <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">保险{{index+1}}</h2>
+              <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">债务{{index+1}}</h2>
               <!-- 大问题块 -->
               <div v-for="($item,$index) in item"  :key="$index">
                 <h2 class="text-left">{{$item.title}}</h2>
@@ -690,24 +690,39 @@
                 </div>
               </div>
               <div class="text-right flex">
-                <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeFangChan(index)">删除当前保险</div>
+                <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeFangChan(index)">删除当前债务</div>
               </div>
             </div>
             <div class="text-right flex">
-              <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addFangChan">添加保险</div>
+              <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addFangChan">添加债务</div>
             </div>
           </div>
         </div>
       </el-form>
       <div class="w-1/3 flex mx-auto">
         <div class="w-40 mr-2">
-          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="NextPage">
-            下一页
+          <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click="GoComplatePage">
+            生成协议
           </div>
         </div>
         <div class="w-40">
-          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="UpPage">
+          <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click="UpPage">
             上一页
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-show='IsShow' id="alert_xieyi">
+      <h2>您已填写完毕，确认生成协议吗？</h2>
+      <div class="queren flex mx-auto">
+         <div class="w-24 mr-2">
+          <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='quxiao'>
+            取消
+          </div>
+        </div>
+        <div class="w-24">
+          <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='complate'>
+            确认
           </div>
         </div>
       </div>
@@ -724,6 +739,7 @@
             hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
             days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
             mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            IsShow: false,
             childNum: '',
             answerMsg: [],
             childAll: [],
@@ -745,66 +761,18 @@
               title: '问题一：基本信息',
               questions: [
                 {
-                  title: '1、保险的名称是？',
+                  title: '1、我们欠/借别人多少钱？',
                   id: '1',
                   isRequired: true,
                   type: 'input',
-                  input_type: 'text',
-                  tip: '',
-                  answer: ''
-                },
-                {
-                  title: '2、哪个保险公司的保险？',
-                  id: '2',
-                  isRequired: true,
-                  type: 'input',
-                  input_type: 'text',
-                  tip: '',
-                  answer: ''
-                },
-                {
-                  title: '3、保险数额多少？',
-                  id: '3',
-                  isRequired: true,
-                  type: 'input',
                   input_type: 'number',
-                  placeholder: '￥，请输入金额，如：50000',
                   tip: '',
                   answer: ''
                 },
                 {
-                  title: '4、什么时间投保的？',
-                  id: '4',
-                  isRequired: true,
-                  type: 'dateTime_day',
-                  tip: '',
-                  answer: ''
-                },
-                {
-                  title: '5、投保人是谁？',
-                  id: '5',
-                  isRequired: true,
-                  type: 'select',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '男方', value: '1' },
-                    { label: '女方', value: '2' }
-                  ]
-                },
-                {
-                  title: '6、被保险人姓名？',
-                  id: '6',
-                  isRequired: true,
-                  type: 'input',
-                  input_type: 'text',
-                  tip: '',
-                  answer: ''
-                },
-                {
-                  title: '7、受益人姓名？',
-                  id: '7',
-                  isRequired: true,
+                  title: '2、欠了/借了谁的钱？',
+                  id: '2',
+                  isRequired: false,
                   type: 'input',
                   input_type: 'text',
                   tip: '',
@@ -813,36 +781,48 @@
               ]
             },
             {
-              title: '问题二：离婚后保险收益归属',
+              title: '问题二：离婚后债务承担',
               questions: [
                 {
-                  title: '8、离婚后保险归谁？',
-                  id: '8',
+                  title: '3、离婚后谁负责还债？',
+                  id: '3',
                   isRequired: true,
                   type: 'select',
                   tip: '',
-                  answer: '',
+                  answer: [],
                   listData: [
                     { label: '男方', value: '1' },
                     { label: '女方', value: '2' },
-                    { label: '孩子', value: '3' }
-                  ]
+                    { label: '双方共同', value: '3' }
+                  ],
+                  childQuestion: {
+                    3: [
+                      {
+                        title: '男方承担份额',
+                        id: '3_3_1',
+                        isRequired: true,
+                        type: 'input',
+                        placeholder: '填写百分比，如50%',
+                        input_type: 'number',
+                        tip: '提示',
+                        answer: ''
+                      },
+                      {
+                        title: '女方承担份额',
+                        id: '3_3_2',
+                        isRequired: true,
+                        type: 'input',
+                        placeholder: '填写百分比，如50%',
+                        input_type: 'number',
+                        tip: '提示',
+                        answer: ''
+                      }
+                    ]
+                  }
                 },
                 {
-                  title: '9、剩余保费谁承担？',
-                  id: '9',
-                  isRequired: true,
-                  type: 'select',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '男方', value: '1' },
-                    { label: '女方', value: '2' }
-                  ]
-                },
-                {
-                  title: '10、是否支付对方补偿款？',
-                  id: '10',
+                  title: '4、是否支付对方补偿款？',
+                  id: '4',
                   isRequired: true,
                   type: 'radio',
                   tip: '',
@@ -850,31 +830,86 @@
                   listData: [
                     { label: '是', value: '1' },
                     { label: '否', value: '0' }
+                  ]
+                },
+                {
+                  title: '（1）、支付多少差价？',
+                  id: '5',
+                  isRequired: true,
+                  type: 'question',
+                  tip: '',
+                  childQuestion: [
+                    {
+                      title: '',
+                      id: '5_1',
+                      isRequired: true,
+                      type: 'select',
+                      tip: '',
+                      answer: '',
+                      listData: [
+                        { label: '男方', value: '1' },
+                        { label: '女方', value: '2' }
+                      ]
+                    },
+                    {
+                      title: '支付',
+                      id: '5_2',
+                      isRequired: true,
+                      type: 'select',
+                      tip: '',
+                      answer: '',
+                      listData: [
+                        { label: '男方', value: '1' },
+                        { label: '女方', value: '2' }
+                      ]
+                    },
+                    {
+                      title: '差价',
+                      id: '5_3',
+                      isRequired: true,
+                      type: 'input',
+                      input_type: 'number',
+                      placeholder: '￥，支付多少钱',
+                      tip: '',
+                      answer: ''
+                    }
                   ],
-                  childQuestion: {
-                    1: [
-                      {
-                        title: '（1）支付多少补偿',
-                        id: '10_1_1',
-                        isRequired: true,
-                        type: 'input',
-                        placeholder: '如：男方支付女方2000元',
-                        input_type: 'text',
-                        tip: '提示',
-                        answer: ''
-                      },
-                      {
-                        title: '（2）什么时候支付',
-                        id: '10_1_2',
-                        isRequired: true,
-                        type: 'dateTime_day',
-                        placeholder: '选择支付时间',
-                        tip: '提示',
-                        answer: ''
-                      },
-                      {
-                      title: '（3）收款账户 开户名',
-                      id: '10_1_3',
+                  requireQidAndAnswer: { id: '4', answer: '1' }
+                },
+                {
+                  title: '（2）、什么时候支付',
+                  id: '6',
+                  isRequired: true,
+                  type: 'select',
+                  tip: '提示',
+                  answer: '',
+                  listData: [
+                    { label: '无需约定/双方另行约定', value: '1' },
+                    { label: '本协议生效之日起', value: '2' },
+                    { label: '具体时间', value: '3' }
+                  ],
+                  requireQidAndAnswer: { id: '4', answer: '1' }
+                },
+                {
+                  title: '具体时间？',
+                  id: '7',
+                  isRequired: true,
+                  type: 'dateTime_day',
+                  placeholder: '选择具体时间',
+                  tip: '',
+                  answer: '',
+                  requireQidAndAnswer: { id: '6', answer: '3' }
+                },
+                {
+                  title: '(3)、收款账户？',
+                  id: '8',
+                  isRequired: false,
+                  type: 'question',
+                  tip: '',
+                  childQuestion: [
+                    {
+                      title: '开户名',
+                      id: '8_1',
                       isRequired: true,
                       type: 'input',
                       input_type: 'text',
@@ -884,7 +919,7 @@
                     },
                     {
                       title: '银行名称',
-                      id: '10_1_4',
+                      id: '8_2',
                       isRequired: true,
                       type: 'input',
                       input_type: 'text',
@@ -894,7 +929,7 @@
                     },
                     {
                       title: '账号',
-                      id: '10_1_5',
+                      id: '8_3',
                       isRequired: true,
                       type: 'input',
                       placeholder: '请输入银行卡号',
@@ -902,8 +937,8 @@
                       tip: '',
                       answer: ''
                     }
-                    ]
-                  }
+                  ],
+                  requireQidAndAnswer: { id: '4', answer: '1' }
                 }
               ]
             }
@@ -918,17 +953,24 @@
         },
         addFangChan () {
           this.childAll.push(this.childMsg1())
-          alert('添加第'+this.childAll.length+'保险')
+          alert('添加第'+this.childAll.length+'债务')
         },
         removeFangChan (index) {
           this.childAll.splice(index,1)
-          alert('删除第'+(index+1)+'保险')
+          alert('删除第'+(index+1)+'债务')
         },
-         UpPage () {
-          this.$router.replace("/JiaDian");
+        UpPage () {
+          this.$router.replace("/ZhaiQuan");
         },
-        NextPage () {
-          this.$router.replace("/QiTaCaiChan");
+        GoComplatePage () {
+          this.IsShow = true;
+          // this.$router.replace("/ShengChengXieYi");
+        },
+        quxiao (){
+          this.IsShow = false;
+        },
+        complate () {
+          this.$router.replace("/ShengChengXieYi");
         },
         addChildBirthday1 (e) {
            console.log(e,12312313)
@@ -953,4 +995,7 @@
 </script>
 <style scoped>
 .ban{width:220px !important;}
+#alert_xieyi{width:400px;height:300px;border:1px solid #343434;position:fixed;top:50%;margin-top:-150px;left:50%;margin-left:-200px;z-index: 1;background: #fff}
+#alert_xieyi h2{margin-top:100px;}
+#alert_xieyi .queren{width:80%;text-align: center;justify-content: space-around;margin-top:80px;margin-left: 20%}
 </style>

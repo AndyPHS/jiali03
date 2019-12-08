@@ -76,6 +76,32 @@
                         </el-radio-group>
                       </el-form-item>
                     </div>
+                    <!-- 多选框 -->
+                    <div v-if="$$item.type == 'checkbox'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                        <el-checkbox-group v-model="$$item.answer">
+                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                        </el-checkbox-group>
+                      </el-form-item>
+                      <div v-if="$$item.grandson">
+                        <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
+                          <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
+                            <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                              <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                <el-input
+                                  type="text"
+                                  class="ban"
+                                  v-model="$$$$item.answer"
+                                  size="small"
+                                  :placeholder="$$$$item.placeholder"
+                                  @blur="addChildName($$$$item.answer)"
+                                ></el-input>
+                              </el-form-item>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <!--下拉框(单选)-->
                     <div v-if="$$item.type == 'select'">
                       <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
@@ -183,6 +209,32 @@
                              </el-radio-group>
                            </el-form-item>
                          </div>
+                         <!-- 多选框 -->
+                          <div v-if="$$$item.type == 'checkbox'">
+                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                              <el-checkbox-group v-model="$$$item.answer">
+                                <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                              </el-checkbox-group>
+                            </el-form-item>
+                            <div v-if="$$$item.grandson">
+                              <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                                <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                  <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                    <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                      <el-input
+                                        type="text"
+                                        class="ban"
+                                        v-model="$$$$$item.answer"
+                                        size="small"
+                                        :placeholder="$$$$$item.placeholder"
+                                        @blur="addChildName($$$$$item.answer)"
+                                      ></el-input>
+                                    </el-form-item>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                          <!--下拉框-->
                          <div v-if="$$$item.type == 'select'">
                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">

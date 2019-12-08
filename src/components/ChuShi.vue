@@ -2,25 +2,12 @@
   <div class="container mx-auto">
     <div>
       <el-form >
-        <div class="text-left"></div>
         <div class="ml-5">
-          <el-form-item label="待处置的保险" class="w-1/2 mx-auto">
-            <el-select v-model="childNum" placeholder="保险" size="small" @change="childList(childNum)">
-              <el-option label="1" value="1"></el-option>
-              <el-option label="2" value="2"></el-option>
-              <el-option label="3" value="3"></el-option>
-              <el-option label="4" value="4"></el-option>
-              <el-option label="5" value="5"></el-option>
-              <el-option label="6" value="6"></el-option>
-            </el-select>
-          </el-form-item>
-        </div>
-        <div class="ml-5">
-          <!--遍历有几辆保险-->
+          <div class="text-lg text-left my-2">为了更高效地为您定制专属协议，请填写如下问题：</div>
           <div >
             <!--遍历孩子的基本信息-->
             <div v-for="(item,index) in childAll" :key="index">
-              <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">保险{{index+1}}</h2>
+              <!-- <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">其他财产</h2> -->
               <!-- 大问题块 -->
               <div v-for="($item,$index) in item"  :key="$index">
                 <h2 class="text-left">{{$item.title}}</h2>
@@ -71,16 +58,16 @@
                     <!--单选框-->
                     <div v-if="$$item.type == 'radio'">
                       <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                        <el-radio-group v-model="$$item.answer">
+                        <el-radio-group v-model="$$item.answer"  @change="addChildName($$item.id)">
                           <el-radio :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                         </el-radio-group>
                       </el-form-item>
                     </div>
                     <!-- 多选框 -->
                     <div v-if="$$item.type == 'checkbox'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                        <el-checkbox-group v-model="$$item.answer">
-                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title"> 
+                        <el-checkbox-group v-model="$$item.answer"  @change="addChildName($$item.id)">
+                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex">{{list.label}}</el-checkbox>
                         </el-checkbox-group>
                       </el-form-item>
                       <div v-if="$$item.grandson">
@@ -94,7 +81,7 @@
                                   v-model="$$$$item.answer"
                                   size="small"
                                   :placeholder="$$$$item.placeholder"
-                                  @blur="addChildName($$$$item.answer)"
+                                  @blur="addChildName($$$$item.id)"
                                 ></el-input>
                               </el-form-item>
                             </div>
@@ -105,7 +92,7 @@
                     <!--下拉框(单选)-->
                     <div v-if="$$item.type == 'select'">
                       <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                        <el-select v-model="$$item.answer">
+                        <el-select v-model="$$item.answer" @change="addChildName($$item.id)">
                           <el-option
                             size="small"
                             v-for="(s,i) in $$item.listData"
@@ -119,7 +106,7 @@
                     <!--下拉框(多选)-->
                     <div v-if="$$item.type == 'select_multiple'">
                       <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                        <el-select v-model="$$item.answer" multiple placeholder="请选择">
+                        <el-select v-model="$$item.answer" multiple placeholder="请选择"  @change="addChildName($$item.id)">
                           <el-option
                             size="small"
                             v-for="(s,i) in $$item.listData"
@@ -235,33 +222,20 @@
                               </div>
                             </div>
                           </div>
-                         <!--下拉框-->
+                         <!-- 下拉单选 -->
                          <div v-if="$$$item.type == 'select'">
                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                             <el-select v-model="$$$item.answer">
+                             <el-select v-model="$$$item.answer" @change="addChildName($$item.answer)">
                                <el-option
                                  size="small"
                                  v-for="(s,i) in $$$item.listData"
                                  :key="i"
                                  :label="s.label"
-                                 :value="s.value">
+                                 :value="s.value"
+                                 >
                                </el-option>
                              </el-select>
                            </el-form-item>
-                            <!--下拉框(多选)-->
-                          <div v-if="$$$item.type == 'select_multiple'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                              <el-select v-model="$$$item.answer" multiple placeholder="请选择">
-                                <el-option
-                                  size="small"
-                                  v-for="(s,i) in $$$item.listData"
-                                  :key="i"
-                                  :label="s.label"
-                                  :value="s.value">
-                                </el-option>
-                              </el-select>
-                            </el-form-item>
-                          </div>
                            <!--下拉框中的问题又会迁出子问题-->
                            <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
                               <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
@@ -354,23 +328,37 @@
                                     </el-select>
                                   </el-form-item>
                                 </div>
-                                 <!--下拉框(多选)-->
-                              <div v-if="$$$$item.type == 'select_multiple'">
-                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
-                                  <el-select v-model="$$$$item.answer" multiple placeholder="请选择">
-                                    <el-option
-                                      size="small"
-                                      v-for="(s,i) in $$$$item.listData"
-                                      :key="i"
-                                      :label="s.label"
-                                      :value="s.value">
-                                    </el-option>
-                                  </el-select>
-                                </el-form-item>
-                              </div>
+                                <!-- 下拉框多选 -->
+                                <div v-if="$$$$item.type == 'select_multiple'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                    <el-select v-model="$$$$item.answer" multiple placeholder="请选择">
+                                      <el-option
+                                        size="small"
+                                        v-for="(s,i) in $$$$item.listData"
+                                        :key="i"
+                                        :label="s.label"
+                                        :value="s.value">
+                                      </el-option>
+                                    </el-select>
+                                  </el-form-item>
+                                </div>
                               </div>
                            </div>
                          </div>
+                         <!-- 下拉多选 -->
+                         <div v-if="$$$item.type == 'select_multiple'">
+                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                              <el-select v-model="$$$item.answer" multiple placeholder="请选择">
+                                <el-option
+                                  size="small"
+                                  v-for="(s,i) in $$$item.listData"
+                                  :key="i"
+                                  :label="s.label"
+                                  :value="s.value">
+                                </el-option>
+                              </el-select>
+                            </el-form-item>
+                          </div>
                        </div>
                     </div>
 
@@ -452,6 +440,32 @@
                               <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                             </el-radio-group>
                           </el-form-item>
+                        </div>
+                        <!-- 多选框 -->
+                        <div v-if="$$$item.type == 'checkbox'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                            <el-checkbox-group v-model="$$$item.answer" @change="addChildName($$$item.id)">
+                              <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                            </el-checkbox-group>
+                          </el-form-item>
+                          <div v-if="$$$item.grandson">
+                            <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                              <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                  <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                    <el-input
+                                      type="text"
+                                      class="ban"
+                                      v-model="$$$$$item.answer"
+                                      size="small"
+                                      :placeholder="$$$$$item.placeholder"
+                                      @blur="addChildName($$$$$item.id)"
+                                    ></el-input>
+                                  </el-form-item>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <!--下拉框-->
                         <div v-if="$$$item.type == 'select'">
@@ -608,6 +622,32 @@
                                   </el-radio-group>
                                 </el-form-item>
                               </div>
+                              <!-- 多选框 -->
+                              <div v-if="$$$$item.type == 'checkbox'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                  <el-checkbox-group v-model="$$$$item.answer">
+                                    <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                                  </el-checkbox-group>
+                                </el-form-item>
+                                <div v-if="$$$$item.grandson">
+                                <div v-for="($$$$$item, $$$$$index) in $$$$item.answer" :key="$$$$$index">
+                                  <div v-for="($$$$$$item,$$$$$$index) in $$$$item.grandson[$$$$$item]">
+                                    <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='number'">
+                                      <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
+                                        <el-input
+                                          type="text"
+                                          class="ban"
+                                          v-model="$$$$$$item.answer"
+                                          size="small"
+                                          :placeholder="$$$$$$item.placeholder"
+                                          @blur="addChildName($$$$$$item.answer)"
+                                        ></el-input>
+                                      </el-form-item>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              </div>
                               <!--下拉框-->
                               <div v-if="$$$$item.type == 'select'">
                                 <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
@@ -689,25 +729,14 @@
                   </div>
                 </div>
               </div>
-              <div class="text-right flex">
-                <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeFangChan(index)">删除当前保险</div>
-              </div>
-            </div>
-            <div class="text-right flex">
-              <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addFangChan">添加保险</div>
             </div>
           </div>
         </div>
       </el-form>
-      <div class="w-1/3 flex mx-auto">
+      <div class="w-1/3 mx-auto">
         <div class="w-40 mr-2">
           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="NextPage">
-            下一页
-          </div>
-        </div>
-        <div class="w-40">
-          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="UpPage">
-            上一页
+            确定
           </div>
         </div>
       </div>
@@ -735,6 +764,9 @@
       mounted () {
 
       },
+      mounted () {
+        this.childList();
+      },
       methods: {
         getId (index) {
           return 'box_' + index
@@ -742,166 +774,255 @@
         childMsg1 () {
           return [
             {
-              title: '问题一：基本信息',
+              title: '',
               questions: [
                 {
-                  title: '1、保险的名称是？',
+                  title: '1、您离婚想要达到的诉求是什么？',
                   id: '1',
                   isRequired: true,
-                  type: 'input',
-                  input_type: 'text',
+                  type: 'select',
                   tip: '',
-                  answer: ''
+                  answer: '',
+                  listData: [
+                    { label: '要求对方净身出户', value: '1' },
+                    { label: '争夺孩子抚养权', value: '2' },
+                    { label: '以上都是', value: '3' }
+                  ]
                 },
                 {
-                  title: '2、哪个保险公司的保险？',
+                  title: '2、你们感情破裂的原因是什么？（可多选）',
                   id: '2',
                   isRequired: true,
-                  type: 'input',
-                  input_type: 'text',
+                  type: 'select_multiple',
                   tip: '',
-                  answer: ''
+                  answer: '',
+                  listData: [
+                    { label: '婚前感情基础薄弱', value: '1' },
+                    { label: '性格不合，琐事矛盾', value: '2' },
+                    { label: '出轨', value: '3' },
+                    { label: '与人同居', value: '4' },
+                    { label: '重婚', value: '5' },
+                    { label: '虐待', value: '6' },
+                    { label: '遗弃', value: '7' },
+                    { label: '赌博', value: '8' },
+                    { label: '吸毒', value: '9' },
+                    { label: '沉迷网络游戏', value: '10' },
+                    { label: '嫖娼', value: '11' },
+                    { label: '酗酒', value: '12' },
+                    { label: '暴力倾向', value: '13' },
+                    { label: '家庭成员矛盾', value: '14' },
+                    { label: '子女抚养方面的矛盾', value: '15' },
+                    { label: '隐瞒疾病', value: '16' },
+                    { label: '长期分居两地', value: '17' },
+                    { label: '对方在服刑', value: '18' }
+                  ]
                 },
                 {
-                  title: '3、保险数额多少？',
+                  title: '3、你们都是初婚吗？',
                   id: '3',
                   isRequired: true,
-                  type: 'input',
-                  input_type: 'number',
-                  placeholder: '￥，请输入金额，如：50000',
+                  type: 'select',
                   tip: '',
-                  answer: ''
+                  answer: '',
+                  listData: [
+                    { label: '均初婚', value: '1' },
+                    { label: '均再婚', value: '2' },
+                    { label: '男方初婚，女方再婚', value: '3' },
+                    { label: '女方初婚，男方再婚', value: '4' }
+                  ]
                 },
                 {
-                  title: '4、什么时间投保的？',
+                  title: '4、您与配偶生育了几个子女？',
                   id: '4',
                   isRequired: true,
-                  type: 'dateTime_day',
+                  type: 'select',
                   tip: '',
-                  answer: ''
+                  answer: '',
+                  listData: [
+                    { label: '1', value: '1' },
+                    { label: '2', value: '2' },
+                    { label: '3', value: '3' },
+                    { label: '4', value: '4' },
+                    { label: '5', value: '5' },
+                    { label: '6', value: '6' },
+                    { label: '7', value: '7' }
+                  ]
                 },
                 {
-                  title: '5、投保人是谁？',
+                  title: '5、是否有需要处理的共同财产？',
                   id: '5',
                   isRequired: true,
-                  type: 'select',
+                  type: 'radio',
                   tip: '',
                   answer: '',
                   listData: [
-                    { label: '男方', value: '1' },
-                    { label: '女方', value: '2' }
-                  ]
+                    { label: '无夫妻共同财产', value: '1' },
+                    { label: '有财产待处理', value: '2' }
+                  ],
+                  childQuestion: {
+                    2: [
+                      {
+                        title: '请勾选您需要处理的夫妻共同财产',
+                        id: '5_2_1',
+                        isRequired: true,
+                        type: 'checkbox',
+                        tip: '提示',
+                        answer: [],
+                        listData: [
+                          { label: '房子', value: '1' },
+                          { label: '存款', value: '2' },
+                          { label: '理财', value: '3' },
+                          { label: '车子', value: '4' },
+                          { label: '家具家电', value: '5' },
+                          { label: '保险', value: '6' },
+                          { label: '其他', value: '7' }
+                        ],
+                        grandson: {
+                          1: [
+                            {
+                              title: '您与配有有几套房产需要处理？',
+                              id: '5_2_1_1',
+                              isRequired: true,
+                              type: 'input',
+                              input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                            }
+                          ],
+                          2: [
+                            {
+                              title: '您与配有有几笔存款需要处理？',
+                              id: '5_2_2_1',
+                              isRequired: true,
+                              type: 'input',
+                              input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                            }
+                          ],
+                          3: [
+                            {
+                              title: '您与配有有几笔理财需要处理？',
+                              id: '5_2_3_1',
+                              isRequired: true,
+                              type: 'input',
+                              input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                            }
+                          ],
+                          4: [
+                            {
+                              title: '您与配有有几辆车子需要处理？',
+                              id: '5_2_4_1',
+                              isRequired: true,
+                              type: 'input',
+                              input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                            }
+                          ],
+                          6: [
+                            {
+                              title: '您与配有有几份保险需要处理？',
+                              id: '5_2_4_1',
+                              isRequired: true,
+                              type: 'input',
+                              input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
                 },
                 {
-                  title: '6、被保险人姓名？',
+                  title: '6、外债的具体情形？',
                   id: '6',
                   isRequired: true,
-                  type: 'input',
-                  input_type: 'text',
+                  type: 'radio',
                   tip: '',
-                  answer: ''
+                  answer: '',
+                  listData: [
+                    { label: '无外债', value: '1' },
+                    { label: '有外债', value: '2' }
+                  ],
+                  childQuestion: {
+                    2: [
+                      {
+                        title: '外债的具体情形是',
+                        id: '6_2_1',
+                        isRequired: true,
+                        type: 'checkbox',
+                        tip: '提示',
+                        answer: [],
+                        listData: [
+                          { label: '有债权（别人欠/借你们钱）', value: '1' },
+                          { label: '有债务（你们欠/借了别人钱）', value: '2' }
+                        ],
+                        grandson: {
+                          1: [
+                            {
+                              title: '您与配有有几笔债权需要处理？',
+                              id: '6_2_1_1',
+                              isRequired: true,
+                              type: 'input',
+                              input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                            }
+                          ],
+                          2: [
+                            {
+                              title: '您与配有有几笔债务需要处理？',
+                              id: '6_2_1_2',
+                              isRequired: true,
+                              type: 'input',
+                              input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
                 },
                 {
-                  title: '7、受益人姓名？',
+                  title: '7、您与配偶对离婚是否达成一致？',
                   id: '7',
-                  isRequired: true,
-                  type: 'input',
-                  input_type: 'text',
-                  tip: '',
-                  answer: ''
-                }
-              ]
-            },
-            {
-              title: '问题二：离婚后保险收益归属',
-              questions: [
-                {
-                  title: '8、离婚后保险归谁？',
-                  id: '8',
-                  isRequired: true,
-                  type: 'select',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '男方', value: '1' },
-                    { label: '女方', value: '2' },
-                    { label: '孩子', value: '3' }
-                  ]
-                },
-                {
-                  title: '9、剩余保费谁承担？',
-                  id: '9',
-                  isRequired: true,
-                  type: 'select',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '男方', value: '1' },
-                    { label: '女方', value: '2' }
-                  ]
-                },
-                {
-                  title: '10、是否支付对方补偿款？',
-                  id: '10',
                   isRequired: true,
                   type: 'radio',
                   tip: '',
                   answer: '',
                   listData: [
                     { label: '是', value: '1' },
-                    { label: '否', value: '0' }
+                    { label: '否', value: '2' }
                   ],
                   childQuestion: {
-                    1: [
+                    2: [
                       {
-                        title: '（1）支付多少补偿',
-                        id: '10_1_1',
+                        title: '您与配偶对离婚的争议是什么？',
+                        id: '7_2_1',
                         isRequired: true,
-                        type: 'input',
-                        placeholder: '如：男方支付女方2000元',
-                        input_type: 'text',
+                        type: 'checkbox',
                         tip: '提示',
-                        answer: ''
-                      },
-                      {
-                        title: '（2）什么时候支付',
-                        id: '10_1_2',
-                        isRequired: true,
-                        type: 'dateTime_day',
-                        placeholder: '选择支付时间',
-                        tip: '提示',
-                        answer: ''
-                      },
-                      {
-                      title: '（3）收款账户 开户名',
-                      id: '10_1_3',
-                      isRequired: true,
-                      type: 'input',
-                      input_type: 'text',
-                      placeholder: '请输姓名，如：刘德华',
-                      tip: '',
-                      answer: ''
-                    },
-                    {
-                      title: '银行名称',
-                      id: '10_1_4',
-                      isRequired: true,
-                      type: 'input',
-                      input_type: 'text',
-                      placeholder: '如：中国工商银行(建外大街支行)',
-                      tip: '',
-                      answer: ''
-                    },
-                    {
-                      title: '账号',
-                      id: '10_1_5',
-                      isRequired: true,
-                      type: 'input',
-                      placeholder: '请输入银行卡号',
-                      input_type: 'number',
-                      tip: '',
-                      answer: ''
-                    }
+                        answer: [],
+                        listData: [
+                          { label: '子女', value: '1' },
+                          { label: '财产', value: '2' },
+                          { label: '外债', value: '3' }
+                        ]
+                      }
                     ]
                   }
                 }
@@ -912,23 +1033,18 @@
         childList (e) {
           this.$forceUpdate();
           this.childAll = [];
-          for (let i = 0; i < e; i++) {
-            this.$set(this.childAll, i, this.childMsg1())
-          }
+          this.$set(this.childAll, 1, this.childMsg1())
         },
         addFangChan () {
           this.childAll.push(this.childMsg1())
-          alert('添加第'+this.childAll.length+'保险')
+          alert('添加第'+this.childAll.length+'存款')
         },
         removeFangChan (index) {
           this.childAll.splice(index,1)
-          alert('删除第'+(index+1)+'保险')
-        },
-         UpPage () {
-          this.$router.replace("/JiaDian");
+          alert('删除第'+(index+1)+'存款')
         },
         NextPage () {
-          this.$router.replace("/QiTaCaiChan");
+          this.$router.replace("/QueDing");
         },
         addChildBirthday1 (e) {
            console.log(e,12312313)
@@ -938,6 +1054,7 @@
         },
         addChildName (e) {    // 添加姓名
           console.log(e)
+          alert(e)
         },
         addChildSex (e) {
           console.log(e)
