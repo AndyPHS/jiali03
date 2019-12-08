@@ -15,6 +15,7 @@ var environment = {
 var host = location.host,
   baseHost = '',
   baseURL = '',
+  baseLiHunURL = '',
   adminBaseURL, compBaseURL
 
 if(host.indexOf('线上地址') > -1){
@@ -24,7 +25,8 @@ if(host.indexOf('线上地址') > -1){
   //测试环境
   baseHost = environment.dev
 }
-baseURL = baseHost
+baseURL = baseHost + 'jiali_api/v1/'
+baseLiHunURL = baseHost + 'Questionnaire/v1/'
 //接口集合
 const apiUrl = {
   // 登录
@@ -59,7 +61,6 @@ const apiUrl = {
   updateUserRole: baseURL + 'users/update_role',
   // 查询角色
   selectUserRole: baseURL + 'users/select_role',
-
   // 上传列表页
   selectCaseLlist: baseURL + 'case/select_case_list',
 
@@ -124,7 +125,41 @@ const apiUrl = {
   // 修改案件类型
   updateCaseType: baseURL + 'case_type/update',
   // 查找案件类型
-  selectCaseType: baseURL + 'case_type/select'
+  selectCaseType: baseURL + 'case_type/select',
+
+  // 离婚配置
+  // 新增问题
+  addQuestion: baseLiHunURL + 'problem/add',
+  // 查询问题
+  selectQuestion: baseLiHunURL + 'problem/select',
+  // 查询问题列表
+  selectQuestionList: baseLiHunURL + 'problem/select',
+  // 删除问题
+  deleteQuestion: baseLiHunURL + 'problem/delete/',
+  // 修改问题
+  updateQuestion: baseLiHunURL + 'problem/update/',
+  // 问题数组
+  QuestionArr: baseLiHunURL + 'problem/created',
+  // 添加选项
+  addAnswer: baseLiHunURL + 'problem/add_answer/',
+  // 查询关系
+  selectTree: baseLiHunURL + 'ProblemQ/select_tree',
+  // 新增关联
+  ProblemQAdd: baseLiHunURL + 'ProblemQ/add',
+  // 新增关联条件
+  addQpWhere: baseLiHunURL + 'ProblemQ/add_qp_where/',
+  // 查询关联条件
+  selectQpWhere: baseLiHunURL + 'ProblemQ/select_qp_where/',
+  // 删除关联
+  deleteProblemQ: baseLiHunURL + 'ProblemQ/delete/',
+  // 查询单独问题
+  selectOnlyQuestion: baseLiHunURL + 'problem/select_only/',
+
+  // word
+  // 查询组合规则tree结构
+  wordSelectTree: baseLiHunURL + 'word/select_tree/',
+  // 新增组合规则
+  addWord: baseLiHunURL + 'word/add_word'
 }
 export{
   apiUrl
