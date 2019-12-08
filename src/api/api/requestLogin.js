@@ -405,23 +405,155 @@ export const addLawyer = params => {
     data:params
   });
 };
-// 问卷问题接口
-export const question = params => {
+// 离婚页面配置
+// 查询问题
+export const selectQuestion = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: 'http://jiali_ui.com:81/static/mock/question.json',
+    url: apiUrl.selectQuestion+'?page='+params.page,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
-    data:params
+    data: params
   });
 };
-// 问卷答案接口
-export const answer = params => {
+// 查询问题列表s按标题查找
+export const selectQuestionList = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: 'http://jiali_ui.com:81/static/mock/answer.json',
+    url: apiUrl.selectQuestionList+'/?'+params,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
-    data:params
+    data: params
+  });
+};
+// 新增问题
+export const addQuestion = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addQuestion,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除问题
+export const deleteQuestion = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteQuestion + '/' + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 修改问题
+export const updateQuestion = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateQuestion + localStorage.getItem('pid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 问题数组
+export const QuestionArr = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.QuestionArr,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改问题
+export const addAnswer = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addAnswer + '/' + localStorage.getItem('pid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 关系数组
+export const selectTree = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectTree,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增关联
+export const ProblemQAdd = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.ProblemQAdd,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增关联条件
+export const addQpWhere  = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addQpWhere + localStorage.getItem('qpid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询关联条件selectQpWhere
+export const selectQpWhere  = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectQpWhere + localStorage.getItem('qpid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除关联
+export const deleteProblemQ = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteProblemQ + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: qs.stringify(params)
+  });
+};
+// 查询单独问题
+export const selectOnlyQuestion = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectOnlyQuestion + localStorage.getItem('pid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 新增组合规则
+export const addWord = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addWord,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询组合规则tree结构
+export const wordSelectTree = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.wordSelectTree + localStorage.getItem('wid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
   });
 };
