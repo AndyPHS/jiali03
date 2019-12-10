@@ -32,7 +32,7 @@
             <el-menu-item index="4"><router-link to="SearchCase">案例检索</router-link></el-menu-item>
             <el-menu-item index="5"><router-link to="QuestionManagement">问题管理</router-link></el-menu-item>
             <el-menu-item index="6"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
-            <el-menu-item index="7"><router-link to="ZuHeManagement">组合管理</router-link></el-menu-item>
+            <el-menu-item index="7"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
         </el-menu>
         <div class="container mx-auto">
             <dl class="text-left flex items-center py-2">

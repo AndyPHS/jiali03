@@ -158,8 +158,18 @@ const apiUrl = {
   // word
   // 查询组合规则tree结构
   wordSelectTree: baseLiHunURL + 'word/select_tree/',
+  // 查询单独组合：
+  wordSelect: baseLiHunURL + 'word/select/',
+  // 修改组合规则
+  updateWord: baseLiHunURL + 'word/update_word/',
   // 新增组合规则
-  addWord: baseLiHunURL + 'word/add_word'
+  addWord: baseLiHunURL + 'word/add_word',
+  // 添加word的json部分
+  addWordJson: baseLiHunURL + 'word/addWordJson/',
+  // 修改word的json部分
+  updateWordJson: baseLiHunURL + 'word/updateWordJson/',
+  // 删除word的json部分
+  deleteWord: baseLiHunURL + 'word/deleteWordJson/'
 }
 export{
   apiUrl

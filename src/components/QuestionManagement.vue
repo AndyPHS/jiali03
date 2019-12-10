@@ -40,7 +40,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    
                 </div>
                 <el-pagination
                     background

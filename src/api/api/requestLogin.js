@@ -547,12 +547,64 @@ export const addWord = params => {
     data: params
   });
 };
+// 修改组合规则
+export const updateWord = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateWord + localStorage.getItem('fWordId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询单独组合规则
+export const wordSelect = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.wordSelect + localStorage.getItem('fWordId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
 // 查询组合规则tree结构
 export const wordSelectTree = params => {
   return axios({
     method: "get",
     dataType: 'json',
     url: apiUrl.wordSelectTree + localStorage.getItem('wid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 新增word的json部分
+export const addWordJson = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addWordJson + localStorage.getItem('fWordId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改word的json部分
+export const updateWordJson = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateWordJson + localStorage.getItem('wordJsonId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除关联
+export const deleteWord = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteWord + localStorage.getItem('wordJsonId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

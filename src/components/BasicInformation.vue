@@ -668,7 +668,8 @@
               JiaDian: [],                // 家电
               BaoXian: [],          // 保险
               ZhaiQuan: [],         // 债权
-              ZhaiWu: []            // 债务
+              ZhaiWu: [],            // 债务
+              QiTaCaiChan: []       // 其他财产
             },           
             IsShow: false,
             mokuai: [
@@ -683,6 +684,7 @@
               {title: '保险', part: 'BaoXian'},
               {title: '债权', part: 'ZhaiQuan'},
               {title: '债务', part: 'ZhaiWu'},
+              // {title: '其他财产', part: 'QiTaCaiChan'},
               {title: '生成协议', part: 'ShengChengXieYi'}
             ],
             active: 0

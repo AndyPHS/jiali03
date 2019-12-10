@@ -563,9 +563,12 @@
             // 操作树结构
             handleTreeJieDian () {
                 this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.id
-                // console.log(this.problemqAdd.fqaspId)
                 this.nodeType = this.$refs.tree.currentNode.node.data.type
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
+                this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
+                console.log(this.problemqAdd.fqaspId)
+                console.log(this.nodeType)
+                console.log(this.$refs.tree.currentNode.node.data)
             },
             getCheckedNodes() { // 通过 node 获取
                 console.log(this.$refs.tree.getCheckedNodes());
@@ -610,6 +613,7 @@
             },
             updateTree(){   // 修改树结构
                 localStorage.setItem('qpid',this.problemqAdd.fqaspId)
+                // this.problemqAdd.title = 
                 if(this.nodeType==1){
                    this.dialogaddTreeTitle = true; 
                 }else{
@@ -649,7 +653,7 @@
             delete_answer_btn (index) {   // 点击删除，删除当前选项
                 this.add_answer.splice(index,1)
             },
-            dbclickQuestion (e){   // 双击为选中的问题添加配置
+            dbclickQuestion (e){   // 点击为选中的问题添加配置
                 this.dialogQuestionConfig = true
                 localStorage.setItem('pid',e)
                 this.problemqAdd.problemId = e
@@ -669,6 +673,7 @@
             selectQpWhere() {
                 selectQpWhere().then((data)=>{
                     this.selectQpWhereList = data.data.data
+                    console.log(this.selectQpWhereList)
                 }).catch((data)=>{
 
                 })

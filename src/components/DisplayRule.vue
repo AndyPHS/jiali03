@@ -2,7 +2,7 @@
     <div>
         <head-menu></head-menu>
         <div class="container mx-auto flex">
-            <div class="w-1/2">
+            <div class="w-1/3">
                 <div class="border border-1 rounded">
                     <h2 class="text-xl py-2">离婚协议书组合规则</h2>
                     <div class="h-40 overflow-scroll">
@@ -13,21 +13,43 @@
                           ref="wordtree"
                           empty-text="加载中，请稍后！"
                           highlight-current
+                          @node-contextmenu="addGuiZeText()"
                           @node-click="handleWordTreeJieDian()"
                           :props="wordDefaultProps">
                         </el-tree>
                     </div>
-                    <div class="w-2/3 text-left flex justify-around">
-                        <el-button type="primary" plain class="" @click="addNewWord">新增组合</el-button> 
-                        <el-button type="primary" plain class="" @click="updateWordAlert">修改组合</el-button>
-                        <el-button type="primary" plain class="" @click="editDisplayContent">编辑显示内容</el-button>
+                    <div class="w-full text-left flex justify-around py-3">
+                        <el-button type="primary" plain size="small" @click="addNewWord">新增组合</el-button> 
+                        <el-button type="primary" plain size="small" @click="updateWordAlert">修改组合</el-button>
+                        <el-button type="primary" plain size="small" @click="editDisplayContent">编辑显示内容</el-button>
                     </div>
                 </div>
             </div>
-            <div>
-                
+            <div  class="w-1/3 mx-2">
+                <div  class="border border-1 rounded">
+                    <h2 class="text-xl py-2">{{ this.wordTreeMsg.title }}</h2>
+                    <el-form>
+                      <div class='flex justify-around'>
+                        <el-form-item label=""  id="newtitle">
+                          <el-input v-model="newTitle" class="w-2/3" autocomplete="off" placeholder='请输入问题名称'></el-input>
+                        </el-form-item>
+                        <el-button type="primary" plain size="small" @click="addTitle" >新增标题</el-button>
+                      </div>
+                      <div class="mx-2">
+                        <el-form-item label="编辑文案" prop="desc">
+                          <el-input type="textarea" rows="20" v-model="addWordJson.json"></el-input>
+                        </el-form-item> 
+                      </div>
+                       
+                    </el-form>
+                    <div class="my-2">
+                      <el-button v-if="this.selectGuiZe.selectGuiZeId !=null " type="primary" size="small" plain @click="updateWordJsonOk">确定修改</el-button> 
+                      <el-button v-if="this.selectGuiZe.selectGuiZeId ==null " type="primary" size="small" plain @click="addWordJsonOk">确定添加</el-button> 
+                    </div>
+                    
+                </div>
             </div>
-            <div class="w-1/2">
+            <div class="w-1/3">
                 <div class="border border-1 rounded">
                     <h2 class="text-xl py-2">离婚协议书</h2>
                     <div class="h-40 overflow-scroll">
@@ -38,6 +60,7 @@
                           ref="tree"
                           empty-text="加载中，请稍后！"
                           highlight-current
+                          @node-contextmenu="addTreeText()"
                           @node-click="handleTreeJieDian()"
                           :props="defaultProps">
                         </el-tree>
@@ -156,25 +179,24 @@
                 </table>
             </div>
         </el-dialog>
-        <el-dialog title="" :visible.sync="dialogDisplayContent">
+        <!-- 点击编辑内容显示 -->
+         <el-dialog title="" :visible.sync="dialogDisplayContent">
           <el-form :model="wordAdd">
             <h2 class="text-xl py-1">{{this.wordTreeMsg.title}}</h2>
             <div class="w-full text-right">
-                <el-button type="primary">新增显示规则</el-button>
+                <el-button type="primary" @click="addNewGuiZe">新增显示规则</el-button>
             </div>
              <div>
                  <ul>
-                     <li v-for="(item, index) in this.selectGuiZeArr" :key="index">
+                     <li v-for="(item, index) in this.selectGuiZe.selectGuiZeArr" :key="index">
                          <div class="flex justify-between bg-blue-100 rounded-sm my-2">
                             <div class="w-4/5 text-left my-2 mx-2 h-105">
-                                <div v-for="($item, $index) in JSON.parse(item.json)" :key="$index">
-                                    <p>{{ $item }}</p>
-                                </div>  
+                                <p>{{ item.json }}</p>
                             </div>
                              <div  class="w-1/5 text-center">
                                  <el-button type="primary" plain size="mini" id="edit_bt" @click="editSelectGuiZe(item)">编辑</el-button>
-                                 <el-button type="warning" plain size="mini" id="delete_bt">删除</el-button>
-                                 <el-button  type="info" plain size="mini" id="display_bt">显示</el-button>
+                                 <el-button type="warning" plain size="mini" id="delete_bt" @click="deleteSelectGuZe(item)">删除</el-button>
+                                 <el-button  type="info" plain size="mini" id="display_bt" @click="ifDisplayGuZe(item)"><span v-if="item.type ==1">隐藏</span><span v-if="item.type ==2">显示</span></el-button>
                              </div>
                          </div>
                      </li>
@@ -193,7 +215,10 @@
     import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
     import {addWord} from '@/api/api/requestLogin.js'   // 新增组合规则
     import {updateWord} from '@/api/api/requestLogin.js'   // 修改组合规则
-    import {wordSelect} from '@/api/api/requestLogin.js'   // 查询单独组合
+    import {addWordJson} from '@/api/api/requestLogin.js'   // 新增word的json部分
+    import {updateWordJson} from '@/api/api/requestLogin.js'   // 修改word的json部分
+    import {deleteWord} from '@/api/api/requestLogin.js'   // 删除word的json部分
+    import {wordSelect} from '@/api/api/requestLogin.js'   // 修改组合规则
     import {selectTree} from '@/api/api/requestLogin.js'    // 查询关系
     import {wordSelectTree} from '@/api/api/requestLogin.js'    // 查询组合规则tree结构
     
@@ -251,6 +276,12 @@
                     replate: '替换',
                     control: '操作'
                 },
+
+                newTitle:'', //点击新增组合规则的文字标题
+                addWordJson: {
+                  json: ''  // json格式的内容实例
+                },
+
                 formLabelWidth: '80px',   // 表单标签宽度
                 dataFilterValueArr: [], // 搜索查找的结果数据
                 TiaoJianList:[   // 条件列表
@@ -280,7 +311,13 @@
                     }
                 ],
                 selectOnlyLisg: [],    // 查询单独问题
-                selectGuiZeArr: []     // 点击某个规则展示某个规则包含的规则列表
+                selectGuiZe: {
+                  selectGuiZeArr: '',     // 点击某个规则展示某个规则包含的规则列表
+                  selectGuiZeId: null,     // 点击某个规则展示某个规则包含的规则ID
+                  selectGuiZeFatherId: null,     // 点击某个规则展示某个规则包含的规则ID
+                  type: null
+                },
+                
             }
         },
         mounted () {
@@ -303,7 +340,12 @@
                 this.treeMsg.nodeType = this.$refs.tree.currentNode.node.data.type
                 this.treeMsg.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.treeMsg.title = this.$refs.tree.currentNode.node.data.title
-                // console.log(this.treeMsg)
+            },
+            addTreeText(){ // 右键点击离婚协议书dom树 1为问题
+                const a = this.treeMsg.fqaspId
+                const b = this.treeMsg.title
+                this.addWordJson.json +="{{1," + a + "," + b +"}}"
+                console.log(this.addWordJson.json)
             },
             // 右侧模块结束
 
@@ -324,6 +366,16 @@
                 this.wordTreeMsg.title = this.$refs.wordtree.currentNode.node.data.title
                 // console.log(this.wordTreeMsg.fatherId)
                 // console.log(this.wordTreeMsg.fqaspId)
+            },
+            addGuiZeText(){ // 右键点击组合规则 2为组合规则
+                const a = this.wordTreeMsg.fqaspId
+                const b = this.wordTreeMsg.title
+                this.addWordJson.json +="{{2," + a + "," + b +"}}"
+                console.log(this.addWordJson.json)
+            },
+            addTitle () {  // 点击新增标题往文案添加标题
+                this.addWordJson.json +="{{3," + this.newTitle +"}}"
+                console.log(this.addWordJson.json)
             },
             addNewWord () { // 点击新增组合弹出新增组合对话框
                 this.dialogNewWord = true;
@@ -393,11 +445,12 @@
                 localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 wordSelect().then((data)=>{
                     this.wordAdd.where = JSON.parse(data.data.data.where)
+                    console.log( this.wordAdd.where)
                 }).catch((data)=>{
 
                 })
             },
-            updateWordOk () {   // 点击修改组合确定按钮提交表单
+            updateWordOk () {   // 点击新增组合确定按钮提交表单
                 this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 this.wordAddWhere = {} // 清空组合绑定的问题
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
@@ -424,16 +477,84 @@
                 this.dialogDisplayContent = true;
                 localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 wordSelect().then((data)=>{
-                    this.selectGuiZeArr = data.data.data.json
-                    console.log(this.selectGuiZeArr)
+                    // localStorage.removeItem('fWordId');
+                    this.selectGuiZe.selectGuiZeArr = data.data.data.json
+                    console.log(this.selectGuiZe.selectGuiZeArr)
                 }).catch((data)=>{
 
                 })
             },
-            editSelectGuiZe (item) {  // 点击选择的组合规则跳转到编辑页面
-                console.log("本身的id是"+item.id)
-                console.log("本身的wid是"+item.wid)
-                console.log("是否显示"+item.type)
+            addNewGuiZe () {   // 点击新增显示规则按钮
+              this.dialogDisplayContent = false;
+            },
+            editSelectGuiZe (item) {  // 点击选择的组合规则编辑按钮跳转到编辑页面
+                this.addWordJson.json = item.json
+                this.selectGuiZe.selectGuiZeId = item.id
+                this.selectGuiZe.type = item.type
+                // this.selectGuiZe.selectGuiZeFatherId = item.wid
+                localStorage.setItem('wordJsonId',this.selectGuiZe.selectGuiZeId)
+                this.dialogDisplayContent = false;
+            },
+            
+            deleteSelectGuZe (item) { // 点击选择的组合规则删除按钮直接删除此条组合规则
+              this.selectGuiZe.selectGuiZeId = item.id
+              localStorage.setItem('wordJsonId',this.selectGuiZe.selectGuiZeId)
+              deleteWord().then((data)=>{
+                localStorage.removeItem('wordJsonId');
+                this.dialogDisplayContent = false;
+              }).catch((data)=>{
+
+              })
+            },
+            ifDisplayGuZe (item) { // 点击选择的组合规则显示按钮选择是否隐藏
+                this.addWordJson.json = item.json
+                this.selectGuiZe.selectGuiZeId = item.id
+                this.selectGuiZe.type = item.type
+                // this.selectGuiZe.selectGuiZeFatherId = item.wid
+                localStorage.setItem('wordJsonId',this.selectGuiZe.selectGuiZeId)
+              if(this.selectGuiZe.type ==1 ){
+                this.selectGuiZe.type =2
+                updateWordJson({
+                  type: this.selectGuiZe.type,
+                  json: this.addWordJson.json
+                }).then((data)=>{
+                  this.dialogDisplayContent = false;
+                }).catch((data)=>{
+                })
+              }else if(this.selectGuiZe.type ==2 ){
+                this.selectGuiZe.type =1
+                updateWordJson({
+                  type: this.selectGuiZe.type,
+                  json: this.addWordJson.json
+                }).then((data)=>{
+                  this.dialogDisplayContent = false;
+                }).catch((data)=>{
+                })
+              }
+            },
+            updateWordJsonOk () {  // 修改Wordjson
+                updateWordJson({
+                  type: this.selectGuiZe.type,
+                  json: this.addWordJson.json
+                }).then((data)=>{
+                  this.selectGuiZe.selectGuiZeId = null
+                  this.selectGuiZe.type = null
+                  this.addWordJson.json = ''
+                  localStorage.removeItem('wordJsonId');
+                }).catch((data)=>{
+
+                })
+            },
+            addWordJsonOk () {   // 新增Wordjson
+                addWordJson({
+                  type: 1,
+                  json: this.addWordJson.json
+                }).then((data)=>{
+                  this.addWordJson.json = ''
+                  localStorage.removeItem('fWordId');
+                }).catch((data)=>{
+
+                })
             }
             // 左侧模块结束
         }
@@ -441,12 +562,13 @@
 </script>
 
 <style scoped>
-.h-105{height: 105px;}
-.h-40{height: 1000px;}
+.h-40{height: 480px;}
+#newtitle{margin-bottom: 0 ;width: 70%}
+#newtitle .el-form-item__content{margin-left: 0 !important;}
 .h-1{height: 1px;width: 100%;background: #343434;display: inline-block;}
 .el-form-item{margin-bottom:0.25rem;}
 .wenti{height: 40px;}
 #edit_bt{margin:10px;}
 #delete_bt{margin-bottom:10px;margin-left: 0}
-#display_bt{margin-left: 0}
+#display_bt{margin-left: 0;margin-bottom: 10px}
 </style>
