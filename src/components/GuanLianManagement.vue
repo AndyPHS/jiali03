@@ -16,11 +16,11 @@
                           @node-click="handleTreeJieDian()"
                           :props="defaultProps">
                         </el-tree>
-                        <div class="w-2/3 text-left flex justify-around">
-                            <el-button type="primary" plain class="" @click="addTreeTitle">新增</el-button> 
-                            <el-button type="primary" plain class="" @click="updateTree">修改</el-button>
-                            <el-button type="primary" plain class="" @click="deletedTree">删除</el-button>
-                        </div>
+                    </div>
+                    <div class="w-2/3 text-left flex justify-around py-3">
+                        <el-button type="primary" plain class="" @click="addTreeTitle">新增</el-button> 
+                        <el-button type="primary" plain class="" @click="updateTree">修改</el-button>
+                        <el-button type="primary" plain class="" @click="deletedTree">删除</el-button>
                     </div>
                 </div>
             </div>
@@ -36,8 +36,8 @@
                         <el-button type="primary" plain class="" @click="titleSearch">搜索问题</el-button>
                     </el-form>
                 </div>
-                <div class="py-2 text-lg relative my-2">问题列表</div>
-                <div class="text-center">
+                <div class="py-2 text-lg relative">问题列表</div>
+                <div class="text-center question_list">
                     <table class="w-full">
                         <thead>
                             <tr>
@@ -52,8 +52,8 @@
                                 <td class="border text-black hover:cursor-pointer">{{ item.title }}</td>
                                 <td class="border text-black">{{ problemType[item.type] }}</td>
                                 <td class="border text-black justify-around">
-                                    <div class="flex justify-around py-2 w-2/3 mx-auto">
-                                        <el-button type="primary" plain class="" @click="dbclickQuestion(item.id)">添加</el-button>
+                                    <div class="flex justify-around py-1 w-2/3 mx-auto">
+                                        <el-button type="primary" plain class="" size='mini' @click="dbclickQuestion(item.id)">添加</el-button>
                                     </div>
                                 </td>
                             </tr>
@@ -940,8 +940,9 @@
 </script>
 
 <style scoped>
-.h-40{height: 1539px;}
+.h-40{height: 480px;}
 .h-1{height: 1px;width: 100%;background: #343434;display: inline-block;position: absolute;top:20px;left: 0}
 .el-form-item{margin-bottom:0.25rem;}
 .wenti{height: 40px;}
+.question_list{height: 340px;overflow: scroll;}
 </style>
