@@ -4,7 +4,7 @@
         <div class="container mx-auto flex">
             <div class="w-1/2">
                 <div class="border border-1 rounded">
-                    <h2 class="text-xl py-2">离婚协议书组合规则</h2>
+                    <h2 class="text-xl py-2 cursor-pointer" @click="addRootWord">离婚协议书组合规则</h2>
                     <div class="h-40 overflow-scroll">
                         <el-tree
                           :data="wordTreeList"
@@ -28,7 +28,7 @@
             </div>
             <div  class="w-1/3 mx-2" v-show="editShow">
                 <div  class="border border-1 rounded">
-                    <h2 class="text-xl py-2">{{ this.wordTreeMsg.title }}</h2>
+                    <h2 class="text-xl py-2">编辑规则</h2>
                     <el-form>
                       <div class='flex justify-around'>
                         <el-form-item label=""  id="newtitle">
@@ -353,17 +353,21 @@
                 const a = this.treeMsg.fqaspId
                 const b = this.treeMsg.title
                 this.addWordJson.json +="{{1," + a + "," + b +"}}"
-                console.log(this.addWordJson.json)
+                // console.log(this.addWordJson.json)
             },
             // 右侧模块结束
 
             // 左侧模块开始
             wordSelectTree () {  // 查询组合规则tree结构
-                wordSelectTree(5).then((data)=>{
+                localStorage.setItem('wid',5) 
+                wordSelectTree().then((data)=>{
                     this.wordTreeList = data.data.data
-                    // console.log(this.wordTreeMsg.fqaspId)
+                    localStorage.removeItem('wid');
                 }).catch((data)=>{
-                    console.log('组合规则获取失败')
+                    this.$message({
+                      message: '获取组合规则失败',
+                      type: 'error'
+                    });
                 })
             },
             handleWordTreeJieDian () {  // 操作组合规则树结构
@@ -388,6 +392,10 @@
             addNewWord () { // 点击新增组合弹出新增组合对话框
                 this.dialogNewWord = true;
             },
+            addRootWord () {  // 点击标题新增根组合
+                this.dialogNewWord = true;
+                this.wordTreeMsg.fqaspId == null
+            },
             addWhere () {
                 if(JSON.stringify(this.wordAdd.where) == '{}'){
                     this.wordAdd.where.splice(1,1)
@@ -399,11 +407,12 @@
                 }
             },
             addWordOk () {   // 点击新增组合确定按钮提交表单
+                this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
                 if(this.wordTreeMsg.fqaspId == null){
                     addWord({
                         title:this.wordAdd.title,
-                        fWordId :0,
+                        fWordId :5,
                         where: this.wordAdd.where
                     }).then((data)=>{
                         this.wordAdd.title = ''
@@ -531,6 +540,7 @@
                 this.selectGuiZe.type = item.type
                 // this.selectGuiZe.selectGuiZeFatherId = item.wid
                 localStorage.setItem('wordJsonId',this.selectGuiZe.selectGuiZeId)
+                this.editShow = true;
                 this.dialogDisplayContent = false;
             },
             

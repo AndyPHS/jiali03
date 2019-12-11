@@ -261,7 +261,7 @@
                     <el-radio :label="2">否</el-radio>
                 </el-radio-group>
             </el-form-item>
-            <div v-if="problemqAdd.type==6 || problemqAdd.type==7 || problemqAdd.type==8 || problemqAdd.type==9 " >
+            <div >
                 <div class="relative wenti">
                     <span class="h-1"></span>
                     <span class="px-2 py-2 border absolute left-0 top-0 z-10 bg-white">问题关系配置</span>
