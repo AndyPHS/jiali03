@@ -613,7 +613,6 @@
             },
             updateTree(){   // 修改树结构
                 localStorage.setItem('qpid',this.problemqAdd.fqaspId)
-                // this.problemqAdd.title = 
                 if(this.nodeType==1){
                    this.dialogaddTreeTitle = true; 
                 }else{
@@ -670,7 +669,7 @@
 
                 })
             },
-            selectQpWhere() {
+            selectQpWhere() {  // 查询选中的问题下关联的关系
                 selectQpWhere().then((data)=>{
                     this.selectQpWhereList = data.data.data
                     console.log(this.selectQpWhereList)

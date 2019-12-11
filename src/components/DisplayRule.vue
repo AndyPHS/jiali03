@@ -2,7 +2,7 @@
     <div>
         <head-menu></head-menu>
         <div class="container mx-auto flex">
-            <div class="w-1/3">
+            <div class="w-1/2">
                 <div class="border border-1 rounded">
                     <h2 class="text-xl py-2">离婚协议书组合规则</h2>
                     <div class="h-40 overflow-scroll">
@@ -21,11 +21,12 @@
                     <div class="w-full text-left flex justify-around py-3">
                         <el-button type="primary" plain size="small" @click="addNewWord">新增组合</el-button> 
                         <el-button type="primary" plain size="small" @click="updateWordAlert">修改组合</el-button>
+                        <el-button type="primary" plain size="small" @click="deleteWordAlert">删除组合</el-button>
                         <el-button type="primary" plain size="small" @click="editDisplayContent">编辑显示内容</el-button>
                     </div>
                 </div>
             </div>
-            <div  class="w-1/3 mx-2">
+            <div  class="w-1/3 mx-2" v-show="editShow">
                 <div  class="border border-1 rounded">
                     <h2 class="text-xl py-2">{{ this.wordTreeMsg.title }}</h2>
                     <el-form>
@@ -49,7 +50,7 @@
                     
                 </div>
             </div>
-            <div class="w-1/3">
+            <div class="w-1/2">
                 <div class="border border-1 rounded">
                     <h2 class="text-xl py-2">离婚协议书</h2>
                     <div class="h-40 overflow-scroll">
@@ -166,18 +167,26 @@
                             :key="index"
                         >
                             <td class="border text-black">{{ item.qpid }}</td>
-                            <td class="border text-black">{{ item.title }}</td>
+                            <td class="border text-black">{{ item.type }}</td>
                             <td class="border text-black">{{ item.value }}</td>
                             <td class="border text-black">{{ item.replate }}</td>
                             <td class="border text-black justify-around">
                                 <div class="flex justify-around py-2 w-2/3 mx-auto">
-                                    <el-button type="danger" icon="el-icon-delete" circle  @click="deleteWord(index)"></el-button>
+                                    <el-button type="danger" icon="el-icon-delete" circle  @click="deleteWordBtn(index)"></el-button>
                                 </div>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </el-dialog>
+        <!-- 删除组合弹出框 -->
+        <el-dialog title="删除当前选中组合" :visible.sync="dialogDeleteWord">
+          <p>删除选中的组合规则后会一并删除其中包含的word编辑文档</p>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogDeleteWord = false">取 消</el-button>
+            <el-button type="primary" @click="dialogDeleteWordOk">确 定</el-button>
+          </div>
         </el-dialog>
         <!-- 点击编辑内容显示 -->
          <el-dialog title="" :visible.sync="dialogDisplayContent">
@@ -202,11 +211,7 @@
                      </li>
                  </ul>
              </div>
-        </el-form>
-          <!-- <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogDisplayContent = false">取 消</el-button>
-            <el-button type="primary" @click="updateWordOk">确 定</el-button>
-          </div> -->
+          </el-form>
         </el-dialog>
     </div>   
 </template>
@@ -215,9 +220,10 @@
     import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
     import {addWord} from '@/api/api/requestLogin.js'   // 新增组合规则
     import {updateWord} from '@/api/api/requestLogin.js'   // 修改组合规则
+    import {deleteWord} from '@/api/api/requestLogin.js'   // 删除组合规则
     import {addWordJson} from '@/api/api/requestLogin.js'   // 新增word的json部分
     import {updateWordJson} from '@/api/api/requestLogin.js'   // 修改word的json部分
-    import {deleteWord} from '@/api/api/requestLogin.js'   // 删除word的json部分
+    import {deleteWordJson} from '@/api/api/requestLogin.js'   // 删除word的json部分
     import {wordSelect} from '@/api/api/requestLogin.js'   // 修改组合规则
     import {selectTree} from '@/api/api/requestLogin.js'    // 查询关系
     import {wordSelectTree} from '@/api/api/requestLogin.js'    // 查询组合规则tree结构
@@ -256,7 +262,9 @@
                 },
                 dialogNewWord: false, // 新增组合弹出框
                 dialogUpdateWord: false, // 修改组合弹出框
+                dialogDeleteWord: false, // 删除组合规则弹框
                 dialogDisplayContent: false,  // 编辑显示内容弹出框
+                editShow: false, // 中间编辑区域默认隐藏
                 wordAdd:{       // 新增组合绑定数据
                     title: '',  // 组合名称
                     fWordId: null, // 组合的父id
@@ -375,7 +383,7 @@
             },
             addTitle () {  // 点击新增标题往文案添加标题
                 this.addWordJson.json +="{{3," + this.newTitle +"}}"
-                console.log(this.addWordJson.json)
+                this.newTitle = '';
             },
             addNewWord () { // 点击新增组合弹出新增组合对话框
                 this.dialogNewWord = true;
@@ -400,10 +408,17 @@
                     }).then((data)=>{
                         this.wordAdd.title = ''
                         this.wordAdd.where = []
+                        this.wordAddWhere.qpid = null
+                        this.wordAddWhere.type = null
+                        this.wordAddWhere.value = null
+                        this.wordAddWhere.replate = null
                         this.wordSelectTree(); // 重新获取数结构
                         localStorage.removeItem('pid');
                         this.dialogNewWord = false;
-                        console.log("成功")
+                        this.$message({
+                          message: '添加成功',
+                          type: 'success'
+                        });
                     })
                 }else{
                     addWord({
@@ -414,10 +429,17 @@
                         this.wordSelectTree(); // 重新获取数结构
                         this.wordAdd.title = ''
                         this.wordAdd.where = []
+                        this.wordAddWhere.qpid = null
+                        this.wordAddWhere.type = null
+                        this.wordAddWhere.value = null
+                        this.wordAddWhere.replate = null
                         this.wordTreeMsg.fqaspId = null
                         localStorage.removeItem('pid');
                         this.dialogNewWord = false;
-                        console.log("成功")
+                        this.$message({
+                          message: '添加成功',
+                          type: 'success'
+                        });
                     })
                 }  
             },
@@ -439,6 +461,24 @@
 
                 })
             },
+            deleteWordAlert () { // 点击删除组合规则，弹出对话框
+              this.dialogDeleteWord = true;
+              localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
+
+            },
+            dialogDeleteWordOk () { // 点击删除组合规则确定键，删除所选的组合规则
+              deleteWord().then((data)=>{
+                this.wordSelectTree()
+                localStorage.removeItem('fWordId'); 
+                this.dialogDeleteWord = false;
+                this.$message({
+                  message: '该规则已经被删除',
+                  type: 'error'
+                });
+              }).catch((data)=>{
+
+              })
+            },
             updateWordAlert (){ // 点击修改组合弹出修改组合对话框
                 this.dialogUpdateWord = true;
                 this.wordAdd.title = this.wordTreeMsg.title
@@ -451,7 +491,7 @@
                 })
             },
             updateWordOk () {   // 点击新增组合确定按钮提交表单
-                this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
+                // this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 this.wordAddWhere = {} // 清空组合绑定的问题
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
 
@@ -467,24 +507,22 @@
                     localStorage.removeItem('pid');
                     localStorage.removeItem('fWordId');
                     this.dialogUpdateWord = false;
-                    console.log("成功")
                 })
             },
-            deleteWord (index) { // 点击组合规则删除按钮，删除组合规则
+            deleteWordBtn (index) { // 点击组合规则删除按钮，删除组合规则
                 this.wordAdd.where.splice(index,1)
             },
             editDisplayContent () { // 点击编辑显示内容弹出框
                 this.dialogDisplayContent = true;
                 localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 wordSelect().then((data)=>{
-                    // localStorage.removeItem('fWordId');
                     this.selectGuiZe.selectGuiZeArr = data.data.data.json
-                    console.log(this.selectGuiZe.selectGuiZeArr)
                 }).catch((data)=>{
 
                 })
             },
             addNewGuiZe () {   // 点击新增显示规则按钮
+              this.editShow = true;
               this.dialogDisplayContent = false;
             },
             editSelectGuiZe (item) {  // 点击选择的组合规则编辑按钮跳转到编辑页面
@@ -499,8 +537,12 @@
             deleteSelectGuZe (item) { // 点击选择的组合规则删除按钮直接删除此条组合规则
               this.selectGuiZe.selectGuiZeId = item.id
               localStorage.setItem('wordJsonId',this.selectGuiZe.selectGuiZeId)
-              deleteWord().then((data)=>{
+              deleteWordJson().then((data)=>{
                 localStorage.removeItem('wordJsonId');
+                this.$message({
+                  message: '该规则已经被删除',
+                  type: 'error'
+                });
                 this.dialogDisplayContent = false;
               }).catch((data)=>{
 
@@ -519,6 +561,10 @@
                   json: this.addWordJson.json
                 }).then((data)=>{
                   this.dialogDisplayContent = false;
+                  this.$message({
+                      message: '该规则已经被隐藏',
+                      type: 'warning'
+                    });
                 }).catch((data)=>{
                 })
               }else if(this.selectGuiZe.type ==2 ){
@@ -528,6 +574,10 @@
                   json: this.addWordJson.json
                 }).then((data)=>{
                   this.dialogDisplayContent = false;
+                  this.$message({
+                      message: '该规则已经被显示',
+                      type: 'success'
+                    });
                 }).catch((data)=>{
                 })
               }
@@ -540,7 +590,12 @@
                   this.selectGuiZe.selectGuiZeId = null
                   this.selectGuiZe.type = null
                   this.addWordJson.json = ''
+                  this.editShow=false
                   localStorage.removeItem('wordJsonId');
+                  this.$message({
+                      message: '恭喜你，修改成功',
+                      type: 'success'
+                    });
                 }).catch((data)=>{
 
                 })
@@ -552,6 +607,12 @@
                 }).then((data)=>{
                   this.addWordJson.json = ''
                   localStorage.removeItem('fWordId');
+
+                  this.editShow=false
+                  this.$message({
+                      message: '恭喜你，新增成功',
+                      type: 'success'
+                    });
                 }).catch((data)=>{
 
                 })

@@ -567,6 +567,16 @@ export const wordSelect = params => {
     data: params
   });
 };
+// 删除组合规则
+export const deleteWord = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteWord + localStorage.getItem('fWordId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 
 // 查询组合规则tree结构
 export const wordSelectTree = params => {
@@ -599,12 +609,12 @@ export const updateWordJson = params => {
     data: params
   });
 };
-// 删除关联
-export const deleteWord = params => {
+// 删除word的json部分
+export const deleteWordJson = params => {
   return axios({
     method: "delete",
     dataType: 'json',
-    url: apiUrl.deleteWord + localStorage.getItem('wordJsonId'),
+    url: apiUrl.deleteWordJson + localStorage.getItem('wordJsonId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
