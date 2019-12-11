@@ -383,7 +383,7 @@
                 const a = this.wordTreeMsg.fqaspId
                 const b = this.wordTreeMsg.title
                 this.addWordJson.json +="{{2," + a + "," + b +"}}"
-                console.log(this.addWordJson.json)
+                // console.log(this.addWordJson.json)
             },
             addTitle () {  // 点击新增标题往文案添加标题
                 this.addWordJson.json +="{{3," + this.newTitle +"}}"

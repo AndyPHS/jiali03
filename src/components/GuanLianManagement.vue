@@ -261,6 +261,16 @@
                     <el-radio :label="2">否</el-radio>
                 </el-radio-group>
             </el-form-item>
+            <el-form-item label="绑定问题" :label-width="formLabelWidth">
+                <el-select v-model="problemqAdd.problemId" filterable :filter-method="dataFilter" placeholder="请选择">
+                    <el-option
+                      v-for="item in dataFilterValueArr"
+                      :key="item.id"
+                      :label="item.title"
+                      :value="item.id">
+                    </el-option>
+                </el-select>
+            </el-form-item>
             <div >
                 <div class="relative wenti">
                     <span class="h-1"></span>
@@ -401,8 +411,8 @@
                 }],    // 
                 // fileList: [],   // 实例图片
                 treeList: [],    // 节点树数据
-                dataFilterValueArr: [], // 搜索查找的结果数据
-                selectVagueValueArr: [], // 模糊查询关联搜索结果
+                dataFilterValueArr: [], // 点击修改弹出的绑定问题模糊搜索
+                selectVagueValueArr: [], // 点击修改弹出的绑定问题模糊搜索关联搜索结果
                 // whereArr: [{
                 //     relationId: null,
                 //     type: '',
@@ -769,22 +779,8 @@
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
                         this.problemqAdd.important = '';
-                        // this.whereArr.forEach((item)=>{
-                        //     addQpWhere({
-                        //         relationId: item.relationId,
-                        //         type: item.type,
-                        //         value: item.value
-                        //     }).then((data)=>{
-                        //         item.relationId ='';
-                        //         item.type = '';
-                        //         item.value = '';
-                        //     }).catch((data)=>{
-
-                        //     })
-                        // })
-                        // this.selectQpWhere()
                         localStorage.removeItem('qpid')
-                        this.dialogQuestionConfig = false;
+                        this.dialogQuestionConfigUpdate = false;
                         this.selectTree()
                     }).catch((data)=>{
 
@@ -800,7 +796,7 @@
                         class: this.problemqAdd.class,
                         title: this.problemqAdd.title
                     }).then((data)=>{
-                        this.dialogQuestionConfig = false;
+                        this.dialogQuestionConfigUpdate = false;
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
@@ -813,13 +809,13 @@
                 }
                 
             },
-            // dataFilter (val) {  // 问题模糊搜索
-            //     selectQuestionList("title="+val).then((data)=>{
-            //         this.dataFilterValueArr = data.data.data.data
-            //     }).catch((data)=>{
+            dataFilter (val) {  // 点击修改弹出的绑定问题模糊搜索
+                selectQuestionList("title="+val).then((data)=>{
+                    this.dataFilterValueArr = data.data.data.data
+                }).catch((data)=>{
 
-            //     })
-            // },
+                })
+            },
             select_vague (val) {  // 关联的模糊搜索
                 selectVague("title="+val).then((data)=>{
                     this.selectVagueValueArr = data.data
