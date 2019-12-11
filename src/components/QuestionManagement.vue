@@ -2,16 +2,16 @@
     <div>
         <head-menu></head-menu>
         <div class="container mx-auto">
-            <div class="py-2 text-lg relative my-2">
+            <div class="text-lg relative my-2">
                 <el-form>
-                    <el-form-item label="" :label-width="formLabelWidth">
+                    <el-form-item label="">
                       <el-input v-model="titleSearchMsg" class="w-1/2" autocomplete="off" placeholder='请输入问题名称'></el-input>
                     </el-form-item>
                     <el-button type="primary" plain class="absolute top-0 right-0 bottom-0" @click="titleSearch">搜索问题</el-button>
                 </el-form>
             </div>
-            <div class="py-2 text-lg relative my-2">问题列表<el-button type="primary" plain class="absolute top-0 right-0 bottom-0" @click="handleQuestionAdd">新增问题</el-button></div>
-                <div class="text-center">
+            <div class="py-1 text-lg relative my-2">问题列表<el-button type="primary" plain class="absolute top-0 right-0 bottom-0" @click="handleQuestionAdd">新增问题</el-button></div>
+                <div class="text-center h-500">
                     <table class="w-full">
                         <thead>
                             <tr>
@@ -32,7 +32,7 @@
                                     无实例
                                 </td>
                                 <td class="border text-black justify-around">
-                                    <div class="flex justify-around py-2 w-2/3 mx-auto">
+                                    <div class="flex justify-around py-1 mx-auto">
                                         <el-button type="primary" icon="el-icon-edit" circle @click="updateQuestion(item)"></el-button>
                                         <el-button type="danger" icon="el-icon-delete" circle  @click="deleteQuestion(item.id)"></el-button>
                                     </div>
@@ -397,5 +397,7 @@
 </script>
 
 <style scoped>
+/*.searchBox{ margin-right: 150px;}*/
+.h-500{height: 500px;overflow: scroll;}
 .el-form-item{margin-bottom:0.25rem;}
 </style>
