@@ -476,12 +476,22 @@ export const addAnswer = params => {
     data: params
   });
 };
-// 关系数组
+// 查询关系树
 export const selectTree = params => {
   return axios({
     method: "get",
     dataType: 'json',
     url: apiUrl.selectTree,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 模糊查询关联
+export const selectVague = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectVague+'/?'+params,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -512,6 +522,17 @@ export const selectQpWhere  = params => {
     method: "get",
     dataType: 'json',
     url: apiUrl.selectQpWhere + localStorage.getItem('qpid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 删除关联条件
+export const deleteQpWhere  = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteQpWhere + localStorage.getItem('qpWhereId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

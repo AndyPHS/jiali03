@@ -174,24 +174,24 @@
                     <span class="px-2 py-2 border absolute left-0 top-0 z-10 bg-white">问题关系配置</span>
                 </div>
                 <div class="clear-both"></div>
-                <div v-for="(whereItem, whereIndex) in whereArr">
+                <div>
                     <el-form-item label="绑定的值" :label-width="formLabelWidth">
-                        <el-select v-model="whereItem.value" placeholder="选择绑定的值">
+                        <el-select v-model="whereItemConfig.value" placeholder="选择绑定的值">
                           <el-option v-for="(item, index) in selectOnlyLisg" :key="index" :label="item.label" :value="item.value"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="问题" :label-width="formLabelWidth">
-                        <el-select v-model="whereItem.relationId" filterable :filter-method="dataFilter" placeholder="请选择">
+                        <el-select v-model="whereItemConfig.relationId" filterable :filter-method="select_vague" placeholder="请选择">
                             <el-option
-                              v-for="item in dataFilterValueArr"
+                              v-for="item in selectVagueValueArr"
                               :key="item.id"
-                              :label="item.title"
+                              :label="item.qpTitle"
                               :value="item.id">
                             </el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="条件" :label-width="formLabelWidth">
-                        <el-select v-model="whereItem.type" filterable :filter-method="dataFilter" placeholder="请选择">
+                        <el-select v-model="whereItemConfig.type"  placeholder="请选择">
                             <el-option
                               v-for="item in TiaoJianList"
                               :key="item.value"
@@ -202,7 +202,7 @@
                     </el-form-item>
                     <div class="my-2">
                         <el-button @click="addWhere">添加关系</el-button>
-                        <el-button @click="deleteWhere(whereIndex)">删除关系</el-button>
+                        <!-- <el-button @click="deleteWhere(whereIndex)">删除关系</el-button> -->
                     </div>
                 </div>
                 <div>
@@ -218,14 +218,14 @@
                                 :key="index"
                             >
                                 <td class="border text-black hover:cursor-pointer">{{ item.title }}</td>
-                                <td class="border text-black">{{ item.qrtype }}</td>
+                                <td class="border text-black">{{ whereType[item.qrtype] }}</td>
                                 <td class="border text-black">{{ item.label }}</td>
-                               <!--  <td class="border text-black justify-around">
+                                <td class="border text-black justify-around">
                                     <div class="flex justify-around py-2 w-2/3 mx-auto">
-                                        <el-button type="primary" plain class="" @click="dbclickQuestion(item.id)">修改</el-button>
-                                        <el-button type="primary" plain class="" @click="dbclickQuestion(item.id)">删除</el-button>
+                                        <!-- <el-button type="primary" plain class="" @click="dbclickQuestion(item.id)">修改</el-button> -->
+                                        <el-button type="primary" plain class="" @click="deleteWhere(item.qpWhereId)">删除</el-button>
                                     </div>
-                                </td> -->
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -267,24 +267,24 @@
                     <span class="px-2 py-2 border absolute left-0 top-0 z-10 bg-white">问题关系配置</span>
                 </div>
                 <div class="clear-both"></div>
-                <div v-for="(whereItem, whereIndex) in selectQpWhereList">
+                <div >
                     <el-form-item label="绑定的值" :label-width="formLabelWidth">
-                        <el-select v-model="whereItem.value" placeholder="选择绑定的值">
+                        <el-select v-model="whereItemConfig.value" placeholder="选择绑定的值">
                           <el-option v-for="(item, index) in selectOnlyLisg" :key="index" :label="item.label" :value="item.value"></el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="问题" :label-width="formLabelWidth">
-                        <el-select v-model="whereItem.relationId" filterable :filter-method="dataFilter" placeholder="请选择">
+                        <el-select v-model="whereItemConfig.relationId" filterable :filter-method="select_vague" placeholder="请选择">
                             <el-option
-                              v-for="item in dataFilterValueArr"
+                              v-for="item in selectVagueValueArr"
                               :key="item.id"
-                              :label="item.title"
+                              :label="item.qpTitle"
                               :value="item.id">
                             </el-option>
                         </el-select>
                     </el-form-item>
                     <el-form-item label="条件" :label-width="formLabelWidth">
-                        <el-select v-model="whereItem.type" filterable :filter-method="dataFilter" placeholder="请选择">
+                        <el-select v-model="whereItemConfig.type" placeholder="请选择">
                             <el-option
                               v-for="item in TiaoJianList"
                               :key="item.value"
@@ -295,7 +295,7 @@
                     </el-form-item>
                     <div class="my-2">
                         <el-button @click="addWhere">添加关系</el-button>
-                        <el-button @click="deleteWhere(whereIndex)">删除关系</el-button>
+                        <!-- <el-button @click="deleteWhere(whereIndex)">删除关系</el-button> -->
                     </div>
                 </div>
                 <div>
@@ -311,14 +311,14 @@
                                 :key="index"
                             >
                                 <td class="border text-black hover:cursor-pointer">{{ item.title }}</td>
-                                <td class="border text-black">{{ item.qrtype }}</td>
+                                <td class="border text-black">{{ whereType[item.qrtype] }}</td>
                                 <td class="border text-black">{{ item.label }}</td>
-                                <!-- <td class="border text-black justify-around">
+                                <td class="border text-black justify-around">
                                     <div class="flex justify-around py-2 w-2/3 mx-auto">
-                                        <el-button type="primary" plain class="" @click="dbclickQuestion(item.id)">修改</el-button>
-                                        <el-button type="primary" plain class="" @click="dbclickQuestion(item.id)">删除</el-button>
+                                        <!-- <el-button type="primary" plain class="" @click="dbclickQuestion(item.id)">修改</el-button> -->
+                                        <el-button type="primary" plain class="" @click="deleteWhere(item.qpWhereId)">删除</el-button>
                                     </div>
-                                </td> -->
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -361,9 +361,11 @@
     import {deleteQuestion} from '@/api/api/requestLogin.js'   // 删除问题
     import {QuestionArr} from '@/api/api/requestLogin.js'    // 问题数组
     import {selectTree} from '@/api/api/requestLogin.js'    // 查询关系
+    import {selectVague} from '@/api/api/requestLogin.js'    // 模糊查询关系
     import {ProblemQAdd} from '@/api/api/requestLogin.js'    // 新增关联
     import {addQpWhere} from '@/api/api/requestLogin.js'    // 新增关联条件
     import {selectQpWhere} from '@/api/api/requestLogin.js'    // 查询关联条件
+    import {deleteQpWhere} from '@/api/api/requestLogin.js'    // 删除关联条件
     import {deleteProblemQ} from '@/api/api/requestLogin.js'    // 删除关联
     
 
@@ -400,15 +402,22 @@
                 // fileList: [],   // 实例图片
                 treeList: [],    // 节点树数据
                 dataFilterValueArr: [], // 搜索查找的结果数据
-                whereArr: [{
-                    relationId: null,
-                    type: '',
-                    value: null
-                }],
-                whereThead: {
+                selectVagueValueArr: [], // 模糊查询关联搜索结果
+                // whereArr: [{
+                //     relationId: null,
+                //     type: '',
+                //     value: null
+                // }],
+                whereThead: { 
                     title: '标题',
                     tiaojian: '条件',
-                    value: '值'
+                    value: '值',
+                    control: '操作'
+                },
+                whereItemConfig: {
+                    relationId: null,
+                    type: null,
+                    value: null
                 },
                 TiaoJianList:[
                     {
@@ -435,8 +444,15 @@
                        title: '不等于',
                        value: '6'             
                     }
-
                 ],
+                whereType: { // 条件类型
+                    '1': '等于',
+                    '2': '小于',
+                    '3': '大于',
+                    '4': '小于等于',
+                    '5': '大于等于',
+                    '6': '不等于'
+                },
                 defaultProps: {
                   children: 'child',
                   label: 'title'
@@ -543,14 +559,30 @@
                 })
             },
             addWhere () {   
-                this.whereArr.push({
-                    relationId: null,
-                    type: '',
-                    value: null
+                addQpWhere({
+                    relationId: this.whereItemConfig.relationId,
+                    type: this.whereItemConfig.type,
+                    value: this.whereItemConfig.value
+                }).then((data)=>{
+                    this.whereItemConfig.relationId ='';
+                    this.whereItemConfig.type = '';
+                    this.whereItemConfig.value = '';
+                    this.selectQpWhere()
+                }).catch((data)=>{
+
                 })
             },
-            deleteWhere (index) {
-                this.whereArr.splice(1, index)
+            deleteWhere (e) {
+                localStorage.setItem('qpWhereId',e)
+                deleteQpWhere().then((data)=>{
+                    this.selectQpWhere()
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!'
+                    });
+                }).catch((data)=>{
+
+                })
             },
             selectTree () {   // 查询树结构
                 selectTree().then((data)=>{
@@ -566,9 +598,6 @@
                 this.nodeType = this.$refs.tree.currentNode.node.data.type
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
-                console.log(this.problemqAdd.fqaspId)
-                console.log(this.nodeType)
-                console.log(this.$refs.tree.currentNode.node.data)
             },
             getCheckedNodes() { // 通过 node 获取
                 console.log(this.$refs.tree.getCheckedNodes());
@@ -627,28 +656,24 @@
                   type: 'warning'
                 }).then(() => {
                     deleteProblemQ(this.problemqAdd.fqaspId).then((data)=>{
-                            this.$message({
-                                type: 'success',
-                                message: '删除成功!'
-                            });
-                            this.selectTree()
-                        }).catch((data)=>{
-                           this.$message({
-                            type: 'info',
-                            message: '有子集无法删除'
-                          });  
-                        }) 
-                    
+                        this.selectTree()
+                        this.$message({
+                            type: 'success',
+                            message: '删除成功!'
+                        });
+                    }).catch((data)=>{
+                       this.$message({
+                        type: 'info',
+                        message: '有子集无法删除'
+                      });  
+                    }) 
                 }).catch(() => {
                   this.$message({
                     type: 'info',
                     message: '已取消删除'
                   });          
                 });
-                
             },
-
-
             delete_answer_btn (index) {   // 点击删除，删除当前选项
                 this.add_answer.splice(index,1)
             },
@@ -672,7 +697,7 @@
             selectQpWhere() {  // 查询选中的问题下关联的关系
                 selectQpWhere().then((data)=>{
                     this.selectQpWhereList = data.data.data
-                    console.log(this.selectQpWhereList)
+                    // console.log(this.selectQpWhereList)
                 }).catch((data)=>{
 
                 })
@@ -694,19 +719,9 @@
                         this.problemqAdd.type = '';
                         this.problemqAdd.important = '';
                         localStorage.setItem('qpid',data.data.data)
-                        this.whereArr.forEach((item)=>{
-                            addQpWhere({
-                                relationId: item.relationId,
-                                type: item.type,
-                                value: item.value
-                            }).then((data)=>{
-                                item.relationId ='';
-                                item.type = '';
-                                item.value = '';
-                            }).catch((data)=>{
-
-                            })
-                        })
+                        // this.whereArr.forEach((item)=>{
+                            
+                        // })
                         // this.selectQpWhere()
                         localStorage.removeItem('qpid')
                         this.dialogQuestionConfig = false;
@@ -754,19 +769,19 @@
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
                         this.problemqAdd.important = '';
-                        this.whereArr.forEach((item)=>{
-                            addQpWhere({
-                                relationId: item.relationId,
-                                type: item.type,
-                                value: item.value
-                            }).then((data)=>{
-                                item.relationId ='';
-                                item.type = '';
-                                item.value = '';
-                            }).catch((data)=>{
+                        // this.whereArr.forEach((item)=>{
+                        //     addQpWhere({
+                        //         relationId: item.relationId,
+                        //         type: item.type,
+                        //         value: item.value
+                        //     }).then((data)=>{
+                        //         item.relationId ='';
+                        //         item.type = '';
+                        //         item.value = '';
+                        //     }).catch((data)=>{
 
-                            })
-                        })
+                        //     })
+                        // })
                         // this.selectQpWhere()
                         localStorage.removeItem('qpid')
                         this.dialogQuestionConfig = false;
@@ -798,12 +813,20 @@
                 }
                 
             },
-            dataFilter (val) {
-                selectQuestionList("title="+val).then((data)=>{
-                    this.dataFilterValueArr = data.data.data.data
+            // dataFilter (val) {  // 问题模糊搜索
+            //     selectQuestionList("title="+val).then((data)=>{
+            //         this.dataFilterValueArr = data.data.data.data
+            //     }).catch((data)=>{
+
+            //     })
+            // },
+            select_vague (val) {  // 关联的模糊搜索
+                selectVague("title="+val).then((data)=>{
+                    this.selectVagueValueArr = data.data
                 }).catch((data)=>{
 
                 })
+
             },
             handleSizeChange (size) {   // 点击分页
                 this.pagesize = size;

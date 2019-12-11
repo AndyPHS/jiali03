@@ -142,14 +142,18 @@ const apiUrl = {
   QuestionArr: baseLiHunURL + 'problem/created',
   // 添加选项
   addAnswer: baseLiHunURL + 'problem/add_answer/',
-  // 查询关系
+  // 查询关系树
   selectTree: baseLiHunURL + 'ProblemQ/select_tree',
+  // 模糊查询关联
+  selectVague: baseLiHunURL + 'ProblemQ/select_vague',
   // 新增关联
   ProblemQAdd: baseLiHunURL + 'ProblemQ/add',
   // 新增关联条件
   addQpWhere: baseLiHunURL + 'ProblemQ/add_qp_where/',
   // 查询关联条件
   selectQpWhere: baseLiHunURL + 'ProblemQ/select_qp_where/',
+  // 删除关联条件
+  deleteQpWhere: baseLiHunURL + 'ProblemQ/delete_qp_where/',
   // 删除关联
   deleteProblemQ: baseLiHunURL + 'ProblemQ/delete/',
   // 查询单独问题
