@@ -632,7 +632,7 @@
                 this.problemqAdd.problemTitle =this.$refs.tree.currentNode.node.data.problemTitle  // 绑定问题的title
                 this.problemqAdd.important = this.$refs.tree.currentNode.node.data.important  // 绑定问题是否必填
                 this.problemqAdd.id = this.$refs.tree.currentNode.node.data.id    // 当前选择的ID
-                this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的ID
+                this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的父ID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
             },
@@ -808,7 +808,7 @@
                         this.problemqAdd.important = null;
                         localStorage.removeItem('qpid')
                         this.dialogQuestionConfigUpdate = false;
-                        this.selectTree()
+                        // this.selectTree()
                     }).catch((data)=>{
 
                     })
@@ -829,7 +829,7 @@
                         this.problemqAdd.type = '';
                         this.problemqAdd.important = null;
                         // console.log(data.data.data) 
-                        this.selectTree()
+                        // this.selectTree()
                     }).catch((data)=>{
 
                     })
