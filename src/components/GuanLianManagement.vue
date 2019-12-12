@@ -564,7 +564,7 @@
                 })
             },
             bangdingQuestion (e) {  // 点击修改弹框，选择绑定问题后获取绑定问题的值
-                
+
                 localStorage.setItem('pid',e)
                 ProblemQAdd({
                     questionnaireId: 3,
@@ -627,6 +627,7 @@
                 this.problemqAdd.type = this.$refs.tree.currentNode.node.data.type  // 标题类型
                 this.problemqAdd.problemId = this.$refs.tree.currentNode.node.data.problemId  // 绑定问题的id
                 this.problemqAdd.problemTitle =this.$refs.tree.currentNode.node.data.problemTitle  // 绑定问题的title
+                this.problemqAdd.important = this.$refs.tree.currentNode.node.data.important  // 绑定问题是否必填
                 this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.id    // 当前选择的父ID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
@@ -749,7 +750,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
-                        this.problemqAdd.important = '';
+                        this.problemqAdd.important = null;
                         localStorage.setItem('qpid',data.data.data)
                         // this.whereArr.forEach((item)=>{
                             
@@ -776,7 +777,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
-                        this.problemqAdd.important = '';
+                        this.problemqAdd.important = null;
                         console.log(data.data.data) 
                         this.selectTree()
                     }).catch((data)=>{
@@ -800,7 +801,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
-                        this.problemqAdd.important = '';
+                        this.problemqAdd.important = null;
                         localStorage.removeItem('qpid')
                         this.dialogQuestionConfigUpdate = false;
                         this.selectTree()
@@ -822,7 +823,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
-                        this.problemqAdd.important = '';
+                        this.problemqAdd.important = null;
                         // console.log(data.data.data) 
                         this.selectTree()
                     }).catch((data)=>{
