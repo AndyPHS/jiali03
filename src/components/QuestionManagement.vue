@@ -67,13 +67,22 @@
                       <el-option v-for="(item, index) in problemRe" :key="index" :label="item" :value="index"></el-option>
                     </el-select>
                 </el-form-item>
-                <div  v-for="(item, index) in add_answer" :key="index" v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 " class="flex justify-between " >
-                    <el-form-item label="选项名称" :label-width="formLabelWidth">
-                         <el-input v-model="item.label" class="w-1/2" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <div>
-                        <el-button @click="add_answer_btn">添加</el-button>
-                        <el-button @click="delete_answer_btn(index)">删除</el-button>
+                <div  v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 " >
+                    <div  v-for="(item, index) in addQuestion_answer" :key="index" class="flex justify-between " >
+                        <el-form-item label="选项名称" :label-width="formLabelWidth">
+                             <el-input v-model="item.label" class="w-1/2" autocomplete="off" :disabled="true"></el-input>
+                        </el-form-item>
+                        <div>
+                            <el-button @click="deleteQuestion_answer_btn(index)">删除</el-button>
+                        </div>
+                    </div>
+                    <div   class="flex justify-between"> 
+                        <el-form-item label="选项名称" :label-width="formLabelWidth">
+                             <el-input v-model="addQuestion_answerName" class="w-1/2" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <div>
+                            <el-button @click="addQuestion_answer_btn">添加</el-button>
+                        </div>
                     </div>
                 </div>
                 <el-form-item label="是否禁用" :label-width="formLabelWidth">
@@ -107,11 +116,19 @@
                 <div v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 ">
                     <div  v-for="(item, index) in add_answer" :key="index"  class="flex justify-between" >
                         <el-form-item label="选项名称" :label-width="formLabelWidth">
-                             <el-input v-model="item.label" class="w-1/2" autocomplete="off"></el-input>
+                             <el-input v-model="item.label" class="w-1/2" autocomplete="off" :disabled="true"></el-input>
+                        </el-form-item>
+                        <div>
+                            <!-- <el-button @click="add_answer_btn">添加</el-button> -->
+                            <el-button @click="delete_answer_btn(item,index)">删除</el-button>
+                        </div>
+                    </div>
+                    <div   class="flex justify-between"> 
+                        <el-form-item label="选项名称" :label-width="formLabelWidth">
+                             <el-input v-model="answerName" class="w-1/2" autocomplete="off"></el-input>
                         </el-form-item>
                         <div>
                             <el-button @click="add_answer_btn">添加</el-button>
-                            <el-button @click="delete_answer_btn(index)">删除</el-button>
                         </div>
                     </div>
                 </div>
@@ -137,6 +154,7 @@
     import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
     import {addQuestion} from '@/api/api/requestLogin.js'   // 新增问题
     import {addAnswer} from '@/api/api/requestLogin.js'    // 添加选项
+    import {deleteAnswer} from '@/api/api/requestLogin.js'    // 删除选项
     import {selectQuestion} from '@/api/api/requestLogin.js'  // 获取用户列表
     import {selectQuestionList} from '@/api/api/requestLogin.js'  // 根据标题条件获取用户列表
     import {updateQuestion} from '@/api/api/requestLogin.js'   // 修改问题
@@ -175,10 +193,10 @@
                     status: '',    // 是否禁用
                     imgs: []       // 添加实例
                 },
-                add_answer: [{      // 添加选项
-                    status: '',
-                    label: '测试'
-                }],    // 
+                add_answer: [],   // 修改页面添加选项
+                answerName: '',   // 修改页面点击添加选项绑定的值
+                addQuestion_answer: [], // 新增页面选项列表
+                addQuestion_answerName: '',   // 新增页面点击添加选项绑定的值
                 // fileList: [],   // 实例图片
                 problemType: {},
                 problemRe: {},
@@ -245,20 +263,46 @@
                     console.log(data)
                 })
               },
-            QuestionArrOk () {
+            QuestionArrOk () {  
                 QuestionArr().then((data)=>{
                     this.problemType = data.data.data.problemType
                     this.problemRe = data.data.data.problemRe
                 })
             },
-            add_answer_btn () {
-                this.add_answer.push({      // 添加选项
-                    status: '',
-                    label: ''
+            add_answer_btn () {  // 修改页面点击添加选项
+                addAnswer({
+                    status: 1,
+                    label: this.answerName
+                }).then((data)=>{
+                    this.selectOnlyQuestionList()
+                    this.$message({
+                        type: 'success',
+                        message: '成功添加选项!'
+                      });
+                    this.answerName = ''
                 })
             },
-            delete_answer_btn (index) {
-                this.add_answer.splice(index,1)
+            delete_answer_btn (item,index) { // 修改页面点击删除选项
+                localStorage.setItem('paid',item.id)
+                deleteAnswer().then((data)=>{
+                    this.$message({
+                        type: 'success',
+                        message: '删除选项成功!'
+                      });
+                    this.selectOnlyQuestionList()
+                }).catch((data)=>{
+
+                })
+            },
+            addQuestion_answer_btn () {  // 新增问题页面点击添加选项
+                this.addQuestion_answer.push({
+                    status: 1,
+                    label:this.addQuestion_answerName
+                })
+                this.addQuestion_answerName = ''
+            },
+            deleteQuestion_answer_btn (index) { // 新增问题页面点击删除选项
+                this.addQuestion_answer.splice(index,1)
             },
             handleSizeChange (size) {   // 点击分页
                 this.pagesize = size;
@@ -267,7 +311,8 @@
                 this.currentPage = currentPage;
             },
             
-            handleQuestionAdd () {    // 点击新增
+            handleQuestionAdd () {    // 点击新增问题
+                localStorage.removeItem('pid');
                 this.user.title = '';
                 this.user.type = '';
                 this.user.status = '';
@@ -286,45 +331,44 @@
                     this.user.status = '';
                     this.handleQuestionList()
                     localStorage.setItem('pid',data.data.data)
-                    this.add_answer.forEach((item)=>{
+                    this.addQuestion_answer.forEach((item)=>{
                         addAnswer({
                             status: 1,
                             label: item.label
                         }).then((data)=>{
-                            console.log('添加成功')
+                            
                         })
                     })
+                    this.$message({
+                        type: 'success',
+                        message: '成功添加问题!'
+                    });
+                    localStorage.removeItem('pid');
                     this.dialogQuestionAdd = false
                 }).catch((data)=>{
 
                 })
             },
-            selectOnlyQuestionList () {
-                console.log(1)
-               
-            },
+
             updateQuestion (item) {    // 点击修改问题
-                
+                localStorage.setItem('pid',item.id)
                 this.user.title = item.title;
                 this.user.type = item.type;
                 this.user.re = item.re;
                 this.user.status = item.status;
+                this.dialogFormVisible = true
                 if(this.user.type==6 || this.user.type==7 || this.user.type==8 || this.user.type==9 ){
-                    selectOnlyQuestion(item.id).then((data)=>{
-                         this.add_answer = data.data.child
-                        console.log(this.add_answer)
-                        this.dialogFormVisible = true
-                        
-                    }).catch((data)=>{
-                    })
-
+                    this.selectOnlyQuestionList()
                 }
-                
-               // console.log(this.add_answer)
+            },
+            selectOnlyQuestionList () {  // 修改页面查询当前问题下的选项列表
+                selectOnlyQuestion().then((data)=>{
+                     this.add_answer = data.data.child       
+                }).catch((data)=>{
+                })
             },
             handleCheckedCitiesChange (value) {
                 this.chooseUserRole = value
-                
             },
             updataQuestionMsg () {   // 确定修改用户信息
                 if(this.user.type==1){
@@ -351,14 +395,6 @@
                         this.user.title = '';
                         this.user.type = '';
                         this.user.status = '';
-                        this.add_answer.forEach((item)=>{
-                            addAnswer({
-                                status: 1,
-                                label: item.label
-                            }).then((data)=>{
-                                console.log('添加成功')
-                            })
-                        })
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
                         this.dialogFormVisible = false

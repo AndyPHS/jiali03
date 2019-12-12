@@ -142,6 +142,8 @@ const apiUrl = {
   QuestionArr: baseLiHunURL + 'problem/created',
   // 添加选项
   addAnswer: baseLiHunURL + 'problem/add_answer/',
+  // 删除选项
+  deleteAnswer: baseLiHunURL + 'problem/delete_answer/',
   // 查询关系树
   selectTree: baseLiHunURL + 'ProblemQ/select_tree',
   // 模糊查询关联

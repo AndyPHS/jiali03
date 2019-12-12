@@ -479,7 +479,7 @@ export const addAnswer = params => {
 // 删除选项deleteAnswer
 export const deleteAnswer = params => {
   return axios({
-    method: "post",
+    method: "delete",
     dataType: 'json',
     url: apiUrl.deleteAnswer + localStorage.getItem('paid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
@@ -562,7 +562,7 @@ export const selectOnlyQuestion = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.selectOnlyQuestion + params,
+    url: apiUrl.selectOnlyQuestion + localStorage.getItem('pid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
