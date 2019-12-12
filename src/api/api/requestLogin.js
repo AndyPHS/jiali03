@@ -466,12 +466,22 @@ export const QuestionArr = params => {
     data: params
   });
 };
-// 修改问题
+// 添加选项
 export const addAnswer = params => {
   return axios({
     method: "post",
     dataType: 'json',
-    url: apiUrl.addAnswer + '/' + localStorage.getItem('pid'),
+    url: apiUrl.addAnswer + localStorage.getItem('pid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除选项deleteAnswer
+export const deleteAnswer = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.deleteAnswer + localStorage.getItem('paid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -552,7 +562,7 @@ export const selectOnlyQuestion = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.selectOnlyQuestion + localStorage.getItem('pid'),
+    url: apiUrl.selectOnlyQuestion + params,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

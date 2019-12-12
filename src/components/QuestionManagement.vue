@@ -51,6 +51,7 @@
                     :total="this.min.total">
                 </el-pagination>
             </div>
+            <!-- 新增问题弹窗 -->
             <el-dialog title="新增问题" :visible.sync="dialogQuestionAdd">
               <el-form :model="user">
                 <el-form-item label="名称" :label-width="formLabelWidth">
@@ -87,6 +88,7 @@
                 <el-button type="primary" @click="addNewQuestion">确 定</el-button>
               </div>
             </el-dialog>
+            <!-- 修改问题弹窗 -->
             <el-dialog title="修改问题" :visible.sync="dialogFormVisible">
               <el-form :model="user">
                 <el-form-item label="名称" :label-width="formLabelWidth">
@@ -102,15 +104,18 @@
                       <el-option v-for="(item, index) in problemRe" :key="index" :label="item" :value="index">{{item}}</el-option>
                     </el-select>
                 </el-form-item>
-                <div  v-for="(item, index) in add_answer" :key="index" v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 " class="flex justify-between" >
-                    <el-form-item label="选项名称" :label-width="formLabelWidth">
-                         <el-input v-model="item.label" class="w-1/2" autocomplete="off"></el-input>
-                    </el-form-item>
-                    <div>
-                        <el-button @click="add_answer_btn">添加</el-button>
-                        <el-button @click="delete_answer_btn(index)">删除</el-button>
+                <div v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 ">
+                    <div  v-for="(item, index) in add_answer" :key="index"  class="flex justify-between" >
+                        <el-form-item label="选项名称" :label-width="formLabelWidth">
+                             <el-input v-model="item.label" class="w-1/2" autocomplete="off"></el-input>
+                        </el-form-item>
+                        <div>
+                            <el-button @click="add_answer_btn">添加</el-button>
+                            <el-button @click="delete_answer_btn(index)">删除</el-button>
+                        </div>
                     </div>
                 </div>
+                
                 <el-form-item label="是否禁用" :label-width="formLabelWidth">
                     <el-radio-group v-model="user.status">
                         <el-radio :label="1">是</el-radio>
@@ -136,8 +141,9 @@
     import {selectQuestionList} from '@/api/api/requestLogin.js'  // 根据标题条件获取用户列表
     import {updateQuestion} from '@/api/api/requestLogin.js'   // 修改问题
     import {deleteQuestion} from '@/api/api/requestLogin.js'   // 删除问题
+    import {selectOnlyQuestion} from '@/api/api/requestLogin.js'   // 查询单独问题
     import {QuestionArr} from '@/api/api/requestLogin.js'    // 问题数组
-    addAnswer
+
     export default {
         components:{
             HeadMenu,
@@ -171,7 +177,7 @@
                 },
                 add_answer: [{      // 添加选项
                     status: '',
-                    label: ''
+                    label: '测试'
                 }],    // 
                 // fileList: [],   // 实例图片
                 problemType: {},
@@ -293,14 +299,28 @@
 
                 })
             },
+            selectOnlyQuestionList () {
+                console.log(1)
+               
+            },
             updateQuestion (item) {    // 点击修改问题
-                this.dialogFormVisible = true
+                
                 this.user.title = item.title;
                 this.user.type = item.type;
                 this.user.re = item.re;
                 this.user.status = item.status;
-                localStorage.setItem('pid',item.id);
-               
+                if(this.user.type==6 || this.user.type==7 || this.user.type==8 || this.user.type==9 ){
+                    selectOnlyQuestion(item.id).then((data)=>{
+                         this.add_answer = data.data.child
+                        console.log(this.add_answer)
+                        this.dialogFormVisible = true
+                        
+                    }).catch((data)=>{
+                    })
+
+                }
+                
+               // console.log(this.add_answer)
             },
             handleCheckedCitiesChange (value) {
                 this.chooseUserRole = value
