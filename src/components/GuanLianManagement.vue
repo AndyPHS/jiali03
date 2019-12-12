@@ -467,12 +467,13 @@
                   children: 'child',
                   label: 'title'
                 },
+                problemId: null,
                 fqaspId: null,   // 当前选中的树形结构的节点
-                nodeType: null,  // 当前选中的树形结构的类型
                 nodeChild: null, // 当前选中的树形结构是否有子集
                 problemqAdd: {   
                     questionnaireId: 3,
                     problemId: null,
+                    problemTitle: '',
                     orderId: 0,
                     fqaspId: null,
                     important: null,
@@ -563,6 +564,7 @@
                 })
             },
             bangdingQuestion (e) {  // 点击修改弹框，选择绑定问题后获取绑定问题的值
+                
                 localStorage.setItem('pid',e)
                 ProblemQAdd({
                     questionnaireId: 3,
@@ -622,8 +624,10 @@
             },
             // 操作树结构
             handleTreeJieDian () {
-                this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.id
-                this.nodeType = this.$refs.tree.currentNode.node.data.type
+                this.problemqAdd.type = this.$refs.tree.currentNode.node.data.type  // 标题类型
+                this.problemqAdd.problemId = this.$refs.tree.currentNode.node.data.problemId  // 绑定问题的id
+                this.problemqAdd.problemTitle =this.$refs.tree.currentNode.node.data.problemTitle  // 绑定问题的title
+                this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.id    // 当前选择的父ID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
             },
@@ -670,7 +674,7 @@
             },
             updateTree(){   // 修改树结构
                 localStorage.setItem('qpid',this.problemqAdd.fqaspId)
-                if(this.nodeType==1){
+                if(this.problemqAdd.type==1){
                    this.dialogaddTreeTitle = true; 
                 }else{
                     this.dialogQuestionConfigUpdate = true;
