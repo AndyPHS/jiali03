@@ -516,6 +516,17 @@ export const ProblemQAdd = params => {
     data: params
   });
 };
+
+// 修改关联
+export const updateProblemQ = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateProblemQ + localStorage.getItem('qpid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 新增关联条件
 export const addQpWhere  = params => {
   return axios({

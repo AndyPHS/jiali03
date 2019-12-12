@@ -377,6 +377,8 @@
     import {selectQpWhere} from '@/api/api/requestLogin.js'    // 查询关联条件
     import {deleteQpWhere} from '@/api/api/requestLogin.js'    // 删除关联条件
     import {deleteProblemQ} from '@/api/api/requestLogin.js'    // 删除关联
+    import {updateProblemQ} from '@/api/api/requestLogin.js'    // 修改关联
+    
     
 
     export default {
@@ -566,7 +568,7 @@
             bangdingQuestion (e) {  // 点击修改弹框，选择绑定问题后获取绑定问题的值
 
                 localStorage.setItem('pid',e)
-                ProblemQAdd({
+                updateProblemQ({
                     questionnaireId: 3,
                     problemId: this.problemqAdd.problemId,
                     orderId: 0,
@@ -657,7 +659,7 @@
                 this.dialogaddTreeTitle = true;
             },
             addTreeTitleConfig () { // 确认添加标题
-                ProblemQAdd({
+                updateProblemQ({
                     questionnaireId: 3,
                     orderId: 0,
                     fqaspId: this.problemqAdd.fqaspId,
@@ -737,7 +739,7 @@
             },
             addQuestionConfig () {  // 点击确定提交当前问题的配置
                 if(this.problemqAdd.type==6 || this.problemqAdd.type==7 || this.problemqAdd.type==8 || this.problemqAdd.type==9 ){
-                    ProblemQAdd({
+                    updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
                         orderId: 0,
@@ -763,7 +765,7 @@
 
                     })
                 }else{
-                    ProblemQAdd({
+                    updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
                         orderId: 0,
@@ -788,7 +790,7 @@
             },
              addQuestionConfigUpdate () {  // 修改配置点击确定提交当前问题的配置
                 if(this.problemqAdd.type==6 || this.problemqAdd.type==7 || this.problemqAdd.type==8 || this.problemqAdd.type==9 ){
-                    ProblemQAdd({
+                    updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
                         orderId: 0,
@@ -809,7 +811,7 @@
 
                     })
                 }else{
-                    ProblemQAdd({
+                    updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
                         orderId: 0,

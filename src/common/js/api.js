@@ -152,6 +152,8 @@ const apiUrl = {
   ProblemQAdd: baseLiHunURL + 'ProblemQ/add',
   // 新增关联条件
   addQpWhere: baseLiHunURL + 'ProblemQ/add_qp_where/',
+  // 修改关联
+  updateProblemQ: baseLiHunURL + 'ProblemQ/update/',
   // 查询关联条件
   selectQpWhere: baseLiHunURL + 'ProblemQ/select_qp_where/',
   // 删除关联条件
