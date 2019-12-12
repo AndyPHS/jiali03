@@ -680,14 +680,17 @@
                 })
             },
             updateTree(){   // 修改树结构
-                this.problemqAdd.problemId = this.problemqAdd.problemTitle
+                
                 localStorage.setItem('qpid',this.problemqAdd.id)
                 if(this.problemqAdd.type==1){
                    this.dialogaddTreeTitle = true; 
+                   this.problemqAdd.problemId = this.problemqAdd.problemTitle
                 }else{
                     this.dialogQuestionConfigUpdate = true;
-                    console.log(this.problemqAdd.problemType)
-                    this.selectQpWhere()
+                    this.selectQpWhere();
+                    localStorage.setItem('pid',this.problemqAdd.problemId)
+                    this.selectOnlyQuestion()
+                    this.problemqAdd.problemId = this.problemqAdd.problemTitle
                 }
             },
             deletedTree () {   // 删除树节点
