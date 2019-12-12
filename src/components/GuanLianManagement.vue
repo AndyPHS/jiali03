@@ -262,7 +262,7 @@
                 </el-radio-group>
             </el-form-item>
             <el-form-item label="绑定问题" :label-width="formLabelWidth">
-                <el-select v-model="problemqAdd.problemId" filterable :filter-method="dataFilter" placeholder="请选择">
+                <el-select v-model="problemqAdd.problemId" filterable :filter-method="dataFilter" @change="bangdingQuestion(problemqAdd.problemId)" placeholder="请选择">
                     <el-option
                       v-for="item in dataFilterValueArr"
                       :key="item.id"
@@ -271,7 +271,7 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <div >
+            <div v-if="problemqAdd.problemId ==6|| problemqAdd.problemId ==7 || problemqAdd.problemId ==8 || problemqAdd.problemId ==9">
                 <div class="relative wenti">
                     <span class="h-1"></span>
                     <span class="px-2 py-2 border absolute left-0 top-0 z-10 bg-white">问题关系配置</span>
@@ -562,6 +562,24 @@
                     this.problemRe = data.data.data.problemRe
                 })
             },
+            bangdingQuestion (e) {  // 点击修改弹框，选择绑定问题后获取绑定问题的值
+                localStorage.setItem('pid',e)
+                ProblemQAdd({
+                    questionnaireId: 3,
+                    problemId: this.problemqAdd.problemId,
+                    orderId: 0,
+                    fqaspId: this.problemqAdd.fqaspId,
+                    important: this.problemqAdd.important,
+                    type: this.problemqAdd.type,
+                    class: this.problemqAdd.class,
+                    title: this.problemqAdd.title
+                }).then((data)=>{
+                   
+                }).catch((data)=>{
+
+                })
+                this.selectOnlyQuestion ()
+            },
             add_answer_btn () {
                 this.add_answer.push({      // 添加选项
                     status: '',
@@ -699,7 +717,7 @@
                     this.selectOnlyLisg = data.data.child
                     this.problemqAdd.type = data.data[0].type
                     this.problemqAdd.title = data.data[0].title
-                    // console.log(this.problemqAdd.type)
+                    localStorage.removeItem('pid')
                 }).catch((data)=>{
 
                 })
@@ -763,7 +781,7 @@
                 }
                 
             },
-             addQuestionConfigUpdate () {  // 点击确定提交当前问题的配置
+             addQuestionConfigUpdate () {  // 修改配置点击确定提交当前问题的配置
                 if(this.problemqAdd.type==6 || this.problemqAdd.type==7 || this.problemqAdd.type==8 || this.problemqAdd.type==9 ){
                     ProblemQAdd({
                         questionnaireId: 3,
@@ -801,7 +819,7 @@
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
                         this.problemqAdd.important = '';
-                        console.log(data.data.data) 
+                        // console.log(data.data.data) 
                         this.selectTree()
                     }).catch((data)=>{
 
