@@ -433,10 +433,6 @@
                 },
                 TiaoJianList:[
                     {
-                       title: '大于',
-                       value: '3'             
-                    },
-                    {
                        title: '等于',
                        value: '1'             
                     },
@@ -445,16 +441,8 @@
                        value: '2'             
                     },
                     {
-                       title: '小于等于',
-                       value: '4'             
-                    },
-                    {
-                       title: '大于等于',
-                       value: '5'             
-                    },
-                    {
-                       title: '不等于',
-                       value: '6'             
+                       title: '大于',
+                       value: '3'             
                     }
                 ],
                 whereType: { // 条件类型
