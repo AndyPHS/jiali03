@@ -271,7 +271,7 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <div v-if="problemqAdd.problemId ==6|| problemqAdd.problemId ==7 || problemqAdd.problemId ==8 || problemqAdd.problemId ==9">
+            <div v-if="problemqAdd.problemType ==6|| problemqAdd.problemType ==7 || problemqAdd.problemType ==8 || problemqAdd.problemType ==9">
                 <div class="relative wenti">
                     <span class="h-1"></span>
                     <span class="px-2 py-2 border absolute left-0 top-0 z-10 bg-white">问题关系配置</span>
@@ -476,6 +476,7 @@
                     questionnaireId: 3,
                     problemId: null,
                     problemTitle: '',
+                    problemType: null,
                     orderId: 0,
                     fqaspId: null,
                     important: null,
@@ -629,7 +630,8 @@
             handleTreeJieDian () {
                 this.problemqAdd.type = this.$refs.tree.currentNode.node.data.type  // 标题类型
                 this.problemqAdd.problemId = this.$refs.tree.currentNode.node.data.problemId  // 绑定问题的id
-                this.problemqAdd.problemTitle =this.$refs.tree.currentNode.node.data.problemTitle  // 绑定问题的title
+                this.problemqAdd.problemTitle = this.$refs.tree.currentNode.node.data.problemTitle  // 绑定问题的title
+                this.problemqAdd.problemType = this.$refs.tree.currentNode.node.data.problemType // 绑定问题的类型
                 this.problemqAdd.important = this.$refs.tree.currentNode.node.data.important  // 绑定问题是否必填
                 this.problemqAdd.id = this.$refs.tree.currentNode.node.data.id    // 当前选择的ID
                 this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的父ID
@@ -678,11 +680,13 @@
                 })
             },
             updateTree(){   // 修改树结构
+                this.problemqAdd.problemId = this.problemqAdd.problemTitle
                 localStorage.setItem('qpid',this.problemqAdd.id)
                 if(this.problemqAdd.type==1){
                    this.dialogaddTreeTitle = true; 
                 }else{
                     this.dialogQuestionConfigUpdate = true;
+                    console.log(this.problemqAdd.problemType)
                     this.selectQpWhere()
                 }
             },
