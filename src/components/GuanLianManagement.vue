@@ -470,7 +470,7 @@
                   label: 'title'
                 },
                 problemId: null,
-                fqaspId: null,   // 当前选中的树形结构的节点
+                // fqaspId: null,   // 当前选中的树形结构的节点
                 nodeChild: null, // 当前选中的树形结构是否有子集
                 problemqAdd: {   
                     questionnaireId: 3,
@@ -479,6 +479,7 @@
                     orderId: 0,
                     fqaspId: null,
                     important: null,
+                    id: null,   // 当前选中的树形结构的节点
                     type: null,
                     class: null,
                     title: '',
@@ -630,7 +631,8 @@
                 this.problemqAdd.problemId = this.$refs.tree.currentNode.node.data.problemId  // 绑定问题的id
                 this.problemqAdd.problemTitle =this.$refs.tree.currentNode.node.data.problemTitle  // 绑定问题的title
                 this.problemqAdd.important = this.$refs.tree.currentNode.node.data.important  // 绑定问题是否必填
-                this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.id    // 当前选择的父ID
+                this.problemqAdd.id = this.$refs.tree.currentNode.node.data.id    // 当前选择的ID
+                this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的ID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
             },
@@ -676,7 +678,7 @@
                 })
             },
             updateTree(){   // 修改树结构
-                localStorage.setItem('qpid',this.problemqAdd.fqaspId)
+                localStorage.setItem('qpid',this.problemqAdd.id)
                 if(this.problemqAdd.type==1){
                    this.dialogaddTreeTitle = true; 
                 }else{
@@ -690,7 +692,7 @@
                   cancelButtonText: '取消',
                   type: 'warning'
                 }).then(() => {
-                    deleteProblemQ(this.problemqAdd.fqaspId).then((data)=>{
+                    deleteProblemQ(this.problemqAdd.id).then((data)=>{
                         this.selectTree()
                         this.$message({
                             type: 'success',
