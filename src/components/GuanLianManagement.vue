@@ -150,7 +150,7 @@
             <el-form-item label="标题" :label-width="formLabelWidth" class="mb-1">
               <el-input v-model="problemqAdd.title" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
-            <div v-if="problemqAdd.type!=6 && problemqAdd.type!=7 && problemqAdd.type!=8 && problemqAdd.type!=9 " >
+            <div>
                 <el-form-item label="类型" :label-width="formLabelWidth">
                     <el-radio-group v-model="problemqAdd.type">
                         <el-radio :label="2">不可重复</el-radio>
@@ -243,7 +243,7 @@
             <el-form-item label="标题" :label-width="formLabelWidth" class="mb-1">
               <el-input v-model="problemqAdd.title" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
-            <div v-if="problemqAdd.type!=6 && problemqAdd.type!=7 && problemqAdd.type!=8 && problemqAdd.type!=9 " >
+            <div>
                 <el-form-item label="类型" :label-width="formLabelWidth">
                     <el-radio-group v-model="problemqAdd.type">
                         <el-radio :label="2">不可重复</el-radio>
@@ -719,7 +719,7 @@
             selectOnlyQuestion () {  // 查询单独问题
                 selectOnlyQuestion().then((data)=>{
                     this.selectOnlyLisg = data.data.child
-                    this.problemqAdd.type = data.data[0].type
+                    this.problemqAdd.problemType = data.data[0].type
                     this.problemqAdd.title = data.data[0].title
                     localStorage.removeItem('pid')
                 }).catch((data)=>{
