@@ -81,7 +81,7 @@
                     <el-option
                       v-for="item in dataFilterValueArr"
                       :key="item.id"
-                      :label="item.title"
+                      :label="item.qpTitle"
                       :value="item.id">
                     </el-option>
                 </el-select>
@@ -106,7 +106,7 @@
             </el-form-item>
         </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogNewWord = false">取 消</el-button>
+            <el-button @click="cancelAddWord">取 消</el-button>
             <el-button type="primary" @click="addWordOk">确 定</el-button>
           </div>
         </el-dialog>
@@ -122,7 +122,7 @@
                     <el-option
                       v-for="item in dataFilterValueArr"
                       :key="item.id"
-                      :label="item.title"
+                      :label="item.qpTitle"
                       :value="item.id">
                     </el-option>
                 </el-select>
@@ -151,7 +151,7 @@
             </div>
         </el-form>
           <div slot="footer" class="dialog-footer">
-            <el-button @click="dialogUpdateWord = false">取 消</el-button>
+            <el-button @click="cancelAddWord">取 消</el-button>
             <el-button type="primary" @click="updateWordOk">确 定</el-button>
           </div>
           <div class="text-center">
@@ -229,7 +229,9 @@
     import {wordSelectTree} from '@/api/api/requestLogin.js'    // 查询组合规则tree结构
     
     import {selectQuestionList} from '@/api/api/requestLogin.js'  // 根据标题条件获取用户列表
-    import {selectOnlyQuestion} from '@/api/api/requestLogin.js'  // 根据标题条件获取用户列表
+    import {selectVague} from '@/api/api/requestLogin.js'  // 模糊查询关联
+    // import {selectOnlyQuestion} from '@/api/api/requestLogin.js'  // 根据标题条件获取用户列表
+    
 
     export default {
         components:{
@@ -406,6 +408,16 @@
                     this.wordAddWhere = {} // 清空组合绑定的问题
                 }
             },
+            cancelAddWord () {
+              this.dialogNewWord = false; // 取消新增弹框
+              this.dialogUpdateWord = false; // 取消修改弹框
+              this.wordAdd.title = '';
+              this.wordAddWhere.type = null;
+              this.wordAddWhere.value = null;
+              this.wordAddWhere.replate = '';
+               this.wordAddWhere.id = null
+            },
+            
             addWordOk () {   // 点击新增组合确定按钮提交表单
                 this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
@@ -453,22 +465,27 @@
                 }  
             },
             dataFilter (val) { // 筛选问题
-                selectQuestionList("title="+val).then((data)=>{
-                    this.dataFilterValueArr = data.data.data.data
+                selectVague("title="+val).then((data)=>{
+                    this.dataFilterValueArr = data.data
                 }).catch((data)=>{
 
                 })
             },
             selectOnlyQuestion () {  // 查询问题新绑定的值
-                localStorage.setItem('pid',this.wordAddWhere.qpid)
-                selectOnlyQuestion().then((data)=>{
-                    this.selectOnlyLisg = data.data.child
-                    // this.problemqAdd.type = data.data[0].type
-                    // this.problemqAdd.title = data.data[0].title
-                    // console.log(this.problemqAdd.type)
-                }).catch((data)=>{
+                for(let i = 0;i < this.dataFilterValueArr.length; i++ ){
+                  if(this.dataFilterValueArr[i].id == this.wordAddWhere.qpid){
+                    this.selectOnlyLisg = this.dataFilterValueArr[i].child
+                  }
+                }
+                // localStorage.setItem('pid',this.wordAddWhereItem.problemId)
+                // selectOnlyQuestion().then((data)=>{
+                //     this.selectOnlyLisg = data.data.child
+                //     // this.problemqAdd.type = data.data[0].type
+                //     // this.problemqAdd.title = data.data[0].title
+                //     // console.log(this.problemqAdd.type)
+                // }).catch((data)=>{
 
-                })
+                // })
             },
             deleteWordAlert () { // 点击删除组合规则，弹出对话框
               this.dialogDeleteWord = true;
