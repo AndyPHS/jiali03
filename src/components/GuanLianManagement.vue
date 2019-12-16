@@ -629,6 +629,7 @@
                 this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的父ID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
+                console.log(this.problemqAdd.fqaspId)
             },
             getCheckedNodes() { // 通过 node 获取
                 console.log(this.$refs.tree.getCheckedNodes());
@@ -658,7 +659,7 @@
                 ProblemQAdd({
                     questionnaireId: 3,
                     orderId: 0,
-                    fqaspId: this.problemqAdd.fqaspId,
+                    fqaspId: this.problemqAdd.id,
                     class: this.problemqAdd.class,
                     type: 1,
                     title: this.problemqAdd.title
