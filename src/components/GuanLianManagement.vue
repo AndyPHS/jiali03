@@ -6,6 +6,7 @@
                 <div class="border border-1 rounded">
                     <h2 class="text-xl py-2">离婚协议书</h2>
                     <div class="h-40 overflow-scroll">
+
                         <el-tree
                           :data="treeList"
                           default-expand-all
@@ -15,6 +16,7 @@
                           highlight-current
                           @node-click="handleTreeJieDian()"
                           :props="defaultProps">
+                          <!-- <span slot-scope="{ node, data }">{{ node }}</span> -->
                         </el-tree>
                     </div>
                     <div class="w-2/3 text-left flex justify-around py-3">
@@ -412,6 +414,7 @@
                     label: ''
                 }],    // 
                 // fileList: [],   // 实例图片
+                treeId: null, // 树结构前面的节点
                 treeList: [],    // 节点树数据
                 dataFilterValueArr: [], // 点击修改弹出的绑定问题模糊搜索
                 selectVagueValueArr: [], // 点击修改弹出的绑定问题模糊搜索关联搜索结果
@@ -609,6 +612,7 @@
             selectTree () {   // 查询树结构
                 selectTree().then((data)=>{
                     this.treeList = data.data.data
+                    // this.treeId = this.$refs.tree.currentNode.node.data.id
                     // console.log(this.treeList)
                 }).catch((data)=>{
                     console.log("请求失败")
@@ -651,7 +655,7 @@
                 this.dialogaddTreeTitle = true;
             },
             addTreeTitleConfig () { // 确认添加标题
-                updateProblemQ({
+                ProblemQAdd({
                     questionnaireId: 3,
                     orderId: 0,
                     fqaspId: this.problemqAdd.fqaspId,
@@ -672,13 +676,14 @@
                 localStorage.setItem('qpid',this.problemqAdd.id)
                 if(this.problemqAdd.type==1){
                    this.dialogaddTreeTitle = true; 
-                   this.problemqAdd.problemId = this.problemqAdd.problemTitle
+                   // this.problemqAdd.problemId = this.problemqAdd.problemTitle
                 }else{
                     this.dialogQuestionConfigUpdate = true;
                     this.selectQpWhere();
                     localStorage.setItem('pid',this.problemqAdd.problemId)
                     this.selectOnlyQuestion()
-                    this.problemqAdd.problemId = this.problemqAdd.problemTitle
+                    this.problemqAdd.problemId = {label:this.problemAdd.problemId,
+                                                  value:this.problemqAdd.problemTitle}
                 }
             },
             deletedTree () {   // 删除树节点
