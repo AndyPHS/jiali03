@@ -661,3 +661,25 @@ export const deleteWordJson = params => {
     data: params
   });
 };
+
+// 查询问卷基本信息
+export const returnQuestionnaireJson = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.returnQuestionnaireJson + '6?qpid='+params.qpid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 用户添加问卷的内容
+
+export const userAddAnswer = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.userAddAnswer,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};

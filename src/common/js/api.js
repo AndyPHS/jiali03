@@ -179,7 +179,12 @@ const apiUrl = {
   // 修改word的json部分
   updateWordJson: baseLiHunURL + 'word/updateWordJson/',
   // 删除word的json部分
-  deleteWordJson: baseLiHunURL + 'word/deleteWordJson/'
+  deleteWordJson: baseLiHunURL + 'word/deleteWordJson/',
+
+  // 查询问卷基本信息
+  returnQuestionnaireJson: baseLiHunURL + 'word/returnQuestionnaireJson/',
+  // 用户添加问卷的内容
+  userAddAnswer: baseLiHunURL + 'word/user_add_answer'
 }
 export{
   apiUrl
