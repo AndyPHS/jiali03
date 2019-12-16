@@ -166,9 +166,9 @@
                             v-for="(item, index) in this.wordAdd.where"
                             :key="index"
                         >
-                            <td class="border text-black">{{ item.qpid }}</td>
+                            <td class="border text-black">{{ item.title }}</td>
                             <td class="border text-black">{{ item.type }}</td>
-                            <td class="border text-black">{{ item.value }}</td>
+                            <td class="border text-black">{{ item.label }}</td>
                             <td class="border text-black">{{ item.replate }}</td>
                             <td class="border text-black justify-around">
                                 <div class="flex justify-around py-2 w-2/3 mx-auto">
@@ -273,6 +273,8 @@
                     where: []     // 条件
                 },
                 wordAddWhere:{  // 单独绑定的组合规则
+                    title: '',
+                    label: '',
                     qpid: null,
                     type: null,
                     value: null,
@@ -296,10 +298,6 @@
                 dataFilterValueArr: [], // 搜索查找的结果数据
                 TiaoJianList:[   // 条件列表
                     {
-                       title: '大于',
-                       value: '3'             
-                    },
-                    {
                        title: '等于',
                        value: '1'             
                     },
@@ -308,16 +306,8 @@
                        value: '2'             
                     },
                     {
-                       title: '小于等于',
-                       value: '4'             
-                    },
-                    {
-                       title: '大于等于',
-                       value: '5'             
-                    },
-                    {
-                       title: '不等于',
-                       value: '6'             
+                       title: '大于',
+                       value: '3'             
                     }
                 ],
                 selectOnlyLisg: [],    // 查询单独问题
@@ -510,8 +500,8 @@
                 this.wordAdd.title = this.wordTreeMsg.title
                 localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 wordSelect().then((data)=>{
-                    this.wordAdd.where = JSON.parse(data.data.data.where)
-                    console.log( this.wordAdd.where)
+                    this.wordAdd.where = data.data.data.where
+                    
                 }).catch((data)=>{
 
                 })
@@ -519,8 +509,11 @@
             updateWordOk () {   // 点击新增组合确定按钮提交表单
                 // this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 this.wordAddWhere = {} // 清空组合绑定的问题
+                for(let i = 0;i<this.wordAdd.where.length;i++){
+                  this.$delete(this.wordAdd.where[i], 'label')
+                  this.$delete(this.wordAdd.where[i], 'title')
+                }
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
-
                 updateWord({
                     title:this.wordAdd.title,
                     fWordId :this.wordTreeMsg.fatherId,
