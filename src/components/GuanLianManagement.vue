@@ -676,14 +676,19 @@
                 localStorage.setItem('qpid',this.problemqAdd.id)
                 if(this.problemqAdd.type==1){
                    this.dialogaddTreeTitle = true; 
-                   // this.problemqAdd.problemId = this.problemqAdd.problemTitle
+                   this.dataFilterValueArr = [{
+                        title:this.problemqAdd.problemTitle,
+                        id:this.problemqAdd.problemId
+                   }]
                 }else{
                     this.dialogQuestionConfigUpdate = true;
                     this.selectQpWhere();
                     localStorage.setItem('pid',this.problemqAdd.problemId)
                     this.selectOnlyQuestion()
-                    this.problemqAdd.problemId = {label:this.problemAdd.problemId,
-                                                  value:this.problemqAdd.problemTitle}
+                    this.dataFilterValueArr = [{
+                        title:this.problemqAdd.problemTitle,
+                        id:this.problemqAdd.problemId
+                   }]
                 }
             },
             deletedTree () {   // 删除树节点
