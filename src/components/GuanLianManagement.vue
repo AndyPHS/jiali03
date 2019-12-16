@@ -747,11 +747,11 @@
             },
             addQuestionConfig () {  // 点击确定提交当前问题的配置
                 if(this.problemqAdd.type==6 || this.problemqAdd.type==7 || this.problemqAdd.type==8 || this.problemqAdd.type==9 ){
-                    updateProblemQ({
+                    ProblemQAdd({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
                         orderId: 0,
-                        fqaspId: this.problemqAdd.fqaspId,
+                        fqaspId: this.problemqAdd.id,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
                         class: this.problemqAdd.class,
@@ -773,11 +773,11 @@
 
                     })
                 }else{
-                    updateProblemQ({
+                    ProblemQAdd({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
                         orderId: 0,
-                        fqaspId: this.problemqAdd.fqaspId,
+                        fqaspId: this.problemqAdd.id,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
                         class: this.problemqAdd.class,
