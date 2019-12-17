@@ -9,461 +9,351 @@
             <div v-for="(item,index) in childAll" :key="index">
               <!-- <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">其他财产</h2> -->
               <!-- 大问题块 -->
-               <div v-for="($item,$index) in item"  :key="$index">
-                  <h2 class="text-left">{{$item.title}}</h2>
-                  <!-- 一级问题块 -->
-                  <div v-for="($$item,$$index) in $item.questions" :key="$$index">
-                    <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
-                      <!--日期-精确到日-->
-                      <div v-if="$$item.type == 'dateTime_day'">
-                        <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
-                          <el-date-picker
-                            v-model="$$item.answer"
-                            type="date"
-                            size="small"
-                            placeholder="选择日期"
-                            format="yyyy 年 MM 月 dd 日"
-                            @change="userAddAnswerAction($$item)"
-                            value-format="yyyy-MM-dd">
-                          </el-date-picker>
-                        </el-form-item>
-                      </div>
-                      <!--输入框-文字类型-->
-                      <div v-if="$$item.type == 'input' && $$item.input_type=='text'">
-                        <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
-                          <el-input
-                            type="text"
-                            class="ban"
-                            v-model="$$item.answer"
-                            size="small"
-                            :placeholder="$$item.placeholder"
-                            @blur="userAddAnswerAction($$item)"
-                          ></el-input>
-                        </el-form-item>
-                      </div>
-                      <!--输入框-数字类型（类似身份证号、金额）-->
-                      <div v-if="$$item.type == 'input' && $$item.input_type=='number'">
-                        <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
-                          <el-input
-                            type="number"
-                            class="ban"
-                            v-model="$$item.answer"
-                            size="small"
-                            :placeholder="$$item.placeholder"
-                            @blur="userAddAnswerAction($$item)"
-                          ></el-input>
-                        </el-form-item>
-                      </div>
-                      <!--单选框-->
-                      <div v-if="$$item.type == 'radio'">
-                        <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                          <el-radio-group v-model="$$item.answer" @change='userAddAnswerAction($$item)'>
-                            <el-radio :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                          </el-radio-group>
-                        </el-form-item>
-                      </div>
-                      <!-- 多选框 -->
-                      <div v-if="$$item.type == 'checkbox'">
-                        <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                          <el-checkbox-group v-model="$$item.answer"  @change='userAddAnswerAction($$item)'>
-                            <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
-                          </el-checkbox-group>
-                        </el-form-item>
-                        <div v-if="$$item.grandson">
-                          <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
-                            <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
-                              <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
-                                  <el-input
-                                    type="text"
-                                    class="ban"
-                                    v-model="$$$$item.answer"
-                                    size="small"
-                                    :placeholder="$$$$item.placeholder"
-                                    @blur="userAddAnswerAction($$$$item)"
-                                  ></el-input>
-                                </el-form-item>
-                              </div>
+              <div v-for="($item,$index) in item"  :key="$index">
+                <h2 class="text-left">{{$item.title}}</h2>
+
+                <!-- 一级问题块 -->
+
+                <div v-for="($$item,$$index) in $item.questions" :key="$$index">
+                  <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
+                    <!--日期-精确到日-->
+                    <div v-if="$$item.type == 'dateTime_day'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                        <el-date-picker
+                          v-model="$$item.answer"
+                          @change="userAddAnswerAction($$item)"
+                          type="date"
+                          size="small"
+                          placeholder="选择日期"
+                          format="yyyy 年 MM 月 dd 日"
+                          value-format="yyyy-MM-dd">
+                        </el-date-picker>
+                      </el-form-item>
+                    </div>
+                    <!--输入框-文字类型-->
+                    <div v-if="$$item.type == 'input' && $$item.input_type=='text'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                        <el-input
+                          type="text"
+                          class="ban"
+                          v-model="$$item.answer"
+                          size="small"
+                          :placeholder="$$item.placeholder"
+                          @blur="userAddAnswerAction($$item)"
+                        ></el-input>
+                      </el-form-item>
+                    </div>
+                    <!--输入框-数字类型（类似身份证号、金额）-->
+                    <div v-if="$$item.type == 'input' && $$item.input_type=='number'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                        <el-input
+                          type="number"
+                          class="ban"
+                          v-model="$$item.answer"
+                          size="small"
+                          :placeholder="$$item.placeholder"
+                          @blur="userAddAnswerAction($$item)"
+                        ></el-input>
+                      </el-form-item>
+                    </div>
+                    <!--单选框-->
+                    <div v-if="$$item.type == 'radio'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                        <el-radio-group v-model="$$item.answer"  @change="userAddAnswerAction($$item)">
+                          <el-radio :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                        </el-radio-group>
+                      </el-form-item>
+                    </div>
+                    <!-- 多选框 -->
+                    <div v-if="$$item.type == 'checkbox'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title"> 
+                        <el-checkbox-group v-model="$$item.answer"  @change="userAddAnswerAction($$item)">
+                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex">{{list.label}}</el-checkbox>
+                        </el-checkbox-group>
+                      </el-form-item>
+                      <div v-if="$$item.grandson">
+                        <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
+                          <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
+                            <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                              <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                <el-input
+                                  type="text"
+                                  class="ban"
+                                  v-model="$$$$item.answer"
+                                  size="small"
+                                  :placeholder="$$$$item.placeholder"
+                                  @blur="userAddAnswerAction($$$$item)"
+                                ></el-input>
+                              </el-form-item>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <!--下拉框(单选)-->
-                      <div v-if="$$item.type == 'select'">
-                        <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                          <el-select v-model="$$item.answer"  @change='userAddAnswerAction($$item)'>
-                            <el-option
-                              size="small"
-                              v-for="(s,i) in $$item.listData"
-                              :key="s.value"
-                              :label="s.label"
-                              :value="s.value">
-                            </el-option>
-                          </el-select>
-                        </el-form-item>
-                      </div>
-                      <!--下拉框(多选)-->
-                      <div v-if="$$item.type == 'select_multiple'">
-                        <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                          <el-select v-model="$$item.answer" multiple placeholder="请选择"  @change='userAddAnswerAction($$item)'>
-                            <el-option
-                              size="small"
-                              v-for="(s,i) in $$item.listData"
-                              :key="i"
-                              :label="s.label"
-                              :value="s.value">
-                            </el-option>
-                          </el-select>
-                        </el-form-item>
-                      </div>
-                      <!--只有问题无答案-->
-                      <div v-if="$$item.type =='question'">
-                        <h2 class="text-left">{{$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title}}</h2>
-                         <div  v-for="($$$item,$$$index) in $$item.childQuestion" :key="$$$index">
-                           <!--日期-精确到日-->
-                           <div v-if="$$$item.type == 'dateTime_day'">
-                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                               <el-date-picker
-                                 v-model="$$$item.answer"
-                                 type="date"
-                                 size="small"
-                                 placeholder="选择日期"
-                                 @change="userAddAnswerAction($$$item)"
-                                 format="yyyy 年 MM 月 dd 日"
-                                 value-format="yyyy-MM-dd">
-                               </el-date-picker>
-                             </el-form-item>
-                           </div>
-                           <!--日期-区间几点到几点-->
-                           <div v-if="$$$item.type == 'dateTime_Time_Interval'">
-                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                               <el-time-picker
-                                 v-model="$$$item.answer"
-                                 @change="userAddAnswerAction($$$item)"
-                                 is-range
-                                 size="small"
-                                 range-separator="至"
-                                 start-placeholder="开始日期"
-                                 end-placeholder="结束日期"
-                                 placeholder="选择时间范围">
-                               </el-time-picker>
-                             </el-form-item>
-                           </div>
-                           <!--日期-区间几号到几号-->
-                           <div v-if="$$$item.type == 'dateTime_Day_Interval'">
-                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                               <el-date-picker
-                                 v-model="$$$item.answer"
-                                 @change="userAddAnswerAction($$$item)"
-                                 type="daterange"
-                                 size="small"
-                                 range-separator="至"
-                                 start-placeholder="开始日期"
-                                 end-placeholder="结束日期"
-                                 placeholder="选择日期范围">
-                               </el-date-picker>
-                             </el-form-item>
-                           </div>
-                           <!--输入框-文字类型-->
-                           <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
-                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                               <el-input
-                                 type="text"
-                                 class="ban"
-                                 v-model="$$$item.answer"
-                                 size="small"
-                                 :placeholder="$$$item.placeholder"
-                                 @blur="userAddAnswerAction($$$item)"
-                               ></el-input>
-                             </el-form-item>
-                           </div>
-                           <!--输入框-数字类型（类似身份证号、金额）-->
-                           <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
-                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                               <el-input
-                                 type="number"
-                                 class="ban"
-                                 v-model="$$$item.answer"
-                                 size="small"
-                                 :placeholder="$$$item.placeholder"
-                                 @blur="userAddAnswerAction($$$item)"
-                               ></el-input>
-                             </el-form-item>
-                           </div>
-                           <!--单选框-->
-                           <div v-if="$$$item.type == 'radio'">
-                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                               <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
-                                 <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                               </el-radio-group>
-                             </el-form-item>
-                           </div>
-                           <!-- 多选框 -->
-                            <div v-if="$$$item.type == 'checkbox'">
-                              <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                <el-checkbox-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
-                                  <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
-                                </el-checkbox-group>
-                              </el-form-item>
-                              <div v-if="$$$item.grandson">
-                                <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
-                                  <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
-                                    <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
-                                      <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
-                                        <el-input
-                                          type="text"
-                                          class="ban"
-                                          v-model="$$$$$item.answer"
-                                          size="small"
-                                          :placeholder="$$$$$item.placeholder"
-                                          @blur="userAddAnswerAction($$$$$item)"
-                                        ></el-input>
-                                      </el-form-item>
-                                    </div>
+                    </div>
+                    <!--下拉框(单选)-->
+                    <div v-if="$$item.type == 'select'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                        <el-select v-model="$$item.answer" @change="userAddAnswerAction($$item)">
+                          <el-option
+                            size="small"
+                            v-for="(s,i) in $$item.listData"
+                            :key="i"
+                            :label="s.label"
+                            :value="s.value">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                    </div>
+                    <!--下拉框(多选)-->
+                    <div v-if="$$item.type == 'select_multiple'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                        <el-select v-model="$$item.answer" multiple placeholder="请选择"  @change="userAddAnswerAction($$item)">
+                          <el-option
+                            size="small"
+                            v-for="(s,i) in $$item.listData"
+                            :key="i"
+                            :label="s.label"
+                            :value="s.value">
+                          </el-option>
+                        </el-select>
+                      </el-form-item>
+                    </div>
+                    <!--只有问题无答案-->
+                    <div v-if="$$item.type =='question'">
+                      <h2 class="text-left">{{$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title}}</h2>
+                       <div  v-for="($$$item,$$$index) in $$item.childQuestion" :key="$$$index">
+                         <!--日期-精确到日-->
+                         <div v-if="$$$item.type == 'dateTime_day'">
+                           <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                             <el-date-picker
+                               v-model="$$$item.answer"
+                               @change="userAddAnswerAction($$$item)"
+                               type="date"
+                               size="small"
+                               placeholder="选择日期"
+                               format="yyyy 年 MM 月 dd 日"
+                               value-format="yyyy-MM-dd">
+                             </el-date-picker>
+                           </el-form-item>
+                         </div>
+                         <!--日期-区间几点到几点-->
+                         <div v-if="$$$item.type == 'dateTime_Time_Interval'">
+                           <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                             <el-time-picker
+                               v-model="$$$item.answer"
+                               @change="userAddAnswerAction($$$item)"
+                               is-range
+                               size="small"
+                               range-separator="至"
+                               start-placeholder="开始日期"
+                               end-placeholder="结束日期"
+                               placeholder="选择时间范围">
+                             </el-time-picker>
+                           </el-form-item>
+                         </div>
+                         <!--日期-区间几号到几号-->
+                         <div v-if="$$$item.type == 'dateTime_Day_Interval'">
+                           <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                             <el-date-picker
+                               v-model="$$$item.answer"
+                               @change="userAddAnswerAction($$$item)"
+                               type="daterange"
+                               size="small"
+                               range-separator="至"
+                               start-placeholder="开始日期"
+                               end-placeholder="结束日期"
+                               placeholder="选择日期范围">
+                             </el-date-picker>
+                           </el-form-item>
+                         </div>
+                         <!--输入框-文字类型-->
+                         <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
+                           <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                             <el-input
+                               type="text"
+                               class="ban"
+                               v-model="$$$item.answer"
+                               size="small"
+                               :placeholder="$$$item.placeholder"
+                               @blur="userAddAnswerAction($$$item)"
+                             ></el-input>
+                           </el-form-item>
+                         </div>
+                         <!--输入框-数字类型（类似身份证号、金额）-->
+                         <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
+                           <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                             <el-input
+                               type="number"
+                               class="ban"
+                               v-model="$$$item.answer"
+                               size="small"
+                               :placeholder="$$$item.placeholder"
+                               @blur="userAddAnswerAction($$$item)"
+                             ></el-input>
+                           </el-form-item>
+                         </div>
+                         <!--单选框-->
+                         <div v-if="$$$item.type == 'radio'">
+                           <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                             <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
+                               <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                             </el-radio-group>
+                           </el-form-item>
+                         </div>
+                         <!-- 多选框 -->
+                          <div v-if="$$$item.type == 'checkbox'">
+                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                              <el-checkbox-group v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
+                                <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                              </el-checkbox-group>
+                            </el-form-item>
+                            <div v-if="$$$item.grandson">
+                              <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                                <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                  <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                    <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                      <el-input
+                                        type="text"
+                                        class="ban"
+                                        v-model="$$$$$item.answer"
+                                        size="small"
+                                        :placeholder="$$$$$item.placeholder"
+                                        @blur="userAddAnswerAction($$$$$item)"
+                                      ></el-input>
+                                    </el-form-item>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                           <!-- 下拉单选 -->
-                           <div v-if="$$$item.type == 'select'">
-                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                               <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
-                                 <el-option
-                                   size="small"
-                                   v-for="(s,i) in $$$item.listData"
-                                   :key="i"
-                                   :label="s.label"
-                                   :value="s.value">
-                                 </el-option>
-                               </el-select>
-                             </el-form-item>
-                             <!--下拉框中的问题又会迁出子问题-->
-                             <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
-                                <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
-                                  <!--日期-精确到日-->
-                                  <div v-if="$$$$item.type == 'dateTime_day'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
-                                      <el-date-picker
-                                        v-model="$$$$item.answer"
-                                        type="date"
-                                        size="small"
-                                         @change="userAddAnswerAction($$$$item)"
-                                        placeholder="选择日期"
-                                        format="yyyy 年 MM 月 dd 日"
-                                        value-format="yyyy-MM-dd">
-                                      </el-date-picker>
-                                    </el-form-item>
-                                  </div>
-                                  <!--日期-区间几点到几点-->
-                                  <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
-                                      <el-time-picker
-                                        v-model="$$$$item.answer"
-                                        is-range
-                                        @change="userAddAnswerAction($$$$item)"
-                                        size="small"
-                                        range-separator="至"
-                                        start-placeholder="开始日期"
-                                        end-placeholder="结束日期"
-                                        placeholder="选择时间范围">
-                                      </el-time-picker>
-                                    </el-form-item>
-                                  </div>
-                                  <!--日期-区间几号到几号-->
-                                  <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
-                                      <el-date-picker
-                                        v-model="$$$$item.answer"
-                                        @change="userAddAnswerAction($$$$item)"
-                                        type="daterange"
-                                        size="small"
-                                        range-separator="至"
-                                        start-placeholder="开始日期"
-                                        end-placeholder="结束日期"
-                                        placeholder="选择日期范围">
-                                      </el-date-picker>
-                                    </el-form-item>
-                                  </div>
-                                  <!--输入框-文字类型-->
-                                  <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
-                                      <el-input
-                                        type="text"
-                                        class="ban"
-                                        v-model="$$$$item.answer"
-                                        size="small"
-                                        :placeholder="$$$$item.placeholder"
-                                        @blur="userAddAnswerAction($$$$item)"
-                                      ></el-input>
-                                    </el-form-item>
-                                  </div>
-                                  <!--输入框-数字类型（类似身份证号、金额）-->
-                                  <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
-                                      <el-input
-                                        type="number"
-                                        class="ban"
-                                        v-model="$$$$item.answer"
-                                        size="small"
-                                        :placeholder="$$$$item.placeholder"
-                                        @blur="userAddAnswerAction($$$$item)"
-                                      ></el-input>
-                                    </el-form-item>
-                                  </div>
-                                  <!--单选框-->
-                                  <div v-if="$$$$item.type == 'radio'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
-                                      <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                        <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                      </el-radio-group>
-                                    </el-form-item>
-                                  </div>
-                                  <!--下拉框-->
-                                  <div v-if="$$$$item.type == 'select'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
-                                      <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                        <el-option
-                                          size="small"
-                                          v-for="(s,i) in $$$$item.listData"
-                                          :key="i"
-                                          :label="s.label"
-                                          :value="s.value">
-                                        </el-option>
-                                      </el-select>
-                                    </el-form-item>
-                                  </div>
-                                  <!-- 下拉框多选 -->
-                                  <div v-if="$$$$item.type == 'select_multiple'">
-                                    <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
-                                      <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
-                                        <el-option
-                                          size="small"
-                                          v-for="(s,i) in $$$$item.listData"
-                                          :key="i"
-                                          :label="s.label"
-                                          :value="s.value">
-                                        </el-option>
-                                      </el-select>
-                                    </el-form-item>
-                                  </div>
+                          </div>
+                         <!-- 下拉单选 -->
+                         <div v-if="$$$item.type == 'select'">
+                           <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                             <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
+                               <el-option
+                                 size="small"
+                                 v-for="(s,i) in $$$item.listData"
+                                 :key="i"
+                                 :label="s.label"
+                                 :value="s.value"
+                                 >
+                               </el-option>
+                             </el-select>
+                           </el-form-item>
+                           <!--下拉框中的问题又会迁出子问题-->
+                           <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
+                              <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
+                                <!--日期-精确到日-->
+                                <div v-if="$$$$item.type == 'dateTime_day'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                    <el-date-picker
+                                      v-model="$$$$item.answer"
+                                      @change="userAddAnswerAction($$$$item)"
+                                      type="date"
+                                      size="small"
+                                      placeholder="选择日期"
+                                      format="yyyy 年 MM 月 dd 日"
+                                      value-format="yyyy-MM-dd">
+                                    </el-date-picker>
+                                  </el-form-item>
                                 </div>
-                             </div>
+                                <!--日期-区间几点到几点-->
+                                <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                    <el-time-picker
+                                      v-model="$$$$item.answer"
+                                      @change="userAddAnswerAction($$$$item)"
+                                      is-range
+                                      size="small"
+                                      range-separator="至"
+                                      start-placeholder="开始日期"
+                                      end-placeholder="结束日期"
+                                      placeholder="选择时间范围">
+                                    </el-time-picker>
+                                  </el-form-item>
+                                </div>
+                                <!--日期-区间几号到几号-->
+                                <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                    <el-date-picker
+                                      v-model="$$$$item.answer"
+                                      @change="userAddAnswerAction($$$$item)"
+                                      type="daterange"
+                                      size="small"
+                                      range-separator="至"
+                                      start-placeholder="开始日期"
+                                      end-placeholder="结束日期"
+                                      placeholder="选择日期范围">
+                                    </el-date-picker>
+                                  </el-form-item>
+                                </div>
+                                <!--输入框-文字类型-->
+                                <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                    <el-input
+                                      type="text"
+                                      class="ban"
+                                      v-model="$$$$item.answer"
+                                      size="small"
+                                      :placeholder="$$$$item.placeholder"
+                                      @blur="userAddAnswerAction($$$$item)"
+                                    ></el-input>
+                                  </el-form-item>
+                                </div>
+                                <!--输入框-数字类型（类似身份证号、金额）-->
+                                <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                    <el-input
+                                      type="number"
+                                      class="ban"
+                                      v-model="$$$$item.answer"
+                                      size="small"
+                                      :placeholder="$$$$item.placeholder"
+                                      @blur="userAddAnswerAction($$$$item)"
+                                    ></el-input>
+                                  </el-form-item>
+                                </div>
+                                <!--单选框-->
+                                <div v-if="$$$$item.type == 'radio'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                    <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                      <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                                    </el-radio-group>
+                                  </el-form-item>
+                                </div>
+                                <!--下拉框-->
+                                <div v-if="$$$$item.type == 'select'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                    <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                      <el-option
+                                        size="small"
+                                        v-for="(s,i) in $$$$item.listData"
+                                        :key="i"
+                                        :label="s.label"
+                                        :value="s.value">
+                                      </el-option>
+                                    </el-select>
+                                  </el-form-item>
+                                </div>
+                                <!-- 下拉框多选 -->
+                                <div v-if="$$$$item.type == 'select_multiple'">
+                                  <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                    <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
+                                      <el-option
+                                        size="small"
+                                        v-for="(s,i) in $$$$item.listData"
+                                        :key="i"
+                                        :label="s.label"
+                                        :value="s.value">
+                                      </el-option>
+                                    </el-select>
+                                  </el-form-item>
+                                </div>
+                              </div>
                            </div>
-                           <!-- 下拉多选 -->
-                           <div v-if="$$$item.type == 'select_multiple'">
-                              <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
-                                  <el-option
-                                    size="small"
-                                    v-for="(s,i) in $$$item.listData"
-                                    :key="i"
-                                    :label="s.label"
-                                    :value="s.value">
-                                  </el-option>
-                                </el-select>
-                              </el-form-item>
-                            </div>
                          </div>
-                      </div>
-
-                      <!-- 二级问题块 -->
-                      
-                      <div v-if="$$item.childQuestion && $$item.childQuestion[$$item.answer]">
-                        <div v-for="($$$item,$$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
-                          <!--日期-精确到日-->
-                          <div v-if="$$$item.type == 'dateTime_day'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                              <el-date-picker
-                                v-model="$$$item.answer"
-                                @change="userAddAnswerAction($$$item)"
-                                type="date"
-                                size="small"
-                                placeholder="选择日期"
-                                format="yyyy 年 MM 月 dd 日"
-                                value-format="yyyy-MM-dd">
-                              </el-date-picker>
-                            </el-form-item>
-                          </div>
-                          <!--日期-区间几点到几点-->
-                          <div v-if="$$$item.type == 'dateTime_Time_Interval'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                              <el-time-picker
-                                v-model="$$$item.answer"
-                                @change="userAddAnswerAction($$$item)"
-                                is-range
-                                size="small"
-                                range-separator="至"
-                                start-placeholder="开始日期"
-                                end-placeholder="结束日期"
-                                placeholder="选择时间范围">
-                              </el-time-picker>
-                            </el-form-item>
-                          </div>
-                          <!--日期-区间几号到几号-->
-                          <div v-if="$$$item.type == 'dateTime_Day_Interval'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                              <el-date-picker
-                                v-model="$$$item.answer"
-                                @change="userAddAnswerAction($$$item)"
-                                type="daterange"
-                                size="small"
-                                range-separator="至"
-                                start-placeholder="开始日期"
-                                end-placeholder="结束日期"
-                                placeholder="选择日期范围">
-                              </el-date-picker>
-                            </el-form-item>
-                          </div>
-                          <!--输入框-文字类型-->
-                          <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                              <el-input
-                                type="text"
-                                class="ban"
-                                v-model="$$$item.answer"
-                                size="small"
-                                :placeholder="$$$item.placeholder"
-                                @blur="userAddAnswerAction($$$item)"
-                              ></el-input>
-                            </el-form-item>
-                          </div>
-                          <!--输入框-数字类型（类似身份证号、金额）-->
-                          <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
-                              <el-input
-                                type="number"
-                                class="ban"
-                                v-model="$$$item.answer"
-                                size="small"
-                                :placeholder="$$$item.placeholder"
-                                @blur="userAddAnswerAction($$$item)"
-                              ></el-input>
-                            </el-form-item>
-                          </div>
-                          <!--单选框-->
-                          <div v-if="$$$item.type == 'radio'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                              <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
-                                <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                              </el-radio-group>
-                            </el-form-item>
-                          </div>
-                          <!--下拉框-->
-                          <div v-if="$$$item.type == 'select'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                              <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
-                                <el-option
-                                  size="small"
-                                  v-for="(s,i) in $$$item.listData"
-                                  :key="i"
-                                  :label="s.label"
-                                  :value="s.value">
-                                </el-option>
-                              </el-select>
-                            </el-form-item>
-                          </div>
-                           <!--下拉框(多选)-->
-                          <div v-if="$$$item.type == 'select_multiple'">
+                         <!-- 下拉多选 -->
+                         <div v-if="$$$item.type == 'select_multiple'">
                             <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
                               <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
                                 <el-option
@@ -476,57 +366,382 @@
                               </el-select>
                             </el-form-item>
                           </div>
-                          <!--下拉框选择每月几号-->
-                          <div v-if="$$$item.type == 'select_day_per'">
-                              <span>
-                                每月
-                                <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
-                                  <el-option
-                                    size="small"
-                                    v-for="(s,i) in days"
-                                    :key="i"
-                                    :label="s"
-                                    :value="s">
-                                  </el-option>
-                                </el-select>
-                                日前
-                              </span>
+                       </div>
+                    </div>
+
+                    <!-- 二级问题块 -->
+
+                    <div v-if="$$item.childQuestion && $$item.childQuestion[$$item.answer]">
+                      <div v-for="($$$item,$$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
+                        <!--日期-精确到日-->
+                        <div v-if="$$$item.type == 'dateTime_day'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                            <el-date-picker
+                              v-model="$$$item.answer"
+                              @change="userAddAnswerAction($$$item)"
+                              type="date"
+                              size="small"
+                              placeholder="选择日期"
+                              format="yyyy 年 MM 月 dd 日"
+                              value-format="yyyy-MM-dd">
+                            </el-date-picker>
+                          </el-form-item>
+                        </div>
+                        <!--日期-区间几点到几点-->
+                        <div v-if="$$$item.type == 'dateTime_Time_Interval'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                            <el-time-picker
+                              v-model="$$$item.answer"
+                             @change="userAddAnswerAction($$$item)"
+                              is-range
+                              size="small"
+                              range-separator="至"
+                              start-placeholder="开始日期"
+                              end-placeholder="结束日期"
+                              placeholder="选择时间范围">
+                            </el-time-picker>
+                          </el-form-item>
+                        </div>
+                        <!--日期-区间几号到几号-->
+                        <div v-if="$$$item.type == 'dateTime_Day_Interval'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                            <el-date-picker
+                              v-model="$$$item.answer"
+                              @blur="userAddAnswerAction($$$item)"
+                              type="daterange"
+                              size="small"
+                              range-separator="至"
+                              start-placeholder="开始日期"
+                              end-placeholder="结束日期"
+                              placeholder="选择日期范围">
+                            </el-date-picker>
+                          </el-form-item>
+                        </div>
+                        <!--输入框-文字类型-->
+                        <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                            <el-input
+                              type="text"
+                              class="ban"
+                              v-model="$$$item.answer"
+                              size="small"
+                              :placeholder="$$$item.placeholder"
+                              @blur="userAddAnswerAction($$$item)"
+                            ></el-input>
+                          </el-form-item>
+                        </div>
+                        <!--输入框-数字类型（类似身份证号、金额）-->
+                        <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                            <el-input
+                              type="number"
+                              class="ban"
+                              v-model="$$$item.answer"
+                              size="small"
+                              :placeholder="$$$item.placeholder"
+                              @blur="userAddAnswerAction($$$item)"
+                            ></el-input>
+                          </el-form-item>
+                        </div>
+                        <!--单选框-->
+                        <div v-if="$$$item.type == 'radio'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                            <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
+                              <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                            </el-radio-group>
+                          </el-form-item>
+                        </div>
+                        <!-- 多选框 -->
+                        <div v-if="$$$item.type == 'checkbox'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                            <el-checkbox-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
+                              <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                            </el-checkbox-group>
+                          </el-form-item>
+                          <div v-if="$$$item.grandson">
+                            <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                              <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                  <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                    <el-input
+                                      type="text"
+                                      class="ban"
+                                      v-model="$$$$$item.answer"
+                                      size="small"
+                                      :placeholder="$$$$$item.placeholder"
+                                      @blur="userAddAnswerAction($$$$$item)"
+                                    ></el-input>
+                                  </el-form-item>
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <!--下拉框选择月几号-->
-                          <div v-if="$$$item.type == 'select_day'">
-                              <span>
-                                月
-                                <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)" >
-                                  <el-option
-                                    size="small"
-                                    v-for="(s,i) in days"
-                                    :key="i"
-                                    :label="s"
-                                    :value="s">
-                                  </el-option>
-                                </el-select>
-                                日前
-                              </span>
-                          </div>
-                          <!--下拉选择一年中哪个月-->
-                          <div v-if="$$$item.type == 'select_year'">
-                            <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                              <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
+                        </div>
+                        <!--下拉框-->
+                        <div v-if="$$$item.type == 'select'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                            <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
+                              <el-option
+                                size="small"
+                                v-for="(s,i) in $$$item.listData"
+                                :key="i"
+                                :label="s.label"
+                                :value="s.value">
+                              </el-option>
+                            </el-select>
+                          </el-form-item>
+                        </div>
+                         <!--下拉框(多选)-->
+                        <div v-if="$$$item.type == 'select_multiple'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                            <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
+                              <el-option
+                                size="small"
+                                v-for="(s,i) in $$$item.listData"
+                                :key="i"
+                                :label="s.label"
+                                :value="s.value">
+                              </el-option>
+                            </el-select>
+                          </el-form-item>
+                        </div>
+                        <!--下拉框选择每月几号-->
+                        <div v-if="$$$item.type == 'select_day_per'">
+                            <span>
+                              每月
+                              <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
                                 <el-option
                                   size="small"
-                                  v-for="(s,i) in mon"
+                                  v-for="(s,i) in days"
                                   :key="i"
                                   :label="s"
                                   :value="s">
                                 </el-option>
                               </el-select>
-                            </el-form-item>
+                              日前
+                            </span>
+                        </div>
+                        <!--下拉框选择月几号-->
+                        <div v-if="$$$item.type == 'select_day'">
+                            <span>
+                              月
+                              <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
+                                <el-option
+                                  size="small"
+                                  v-for="(s,i) in days"
+                                  :key="i"
+                                  :label="s"
+                                  :value="s">
+                                </el-option>
+                              </el-select>
+                              日前
+                            </span>
+                        </div>
+                        <!--下拉选择一年中哪个月-->
+                        <div v-if="$$$item.type == 'select_year'">
+                          <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                            <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
+                              <el-option
+                                size="small"
+                                v-for="(s,i) in mon"
+                                :key="i"
+                                :label="s"
+                                :value="s">
+                              </el-option>
+                            </el-select>
+                          </el-form-item>
+                        </div>
+
+                        <!-- 三级问题 -->
+
+                        <div v-if="$$$item.questions ">
+                          <h2 class="text-left text-blue-500">{{$$$item.title}}</h2>
+                          <div v-for="($$$$item, $$$$index) in $$$item.questions">
+                             <!--日期-精确到日-->
+                              <div v-if="$$$$item.type == 'dateTime_day'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                  <el-date-picker
+                                    v-model="$$$$item.answer"
+                                    @change="userAddAnswerAction($$$$item)"
+                                    type="date"
+                                    size="small"
+                                    placeholder="选择日期"
+                                    format="yyyy 年 MM 月 dd 日"
+                                    value-format="yyyy-MM-dd">
+                                  </el-date-picker>
+                                </el-form-item>
+                              </div>
+                              <!--日期-区间几点到几点-->
+                              <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                  <el-time-picker
+                                    v-model="$$$$item.answer"
+                                    @change="userAddAnswerAction($$$$item)"
+                                    is-range
+                                    size="small"
+                                    range-separator="至"
+                                    start-placeholder="开始日期"
+                                    end-placeholder="结束日期"
+                                    placeholder="选择时间范围">
+                                  </el-time-picker>
+                                </el-form-item>
+                              </div>
+                              <!--日期-区间几号到几号-->
+                              <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                  <el-date-picker
+                                    v-model="$$$$item.answer"
+                                    @change="userAddAnswerAction($$$$item)"
+                                    type="daterange"
+                                    size="small"
+                                    range-separator="至"
+                                    start-placeholder="开始日期"
+                                    end-placeholder="结束日期"
+                                    placeholder="选择日期范围">
+                                  </el-date-picker>
+                                </el-form-item>
+                              </div>
+                              <!--输入框-文字类型-->
+                              <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                  <el-input
+                                    type="text"
+                                    class="ban"
+                                    v-model="$$$$item.answer"
+                                    size="small"
+                                    :placeholder="$$$$item.placeholder"
+                                    @blur="userAddAnswerAction($$$$item)"
+                                  ></el-input>
+                                </el-form-item>
+                              </div>
+                              <!--输入框-数字类型（类似身份证号、金额）-->
+                              <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                  <el-input
+                                    type="number"
+                                    class="ban"
+                                    v-model="$$$$item.answer"
+                                    size="small"
+                                    :placeholder="$$$$item.placeholder"
+                                    @blur="userAddAnswerAction($$$$item)"
+                                  ></el-input>
+                                </el-form-item>
+                              </div>
+                              <!--单选框-->
+                              <div v-if="$$$$item.type == 'radio'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                  <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                    <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                                  </el-radio-group>
+                                </el-form-item>
+                              </div>
+                              <!-- 多选框 -->
+                              <div v-if="$$$$item.type == 'checkbox'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                  <el-checkbox-group v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                    <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                                  </el-checkbox-group>
+                                </el-form-item>
+                                <div v-if="$$$$item.grandson">
+                                <div v-for="($$$$$item, $$$$$index) in $$$$item.answer" :key="$$$$$index">
+                                  <div v-for="($$$$$$item,$$$$$$index) in $$$$item.grandson[$$$$$item]">
+                                    <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='number'">
+                                      <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
+                                        <el-input
+                                          type="text"
+                                          class="ban"
+                                          v-model="$$$$$$item.answer"
+                                          size="small"
+                                          :placeholder="$$$$$$item.placeholder"
+                                          @blur="userAddAnswerAction($$$$$$item)"
+                                        ></el-input>
+                                      </el-form-item>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              </div>
+                              <!--下拉框-->
+                              <div v-if="$$$$item.type == 'select'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                  <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                    <el-option
+                                      size="small"
+                                      v-for="(s,i) in $$$$item.listData"
+                                      :key="i"
+                                      :label="s.label"
+                                      :value="s.value">
+                                    </el-option>
+                                  </el-select>
+                                </el-form-item>
+                              </div>
+                               <!--下拉框(多选)-->
+                              <div v-if="$$$$item.type == 'select_multiple'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                  <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
+                                    <el-option
+                                      size="small"
+                                      v-for="(s,i) in $$$$item.listData"
+                                      :key="i"
+                                      :label="s.label"
+                                      :value="s.value">
+                                    </el-option>
+                                  </el-select>
+                                </el-form-item>
+                              </div>
+                              <!--下拉框选择每月几号-->
+                              <div v-if="$$$$item.type == 'select_day_per'">
+                                  <span>
+                                    每月
+                                    <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                      <el-option
+                                        size="small"
+                                        v-for="(s,i) in days"
+                                        :key="i"
+                                        :label="s"
+                                        :value="s">
+                                      </el-option>
+                                    </el-select>
+                                    日前
+                                  </span>
+                              </div>
+                              <!--下拉框选择月几号-->
+                              <div v-if="$$$$item.type == 'select_day'">
+                                  <span>
+                                    月
+                                    <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                      <el-option
+                                        size="small"
+                                        v-for="(s,i) in days"
+                                        :key="i"
+                                        :label="s"
+                                        :value="s">
+                                      </el-option>
+                                    </el-select>
+                                    日前
+                                  </span>
+                              </div>
+                              <!--下拉选择一年中哪个月-->
+                              <div v-if="$$$$item.type == 'select_year'">
+                                <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                  <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                    <el-option
+                                      size="small"
+                                      v-for="(s,i) in mon"
+                                      :key="i"
+                                      :label="s"
+                                      :value="s">
+                                    </el-option>
+                                  </el-select>
+                                </el-form-item>
+                              </div> 
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
             </div>
           </div>
         </div>
@@ -544,6 +759,9 @@
 <script>
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   export default {
+    components: {
+      // label_case,
+    },
       data () {
           return {
             hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
@@ -574,7 +792,7 @@
               questions: [
                 {
                   title: '1、您离婚想要达到的诉求是什么？',
-                  id: '1',
+                  id: '649',
                   isRequired: true,
                   type: 'select',
                   tip: '',
@@ -587,7 +805,7 @@
                 },
                 {
                   title: '2、你们感情破裂的原因是什么？（可多选）',
-                  id: '2',
+                  id: '650',
                   isRequired: true,
                   type: 'select_multiple',
                   tip: '',
@@ -629,7 +847,7 @@
                 },
                 {
                   title: '4、您与配偶生育了几个子女？',
-                  id: '4',
+                  id: '518',
                   isRequired: true,
                   type: 'select',
                   tip: '',
@@ -646,7 +864,7 @@
                 },
                 {
                   title: '5、是否有需要处理的共同财产？',
-                  id: '5',
+                  id: '652',
                   isRequired: true,
                   type: 'radio',
                   tip: '',
@@ -659,7 +877,7 @@
                     2: [
                       {
                         title: '请勾选您需要处理的夫妻共同财产',
-                        id: '5_2_1',
+                        id: '520',
                         isRequired: true,
                         type: 'checkbox',
                         tip: '提示',
@@ -677,7 +895,7 @@
                           1: [
                             {
                               title: '您与配有有几套房产需要处理？',
-                              id: '5_2_1_1',
+                              id: '521',
                               isRequired: true,
                               type: 'input',
                               input_type: 'number',
@@ -689,7 +907,7 @@
                           2: [
                             {
                               title: '您与配有有几笔存款需要处理？',
-                              id: '5_2_2_1',
+                              id: '637',
                               isRequired: true,
                               type: 'input',
                               input_type: 'number',
@@ -701,7 +919,7 @@
                           3: [
                             {
                               title: '您与配有有几笔理财需要处理？',
-                              id: '5_2_3_1',
+                              id: '523',
                               isRequired: true,
                               type: 'input',
                               input_type: 'number',
@@ -713,7 +931,7 @@
                           4: [
                             {
                               title: '您与配有有几辆车子需要处理？',
-                              id: '5_2_4_1',
+                              id: '522',
                               isRequired: true,
                               type: 'input',
                               input_type: 'number',
@@ -725,7 +943,7 @@
                           6: [
                             {
                               title: '您与配有有几份保险需要处理？',
-                              id: '5_2_4_1',
+                              id: '524',
                               isRequired: true,
                               type: 'input',
                               input_type: 'number',
@@ -741,7 +959,7 @@
                 },
                 {
                   title: '6、外债的具体情形？',
-                  id: '6',
+                  id: '653',
                   isRequired: true,
                   type: 'radio',
                   tip: '',
@@ -754,7 +972,7 @@
                     2: [
                       {
                         title: '外债的具体情形是',
-                        id: '6_2_1',
+                        id: '654',
                         isRequired: true,
                         type: 'checkbox',
                         tip: '提示',
@@ -767,7 +985,7 @@
                           1: [
                             {
                               title: '您与配有有几笔债权需要处理？',
-                              id: '6_2_1_1',
+                              id: '655',
                               isRequired: true,
                               type: 'input',
                               input_type: 'number',
@@ -779,7 +997,7 @@
                           2: [
                             {
                               title: '您与配有有几笔债务需要处理？',
-                              id: '6_2_1_2',
+                              id: '656',
                               isRequired: true,
                               type: 'input',
                               input_type: 'number',
@@ -795,7 +1013,7 @@
                 },
                 {
                   title: '7、您与配偶对离婚是否达成一致？',
-                  id: '7',
+                  id: '657',
                   isRequired: true,
                   type: 'radio',
                   tip: '',
@@ -808,7 +1026,7 @@
                     2: [
                       {
                         title: '您与配偶对离婚的争议是什么？',
-                        id: '7_2_1',
+                        id: '658',
                         isRequired: true,
                         type: 'checkbox',
                         tip: '提示',
@@ -832,9 +1050,9 @@
           this.$set(this.childAll, 1, this.childMsg1())
         },
         userAddAnswerAction (e){
-          if(e.fornum !== undefined){
+          if(Array.isArray(e.answer)){
             userAddAnswer({
-              value: e.answer,  // 值
+              value: JSON.stringify(e.answer),  // 值
               qpid: e.id, // 关联id
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: 6 //用户的问卷id
@@ -847,7 +1065,7 @@
             userAddAnswer({
               value: e.answer,  // 值
               qpid: e.id, // 关联id
-              // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+              fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: 6 //用户的问卷id
             }).then((data)=>{
               console.log("保存成功")
