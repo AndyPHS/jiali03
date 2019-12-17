@@ -354,10 +354,23 @@
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogaddTreeTitle = false">取 消</el-button>
-            <el-button type="primary" @click="addTreeTitleConfig">确 定</el-button>
+            <el-button type="primary" @click="addTreeTitleOk">确 定</el-button>
           </div>
         </el-dialog>
-        
+        <el-dialog title="修改标题" :visible.sync="dialogConfigTreeTitle">
+          <el-form :model="problemqAdd">
+            <el-form-item label="标题" :label-width="formLabelWidth">
+              <el-input v-model="problemqAdd.title" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="class" :label-width="formLabelWidth">
+              <el-input v-model="problemqAdd.class" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogConfigTreeTitle = false">取 消</el-button>
+            <el-button type="primary" @click="configTreeTitleOk">确 定</el-button>
+          </div>
+        </el-dialog>
     </div>
         
 </template>
@@ -492,7 +505,8 @@
                 dialogQuestionAdd: false,
                 dialogQuestionConfig: false,        // 点击添加配置
                 dialogQuestionConfigUpdate: false,  // 修改配置
-                dialogaddTreeTitle: false,
+                dialogaddTreeTitle: false,  // 新增标题
+                dialogConfigTreeTitle: false,   // 点击标题修改
                 formLabelWidth: '80px',
                  // 分页
                 first_page_url: '',
@@ -629,7 +643,7 @@
                 this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的父ID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
-                console.log(this.problemqAdd.fqaspId)
+                console.log(this.problemqAdd.id)
             },
             getCheckedNodes() { // 通过 node 获取
                 console.log(this.$refs.tree.getCheckedNodes());
@@ -655,7 +669,7 @@
             addTreeTitle () {  // 添加标题
                 this.dialogaddTreeTitle = true;
             },
-            addTreeTitleConfig () { // 确认添加标题
+            addTreeTitleOk () { // 确认添加标题
                 if(this.problemqAdd.id ==null){
                     ProblemQAdd({
                         questionnaireId: 3,
@@ -691,15 +705,32 @@
                 }
                 
             },
+            configTreeTitleOk(){ // 点击标题进行修改的时候提交到修改接口
+                updateProblemQ({
+                    questionnaireId: 3,
+                    problemId: this.problemqAdd.problemId,
+                    orderId: 0,
+                    fqaspId: this.problemqAdd.fqaspId,
+                    important: this.problemqAdd.important,
+                    type: this.problemqAdd.type,
+                    class: this.problemqAdd.class,
+                    title: this.problemqAdd.title
+                }).then((data)=>{
+                    this.problemqAdd.title = '';
+                    this.problemqAdd.class = '';
+                    this.problemqAdd.type = '';
+                    this.problemqAdd.important = null;
+                    localStorage.removeItem('qpid')
+                    this.dialogConfigTreeTitle = false;
+                    this.selectTree()
+                }).catch((data)=>{
+
+                })
+            },
             updateTree(){   // 修改树结构
-                
                 localStorage.setItem('qpid',this.problemqAdd.id)
                 if(this.problemqAdd.type==1){
-                   this.dialogaddTreeTitle = true; 
-                   this.dataFilterValueArr = [{
-                        title:this.problemqAdd.problemTitle,
-                        id:this.problemqAdd.problemId
-                   }]
+                   this.dialogConfigTreeTitle = true; 
                 }else{
                     this.dialogQuestionConfigUpdate = true;
                     this.selectQpWhere();
