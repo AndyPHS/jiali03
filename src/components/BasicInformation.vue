@@ -3948,8 +3948,8 @@
         addChildId (e) {
           console.log(e)
         },
-        consoleChild () {
-
+        consoleChild (e) {
+          console.log(e)
         }
       }
     }
