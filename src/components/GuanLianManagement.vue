@@ -4,7 +4,7 @@
         <div class="container mx-auto flex">
             <div class="w-1/2">
                 <div class="border border-1 rounded">
-                    <h2 class="text-xl py-2">离婚协议书</h2>
+                    <h2 class="text-xl py-2 cursor-pointer" @click="addTreeTitle()">离婚协议书</h2>
                     <div class="h-40 overflow-scroll">
 
                         <el-tree
@@ -656,21 +656,40 @@
                 this.dialogaddTreeTitle = true;
             },
             addTreeTitleConfig () { // 确认添加标题
-                ProblemQAdd({
-                    questionnaireId: 3,
-                    orderId: 0,
-                    fqaspId: this.problemqAdd.id,
-                    class: this.problemqAdd.class,
-                    type: 1,
-                    title: this.problemqAdd.title
-                }).then((data)=>{
-                    this.problemqAdd.title = '';
-                    this.problemqAdd.class = '';
-                    this.dialogaddTreeTitle = false;
-                    this.selectTree()
-                }).catch((data)=>{
+                if(this.problemqAdd.id ==null){
+                    ProblemQAdd({
+                        questionnaireId: 3,
+                        orderId: 0,
+                        fqaspId: 0,
+                        class: this.problemqAdd.class,
+                        type: 1,
+                        title: this.problemqAdd.title
+                    }).then((data)=>{
+                        this.problemqAdd.title = '';
+                        this.problemqAdd.class = '';
+                        this.dialogaddTreeTitle = false;
+                        this.selectTree()
+                    }).catch((data)=>{
 
-                })
+                    })
+                }else{
+                    ProblemQAdd({
+                        questionnaireId: 3,
+                        orderId: 0,
+                        fqaspId: this.problemqAdd.id,
+                        class: this.problemqAdd.class,
+                        type: 1,
+                        title: this.problemqAdd.title
+                    }).then((data)=>{
+                        this.problemqAdd.title = '';
+                        this.problemqAdd.class = '';
+                        this.dialogaddTreeTitle = false;
+                        this.selectTree()
+                    }).catch((data)=>{
+
+                    })
+                }
+                
             },
             updateTree(){   // 修改树结构
                 
