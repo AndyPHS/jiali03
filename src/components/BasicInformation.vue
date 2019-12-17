@@ -131,7 +131,7 @@
                                 <el-option
                                   size="small"
                                   v-for="(s,i) in $$item.listData"
-                                  :key="i"
+                                  :key="s.value"
                                   :label="s.label"
                                   :value="s.value">
                                 </el-option>
@@ -164,6 +164,7 @@
                                      type="date"
                                      size="small"
                                      placeholder="选择日期"
+                                     @change="userAddAnswerAction($$$item)"
                                      format="yyyy 年 MM 月 dd 日"
                                      value-format="yyyy-MM-dd">
                                    </el-date-picker>
@@ -174,6 +175,7 @@
                                  <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
                                    <el-time-picker
                                      v-model="$$$item.answer"
+                                     @change="userAddAnswerAction($$$item)"
                                      is-range
                                      size="small"
                                      range-separator="至"
@@ -188,6 +190,7 @@
                                  <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
                                    <el-date-picker
                                      v-model="$$$item.answer"
+                                     @change="userAddAnswerAction($$$item)"
                                      type="daterange"
                                      size="small"
                                      range-separator="至"
@@ -206,7 +209,7 @@
                                      v-model="$$$item.answer"
                                      size="small"
                                      :placeholder="$$$item.placeholder"
-                                     @blur="addChildName($$$item.answer)"
+                                     @blur="userAddAnswerAction($$$item)"
                                    ></el-input>
                                  </el-form-item>
                                </div>
@@ -219,14 +222,14 @@
                                      v-model="$$$item.answer"
                                      size="small"
                                      :placeholder="$$$item.placeholder"
-                                     @blur="addChildName($$$item.answer)"
+                                     @blur="userAddAnswerAction($$$item)"
                                    ></el-input>
                                  </el-form-item>
                                </div>
                                <!--单选框-->
                                <div v-if="$$$item.type == 'radio'">
                                  <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                   <el-radio-group v-model="$$$item.answer">
+                                   <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
                                      <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                                    </el-radio-group>
                                  </el-form-item>
@@ -234,7 +237,7 @@
                                <!-- 多选框 -->
                                 <div v-if="$$$item.type == 'checkbox'">
                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                    <el-checkbox-group v-model="$$$item.answer">
+                                    <el-checkbox-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
                                       <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
                                     </el-checkbox-group>
                                   </el-form-item>
@@ -249,7 +252,7 @@
                                               v-model="$$$$$item.answer"
                                               size="small"
                                               :placeholder="$$$$$item.placeholder"
-                                              @blur="addChildName($$$$$item.answer)"
+                                              @blur="userAddAnswerAction($$$$$item)"
                                             ></el-input>
                                           </el-form-item>
                                         </div>
@@ -260,7 +263,7 @@
                                <!-- 下拉单选 -->
                                <div v-if="$$$item.type == 'select'">
                                  <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                   <el-select v-model="$$$item.answer">
+                                   <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
                                      <el-option
                                        size="small"
                                        v-for="(s,i) in $$$item.listData"
@@ -280,6 +283,7 @@
                                             v-model="$$$$item.answer"
                                             type="date"
                                             size="small"
+                                             @change="userAddAnswerAction($$$$item)"
                                             placeholder="选择日期"
                                             format="yyyy 年 MM 月 dd 日"
                                             value-format="yyyy-MM-dd">
@@ -292,6 +296,7 @@
                                           <el-time-picker
                                             v-model="$$$$item.answer"
                                             is-range
+                                            @change="userAddAnswerAction($$$$item)"
                                             size="small"
                                             range-separator="至"
                                             start-placeholder="开始日期"
@@ -305,6 +310,7 @@
                                         <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
                                           <el-date-picker
                                             v-model="$$$$item.answer"
+                                            @change="userAddAnswerAction($$$$item)"
                                             type="daterange"
                                             size="small"
                                             range-separator="至"
@@ -323,7 +329,7 @@
                                             v-model="$$$$item.answer"
                                             size="small"
                                             :placeholder="$$$$item.placeholder"
-                                            @blur="addChildName($$$$item.answer)"
+                                            @blur="userAddAnswerAction($$$$item)"
                                           ></el-input>
                                         </el-form-item>
                                       </div>
@@ -336,14 +342,14 @@
                                             v-model="$$$$item.answer"
                                             size="small"
                                             :placeholder="$$$$item.placeholder"
-                                            @blur="addChildName($$$$item.answer)"
+                                            @blur="userAddAnswerAction($$$$item)"
                                           ></el-input>
                                         </el-form-item>
                                       </div>
                                       <!--单选框-->
                                       <div v-if="$$$$item.type == 'radio'">
                                         <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
-                                          <el-radio-group v-model="$$$$item.answer">
+                                          <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
                                             <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                                           </el-radio-group>
                                         </el-form-item>
@@ -351,7 +357,7 @@
                                       <!--下拉框-->
                                       <div v-if="$$$$item.type == 'select'">
                                         <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
-                                          <el-select v-model="$$$$item.answer">
+                                          <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
                                             <el-option
                                               size="small"
                                               v-for="(s,i) in $$$$item.listData"
@@ -365,7 +371,7 @@
                                       <!-- 下拉框多选 -->
                                       <div v-if="$$$$item.type == 'select_multiple'">
                                         <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
-                                          <el-select v-model="$$$$item.answer" multiple placeholder="请选择">
+                                          <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
                                             <el-option
                                               size="small"
                                               v-for="(s,i) in $$$$item.listData"
@@ -382,7 +388,7 @@
                                <!-- 下拉多选 -->
                                <div v-if="$$$item.type == 'select_multiple'">
                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                    <el-select v-model="$$$item.answer" multiple placeholder="请选择">
+                                    <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
                                       <el-option
                                         size="small"
                                         v-for="(s,i) in $$$item.listData"
@@ -405,6 +411,7 @@
                                 <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
                                   <el-date-picker
                                     v-model="$$$item.answer"
+                                    @change="userAddAnswerAction($$$item)"
                                     type="date"
                                     size="small"
                                     placeholder="选择日期"
@@ -418,6 +425,7 @@
                                 <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
                                   <el-time-picker
                                     v-model="$$$item.answer"
+                                    @change="userAddAnswerAction($$$item)"
                                     is-range
                                     size="small"
                                     range-separator="至"
@@ -432,6 +440,7 @@
                                 <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
                                   <el-date-picker
                                     v-model="$$$item.answer"
+                                    @change="userAddAnswerAction($$$item)"
                                     type="daterange"
                                     size="small"
                                     range-separator="至"
@@ -450,7 +459,7 @@
                                     v-model="$$$item.answer"
                                     size="small"
                                     :placeholder="$$$item.placeholder"
-                                    @blur="addChildName($$$item.answer)"
+                                    @blur="userAddAnswerAction($$$item)"
                                   ></el-input>
                                 </el-form-item>
                               </div>
@@ -463,14 +472,14 @@
                                     v-model="$$$item.answer"
                                     size="small"
                                     :placeholder="$$$item.placeholder"
-                                    @blur="addChildName($$$item.answer)"
+                                    @blur="userAddAnswerAction($$$item)"
                                   ></el-input>
                                 </el-form-item>
                               </div>
                               <!--单选框-->
                               <div v-if="$$$item.type == 'radio'">
                                 <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                  <el-radio-group v-model="$$$item.answer">
+                                  <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
                                     <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                                   </el-radio-group>
                                 </el-form-item>
@@ -478,7 +487,7 @@
                               <!--下拉框-->
                               <div v-if="$$$item.type == 'select'">
                                 <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                  <el-select v-model="$$$item.answer">
+                                  <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
                                     <el-option
                                       size="small"
                                       v-for="(s,i) in $$$item.listData"
@@ -492,7 +501,7 @@
                                <!--下拉框(多选)-->
                               <div v-if="$$$item.type == 'select_multiple'">
                                 <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                  <el-select v-model="$$$item.answer" multiple placeholder="请选择">
+                                  <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
                                     <el-option
                                       size="small"
                                       v-for="(s,i) in $$$item.listData"
@@ -507,7 +516,7 @@
                               <div v-if="$$$item.type == 'select_day_per'">
                                   <span>
                                     每月
-                                    <el-select v-model="$$$item.answer">
+                                    <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
                                       <el-option
                                         size="small"
                                         v-for="(s,i) in days"
@@ -523,7 +532,7 @@
                               <div v-if="$$$item.type == 'select_day'">
                                   <span>
                                     月
-                                    <el-select v-model="$$$item.answer">
+                                    <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)" >
                                       <el-option
                                         size="small"
                                         v-for="(s,i) in days"
@@ -538,7 +547,7 @@
                               <!--下拉选择一年中哪个月-->
                               <div v-if="$$$item.type == 'select_year'">
                                 <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
-                                  <el-select v-model="$$$item.answer">
+                                  <el-select v-model="$$$item.answer"  @change="userAddAnswerAction($$$item)">
                                     <el-option
                                       size="small"
                                       v-for="(s,i) in mon"
@@ -556,61 +565,61 @@
                     </div>
                     <div>
                       <div v-if="mo.title==='房产' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeFangChan(index)">删除房产</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(521,index)">删除房产</div>
                       </div>
                       <div v-if="mo.title==='子女状况' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeZiNv(index)">删除孩子</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(518,index)">删除孩子</div>
                       </div>
                       <div v-if="mo.title==='存款' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeCunKuan(index)">删除存款</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(637,index)">删除存款</div>
                       </div>
                       <div v-if="mo.title==='车子' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeCar(index)">删除车子</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(522,index)">删除车子</div>
                       </div>
                       <div v-if="mo.title==='理财' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeLiCai(index)">删除理财</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(523,index)">删除理财</div>
                       </div>
                       <div v-if="mo.title==='家电' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeJiaDian(index)">删除家电</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(636,index)">删除家电</div>
                       </div>
                       <div v-if="mo.title==='保险' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeBaoXian(index)">删除保险</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(524,index)">删除保险</div>
                       </div>
                       <div v-if="mo.title==='债权' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeZhaiQuan(index)">删除债权</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(634,index)">删除债权</div>
                       </div>
                       <div v-if="mo.title==='债务' " class="text-right flex">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="removeZhaiWu(index)">删除债务</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(635,index)">删除债务</div>
                       </div>
                     </div>
                   </div>
                   <div>
                     <div v-if="mo.title== '房产' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addFangChan">添加房产</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(521)">添加房产</div>
                     </div>
                     <div v-if="mo.title== '子女状况' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addZiNv">添加孩子</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(518)">添加孩子</div>
                     </div>
                     <div v-if="mo.title== '存款' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addCunKuan">添加存款</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(637)">添加存款</div>
                     </div>
                     <div v-if="mo.title== '车子' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addCar">添加车子</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(522)">添加车子</div>
                     </div>
                     <div v-if="mo.title== '理财' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addLiCai">添加理财</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(523)">添加理财</div>
                     </div>
                     <div v-if="mo.title== '家电' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addJiaDian">添加家电</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(636)">添加家电</div>
                     </div>
                     <div v-if="mo.title== '保险' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addBaoXian">添加保险</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(524)">添加保险</div>
                     </div>
                     <div v-if="mo.title== '债权' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addZhaiQuan">添加债权</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(634)">添加债权</div>
                     </div>
                     <div v-if="mo.title== '债务' " class="text-right flex">
-                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="addZhaiWu">添加债务</div>
+                      <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(635)">添加债务</div>
                     </div>
                   </div>
                 </div>
@@ -652,13 +661,16 @@
   
   import {returnQuestionnaireJson} from '@/api/api/requestLogin.js'    // 查询问卷json
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
-
+  import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
+  import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
+  
   export default {
     components: {
       // label_case,
     },
       data () {
           return {
+            demo:4,
             hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
             days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
             mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
@@ -704,75 +716,166 @@
         getId (index) {
           return 'box_' + index
         },
+        getBasicInformation (){ // 查询双方基本信息模块数据
+          returnQuestionnaireJson({'qpid': 595}).then((data)=>{  // 查询双方基本信息模块数据
+            this.aa.BasicInformation = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getHunYinStatus () {// 查询婚姻状况模块数据
+          returnQuestionnaireJson({'qpid': 596}).then((data)=>{  // 查询婚姻状况模块数据
+            this.aa.HunYinStatus = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getZiNv () { // 查询子女模块数据
+          returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
+            this.aa.ZiNv = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getFangChan () {// 查询房产模块数据
+          returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
+            this.aa.FangChan = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getCunKuan () {// 查询存款模块数据
+          returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
+            this.aa.CunKuan = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getCar () { // 查询车子模块数据
+          returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
+            this.aa.Car = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getLiCai () { // 查询理财模块数据
+          returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
+            this.aa.LiCai = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getJiaDian () { // 查询家电模块数据
+          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
+            this.aa.JiaDian = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getBaoXian(){// 查询保险模块数据
+          returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
+            this.aa.BaoXian = data.data.data
+          }).catch((data)=>{
+
+          })
+        },
+        getZhaiQuan(){ // 查询债权模块数据
+          returnQuestionnaireJson({'qpid': 634}).then((data)=>{  // 查询债权模块数据
+            this.aa.ZhaiQuan = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getZhaiWu(){ // 查询债务模块数据
+          returnQuestionnaireJson({'qpid': 635}).then((data)=>{  // 查询债务模块数据
+            this.aa.ZhaiWu = data.data.data
+          }).catch((data)=>{
+          })
+        },
         getReturnQuestionnaireJson () {  
-            returnQuestionnaireJson({'qpid': 595}).then((data)=>{  // 查询双方基本信息模块数据
-              this.aa.BasicInformation = data.data.data
-              console.log(this.aa.BasicInformation)
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 596}).then((data)=>{  // 查询婚姻状况模块数据
-              this.aa.HunYinStatus = data.data.data
-              // console.log(this.aa.BasicInformation)
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
-              this.aa.ZiNv = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
-              this.aa.FangChan = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
-              this.aa.CunKuan = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
-              this.aa.Car = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
-              this.aa.LiCai = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
-              this.aa.JiaDian = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
-              this.aa.BaoXian = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 634}).then((data)=>{  // 查询债权模块数据
-              this.aa.ZhaiQuan = data.data.data
-            }).catch((data)=>{
-
-            })
-            returnQuestionnaireJson({'qpid': 635}).then((data)=>{  // 查询债务模块数据
-              this.aa.ZhaiWu = data.data.data
-            }).catch((data)=>{
-
-            })
+            this.getBasicInformation() // 查询双方基本信息模块数据
+            this.getHunYinStatus()  // 查询婚姻状况模块数据
+            this.getZiNv()  // 查询子女模块数据
+            this.getFangChan() // 查询房产模块数据
+            this.getCunKuan()  // 查询存款模块数据
+            this.getCar()   // 查询车子模块数据
+            this.getLiCai()  // 查询理财模块数据
+            this.getJiaDian()  // 查询家电模块数据
+            this.getBaoXian() // 查询保险模块数据
+            this.getZhaiQuan()  // 查询债权模块数据
+            this.getZhaiWu()  // 查询债务模块数据    
         },
         userAddAnswerAction (e){
-          userAddAnswer({
-            value: e.answer,  // 值
-            qpid: e.id, // 关联id
-            fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-            quid: 6 //用户的问卷id
+          if(e.fornum !== undefined){
+            userAddAnswer({
+              value: e.answer,  // 值
+              qpid: e.id, // 关联id
+              fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+              quid: 6 //用户的问卷id
+            }).then((data)=>{
+              console.log("保存成功")
+            }).catch((data)=>{
+               console.log("保存失败")
+            })
+          }else{
+            userAddAnswer({
+              value: e.answer,  // 值
+              qpid: e.id, // 关联id
+              // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+              quid: 6 //用户的问卷id
+            }).then((data)=>{
+              console.log("保存成功")
+            }).catch((data)=>{
+               console.log("保存失败")
+            })
+          }
+        },
+        userAddSelectAnswerAction (e){   // 添加子女或者房产等
+            userAddSelectAnswer({
+              qpid: e,
+              quid: 6
+            }).then((data)=>{
+              if(e==518){
+                this.getZiNv()  // 查询子女模块数据
+              }else if(e==521){
+                this.getFangChan() // 查询房产模块数据
+              }else if(e==637){
+                this.getCunKuan()  // 查询存款模块数据
+              }else if(e==522){
+                this.getCar()   // 查询车子模块数据
+              }else if(e==523){
+                this.getLiCai()  // 查询理财模块数据
+              }else if(e==636){
+                this.getJiaDian()  // 查询家电模块数据
+              }else if(e==524){
+                this.getBaoXian() // 查询保险模块数据
+              }else if(e==634){
+                this.getZhaiQuan()  // 查询债权模块数据
+              }else if(e==635){
+                this.getZhaiWu()  // 查询债务模块数据
+              }
+            }).catch((data)=>{
+              console.log('添加失败')
+            })
+        },
+        userDeleteSelectAnswerAction (e,index) { // 删除子女或者房产等信息
+          userDeleteSelectAnswer({
+            qpid: e,
+            quid: 6,
+            fornum: index+1
           }).then((data)=>{
-            alert("保存成功")
+            if(e==518){
+                this.getZiNv()  // 查询子女模块数据
+              }else if(e==521){
+                this.getFangChan() // 查询房产模块数据
+              }else if(e==637){
+                this.getCunKuan()  // 查询存款模块数据
+              }else if(e==522){
+                this.getCar()   // 查询车子模块数据
+              }else if(e==523){
+                this.getLiCai()  // 查询理财模块数据
+              }else if(e==636){
+                this.getJiaDian()  // 查询家电模块数据
+              }else if(e==524){
+                this.getBaoXian() // 查询保险模块数据
+              }else if(e==634){
+                this.getZhaiQuan()  // 查询债权模块数据
+              }else if(e==635){
+                this.getZhaiWu()  // 查询债务模块数据
+              }
           }).catch((data)=>{
-             alert("保存失败")
+            console.log('删除失败')
           })
         },
         // BasicInformation1 () {
@@ -3834,80 +3937,80 @@
           // this.aa.ZhaiWu = [];
           // this.$set(this.aa.ZhaiWu, this.ZhaiWu1())
         },
-        addZiNv () { // 添加房产
-          this.aa.ZiNv.push(this.ZiNv1())
-          alert('添加第'+this.aa.ZiNv.length+'个孩子')
-        },
-        removeZiNv (index) {  // 删除房产
-          this.aa.ZiNv.splice(index,1)
-          alert('删除第'+(index+1)+'个孩子')
-        },
-        addFangChan () { // 添加房产
-          this.aa.FangChan.push(this.FangChan1())
-          alert('添加第'+this.aa.FangChan.length+'套房产')
-        },
-        removeFangChan (index) {  // 删除房产
-          this.aa.FangChan.splice(index,1)
-          alert('删除第'+(index+1)+'套房产')
-        },
+        // addZiNv () { // 添加房产
+        //   this.aa.ZiNv.push(this.ZiNv1())
+        //   alert('添加第'+this.aa.ZiNv.length+'个孩子')
+        // },
+        // removeZiNv (index) {  // 删除房产
+        //   this.aa.ZiNv.splice(index,1)
+        //   alert('删除第'+(index+1)+'个孩子')
+        // },
+        // addFangChan () { // 添加房产
+        //   this.aa.FangChan.push(this.FangChan1())
+        //   alert('添加第'+this.aa.FangChan.length+'套房产')
+        // },
+        // removeFangChan (index) {  // 删除房产
+        //   this.aa.FangChan.splice(index,1)
+        //   alert('删除第'+(index+1)+'套房产')
+        // },
         
-        addCunKuan () {  
-          this.aa.CunKuan.push(this.CunKuan1())
-          alert('添加第'+this.aa.CunKuan.length+'笔存款')
-        },
-        removeCunKuan (index) {
-          this.aa.CunKuan.splice(index,1)
-          alert('删除第'+(index+1)+'笔存款')
-        },
+        // addCunKuan () {  
+        //   this.aa.CunKuan.push(this.CunKuan1())
+        //   alert('添加第'+this.aa.CunKuan.length+'笔存款')
+        // },
+        // removeCunKuan (index) {
+        //   this.aa.CunKuan.splice(index,1)
+        //   alert('删除第'+(index+1)+'笔存款')
+        // },
         
-        addCar () {
-          this.aa.Car.push(this.Car1())
-          alert('添加第'+this.aa.Car.length+'辆车子')
-        },
-        removeCar (index) {
-          this.aa.Car.splice(index,1)
-          alert('删除第'+(index+1)+'辆车子')
-        },
-        addLiCai () {
-          this.aa.LiCai.push(this.LiCai1())
-          alert('添加第'+this.aa.LiCai.length+'笔理财')
-        },
-        removeLiCai (index) {
-          this.aa.LiCai.splice(index,1)
-          alert('删除第'+(index+1)+'笔理财')
-        },
-        addJiaDian () {
-          this.aa.JiaDian.push(this.JiaDian1())
-          alert('添加第'+this.aa.JiaDian.length+'家电')
-        },
-        removeJiaDian (index) {
-          this.aa.JiaDian.splice(index,1)
-          alert('删除第'+(index+1)+'家电')
-        },
-        addBaoXian () {
-          this.aa.BaoXian.push(this.BaoXian1())
-          alert('添加第'+this.aa.BaoXian.length+'笔保险')
-        },
-        removeBaoXian (index) {
-          this.aa.BaoXian.splice(index,1)
-          alert('删除第'+(index+1)+'笔保险')
-        },
-        addZhaiQuan () {
-          this.aa.ZhaiQuan.push(this.ZhaiQuan1())
-          alert('添加第'+this.aa.ZhaiQuan.length+'笔债权')
-        },
-        removeZhaiQuan (index) {
-          this.aa.ZhaiQuan.splice(index,1)
-          alert('删除第'+(index+1)+'笔债权')
-        },
-        addZhaiWu () {
-          this.aa.ZhaiWu.push(this.ZhaiWu1())
-          alert('添加第'+this.aa.ZhaiWu.length+'笔债务')
-        },
-        removeZhaiWu (index) {
-          this.aa.ZhaiWu.splice(index,1)
-          alert('删除第'+(index+1)+'笔债务')
-        },
+        // addCar () {
+        //   this.aa.Car.push(this.Car1())
+        //   alert('添加第'+this.aa.Car.length+'辆车子')
+        // },
+        // removeCar (index) {
+        //   this.aa.Car.splice(index,1)
+        //   alert('删除第'+(index+1)+'辆车子')
+        // },
+        // addLiCai () {
+        //   this.aa.LiCai.push(this.LiCai1())
+        //   alert('添加第'+this.aa.LiCai.length+'笔理财')
+        // },
+        // removeLiCai (index) {
+        //   this.aa.LiCai.splice(index,1)
+        //   alert('删除第'+(index+1)+'笔理财')
+        // },
+        // addJiaDian () {
+        //   this.aa.JiaDian.push(this.JiaDian1())
+        //   alert('添加第'+this.aa.JiaDian.length+'家电')
+        // },
+        // removeJiaDian (index) {
+        //   this.aa.JiaDian.splice(index,1)
+        //   alert('删除第'+(index+1)+'家电')
+        // },
+        // addBaoXian () {
+        //   this.aa.BaoXian.push(this.BaoXian1())
+        //   alert('添加第'+this.aa.BaoXian.length+'笔保险')
+        // },
+        // removeBaoXian (index) {
+        //   this.aa.BaoXian.splice(index,1)
+        //   alert('删除第'+(index+1)+'笔保险')
+        // },
+        // addZhaiQuan () {
+        //   this.aa.ZhaiQuan.push(this.ZhaiQuan1())
+        //   alert('添加第'+this.aa.ZhaiQuan.length+'笔债权')
+        // },
+        // removeZhaiQuan (index) {
+        //   this.aa.ZhaiQuan.splice(index,1)
+        //   alert('删除第'+(index+1)+'笔债权')
+        // },
+        // addZhaiWu () {
+        //   this.aa.ZhaiWu.push(this.ZhaiWu1())
+        //   alert('添加第'+this.aa.ZhaiWu.length+'笔债务')
+        // },
+        // removeZhaiWu (index) {
+        //   this.aa.ZhaiWu.splice(index,1)
+        //   alert('删除第'+(index+1)+'笔债务')
+        // },
 
         GoComplatePage () {
           this.IsShow = true;
@@ -3931,26 +4034,26 @@
         },
         next () {
           if (this.active++ >this.mokuai.length-2) this.$router.replace("/ShengChengXieYi");
-        },
-        addChildBirthday1 (e) {
-           console.log(e,12312313)
-        },
-        addChildBirthday (e) {
-          console.log(e,12312313)
-        },
-        addChildName (e) {    // 添加姓名
-          console.log(e)
-          alert(e)
-        },
-        addChildSex (e) {
-          console.log(e)
-        },
-        addChildId (e) {
-          console.log(e)
-        },
-        consoleChild (e) {
-          console.log(e)
         }
+        // addChildBirthday1 (e) {
+        //    console.log(e,12312313)
+        // },
+        // addChildBirthday (e) {
+        //   console.log(e,12312313)
+        // },
+        // addChildName (e) {    // 添加姓名
+        //   console.log(e)
+        //   alert(e)
+        // },
+        // addChildSex (e) {
+        //   console.log(e)
+        // },
+        // addChildId (e) {
+        //   console.log(e)
+        // },
+        // consoleChild (e) {
+        //   console.log(e)
+        // }
       }
     }
 </script>

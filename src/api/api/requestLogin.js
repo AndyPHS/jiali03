@@ -683,3 +683,24 @@ export const userAddAnswer = params => {
     data: params
   });
 };
+// 重复问题+1 添加子女房产
+export const userAddSelectAnswer = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.userAddSelectAnswer,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 重复问题-1  删除子女
+export const userDeleteSelectAnswer = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.userDeleteSelectAnswer,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
