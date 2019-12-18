@@ -188,7 +188,9 @@ const apiUrl = {
   // 重复问题+1 添加孩子房产等信息
   userAddSelectAnswer: baseLiHunURL + 'page/user_add_select_answer',
   // 重复问题-1 删除孩子房产等信息
-  userDeleteSelectAnswer: baseLiHunURL + 'page/user_delete_select_answer'
+  userDeleteSelectAnswer: baseLiHunURL + 'page/user_delete_select_answer',
+  // 生成数据
+  outPutWord: baseLiHunURL + 'word/outputWord/'
 }
 export{
   apiUrl

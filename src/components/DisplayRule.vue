@@ -401,9 +401,11 @@
                 this.wordTreeMsg.fqaspId == null
             },
             addWhere () {
+
                 if(JSON.stringify(this.wordAdd.where) == '{}'){
                     this.wordAdd.where.splice(1,1)
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
+                    // console.log(this.wordAdd.where)
                     this.wordAddWhere = {} // 清空组合绑定的问题
                 }else{
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题

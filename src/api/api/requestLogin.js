@@ -704,3 +704,14 @@ export const userDeleteSelectAnswer = params => {
     data: params
   });
 };
+// 生成数据
+
+export const outPutWord = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.outPutWord + localStorage.getItem('qid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
