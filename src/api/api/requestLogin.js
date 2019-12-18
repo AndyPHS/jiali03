@@ -708,7 +708,7 @@ export const userDeleteSelectAnswer = params => {
 
 export const outPutWord = params => {
   return axios({
-    method: "put",
+    method: "get",
     dataType: 'json',
     url: apiUrl.outPutWord + localStorage.getItem('qid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},

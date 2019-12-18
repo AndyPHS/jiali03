@@ -644,22 +644,16 @@
           </div>
         </div>
       </div>
-      <div v-if="active == this.mokuai.length-1" class="mt-20">
-        <h2>请您耐心等待几分钟，</h2>
-        <p>我们正为您加速生成专属于您的个性化协议……</p>
-        <div class="text-center mt-10" >
-          <img class="mx-auto" src="@/assets/images/lihun/loading.gif">
-        </div>
-      </div>
-      <div >
+      
+      <div v-show="WordShow" class="outputword">
         <h2 class="py-2">离婚协议书</h2>
         <div class="w-full">
-          <div>{{123}}</div>
+          <div class="text-left msg">{{outputWord}}</div>
         </div>
       </div>
-      <el-button v-if="active < this.mokuai.length-1 && active > 0" style="margin-top: 12px;" @click="prev">上一步</el-button>
-      <el-button v-if="active < this.mokuai.length-2 " style="margin-top: 12px;" @click="next">下一步</el-button>
-      <el-button v-if="active==this.mokuai.length-2" style="margin-top: 12px;" @click="GoComplatePage">生成协议</el-button>
+      <el-button v-if="active < this.mokuai.length && active > 0" style="margin-top: 12px;" @click="prev">上一步</el-button>
+      <el-button v-if="active < this.mokuai.length-1 " style="margin-top: 12px;" @click="next">下一步</el-button>
+      <el-button v-if="active==this.mokuai.length-1" style="margin-top: 12px;" @click="GoComplatePage">生成协议</el-button>
     </div>
   </div>
 </template>
@@ -682,9 +676,22 @@
             hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
             days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
             mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            a: {
+
+            },
             aa: {
               BasicInformation: [],    //基本信息
-              HunYinStatus: []  // 婚姻状况
+              HunYinStatus: [],  // 婚姻状况
+              ZiNv: [],  // 子女
+              FangChan: [],               // 房产状况
+              CunKuan: [],                // 存款
+              Car: [],                // 车子
+              LiCai: [],                // 理财
+              JiaDian: [],                // 家电
+              BaoXian: [],          // 保险
+              ZhaiQuan: [],         // 债权
+              ZhaiWu: [],            // 债务
+              QiTaCaiChan: []       // 其他财产
             },           
             IsShow: false,
             mokuai: [
@@ -693,28 +700,26 @@
             ],
             active: 0,
             outputWord: '',
-            WordShow: false
+            WordShow: false,
+            waitWordShow: true
           }
       },
       name: 'WenJuan2',
-      beforeMount () {
-        
-        
-      },
+      
       mounted () {
-        this.childList();
+        // this.childList();
         this.getBasicInformation() // 查询双方基本信息模块数据
         this.getHunYinStatus()  // 查询婚姻状况模块数据
-        this.getZiNv()  // 查询子女模块数据
-        this.getFangChan() // 查询房产模块数据
-        this.getCunKuan()  // 查询存款模块数据
-        this.getCar()   // 查询车子模块数据
-        this.getLiCai()  // 查询理财模块数据
-        this.getJiaDian()  // 查询家电模块数据
-        this.getBaoXian() // 查询保险模块数据
-        this.getZhaiQuan()  // 查询债权模块数据
-        this.getZhaiWu()  // 查询债务模块数据
-        this.getShengChengXieYi() // 生成协议弹框
+        this.getZiNvMsg()  // 查询子女模块数据
+        this.getFangChanMsg() // 查询房产模块数据
+        this.getCunKuanMsg()  // 查询存款模块数据
+        this.getCarMsg()   // 查询车子模块数据
+        this.getLiCaiMsg()  // 查询理财模块数据
+        this.getJiaDianMsg()  // 查询家电模块数据
+        this.getBaoXianMsg() // 查询保险模块数据
+        this.getZhaiQuanMsg()  // 查询债权模块数据
+        this.getZhaiWuMsg()  // 查询债务模块数据
+        // this.getShengChengXieYi() // 生成协议弹框
       },
       methods: {
         getId (index) {
@@ -734,26 +739,29 @@
           }).catch((data)=>{
           })
         },
-        getZiNv () { // 查询子女模块数据
+        getZiNvMsg () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             if(data.data.data !== undefined ){
-              this.aa.ZiNv= data.data.data
+              this.aa.ZiNv = data.data.data
               this.mokuai.push({
                 title: '子女状况', 
                 part: 'ZiNv',
                 id: 3
               })
               this.mokuai.sort(this.compare('id'));
+
             }
+            // this.$set(this.aa.ZiNv,1,data.data.data)
+            console.log(this.aa.ZiNv)
           }).catch((data)=>{
           })
         },
-        getFangChan () {// 查询房产模块数据
+        getFangChanMsg () {// 查询房产模块数据
           returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
             if(data.data.data !== undefined ){
               this.aa.FangChan= data.data.data
               this.mokuai.push({
-                title: '房产状况', 
+                title: '房产', 
                 part: 'FangChan',
                 id: 4
               })
@@ -762,12 +770,12 @@
           }).catch((data)=>{
           })
         },
-        getCunKuan () {// 查询存款模块数据
+        getCunKuanMsg () {// 查询存款模块数据
           returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
             if(data.data.data !== undefined ){
               this.aa.CunKuan= data.data.data
               this.mokuai.push({
-                title: '存款状况', 
+                title: '存款', 
                 part: 'CunKuan',
                 id: 5
               })
@@ -776,12 +784,12 @@
           }).catch((data)=>{
           })
         },
-        getCar () { // 查询车子模块数据
+        getCarMsg () { // 查询车子模块数据
           returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
             if(data.data.data !== undefined ){
               this.aa.Car= data.data.data
               this.mokuai.push({
-                title: '车辆信息', 
+                title: '车子', 
                 part: 'Car',
                 id: 6
               })
@@ -790,12 +798,12 @@
           }).catch((data)=>{
           })
         },
-        getLiCai () { // 查询理财模块数据
+        getLiCaiMsg () { // 查询理财模块数据
           returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
             if(data.data.data !== undefined ){
               this.aa.LiCai= data.data.data
               this.mokuai.push({
-                title: '理财信息', 
+                title: '理财', 
                 part: 'LiCai',
                 id: 7
               })
@@ -804,12 +812,12 @@
           }).catch((data)=>{
           })
         },
-        getJiaDian () { // 查询家电模块数据
+        getJiaDianMsg () { // 查询家电模块数据
           returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
             if(data.data.data !== undefined ){
               this.aa.JiaDian= data.data.data
               this.mokuai.push({
-                title: '家电信息', 
+                title: '家电', 
                 part: 'JiaDian',
                 id: 8
               })
@@ -818,12 +826,12 @@
           }).catch((data)=>{
           })
         },
-        getBaoXian(){// 查询保险模块数据
+        getBaoXianMsg (){// 查询保险模块数据
           returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
             if(data.data.data !== undefined ){
               this.aa.BaoXian= data.data.data
               this.mokuai.push({
-                title: '保险信息', 
+                title: '保险', 
                 part: 'BaoXian',
                 id: 9
               })
@@ -833,12 +841,12 @@
 
           })
         },
-        getZhaiQuan(){ // 查询债权模块数据
+        getZhaiQuanMsg (){ // 查询债权模块数据
           returnQuestionnaireJson({'qpid': 634}).then((data)=>{  // 查询债权模块数据
             if(data.data.data !== undefined ){
               this.aa.ZhaiQuan= data.data.data
               this.mokuai.push({
-                title: '债权信息', 
+                title: '债权', 
                 part: 'ZhaiQuan',
                 id: 10
               })
@@ -847,12 +855,12 @@
           }).catch((data)=>{
           })
         },
-        getZhaiWu(){ // 查询债务模块数据
+        getZhaiWuMsg (){ // 查询债务模块数据
           returnQuestionnaireJson({'qpid': 635}).then((data)=>{  // 查询债务模块数据
             if(data.data.data !== undefined ){
               this.aa.ZhaiWu= data.data.data
               this.mokuai.push({
-                title: '债务信息', 
+                title: '债务', 
                 part: 'ZhaiWu',
                 id: 11
               })
@@ -861,14 +869,87 @@
           }).catch((data)=>{
           })
         },
-        
-        getShengChengXieYi(){  // 最后弹出生成弹框
-          this.mokuai.push({
-            title: '生成协议', 
-            part: 'ShengChengXieYi',
-            id: 12
+        // getShengChengXieYi(){  // 最后弹出生成弹框
+        //   this.mokuai.push({
+        //     title: '生成协议', 
+        //     part: 'ShengChengXieYi',
+        //     id: 12
+        //   })
+        //   this.mokuai.sort(this.compare('id'));
+        // },
+
+        getZiNv () { // 查询子女模块数据
+          returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
+            if(data.data.data !== undefined ){
+              this.aa.ZiNv = data.data.data
+            }
+          }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
+        },
+        getFangChan () {// 查询房产模块数据
+          returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
+            if(data.data.data !== undefined ){
+              this.aa.FangChan= data.data.data
+            }
+          }).catch((data)=>{
+          })
+        },
+        getCunKuan () {// 查询存款模块数据
+          returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
+            if(data.data.data !== undefined ){
+              this.aa.CunKuan= data.data.data
+            }
+          }).catch((data)=>{
+          })
+        },
+        getCar () { // 查询车子模块数据
+          returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
+            if(data.data.data !== undefined ){
+              this.aa.Car= data.data.data
+            }
+          }).catch((data)=>{
+          })
+        },
+        getLiCai () { // 查询理财模块数据
+          returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
+            if(data.data.data !== undefined ){
+              this.aa.LiCai= data.data.data
+            }
+          }).catch((data)=>{
+          })
+        },
+        getJiaDian () { // 查询家电模块数据
+          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
+            if(data.data.data !== undefined ){
+              this.aa.JiaDian= data.data.data
+            }
+          }).catch((data)=>{
+          })
+        },
+        getBaoXian (){// 查询保险模块数据
+          returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
+            if(data.data.data !== undefined ){
+              this.aa.BaoXian= data.data.data
+            }
+          }).catch((data)=>{
+
+          })
+        },
+        getZhaiQuan (){ // 查询债权模块数据
+          returnQuestionnaireJson({'qpid': 634}).then((data)=>{  // 查询债权模块数据
+            if(data.data.data !== undefined ){
+              this.aa.ZhaiQuan= data.data.data
+            }
+          }).catch((data)=>{
+          })
+        },
+        getZhaiWu (){ // 查询债务模块数据
+          returnQuestionnaireJson({'qpid': 635}).then((data)=>{  // 查询债务模块数据
+            if(data.data.data !== undefined ){
+              this.aa.ZhaiWu= data.data.data
+            }
+          }).catch((data)=>{
+          })
         },
         compare(property){
           return function(a,b){
@@ -1355,6 +1436,21 @@
         //     }
         //   ]
         // },
+           ZiNv1 (){
+              returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
+                if(data.data.data !== undefined ){
+                 console.log(data.data.data)
+                  this.mokuai.push({
+                    title: '子女状况', 
+                    part: 'ZiNv',
+                    id: 3
+                  })
+                  this.mokuai.sort(this.compare('id'));
+                }
+              }).catch((data)=>{
+              })
+              
+           },
         // ZiNv1 () {
         //   return [
         //     {
@@ -4015,6 +4111,7 @@
           // this.$set(this.aa.HunYinStatus, 1, this.HunYinStatus1())
           // this.aa.ZiNv = [];
           // this.$set(this.aa.ZiNv, this.ZiNv1())
+          // console.log(this.aa.ZiNv)
           // this.aa.CunKuan = [];
           // this.$set(this.aa.CunKuan, this.CunKuan1())
           // this.aa.FangChan = [];
@@ -4111,15 +4208,14 @@
 
         GoComplatePage () {
           this.IsShow = true;
-          // this.$router.replace("/ShengChengXieYi");
+          
         },
         quxiao (){
           this.IsShow = false;
         },
         complate () {
           this.IsShow = false;
-          this.active =this.mokuai.length-1
-          // this.$router.replace("/ShengChengXieYi");
+          this.$router.replace("/ShengChengXieYi");
         },
         stepClick (val) {
           var _that = this;
@@ -4130,8 +4226,7 @@
           if(this.active < 0 ) this.active = 0;
         },
         next () {
-
-          if (this.active++ >this.mokuai.length-2) this.$router.replace("/ShengChengXieYi");
+          if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
         }
         // addChildBirthday1 (e) {
         //    console.log(e,12312313)
@@ -4160,4 +4255,5 @@
 #alert_xieyi{width:400px;height:300px;border:1px solid #343434;position:fixed;top:50%;margin-top:-150px;left:50%;margin-left:-200px;z-index: 1;background: #fff}
 #alert_xieyi h2{margin-top:100px;}
 #alert_xieyi .queren{width:80%;text-align: center;justify-content: space-around;margin-top:80px;margin-left: 20%}
+.outputword .msg{text-indent:2em;}
 </style>

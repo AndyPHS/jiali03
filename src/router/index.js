@@ -34,6 +34,7 @@ import BaoXian from '@/components/BaoXian'         // 添加离婚协议书保�
 import QiTaCaiChan from '@/components/QiTaCaiChan'         // 添加离婚协议书其他财产页面
 import ZhaiQuan from '@/components/ZhaiQuan'         // 添加离婚协议书债权页面
 import ZhaiWu from '@/components/ZhaiWu'         // 添加离婚协议书债务页面
+import ShengChengXieYi from '@/components/ShengChengXieYi'         // 添加离婚协议书债务页面
 
 Vue.use(Router)
 
@@ -239,6 +240,12 @@ export default new Router({
       path: '/ZhaiWu',
       name: 'ZhaiWu',
       component: ZhaiWu
+    },
+    // 生成离婚协议书页面
+    {
+      path: '/ShengChengXieYi',
+      name: 'ShengChengXieYi',
+      component: ShengChengXieYi
     }
 
   ]
