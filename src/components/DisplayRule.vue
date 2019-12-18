@@ -308,6 +308,18 @@
                     {
                        title: '大于',
                        value: '3'             
+                    },
+                    {
+                       title: '大于等于',
+                       value: '4'             
+                    },
+                    {
+                       title: '小于等于',
+                       value: '5'             
+                    },
+                    {
+                       title: '不等于',
+                       value: '6'             
                     }
                 ],
                 selectOnlyLisg: [],    // 查询单独问题
