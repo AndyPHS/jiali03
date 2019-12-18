@@ -344,7 +344,7 @@
             addTreeText(){ // 右键点击离婚协议书dom树 1为问题
                 const a = this.treeMsg.fqaspId
                 const b = this.treeMsg.title
-                this.addWordJson.json +="{{1," + a + "," + b +"}}"
+                this.addWordJson.json +="{{2," + a + "," + b +"}}"
                 // console.log(this.addWordJson.json)
             },
             // 右侧模块结束
@@ -374,11 +374,11 @@
             addGuiZeText(){ // 右键点击组合规则 2为组合规则
                 const a = this.wordTreeMsg.fqaspId
                 const b = this.wordTreeMsg.title
-                this.addWordJson.json +="{{2," + a + "," + b +"}}"
+                this.addWordJson.json +="{{3," + a + "," + b +"}}"
                 // console.log(this.addWordJson.json)
             },
             addTitle () {  // 点击新增标题往文案添加标题
-                this.addWordJson.json +="{{3," + this.newTitle +"}}"
+                this.addWordJson.json +="{{1," + this.newTitle +"}}"
                 this.newTitle = '';
             },
             addNewWord () { // 点击新增组合弹出新增组合对话框
