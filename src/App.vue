@@ -15,6 +15,7 @@ export default {
 
 @import "./common/css/app.css";
 
+@import "./common/css/tailwindcss.css";
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

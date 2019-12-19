@@ -672,88 +672,111 @@
                   listData: [
                     { label: '无', value: '1' },
                     { label: '有', value: '2' }
+                  ]
+                },
+                {
+                  title: '以谁的名义签订的购房合同？',
+                  id: '55',
+                  isRequired: true,
+                  type: 'select',
+                  tip: '',
+                  answer: '',
+                  listData: [
+                    { label: '男方', value: '1' },
+                    { label: '女方', value: '2' },
+                    { label: '双方', value: '2' }
+                  ],
+                  requireQidAndAnswer: { id: '5', answer: '1' }
+                },
+                {
+                  title: '与谁签订的购房合同',
+                  id: '5_1_2',
+                  isRequired: false,
+                  type: 'input',
+                  input_type: 'text',
+                  placeholder: '',
+                  tip: '提示',
+                  answer: '',
+                  requireQidAndAnswer: { id: '5', answer: '1' }
+                },
+                {
+                  title: '合同全称',
+                  id: '5_1_3',
+                  isRequired: false,
+                  type: 'input',
+                  input_type: 'text',
+                  placeholder: '',
+                  tip: '提示',
+                  answer: '',
+                  requireQidAndAnswer: { id: '5', answer: '1' }
+                },
+                {
+                  title: '房产证号',
+                  id: '5_2_1',
+                  isRequired: true,
+                  type: 'input',
+                  input_type: 'number',
+                  placeholder: '男方抚养时间',
+                  tip: '',
+                  answer: '',
+                  requireQidAndAnswer: { id: '5', answer: '2' }
+                },
+                {
+                  title: '房子登记在谁名下',
+                  id: '5_2_2',
+                  isRequired: true,
+                  type: 'select',
+                  tip: '',
+                  answer: '',
+                  listData: [
+                    { label: '男方', value: '1' },
+                    { label: '女方', value: '2' },
+                    { label: '双方', value: '3' }
                   ],
                   childQuestion: {
-                    1: [
-                      {
-                        title: '以谁的名义签订的购房合同？',
-                        id: '5_1_1',
-                        isRequired: true,
-                        type: 'select',
-                        tip: '',
-                        answer: '',
-                        listData: [
-                          { label: '男方', value: '1' },
-                          { label: '女方', value: '2' },
-                          { label: '双方', value: '2' }
-                        ]
-                      },
-                      {
-                        title: '与谁签订的购房合同',
-                        id: '5_1_2',
-                        isRequired: false,
-                        type: 'input',
-                        input_type: 'text',
-                        placeholder: '',
-                        tip: '提示',
-                        answer: ''
-                      },
-                      {
-                        title: '合同全称',
-                        id: '5_1_3',
-                        isRequired: false,
-                        type: 'input',
-                        input_type: 'text',
-                        placeholder: '',
-                        tip: '提示',
-                        answer: ''
-                      }
-                    ],
+                    1:[
+                    {
+                      title: '男方拥有份额',
+                      id: '5_2_3',
+                      isRequired: true,
+                      type: 'input',
+                      input_type: 'number',
+                      tip: '',
+                      answer: ''
+                    }],
                     2: [
-                      {
-                        title: '房产证号',
-                        id: '5_2_1',
-                        isRequired: true,
-                        type: 'input',
-                        input_type: 'number',
-                        placeholder: '男方抚养时间',
-                        tip: '',
-                        answer: ''
-                      },
-                      {
-                        title: '房子登记在谁名下',
-                        id: '5_2_2',
-                        isRequired: true,
-                        type: 'select',
-                        tip: '',
-                        answer: '',
-                        listData: [
-                          { label: '男方', value: '男方' },
-                          { label: '女方', value: '女方' },
-                          { label: '双方', value: '双方' }
-                        ]
-                      },
-                      {
-                        title: '男方拥有份额',
-                        id: '5_2_3',
-                        isRequired: true,
-                        type: 'input',
-                        input_type: 'number',
-                        tip: '',
-                        answer: ''
-                      },
-                      {
-                        title: '女方拥有份额',
-                        id: '5_2_4',
-                        isRequired: true,
-                        type: 'input',
-                        input_type: 'number',
-                        tip: '',
-                        answer: ''
-                      }
-                    ]
-                  }
+                    {
+                      title: '女方拥有份额',
+                      id: '5_2_3',
+                      isRequired: true,
+                      type: 'input',
+                      input_type: 'number',
+                      tip: '',
+                      answer: ''
+                    }],
+                    3: [
+                    {
+                      title: '孩子拥有份额',
+                      id: '5_2_3',
+                      isRequired: true,
+                      type: 'input',
+                      input_type: 'number',
+                      tip: '',
+                      answer: ''
+                    },
+                    {
+                      title: '孩子的姓名是',
+                      id: '5_2_3',
+                      isRequired: true,
+                      type: 'input',
+                      input_type: 'text',
+                      tip: '',
+                      answer: ''
+                    }]
+                  },
+                  requireQidAndAnswer: { id: '5', answer: '2' }
                 }
+                
               ]
             },
             {
