@@ -960,27 +960,54 @@
         },
         userAddAnswerAction (e){
           if(e.fornum !== undefined){
-            userAddAnswer({
-              value: e.answer,  // 值
-              qpid: e.id, // 关联id
-              fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-              quid: 6 //用户的问卷id
-            }).then((data)=>{
-              console.log("保存成功")
-            }).catch((data)=>{
-               console.log("保存失败")
-            })
+            if(Array.isArray(e.answer)){
+              userAddAnswer({
+                value: JSON.stringify(e.answer),  // 值
+                qpid: e.id, // 关联id
+                fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                quid: 6 //用户的问卷id
+              }).then((data)=>{
+                console.log("保存成功")
+              }).catch((data)=>{
+                 console.log("保存失败")
+              })
+            }else{
+              userAddAnswer({
+                value: e.answer,  // 值
+                qpid: e.id, // 关联id
+                fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                quid: 6 //用户的问卷id
+              }).then((data)=>{
+                console.log("保存成功")
+              }).catch((data)=>{
+                 console.log("保存失败")
+              })
+            }
           }else{
-            userAddAnswer({
-              value: e.answer,  // 值
-              qpid: e.id, // 关联id
-              // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-              quid: 6 //用户的问卷id
-            }).then((data)=>{
-              console.log("保存成功")
-            }).catch((data)=>{
-               console.log("保存失败")
-            })
+             if(Array.isArray(e.answer)){
+              userAddAnswer({
+                value: JSON.stringify(e.answer),  // 值
+                qpid: e.id, // 关联id
+                // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                quid: 6 //用户的问卷id
+              }).then((data)=>{
+                console.log("保存成功")
+              }).catch((data)=>{
+                 console.log("保存失败")
+              })
+            }else{
+              userAddAnswer({
+                value: e.answer,  // 值
+                qpid: e.id, // 关联id
+                // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                quid: 6 //用户的问卷id
+              }).then((data)=>{
+                console.log("保存成功")
+              }).catch((data)=>{
+                 console.log("保存失败")
+              })
+            }
+            
           }
         },
         userAddSelectAnswerAction (e){   // 添加子女或者房产等
