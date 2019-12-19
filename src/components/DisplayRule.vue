@@ -320,6 +320,10 @@
                     {
                        title: '不等于',
                        value: '6'             
+                    },
+                    {
+                       title: '包含',
+                       value: '7'             
                     }
                 ],
                 selectOnlyLisg: [],    // 查询单独问题
