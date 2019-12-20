@@ -558,6 +558,167 @@
                                   </el-select>
                                 </el-form-item>
                               </div>
+
+
+                              <!-- 三级问题 -->
+
+                              <div v-if="$$$item.questions ">
+                                <h2 class="text-left text-blue-500">{{$$$item.title}}</h2>
+                                <div v-for="($$$$item, $$$$index) in $$$item.questions">
+                                   <!--日期-精确到日-->
+                                    <div v-if="$$$$item.type == 'dateTime_day'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                        <el-date-picker
+                                          v-model="$$$$item.answer"
+                                          @change="userAddAnswerAction($$$$item)"
+                                          type="date"
+                                          size="small"
+                                          placeholder="选择日期"
+                                          format="yyyy 年 MM 月 dd 日"
+                                          value-format="yyyy-MM-dd">
+                                        </el-date-picker>
+                                      </el-form-item>
+                                    </div>
+                                    <!--日期-区间几点到几点-->
+                                    <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                        <el-time-picker
+                                          v-model="$$$$item.answer"
+                                           @change="userAddAnswerAction($$$$item)"
+                                          is-range
+                                          size="small"
+                                          range-separator="至"
+                                          start-placeholder="开始日期"
+                                          end-placeholder="结束日期"
+                                          placeholder="选择时间范围">
+                                        </el-time-picker>
+                                      </el-form-item>
+                                    </div>
+                                    <!--日期-区间几号到几号-->
+                                    <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                        <el-date-picker
+                                          v-model="$$$$item.answer"
+                                           @change="userAddAnswerAction($$$$item)"
+                                          type="daterange"
+                                          size="small"
+                                          range-separator="至"
+                                          start-placeholder="开始日期"
+                                          end-placeholder="结束日期"
+                                          placeholder="选择日期范围">
+                                        </el-date-picker>
+                                      </el-form-item>
+                                    </div>
+                                    <!--输入框-文字类型-->
+                                    <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                        <el-input
+                                          type="text"
+                                          class="ban"
+                                          v-model="$$$$item.answer"
+                                          size="small"
+                                          :placeholder="$$$$item.placeholder"
+                                          @blur="userAddAnswerAction($$$$item)"
+                                        ></el-input>
+                                      </el-form-item>
+                                    </div>
+                                    <!--输入框-数字类型（类似身份证号、金额）-->
+                                    <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                        <el-input
+                                          type="number"
+                                          class="ban"
+                                          v-model="$$$$item.answer"
+                                          size="small"
+                                          :placeholder="$$$$item.placeholder"
+                                          @blur="userAddAnswerAction($$$$item)"
+                                        ></el-input>
+                                      </el-form-item>
+                                    </div>
+                                    <!--单选框-->
+                                    <div v-if="$$$$item.type == 'radio'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                        <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                          <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                                        </el-radio-group>
+                                      </el-form-item>
+                                    </div>
+                                    <!--下拉框-->
+                                    <div v-if="$$$$item.type == 'select'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                        <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                          <el-option
+                                            size="small"
+                                            v-for="(s,i) in $$$$item.listData"
+                                            :key="i"
+                                            :label="s.label"
+                                            :value="s.value">
+                                          </el-option>
+                                        </el-select>
+                                      </el-form-item>
+                                    </div>
+                                     <!--下拉框(多选)-->
+                                    <div v-if="$$$$item.type == 'select_multiple'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                        <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
+                                          <el-option
+                                            size="small"
+                                            v-for="(s,i) in $$$$item.listData"
+                                            :key="i"
+                                            :label="s.label"
+                                            :value="s.value">
+                                          </el-option>
+                                        </el-select>
+                                      </el-form-item>
+                                    </div>
+                                    <!--下拉框选择每月几号-->
+                                    <div v-if="$$$$item.type == 'select_day_per'">
+                                        <span>
+                                          每月
+                                          <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                            <el-option
+                                              size="small"
+                                              v-for="(s,i) in days"
+                                              :key="i"
+                                              :label="s"
+                                              :value="s">
+                                            </el-option>
+                                          </el-select>
+                                          日前
+                                        </span>
+                                    </div>
+                                    <!--下拉框选择月几号-->
+                                    <div v-if="$$$$item.type == 'select_day'">
+                                        <span>
+                                          月
+                                          <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                            <el-option
+                                              size="small"
+                                              v-for="(s,i) in days"
+                                              :key="i"
+                                              :label="s"
+                                              :value="s">
+                                            </el-option>
+                                          </el-select>
+                                          日前
+                                        </span>
+                                    </div>
+                                    <!--下拉选择一年中哪个月-->
+                                    <div v-if="$$$$item.type == 'select_year'">
+                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                        <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
+                                          <el-option
+                                            size="small"
+                                            v-for="(s,i) in mon"
+                                            :key="i"
+                                            :label="s"
+                                            :value="s">
+                                          </el-option>
+                                        </el-select>
+                                      </el-form-item>
+                                    </div> 
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -749,10 +910,7 @@
                 id: 3
               })
               this.mokuai.sort(this.compare('id'));
-
             }
-            // this.$set(this.aa.ZiNv,1,data.data.data)
-            console.log(this.aa.ZiNv)
           }).catch((data)=>{
           })
         },
