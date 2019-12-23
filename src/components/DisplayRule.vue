@@ -31,10 +31,11 @@
                     <h2 class="text-xl py-2">编辑规则</h2>
                     <el-form>
                       <div class='flex justify-around'>
-                        <el-form-item label=""  id="newtitle">
-                          <el-input v-model="newTitle" class="w-2/3" autocomplete="off" placeholder='请输入问题名称'></el-input>
-                        </el-form-item>
+                        <el-input v-model="newTitle" class="w-2/3" size="small" autocomplete="off" placeholder='请输入问题名称'></el-input>
                         <el-button type="primary" plain size="small" @click="addTitle" >新增标题</el-button>
+                      </div>
+                      <div class="my-2">
+                        <el-button type="primary" plain size="small" @click="addNum" >重复序号</el-button>
                       </div>
                       <div class="mx-2">
                         <el-form-item label="编辑文案" prop="desc">
@@ -396,6 +397,9 @@
             addTitle () {  // 点击新增标题往文案添加标题
                 this.addWordJson.json +="{{1," + this.newTitle +"}}"
                 this.newTitle = '';
+            },
+            addNum () {  // 点击添加重复序号
+                this.addWordJson.json +="{{4}}"
             },
             addNewWord () { // 点击新增组合弹出新增组合对话框
                 this.dialogNewWord = true;
