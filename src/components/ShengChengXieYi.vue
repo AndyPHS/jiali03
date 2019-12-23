@@ -42,5 +42,5 @@
     }
 </script>
 <style scoped>
-.outputword .msg{text-indent:2em;}
+.outputword .msg{text-indent:2em;white-space:pre-wrap;}
 </style>
