@@ -5,7 +5,9 @@
       <div class="outputword">
         <h2 class="py-2">离婚协议书 <el-button class="text-right" @click="GoBasicInformationPage">返回修改</el-button></h2>
         <div class="w-full">
-          <div class="text-left msg">{{outputWord}}</div>
+          <div class="text-left msg">
+            {{outputWord}}
+          </div>
         </div>
       </div>
     </div>

@@ -530,8 +530,7 @@
                               </div>
                               <!--下拉框选择月几号-->
                               <div v-if="$$$item.type == 'select_day'">
-                                  <span>
-                                    月
+                                  <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
                                     <el-select v-model="$$$item.answer" @change="userAddAnswerAction($$$item)" >
                                       <el-option
                                         size="small"
@@ -541,8 +540,7 @@
                                         :value="s">
                                       </el-option>
                                     </el-select>
-                                    日前
-                                  </span>
+                                  </el-form-item>
                               </div>
                               <!--下拉选择一年中哪个月-->
                               <div v-if="$$$item.type == 'select_year'">
@@ -689,8 +687,7 @@
                                     </div>
                                     <!--下拉框选择月几号-->
                                     <div v-if="$$$$item.type == 'select_day'">
-                                        <span>
-                                          月
+                                        <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
                                           <el-select v-model="$$$$item.answer"  @change="userAddAnswerAction($$$$item)">
                                             <el-option
                                               size="small"
@@ -700,8 +697,7 @@
                                               :value="s">
                                             </el-option>
                                           </el-select>
-                                          日前
-                                        </span>
+                                        </el-form-item>
                                     </div>
                                     <!--下拉选择一年中哪个月-->
                                     <div v-if="$$$$item.type == 'select_year'">
