@@ -86,6 +86,19 @@
                                 ></el-input>
                               </el-form-item>
                             </div>
+                            <div v-if="$$$$item.type == 'select'">
+                              <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                  <el-option
+                                    size="small"
+                                    v-for="(s,i) in $$$$item.listData"
+                                    :key="i"
+                                    :label="s.label"
+                                    :value="s.value">
+                                  </el-option>
+                                </el-select>
+                              </el-form-item>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -220,6 +233,19 @@
                                         :placeholder="$$$$$item.placeholder"
                                         @blur="userAddAnswerAction($$$$$item)"
                                       ></el-input>
+                                    </el-form-item>
+                                  </div>
+                                  <div v-if="$$$$$item.type == 'select'">
+                                    <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title">
+                                      <el-select v-model="$$$$$item.answer" @change="userAddAnswerAction($$$$$item)">
+                                        <el-option
+                                          size="small"
+                                          v-for="(s,i) in $$$$$item.listData"
+                                          :key="i"
+                                          :label="s.label"
+                                          :value="s.value">
+                                        </el-option>
+                                      </el-select>
                                     </el-form-item>
                                   </div>
                                 </div>
@@ -473,6 +499,19 @@
                                     ></el-input>
                                   </el-form-item>
                                 </div>
+                                <div v-if="$$$$$item.type == 'select'">
+                                  <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title">
+                                    <el-select v-model="$$$$$item.answer" @change="userAddAnswerAction($$$$$item)">
+                                      <el-option
+                                        size="small"
+                                        v-for="(s,i) in $$$$$item.listData"
+                                        :key="i"
+                                        :label="s.label"
+                                        :value="s.value">
+                                      </el-option>
+                                    </el-select>
+                                  </el-form-item>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -655,6 +694,19 @@
                                           :placeholder="$$$$$$item.placeholder"
                                           @blur="userAddAnswerAction($$$$$$item)"
                                         ></el-input>
+                                      </el-form-item>
+                                    </div>
+                                    <div v-if="$$$$$$item.type == 'select'">
+                                      <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title">
+                                        <el-select v-model="$$$$$$item.answer" @change="userAddAnswerAction($$$$$$item)">
+                                          <el-option
+                                            size="small"
+                                            v-for="(s,i) in $$$$$$item.listData"
+                                            :key="i"
+                                            :label="s.label"
+                                            :value="s.value">
+                                          </el-option>
+                                        </el-select>
                                       </el-form-item>
                                     </div>
                                   </div>
@@ -897,11 +949,20 @@
                               title: '您与配有有几套房产需要处理？',
                               id: '521',
                               isRequired: true,
-                              type: 'input',
-                              input_type: 'number',
+                              type: 'select',
+                              // input_type: 'number',
                               placeholder: '如：3',
                               tip: '提示',
                               answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
                             }
                           ],
                           2: [
@@ -909,11 +970,20 @@
                               title: '您与配有有几笔存款需要处理？',
                               id: '637',
                               isRequired: true,
-                              type: 'input',
-                              input_type: 'number',
+                              type: 'select',
+                              // input_type: 'number',
                               placeholder: '如：3',
                               tip: '提示',
                               answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
                             }
                           ],
                           3: [
@@ -921,11 +991,20 @@
                               title: '您与配有有几笔理财需要处理？',
                               id: '523',
                               isRequired: true,
-                              type: 'input',
-                              input_type: 'number',
+                              type: 'select',
+                              // input_type: 'number',
                               placeholder: '如：3',
                               tip: '提示',
                               answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
                             }
                           ],
                           4: [
@@ -933,11 +1012,20 @@
                               title: '您与配有有几辆车子需要处理？',
                               id: '522',
                               isRequired: true,
-                              type: 'input',
-                              input_type: 'number',
+                              type: 'select',
+                              // input_type: 'number',
                               placeholder: '如：3',
                               tip: '提示',
                               answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
                             }
                           ],
                           6: [
@@ -945,11 +1033,20 @@
                               title: '您与配有有几份保险需要处理？',
                               id: '524',
                               isRequired: true,
-                              type: 'input',
-                              input_type: 'number',
+                              type: 'select',
+                              // input_type: 'number',
                               placeholder: '如：3',
                               tip: '提示',
                               answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
                             }
                           ]
                         }
@@ -987,11 +1084,20 @@
                               title: '您与配有有几笔债权需要处理？',
                               id: '655',
                               isRequired: true,
-                              type: 'input',
-                              input_type: 'number',
+                              type: 'select',
+                              // input_type: 'number',
                               placeholder: '如：3',
                               tip: '提示',
                               answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
                             }
                           ],
                           2: [
@@ -999,11 +1105,20 @@
                               title: '您与配有有几笔债务需要处理？',
                               id: '656',
                               isRequired: true,
-                              type: 'input',
-                              input_type: 'number',
+                              type: 'select',
+                              // input_type: 'number',
                               placeholder: '如：3',
                               tip: '提示',
                               answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
                             }
                           ]
                         }
