@@ -409,9 +409,10 @@
                 if(JSON.stringify(this.wordAdd.where) == '{}'){
                     this.wordAdd.where.splice(1,1)
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
-                    // console.log(this.wordAdd.where)
+                    
                     this.wordAddWhere = {} // 清空组合绑定的问题
                 }else{
+
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                     this.wordAddWhere = {} // 清空组合绑定的问题
                 }
@@ -519,11 +520,15 @@
             },
             updateWordAlert (){ // 点击修改组合弹出修改组合对话框
                 this.dialogUpdateWord = true;
+
                 this.wordAdd.title = this.wordTreeMsg.title
                 localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 wordSelect().then((data)=>{
+                    if(data.data.data.where==''){
+                      data.data.data.where = []
+                    }
                     this.wordAdd.where = data.data.data.where
-                    
+
                 }).catch((data)=>{
 
                 })
