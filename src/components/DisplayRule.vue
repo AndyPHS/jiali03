@@ -347,7 +347,7 @@
                 selectTree().then((data)=>{
                     this.treeList = data.data.data
                 }).catch((data)=>{
-                    console.log("请求失败")
+                    this.$router.replace("/");
                 })
             },
             // 操作树结构

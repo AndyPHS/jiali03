@@ -207,8 +207,6 @@
                                        v-model="$$$item.answer"
                                        @change="userAddAnswerAction($$$item)"
                                        type="daterange"
-                                       format="yyyy-MM-dd"
-                                       value-format="yyyy-MM-dd"
                                        size="small"
                                        range-separator="至"
                                        start-placeholder="开始日期"
@@ -338,8 +336,6 @@
                                               v-model="$$$$item.answer"
                                               @change="userAddAnswerAction($$$$item)"
                                               type="daterange"
-                                              format="yyyy-MM-dd"
-                                              value-format="yyyy-MM-dd"
                                               size="small"
                                               range-separator="至"
                                               start-placeholder="开始日期"
@@ -478,8 +474,6 @@
                                       v-model="$$$item.answer"
                                       @change="userAddAnswerAction($$$item)"
                                       type="daterange"
-                                      format="yyyy-MM-dd"
-                                      value-format="yyyy-MM-dd"
                                       size="small"
                                       range-separator="至"
                                       start-placeholder="开始日期"
@@ -641,8 +635,6 @@
                                             v-model="$$$$item.answer"
                                             @change="userAddAnswerAction($$$$item)"
                                             type="daterange"
-                                            format="yyyy-MM-dd"
-                                            value-format="yyyy-MM-dd"
                                             size="small"
                                             range-separator="至"
                                             start-placeholder="开始日期"
@@ -1150,56 +1142,60 @@
           }
         },
         userAddAnswerAction (e){
-          if(e.fornum !== undefined){
-            if(Array.isArray(e.answer)){
-              userAddAnswer({
-                value: JSON.stringify(e.answer),  // 值
-                qpid: e.id, // 关联id
-                fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                quid: 6 //用户的问卷id
-              }).then((data)=>{
-                console.log("保存成功")
-              }).catch((data)=>{
-                 console.log("保存失败")
-              })
-            }else{
-              userAddAnswer({
-                value: e.answer,  // 值
-                qpid: e.id, // 关联id
-                fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                quid: 6 //用户的问卷id
-              }).then((data)=>{
-                console.log("保存成功")
-              }).catch((data)=>{
-                 console.log("保存失败")
-              })
-            }
+          if(e.answer == '' || e.answer == null){
+            this.$message.error('必填项内容不能为空');
           }else{
-             if(Array.isArray(e.answer)){
-              userAddAnswer({
-                value: JSON.stringify(e.answer),  // 值
-                qpid: e.id, // 关联id
-                // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                quid: 6 //用户的问卷id
-              }).then((data)=>{
-                console.log("保存成功")
-              }).catch((data)=>{
-                 console.log("保存失败")
-              })
+            if(e.fornum !== undefined){
+              if(Array.isArray(e.answer)){
+                userAddAnswer({
+                  value: JSON.stringify(e.answer),  // 值
+                  qpid: e.id, // 关联id
+                  fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                  quid: 6 //用户的问卷id
+                }).then((data)=>{
+                  console.log("保存成功")
+                }).catch((data)=>{
+                   console.log("保存失败")
+                })
+              }else{
+                userAddAnswer({
+                  value: e.answer,  // 值
+                  qpid: e.id, // 关联id
+                  fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                  quid: 6 //用户的问卷id
+                }).then((data)=>{
+                  console.log("保存成功")
+                }).catch((data)=>{
+                   console.log("保存失败")
+                })
+              }
             }else{
-              userAddAnswer({
-                value: e.answer,  // 值
-                qpid: e.id, // 关联id
-                // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                quid: 6 //用户的问卷id
-              }).then((data)=>{
-                console.log("保存成功")
-              }).catch((data)=>{
-                 console.log("保存失败")
-              })
+               if(Array.isArray(e.answer)){
+                userAddAnswer({
+                  value: JSON.stringify(e.answer),  // 值
+                  qpid: e.id, // 关联id
+                  // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                  quid: 6 //用户的问卷id
+                }).then((data)=>{
+                  // console.log("保存成功")
+                }).catch((data)=>{
+                   // console.log("保存失败")
+                })
+              }else{
+                userAddAnswer({
+                  value: e.answer,  // 值
+                  qpid: e.id, // 关联id
+                  // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                  quid: 6 //用户的问卷id
+                }).then((data)=>{
+                  // console.log("保存成功")
+                }).catch((data)=>{
+                   // console.log("保存失败")
+                })
+              }
             }
-            
           }
+          
         },
         userAddSelectAnswerAction (e){   // 添加子女或者房产等
             this.$message({
