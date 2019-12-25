@@ -1028,6 +1028,27 @@
                               ]
                             }
                           ],
+                          5: [
+                            {
+                              title: '您与配有有多少家电需要处理？',
+                              id: '636',
+                              isRequired: true,
+                              type: 'select',
+                              // input_type: 'number',
+                              placeholder: '如：3',
+                              tip: '提示',
+                              answer: '',
+                              listData: [
+                                { label: '1', value: '1' },
+                                { label: '2', value: '2' },
+                                { label: '3', value: '3' },
+                                { label: '4', value: '4' },
+                                { label: '5', value: '5' },
+                                { label: '6', value: '6' },
+                                { label: '7', value: '7' }
+                              ]
+                            }
+                          ],
                           6: [
                             {
                               title: '您与配有有几份保险需要处理？',

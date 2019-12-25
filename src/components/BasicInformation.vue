@@ -151,7 +151,8 @@
                             </div>
                             <!--下拉框(多选)-->
                             <div v-if="$$item.type == 'select_multiple'">
-                              <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                              <el-form-item label="">
+                                 <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-select v-model="$$item.answer" multiple placeholder="请选择" size="small" @change='userAddAnswerAction($$item)'>
                                   <el-option
                                     v-for="(s,i) in $$item.listData"
@@ -168,7 +169,8 @@
                                <div  v-for="($$$item,$$$index) in $$item.childQuestion" :key="$$$index">
                                  <!--日期-精确到日-->
                                  <div v-if="$$$item.type == 'dateTime_day'">
-                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                                   <el-form-item label="" class="text-base">
+                                    <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                      <el-date-picker
                                        v-model="$$$item.answer"
                                        type="date"
@@ -182,7 +184,8 @@
                                  </div>
                                  <!--日期-区间几点到几点-->
                                  <div v-if="$$$item.type == 'dateTime_Time_Interval'">
-                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                                   <el-form-item label="" class="text-base">
+                                    <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                      <el-time-picker
                                        v-model="$$$item.answer"
                                        @change="userAddAnswerAction($$$item)"
@@ -198,7 +201,8 @@
                                  </div>
                                  <!--日期-区间几号到几号-->
                                  <div v-if="$$$item.type == 'dateTime_Day_Interval'">
-                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                                   <el-form-item label="" class="text-base">
+                                    <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                      <el-date-picker
                                        v-model="$$$item.answer"
                                        @change="userAddAnswerAction($$$item)"
@@ -215,7 +219,8 @@
                                  </div>
                                  <!--输入框-文字类型-->
                                  <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
-                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                                   <el-form-item label="" class="text-base">
+                                    <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                      <el-input
                                        type="text"
                                        class="ban"
@@ -228,7 +233,8 @@
                                  </div>
                                  <!--输入框-数字类型（类似身份证号、金额）-->
                                  <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
-                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title" class="text-base">
+                                   <el-form-item label="" class="text-base">
+                                    <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                      <el-input
                                        type="number"
                                        class="ban"
@@ -241,7 +247,8 @@
                                  </div>
                                  <!--单选框-->
                                  <div v-if="$$$item.type == 'radio'">
-                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                                   <el-form-item label="" class="text-base">
+                                      <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                      <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
                                        <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                                      </el-radio-group>
@@ -249,7 +256,8 @@
                                  </div>
                                  <!-- 多选框 -->
                                   <div v-if="$$$item.type == 'checkbox'">
-                                    <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                                    <el-form-item label="" class="text-base">
+                                      <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                       <el-checkbox-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
                                         <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
                                       </el-checkbox-group>
@@ -258,7 +266,8 @@
                                       <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
                                         <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
                                           <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
-                                            <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                            <el-form-item label="" class="text-base">
+                                              <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
                                               <el-input
                                                 type="text"
                                                 class="ban"
@@ -275,7 +284,8 @@
                                   </div>
                                  <!-- 下拉单选 -->
                                  <div v-if="$$$item.type == 'select'">
-                                   <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                                  <el-form-item label="" class="text-base">
+                                      <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                      <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)">
                                        <el-option
                                          v-for="(s,i) in $$$item.listData"
@@ -290,7 +300,8 @@
                                       <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
                                         <!--日期-精确到日-->
                                         <div v-if="$$$$item.type == 'dateTime_day'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                          <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-date-picker
                                               v-model="$$$$item.answer"
                                               type="date"
@@ -304,7 +315,8 @@
                                         </div>
                                         <!--日期-区间几点到几点-->
                                         <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                         <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-time-picker
                                               v-model="$$$$item.answer"
                                               is-range
@@ -320,7 +332,8 @@
                                         </div>
                                         <!--日期-区间几号到几号-->
                                         <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                          <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-date-picker
                                               v-model="$$$$item.answer"
                                               @change="userAddAnswerAction($$$$item)"
@@ -337,7 +350,8 @@
                                         </div>
                                         <!--输入框-文字类型-->
                                         <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                          <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-input
                                               type="text"
                                               class="ban"
@@ -350,7 +364,8 @@
                                         </div>
                                         <!--输入框-数字类型（类似身份证号、金额）-->
                                         <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                          <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-input
                                               type="number"
                                               class="ban"
@@ -363,7 +378,8 @@
                                         </div>
                                         <!--单选框-->
                                         <div v-if="$$$$item.type == 'radio'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                          <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
                                               <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                                             </el-radio-group>
@@ -371,7 +387,8 @@
                                         </div>
                                         <!--下拉框-->
                                         <div v-if="$$$$item.type == 'select'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                          <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
                                               <el-option
                                                 size="small"
@@ -385,7 +402,8 @@
                                         </div>
                                         <!-- 下拉框多选 -->
                                         <div v-if="$$$$item.type == 'select_multiple'">
-                                          <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                                          <el-form-item label="" class="text-base">
+                                            <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                             <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
                                               <el-option
                                                 v-for="(s,i) in $$$$item.listData"
@@ -401,7 +419,8 @@
                                  </div>
                                  <!-- 下拉多选 -->
                                  <div v-if="$$$item.type == 'select_multiple'">
-                                    <el-form-item :label="$$$item.isRequired==false ?'(选填)'+$$$item.title:$$$item.title">
+                                    <el-form-item label="" class="text-base">
+                                      <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                       <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
                                         <el-option
                                           v-for="(s,i) in $$$item.listData"
