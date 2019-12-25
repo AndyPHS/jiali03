@@ -597,24 +597,9 @@
         NextPage () {
           this.$router.replace("/ZiNv");
         },
-        addChildBirthday1 (e) {
-           console.log(e,12312313)
-        },
-        addChildBirthday (e) {
-          console.log(e,12312313)
-        },
         addChildName (e) {    // 添加姓名
           console.log(e)
         },
-        addChildSex (e) {
-          console.log(e)
-        },
-        addChildId (e) {
-          console.log(e)
-        },
-        consoleChild () {
-
-        }
       }
     }
 </script>

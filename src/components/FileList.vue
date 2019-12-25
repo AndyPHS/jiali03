@@ -151,6 +151,8 @@
             }
           }
 
+        }).catch((data)=>{
+           this.$router.replace("/");
         })
       },
       handleClick (e) {
