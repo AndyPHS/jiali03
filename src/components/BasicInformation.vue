@@ -57,8 +57,8 @@
                           <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
                             <!--日期-精确到日-->
                             <div v-if="$$item.type == 'dateTime_day'">
-                              <el-form-item label="名称">
-                                <label slot="label">{{ $$item.isRequired==false ?'(选填)'+$$item.title:$$item.title }}</label>
+                              <el-form-item label="">
+                                <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-date-picker
                                   v-model="$$item.answer"
                                   type="date"
@@ -72,7 +72,8 @@
                             </div>
                             <!--输入框-文字类型-->
                             <div v-if="$$item.type == 'input' && $$item.input_type=='text'">
-                              <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                              <el-form-item label="" class="text-base">
+                                 <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-input
                                   type="text"
                                   class="ban"
@@ -85,7 +86,8 @@
                             </div>
                             <!--输入框-数字类型（类似身份证号、金额）-->
                             <div v-if="$$item.type == 'input' && $$item.input_type=='number'">
-                              <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                              <el-form-item label="" class="text-base">
+                                <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-input
                                   type="number"
                                   class="ban"
@@ -98,7 +100,8 @@
                             </div>
                             <!--单选框-->
                             <div v-if="$$item.type == 'radio'">
-                              <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                              <el-form-item label="">
+                                <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-radio-group v-model="$$item.answer" @change='userAddAnswerAction($$item)'>
                                   <el-radio :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                                 </el-radio-group>
@@ -106,7 +109,8 @@
                             </div>
                             <!-- 多选框 -->
                             <div v-if="$$item.type == 'checkbox'">
-                              <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                              <el-form-item label="">
+                                <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-checkbox-group v-model="$$item.answer"  @change='userAddAnswerAction($$item)'>
                                   <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
                                 </el-checkbox-group>
@@ -115,7 +119,8 @@
                                 <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
                                   <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
                                     <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                      <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                                      <el-form-item label="" class="text-base">
+                                        <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                         <el-input
                                           type="text"
                                           class="ban"
@@ -132,7 +137,8 @@
                             </div>
                             <!--下拉框(单选)-->
                             <div v-if="$$item.type == 'select'">
-                              <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                              <el-form-item label="">
+                                <label slot="label"><span class="px-1 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-select v-model="$$item.answer"  @change='userAddAnswerAction($$item)' size="small">
                                   <el-option
                                     v-for="(s,i) in $$item.listData"
@@ -183,7 +189,6 @@
                                        type="datetimerange"
                                        is-range
                                        size="small"
-                                       value-format="HH:mm"
                                        range-separator="至"
                                        start-placeholder="开始日期"
                                        end-placeholder="结束日期"
@@ -306,7 +311,6 @@
                                               @change="userAddAnswerAction($$$$item)"
                                               type="datetimerange"
                                               size="small"
-                                              value-format="HH:mm"
                                               range-separator="至"
                                               start-placeholder="开始日期"
                                               end-placeholder="结束日期"
@@ -437,7 +441,6 @@
                                       @change="userAddAnswerAction($$$item)"
                                       type="datetimerange"
                                       is-range
-                                      value-format="HH:mm"
                                       size="small"
                                       range-separator="至"
                                       start-placeholder="开始日期"
@@ -591,7 +594,6 @@
                                             type="datetimerange"
                                             is-range
                                             size="small"
-                                            value-format="HH:mm"
                                             range-separator="至"
                                             start-placeholder="开始日期"
                                             end-placeholder="结束日期"
@@ -745,10 +747,10 @@
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(524,index)">删除保险</div>
                         </div>
                         <div v-if="mo.title==='债权' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(634,index)">删除债权</div>
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(655,index)">删除债权</div>
                         </div>
                         <div v-if="mo.title==='债务' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(635,index)">删除债务</div>
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(656,index)">删除债务</div>
                         </div>
                       </div>
                     </div>
@@ -775,10 +777,10 @@
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(524)">添加保险</div>
                       </div>
                       <div v-if="mo.title== '债权' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(634)">添加债权</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(655)">添加债权</div>
                       </div>
                       <div v-if="mo.title== '债务' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(635)">添加债务</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(656)">添加债务</div>
                       </div>
                     </div>
                   </div>
@@ -1000,7 +1002,7 @@
           })
         },
         getZhaiQuanMsg (){ // 查询债权模块数据
-          returnQuestionnaireJson({'qpid': 634}).then((data)=>{  // 查询债权模块数据
+          returnQuestionnaireJson({'qpid': 655}).then((data)=>{  // 查询债权模块数据
             if(data.data.data !== undefined ){
               this.aa.ZhaiQuan= data.data.data
               this.mokuai.push({
@@ -1014,7 +1016,7 @@
           })
         },
         getZhaiWuMsg (){ // 查询债务模块数据
-          returnQuestionnaireJson({'qpid': 635}).then((data)=>{  // 查询债务模块数据
+          returnQuestionnaireJson({'qpid': 656}).then((data)=>{  // 查询债务模块数据
             if(data.data.data !== undefined ){
               this.aa.ZhaiWu= data.data.data
               this.mokuai.push({
@@ -1094,7 +1096,7 @@
           })
         },
         getZhaiQuan (){ // 查询债权模块数据
-          returnQuestionnaireJson({'qpid': 634}).then((data)=>{  // 查询债权模块数据
+          returnQuestionnaireJson({'qpid': 655}).then((data)=>{  // 查询债权模块数据
             if(data.data.data !== undefined ){
               this.aa.ZhaiQuan= data.data.data
             }
@@ -1102,7 +1104,7 @@
           })
         },
         getZhaiWu (){ // 查询债务模块数据
-          returnQuestionnaireJson({'qpid': 635}).then((data)=>{  // 查询债务模块数据
+          returnQuestionnaireJson({'qpid': 656}).then((data)=>{  // 查询债务模块数据
             if(data.data.data !== undefined ){
               this.aa.ZhaiWu= data.data.data
             }
@@ -1191,9 +1193,9 @@
                 this.getJiaDian()  // 查询家电模块数据
               }else if(e==524){
                 this.getBaoXian() // 查询保险模块数据
-              }else if(e==634){
+              }else if(e==655){
                 this.getZhaiQuan()  // 查询债权模块数据
-              }else if(e==635){
+              }else if(e==656){
                 this.getZhaiWu()  // 查询债务模块数据
               }
               this.$message({
@@ -1228,9 +1230,9 @@
               this.getJiaDian()  // 查询家电模块数据
             }else if(e==524){
               this.getBaoXian() // 查询保险模块数据
-            }else if(e==634){
+            }else if(e==655){
               this.getZhaiQuan()  // 查询债权模块数据
-            }else if(e==635){
+            }else if(e==656){
               this.getZhaiWu()  // 查询债务模块数据
             }
             this.$message({
@@ -4437,11 +4439,8 @@
 </script>
 <style>
 .ban{width:100% !important;}
-.el-form-item{margin-bottom:10px !important;}
-
-.redItem{color: red !important;}
-/*.blackItem.el-form-item__label{color: black !important;}*/
-.blackItem .el-form-item__label{color: #343434;}
+.el-form-item{margin-bottom:8px !important;}
+.el-form--label-top .el-form-item__label{padding-bottom:0 !important;}
 .el-date-editor.el-input, .el-date-editor.el-input__inner{width:100% !important;}
 .el-select{width:100% !important;}
 #alert_xieyi{width:400px;height:300px;border:1px solid #343434;position:fixed;top:50%;margin-top:-150px;left:50%;margin-left:-200px;z-index: 1;background: #fff}
