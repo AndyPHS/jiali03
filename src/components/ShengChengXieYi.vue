@@ -65,5 +65,5 @@
 <style scoped>
 .outputword{padding:10px;border:1px solid #ecf5ec;}
 .outputword>h2{border-bottom: 1px solid #dbe2db;}
-.outputword .msg{text-indent:2em;white-space:pre-wrap;}
+.outputword .msg{white-space:pre-wrap;}
 </style>
