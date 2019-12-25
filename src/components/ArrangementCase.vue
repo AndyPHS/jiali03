@@ -128,6 +128,7 @@
             case 4: this.status = '其他'; break
           }
         }).catch((data)=>{
+           this.$router.replace("/");
         });
       },
       // 修改页面提交信息

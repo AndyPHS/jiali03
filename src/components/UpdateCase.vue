@@ -691,6 +691,7 @@
             }
           };
         }).catch((data)=>{
+           this.$router.replace("/");
         });
       },
 

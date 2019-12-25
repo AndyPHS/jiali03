@@ -79,6 +79,8 @@
           // console.log(this.rows)
           this.userList = data.data.data.data
           this.isShow = false
+        }).catch((data)=>{
+           this.$router.replace("/");
         })
       },
     Save (event) {

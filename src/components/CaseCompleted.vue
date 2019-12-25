@@ -275,7 +275,7 @@
             case 4: this.status = '其他'; break
           }
         }).catch((data) => {
-          console.log(data)
+           this.$router.replace("/");
         });
         // 将案由数字转为文字
         selectCaseAction().then((data) => {

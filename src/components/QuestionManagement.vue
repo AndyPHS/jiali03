@@ -232,7 +232,7 @@
                     this.min = data.data.data
                     // this.fileList = this.pageInfo.imgs
                 }).catch((data)=>{
-                    // this.$router.replace("/");
+                    this.$router.replace("/");
                 })
             },
             encodeSearchParams(obj) {   // 通过条件查找问题
