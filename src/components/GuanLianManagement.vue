@@ -660,7 +660,7 @@
                 this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的父ID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
-                console.log(this.problemqAdd.id)
+                // console.log(this.problemqAdd.id)
             },
             getCheckedNodes() { // 通过 node 获取
                 console.log(this.$refs.tree.getCheckedNodes());
@@ -855,7 +855,7 @@
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
                         this.problemqAdd.important = null;
-                        console.log(data.data.data) 
+                        // console.log(data.data.data) 
                         this.selectTree()
                     }).catch((data)=>{
 
