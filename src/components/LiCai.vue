@@ -776,12 +776,12 @@
                   answer: ''
                 },
                 {
-                  title: '1、理财机构是？',
+                  title: '1、领证地点是？',
                   id: '11',
                   isRequired: false,
                   type: 'select_city',
                   input_type: 'text',
-                  placeholder: '填写机构名称即可',
+                  placeholder: '在哪领的证',
                   tip: '',
                   answer: ''
                 },
@@ -1061,8 +1061,8 @@
         },
         addChildName1 (e) {  
           // 添加姓名
-          
-          console.log(CodeToText[e.answer[0]] + '' + CodeToText[e.answer[1]] + CodeToText[e.answer[2]])
+
+          console.log([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]])
           console.log(e)
         },
         addChildSex (e) {

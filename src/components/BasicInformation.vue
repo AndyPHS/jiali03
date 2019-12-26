@@ -55,6 +55,7 @@
                         <!-- 一级问题块 -->
                         <div v-for="($$item,$$index) in $item.questions" :key="$$index">
                           <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
+                            <!-- 省市三级联动 -->
                             <div v-if="$$item.type == 'select_city'">
                               <el-form-item label="">
                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
@@ -141,6 +142,17 @@
                                         ></el-input>
                                       </el-form-item>
                                     </div>
+                                    <!-- 省市三级联动 -->
+                                    <div v-if="$$$$item.type == 'select_city'">
+                                      <el-form-item label="">
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                        <el-cascader
+                                        v-model="$$$$item.answer"
+                                        :options="options"
+                                        @change="userAddAnswerAction($$$$item)">
+                                        </el-cascader>
+                                      </el-form-item>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -177,6 +189,17 @@
                             <div v-if="$$item.type =='question'">
                               <h2 class="text-sm font-bold">{{$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title}}</h2>
                                <div  v-for="($$$item,$$$index) in $$item.childQuestion" :key="$$$index">
+                                <!-- 省市三级联动 -->
+                                <div v-if="$$$item.type == 'select_city'">
+                                  <el-form-item label="">
+                                    <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                    <el-cascader
+                                    v-model="$$$item.answer"
+                                    :options="options"
+                                    @change="userAddAnswerAction($$$item)">
+                                    </el-cascader>
+                                  </el-form-item>
+                                </div>
                                  <!--日期-精确到日-->
                                  <div v-if="$$$item.type == 'dateTime_day'">
                                    <el-form-item label="" class="text-base">
@@ -273,6 +296,17 @@
                                     <div v-if="$$$item.grandson">
                                       <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
                                         <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                          <!-- 省市三级联动 -->
+                                          <div v-if="$$$$$item.type == 'select_city'">
+                                            <el-form-item label="">
+                                              <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                              <el-cascader
+                                              v-model="$$$$$item.answer"
+                                              :options="options"
+                                              @change="userAddAnswerAction($$$$$item)">
+                                              </el-cascader>
+                                            </el-form-item>
+                                          </div>
                                           <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
                                             <el-form-item label="" class="text-base">
                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
@@ -306,6 +340,17 @@
                                    <!--下拉框中的问题又会迁出子问题-->
                                    <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
                                       <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
+                                        <!-- 省市三级联动 -->
+                                        <div v-if="$$$$item.type == 'select_city'">
+                                          <el-form-item label="">
+                                            <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                            <el-cascader
+                                            v-model="$$$$item.answer"
+                                            :options="options"
+                                            @change="userAddAnswerAction($$$$item)">
+                                            </el-cascader>
+                                          </el-form-item>
+                                        </div>
                                         <!--日期-精确到日-->
                                         <div v-if="$$$$item.type == 'dateTime_day'">
                                           <el-form-item label="" class="text-base">
@@ -458,6 +503,17 @@
                             
                             <div v-if="$$item.childQuestion && $$item.childQuestion[$$item.answer]">
                               <div v-for="($$$item,$$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
+                                <!-- 省市三级联动 -->
+                                <div v-if="$$$item.type == 'select_city'">
+                                  <el-form-item label="">
+                                    <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                    <el-cascader
+                                    v-model="$$$item.answer"
+                                    :options="options"
+                                    @change="userAddAnswerAction($$$item)">
+                                    </el-cascader>
+                                  </el-form-item>
+                                </div>
                                 <!--日期-精确到日-->
                                 <div v-if="$$$item.type == 'dateTime_day'">
                                   <el-form-item label="" class="text-base">
@@ -558,6 +614,17 @@
                                   </el-form-item>
                                   <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
                                     <div v-for="($$$$item, $$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
+                                      <!-- 省市三级联动 -->
+                                      <div v-if="$$$$item.type == 'select_city'">
+                                        <el-form-item label="">
+                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                          <el-cascader
+                                          v-model="$$$$item.answer"
+                                          :options="options"
+                                          @change="userAddAnswerAction($$$$item)">
+                                          </el-cascader>
+                                        </el-form-item>
+                                      </div>
                                       <!-- 30天以内的下拉选项 -->
                                       <div v-if="$$$$item.type == 'select_day'">
                                         <el-form-item label="" class="text-base">
@@ -671,6 +738,17 @@
                                         </el-form-item>
                                         <div  v-if="$$$$item.grandson && $$$$item.grandson[$$$$item.answer]">
                                           <div v-for="($$$$$item, $$$$$index) in $$$$item.grandson[$$$$item.answer]" :key="$$$$$index">
+                                            <!-- 省市三级联动 -->
+                                            <div v-if="$$$$$item.type == 'select_city'">
+                                              <el-form-item label="">
+                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                <el-cascader
+                                                v-model="$$$$$item.answer"
+                                                :options="options"
+                                                @change="userAddAnswerAction($$$$$item)">
+                                                </el-cascader>
+                                              </el-form-item>
+                                            </div>
                                             <!-- 30天以内的下拉选项 -->
                                             <div v-if="$$$$$item.type == 'select_day'">
                                               <el-form-item label="" class="text-base">
@@ -838,6 +916,17 @@
                                 <div v-if="$$$item.questions ">
                                   <h2 class="text-left text-blue-500">{{$$$item.title}}</h2>
                                   <div v-for="($$$$item, $$$$index) in $$$item.questions">
+                                    <!-- 省市三级联动 -->
+                                    <div v-if="$$$$item.type == 'select_city'">
+                                      <el-form-item label="">
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                        <el-cascader
+                                        v-model="$$$$item.answer"
+                                        :options="options"
+                                        @change="userAddAnswerAction($$$$item)">
+                                        </el-cascader>
+                                      </el-form-item>
+                                    </div>
                                      <!--日期-精确到日-->
                                       <div v-if="$$$$item.type == 'dateTime_day'">
                                         <el-form-item label="" class="text-base">
@@ -1393,7 +1482,7 @@
               if(Array.isArray(e.answer)){
                 if(e.type == "select_city"){
                     userAddAnswer({
-                    value: CodeToText[e.answer[0]] + '' + CodeToText[e.answer[1]] + CodeToText[e.answer[2]],  // 值
+                    value: [CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]],  // 值
                     qpid: e.id, // 关联id
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                     quid: 6 //用户的问卷id
