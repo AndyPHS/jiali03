@@ -30,6 +30,16 @@
                 <div v-for="($$item,$$index) in $item.questions" :key="$$index">
                   <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
                     <!--日期-精确到日-->
+                    <div v-if="$$item.type == 'select_city'">
+                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                        <el-cascader
+                        v-model="$$item.answer"
+                        :options="options"
+                        @change="addChildName1($$item)">
+                        </el-cascader>
+                      </el-form-item>
+                    </div>
+                    <!--日期-精确到日-->
                     <div v-if="$$item.type == 'dateTime_day'">
                       <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
                         <el-date-picker
@@ -714,6 +724,8 @@
   </div>
 </template>
 <script>
+  import { regionData, CodeToText  } from 'element-china-area-data'
+
   export default {
     components: {
       // label_case,
@@ -727,7 +739,10 @@
             answerMsg: [],
             childAll: [],
             ChildBirthday: '',
-            ChildName: ''
+            ChildName: '',
+            options: regionData,
+            selectedOptions: [],
+            aa: ''
           }
       },
       name: 'FangChan',
@@ -737,6 +752,13 @@
       methods: {
         getId (index) {
           return 'box_' + index
+        },
+        handleChange(value) {
+          // console.log(value);
+          this.aa = CodeToText[this.selectedOptions[0]] + '' + CodeToText[this.selectedOptions[1]] + CodeToText[this.selectedOptions[2]]
+          // console.log(CodeToText['110000'])
+          
+          console.log(this.aa)
         },
         childMsg1 () {
           return [
@@ -748,6 +770,16 @@
                   id: '1',
                   isRequired: false,
                   type: 'input',
+                  input_type: 'text',
+                  placeholder: '填写机构名称即可',
+                  tip: '',
+                  answer: ''
+                },
+                {
+                  title: '1、理财机构是？',
+                  id: '11',
+                  isRequired: false,
+                  type: 'select_city',
                   input_type: 'text',
                   placeholder: '填写机构名称即可',
                   tip: '',
@@ -1027,7 +1059,10 @@
         addChildBirthday (e) {
           console.log(e,12312313)
         },
-        addChildName (e) {    // 添加姓名
+        addChildName1 (e) {  
+          // 添加姓名
+          
+          console.log(CodeToText[e.answer[0]] + '' + CodeToText[e.answer[1]] + CodeToText[e.answer[2]])
           console.log(e)
         },
         addChildSex (e) {

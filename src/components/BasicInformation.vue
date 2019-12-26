@@ -55,6 +55,16 @@
                         <!-- 一级问题块 -->
                         <div v-for="($$item,$$index) in $item.questions" :key="$$index">
                           <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
+                            <div v-if="$$item.type == 'select_city'">
+                              <el-form-item label="">
+                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
+                                <el-cascader
+                                v-model="$$item.answer"
+                                :options="options"
+                                @change="userAddAnswerAction($$item)">
+                                </el-cascader>
+                              </el-form-item>
+                            </div>
                             <!--日期-精确到日-->
                             <div v-if="$$item.type == 'dateTime_day'">
                               <el-form-item label="">
@@ -1085,7 +1095,7 @@
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
-  
+  import { regionData, CodeToText  } from 'element-china-area-data'    // 省市联动信息
   
   export default {
     components: {
@@ -1119,7 +1129,8 @@
               {title: '基本信息', part: 'BasicInformation',id:1},
               {title: '婚姻状况', part: 'HunYinStatus',id:2}
             ],
-            active: 0
+            active: 0,
+            options: regionData  // 省市联动
           }
       },
       name: 'WenJuan2',
@@ -1380,16 +1391,29 @@
           }else{
             if(e.fornum !== undefined){
               if(Array.isArray(e.answer)){
-                userAddAnswer({
-                  value: JSON.stringify(e.answer),  // 值
-                  qpid: e.id, // 关联id
-                  fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                  quid: 6 //用户的问卷id
-                }).then((data)=>{
-                  console.log("保存成功")
-                }).catch((data)=>{
-                   console.log("保存失败")
-                })
+                if(e.type == "select_city"){
+                    userAddAnswer({
+                    value: CodeToText[e.answer[0]] + '' + CodeToText[e.answer[1]] + CodeToText[e.answer[2]],  // 值
+                    qpid: e.id, // 关联id
+                    fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: 6 //用户的问卷id
+                  }).then((data)=>{
+                    console.log("保存成功")
+                  }).catch((data)=>{
+                     console.log("保存失败")
+                  }) 
+                }else{
+                  userAddAnswer({
+                    value: JSON.stringify(e.answer),  // 值
+                    qpid: e.id, // 关联id
+                    fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: 6 //用户的问卷id
+                  }).then((data)=>{
+                    console.log("保存成功")
+                  }).catch((data)=>{
+                     console.log("保存失败")
+                  })  
+                }
               }else{
                 userAddAnswer({
                   value: e.answer,  // 值
