@@ -898,7 +898,18 @@
                   ]
                 },
                 {
-                  title: '4、您与配偶生育了几个子女？',
+                  title:'4、您与配偶是否育有子女？',
+                  id: '875',
+                  isRequired: true,
+                  type: 'radio',
+                  answer: '',
+                  listData: [
+                    { label: '是', value: '1' },
+                    { label: '否', value: '2' }
+                  ]
+                },
+                {
+                  title: '您与配偶生育了几个子女？',
                   id: '518',
                   isRequired: true,
                   type: 'select',
@@ -912,7 +923,8 @@
                     { label: '5', value: '5' },
                     { label: '6', value: '6' },
                     { label: '7', value: '7' }
-                  ]
+                  ],
+                  requireQidAndAnswer: { id: '875', answer: '1' }
                 },
                 {
                   title: '5、是否有需要处理的共同财产？',
