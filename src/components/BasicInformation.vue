@@ -1184,7 +1184,7 @@
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
-  import { regionData, CodeToText  } from 'element-china-area-data'    // 省市联动信息
+  import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
   
   export default {
     components: {
@@ -1255,6 +1255,8 @@
           returnQuestionnaireJson({'qpid': 596}).then((data)=>{  // 查询婚姻状况模块数据
             this.aa.HunYinStatus = data.data.data
             this.mokuai.sort(this.compare('id'));
+            let cityAnswer = JSON.parse(this.aa.HunYinStatus[0][0].questions[1].answer)
+            this.aa.HunYinStatus[0][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
           })
         },
@@ -1482,7 +1484,7 @@
               if(Array.isArray(e.answer)){
                 if(e.type == "select_city"){
                     userAddAnswer({
-                    value: [CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]],  // 值
+                    value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
                     qpid: e.id, // 关联id
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                     quid: 6 //用户的问卷id
@@ -1517,16 +1519,29 @@
               }
             }else{
                if(Array.isArray(e.answer)){
-                userAddAnswer({
-                  value: JSON.stringify(e.answer),  // 值
-                  qpid: e.id, // 关联id
-                  // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                  quid: 6 //用户的问卷id
-                }).then((data)=>{
-                  // console.log("保存成功")
-                }).catch((data)=>{
-                   // console.log("保存失败")
-                })
+                if(e.type == "select_city"){
+                  userAddAnswer({
+                    value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
+                    qpid: e.id, // 关联id
+                    // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: 6 //用户的问卷id
+                  }).then((data)=>{
+                    // console.log("保存成功")
+                  }).catch((data)=>{
+                     // console.log("保存失败")
+                  })
+                }else{
+                  userAddAnswer({
+                    value: JSON.stringify(e.answer),  // 值
+                    qpid: e.id, // 关联id
+                    // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: 6 //用户的问卷id
+                  }).then((data)=>{
+                    // console.log("保存成功")
+                  }).catch((data)=>{
+                     // console.log("保存失败")
+                  })
+                }
               }else{
                 userAddAnswer({
                   value: e.answer,  // 值
