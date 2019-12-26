@@ -31,7 +31,8 @@
                   <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
                     <!--日期-精确到日-->
                     <div v-if="$$item.type == 'select_city'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                      <el-form-item label="">
+                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                         <el-cascader
                         v-model="$$item.answer"
                         :options="options"
@@ -780,7 +781,6 @@
                   id: '11',
                   isRequired: false,
                   type: 'select_city',
-                  input_type: 'text',
                   placeholder: '在哪领的证',
                   tip: '',
                   answer: ''

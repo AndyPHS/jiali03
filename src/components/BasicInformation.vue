@@ -4815,6 +4815,7 @@
 .el-form-item{margin-bottom:8px !important;}
 .el-form--label-top .el-form-item__label{padding-bottom:0 !important;}
 .el-date-editor.el-input, .el-date-editor.el-input__inner{width:100% !important;}
+.el-cascader{width:100% !important;}
 .el-select{width:100% !important;}
 #alert_xieyi{width:400px;height:300px;border:1px solid #343434;position:fixed;top:50%;margin-top:-150px;left:50%;margin-left:-200px;z-index: 1;background: #fff}
 #alert_xieyi h2{margin-top:100px;}
