@@ -1,10 +1,10 @@
 <template>
   <div class="container mx-auto">
     <div>
-      <el-form >
+      <el-form label-position="top" label-width="160px">
         <div class="ml-5">
-          <div class="text-lg text-left my-2">为了更高效地为您定制专属协议，请填写如下问题：</div>
-          <div >
+          <div class="text-2xl font-bold text-center py-8">为了更高效地为您定制专属协议，请填写如下问题：</div>
+          <div class="w-3/5 text-left mx-auto bg-white px-5 py-5 border-2 border-green-200 rounded-lg shadow-lg">
             <!--遍历孩子的基本信息-->
             <div v-for="(item,index) in childAll" :key="index">
               <!-- <h2 class="text-left my-5 border-b pb-5 text-base text-orange-500">其他财产</h2> -->
@@ -798,11 +798,12 @@
           </div>
         </div>
       </el-form>
-      <div class="w-1/3 mx-auto">
-        <div class="w-40 mr-2">
-          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="NextPage">
+      <div class="w-1/3 my-8 mx-auto">
+        <div>
+          <!-- <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="NextPage">
             确定
-          </div>
+          </div> -->
+           <el-button type="primary" @click="NextPage">确定</el-button>
         </div>
       </div>
     </div>
@@ -1249,4 +1250,10 @@
 </script>
 <style scoped>
 .ban{width:220px !important;}
+.ban{width:100% !important;}
+.el-form-item{margin-bottom:8px !important;}
+.el-form--label-top .el-form-item__label{padding-bottom:0 !important;}
+.el-date-editor.el-input, .el-date-editor.el-input__inner{width:100% !important;}
+.el-cascader{width:100% !important;}
+.el-select{width:100% !important;}
 </style>
