@@ -22,7 +22,7 @@
                 <el-menu-item index="2—3"><router-link to="SearchCase">案例检索</router-link></el-menu-item>
                  <el-menu-item index="2-4" class="hidden"><router-link to="CaseCourt">法院管理</router-link></el-menu-item>
             </el-submenu>
-            <el-submenu index="3" collapse-transition>
+            <el-submenu index="3" collapse-transition v-show="this.wenjuan.questionnaireAdmin || this.wenjuan.questionnaire">
                 <template slot="title">问卷管理</template>
                 <el-submenu index="3-1" v-show="this.wenjuan.questionnaireAdmin">
                   <template slot="title">问题模块</template>
