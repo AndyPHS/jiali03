@@ -46,7 +46,7 @@ const apiUrl = {
   // 查找用户角色
   selectUserRoles: baseURL + 'users/select_user_roles',
   // 查找用户基本信息
-  usersSelect: baseURL + 'users/select/',
+  usersSelect: baseURL + 'user/select',
   // 新增权限
   addPermission: baseURL + 'users/add_permission',
   // 删除权限

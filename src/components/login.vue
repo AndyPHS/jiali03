@@ -31,6 +31,7 @@
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="loginSubmit('loginForm')" v-html="denglu">{{denglu}}</el-button>
+                <!-- <el-button type="primary" :loading="true">加载中</el-button> -->
                 <!--<el-button type="primary" @click="onRegit('loginForm')">注册</el-button>-->
             </el-form-item>
         </el-form>
@@ -41,6 +42,7 @@
   import Cookies from 'js-cookie'
   import {requestLogin} from '@/api/api/requestLogin.js'
   import {verifyCode} from '@/api/api/requestLogin.js'
+  
   // import vertical from '@/common/js/gVerify.js'
 export default {
     name: "login",
@@ -79,11 +81,12 @@ export default {
     this.changeCode();
   },
     methods: {
+      
       loginSubmit(formName) {
         if(this.loginForm.name == "" || this.loginForm.password == ""){
           this.errorAlert('用户名和密码不能为空')
         }else{
-          this.denglu = '登录中……'
+          this.denglu = '登录'
         }
 
         // 为表单绑定验证功能
@@ -96,7 +99,7 @@ export default {
               localStorage.setItem('password', this.loginForm.password);
               localStorage.setItem('token',data.data.data.token)
               this.$router.replace("/FileList");
-              this.showDialog = true
+              // this.showDialog = true
             }).catch((data)=>{
               this.errorAlert('验证码错误')
             });

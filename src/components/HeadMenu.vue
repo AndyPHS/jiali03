@@ -9,11 +9,11 @@
                 text-color="#fff"
                 active-text-color="#ffd04b">
             <!--<el-menu-item index="1">用户管理</el-menu-item>-->
-            <el-submenu index="1">
+            <el-submenu index="1"  v-show="this.guanliyuan || this.quanxian || this.juese ">
                 <template slot="title">用户管理</template>
-                <el-menu-item index="1-1"><router-link  to="Users">管理员列表</router-link></el-menu-item>
-                <el-menu-item index="1-2"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
-                <el-menu-item index="1-3"><router-link  to="UsersRole">角色列表</router-link></el-menu-item>
+                <el-menu-item index="1-1" v-show="guanliyuan"><router-link  to="Users">管理员列表</router-link></el-menu-item>
+                <el-menu-item index="1-2" v-show="quanxian"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
+                <el-menu-item index="1-3" v-show="juese"><router-link  to="UsersRole">角色列表</router-link></el-menu-item>
             </el-submenu>
             <el-submenu index="2" collapse-transition>
                 <template slot="title">我的工作台</template>
@@ -48,17 +48,45 @@
 </template>
 
 <script>
+  import {usersSelect} from '@/api/api/requestLogin.js'  // 查询角色
+
   export default {
     name: 'HeadMenu.vue',
     data() {
       return {
         activeIndex: '1',
+        permissions: [], // 用户权限
+        guanliyuan: false,  // 管理员
+        quanxian: false,   // 权限
+        juese: false,      // 角色
         user: localStorage.getItem('name')
       };
+    },
+    mounted(){
+      this.getUserSelect()   // 查找用户基本信息
     },
     methods: {
       handleSelect(key, keyPath) {
         // console.log(key, keyPath);
+      },
+      getUserSelect () { // 获取前用户拥有的权限
+        usersSelect().then((data)=>{
+            this.permissions = data.data.permissions
+            if(this.permissions !== []){
+                this.permissions.forEach((item)=>{
+                    if(item.id==11){
+                        this.juese = true
+                    }else if(item.id == 12){
+                        this.quanxian = true
+                    }else if(item.id == 13){
+                        this.guanliyuan = true
+                    }
+                })
+            }
+          // console.log(data.data.permissions)
+        }).catch((data)=>{
+
+        })
       }
     }
   }
