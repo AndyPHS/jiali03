@@ -54,7 +54,7 @@
                        
                         <!-- 一级问题块 -->
                         <div v-for="($$item,$$index) in $item.questions" :key="$$index">
-                          <div v-if="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
+                          <div v-show="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
                             <!-- 省市三级联动 -->
                             <div v-if="$$item.type == 'select_city'">
                               <el-form-item label="">
@@ -81,6 +81,39 @@
                                 </el-date-picker>
                               </el-form-item>
                             </div>
+                            <!--日期-区间几点到几点-->
+                           <div v-if="$$item.type == 'dateTime_Time_Interval'">
+                             <el-form-item label="" class="text-base">
+                              <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
+                               <el-time-picker
+                                 v-model="$$item.answer"
+                                 @change="userAddAnswerAction($$item)"
+                                 type="datetimerange"
+                                 is-range
+                                 size="small"
+                                 range-separator="至"
+                                 start-placeholder="开始日期"
+                                 end-placeholder="结束日期"
+                                 placeholder="选择时间范围">
+                               </el-time-picker>
+                             </el-form-item>
+                           </div>
+                           <!--日期-区间几号到几号-->
+                           <div v-if="$$item.type == 'dateTime_Day_Interval'">
+                             <el-form-item label="" class="text-base">
+                              <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
+                               <el-date-picker
+                                 v-model="$$item.answer"
+                                 @change="userAddAnswerAction($$item)"
+                                 type="daterange"
+                                 size="small"
+                                 range-separator="至"
+                                 start-placeholder="开始日期"
+                                 end-placeholder="结束日期"
+                                 placeholder="选择日期范围">
+                               </el-date-picker>
+                             </el-form-item>
+                           </div>
                             <!--输入框-文字类型-->
                             <div v-if="$$item.type == 'input' && $$item.input_type=='text'">
                               <el-form-item label="" class="text-base">
@@ -1170,7 +1203,26 @@
             </div>
           </div>
         </div>
-       
+        <div v-show="missMsgBox" id="missMsgBox" class="border border-green-200 rounded-lg shadow-lg">
+          <h2>以下信息未填写无法跳转到下一步</h2>
+          <div class="w-3/4 mx-auto text-red-500" style="overflow: scroll;height: 60%" >
+            <ul>
+              <li class="my-2 text-left" v-for="(item, index) in missMsg" :key="index">{{item.problemTitle}}</li>
+            </ul>
+          </div>
+          <div class="queren flex mx-auto">
+             <div class="w-24 mr-2">
+              <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='closeMissMsgBox'>
+                取消
+              </div>
+            </div>
+            <div class="w-24">
+              <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='closeMissMsgBox'>
+                继续填写
+              </div>
+            </div>
+          </div>
+        </div>
         <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev">上一步</el-button>
         <el-button v-if="active < this.mokuai.length-1 " class="my-5" @click="next">下一步</el-button>
         <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
@@ -1184,6 +1236,7 @@
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
+  import {verificationWord} from '@/api/api/requestLogin.js'    // 验证单独word
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
   
   export default {
@@ -1219,13 +1272,20 @@
               {title: '婚姻状况', part: 'HunYinStatus',id:2}
             ],
             active: 0,
-            options: regionData  // 省市联动
+            options: regionData,  // 省市联动
+            missMsgBox: false,      // 错误信息默认不显示
+            missMsg:[]   // 验证的时候漏填项
+            // rules:{
+            //   name:[
+            //     { required: true, message: '不能为空', trigger: 'blur' }
+            //   ]
+            // }
           }
       },
       name: 'WenJuan2',
       
-      mounted () {
-        // this.childList();
+      beforeMount () {
+        // this.getChuShi();  // 初始化保存当前页面
         this.getBasicInformation() // 查询双方基本信息模块数据
         this.getHunYinStatus()  // 查询婚姻状况模块数据
         this.getZiNvMsg()  // 查询子女模块数据
@@ -1239,9 +1299,12 @@
         this.getZhaiWuMsg()  // 查询债务模块数据
         // this.getShengChengXieYi() // 生成协议弹框
       },
+      mounted (){
+        this.getChuShi();  // 初始化保存当前页面
+      },
       methods: {
-        getId (index) {
-          return 'box_' + index
+        getChuShi () {
+          
         },
         getBasicInformation (){ // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 595}).then((data)=>{  // 查询双方基本信息模块数据
@@ -1387,15 +1450,6 @@
           }).catch((data)=>{
           })
         },
-        // getShengChengXieYi(){  // 最后弹出生成弹框
-        //   this.mokuai.push({
-        //     title: '生成协议', 
-        //     part: 'ShengChengXieYi',
-        //     id: 12
-        //   })
-        //   this.mokuai.sort(this.compare('id'));
-        // },
-
         getZiNv () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             if(data.data.data !== undefined ){
@@ -2011,21 +2065,21 @@
         //     }
         //   ]
         // },
-           // ZiNv1 (){
-           //    returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
-           //      if(data.data.data !== undefined ){
-           //       console.log(data.data.data)
-           //        this.mokuai.push({
-           //          title: '子女状况', 
-           //          part: 'ZiNv',
-           //          id: 3
-           //        })
-           //        this.mokuai.sort(this.compare('id'));
-           //      }
-           //    }).catch((data)=>{
-           //    })
+        //    ZiNv1 (){
+        //       returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
+        //         if(data.data.data !== undefined ){
+        //          console.log(data.data.data)
+        //           this.mokuai.push({
+        //             title: '子女状况', 
+        //             part: 'ZiNv',
+        //             id: 3
+        //           })
+        //           this.mokuai.sort(this.compare('id'));
+        //         }
+        //       }).catch((data)=>{
+        //       })
               
-           // },
+        //    },
         // ZiNv1 () {
         //   return [
         //     {
@@ -4678,107 +4732,33 @@
         //     }
         //   ]
         // },
-        childList (e) {
-          this.$forceUpdate();
-          // this.aa.BasicInformation = [];
-          // this.$set(this.aa.BasicInformation, 1, this.BasicInformation1())
-          // this.aa.HunYinStatus = [];
-          // this.$set(this.aa.HunYinStatus, 1, this.HunYinStatus1())
-          // this.aa.ZiNv = [];
-          // this.$set(this.aa.ZiNv, this.ZiNv1())
-          // console.log(this.aa.ZiNv)
-          // this.aa.CunKuan = [];
-          // this.$set(this.aa.CunKuan, this.CunKuan1())
-          // this.aa.FangChan = [];
-          // this.$set(this.aa.FangChan, this.FangChan1())
-          // this.aa.CunKuan = [];
-          // this.$set(this.aa.CunKuan, this.CunKuan1())
-          // this.aa.Car = [];
-          // this.$set(this.aa.Car, this.Car1())
-          // this.aa.LiCai = [];
-          // this.$set(this.aa.LiCai, this.LiCai1())
-          // this.aa.JiaDian = [];
-          // this.$set(this.aa.JiaDian, this.JiaDian1())
-          // this.aa.BaoXian = [];
-          // this.$set(this.aa.BaoXian, this.BaoXian1())
-          // this.aa.ZhaiQuan = [];
-          // this.$set(this.aa.ZhaiQuan, this.ZhaiQuan1())
-          // this.aa.ZhaiWu = [];
-          // this.$set(this.aa.ZhaiWu, this.ZhaiWu1())
-        },
-        // addZiNv () { // 添加房产
-        //   this.aa.ZiNv.push(this.ZiNv1())
-        //   alert('添加第'+this.aa.ZiNv.length+'个孩子')
-        // },
-        // removeZiNv (index) {  // 删除房产
-        //   this.aa.ZiNv.splice(index,1)
-        //   alert('删除第'+(index+1)+'个孩子')
-        // },
-        // addFangChan () { // 添加房产
-        //   this.aa.FangChan.push(this.FangChan1())
-        //   alert('添加第'+this.aa.FangChan.length+'套房产')
-        // },
-        // removeFangChan (index) {  // 删除房产
-        //   this.aa.FangChan.splice(index,1)
-        //   alert('删除第'+(index+1)+'套房产')
-        // },
-        
-        // addCunKuan () {  
-        //   this.aa.CunKuan.push(this.CunKuan1())
-        //   alert('添加第'+this.aa.CunKuan.length+'笔存款')
-        // },
-        // removeCunKuan (index) {
-        //   this.aa.CunKuan.splice(index,1)
-        //   alert('删除第'+(index+1)+'笔存款')
-        // },
-        
-        // addCar () {
-        //   this.aa.Car.push(this.Car1())
-        //   alert('添加第'+this.aa.Car.length+'辆车子')
-        // },
-        // removeCar (index) {
-        //   this.aa.Car.splice(index,1)
-        //   alert('删除第'+(index+1)+'辆车子')
-        // },
-        // addLiCai () {
-        //   this.aa.LiCai.push(this.LiCai1())
-        //   alert('添加第'+this.aa.LiCai.length+'笔理财')
-        // },
-        // removeLiCai (index) {
-        //   this.aa.LiCai.splice(index,1)
-        //   alert('删除第'+(index+1)+'笔理财')
-        // },
-        // addJiaDian () {
-        //   this.aa.JiaDian.push(this.JiaDian1())
-        //   alert('添加第'+this.aa.JiaDian.length+'家电')
-        // },
-        // removeJiaDian (index) {
-        //   this.aa.JiaDian.splice(index,1)
-        //   alert('删除第'+(index+1)+'家电')
-        // },
-        // addBaoXian () {
-        //   this.aa.BaoXian.push(this.BaoXian1())
-        //   alert('添加第'+this.aa.BaoXian.length+'笔保险')
-        // },
-        // removeBaoXian (index) {
-        //   this.aa.BaoXian.splice(index,1)
-        //   alert('删除第'+(index+1)+'笔保险')
-        // },
-        // addZhaiQuan () {
-        //   this.aa.ZhaiQuan.push(this.ZhaiQuan1())
-        //   alert('添加第'+this.aa.ZhaiQuan.length+'笔债权')
-        // },
-        // removeZhaiQuan (index) {
-        //   this.aa.ZhaiQuan.splice(index,1)
-        //   alert('删除第'+(index+1)+'笔债权')
-        // },
-        // addZhaiWu () {
-        //   this.aa.ZhaiWu.push(this.ZhaiWu1())
-        //   alert('添加第'+this.aa.ZhaiWu.length+'笔债务')
-        // },
-        // removeZhaiWu (index) {
-        //   this.aa.ZhaiWu.splice(index,1)
-        //   alert('删除第'+(index+1)+'笔债务')
+        // childList (e) {
+        //   this.$forceUpdate();
+        //   // this.aa.BasicInformation = [];
+        //   // this.$set(this.aa.BasicInformation, 1, this.BasicInformation1())
+        //   // this.aa.HunYinStatus = [];
+        //   // this.$set(this.aa.HunYinStatus, 1, this.HunYinStatus1())
+        //   // this.aa.ZiNv = [];
+        //   // this.$set(this.aa.ZiNv, this.ZiNv1())
+        //   // console.log(this.aa.ZiNv)
+        //   // this.aa.CunKuan = [];
+        //   // this.$set(this.aa.CunKuan, this.CunKuan1())
+        //   // this.aa.FangChan = [];
+        //   // this.$set(this.aa.FangChan, this.FangChan1())
+        //   // this.aa.CunKuan = [];
+        //   // this.$set(this.aa.CunKuan, this.CunKuan1())
+        //   // this.aa.Car = [];
+        //   // this.$set(this.aa.Car, this.Car1())
+        //   // this.aa.LiCai = [];
+        //   // this.$set(this.aa.LiCai, this.LiCai1())
+        //   // this.aa.JiaDian = [];
+        //   // this.$set(this.aa.JiaDian, this.JiaDian1())
+        //   // this.aa.BaoXian = [];
+        //   // this.$set(this.aa.BaoXian, this.BaoXian1())
+        //   // this.aa.ZhaiQuan = [];
+        //   // this.$set(this.aa.ZhaiQuan, this.ZhaiQuan1())
+        //   // this.aa.ZhaiWu = [];
+        //   // this.$set(this.aa.ZhaiWu, this.ZhaiWu1())
         // },
 
         GoComplatePage () {
@@ -4795,13 +4775,164 @@
         stepClick (val) {
           var _that = this;
           _that.active = val;
+          localStorage.setItem('active',val)
         },
         prev () {
+          // console.log(this.active)
           --this.active;
           if(this.active < 0 ) this.active = 0;
         },
         next () {
-          if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+          localStorage.setItem('active',this.active)
+          // console.log(this.active)
+          if(this.mokuai[this.active].title == '基本信息'){
+            localStorage.setItem('qpid',595) 
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '婚姻状况'){
+            localStorage.setItem('qpid',596) 
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '子女状况'){
+            localStorage.setItem('qpid',518)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '房产'){
+            localStorage.setItem('qpid',521)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '存款'){
+            localStorage.setItem('qpid',637)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '车子'){
+            localStorage.setItem('qpid',522)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '理财'){
+            localStorage.setItem('qpid',523)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '家电'){
+            localStorage.setItem('qpid',636)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '保险'){
+            localStorage.setItem('qpid',524)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '债权'){
+            localStorage.setItem('qpid',655)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '债务'){
+            localStorage.setItem('qpid',656)
+            verificationWord ({
+              quid: 6
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              }
+            }).catch((data)=>{
+            })
+          }
+          
+        },
+        closeMissMsgBox () {   // 关闭未填写项弹窗
+          this.missMsgBox = false
         }
         // addChildBirthday1 (e) {
         //    console.log(e,12312313)
@@ -4835,4 +4966,7 @@
 #alert_xieyi{width:400px;height:300px;border:1px solid #343434;position:fixed;top:50%;margin-top:-150px;left:50%;margin-left:-200px;z-index: 1;background: #fff}
 #alert_xieyi h2{margin-top:100px;}
 #alert_xieyi .queren{width:80%;text-align: center;justify-content: space-around;margin-top:80px;margin-left: 20%}
+#missMsgBox{width:400px;height:400px;position:fixed;top:50%;margin-top:-200px;left:50%;margin-left:-200px;z-index: 1;background: #e2e5d9}
+#missMsgBox h2{margin:20px 0;font-weight: bold;font-size: 20px;}
+#missMsgBox .queren{width:80%;justify-content: space-around;position: absolute;bottom:10px;left:10%;}
 </style>

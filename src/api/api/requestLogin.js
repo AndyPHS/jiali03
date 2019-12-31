@@ -704,6 +704,17 @@ export const userDeleteSelectAnswer = params => {
     data: params
   });
 };
+
+// 验证单独word
+export const verificationWord = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.verificationWord + localStorage.getItem('qpid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 生成数据
 
 export const outPutWord = params => {

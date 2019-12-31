@@ -45,6 +45,8 @@ const apiUrl = {
   selectUser: baseURL + 'users/select_user',
   // 查找用户角色
   selectUserRoles: baseURL + 'users/select_user_roles',
+  // 查找用户基本信息
+  usersSelect: baseURL + 'users/select/',
   // 新增权限
   addPermission: baseURL + 'users/add_permission',
   // 删除权限
@@ -189,6 +191,8 @@ const apiUrl = {
   userAddSelectAnswer: baseLiHunURL + 'page/user_add_select_answer',
   // 重复问题-1 删除孩子房产等信息
   userDeleteSelectAnswer: baseLiHunURL + 'page/user_delete_select_answer',
+  // 验证单独word
+  verificationWord: baseLiHunURL + 'word/Verification_word/',
   // 生成数据
   outPutWord: baseLiHunURL + 'word/outputWord/'
 }
