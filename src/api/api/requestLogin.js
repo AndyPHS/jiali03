@@ -60,6 +60,16 @@ export const selectUser = params => {
     data: params
   });
 };
+// usersSelect查找用户基本信息
+export const usersSelect = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.usersSelect,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 查询用户角色
 export const selectUserRoles = params => {
   return axios({

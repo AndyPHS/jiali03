@@ -75,6 +75,16 @@
              <el-form-item label="组合名称" :label-width="formLabelWidth" class="mb-1">
               <el-input v-model="wordAdd.title" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
+            <el-form-item label="绑定关联" :label-width="formLabelWidth" class="mb-1">
+              <el-select v-model="wordAdd.qpid" @change="selectOnlyQuestion" multiple filterable :filter-method="dataFilter" placeholder="请选择">
+                  <el-option
+                    v-for="item in dataFilterValueArr"
+                    :key="item.id"
+                    :label="item.qpTitle"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+            </el-form-item>
             <div><span class="h-1"></span></div>
             <el-form-item label="问题" :label-width="formLabelWidth">
                 <el-select v-model="wordAddWhere.qpid" @change="selectOnlyQuestion" filterable :filter-method="dataFilter" placeholder="请选择">
@@ -115,6 +125,16 @@
           <el-form :model="wordAdd">
              <el-form-item label="组合名称" :label-width="formLabelWidth" class="mb-1">
               <el-input v-model="wordAdd.title" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="绑定关联" :label-width="formLabelWidth" class="mb-1">
+              <el-select v-model="wordAdd.qpid" @change="selectOnlyQuestion" multiple filterable :filter-method="dataFilter" placeholder="请选择">
+                  <el-option
+                    v-for="item in dataFilterValueArr"
+                    :key="item.id"
+                    :label="item.qpTitle"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
             </el-form-item>
             <div><span class="h-1"></span></div>
             <el-form-item label="问题" :label-width="formLabelWidth">
@@ -270,7 +290,8 @@
                 wordAdd:{       // 新增组合绑定数据
                     title: '',  // 组合名称
                     fWordId: null, // 组合的父id
-                    where: []     // 条件
+                    where: [],     // 条件
+                    qpid: []
                 },
                 wordAddWhere:{  // 单独绑定的组合规则
                     title: '',
@@ -426,7 +447,6 @@
               this.wordAddWhere.replate = '';
                this.wordAddWhere.id = null
             },
-            
             addWordOk () {   // 点击新增组合确定按钮提交表单
                 this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 for(let i = 0;i<this.wordAdd.where.length;i++){
@@ -434,14 +454,17 @@
                   this.$delete(this.wordAdd.where[i], 'title')
                 }
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
+                this.wordAdd.qpid = JSON.stringify(this.wordAdd.qpid)
                 if(this.wordTreeMsg.fqaspId == null){
                     addWord({
                         title:this.wordAdd.title,
                         fWordId :5,
-                        where: this.wordAdd.where
+                        where: this.wordAdd.where,
+                        qpid: this.wordAdd.qpid
                     }).then((data)=>{
                         this.wordAdd.title = ''
                         this.wordAdd.where = []
+                        this.wordAdd.qpid = []
                         this.wordAddWhere.qpid = null
                         this.wordAddWhere.type = null
                         this.wordAddWhere.value = null
@@ -458,11 +481,13 @@
                     addWord({
                         title:this.wordAdd.title,
                         fWordId :this.wordTreeMsg.fqaspId,
-                        where: this.wordAdd.where
+                        where: this.wordAdd.where,
+                        qpid: this.wordAdd.qpid
                     }).then((data)=>{
                         this.wordSelectTree(); // 重新获取数结构
                         this.wordAdd.title = ''
                         this.wordAdd.where = []
+                        this.wordAdd.qpid = []
                         this.wordAddWhere.qpid = null
                         this.wordAddWhere.type = null
                         this.wordAddWhere.value = null
@@ -533,7 +558,7 @@
 
                 })
             },
-            updateWordOk () {   // 点击新增组合确定按钮提交表单
+            updateWordOk () {   // 点击修改组合确定按钮提交表单
                 // this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 this.wordAddWhere = {} // 清空组合绑定的问题
                 for(let i = 0;i<this.wordAdd.where.length;i++){
@@ -541,14 +566,17 @@
                   this.$delete(this.wordAdd.where[i], 'title')
                 }
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
+                this.wordAdd.qpid = JSON.stringify(this.wordAdd.qpid)
                 updateWord({
                     title:this.wordAdd.title,
                     fWordId :this.wordTreeMsg.fatherId,
-                    where: this.wordAdd.where
+                    where: this.wordAdd.where,
+                    qpid: this.wordAdd.qpid
                 }).then((data)=>{
                     this.wordSelectTree(); // 重新获取数结构
                     this.wordAdd.title = ''
                     this.wordAdd.where = []
+                    this.wordAdd.qpid = []
                     this.wordTreeMsg.fqaspId = null
                     localStorage.removeItem('pid');
                     localStorage.removeItem('fWordId');
