@@ -152,7 +152,9 @@
           }
 
         }).catch((data)=>{
-           this.$router.replace("/");
+           if(data.data.status_code == 401){
+            this.$router.replace("/");
+           }
         })
       },
       handleClick (e) {
