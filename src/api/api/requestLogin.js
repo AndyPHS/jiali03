@@ -120,6 +120,16 @@ export const selectUserRole = params => {
     data: params
   });
 };
+// 查询角色权限
+export const selectRolePermission = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectRolePermission + '/' + localStorage.getItem('roleId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 新增权限
 export const addPermission = params => {
   return axios({

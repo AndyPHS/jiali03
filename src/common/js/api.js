@@ -63,6 +63,8 @@ const apiUrl = {
   updateUserRole: baseURL + 'users/update_role',
   // 查询角色
   selectUserRole: baseURL + 'users/select_role',
+  // 查询角色权限
+  selectRolePermission: baseURL + 'users/select_role_permission/',
   // 上传列表页
   selectCaseLlist: baseURL + 'case/select_case_list',
 

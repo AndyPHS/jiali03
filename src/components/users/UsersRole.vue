@@ -45,7 +45,7 @@
             <el-checkbox-group v-model="userRole.perms">
                 <el-checkbox v-for='item in userPermission' :key="item.id" :label="item.id">{{item.display_name}}</el-checkbox>
             </el-checkbox-group>
-          </el-form>s
+          </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button @click="dialogUserRoleAdd = false">取 消</el-button>
             <el-button type="primary" @click="addNewUserRole">确 定</el-button>
@@ -81,6 +81,8 @@
     import {updateUserRole} from '@/api/api/requestLogin.js'  // 更新角色
     import {selectUserRole} from '@/api/api/requestLogin.js'  // 查询角色
     import {selectPermission} from '@/api/api/requestLogin.js'  // 查询权限
+    import {selectRolePermission} from '@/api/api/requestLogin.js'  // 查询角色权限
+    
 
     export default {
         components:{
@@ -133,6 +135,10 @@
             },
             handleUserRoleAdd () {    // 点击添加角色出弹窗
                 this.dialogUserRoleAdd = true
+                this.userRole.name = '';
+                this.userRole.display_name = '';
+                this.userRole.description = '';
+                this.userRole.perms = []
             },
             addNewUserRole () {     // 确认添加角色
                 this.userRole.perms = JSON.stringify(this.userRole.perms)
@@ -144,9 +150,10 @@
                 }).then((data)=>{
                     this.dialogUserRoleAdd = false;
                     this.getUserRole();    // 重新获取角色列表
+                    this.userRole.perms = []
                     this.userRole.name = '';
                     this.userRole.display_name = '';
-                    this.userRoles.description = '';
+                    this.userRole.description = '';
                 }).catch((data)=>{
 
                 })
@@ -156,7 +163,16 @@
                 this.userRole.name = item.name;
                 this.userRole.display_name = item.display_name;
                 this.userRole.description = item.description;
+                this.userRole.perms = []
                 localStorage.setItem('roleId',item.id)
+                selectRolePermission().then((data)=>{
+                    let permission_id = data.data.data
+                    permission_id.forEach((item)=>{
+                        this.userRole.perms.push(item.id)
+                    })
+                }).catch((data)=>{
+
+                })
             },
             UpdateNewUserRole () {  // 点击确认修改角色
                 this.userRole.perms = JSON.stringify(this.userRole.perms)
@@ -168,9 +184,10 @@
                 }).then((data)=>{
                     this.dialogUserRoleUpdate = false;
                     this.getUserRole();
+                    this.userRole.perms = []
                     this.userRole.name = ''
                     this.userRole.display_name = ''
-                    this.userRoles.description = ''
+                    this.userRole.description = ''
                     localStorage.removeItem('roleId');
                 }).catch((data)=>{
 
