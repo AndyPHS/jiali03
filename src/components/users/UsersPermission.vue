@@ -4,7 +4,7 @@
         <div class="container mx-auto">
             <div class="py-2 text-lg relative my-2">权限列表<el-button type="primary" plain class="absolute top-0 right-0 bottom-0" @click="handleUserPermissionAdd">添加权限</el-button>
             </div>
-            <div class="text-center">
+            <div class="text-center min">
                 <table class="w-full">
                     <thead>
                         <tr>
@@ -179,5 +179,5 @@
 </script>
 
 <style scoped>
-
+.min{height: 580px;overflow-y: scroll; margin-bottom: 10px;}
 </style>
