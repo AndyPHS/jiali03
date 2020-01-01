@@ -730,7 +730,7 @@ export const verificationWord = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.verificationWord + localStorage.getItem('qpid'),
+    url: apiUrl.verificationWord + localStorage.getItem('wid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

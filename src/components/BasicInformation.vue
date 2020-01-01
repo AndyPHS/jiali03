@@ -1205,7 +1205,7 @@
         </div>
         <div v-show="missMsgBox" id="missMsgBox" class="border border-green-200 rounded-lg shadow-lg">
           <h2>以下信息未填写无法跳转到下一步</h2>
-          <div class="w-3/4 mx-auto text-red-500" style="overflow: scroll;height: 60%" >
+          <div class="w-3/4 mx-auto text-red-500" style="overflow-y: scroll;height: 60%" >
             <ul>
               <li class="my-2 text-left" v-for="(item, index) in missMsg" :key="index">{{item.problemTitle}}</li>
             </ul>
@@ -4786,7 +4786,7 @@
           localStorage.setItem('active',this.active)
           // console.log(this.active)
           if(this.mokuai[this.active].title == '基本信息'){
-            localStorage.setItem('qpid',595) 
+            localStorage.setItem('wid',16) 
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4799,7 +4799,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '婚姻状况'){
-            localStorage.setItem('qpid',596) 
+            localStorage.setItem('wid',19) 
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4812,7 +4812,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '子女状况'){
-            localStorage.setItem('qpid',518)
+            localStorage.setItem('wid',20)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4825,7 +4825,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '房产'){
-            localStorage.setItem('qpid',521)
+            localStorage.setItem('wid',22)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4838,7 +4838,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '存款'){
-            localStorage.setItem('qpid',637)
+            localStorage.setItem('wid',93)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4851,7 +4851,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '车子'){
-            localStorage.setItem('qpid',522)
+            localStorage.setItem('wid',25)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4864,7 +4864,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '理财'){
-            localStorage.setItem('qpid',523)
+            localStorage.setItem('wid',24)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4877,7 +4877,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '家电'){
-            localStorage.setItem('qpid',636)
+            localStorage.setItem('wid',94)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4890,7 +4890,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '保险'){
-            localStorage.setItem('qpid',524)
+            localStorage.setItem('wid',26)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4903,7 +4903,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '债权'){
-            localStorage.setItem('qpid',655)
+            localStorage.setItem('wid',133)
             verificationWord ({
               quid: 6
             }).then((data)=>{
@@ -4916,7 +4916,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '债务'){
-            localStorage.setItem('qpid',656)
+            localStorage.setItem('wid',141)
             verificationWord ({
               quid: 6
             }).then((data)=>{
