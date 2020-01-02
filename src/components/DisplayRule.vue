@@ -345,6 +345,11 @@
                     {
                        title: '包含',
                        value: '7'             
+                    },
+                    {
+                      
+                       title: '不等于空',
+                       value: '8'             
                     }
                 ],
                 selectOnlyLisg: [],    // 查询单独问题
