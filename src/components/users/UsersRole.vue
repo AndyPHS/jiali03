@@ -124,13 +124,23 @@
             getPermission () {
                 selectPermission().then((data)=>{
                     this.userPermission = data.data.data
+                }).catch((data)=>{
+                    if(data.data.status_code==401){
+                        this.$router.replace("/");
+                    }else{
+                        alert('获取失败，请重新登录')
+                    }
                 })
             },
             getUserRole () {   // 获取角色
                 selectUserRole().then((data)=>{
                     this.roleMsg = data.data.data
                 }).catch((data)=>{
-                    this.$router.replace("/");
+                    if(data.data.status_code==401){
+                        this.$router.replace("/");
+                    }else{
+                        alert('获取失败，请重新登录')
+                    }
                 })
             },
             handleUserRoleAdd () {    // 点击添加角色出弹窗
