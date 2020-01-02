@@ -7,33 +7,34 @@
                 @select="handleSelect"
                 background-color="#545c64"
                 text-color="#fff"
+                :router=true
                 active-text-color="#ffd04b">
             <!--<el-menu-item index="1">用户管理</el-menu-item>-->
             <el-submenu index="1"  v-show="this.permissionHead.guanliyuan || this.permissionHead.quanxian || this.permissionHead.juese ">
                 <template slot="title">用户管理</template>
-                <el-menu-item index="1-1" v-show="permissionHead.guanliyuan"><router-link  to="Users">管理员列表</router-link></el-menu-item>
-                <el-menu-item index="1-2" v-show="permissionHead.quanxian"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
-                <el-menu-item index="1-3" v-show="permissionHead.juese"><router-link  to="UsersRole">角色列表</router-link></el-menu-item>
+                <el-menu-item index="Users" v-show="permissionHead.guanliyuan"><router-link  to="Users">管理员列表</router-link></el-menu-item>
+                <el-menu-item index="UsersPermission" v-show="permissionHead.quanxian"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
+                <el-menu-item index="UsersRole" v-show="permissionHead.juese"><router-link  to="UsersRole">角色列表</router-link></el-menu-item>
             </el-submenu>
             <el-submenu index="2" collapse-transition v-show="this.caseHead.caseManagement">
                 <template slot="title">案例库管理</template>
-                <el-menu-item index="2-1"><router-link to="CaseUpload">上传案件</router-link></el-menu-item>
-                <el-menu-item index="2-2"><router-link to="FileList">案件列表</router-link></el-menu-item>
-                <el-menu-item index="2—3"><router-link to="SearchCase">案例检索</router-link></el-menu-item>
-                 <el-menu-item index="2-4" class="hidden"><router-link to="CaseCourt">法院管理</router-link></el-menu-item>
+                <el-menu-item index="CaseUpload"><router-link to="CaseUpload">上传案件</router-link></el-menu-item>
+                <el-menu-item index="FileList"><router-link to="FileList">案件列表</router-link></el-menu-item>
+                <el-menu-item index="SearchCase"><router-link to="SearchCase">案例检索</router-link></el-menu-item>
+                 <el-menu-item index="CaseCourt" class="hidden"><router-link to="CaseCourt">法院管理</router-link></el-menu-item>
             </el-submenu>
             <el-submenu index="3" collapse-transition v-show="this.wenjuan.questionnaireAdmin || this.wenjuan.questionnaire">
                 <template slot="title">问卷管理</template>
                 <el-submenu index="3-1" v-show="this.wenjuan.questionnaireAdmin">
                   <template slot="title">问题模块</template>
-                  <el-menu-item index="3-1-1"><router-link to="QuestionManagement">问题管理</router-link></el-menu-item>
-                  <el-menu-item index="3-1-2"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
-                  <el-menu-item index="3-1-3"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
+                  <el-menu-item index="QuestionManagement"><router-link to="QuestionManagement">问题管理</router-link></el-menu-item>
+                  <el-menu-item index="GuanLianManagement"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
+                  <el-menu-item index="DisplayRule"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
                 </el-submenu>
                 <el-submenu index="3-2" v-show="this.wenjuan.questionnaire">
                   <template slot="title">问卷模块</template>
-                  <el-menu-item index="3-2-1"><router-link to="ChuShi">问卷初始化</router-link></el-menu-item>
-                  <el-menu-item index="3-2-2"><router-link to="BasicInformation">填写问卷</router-link></el-menu-item>
+                  <el-menu-item index="ChuShi"><router-link to="ChuShi">问卷初始化</router-link></el-menu-item>
+                  <el-menu-item index="BasicInformation"><router-link to="BasicInformation">填写问卷</router-link></el-menu-item>
                 </el-submenu>
             </el-submenu>
             
