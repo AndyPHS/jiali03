@@ -2,6 +2,7 @@
 .gitignore
 node_modules/
 /dist/
+/config/index.js
 config/
 static/mock
 npm-debug.log*

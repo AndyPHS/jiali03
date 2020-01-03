@@ -1325,128 +1325,110 @@
         },
         getZiNvMsg () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
-            if(data.data.data !== undefined ){
-              this.aa.ZiNv = data.data.data
-              this.mokuai.push({
-                title: '子女状况', 
-                part: 'ZiNv',
-                id: 3
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.ZiNv = data.data.data
+            this.mokuai.push({
+              title: '子女状况', 
+              part: 'ZiNv',
+              id: 3
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getFangChanMsg () {// 查询房产模块数据
           returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
-            if(data.data.data !== undefined ){
-              this.aa.FangChan= data.data.data
-              this.mokuai.push({
-                title: '房产', 
-                part: 'FangChan',
-                id: 4
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.FangChan= data.data.data
+            this.mokuai.push({
+              title: '房产', 
+              part: 'FangChan',
+              id: 4
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getCunKuanMsg () {// 查询存款模块数据
           returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
-            if(data.data.data !== undefined ){
-              this.aa.CunKuan= data.data.data
-              this.mokuai.push({
-                title: '存款', 
-                part: 'CunKuan',
-                id: 5
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.CunKuan= data.data.data
+            this.mokuai.push({
+              title: '存款', 
+              part: 'CunKuan',
+              id: 5
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getCarMsg () { // 查询车子模块数据
           returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
-            if(data.data.data !== undefined ){
-              this.aa.Car= data.data.data
-              this.mokuai.push({
-                title: '车子', 
-                part: 'Car',
-                id: 6
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.Car= data.data.data
+            this.mokuai.push({
+              title: '车子', 
+              part: 'Car',
+              id: 6
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getLiCaiMsg () { // 查询理财模块数据
           returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
-            if(data.data.data !== undefined ){
-              this.aa.LiCai= data.data.data
-              this.mokuai.push({
-                title: '理财', 
-                part: 'LiCai',
-                id: 7
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.LiCai= data.data.data
+            this.mokuai.push({
+              title: '理财', 
+              part: 'LiCai',
+              id: 7
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getJiaDianMsg () { // 查询家电模块数据
           returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
-            if(data.data.data !== undefined ){
-              this.aa.JiaDian= data.data.data
-              this.mokuai.push({
-                title: '家电', 
-                part: 'JiaDian',
-                id: 8
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.JiaDian= data.data.data
+            this.mokuai.push({
+              title: '家电', 
+              part: 'JiaDian',
+              id: 8
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getBaoXianMsg (){// 查询保险模块数据
           returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
-            if(data.data.data !== undefined ){
-              this.aa.BaoXian= data.data.data
-              this.mokuai.push({
-                title: '保险', 
-                part: 'BaoXian',
-                id: 9
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.BaoXian= data.data.data
+            this.mokuai.push({
+              title: '保险', 
+              part: 'BaoXian',
+              id: 9
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
 
           })
         },
         getZhaiQuanMsg (){ // 查询债权模块数据
           returnQuestionnaireJson({'qpid': 655}).then((data)=>{  // 查询债权模块数据
-            if(data.data.data !== undefined ){
-              this.aa.ZhaiQuan= data.data.data
-              this.mokuai.push({
-                title: '债权', 
-                part: 'ZhaiQuan',
-                id: 10
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.ZhaiQuan= data.data.data
+            this.mokuai.push({
+              title: '债权', 
+              part: 'ZhaiQuan',
+              id: 10
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getZhaiWuMsg (){ // 查询债务模块数据
           returnQuestionnaireJson({'qpid': 656}).then((data)=>{  // 查询债务模块数据
-            if(data.data.data !== undefined ){
-              this.aa.ZhaiWu= data.data.data
-              this.mokuai.push({
-                title: '债务', 
-                part: 'ZhaiWu',
-                id: 11
-              })
-              this.mokuai.sort(this.compare('id'));
-            }
+            this.aa.ZhaiWu= data.data.data
+            this.mokuai.push({
+              title: '债务', 
+              part: 'ZhaiWu',
+              id: 11
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
@@ -1621,69 +1603,81 @@
               qpid: e,
               quid: 6
             }).then((data)=>{
-              if(e==518){
-                this.getZiNv()  // 查询子女模块数据
-              }else if(e==521){
-                this.getFangChan() // 查询房产模块数据
-              }else if(e==637){
-                this.getCunKuan()  // 查询存款模块数据
-              }else if(e==522){
-                this.getCar()   // 查询车子模块数据
-              }else if(e==523){
-                this.getLiCai()  // 查询理财模块数据
-              }else if(e==636){
-                this.getJiaDian()  // 查询家电模块数据
-              }else if(e==524){
-                this.getBaoXian() // 查询保险模块数据
-              }else if(e==655){
-                this.getZhaiQuan()  // 查询债权模块数据
-              }else if(e==656){
-                this.getZhaiWu()  // 查询债务模块数据
+              if(data.data.status_code == 200 ){
+                if(e==518){
+                  this.getZiNv()  // 查询子女模块数据
+                }else if(e==521){
+                  this.getFangChan() // 查询房产模块数据
+                }else if(e==637){
+                  this.getCunKuan()  // 查询存款模块数据
+                }else if(e==522){
+                  this.getCar()   // 查询车子模块数据
+                }else if(e==523){
+                  this.getLiCai()  // 查询理财模块数据
+                }else if(e==636){
+                  this.getJiaDian()  // 查询家电模块数据
+                }else if(e==524){
+                  this.getBaoXian() // 查询保险模块数据
+                }else if(e==655){
+                  this.getZhaiQuan()  // 查询债权模块数据
+                }else if(e==656){
+                  this.getZhaiWu()  // 查询债务模块数据
+                }
+                this.$message({
+                  message: '添加成功',
+                  type: 'success'
+                });
               }
-              this.$message({
-                message: '添加成功',
-                type: 'success'
-              });
             }).catch((data)=>{
                this.$message.error('添加失败，请联系管理员');
             })
         },
         userDeleteSelectAnswerAction (e,index) { // 删除子女或者房产等信息
-          this.$message({
-            message:'删除中请稍后……',
-            duration: 1000
-          });
-          userDeleteSelectAnswer({
-            qpid: e,
-            quid: 6,
-            fornum: index+1
-          }).then((data)=>{
-            if(e==518){
-              this.getZiNv()  // 查询子女模块数据
-            }else if(e==521){
-              this.getFangChan() // 查询房产模块数据
-            }else if(e==637){
-              this.getCunKuan()  // 查询存款模块数据
-            }else if(e==522){
-              this.getCar()   // 查询车子模块数据
-            }else if(e==523){
-              this.getLiCai()  // 查询理财模块数据
-            }else if(e==636){
-              this.getJiaDian()  // 查询家电模块数据
-            }else if(e==524){
-              this.getBaoXian() // 查询保险模块数据
-            }else if(e==655){
-              this.getZhaiQuan()  // 查询债权模块数据
-            }else if(e==656){
-              this.getZhaiWu()  // 查询债务模块数据
-            }
+          this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+              userDeleteSelectAnswer({
+                qpid: e,
+                quid: 6,
+                fornum: index+1
+              }).then((data)=>{
+                if(e==518){
+                  this.getZiNv()  // 查询子女模块数据
+                }else if(e==521){
+                  this.getFangChan() // 查询房产模块数据
+                }else if(e==637){
+                  this.getCunKuan()  // 查询存款模块数据
+                }else if(e==522){
+                  this.getCar()   // 查询车子模块数据
+                }else if(e==523){
+                  this.getLiCai()  // 查询理财模块数据
+                }else if(e==636){
+                  this.getJiaDian()  // 查询家电模块数据
+                }else if(e==524){
+                  this.getBaoXian() // 查询保险模块数据
+                }else if(e==655){
+                  this.getZhaiQuan()  // 查询债权模块数据
+                }else if(e==656){
+                  this.getZhaiWu()  // 查询债务模块数据
+                }
+                this.$message({
+                  message: '删除成功',
+                  type: 'success',
+                  duration: 1000
+                });
+              }).catch((data)=>{
+                this.$message.error('删除失败，请联系管理员');
+              })
+          }).catch(() => {
             this.$message({
-              message: '删除成功',
-              type: 'success'
-            });
-          }).catch((data)=>{
-            this.$message.error('删除失败，请联系管理员');
-          })
+              type: 'info',
+              message: '已取消删除'
+            });          
+          });
+          
+          
         },
         // BasicInformation1 () {
         //   return [

@@ -158,6 +158,8 @@ const apiUrl = {
   addQpWhere: baseLiHunURL + 'ProblemQ/add_qp_where/',
   // 修改关联
   updateProblemQ: baseLiHunURL + 'ProblemQ/update/',
+  // 修改层级 父类
+  updateOrder: baseLiHunURL + 'ProblemQ/update_order',
   // 查询关联条件
   selectQpWhere: baseLiHunURL + 'ProblemQ/select_qp_where/',
   // 删除关联条件

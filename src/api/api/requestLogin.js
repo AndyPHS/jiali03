@@ -547,6 +547,16 @@ export const updateProblemQ = params => {
     data: params
   });
 };
+// 修改层级 父类
+export const updateOrder = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateOrder,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 新增关联条件
 export const addQpWhere  = params => {
   return axios({

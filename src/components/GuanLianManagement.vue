@@ -15,7 +15,10 @@
                           empty-text="加载中，请稍后！"
                           highlight-current
                           @node-click="handleTreeJieDian()"
-                          :props="defaultProps">
+                          :props="defaultProps"
+                           :draggable='true'
+                          @node-drop="handleDrop"
+                          >
                           <!-- <span slot-scope="{ node, data }">{{ node }}</span> -->
                         </el-tree>
                     </div>
@@ -393,7 +396,7 @@
     import {deleteQpWhere} from '@/api/api/requestLogin.js'    // 删除关联条件
     import {deleteProblemQ} from '@/api/api/requestLogin.js'    // 删除关联
     import {updateProblemQ} from '@/api/api/requestLogin.js'    // 修改关联
-    
+    import {updateOrder} from '@/api/api/requestLogin.js'    // 修改层级 父类
     
 
     export default {
@@ -1041,7 +1044,36 @@
                 });
                 
             },
-            
+             handleDrop(draggingNode, dropNode, dropType, ev) {
+              // console.log(draggingNode, dropNode, dropType, ev);
+              this.$confirm('此操作将移动该模块位置, 是否继续?', '提示', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  type: 'warning'
+                }).then(() => {
+                    updateOrder({
+                        qpid: draggingNode.data.id,
+                        order: dropNode.data.orderId,
+                        fqaspId: dropNode.data.fqaspId
+                    }).then((data)=>{
+                        this.$message({
+                            type: 'success',
+                            message: '排序成功!'
+                        });
+                    }).catch((data)=>{
+                        this.$message({
+                            type: 'error',
+                            message: '排序失败!'
+                        });
+                    })
+                }).catch(() => {
+                  this.$message({
+                    type: 'info',
+                    message: '已取消移动'
+                  });          
+                });
+              
+            },
             handleRemove(file, fileList) {
               console.log(file, fileList);
             },
