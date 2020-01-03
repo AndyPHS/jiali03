@@ -163,7 +163,9 @@
                     </el-radio-group>
                 </el-form-item>
             </div>
-            
+            <el-form-item label="排序" :label-width="formLabelWidth">
+              <el-input type="number" v-model="problemqAdd.orderId" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
             <el-form-item label="Class" :label-width="formLabelWidth">
               <el-input v-model="problemqAdd.class" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
@@ -256,7 +258,9 @@
                     </el-radio-group>
                 </el-form-item>
             </div>
-            
+            <el-form-item label="排序" :label-width="formLabelWidth">
+              <el-input type="number" v-model="problemqAdd.orderId" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
             <el-form-item label="Class" :label-width="formLabelWidth">
               <el-input v-model="problemqAdd.class" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
@@ -351,6 +355,9 @@
             <el-form-item label="标题" :label-width="formLabelWidth">
               <el-input v-model="problemqAdd.title" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
+            <el-form-item label="排序" :label-width="formLabelWidth">
+              <el-input type="number" v-model="problemqAdd.orderId" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
             <el-form-item label="class" :label-width="formLabelWidth">
               <el-input v-model="problemqAdd.class" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
@@ -364,6 +371,9 @@
           <el-form :model="problemqAdd">
             <el-form-item label="标题" :label-width="formLabelWidth">
               <el-input v-model="problemqAdd.title" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="排序" :label-width="formLabelWidth">
+              <el-input type="number" v-model="problemqAdd.orderId" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="class" :label-width="formLabelWidth">
               <el-input v-model="problemqAdd.class" class="w-1/2" autocomplete="off"></el-input>
@@ -501,7 +511,7 @@
                     problemId: null,
                     problemTitle: '',
                     problemType: null,
-                    orderId: 0,
+                    orderId: null,
                     fqaspId: null,
                     important: null,
                     id: null,   // 当前选中的树形结构的节点
@@ -693,12 +703,13 @@
                 if(this.problemqAdd.id ==null){
                     ProblemQAdd({
                         questionnaireId: 3,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: 0,
                         class: this.problemqAdd.class,
                         type: 1,
                         title: this.problemqAdd.title
                     }).then((data)=>{
+                        this.problemqAdd.orderId = null
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.dialogaddTreeTitle = false;
@@ -729,7 +740,7 @@
                 updateProblemQ({
                     questionnaireId: 3,
                     problemId: this.problemqAdd.problemId,
-                    orderId: 0,
+                    orderId: this.problemqAdd.orderId,
                     fqaspId: this.problemqAdd.fqaspId,
                     important: this.problemqAdd.important,
                     type: this.problemqAdd.type,
@@ -739,6 +750,7 @@
                     this.problemqAdd.title = '';
                     this.problemqAdd.class = '';
                     this.problemqAdd.type = '';
+                    this.problemqAdd.orderId = null
                     this.problemqAdd.important = null;
                     localStorage.removeItem('qpid')
                     this.dialogConfigTreeTitle = false;
@@ -820,7 +832,7 @@
                     ProblemQAdd({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
@@ -830,6 +842,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
+                        this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
                         localStorage.setItem('qpid',data.data.data)
                         // this.whereArr.forEach((item)=>{
@@ -846,7 +859,7 @@
                     ProblemQAdd({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
@@ -857,6 +870,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
+                        this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
                         // console.log(data.data.data) 
                         this.selectTree()
@@ -871,7 +885,7 @@
                     updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.fqaspId,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
@@ -881,6 +895,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
+                        this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
                         localStorage.removeItem('qpid')
                         this.dialogQuestionConfigUpdate = false;
@@ -892,7 +907,7 @@
                     updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.fqaspId,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
@@ -903,6 +918,7 @@
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
+                        this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
                         // console.log(data.data.data) 
                         // this.selectTree()
@@ -1053,7 +1069,6 @@
                 }).then(() => {
                     updateOrder({
                         qpid: draggingNode.data.id,
-                        order: dropNode.data.orderId,
                         fqaspId: dropNode.data.fqaspId
                     }).then((data)=>{
                         this.$message({
