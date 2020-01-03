@@ -1,6 +1,6 @@
 <template>
   <div class="w-full bg-color">
-    <div class=" container mx-auto py-10">
+    <div class=" containermin mx-auto py-10">
       <div class="bg-white rounded-lg">
         <div class="outputword rounded-lg shadow-lg relative">
           <h2 class="py-2 text-2xl font-bold">离婚协议书</h2>
@@ -15,7 +15,7 @@
                   <li v-for="(item, index) in missField" :key="index">{{index+1}}、{{item.problemTitle}}</li>
                 </ul>
               </div>
-              <div class="w-1/2" v-if="this.status_code ==200">
+              <div v-if="this.status_code ==200">
                 {{outputWord}}
               </div>
             </div>
@@ -66,6 +66,7 @@
 </script>
 <style scoped>
 .bg-color{background: #eee;}
+.containermin{width:800px;}
 .outputword{padding:20px;border:1px solid #ecf5ec;}
 .outputword>h2{border-bottom: 1px solid #dbe2db;}
 .outputword .msg{white-space:pre-wrap;margin-top: -50px;}
