@@ -1060,6 +1060,7 @@
                             type: 'success',
                             message: '排序成功!'
                         });
+                        this.selectTree() // 刷新关系列表
                     }).catch((data)=>{
                         this.$message({
                             type: 'error',
