@@ -7,11 +7,11 @@
             <el-step :title="item.title" v-for="(item, index) in mokuai" :key="index"  @click.native ="stepClick(index)"></el-step>
           </el-steps>
         </div>
-        <div v-for="(mo, key) in mokuai" :key="key">
+        <div v-for="(mo, key) in mokuai" :key="key" class="min">
           <div v-if="active=== key">
             <div>
               <el-form label-position="top" label-width="160px">
-                <div class="w-3/5 text-left mx-auto bg-white px-5 py-5 border border-green-200 rounded-lg shadow-lg">
+                <div class="text-left mx-auto bg-white px-5 py-5 border border-green-200 rounded-lg shadow-lg">
                   <!--遍历有几个孩子-->
                   <div>
                     <!--遍历孩子的基本信息-->
@@ -220,7 +220,7 @@
                             </div>
                             <!--只有问题无答案-->
                             <div v-if="$$item.type =='question'">
-                              <h2 class="text-sm font-bold">{{$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title}}</h2>
+                              <h2 class="text-sm font-bold"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{$$item.title}}</h2>
                                <div  v-for="($$$item,$$$index) in $$item.childQuestion" :key="$$$index">
                                 <!-- 省市三级联动 -->
                                 <div v-if="$$$item.type == 'select_city'">
@@ -1223,6 +1223,14 @@
             </div>
           </div>
         </div>
+        <div v-show="missAlert" id="missAlert" v-if="this.status_code == 330">
+          <h2>尚未填写的信息</h2>
+          <div class="px-1 mx-auto text-red-500" style="overflow-y: scroll;" >
+            <ul>
+              <li class="my-2 text-left" v-for="(item, index) in missField" :key="index">{{index+1}}、{{item.problemTitle}}</li>
+            </ul>
+          </div>
+        </div>
         <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev">上一步</el-button>
         <el-button v-if="active < this.mokuai.length-1 " class="my-5" @click="next">下一步</el-button>
         <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
@@ -1237,6 +1245,7 @@
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
   import {verificationWord} from '@/api/api/requestLogin.js'    // 验证单独word
+  import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
   
   export default {
@@ -1274,12 +1283,10 @@
             active: 0,
             options: regionData,  // 省市联动
             missMsgBox: false,      // 错误信息默认不显示
-            missMsg:[]   // 验证的时候漏填项
-            // rules:{
-            //   name:[
-            //     { required: true, message: '不能为空', trigger: 'blur' }
-            //   ]
-            // }
+            missMsg:[],   // 验证的时候漏填项
+            missAlert: true, // 尚未填写的信息弹框
+            status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
+            missField: [] // 未填写项目
           }
       },
       name: 'WenJuan2',
@@ -1434,74 +1441,56 @@
         },
         getZiNv () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
-            if(data.data.data !== undefined ){
-              this.aa.ZiNv = data.data.data
-            }
+            this.aa.ZiNv = data.data.data
           }).catch((data)=>{
           })
         },
         getFangChan () {// 查询房产模块数据
           returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
-            if(data.data.data !== undefined ){
-              this.aa.FangChan= data.data.data
-            }
+            this.aa.FangChan= data.data.data
           }).catch((data)=>{
           })
         },
         getCunKuan () {// 查询存款模块数据
           returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
-            if(data.data.data !== undefined ){
-              this.aa.CunKuan= data.data.data
-            }
+            this.aa.CunKuan= data.data.data
           }).catch((data)=>{
           })
         },
         getCar () { // 查询车子模块数据
           returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
-            if(data.data.data !== undefined ){
-              this.aa.Car= data.data.data
-            }
+            this.aa.Car= data.data.data
           }).catch((data)=>{
           })
         },
         getLiCai () { // 查询理财模块数据
           returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
-            if(data.data.data !== undefined ){
-              this.aa.LiCai= data.data.data
-            }
+            this.aa.LiCai= data.data.data
           }).catch((data)=>{
           })
         },
         getJiaDian () { // 查询家电模块数据
           returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
-            if(data.data.data !== undefined ){
-              this.aa.JiaDian= data.data.data
-            }
+            this.aa.JiaDian= data.data.data
           }).catch((data)=>{
           })
         },
         getBaoXian (){// 查询保险模块数据
           returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
-            if(data.data.data !== undefined ){
-              this.aa.BaoXian= data.data.data
-            }
+            this.aa.BaoXian= data.data.data
           }).catch((data)=>{
 
           })
         },
         getZhaiQuan (){ // 查询债权模块数据
           returnQuestionnaireJson({'qpid': 655}).then((data)=>{  // 查询债权模块数据
-            if(data.data.data !== undefined ){
-              this.aa.ZhaiQuan= data.data.data
-            }
+            this.aa.ZhaiQuan= data.data.data
           }).catch((data)=>{
           })
         },
         getZhaiWu (){ // 查询债务模块数据
           returnQuestionnaireJson({'qpid': 656}).then((data)=>{  // 查询债务模块数据
-            if(data.data.data !== undefined ){
-              this.aa.ZhaiWu= data.data.data
-            }
+            this.aa.ZhaiWu= data.data.data
           }).catch((data)=>{
           })
         },
@@ -5004,6 +4993,18 @@
         },
         closeMissMsgBox () {   // 关闭未填写项弹窗
           this.missMsgBox = false
+        },
+        GetOutPutWord () {   // 获取离婚协议书未填写项
+          localStorage.setItem('qid',5)
+          outPutWord().then((data)=>{
+            this.status_code = data.data.status_code
+            if(this.status_code == 330 ){
+                this.missField = data.data.data
+            }else if(this.status_code == 200){
+                this.missAlert = false
+            }
+          }).catch((data)=>{
+          })
         }
         // addChildBirthday1 (e) {
         //    console.log(e,12312313)
@@ -5028,6 +5029,7 @@
     }
 </script>
 <style>
+.min{width:600px;margin:0 auto;}
 .ban{width:100% !important;}
 .el-form-item{margin-bottom:8px !important;}
 .el-form--label-top .el-form-item__label{padding-bottom:0 !important;}
@@ -5040,4 +5042,6 @@
 #missMsgBox{width:400px;height:400px;position:fixed;top:50%;margin-top:-200px;left:50%;margin-left:-200px;z-index: 1;background: #e2e5d9}
 #missMsgBox h2{margin:20px 0;font-weight: bold;font-size: 20px;}
 #missMsgBox .queren{width:80%;justify-content: space-around;position: absolute;bottom:10px;left:10%;}
+#missAlert{width:250px;height:450px;position:fixed;top:20%;right:2%;z-index: 1;background: #e2e5d9}
+#missAlert h2{margin:20px 0;font-weight: bold;font-size: 20px;}
 </style>

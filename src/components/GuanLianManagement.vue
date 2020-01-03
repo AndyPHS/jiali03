@@ -1045,7 +1045,7 @@
                 
             },
              handleDrop(draggingNode, dropNode, dropType, ev) {
-              // console.log(draggingNode, dropNode, dropType, ev);
+              console.log(draggingNode, dropNode, dropType, ev);
               this.$confirm('此操作将移动该模块位置, 是否继续?', '提示', {
                   confirmButtonText: '确定',
                   cancelButtonText: '取消',
