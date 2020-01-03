@@ -1513,8 +1513,86 @@
           }
         },
         userAddAnswerAction (e){
-          if(e.answer == '' || e.answer == null){
-            this.$message.error('必填项内容不能为空');
+          if( e.isRequired == true){ 
+            if(e.answer == '' || e.answer == null){
+              this.$message.error('必填项内容不能为空');
+            }else{
+              if(e.fornum !== undefined){
+                if(Array.isArray(e.answer)){
+                  if(e.type == "select_city"){
+                      userAddAnswer({
+                      value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
+                      qpid: e.id, // 关联id
+                      fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                      quid: 6 //用户的问卷id
+                    }).then((data)=>{
+                      console.log("保存成功")
+                    }).catch((data)=>{
+                       console.log("保存失败")
+                    }) 
+                  }else{
+                    userAddAnswer({
+                      value: JSON.stringify(e.answer),  // 值
+                      qpid: e.id, // 关联id
+                      fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                      quid: 6 //用户的问卷id
+                    }).then((data)=>{
+                      console.log("保存成功")
+                    }).catch((data)=>{
+                       console.log("保存失败")
+                    })  
+                  }
+                }else{
+                  userAddAnswer({
+                    value: e.answer,  // 值
+                    qpid: e.id, // 关联id
+                    fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: 6 //用户的问卷id
+                  }).then((data)=>{
+                    console.log("保存成功")
+                  }).catch((data)=>{
+                     console.log("保存失败")
+                  })
+                }
+              }else{
+                 if(Array.isArray(e.answer)){
+                  if(e.type == "select_city"){
+                    userAddAnswer({
+                      value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
+                      qpid: e.id, // 关联id
+                      // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                      quid: 6 //用户的问卷id
+                    }).then((data)=>{
+                      // console.log("保存成功")
+                    }).catch((data)=>{
+                       // console.log("保存失败")
+                    })
+                  }else{
+                    userAddAnswer({
+                      value: JSON.stringify(e.answer),  // 值
+                      qpid: e.id, // 关联id
+                      // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                      quid: 6 //用户的问卷id
+                    }).then((data)=>{
+                      // console.log("保存成功")
+                    }).catch((data)=>{
+                       // console.log("保存失败")
+                    })
+                  }
+                }else{
+                  userAddAnswer({
+                    value: e.answer,  // 值
+                    qpid: e.id, // 关联id
+                    // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: 6 //用户的问卷id
+                  }).then((data)=>{
+                    // console.log("保存成功")
+                  }).catch((data)=>{
+                     // console.log("保存失败")
+                  })
+                }
+              }
+            }
           }else{
             if(e.fornum !== undefined){
               if(Array.isArray(e.answer)){
@@ -1592,7 +1670,6 @@
               }
             }
           }
-          
         },
         userAddSelectAnswerAction (e){   // 添加子女或者房产等
             this.$message({
