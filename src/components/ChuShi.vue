@@ -32,7 +32,8 @@
                     </div>
                     <!--输入框-文字类型-->
                     <div v-if="$$item.type == 'input' && $$item.input_type=='text'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                      <el-form-item label="" class="text-base">
+                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                         <el-input
                           type="text"
                           class="ban"
@@ -45,7 +46,8 @@
                     </div>
                     <!--输入框-数字类型（类似身份证号、金额）-->
                     <div v-if="$$item.type == 'input' && $$item.input_type=='number'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title" class="text-base">
+                      <el-form-item label=""  class="text-base">
+                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                         <el-input
                           type="number"
                           class="ban"
@@ -58,7 +60,8 @@
                     </div>
                     <!--单选框-->
                     <div v-if="$$item.type == 'radio'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                      <el-form-item label="">
+                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                         <el-radio-group v-model="$$item.answer"  @change="userAddAnswerAction($$item)">
                           <el-radio :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                         </el-radio-group>
@@ -66,7 +69,8 @@
                     </div>
                     <!-- 多选框 -->
                     <div v-if="$$item.type == 'checkbox'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title"> 
+                      <el-form-item label="">
+                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                         <el-checkbox-group v-model="$$item.answer"  @change="userAddAnswerAction($$item)">
                           <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex">{{list.label}}</el-checkbox>
                         </el-checkbox-group>
@@ -75,7 +79,8 @@
                         <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
                           <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
                             <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                              <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title" class="text-base">
+                              <el-form-item label="">
+                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                 <el-input
                                   type="text"
                                   class="ban"
@@ -87,7 +92,8 @@
                               </el-form-item>
                             </div>
                             <div v-if="$$$$item.type == 'select'">
-                              <el-form-item :label="$$$$item.isRequired==false ?'(选填)'+$$$$item.title:$$$$item.title">
+                              <el-form-item label="">
+                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
                                 <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
                                   <el-option
                                     size="small"
@@ -105,7 +111,8 @@
                     </div>
                     <!--下拉框(单选)-->
                     <div v-if="$$item.type == 'select'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                      <el-form-item label="">
+                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                         <el-select v-model="$$item.answer" @change="userAddAnswerAction($$item)">
                           <el-option
                             size="small"
@@ -119,7 +126,8 @@
                     </div>
                     <!--下拉框(多选)-->
                     <div v-if="$$item.type == 'select_multiple'">
-                      <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
+                      <el-form-item label="">
+                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                         <el-select v-model="$$item.answer" multiple placeholder="请选择"  @change="userAddAnswerAction($$item)">
                           <el-option
                             size="small"
@@ -846,7 +854,7 @@
                 {
                   title: '1、您离婚想要达到的诉求是什么？',
                   id: '649',
-                  isRequired: true,
+                  isRequired: false,
                   type: 'select',
                   tip: '',
                   answer: '',
@@ -859,7 +867,7 @@
                 {
                   title: '2、你们感情破裂的原因是什么？（可多选）',
                   id: '650',
-                  isRequired: true,
+                  isRequired: false,
                   type: 'select_multiple',
                   tip: '',
                   answer: '',
@@ -887,7 +895,7 @@
                 {
                   title: '3、你们都是初婚吗？',
                   id: '3',
-                  isRequired: true,
+                  isRequired: false,
                   type: 'select',
                   tip: '',
                   answer: '',
