@@ -1339,6 +1339,8 @@
               id: 3
             })
             this.mokuai.sort(this.compare('id'));
+            // console.log(this.aa.ZiNv[0][1].questions.filter)
+            console.log(this.aa.ZiNv[0][1].questions.filter(filterItme=>{return filterItme.type == 'select' }))
           }).catch((data)=>{
           })
         },
@@ -4998,6 +5000,7 @@
           localStorage.setItem('qid',5)
           outPutWord().then((data)=>{
             this.status_code = data.data.status_code
+            console.log(this.status_code)
             if(this.status_code == 330 ){
                 this.missField = data.data.data
             }else if(this.status_code == 200){

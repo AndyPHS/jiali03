@@ -198,7 +198,9 @@ const apiUrl = {
   // 验证单独word
   verificationWord: baseLiHunURL + 'word/Verification_word/',
   // 生成数据
-  outPutWord: baseLiHunURL + 'word/outputWord/'
+  outPutWord: baseLiHunURL + 'word/outputWord/',
+  // 下载离婚协议书
+  getWord: baseLiHunURL + 'page/get_word'
 }
 export{
   apiUrl

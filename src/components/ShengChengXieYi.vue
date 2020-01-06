@@ -6,6 +6,7 @@
           <h2 class="py-2 text-2xl font-bold">离婚协议书</h2>
           <div class="absolute top-0 right-0 mt-4 mr-6">
             <el-button class="text-right" type="primary" @click="GoBasicInformationPage">返回修改</el-button>
+            <el-button class="text-right" type="primary" @click='DownLoadWord'>下载协议</el-button>
           </div>
           <div class="w-full">
             <div class="text-left px-4 py-3 msg">
@@ -29,6 +30,7 @@
 <script>
 
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
+  import {getWord} from '@/api/api/requestLogin.js'  // 下载离婚协议书
   
   export default {
       data () {
@@ -60,6 +62,13 @@
         },
         GoBasicInformationPage(){
            this.$router.replace("/BasicInformation");
+        },
+        DownLoadWord () {
+          getWord().then((data)=>{
+            console.log(data)
+          }).catch((data)=>{
+
+          })
         }
       }
     }

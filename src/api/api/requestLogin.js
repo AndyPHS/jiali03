@@ -756,3 +756,15 @@ export const outPutWord = params => {
     data: params
   });
 };
+
+// 下载离婚协议书
+
+export const getWord = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.getWord,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
