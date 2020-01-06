@@ -322,6 +322,7 @@
                 localStorage.removeItem('pid');
                 this.user.title = '';
                 this.user.type = '';
+                this.user.placeholder = '';
                 this.user.status = '';
                 this.dialogQuestionAdd = true
             },
