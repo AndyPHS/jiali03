@@ -61,7 +61,10 @@
                     <el-select v-model="user.type" placeholder="选择问题类型">
                       <el-option v-for="(item, index) in problemType" :key="index" :label="item" :value="index"></el-option>
                     </el-select>
-                  </el-form-item>
+                </el-form-item>
+                <el-form-item label="注释" :label-width="formLabelWidth">
+                  <el-input v-model="user.placeholder" class="w-1/2" autocomplete="off"></el-input>
+                </el-form-item>
                 <el-form-item label="验证类型" :label-width="formLabelWidth" v-if="user.type==1 ">
                     <el-select v-model="user.re" placeholder="选择输入类型">
                       <el-option v-for="(item, index) in problemRe" :key="index" :label="item" :value="index"></el-option>
@@ -107,7 +110,10 @@
                     <el-select v-model="user.type" placeholder="选择问题类型">
                       <el-option v-for="(item, index) in problemType" :key="index" :label="item" :value="index">{{item}}</el-option>
                     </el-select>
-                  </el-form-item>
+                </el-form-item>
+                 <el-form-item label="注释" :label-width="formLabelWidth">
+                  <el-input v-model="user.placeholder" class="w-1/2" autocomplete="off"></el-input>
+                </el-form-item>
                 <el-form-item label="验证类型" :label-width="formLabelWidth" v-if="user.type==1 ">
                     <el-select v-model="user.re" placeholder="选择输入类型">
                       <el-option v-for="(item, index) in problemRe" :key="index" :label="item" :value="index">{{item}}</el-option>
@@ -188,9 +194,10 @@
                 },
                 user:{
                     title: '',
-                    type: '',
-                    re: '',
-                    status: '',    // 是否禁用
+                    type: null,
+                    re: null,
+                    status: null,    // 是否禁用
+                    placeholder: '', // 注释
                     imgs: []       // 添加实例
                 },
                 add_answer: [],   // 修改页面添加选项
@@ -323,11 +330,13 @@
                     title: this.user.title,
                     type: this.user.type,
                     re: this.user.re,
+                    placeholder: this.user.placeholder,
                     status: this.user.status
                 }).then((data)=>{
                     this.user.title = '';
                     this.user.type = '';
                     this.user.re = '';
+                    this.user.placeholder = '';
                     this.user.status = '';
                     this.handleQuestionList()
                     localStorage.setItem('pid',data.data.data)
@@ -355,6 +364,7 @@
                 this.user.title = item.title;
                 this.user.type = item.type;
                 this.user.re = item.re;
+                this.user.placeholder = item.placeholder
                 this.user.status = item.status;
                 this.dialogFormVisible = true
                 if(this.user.type==6 || this.user.type==7 || this.user.type==8 || this.user.type==9 ){
@@ -376,11 +386,13 @@
                         title: this.user.title,
                         type: this.user.type,
                         re: this.user.re,
+                        placeholder: this.user.placeholder,
                         status: this.user.status
                     }).then((data)=>{
                         this.user.title = '';
                         this.user.type = '';
                         this.user.re = '';
+                        this.user.placeholder = '';
                         this.user.status = '';
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
@@ -390,11 +402,13 @@
                     updateQuestion({
                         title: this.user.title,
                         type: this.user.type,
+                        placeholder: this.user.placeholder,
                         status: this.user.status
                     }).then((data)=>{
                         this.user.title = '';
-                        this.user.type = '';
-                        this.user.status = '';
+                        this.user.type = null;
+                        this.user.status = null;
+                        this.user.placeholder = '';
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
                         this.dialogFormVisible = false
@@ -403,11 +417,15 @@
                    updateQuestion({
                         title: this.user.title,
                         type: this.user.type,
+                        re: this.user.re,
+                        placeholder: this.user.placeholder,
                         status: this.user.status
                     }).then((data)=>{
                         this.user.title = '';
-                        this.user.type = '';
-                        this.user.status = '';
+                        this.user.type = null;
+                        this.user.placeholder = '';
+                        this.user.status = null;
+                        this.user.re = null;
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
                         this.dialogFormVisible = false
