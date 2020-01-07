@@ -608,7 +608,7 @@
                 updateProblemQ({
                     questionnaireId: 3,
                     problemId: this.problemqAdd.problemId,
-                    orderId: 0,
+                    orderId: this.problemqAdd.orderId,
                     fqaspId: this.problemqAdd.fqaspId,
                     important: this.problemqAdd.important,
                     type: this.problemqAdd.type,
@@ -671,6 +671,7 @@
                 this.problemqAdd.important = this.$refs.tree.currentNode.node.data.important  // 绑定问题是否必填
                 this.problemqAdd.id = this.$refs.tree.currentNode.node.data.id    // 当前选择的ID
                 this.problemqAdd.fqaspId = this.$refs.tree.currentNode.node.data.fqaspId // 当前选择的父ID
+                this.problemqAdd.orderId = this.$refs.tree.currentNode.node.data.orderId // 当前选择的orderID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
                 // console.log(this.problemqAdd.id)
