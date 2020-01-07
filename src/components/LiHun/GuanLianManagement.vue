@@ -703,7 +703,7 @@
                 if(this.problemqAdd.id ==null){
                     ProblemQAdd({
                         questionnaireId: 3,
-                        orderId: this.problemqAdd.orderId,
+                        orderId: 0,
                         fqaspId: 0,
                         class: this.problemqAdd.class,
                         type: 1,
@@ -720,7 +720,7 @@
                 }else{
                     ProblemQAdd({
                         questionnaireId: 3,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
                         class: this.problemqAdd.class,
                         type: 1,
