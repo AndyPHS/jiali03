@@ -833,7 +833,7 @@
                     ProblemQAdd({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
@@ -860,7 +860,7 @@
                     ProblemQAdd({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
@@ -886,7 +886,7 @@
                     updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.fqaspId,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
@@ -908,7 +908,7 @@
                     updateProblemQ({
                         questionnaireId: 3,
                         problemId: this.problemqAdd.problemId,
-                        orderId: 0,
+                        orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.fqaspId,
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
