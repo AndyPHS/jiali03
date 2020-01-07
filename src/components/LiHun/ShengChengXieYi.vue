@@ -6,7 +6,7 @@
           <h2 class="py-2 text-2xl font-bold">离婚协议书</h2>
           <div class="absolute top-0 right-0 mt-4 mr-6">
             <el-button class="text-right" type="primary" @click="GoBasicInformationPage">返回修改</el-button>
-            <el-button class="text-right" type="primary" @click='DownLoadWord'>下载协议</el-button>
+            <el-button class="text-right" type="primary" ><a href="http://office365.aladdinlaw.com:3921/word/离婚协议书.docx" >下载协议</a></el-button>
           </div>
           <div class="w-full">
             <div class="text-left px-4 py-3 msg">
@@ -35,6 +35,7 @@
   export default {
       data () {
           return {
+            downloadMsg: '', // 后台返回的下载资源
            outputWord: '',  // 获取离婚协议书
            status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
            missField: [] // 未填写项目
@@ -62,14 +63,16 @@
         },
         GoBasicInformationPage(){
            this.$router.replace("/BasicInformation");
-        },
-        DownLoadWord () {
-          getWord().then((data)=>{
-            console.log(data)
-          }).catch((data)=>{
-
-          })
         }
+        // DownLoadWord () {
+        //   getWord().then((data)=>{
+        //     console.log(data.data)
+        //     window.location.href = urls;
+        //     window.open(urls, '/word/离婚协议书.docx')
+        //   }).catch((data)=>{
+
+        //   })
+        // }
       }
     }
 </script>
