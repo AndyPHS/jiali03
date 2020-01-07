@@ -85,6 +85,16 @@
                   </el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="word排序" :label-width="formLabelWidth" class="mb-1">
+              <el-select v-model="wordAdd.orderWords" @change="getWordSelectWord" multiple filterable :filter-method="wordFilter" placeholder="请选择">
+                  <el-option
+                    v-for="item in wordSelectWordArr"
+                    :key="item.id"
+                    :label="item.title"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+            </el-form-item>
             <div><span class="h-1"></span></div>
             <el-form-item label="问题" :label-width="formLabelWidth">
                 <el-select v-model="wordAddWhere.qpid" @change="selectOnlyQuestion" filterable :filter-method="dataFilter" placeholder="请选择">
@@ -132,6 +142,16 @@
                     v-for="item in dataFilterValueArr"
                     :key="item.id"
                     :label="item.qpTitle"
+                    :value="item.id">
+                  </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="word排序" :label-width="formLabelWidth" class="mb-1">
+              <el-select v-model="wordAdd.orderWords" @change="getWordSelectWord" multiple filterable :filter-method="wordFilter" placeholder="请选择">
+                  <el-option
+                    v-for="item in wordSelectWordArr"
+                    :key="item.id"
+                    :label="item.title"
                     :value="item.id">
                   </el-option>
                 </el-select>
@@ -247,7 +267,7 @@
     import {wordSelect} from '@/api/api/requestLogin.js'   // 修改组合规则
     import {selectTree} from '@/api/api/requestLogin.js'    // 查询关系
     import {wordSelectTree} from '@/api/api/requestLogin.js'    // 查询组合规则tree结构
-    
+    import {wordSelectWord} from '@/api/api/requestLogin.js'    // 查询组合规则
     import {selectQuestionList} from '@/api/api/requestLogin.js'  // 根据标题条件获取用户列表
     import {selectVague} from '@/api/api/requestLogin.js'  // 模糊查询关联
     // import {selectOnlyQuestion} from '@/api/api/requestLogin.js'  // 根据标题条件获取用户列表
@@ -291,7 +311,8 @@
                     title: '',  // 组合名称
                     fWordId: null, // 组合的父id
                     where: [],     // 条件
-                    qpid: []
+                    qpid: [],
+                    orderWords: []   // word排序ID
                 },
                 wordAddWhere:{  // 单独绑定的组合规则
                     title: '',
@@ -317,6 +338,7 @@
 
                 formLabelWidth: '80px',   // 表单标签宽度
                 dataFilterValueArr: [], // 搜索查找的结果数据
+                wordSelectWordArr: [],  // 查询组合规则结果汇总数据
                 TiaoJianList:[   // 条件列表
                     {
                        title: '等于',
@@ -430,14 +452,11 @@
                 this.wordTreeMsg.fqaspId == null
             },
             addWhere () {
-
                 if(JSON.stringify(this.wordAdd.where) == '{}'){
                     this.wordAdd.where.splice(1,1)
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
-                    
                     this.wordAddWhere = {} // 清空组合绑定的问题
                 }else{
-
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                     this.wordAddWhere = {} // 清空组合绑定的问题
                 }
@@ -449,7 +468,8 @@
               this.wordAddWhere.type = null;
               this.wordAddWhere.value = null;
               this.wordAddWhere.replate = '';
-               this.wordAddWhere.id = null
+              this.wordAddWhere.id = null
+              this.wordAdd.orderWords = null
             },
             addWordOk () {   // 点击新增组合确定按钮提交表单
                 this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
@@ -459,16 +479,19 @@
                 }
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
                 this.wordAdd.qpid = JSON.stringify(this.wordAdd.qpid)
+                this.wordAdd.orderWords = JSON.stringify(this.wordAdd.orderWords)
                 if(this.wordTreeMsg.fqaspId == null){
                     addWord({
                         title:this.wordAdd.title,
                         fWordId :5,
                         where: this.wordAdd.where,
-                        qpid: this.wordAdd.qpid
+                        qpid: this.wordAdd.qpid,
+                        orderWords: this.wordAdd.orderWords
                     }).then((data)=>{
                         this.wordAdd.title = ''
                         this.wordAdd.where = []
                         this.wordAdd.qpid = []
+                        this.wordAdd.orderWords = []
                         this.wordAddWhere.qpid = null
                         this.wordAddWhere.type = null
                         this.wordAddWhere.value = null
@@ -486,12 +509,14 @@
                         title:this.wordAdd.title,
                         fWordId :this.wordTreeMsg.fqaspId,
                         where: this.wordAdd.where,
-                        qpid: this.wordAdd.qpid
+                        qpid: this.wordAdd.qpid,
+                        orderWords: this.wordAdd.orderWords
                     }).then((data)=>{
                         this.wordSelectTree(); // 重新获取数结构
                         this.wordAdd.title = ''
                         this.wordAdd.where = []
                         this.wordAdd.qpid = []
+                        this.wordAdd.orderWords = []
                         this.wordAddWhere.qpid = null
                         this.wordAddWhere.type = null
                         this.wordAddWhere.value = null
@@ -528,6 +553,16 @@
                 // }).catch((data)=>{
 
                 // })
+            },
+            wordFilter(val){
+                wordSelectWord("title="+val).then((data)=>{
+                    this.wordSelectWordArr = data.data.data
+                }).catch((data)=>{
+
+                })
+            },
+            getWordSelectWord () {  // 查询组合规则
+                console.log(this.wordAdd.orderWords)
             },
             deleteWordAlert () { // 点击删除组合规则，弹出对话框
               this.dialogDeleteWord = true;
@@ -571,16 +606,19 @@
                 }
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
                 this.wordAdd.qpid = JSON.stringify(this.wordAdd.qpid)
+                this.wordAdd.orderWords = JSON.stringify(this.wordAdd.orderWords)
                 updateWord({
                     title:this.wordAdd.title,
                     fWordId :this.wordTreeMsg.fatherId,
                     where: this.wordAdd.where,
-                    qpid: this.wordAdd.qpid
+                    qpid: this.wordAdd.qpid,
+                    orderWords: this.wordAdd.orderWords
                 }).then((data)=>{
                     this.wordSelectTree(); // 重新获取数结构
                     this.wordAdd.title = ''
                     this.wordAdd.where = []
                     this.wordAdd.qpid = []
+                    this.wordAdd.orderWords = []
                     this.wordTreeMsg.fqaspId = null
                     localStorage.removeItem('pid');
                     localStorage.removeItem('fWordId');

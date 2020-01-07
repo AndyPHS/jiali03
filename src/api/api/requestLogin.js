@@ -639,6 +639,17 @@ export const wordSelect = params => {
     data: params
   });
 };
+// 查询组合规则
+
+export const wordSelectWord = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.wordSelectWord+'/?'+params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 删除组合规则
 export const deleteWord = params => {
   return axios({

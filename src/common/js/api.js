@@ -174,6 +174,8 @@ const apiUrl = {
   wordSelectTree: baseLiHunURL + 'word/select_tree/',
   // 查询单独组合：
   wordSelect: baseLiHunURL + 'word/select/',
+  // 查询组合规则
+  wordSelectWord: baseLiHunURL + 'word/select_word',
   // 修改组合规则
   updateWord: baseLiHunURL + 'word/update_word/',
   // 新增组合规则
