@@ -814,7 +814,7 @@
                 selectOnlyQuestion().then((data)=>{
                     this.selectOnlyLisg = data.data.child
                     this.problemqAdd.problemType = data.data[0].type
-                    this.problemqAdd.title = data.data[0].title
+                    // this.problemqAdd.title = data.data[0].title
                     localStorage.removeItem('pid')
                 }).catch((data)=>{
 
