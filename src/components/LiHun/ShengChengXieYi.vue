@@ -6,7 +6,10 @@
           <h2 class="py-2 text-2xl font-bold">离婚协议书</h2>
           <div class="absolute top-0 right-0 mt-4 mr-6">
             <el-button class="text-right" type="primary" @click="GoBasicInformationPage">返回修改</el-button>
-            <el-button class="text-right" type="primary" ><a href="http://office365.aladdinlaw.com:3921/word/离婚协议书.docx" >下载协议</a></el-button>
+            <el-button class="text-right" type="primary" @click='DownLoadWord'>
+              下载协议
+              <!-- <a href="http://office365.aladdinlaw.com:3921/word/离婚协议书.docx" >下载协议</a> -->
+            </el-button>
           </div>
           <div class="w-full">
             <div class="text-left px-4 py-3 msg">
@@ -63,16 +66,19 @@
         },
         GoBasicInformationPage(){
            this.$router.replace("/BasicInformation");
+        },
+        DownLoadWord () {
+          getWord().then((data)=>{
+            if(data.status==200){
+              window.open('http://office365.aladdinlaw.com:3921/word/离婚协议书.docx')
+            }
+          }).catch((data)=>{
+            this.$message({
+              message: '下载失败,请联系管理员',
+              type: 'error'
+            });
+          })
         }
-        // DownLoadWord () {
-        //   getWord().then((data)=>{
-        //     console.log(data.data)
-        //     window.location.href = urls;
-        //     window.open(urls, '/word/离婚协议书.docx')
-        //   }).catch((data)=>{
-
-        //   })
-        // }
       }
     }
 </script>
