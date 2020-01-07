@@ -1340,7 +1340,11 @@
             })
             this.mokuai.sort(this.compare('id'));
             // console.log(this.aa.ZiNv[0][1].questions.filter)
-            console.log(this.aa.ZiNv[0][1].questions.filter(filterItme=>{return filterItme.type == 'select' }))
+            console.log(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
+            this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
+            this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer)
+            this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)
+            this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer)
           }).catch((data)=>{
           })
         },
