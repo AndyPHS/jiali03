@@ -380,7 +380,6 @@
                   selectGuiZeFatherId: null,     // 点击某个规则展示某个规则包含的规则ID
                   type: null
                 },
-                
             }
         },
         mounted () {
