@@ -170,8 +170,8 @@
             <el-form-item label="条件" :label-width="formLabelWidth">
                 <el-select v-model="wordAddWhere.type" placeholder="请选择">
                     <el-option
-                      v-for="item in TiaoJianList"
-                      :key="item.value"
+                      v-for="(item, index) in TiaoJianList"
+                      :key="index"
                       :label="item.title"
                       :value="item.value">
                     </el-option>
@@ -319,7 +319,7 @@
                     label: '',
                     qpid: null,
                     type: null,
-                    value: null,
+                    value: '',
                     replate: ''
                 },
                 wordSelectWhere: [],  //查询单独组合信息
@@ -342,35 +342,35 @@
                 TiaoJianList:[   // 条件列表
                     {
                        title: '等于',
-                       value: '1'             
+                       value: 1             
                     },
                     {
                        title: '小于',
-                       value: '2'             
+                       value: 2            
                     },
                     {
                        title: '大于',
-                       value: '3'             
+                       value: 3             
                     },
                     {
                        title: '大于等于',
-                       value: '4'             
+                       value: 4             
                     },
                     {
                        title: '小于等于',
-                       value: '5'             
+                       value: 5             
                     },
                     {
                        title: '不等于',
-                       value: '6'             
+                       value: 6             
                     },
                     {
                        title: '包含',
-                       value: '7'             
+                       value: 7             
                     },
                     {
                        title: '不等于空',
-                       value: '8'             
+                       value: 8            
                     }
                 ],
                 selectOnlyLisg: [],    // 查询单独问题
@@ -470,13 +470,13 @@
               this.dialogUpdateWord = false; // 取消修改弹框
               this.wordAdd.title = '';
               this.wordAddWhere.type = null;
-              this.wordAddWhere.value = null;
+              this.wordAddWhere.value = '';
               this.wordAddWhere.replate = '';
               this.wordAddWhere.id = null
               this.wordAdd.orderWords = null
             },
             addWordOk () {   // 点击新增组合确定按钮提交表单
-                this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
+                // this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 for(let i = 0;i<this.wordAdd.where.length;i++){
                   this.$delete(this.wordAdd.where[i], 'label')
                   this.$delete(this.wordAdd.where[i], 'title')
@@ -498,8 +498,8 @@
                         this.wordAdd.orderWords = []
                         this.wordAddWhere.qpid = null
                         this.wordAddWhere.type = null
-                        this.wordAddWhere.value = null
-                        this.wordAddWhere.replate = null
+                        this.wordAddWhere.value = ''
+                        this.wordAddWhere.replate = ''
                         this.wordSelectTree(); // 重新获取数结构
                         localStorage.removeItem('pid');
                         this.dialogNewWord = false;
@@ -523,8 +523,8 @@
                         this.wordAdd.orderWords = []
                         this.wordAddWhere.qpid = null
                         this.wordAddWhere.type = null
-                        this.wordAddWhere.value = null
-                        this.wordAddWhere.replate = null
+                        this.wordAddWhere.value = ''
+                        this.wordAddWhere.replate = ''
                         this.wordTreeMsg.fqaspId = null
                         localStorage.removeItem('pid');
                         this.dialogNewWord = false;
@@ -625,6 +625,10 @@
                     this.wordAdd.where = []
                     this.wordAdd.qpid = []
                     this.wordAdd.orderWords = []
+                    this.wordAddWhere.qpid = null
+                    this.wordAddWhere.type = null
+                    this.wordAddWhere.value = ''
+                    this.wordAddWhere.replate = ''
                     this.wordTreeMsg.fqaspId = null
                     localStorage.removeItem('pid');
                     localStorage.removeItem('fWordId');
