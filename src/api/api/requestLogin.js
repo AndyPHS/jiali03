@@ -769,12 +769,61 @@ export const outPutWord = params => {
 };
 
 // 下载离婚协议书
-
 export const getWord = params => {
   return axios({
     method: "get",
     dataType: 'json',
     url: apiUrl.getWord,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 问卷数组
+export const questionnaire = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.questionnaire,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询问卷
+export const questionnaireSelect = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.questionnaireSelect,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增问卷
+export const addQuestionnaire = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addQuestionnaire,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改问卷
+export const updateQuestionnaire = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateQuestionnaire + localStorage.getItem('qid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除问卷
+export const deleteQuestionnaire = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteQuestionnaire + localStorage.getItem('qid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

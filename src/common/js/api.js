@@ -202,7 +202,17 @@ const apiUrl = {
   // 生成数据
   outPutWord: baseLiHunURL + 'word/outputWord/',
   // 下载离婚协议书
-  getWord: baseLiHunURL + 'page/get_word'
+  getWord: baseLiHunURL + 'page/get_word',
+  // 问卷数组
+  questionnaire: baseLiHunURL + 'questionnaire/created',
+  // 查询问卷
+  questionnaireSelect: baseLiHunURL + 'questionnaire/select',
+  // 新增问卷
+  addQuestionnaire: baseLiHunURL + 'questionnaire/add',
+  // 修改问卷
+  updateQuestionnaire: baseLiHunURL + "questionnaire/update/",
+  // 删除问卷
+  deleteQuestionnaire: baseLiHunURL + 'questionnaire/delete/'
 }
 export{
   apiUrl
