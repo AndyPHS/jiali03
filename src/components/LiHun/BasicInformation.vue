@@ -1339,8 +1339,8 @@
               id: 3
             })
             this.mokuai.sort(this.compare('id'));
-            // console.log(this.aa.ZiNv[0][1].questions.filter)
-            console.log(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
+            // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
+            this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
             this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer)
             this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)

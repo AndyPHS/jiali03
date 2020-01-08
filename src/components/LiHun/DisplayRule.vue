@@ -452,6 +452,10 @@
                 this.wordTreeMsg.fqaspId == null
             },
             addWhere () {
+                for(let i = 0;i<this.wordAdd.where.length;i++){
+                  this.$delete(this.wordAdd.where[i], 'label')
+                  this.$delete(this.wordAdd.where[i], 'title')
+                }
                 if(JSON.stringify(this.wordAdd.where) == '{}'){
                     this.wordAdd.where.splice(1,1)
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
@@ -592,6 +596,8 @@
                       data.data.data.where = []
                     }
                     this.wordAdd.where = data.data.data.where
+                    this.wordAdd.qpid = JSON.parse(data.data.data.qpid)
+                    this.wordAdd.orderWords = JSON.parse(data.data.data.orderWords)
 
                 }).catch((data)=>{
 
