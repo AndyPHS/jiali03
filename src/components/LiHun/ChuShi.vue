@@ -859,18 +859,19 @@
                   tip: '',
                   answer: '',
                   listData: [
-                    { label: '自己抚养孩子', value: '1' },
-                    { label: '对方抚养孩子', value: '2' },
-                    { label: '对方不分财产', value: '3' },
-                    { label: '对方少分财产', value: '4' },
-                    { label: '自己多分财产', value: '5' },
-                    { label: '平均分配财产', value: '6' },
-                    { label: '财产赠与孩子', value: '7' },
-                    { label: '债权均归属自己', value: '8' },
-                    { label: '债务均归属对方', value: '9' },
-                    { label: '平均分配债权债务', value: '10' },
-                    { label: '债权赠与孩子', value: '11' },
-                    { label: '其他', value: '12' }
+                    { label: '离婚', value: '1' },
+                    { label: '自己抚养孩子', value: '2' },
+                    { label: '对方抚养孩子', value: '3' },
+                    { label: '对方不分财产', value: '4' },
+                    { label: '对方少分财产', value: '5' },
+                    { label: '自己多分财产', value: '6' },
+                    { label: '平均分配财产', value: '7' },
+                    { label: '财产赠与孩子', value: '8' },
+                    { label: '债权均归属自己', value: '9' },
+                    { label: '债务均归属对方', value: '10' },
+                    { label: '平均分配债权债务', value: '11' },
+                    { label: '债权赠与孩子', value: '12' },
+                    { label: '其他', value: '13' }
                   ]
                 },
                 {
