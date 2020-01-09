@@ -105,9 +105,9 @@
                     }else if(item.id == 67){
                         this.caseHead.caseManagement = true
                     }else if(item.id == 68){
-                        this.wenjuan.questionnaire = true
-                    }else if(item.id == 69){
                         this.wenjuan.questionnaireAdmin = true
+                    }else if(item.id == 69){
+                        this.wenjuan.questionnaire = true
                     }
                 })
             }
