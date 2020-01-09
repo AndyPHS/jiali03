@@ -855,13 +855,22 @@
                   title: '1、您离婚想要达到的诉求是什么？',
                   id: '649',
                   isRequired: false,
-                  type: 'select',
+                  type: 'select_multiple',
                   tip: '',
                   answer: '',
                   listData: [
-                    { label: '要求对方净身出户', value: '1' },
-                    { label: '争夺孩子抚养权', value: '2' },
-                    { label: '以上都是', value: '3' }
+                    { label: '自己抚养孩子', value: '1' },
+                    { label: '对方抚养孩子', value: '2' },
+                    { label: '对方不分财产', value: '3' },
+                    { label: '对方少分财产', value: '4' },
+                    { label: '自己多分财产', value: '5' },
+                    { label: '平均分配财产', value: '6' },
+                    { label: '财产赠与孩子', value: '7' },
+                    { label: '债权均归属自己', value: '8' },
+                    { label: '债务均归属对方', value: '9' },
+                    { label: '平均分配债权债务', value: '10' },
+                    { label: '债权赠与孩子', value: '11' },
+                    { label: '其他', value: '12' }
                   ]
                 },
                 {
@@ -889,7 +898,8 @@
                     { label: '子女抚养方面的矛盾', value: '15' },
                     { label: '隐瞒疾病', value: '16' },
                     { label: '长期分居两地', value: '17' },
-                    { label: '对方在服刑', value: '18' }
+                    { label: '对方在服刑', value: '18' },
+                    { label: '其他', value: '19' }
                   ]
                 },
                 {

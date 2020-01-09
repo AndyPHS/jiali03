@@ -1138,8 +1138,8 @@
                         <div v-if="mo.title==='理财' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(523,index)">删除理财</div>
                         </div>
-                        <div v-if="mo.title==='家电' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(636,index)">删除家电</div>
+                        <div v-if="mo.title==='家具家电' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(636,index)">删除家具家电</div>
                         </div>
                         <div v-if="mo.title==='保险' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(524,index)">删除保险</div>
@@ -1168,8 +1168,8 @@
                       <div v-if="mo.title== '理财' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(523)">添加理财</div>
                       </div>
-                      <div v-if="mo.title== '家电' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(636)">添加家电</div>
+                      <div v-if="mo.title== '家具家电' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(636)">添加家具家电</div>
                       </div>
                       <div v-if="mo.title== '保险' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(524)">添加保险</div>
@@ -1269,7 +1269,7 @@
               CunKuan: [],                // 存款
               Car: [],                // 车子
               LiCai: [],                // 理财
-              JiaDian: [],                // 家电
+              JiaDian: [],                // 家具家电
               BaoXian: [],          // 保险
               ZhaiQuan: [],         // 债权
               ZhaiWu: [],            // 债务
@@ -1300,7 +1300,7 @@
         this.getCunKuanMsg()  // 查询存款模块数据
         this.getCarMsg()   // 查询车子模块数据
         this.getLiCaiMsg()  // 查询理财模块数据
-        this.getJiaDianMsg()  // 查询家电模块数据
+        this.getJiaDianMsg()  // 查询家具家电模块数据
         this.getBaoXianMsg() // 查询保险模块数据
         this.getZhaiQuanMsg()  // 查询债权模块数据
         this.getZhaiWuMsg()  // 查询债务模块数据
@@ -1396,11 +1396,11 @@
           }).catch((data)=>{
           })
         },
-        getJiaDianMsg () { // 查询家电模块数据
-          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
+        getJiaDianMsg () { // 查询家具家电模块数据
+          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家具家电模块数据
             this.aa.JiaDian= data.data.data
             this.mokuai.push({
-              title: '家电', 
+              title: '家具家电', 
               part: 'JiaDian',
               id: 8
             })
@@ -1475,8 +1475,8 @@
           }).catch((data)=>{
           })
         },
-        getJiaDian () { // 查询家电模块数据
-          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家电模块数据
+        getJiaDian () { // 查询家具家电模块数据
+          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家具家电模块数据
             this.aa.JiaDian= data.data.data
           }).catch((data)=>{
           })
@@ -1687,7 +1687,7 @@
                 }else if(e==523){
                   this.getLiCai()  // 查询理财模块数据
                 }else if(e==636){
-                  this.getJiaDian()  // 查询家电模块数据
+                  this.getJiaDian()  // 查询家具家电模块数据
                 }else if(e==524){
                   this.getBaoXian() // 查询保险模块数据
                 }else if(e==655){
@@ -1726,7 +1726,7 @@
                 }else if(e==523){
                   this.getLiCai()  // 查询理财模块数据
                 }else if(e==636){
-                  this.getJiaDian()  // 查询家电模块数据
+                  this.getJiaDian()  // 查询家具家电模块数据
                 }else if(e==524){
                   this.getBaoXian() // 查询保险模块数据
                 }else if(e==655){
@@ -4086,7 +4086,7 @@
         //       title: '',
         //       questions: [
         //         {
-        //           title: '1、需要分割的家电名称、数量和归属？',
+        //           title: '1、需要分割的家具家电名称、数量和归属？',
         //           id: '1',
         //           isRequired: false,
         //           type: 'question',
@@ -4942,7 +4942,7 @@
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '家电'){
+          }else if(this.mokuai[this.active].title == '家具家电'){
             localStorage.setItem('wid',94)
             verificationWord ({
               quid: 6
