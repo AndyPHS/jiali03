@@ -1254,6 +1254,7 @@
     },
       data () {
           return {
+            timer:null, // 定时器
             demo:4,
             hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
             days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
@@ -1308,6 +1309,7 @@
       },
       mounted (){
         this.getChuShi();  // 初始化保存当前页面
+        this.setTimer();   // 每一分钟提示一次自动保存
       },
       methods: {
         getChuShi () {
@@ -1348,6 +1350,7 @@
             this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)
             this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer)
+            console.log(this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer)
           }).catch((data)=>{
           })
         },
@@ -5017,6 +5020,17 @@
             }
           }).catch((data)=>{
           })
+        },
+        setTimer() {     // 每分钟自动提示保存
+            if(this.timer == null) {
+                this.timer = setInterval( () => {
+                    this.$notify({
+                      title: '保存成功',
+                      message: '信息自动保存成功提示',
+                      type: 'success'
+                    });
+                }, 60000)
+            }
         }
         // addChildBirthday1 (e) {
         //    console.log(e,12312313)
