@@ -1343,6 +1343,7 @@
             this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
             this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer)
+            this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)
             this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer)
           }).catch((data)=>{
@@ -1357,6 +1358,7 @@
               id: 4
             })
             this.mokuai.sort(this.compare('id'));
+            this.aa.FangChan[0][0].questions[2].answer = JSON.parse(this.aa.FangChan[0][0].questions[2].answer)
           }).catch((data)=>{
           })
         },
@@ -1381,6 +1383,7 @@
               id: 6
             })
             this.mokuai.sort(this.compare('id'));
+            this.aa.Car[0][0].questions[2].answer = JSON.parse(this.aa.Car[0][0].questions[2].answer)
           }).catch((data)=>{
           })
         },
