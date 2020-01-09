@@ -1308,7 +1308,7 @@
       },
       mounted (){
         this.getChuShi();  // 初始化保存当前页面
-      },
+       },
       methods: {
         getChuShi () {
           
