@@ -1342,9 +1342,11 @@
             // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
+            this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer)
             this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)
+            this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer)
             this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer)
           }).catch((data)=>{
           })
