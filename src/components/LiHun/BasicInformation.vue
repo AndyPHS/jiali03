@@ -46,7 +46,7 @@
                       
                      
                       <!-- 大问题块 -->
-                      <div v-for="($item,$index) in item"  :key="$index">
+                      <div v-for="($item, $index) in item"  :key="$index">
                         <div class="py-2">
                           <el-divider> <h2 class="text-center text-xl">{{$item.title}}</h2></el-divider>
                         </div>
@@ -1339,16 +1339,43 @@
               id: 3
             })
             this.mokuai.sort(this.compare('id'));
-            // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
-            this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
-            this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
-            this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer)
-            this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer)
-            this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer)
-            this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)
-            this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer)
-            this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer)
-            console.log(this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer)
+            for(let i = 0; i < this.aa.ZiNv.length; i++)
+            this.aa.ZiNv.forEach((item)=>{
+              this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
+              this.aa.ZiNv[1][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[7].childQuestion[1][2].answer)
+              this.aa.ZiNv[2][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[7].childQuestion[1][2].answer)
+              console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
+              console.log(this.aa.ZiNv[1][1].questions[7].childQuestion[1][2].answer)
+              this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
+              this.aa.ZiNv[1][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[8].childQuestion[2][0].answer)
+              this.aa.ZiNv[2][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[8].childQuestion[2][0].answer)
+              console.log(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
+              console.log(this.aa.ZiNv[1][1].questions[8].childQuestion[2][0].answer)
+
+              this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer)
+              this.aa.ZiNv[1][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[14].childQuestion[1][2].answer)
+              this.aa.ZiNv[2][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[14].childQuestion[1][2].answer)
+              this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer)
+              this.aa.ZiNv[1][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[15].childQuestion[2][0].answer)
+              this.aa.ZiNv[2][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[15].childQuestion[2][0].answer)
+              // item[1].questions[15].childQuestion[2][0].answer = JSON.parse(item[1].questions[15].childQuestion[2][0].answer)
+              this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer)
+              this.aa.ZiNv[1][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[21].childQuestion[1][2].answer)
+              this.aa.ZiNv[2][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[21].childQuestion[1][2].answer)
+              // item[1].questions[21].childQuestion[1][2].answer = JSON.parse(item[1].questions[21].childQuestion[1][2].answer)
+              this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)
+              this.aa.ZiNv[1][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[22].childQuestion[2][0].answer)
+              this.aa.ZiNv[2][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[22].childQuestion[2][0].answer)
+              // item[1].questions[22].childQuestion[2][0].answer = JSON.parse(item[1].questions[22].childQuestion[2][0].answer)
+              this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer)
+              this.aa.ZiNv[1][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[28].childQuestion[1][2].answer)
+              this.aa.ZiNv[2][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[28].childQuestion[1][2].answer)
+              // item[1].questions[28].childQuestion[1][2].answer = JSON.parse(item[1].questions[28].childQuestion[1][2].answer)
+              this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer)
+              this.aa.ZiNv[1][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[29].childQuestion[2][0].answer)
+              this.aa.ZiNv[2][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[29].childQuestion[2][0].answer)
+              // item[1].questions[29].childQuestion[2][0].answer = JSON.parse(item[1].questions[29].childQuestion[2][0].answer)
+            })
           }).catch((data)=>{
           })
         },
@@ -1362,6 +1389,9 @@
             })
             this.mokuai.sort(this.compare('id'));
             this.aa.FangChan[0][0].questions[2].answer = JSON.parse(this.aa.FangChan[0][0].questions[2].answer)
+            this.aa.FangChan[1][0].questions[2].answer = JSON.parse(this.aa.FangChan[1][0].questions[2].answer)
+            this.aa.FangChan[2][0].questions[2].answer = JSON.parse(this.aa.FangChan[2][0].questions[2].answer)
+            this.aa.FangChan[3][0].questions[2].answer = JSON.parse(this.aa.FangChan[3][0].questions[2].answer)
           }).catch((data)=>{
           })
         },
@@ -1387,6 +1417,8 @@
             })
             this.mokuai.sort(this.compare('id'));
             this.aa.Car[0][0].questions[2].answer = JSON.parse(this.aa.Car[0][0].questions[2].answer)
+            this.aa.Car[1][0].questions[2].answer = JSON.parse(this.aa.Car[1][0].questions[2].answer)
+            this.aa.Car[2][0].questions[2].answer = JSON.parse(this.aa.Car[2][0].questions[2].answer)
           }).catch((data)=>{
           })
         },
