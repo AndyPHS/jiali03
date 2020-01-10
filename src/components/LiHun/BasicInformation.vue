@@ -1349,6 +1349,13 @@
                 this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer)
                 this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer)
               }else if(this.aa.ZiNv[i][1].questions[0].answer == 3){
+                if(this.aa.ZiNv[i][1].questions[1].answer ==2){
+                  this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer)
+                  this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer)
+                }else if(this.aa.ZiNv[i][1].questions[1].answer ==3){
+                  this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer)
+                  this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer)
+                }
                 this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer)
                 this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer)
                 this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer)
