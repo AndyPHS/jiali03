@@ -1333,49 +1333,28 @@
         getZiNvMsg () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
+            console.log(data.data.data)
             this.mokuai.push({
               title: '子女状况', 
               part: 'ZiNv',
               id: 3
             })
             this.mokuai.sort(this.compare('id'));
-            for(let i = 0; i < this.aa.ZiNv.length; i++)
-            this.aa.ZiNv.forEach((item)=>{
-              this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
-              this.aa.ZiNv[1][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[7].childQuestion[1][2].answer)
-              this.aa.ZiNv[2][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[7].childQuestion[1][2].answer)
-              console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
-              console.log(this.aa.ZiNv[1][1].questions[7].childQuestion[1][2].answer)
-              this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
-              this.aa.ZiNv[1][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[8].childQuestion[2][0].answer)
-              this.aa.ZiNv[2][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[8].childQuestion[2][0].answer)
-              console.log(this.aa.ZiNv[0][1].questions[8].childQuestion[2][0].answer)
-              console.log(this.aa.ZiNv[1][1].questions[8].childQuestion[2][0].answer)
-
-              this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[14].childQuestion[1][2].answer)
-              this.aa.ZiNv[1][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[14].childQuestion[1][2].answer)
-              this.aa.ZiNv[2][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[14].childQuestion[1][2].answer)
-              this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[15].childQuestion[2][0].answer)
-              this.aa.ZiNv[1][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[15].childQuestion[2][0].answer)
-              this.aa.ZiNv[2][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[15].childQuestion[2][0].answer)
-              // item[1].questions[15].childQuestion[2][0].answer = JSON.parse(item[1].questions[15].childQuestion[2][0].answer)
-              this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[21].childQuestion[1][2].answer)
-              this.aa.ZiNv[1][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[21].childQuestion[1][2].answer)
-              this.aa.ZiNv[2][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[21].childQuestion[1][2].answer)
-              // item[1].questions[21].childQuestion[1][2].answer = JSON.parse(item[1].questions[21].childQuestion[1][2].answer)
-              this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[22].childQuestion[2][0].answer)
-              this.aa.ZiNv[1][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[22].childQuestion[2][0].answer)
-              this.aa.ZiNv[2][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[22].childQuestion[2][0].answer)
-              // item[1].questions[22].childQuestion[2][0].answer = JSON.parse(item[1].questions[22].childQuestion[2][0].answer)
-              this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[0][1].questions[28].childQuestion[1][2].answer)
-              this.aa.ZiNv[1][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[1][1].questions[28].childQuestion[1][2].answer)
-              this.aa.ZiNv[2][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[2][1].questions[28].childQuestion[1][2].answer)
-              // item[1].questions[28].childQuestion[1][2].answer = JSON.parse(item[1].questions[28].childQuestion[1][2].answer)
-              this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[0][1].questions[29].childQuestion[2][0].answer)
-              this.aa.ZiNv[1][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[1][1].questions[29].childQuestion[2][0].answer)
-              this.aa.ZiNv[2][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[2][1].questions[29].childQuestion[2][0].answer)
-              // item[1].questions[29].childQuestion[2][0].answer = JSON.parse(item[1].questions[29].childQuestion[2][0].answer)
-            })
+            // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
+            for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
+              if(this.aa.ZiNv[i][1].questions[0].answer == 1){
+                this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer)
+                this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer)
+              }else if(this.aa.ZiNv[i][1].questions[0].answer == 2){
+                this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer)
+                this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer)
+              }else if(this.aa.ZiNv[i][1].questions[0].answer == 3){
+                this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer)
+                this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer)
+                this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer)
+                this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer)
+              }
+            }
           }).catch((data)=>{
           })
         },
@@ -1388,10 +1367,9 @@
               id: 4
             })
             this.mokuai.sort(this.compare('id'));
-            this.aa.FangChan[0][0].questions[2].answer = JSON.parse(this.aa.FangChan[0][0].questions[2].answer)
-            this.aa.FangChan[1][0].questions[2].answer = JSON.parse(this.aa.FangChan[1][0].questions[2].answer)
-            this.aa.FangChan[2][0].questions[2].answer = JSON.parse(this.aa.FangChan[2][0].questions[2].answer)
-            this.aa.FangChan[3][0].questions[2].answer = JSON.parse(this.aa.FangChan[3][0].questions[2].answer)
+            for ( let i = 0 ;i < this.aa.FangChan.length; i++) {
+              this.aa.FangChan[i][0].questions[2].answer = JSON.parse(this.aa.FangChan[i][0].questions[2].answer)
+            }
           }).catch((data)=>{
           })
         },

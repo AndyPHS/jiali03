@@ -18,7 +18,8 @@ import ZuHeManagement from '@/components/LiHun/ZuHeManagement'         // 组合
 import DisplayRule from '@/components/LiHun/DisplayRule'         // 显示规则修改页面
 import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 import SearchCase from '@/components/SearchCase'   // 案例搜索
-import WenJuan from '@/components/LiHun/WenJuan'         // 添加问卷测试页面
+import WenJuan from '@/components/LiHun/WenJuan'         // 添加问卷页面
+import UserSystem from '@/components/LiHun/UserSystem'         // 添加用户系统页面
 import WenJuan1 from '@/components/LiHun/WenJuan1'         // 添加问卷测试页面
 import ChuShi from '@/components/LiHun/ChuShi'         // 小问卷初始页面
 import QueDing from '@/components/LiHun/QueDing'         // 确定初始页面
@@ -75,6 +76,8 @@ export default new Router({
     {path: '/SearchCase', name: 'SearchCase', component: SearchCase},
     // 问卷页面
     {path: '/WenJuan', name: 'WenJuan', component: WenJuan},
+    // 用户系统
+    {path: '/UserSystem', name: 'UserSystem', component: UserSystem},
     // 问卷测试页面
     {path: '/WenJuan1', name: 'WenJuan1', component: WenJuan1},
     // 小问卷 初始页面
