@@ -828,3 +828,23 @@ export const deleteQuestionnaire = params => {
     data: params
   });
 };
+// 查找用户问卷
+export const selectUserQuestionnaire = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectUserQuestionnaire + '?qid=' + params.qid + '&&status=' + params.status,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改用户问卷
+export const userUpdateQuestionnaire = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.userUpdateQuestionnaire + localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};

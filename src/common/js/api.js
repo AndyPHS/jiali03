@@ -212,7 +212,13 @@ const apiUrl = {
   // 修改问卷
   updateQuestionnaire: baseLiHunURL + "questionnaire/update/",
   // 删除问卷
-  deleteQuestionnaire: baseLiHunURL + 'questionnaire/delete/'
+  deleteQuestionnaire: baseLiHunURL + 'questionnaire/delete/',
+  // 查找用户问卷
+  selectUserQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire',
+  // 修改用户问卷
+  userUpdateQuestionnaire: baseLiHunURL + 'page/user_update_questionnaire/',
+  // 新增用户问卷
+  userAddQuestionnaire: baseLiHunURL + 'page/user_add_questionnaire/'
 }
 export{
   apiUrl
