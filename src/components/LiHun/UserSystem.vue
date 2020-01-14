@@ -1,29 +1,51 @@
 <template>
   <div>
     <head-menu></head-menu>
-    <div class="container mx-auto">
-      <div  class="text-right">
+    <div class="container mx-auto relative">
+      <div class="head_left">
+        <div>筛选</div>
+        <el-select v-model="questionnaireTypeSelect" @change="questionnaireTypeChange" placeholder="请选择">
+          <el-option
+            v-for="(item, index) in questionnaireType"
+            :key="index"
+            :label="item.index"
+            :value="item">
+          </el-option>
+        </el-select>
+        <el-select v-model="questionnaireSelect" @change="questionnaireChange" placeholder="请选择">
+          <el-option
+            v-for="(item, index) in questionnaireAll"
+            :key="index"
+            :label="item.title"
+            :value="item.id">
+          </el-option>
+        </el-select>
+      </div>
+      <div class="absolute right-0 top-0">
         <el-button type="primary" plain @click="addNewWenJuan">新增问卷</el-button>
       </div>
+      <div class="absolute right-0 delete">
+        <i class="el-icon-delete"  @click="deleteWenJuan"></i>
+      </div>
       <!-- 问卷列表 -->
-      <div>
+      <div >
         <el-table
           :data="QuestionnaireSelectArr"
           height="500"
           style="width: 100%">
           <el-table-column
-            label="ID"
+            label="状态"
             width="80">
             <template slot-scope="scope">
-              <span style="margin-left: 10px;">{{ scope.row.id }}</span>
+              <span style="margin-left: 10px;">暂无</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="问卷名称"
+            label="名称"
             width="250">
             <template slot-scope="scope">
               <el-popover trigger="hover" placement="top">
-                <p>创建人: {{ scope.row.createdUid }}</p>
+                <p>创建人: {{ scope.row.userId }}</p>
                 <p>创建时间: {{ scope.row.createdTime }}</p>
                 <div slot="reference" class="name-wrapper">
                   <el-tag size="medium">{{ scope.row.title }}</el-tag>
@@ -32,31 +54,33 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="问卷类型"
+            label="历史版本"
             width="150">
             <template slot-scope="scope">
-              <span style="margin-left: 10px;">{{questionnaireType[scope.row.type]}}</span>
+              <span style="margin-left: 10px;">暂无</span>
             </template>
           </el-table-column>
           <el-table-column
-            label="关联管理"
+            label="创建时间"
             width="150">
             <template slot-scope="scope">
-              <span style="margin-left: 10px;display: inline-block;cursor: pointer;">查看关联</span>
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="word模板"
-            width="150">
-            <template slot-scope="scope">
-              <span style="margin-left: 10px;display: inline-block;cursor: pointer;">查看模板</span>
+              <span style="margin-left: 10px;display: inline-block;cursor: pointer;">{{scope.row.createdTime}}</span>
             </template>
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button
+              <el-button v-if="this.statusType ==1"
+                size="mini"
+                @click="ViewWenJuan(scope.$index, scope.row)">查看</el-button>
+              <el-button v-if="this.statusType ==1"
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">编辑</el-button>
+                <el-button v-if="this.statusType ==1"
+                size="mini"
+                @click="EditWenJuan(scope.$index, scope.row)">下载</el-button>
+                <el-button v-if="this.statusType ==2"
+                size="mini"
+                @click="EditWenJuan(scope.$index, scope.row)">恢复</el-button>
               <el-button
                 size="mini"
                 type="danger"
@@ -66,6 +90,40 @@
         </el-table>
       </div>
     </div>
+    <!-- 查看问卷 -->
+    <el-dialog title="查看问卷" :visible.sync="dialogViewWenJuan">
+      <!-- <el-form :model="addMsg">
+         <el-form-item label="问卷名称" :label-width="formLabelWidth" class="mb-1">
+          <el-input v-model="addMsg.title" class="w-1/2" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="问卷类型" :label-width="formLabelWidth" class="mb-1">
+          <el-select v-model="addMsg.type" placeholder="请选择">
+              <el-option
+                v-for="(item, index) in questionnaireType"
+                :key="index"
+                :label="item"
+                :value="index">
+              </el-option>
+            </el-select>
+        </el-form-item>
+        <el-form-item label="备注" :label-width="formLabelWidth" class="mb-1">
+          <el-input v-model="addMsg.description" class="w-1/2" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="功能用途" :label-width="formLabelWidth" class="mb-1">
+          <el-input v-model="addMsg.purpose" class="w-1/2" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="是否可用" :label-width="formLabelWidth">
+            <el-radio-group v-model="addMsg.status">
+                <el-radio :label="1">是</el-radio>
+                <el-radio :label="2">否</el-radio>
+            </el-radio-group>
+        </el-form-item>
+    </el-form> -->
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelAddQuestionnaire">取 消</el-button>
+        <el-button type="primary" @click="addQuestionnaireOk">确 定</el-button>
+      </div>
+    </el-dialog>
     <!-- 新增问卷弹出框 -->
     <el-dialog title="新增问卷" :visible.sync="dialogNewWenJuan">
       <el-form :model="addMsg">
@@ -140,7 +198,12 @@
 <script>
 import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
 import {questionnaire} from '@/api/api/requestLogin.js' // 获取问卷类型
+import {selectUserQuestionnaire} from '@/api/api/requestLogin.js' // 查找用户问卷
+import {selectUserDeleteQuestionnaire} from '@/api/api/requestLogin.js' // 查找用户回收站
+
 import {questionnaireSelect} from '@/api/api/requestLogin.js' // 查询问卷
+// import {returnQuestionnaireJson} from '@/api/api/requestLogin.js' // 查询问卷json
+
 import {addQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {updateQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
@@ -150,6 +213,11 @@ export default {
   data () {
     return{
       questionnaireType: {},   // 问卷数组类型
+      questionnaireTypeSelect: '', // 选择问卷数组类型
+      questionnaireTypeSelectNum: null, // 选择问卷数组类型数字
+      questionnaireSelect: null, // 选择问卷
+      statusType: null,  // 状态 1正常 2回收站
+      questionnaireAll: [],    // 问卷类型
       QuestionnaireSelectArr: [  // 获取问卷
         {
           // "id": 3,
@@ -165,6 +233,7 @@ export default {
           // "wid": null
         }
       ],
+      dialogViewWenJuan: false, // 查看问卷
       formLabelWidth: '80px',   // 表单标签宽度
       dialogNewWenJuan: false,  // 新增问卷弹框
       dialogEditWenJuan: false,  // 编辑问卷弹框
@@ -183,13 +252,54 @@ export default {
   },
   mounted () {
     this.getQuestionnaire() // 获取问卷类型
-    this.getQuestionnaireSelect()   // 查询问卷
+    this.getSelectUserQuestionnaire()   // 查找用户问卷
   },
   methods: {
-    getQuestionnaireSelect(){  // 查询问卷
-      questionnaireSelect().then((data)=>{
+    getSelectUserQuestionnaire(){  // 查找用户问卷
+      
+    },
+    getQuestionnaire(){   // 获取问卷类型
+      questionnaire().then((data)=>{
+        if(data.data.status_code == 200 ){
+          this.questionnaireType = data.data.data.questionnaireType
+          console.log(this.questionnaireType)
+        }else{
+          this.$message({
+            message: '问卷类型获取失败',
+            type: 'error'
+          });
+        }
+      }).catch((data)=>{
+
+      })
+    },
+    questionnaireTypeChange(){
+      if(this.questionnaireTypeSelect =='离婚协议书'){
+        this.questionnaireTypeSelectNum = 1
+      }else if(this.questionnaireTypeSelect =='起诉状'){
+        this.questionnaireTypeSelectNum = 2
+      }else if(this.questionnaireTypeSelect =='申请书'){
+        this.questionnaireTypeSelectNum = 3
+      }
+      questionnaireSelect({
+        type: this.questionnaireTypeSelectNum
+      }).then((data)=>{
+        this.questionnaireAll = data.data.data
+
+      }).catch((data)=>{
+
+      })
+      // console.log(this.questionnaireTypeSelect)
+    },
+    questionnaireChange(){
+      this.statusType = 1
+      selectUserQuestionnaire({
+        qid: this.questionnaireSelect,
+        status: this.statusType
+      }).then((data)=>{
         if(data.data.status_code == 200 ){
           this.QuestionnaireSelectArr = data.data.data
+          // this.statusType = null
           // console.log(this.QuestionnaireSelectArr)
         }else{
           this.$message({
@@ -201,17 +311,25 @@ export default {
 
       })
     },
-    getQuestionnaire(){   // 获取问卷类型
-      questionnaire().then((data)=>{
+    ViewWenJuan(){ // 点击查看问卷
+      this.dialogViewWenJuan = true;
+    },
+    deleteWenJuan(){
+      this.statusType = 2
+      selectUserDeleteQuestionnaire({
+        // qid: this.questionnaireSelect,
+        status: this.statusType
+      }).then((data)=>{
         if(data.data.status_code == 200 ){
-          this.questionnaireType = data.data.data.questionnaireType
+          this.QuestionnaireSelectArr = data.data.data
+          // this.statusType = null
+          // console.log(this.QuestionnaireSelectArr)
         }else{
           this.$message({
-            message: '问卷类型获取失败',
+            message: '问卷获取失败',
             type: 'error'
           });
         }
-        // console.log(data.data.data.questionnaireType)
       }).catch((data)=>{
 
       })
@@ -327,6 +445,8 @@ export default {
 }
 </script>
 <style scoped>
+.head_left{width:500px;display: flex;justify-content: space-between;align-items: center;margin: 1rem 0;}
 .ban{width:220px !important;}
+.delete{top:70px;z-index: 1;right: 30px;cursor: pointer;}
 .el-form-item{margin-bottom:10px !important;}
 </style>

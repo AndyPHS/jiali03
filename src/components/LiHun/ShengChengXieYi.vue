@@ -88,6 +88,7 @@
            form:{
             type: false
            },
+            formLabelWidth: '80px',   // 表单标签宽度
            dialogSavedWenJuan: false,   // 点击保存弹出保存弹框
            userWenJuan:{ // 修改用户问卷
             qid: null, // 问卷id

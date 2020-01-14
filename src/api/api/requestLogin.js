@@ -756,6 +756,17 @@ export const verificationWord = params => {
     data: params
   });
 };
+// 验证单独word demo
+export const demoYanZheng = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.demoYanZheng + localStorage.getItem('qpid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
 // 生成数据
 
 export const outPutWord = params => {
@@ -834,6 +845,16 @@ export const selectUserQuestionnaire = params => {
     method: "get",
     dataType: 'json',
     url: apiUrl.selectUserQuestionnaire + '?qid=' + params.qid + '&&status=' + params.status,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查找用户问卷
+export const selectUserDeleteQuestionnaire = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectUserDeleteQuestionnaire + '?status=' + params.status,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

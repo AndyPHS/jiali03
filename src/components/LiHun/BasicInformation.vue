@@ -1534,7 +1534,7 @@
           <h2>以下信息未填写无法跳转到下一步</h2>
           <div class="w-3/4 mx-auto text-red-500" style="overflow-y: scroll;height: 60%" >
             <ul>
-              <li class="my-2 text-left" v-for="(item, index) in missMsg" :key="index">{{item.problemTitle}}</li>
+              <li class="my-2 text-left" v-for="(item, index) in missMsg" :key="index">{{item.title}}</li>
             </ul>
           </div>
           <div class="queren flex mx-auto">
@@ -1572,6 +1572,8 @@
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
   import {verificationWord} from '@/api/api/requestLogin.js'    // 验证单独word
+  import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
+  
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
   
@@ -2121,11 +2123,22 @@
         },
         next () {
           localStorage.setItem('active',this.active)
-          // console.log(this.active)
           if(this.mokuai[this.active].title == '基本信息'){
-            localStorage.setItem('wid',16) 
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',16) 
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 595)
+            demoYanZheng({
+              qpid: 595
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2136,9 +2149,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '婚姻状况'){
-            localStorage.setItem('wid',19) 
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',19) 
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 596)
+            demoYanZheng({
+              qpid: 596
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2149,9 +2174,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '子女状况'){
-            localStorage.setItem('wid',20)
-            verificationWord ({
-              quid: 6
+            localStorage.setItem('qpid', 518)
+            demoYanZheng({
+              qpid: 518
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2162,9 +2187,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '房产'){
-            localStorage.setItem('wid',22)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',22)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 521)
+            demoYanZheng({
+              qpid: 521
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2175,9 +2212,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '存款'){
-            localStorage.setItem('wid',93)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',93)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 637)
+            demoYanZheng({
+              qpid: 637
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2188,9 +2237,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '车子'){
-            localStorage.setItem('wid',25)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',25)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 522)
+            demoYanZheng({
+              qpid: 522
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2201,9 +2262,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '理财'){
-            localStorage.setItem('wid',24)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',24)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 523)
+            demoYanZheng({
+              qpid: 523
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2214,9 +2287,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '家具家电'){
-            localStorage.setItem('wid',94)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',94)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 636)
+            demoYanZheng({
+              qpid: 636
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2227,9 +2312,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '保险'){
-            localStorage.setItem('wid',26)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',26)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 524)
+            demoYanZheng({
+              qpid: 524
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2240,9 +2337,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '债权'){
-            localStorage.setItem('wid',133)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',133)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 655)
+            demoYanZheng({
+              qpid: 655
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -2253,9 +2362,21 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '债务'){
-            localStorage.setItem('wid',141)
-            verificationWord ({
-              quid: 6
+            // localStorage.setItem('wid',141)
+            // verificationWord ({
+            //   quid: 6
+            // }).then((data)=>{
+            //   if(data.data.status_code == 330){
+            //     this.missMsgBox = true
+            //     this.missMsg = data.data.data
+            //   }else{
+            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            //   }
+            // }).catch((data)=>{
+            // })
+            localStorage.setItem('qpid', 656)
+            demoYanZheng({
+              qpid: 656
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true

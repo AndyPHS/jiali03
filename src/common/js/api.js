@@ -199,6 +199,8 @@ const apiUrl = {
   userDeleteSelectAnswer: baseLiHunURL + 'page/user_delete_select_answer',
   // 验证单独word
   verificationWord: baseLiHunURL + 'word/Verification_word/',
+  // 验证单独word demo
+  demoYanZheng: baseLiHunURL + 'word/demo_yanzheng/',
   // 生成数据
   outPutWord: baseLiHunURL + 'word/outputWord/',
   // 下载离婚协议书
@@ -215,6 +217,8 @@ const apiUrl = {
   deleteQuestionnaire: baseLiHunURL + 'questionnaire/delete/',
   // 查找用户问卷
   selectUserQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire',
+  // 查找用户回收站
+  selectUserDeleteQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire',
   // 修改用户问卷
   userUpdateQuestionnaire: baseLiHunURL + 'page/user_update_questionnaire/',
   // 新增用户问卷
