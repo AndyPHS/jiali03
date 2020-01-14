@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-gray-100">
+  <div class="w-full bg-gray-100 relative">
     <div class="container mx-auto">
       <div>
         <div class="py-6">
@@ -1563,6 +1563,9 @@
         <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
       </div>
     </div>
+    <div class="absolute returnUserList right-0">
+      <el-button type="primary" @click="returnUserList">返回用户列表</el-button>
+    </div>
   </div>
 </template>
 <script>
@@ -2404,6 +2407,9 @@
             }
           }).catch((data)=>{
           })
+        },
+        returnUserList(){
+           this.$router.replace("/UserSystem");
         }
       }
     }
@@ -2411,6 +2417,7 @@
 <style>
 .min{width:600px;margin:0 auto;}
 .ban{width:100% !important;}
+.returnUserList{top:110px;right: 20px;}
 .el-form-item{margin-bottom:8px !important;}
 .el-form--label-top .el-form-item__label{padding-bottom:0 !important;}
 .el-date-editor.el-input, .el-date-editor.el-input__inner{width:100% !important;}

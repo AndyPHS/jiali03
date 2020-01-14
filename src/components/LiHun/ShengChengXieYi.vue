@@ -20,10 +20,9 @@
               </div>
             </div>
             <div class="my-4">
-              <el-button class="text-right" type="primary" @click='DownLoadWord'>
+              <!-- <el-button class="text-right" type="primary" @click='DownLoadWord'>
                 修改
-                <!-- <a href="http://office365.aladdinlaw.com:3921/word/离婚协议书.docx" >下载协议</a> -->
-              </el-button>
+              </el-button> -->
               <el-button class="text-right" type="primary" @click='SaveQuestionnaire'>
                 保存
                 <!-- <a href="http://office365.aladdinlaw.com:3921/word/离婚协议书.docx" >下载协议</a> -->

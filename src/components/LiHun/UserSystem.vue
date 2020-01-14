@@ -3,7 +3,7 @@
     <head-menu></head-menu>
     <div class="container mx-auto relative">
       <div class="head_left">
-        <div>筛选</div>
+        <div class="shai">筛选</div>
         <el-select v-model="questionnaireTypeSelect" @change="questionnaireTypeChange" placeholder="请选择">
           <el-option
             v-for="(item, index) in questionnaireType"
@@ -28,7 +28,7 @@
         <i class="el-icon-delete"  @click="deleteWenJuan"></i>
       </div>
       <!-- 问卷列表 -->
-      <div >
+      <div v-show='ListShow'>
         <el-table
           :data="QuestionnaireSelectArr"
           height="500"
@@ -69,16 +69,67 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-              <el-button v-if="this.statusType ==1"
+              <el-button 
                 size="mini"
                 @click="ViewWenJuan(scope.$index, scope.row)">查看</el-button>
-              <el-button v-if="this.statusType ==1"
+              <el-button 
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">编辑</el-button>
-                <el-button v-if="this.statusType ==1"
+              <el-button 
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">下载</el-button>
-                <el-button v-if="this.statusType ==2"
+              <el-button
+                size="mini"
+                type="danger"
+                @click="DeleteWenJuan(scope.$index, scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <!-- 回收站列表 -->
+      <div v-show='DeleteShow'>
+        <div class="cursor-pointer text-blue-500 text-left" @click='returnListShow'>返回文书列表</div>
+        <el-table
+          :data="QuestionnaireSelectArr"
+          height="500"
+          style="width: 100%">
+          <el-table-column
+            label="状态"
+            width="80">
+            <template slot-scope="scope">
+              <span style="margin-left: 10px;">暂无</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="名称"
+            width="250">
+            <template slot-scope="scope">
+              <el-popover trigger="hover" placement="top">
+                <p>创建人: {{ scope.row.userId }}</p>
+                <p>创建时间: {{ scope.row.createdTime }}</p>
+                <div slot="reference" class="name-wrapper">
+                  <el-tag size="medium">{{ scope.row.title }}</el-tag>
+                </div>
+              </el-popover>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="历史版本"
+            width="150">
+            <template slot-scope="scope">
+              <span style="margin-left: 10px;">暂无</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="创建时间"
+            width="150">
+            <template slot-scope="scope">
+              <span style="margin-left: 10px;display: inline-block;cursor: pointer;">{{scope.row.createdTime}}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template slot-scope="scope">
+                <el-button 
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">恢复</el-button>
               <el-button
@@ -92,36 +143,13 @@
     </div>
     <!-- 查看问卷 -->
     <el-dialog title="查看问卷" :visible.sync="dialogViewWenJuan">
-      <!-- <el-form :model="addMsg">
-         <el-form-item label="问卷名称" :label-width="formLabelWidth" class="mb-1">
-          <el-input v-model="addMsg.title" class="w-1/2" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="问卷类型" :label-width="formLabelWidth" class="mb-1">
-          <el-select v-model="addMsg.type" placeholder="请选择">
-              <el-option
-                v-for="(item, index) in questionnaireType"
-                :key="index"
-                :label="item"
-                :value="index">
-              </el-option>
-            </el-select>
-        </el-form-item>
-        <el-form-item label="备注" :label-width="formLabelWidth" class="mb-1">
-          <el-input v-model="addMsg.description" class="w-1/2" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="功能用途" :label-width="formLabelWidth" class="mb-1">
-          <el-input v-model="addMsg.purpose" class="w-1/2" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="是否可用" :label-width="formLabelWidth">
-            <el-radio-group v-model="addMsg.status">
-                <el-radio :label="1">是</el-radio>
-                <el-radio :label="2">否</el-radio>
-            </el-radio-group>
-        </el-form-item>
-    </el-form> -->
+      <div>
+        <h2>{{chooseList.title}}</h2>
+        <div>{{chooseList.content}}</div>
+      </div>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="cancelAddQuestionnaire">取 消</el-button>
-        <el-button type="primary" @click="addQuestionnaireOk">确 定</el-button>
+        <el-button @click="cancelViewWenJuan">取 消</el-button>
+        <el-button type="primary" @click="ViewWenJuanOk">确 定</el-button>
       </div>
     </el-dialog>
     <!-- 新增问卷弹出框 -->
@@ -200,6 +228,7 @@ import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
 import {questionnaire} from '@/api/api/requestLogin.js' // 获取问卷类型
 import {selectUserQuestionnaire} from '@/api/api/requestLogin.js' // 查找用户问卷
 import {selectUserDeleteQuestionnaire} from '@/api/api/requestLogin.js' // 查找用户回收站
+import {outPutWord} from '@/api/api/requestLogin.js' // 生成数据
 
 import {questionnaireSelect} from '@/api/api/requestLogin.js' // 查询问卷
 // import {returnQuestionnaireJson} from '@/api/api/requestLogin.js' // 查询问卷json
@@ -216,7 +245,7 @@ export default {
       questionnaireTypeSelect: '', // 选择问卷数组类型
       questionnaireTypeSelectNum: null, // 选择问卷数组类型数字
       questionnaireSelect: null, // 选择问卷
-      statusType: null,  // 状态 1正常 2回收站
+      statusType: 1,  // 状态 1正常 2回收站
       questionnaireAll: [],    // 问卷类型
       QuestionnaireSelectArr: [  // 获取问卷
         {
@@ -233,6 +262,16 @@ export default {
           // "wid": null
         }
       ],
+      ListShow: true, // 用户列表
+      DeleteShow: false, // 回收站用户列表
+      chooseList: {
+        title: '这是标题',
+        exemption: '这是免责条款',  // 免责条款 0未填写 1填写
+        qid: null,  // 问卷id
+        status: null,  // 状态 1正常 2回收站 3彻底删除
+        content: '这是内容', // 内容
+        complete: null,    // 是否完成 0未完成 1完成
+      },
       dialogViewWenJuan: false, // 查看问卷
       formLabelWidth: '80px',   // 表单标签宽度
       dialogNewWenJuan: false,  // 新增问卷弹框
@@ -262,7 +301,7 @@ export default {
       questionnaire().then((data)=>{
         if(data.data.status_code == 200 ){
           this.questionnaireType = data.data.data.questionnaireType
-          console.log(this.questionnaireType)
+          // console.log(this.questionnaireType)
         }else{
           this.$message({
             message: '问卷类型获取失败',
@@ -292,15 +331,14 @@ export default {
       // console.log(this.questionnaireTypeSelect)
     },
     questionnaireChange(){
-      this.statusType = 1
       selectUserQuestionnaire({
         qid: this.questionnaireSelect,
-        status: this.statusType
+        status: 1
       }).then((data)=>{
         if(data.data.status_code == 200 ){
           this.QuestionnaireSelectArr = data.data.data
-          // this.statusType = null
-          // console.log(this.QuestionnaireSelectArr)
+          this.statusType = 1
+          console.log(this.QuestionnaireSelectArr)
         }else{
           this.$message({
             message: '问卷获取失败',
@@ -311,18 +349,36 @@ export default {
 
       })
     },
-    ViewWenJuan(){ // 点击查看问卷
+    ViewWenJuan(index, row){ // 点击查看问卷
       this.dialogViewWenJuan = true;
+      localStorage.setItem('qid',row.id) 
+      this.chooseList.title = row.title
+      outPutWord().then((data)=>{
+        if(data.data.status_code == 200 ){
+          localStorage.removeItem('qid');
+          this.chooseList.content = data.data.data
+        }else{
+          this.$message({
+            message: '查看失败，请联系管理员',
+            type: 'error'
+          });
+        }
+      }).catch((data)=>{
+
+      })
     },
     deleteWenJuan(){
-      this.statusType = 2
+      this.ListShow = false
+      this.DeleteShow = true
+      this.questionnaireTypeSelect = ''
+      this.questionnaireSelect = null
       selectUserDeleteQuestionnaire({
         // qid: this.questionnaireSelect,
-        status: this.statusType
+        status: 2
       }).then((data)=>{
         if(data.data.status_code == 200 ){
           this.QuestionnaireSelectArr = data.data.data
-          // this.statusType = null
+          this.statusType = 2
           // console.log(this.QuestionnaireSelectArr)
         }else{
           this.$message({
@@ -333,6 +389,16 @@ export default {
       }).catch((data)=>{
 
       })
+    },
+    returnListShow(){
+      this.ListShow = true
+      this.DeleteShow = false
+    },
+    cancelViewWenJuan(){  // 点击预览弹窗中的取消按钮
+      this.dialogViewWenJuan = false;
+    },
+    ViewWenJuanOk(){  // 点击预览弹窗中的确定按钮
+      this.dialogViewWenJuan = false;
     },
     addNewWenJuan(){   // 新增问卷
       this.dialogNewWenJuan = true;
@@ -446,6 +512,8 @@ export default {
 </script>
 <style scoped>
 .head_left{width:500px;display: flex;justify-content: space-between;align-items: center;margin: 1rem 0;}
+.head_left .shai{width:100px;}
+.el-select {margin-right: 10px !important;}
 .ban{width:220px !important;}
 .delete{top:70px;z-index: 1;right: 30px;cursor: pointer;}
 .el-form-item{margin-bottom:10px !important;}
