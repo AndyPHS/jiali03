@@ -661,12 +661,22 @@ export default {
       userUpdateOrderId().then((data)=>{
         if(data.data.status_code == 200 ){
           localStorage.removeItem('quid');
-          this.questionnaireChange()
-          this.$message({
-            message: '置顶成功',
-            type: 'success',
-            duration: 1000
-          });
+          // this.questionnaireChange()
+          if(this.chooseList.orderId ==1){
+            this.$message({
+              message: '取消置顶',
+              type: 'success',
+              duration: 1000
+            });
+            this.questionnaireChange()
+          }else{
+            this.$message({
+              message: '置顶成功',
+              type: 'success',
+              duration: 1000
+            });
+            this.questionnaireChange()
+          }
           this.dialogNewCopy = false;
           this.chooseList.title = '';
         }else{
