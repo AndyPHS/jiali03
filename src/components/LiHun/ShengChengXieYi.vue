@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-color">
+  <div class="w-full bg-color relative">
     <div class=" containermin mx-auto py-10">
       <div class="bg-white rounded-lg">
         <div class="outputword rounded-lg shadow-lg relative">
@@ -67,6 +67,9 @@
         </div>
       </div>
     </div>
+    <div class="absolute returnUserList right-0">
+      <el-button type="primary" @click="returnUserList">返回用户列表</el-button>
+    </div>
   </div>
   
 </template>
@@ -106,8 +109,7 @@
         this.GetOutPutWord () // 获取离婚协议书
       },
       methods: {
-        GetOutPutWord () {
-          localStorage.setItem('qid',5)
+        GetOutPutWord () {   // 获取协议
           outPutWord().then((data)=>{
             this.status_code = data.data.status_code
             if(this.status_code == 330 ){
@@ -120,10 +122,10 @@
               // this.$router.replace("/");
           })
         },
-        GoBasicInformationPage(){
+        GoBasicInformationPage(){   // 点击返回填写按钮
            this.$router.replace("/BasicInformation");
         },
-        dialogDownLoadWenJuanOk(){
+        dialogDownLoadWenJuanOk(){   // 点击下载弹出确定按钮
           if(this.form.type){
             getWord().then((data)=>{
               if(data.status==200){
@@ -144,32 +146,33 @@
           }
           
         },
-        canceldialogDownLoadWenJuan(){
+        canceldialogDownLoadWenJuan(){  // 点击下载弹框取消按钮
           this.dialogDownLoadWenJuan = false;
         },
-        DownLoadWord () {
+        DownLoadWord () {   // 点击下载按钮
           this.dialogDownLoadWenJuan = true;
         },
-        SaveQuestionnaire(){
-          localStorage.setItem('quid',6) 
+        SaveQuestionnaire(){    // 点击保存弹出保存弹框
           this.dialogSavedWenJuan = true;
         },
-        canceldialogSaveWenJuan(){
+        canceldialogSaveWenJuan(){   // 取消保存按钮
           this.dialogSavedWenJuan = false;
         },
-        dialogSaveWenJuanOk(){
+        dialogSaveWenJuanOk(){  // 点击保存确定按钮保存
           userUpdateQuestionnaire({
             status: 1,
             title: this.userWenJuan.title,
             exemption: 1,
             complete: 1
           }).then((data)=>{
-            localStorage.removeItem('quid');
             this.userWenJuan.title = '';
             this.dialogSavedWenJuan = false;
           }).catch((data)=>{
 
           })
+        },
+        returnUserList(){  // 返回协议列表
+           this.$router.replace("/UserSystem");
         }
       }
     }
@@ -177,9 +180,10 @@
 <style scoped>
 .bg-color{background: #eee;}
 .containermin{width:800px;}
+.returnUserList{top:110px;right: 20px;}
 .outputword{padding:20px;border:1px solid #ecf5ec;}
 .outputword>h2{border-bottom: 1px solid #dbe2db;}
 .outputword .msg{white-space:pre-wrap;margin-top: -50px;}
-#outputwordmsg span{font-weight:bolder !important;}
+#outputwordmsg p{font-weight:bolder !important;}
 /*#outputwordmsg{height: 500px;}*/
 </style>

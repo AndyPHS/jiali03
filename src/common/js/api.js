@@ -204,7 +204,7 @@ const apiUrl = {
   // 生成数据
   outPutWord: baseLiHunURL + 'word/outputWord/',
   // 下载离婚协议书
-  getWord: baseLiHunURL + 'page/get_word',
+  getWord: baseLiHunURL + 'page/get_word/',
   // 问卷数组
   questionnaire: baseLiHunURL + 'questionnaire/created',
   // 查询问卷
@@ -218,7 +218,7 @@ const apiUrl = {
   // 查找用户问卷
   selectUserQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire',
   // 查找用户回收站
-  selectUserDeleteQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire',
+  selectUserDeleteQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire/',
   // 修改用户问卷
   userUpdateQuestionnaire: baseLiHunURL + 'page/user_update_questionnaire/',
   // 新增用户问卷

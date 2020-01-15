@@ -1648,6 +1648,7 @@
         getBasicInformation (){ // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 595}).then((data)=>{  // 查询双方基本信息模块数据
             this.aa.BasicInformation = data.data.data
+            // console.log(this.aa.BasicInformation)
           }).catch((data)=>{
 
           })
@@ -1665,12 +1666,12 @@
         getZiNvMsg () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
-            // console.log(data.data.data)
             this.mokuai.push({
               title: '子女状况', 
               part: 'ZiNv',
               id: 3
             })
+            // console.log(this.aa.ZiNv)
             this.mokuai.sort(this.compare('id'));
             // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
             for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
@@ -1803,6 +1804,7 @@
         getZiNv () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
+            console.log(this.aa.ZiNv)
           }).catch((data)=>{
           })
         },
@@ -1874,7 +1876,7 @@
                       value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
                       qpid: e.id, // 关联id
                       fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                      quid: 6 //用户的问卷id
+                      quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
                       console.log("保存成功")
                     }).catch((data)=>{
@@ -1885,7 +1887,7 @@
                       value: JSON.stringify(e.answer),  // 值
                       qpid: e.id, // 关联id
                       fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                      quid: 6 //用户的问卷id
+                      quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
                       console.log("保存成功")
                     }).catch((data)=>{
@@ -1897,7 +1899,7 @@
                     value: e.answer,  // 值
                     qpid: e.id, // 关联id
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: 6 //用户的问卷id
+                    quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     console.log("保存成功")
                   }).catch((data)=>{
@@ -1911,7 +1913,7 @@
                       value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
                       qpid: e.id, // 关联id
                       // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                      quid: 6 //用户的问卷id
+                      quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
                       // console.log("保存成功")
                     }).catch((data)=>{
@@ -1922,7 +1924,7 @@
                       value: JSON.stringify(e.answer),  // 值
                       qpid: e.id, // 关联id
                       // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                      quid: 6 //用户的问卷id
+                      quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
                       // console.log("保存成功")
                     }).catch((data)=>{
@@ -1934,7 +1936,7 @@
                     value: e.answer,  // 值
                     qpid: e.id, // 关联id
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: 6 //用户的问卷id
+                    quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     // console.log("保存成功")
                   }).catch((data)=>{
@@ -1951,7 +1953,7 @@
                     value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
                     qpid: e.id, // 关联id
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: 6 //用户的问卷id
+                    quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     console.log("保存成功")
                   }).catch((data)=>{
@@ -1962,7 +1964,7 @@
                     value: JSON.stringify(e.answer),  // 值
                     qpid: e.id, // 关联id
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: 6 //用户的问卷id
+                    quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     console.log("保存成功")
                   }).catch((data)=>{
@@ -1974,7 +1976,7 @@
                   value: e.answer,  // 值
                   qpid: e.id, // 关联id
                   fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                  quid: 6 //用户的问卷id
+                  quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
                   console.log("保存成功")
                 }).catch((data)=>{
@@ -1988,7 +1990,7 @@
                     value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
                     qpid: e.id, // 关联id
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: 6 //用户的问卷id
+                    quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     // console.log("保存成功")
                   }).catch((data)=>{
@@ -1999,7 +2001,7 @@
                     value: JSON.stringify(e.answer),  // 值
                     qpid: e.id, // 关联id
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: 6 //用户的问卷id
+                    quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     // console.log("保存成功")
                   }).catch((data)=>{
@@ -2011,7 +2013,7 @@
                   value: e.answer,  // 值
                   qpid: e.id, // 关联id
                   // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                  quid: 6 //用户的问卷id
+                  quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
                   // console.log("保存成功")
                 }).catch((data)=>{
@@ -2028,7 +2030,7 @@
             });
             userAddSelectAnswer({
               qpid: e,
-              quid: 6
+              quid: localStorage.getItem('quid')
             }).then((data)=>{
               if(data.data.status_code == 200 ){
                 if(e==518){
@@ -2067,7 +2069,7 @@
           }).then(() => {
               userDeleteSelectAnswer({
                 qpid: e,
-                quid: 6,
+                quid: localStorage.getItem('quid'),
                 fornum: index+1
               }).then((data)=>{
                 if(e==518){
@@ -2140,6 +2142,7 @@
             // }).catch((data)=>{
             // })
             localStorage.setItem('qpid', 595)
+             console.log(this.mokuai[this.active])
             demoYanZheng({
               qpid: 595
             }).then((data)=>{
@@ -2165,6 +2168,7 @@
             // }).catch((data)=>{
             // })
             localStorage.setItem('qpid', 596)
+
             demoYanZheng({
               qpid: 596
             }).then((data)=>{
@@ -2178,225 +2182,167 @@
             })
           }else if(this.mokuai[this.active].title == '子女状况'){
             localStorage.setItem('qpid', 518)
-            demoYanZheng({
-              qpid: 518
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.ZiNv !== undefined){
+              demoYanZheng({
+                qpid: 518
+              }).then((data)=>{
+                console.log(data.data)
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
+            
           }else if(this.mokuai[this.active].title == '房产'){
-            // localStorage.setItem('wid',22)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 521)
-            demoYanZheng({
-              qpid: 521
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.FangChan !== undefined){
+              demoYanZheng({
+                qpid: 521
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
           }else if(this.mokuai[this.active].title == '存款'){
-            // localStorage.setItem('wid',93)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 637)
-            demoYanZheng({
-              qpid: 637
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.CunKuan !== undefined){
+              demoYanZheng({
+                qpid: 637
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
           }else if(this.mokuai[this.active].title == '车子'){
-            // localStorage.setItem('wid',25)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 522)
-            demoYanZheng({
-              qpid: 522
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.Car !== undefined){
+              demoYanZheng({
+                qpid: 522
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
           }else if(this.mokuai[this.active].title == '理财'){
-            // localStorage.setItem('wid',24)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 523)
-            demoYanZheng({
-              qpid: 523
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.LiCai !== undefined){
+              demoYanZheng({
+                qpid: 523
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
           }else if(this.mokuai[this.active].title == '家具家电'){
-            // localStorage.setItem('wid',94)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 636)
-            demoYanZheng({
-              qpid: 636
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.JiaDian !== undefined){
+              demoYanZheng({
+                qpid: 636
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
           }else if(this.mokuai[this.active].title == '保险'){
-            // localStorage.setItem('wid',26)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 524)
-            demoYanZheng({
-              qpid: 524
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.BaoXian !== undefined){
+              demoYanZheng({
+                qpid: 524
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
           }else if(this.mokuai[this.active].title == '债权'){
-            // localStorage.setItem('wid',133)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 655)
-            demoYanZheng({
-              qpid: 655
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.ZhaiQuan !== undefined){
+              demoYanZheng({
+                qpid: 655
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
+            
           }else if(this.mokuai[this.active].title == '债务'){
-            // localStorage.setItem('wid',141)
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 656)
-            demoYanZheng({
-              qpid: 656
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
+            if(this.aa.ZhaiQuan !== undefined){
+              demoYanZheng({
+                qpid: 656
+              }).then((data)=>{
+                if(data.data.status_code == 330){
+                  this.missMsgBox = true
+                  this.missMsg = data.data.data
+                }else{
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                }
+              }).catch((data)=>{
+              })
+            }else{
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+            }
           }
-          
         },
         closeMissMsgBox () {   // 关闭未填写项弹窗
           this.missMsgBox = false
         },
         GetOutPutWord () {   // 获取离婚协议书未填写项
-          localStorage.setItem('qid',5)
+          // localStorage.setItem('qid',5)
           outPutWord().then((data)=>{
             this.status_code = data.data.status_code
             // console.log(this.status_code)

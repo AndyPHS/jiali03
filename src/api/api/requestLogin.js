@@ -708,7 +708,7 @@ export const returnQuestionnaireJson = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.returnQuestionnaireJson + '6?qpid='+params.qpid,
+    url: apiUrl.returnQuestionnaireJson + localStorage.getItem('quid') +'?qpid='+params.qpid,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -761,7 +761,7 @@ export const demoYanZheng = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.demoYanZheng + localStorage.getItem('qpid'),
+    url: apiUrl.demoYanZheng+ localStorage.getItem('quid') +'?qpid='+params.qpid,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -773,7 +773,7 @@ export const outPutWord = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.outPutWord + localStorage.getItem('qid'),
+    url: apiUrl.outPutWord + localStorage.getItem('quid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -784,7 +784,7 @@ export const getWord = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.getWord,
+    url: apiUrl.getWord+ localStorage.getItem('quid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -865,6 +865,16 @@ export const userUpdateQuestionnaire = params => {
     method: "put",
     dataType: 'json',
     url: apiUrl.userUpdateQuestionnaire + localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增用户问卷
+export const userAddQuestionnaire = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.userAddQuestionnaire + localStorage.getItem('qid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
