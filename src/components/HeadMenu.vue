@@ -34,7 +34,7 @@
                 <el-submenu index="3-2" v-show="this.wenjuan.questionnaire">
                   <template slot="title">问卷模块</template>
                   <el-menu-item index="wenjuan"><router-link to="wenjuan">问卷管理</router-link></el-menu-item>
-                  <el-menu-item index="ChuShi"><router-link to="ChuShi">问卷初始化</router-link></el-menu-item>
+                  <el-menu-item index="UserSystem"><router-link to="UserSystem">问卷列表</router-link></el-menu-item>
 
                   <!-- <el-menu-item index="BasicInformation"><router-link to="BasicInformation">填写问卷</router-link></el-menu-item> -->
                 </el-submenu>

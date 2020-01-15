@@ -12,7 +12,7 @@
             :value="item">
           </el-option>
         </el-select>
-        <el-select v-model="questionnaireSelect" @change="questionnaireChange" placeholder="请选择">
+        <el-select v-model="questionnaireSelecter" @change="questionnaireChange" placeholder="请选择">
           <el-option
             v-for="(item, index) in questionnaireAll"
             :key="index"
@@ -44,25 +44,29 @@
             label="名称"
             width="250">
             <template slot-scope="scope">
-              <el-popover trigger="hover" placement="top">
-                <p>创建人: {{ scope.row.userId }}</p>
-                <p>创建时间: {{ scope.row.createdTime }}</p>
+              <el-popover trigger="hover" placement="bottom">
+                <p class="my-2 hover:text-blue-500 cursor-pointer" @click="Renaming(scope.$index, scope.row)">重命名</p>
+                <p class="my-2 hover:text-blue-500 cursor-pointer" @click="NewCopy(scope.$index, scope.row)">新建副本</p>
+                <p class="my-2 hover:text-blue-500 cursor-pointer" @click="ToHead(scope.$index, scope.row)">置顶（取消置顶）</p>
                 <div slot="reference" class="name-wrapper">
                   <el-tag size="medium">{{ scope.row.title }}</el-tag>
+                  <i class="el-icon-more ml-2"></i>
+                  <span v-if="scope.row.orderId == 1" class="ml-2 px-1 font-weight rounded-sm border border-red-800 text-red-800">顶</span> 
                 </div>
               </el-popover>
+              
             </template>
           </el-table-column>
           <el-table-column
             label="历史版本"
-            width="150">
+            width="100">
             <template slot-scope="scope">
               <span style="margin-left: 10px;">暂无</span>
             </template>
           </el-table-column>
           <el-table-column
             label="创建时间"
-            width="150">
+            width="190">
             <template slot-scope="scope">
               <span style="margin-left: 10px;display: inline-block;cursor: pointer;">{{scope.row.createdTime}}</span>
             </template>
@@ -115,14 +119,14 @@
           </el-table-column>
           <el-table-column
             label="历史版本"
-            width="150">
+            width="100">
             <template slot-scope="scope">
               <span style="margin-left: 10px;">暂无</span>
             </template>
           </el-table-column>
           <el-table-column
             label="创建时间"
-            width="150">
+            width="190">
             <template slot-scope="scope">
               <span style="margin-left: 10px;display: inline-block;cursor: pointer;">{{scope.row.createdTime}}</span>
             </template>
@@ -173,8 +177,32 @@
         <el-button type="primary" @click="dialogDownLoadWenJuanOk">确 定</el-button>
       </div>
     </el-dialog>
+    <!-- 重命名 -->
+    <el-dialog title="重新命名" :visible.sync="dialogRenamimg">
+      <el-form :model="chooseList">
+        <el-form-item label="问卷名称" :label-width="formLabelWidth" class="mb-1">
+          <el-input v-model="chooseList.title" class="w-1/2" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="canceldialogRenamimg">取 消</el-button>
+        <el-button type="primary" @click="dialogRenamimgOk">确 定</el-button>
+      </div>
+    </el-dialog>
+    <!-- 新建副本 -->
+    <el-dialog title="新建副本" :visible.sync="dialogNewCopy">
+      <el-form :model="chooseList">
+        <el-form-item label="副本名称" :label-width="formLabelWidth" class="mb-1">
+          <el-input v-model="chooseList.title" class="w-1/2" autocomplete="off"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="canceldialogNewCopy">取 消</el-button>
+        <el-button type="primary" @click="dialogNewCopyOk">确 定</el-button>
+      </div>
+    </el-dialog>
     <!-- 修改问卷弹出框 -->
-    <el-dialog title="修改问卷" :visible.sync="dialogEditWenJuan">
+   <!--  <el-dialog title="修改问卷" :visible.sync="dialogEditWenJuan">
       <el-form :model="addMsg">
          <el-form-item label="问卷名称" :label-width="formLabelWidth" class="mb-1">
           <el-input v-model="addMsg.title" class="w-1/2" autocomplete="off"></el-input>
@@ -206,7 +234,7 @@
         <el-button @click="cancelEditQuestionnaire">取 消</el-button>
         <el-button type="primary" @click="EditQuestionnaireOk">确 定</el-button>
       </div>
-    </el-dialog>
+    </el-dialog> -->
   </div>
   
 </template>
@@ -219,10 +247,11 @@ import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js' // 修改用�
 import {outPutWord} from '@/api/api/requestLogin.js' // 生成数据
 import {getWord} from '@/api/api/requestLogin.js' // 下载word
 import {userAddQuestionnaire} from '@/api/api/requestLogin.js' // 新增用户问卷
-
+import {copyUserQuestionnaire} from '@/api/api/requestLogin.js' // 新增副本
 
 import {questionnaireSelect} from '@/api/api/requestLogin.js' // 查询问卷
-// import {returnQuestionnaireJson} from '@/api/api/requestLogin.js' // 查询问卷json
+import {userUpdateOrderId} from '@/api/api/requestLogin.js' // 置顶
+
 
 import {addQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {updateQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
@@ -235,24 +264,10 @@ export default {
       questionnaireType: {},   // 问卷数组类型
       questionnaireTypeSelect: '', // 选择问卷数组类型
       questionnaireTypeSelectNum: null, // 选择问卷数组类型数字
-      questionnaireSelect: null, // 选择问卷
+      questionnaireSelecter: null, // 选择问卷
       statusType: 1,  // 状态 1正常 2回收站
       questionnaireAll: [],    // 问卷类型
-      QuestionnaireSelectArr: [  // 获取问卷
-        {
-          // "id": 3,
-          // "title": "离婚协议书",
-          // "type": 1,
-          // "createdTime": "2019-11-22 07:17:43",
-          // "updateTime": "2019-11-22 07:17:43",
-          // "description": "离婚协议书自动生成",
-          // "purpose": "离婚协议书自动生成",
-          // "status": 1,
-          // "createdUid": "郝海林",
-          // "updateUid": "郝海林",
-          // "wid": null
-        }
-      ],
+      QuestionnaireSelectArr: [],  // 获取问卷
       QuestionnaireSelectDeleteArr: [],  // 获取垃圾筐内的问卷列表
       dialogDownLoadWenJuan: false,  // 点击下载弹出免责弹窗
        form:{  // 是否阅读免责条款
@@ -266,11 +281,14 @@ export default {
         qid: null,  // 问卷id
         status: null,  // 状态 1正常 2回收站 3彻底删除
         content: '这是内容', // 内容
+        orderId: null, // 是否置顶 1置顶 0不置顶
         complete: null,    // 是否完成 0未完成 1完成
       },
       dialogViewWenJuan: false, // 查看问卷
+      dialogRenamimg: false, // 重命名弹窗
+      dialogNewCopy: false, // 新建副本
       formLabelWidth: '80px',   // 表单标签宽度
-      dialogEditWenJuan: false,  // 编辑问卷弹框
+      // dialogEditWenJuan: false,  // 编辑问卷弹框
       addMsg: {  // 新增问卷字段
         title: '',  // 标题
         type: null,  // 问卷类型
@@ -303,6 +321,7 @@ export default {
             type: 'error'
           });
         }
+        console.log(this.QuestionnaireSelectArr)
       }).catch((data)=>{
 
       })
@@ -327,7 +346,7 @@ export default {
     },
     questionnaireChange(){
       selectUserQuestionnaire({
-        qid: this.questionnaireSelect,
+        qid: this.questionnaireSelecter,
         status: 1
       }).then((data)=>{
         if(data.data.status_code == 200 ){
@@ -364,7 +383,7 @@ export default {
 
       })
     },
-    deleteWenJuanIcon(){
+    deleteWenJuanIcon(){    // 点击回收站按钮
       this.ListShow = false
       this.DeleteShow = true
       this.questionnaireTypeSelect = ''
@@ -399,15 +418,15 @@ export default {
     },
     addNewWenJuan(){   // 新增问卷
       // this.$router.replace("/ChuShi");
-      if(this.questionnaireSelect ==null){
+      if(this.questionnaireSelecter ==null){
         this.$message({
           message: '请先选择需要新增的问卷类型',
           type: 'error'
         });
       }
-      localStorage.setItem('qid',this.questionnaireSelect) 
+      localStorage.setItem('qid',this.questionnaireSelecter) 
       userAddQuestionnaire({
-        qid: this.questionnaireSelect
+        qid: this.questionnaireSelecter
       }).then((data)=>{
         localStorage.setItem('quid', data.data.data)
         localStorage.removeItem('qid');
@@ -418,46 +437,39 @@ export default {
       })
     },
     EditWenJuan(index, row) {   // 点击修改问卷
-      this.dialogEditWenJuan = true
-      this.addMsg.title = row.title;
-      this.addMsg.type = row.type;
-      this.addMsg.description = row.description;
-      this.addMsg.purpose = row.purpose;
-      this.addMsg.status = row.status;
-      localStorage.setItem('qid',row.id) 
-      // this.addMsg.type = this.questionnaireType[this.addMsg.type]
-      console.log(index, row);
+      localStorage.setItem('quid',row.id)
+      this.$router.replace("/BasicInformation");
     },
-    EditQuestionnaireOk(){  // 点击修改问卷确定按钮
-      updateQuestionnaire({
-        title: this.addMsg.title,
-        type: this.addMsg.type,
-        description: this.addMsg.description,
-        purpose: this.addMsg.purpose,
-        status: this.addMsg.status
-      }).then((data)=>{
-        if(data.data.status_code == 200 ){
-          localStorage.removeItem('qid');
-          this.dialogNewWenJuan = false;
-          this.getQuestionnaireSelect()
-          this.$message({
-            message: '修改成功',
-            type: 'success'
-          });
-          this.dialogEditWenJuan = false
-        }else{
-          this.$message({
-            message: '修改失败，请联系管理员',
-            type: 'error'
-          });
-        }
-      }).catch((data)=>{
+    // EditQuestionnaireOk(){  // 点击修改问卷确定按钮
+    //   updateQuestionnaire({
+    //     title: this.addMsg.title,
+    //     type: this.addMsg.type,
+    //     description: this.addMsg.description,
+    //     purpose: this.addMsg.purpose,
+    //     status: this.addMsg.status
+    //   }).then((data)=>{
+    //     if(data.data.status_code == 200 ){
+    //       localStorage.removeItem('qid');
+    //       this.dialogNewWenJuan = false;
+    //       this.getQuestionnaireSelect()
+    //       this.$message({
+    //         message: '修改成功',
+    //         type: 'success'
+    //       });
+    //       this.dialogEditWenJuan = false
+    //     }else{
+    //       this.$message({
+    //         message: '修改失败，请联系管理员',
+    //         type: 'error'
+    //       });
+    //     }
+    //   }).catch((data)=>{
 
-      })
-    },
-    cancelEditQuestionnaire(){  // 点击修改问卷取消按钮
-      this.dialogEditWenJuan = false
-    },
+    //   })
+    // },
+    // cancelEditQuestionnaire(){  // 点击修改问卷取消按钮
+    //   this.dialogEditWenJuan = false
+    // },
     canceldialogDownLoadWenJuan(){  // 点击下载弹框中取消按钮
       this.dialogDownLoadWenJuan = false;
     },
@@ -465,7 +477,7 @@ export default {
       localStorage.setItem('quid',row.id)
       this.dialogDownLoadWenJuan = true;
     },
-     dialogDownLoadWenJuanOk(){
+    dialogDownLoadWenJuanOk(){
       if(this.form.type){
         getWord().then((data)=>{
           if(data.status==200){
@@ -484,7 +496,6 @@ export default {
           type: 'error'
         });
       }
-      
     },
     DeleteWenJuan(index, row) {  // 删除问卷
       this.$confirm('此操作将把文件放入回收站, 是否继续?', '提示', {
@@ -583,6 +594,87 @@ export default {
           message: '已取消删除'
         });          
       });
+    },
+    Renaming(index, row){ // 点击重命名按钮
+      this.dialogRenamimg = true;
+      this.chooseList.title = row.title
+      localStorage.setItem('quid',row.id)
+    },
+    canceldialogRenamimg(){  // 点击重命名弹窗取消按钮
+      this.dialogRenamimg = false;
+      this.chooseList.title = ''
+    },
+    dialogRenamimgOk(){ // 点击重命名弹窗确定按钮
+      userUpdateQuestionnaire({
+        title: this.chooseList.title
+      }).then((data)=>{
+        if(data.data.status_code == 200 ){
+          localStorage.removeItem('quid');
+          this.questionnaireChange()
+          this.$message({
+            message: '重命名成功',
+            type: 'success',
+            duration: 1000
+          });
+          this.dialogRenamimg = false;
+          this.chooseList.title = '';
+        }else{
+          this.$message.error('重命名失败，请联系管理员');
+        }
+        
+      }).catch((data)=>{
+        this.$message.error('重命名失败，请联系管理员');
+      })
+    },
+    NewCopy(index, row){ // 点击新建副本按钮
+      this.dialogNewCopy = true;
+      this.chooseList.title = row.title
+      localStorage.setItem('quid',row.id)
+    },
+    canceldialogNewCopy(){  // 点击新建副本弹窗取消按钮
+      this.dialogNewCopy = false;
+    },
+    dialogNewCopyOk(){  // 点击新建副本弹窗确定按钮
+      copyUserQuestionnaire({
+        title:this.chooseList.title
+      }).then((data)=>{
+        if(data.data.status_code == 200 ){
+          localStorage.removeItem('quid');
+          this.questionnaireChange()
+          this.$message({
+            message: '新增副本成功',
+            type: 'success',
+            duration: 1000
+          });
+          this.dialogNewCopy = false;
+          this.chooseList.title = '';
+        }else{
+          this.$message.error('新增副本失败，请联系管理员');
+        }
+      }).catch((data)=>{
+        this.$message.error('重命名失败，请联系管理员');
+      })
+    },
+    ToHead(index, row){  // 点击置顶
+      localStorage.setItem('quid',row.id)
+      this.chooseList.orderId = row.orderId
+      userUpdateOrderId().then((data)=>{
+        if(data.data.status_code == 200 ){
+          localStorage.removeItem('quid');
+          this.questionnaireChange()
+          this.$message({
+            message: '置顶成功',
+            type: 'success',
+            duration: 1000
+          });
+          this.dialogNewCopy = false;
+          this.chooseList.title = '';
+        }else{
+          this.$message.error('置顶失败，请联系管理员');
+        }
+      }).catch((data)=>{
+
+      })
     }
   }
 }

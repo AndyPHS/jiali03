@@ -804,7 +804,7 @@ export const questionnaireSelect = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.questionnaireSelect,
+    url: apiUrl.questionnaireSelect + '?type=' + params.type,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -875,6 +875,26 @@ export const userAddQuestionnaire = params => {
     method: "post",
     dataType: 'json',
     url: apiUrl.userAddQuestionnaire + localStorage.getItem('qid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增副本
+export const copyUserQuestionnaire = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.copyUserQuestionnaire + localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 置顶
+export const userUpdateOrderId = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.userUpdateOrderId + localStorage.getItem('quid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

@@ -208,7 +208,7 @@ const apiUrl = {
   // 问卷数组
   questionnaire: baseLiHunURL + 'questionnaire/created',
   // 查询问卷
-  questionnaireSelect: baseLiHunURL + 'questionnaire/select',
+  questionnaireSelect: baseLiHunURL + 'questionnaire/select/',
   // 新增问卷
   addQuestionnaire: baseLiHunURL + 'questionnaire/add',
   // 修改问卷
@@ -222,7 +222,11 @@ const apiUrl = {
   // 修改用户问卷
   userUpdateQuestionnaire: baseLiHunURL + 'page/user_update_questionnaire/',
   // 新增用户问卷
-  userAddQuestionnaire: baseLiHunURL + 'page/user_add_questionnaire/'
+  userAddQuestionnaire: baseLiHunURL + 'page/user_add_questionnaire/',
+  // 新增副本
+  copyUserQuestionnaire: baseLiHunURL + 'page/copy_user_questionnaire/',
+  // 置顶
+  userUpdateOrderId: baseLiHunURL + 'page/user_update_orderId/'
 }
 export{
   apiUrl

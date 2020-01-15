@@ -2142,7 +2142,6 @@
             // }).catch((data)=>{
             // })
             localStorage.setItem('qpid', 595)
-             console.log(this.mokuai[this.active])
             demoYanZheng({
               qpid: 595
             }).then((data)=>{
@@ -2150,25 +2149,17 @@
                 this.missMsgBox = true
                 this.missMsg = data.data.data
               }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '基本信息模块已成功保存',
+                  type: 'success'
+                });
                 if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
               }
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '婚姻状况'){
-            // localStorage.setItem('wid',19) 
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 596)
-
             demoYanZheng({
               qpid: 596
             }).then((data)=>{
@@ -2176,6 +2167,11 @@
                 this.missMsgBox = true
                 this.missMsg = data.data.data
               }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '婚姻状况信息已成功保存',
+                  type: 'success'
+                });
                 if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
               }
             }).catch((data)=>{
@@ -2191,6 +2187,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '子女状况模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2209,6 +2210,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '房产信息模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2226,6 +2232,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '存款信息模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2243,6 +2254,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '车辆信息模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2260,6 +2276,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '理财信息模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2277,6 +2298,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '家具家电模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2294,6 +2320,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '保险信息模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2311,6 +2342,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '债权信息模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
@@ -2329,6 +2365,11 @@
                   this.missMsgBox = true
                   this.missMsg = data.data.data
                 }else{
+                  this.$notify({
+                    title: '保存成功',
+                    message: '债务信息模块已成功保存',
+                    type: 'success'
+                  });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
                 }
               }).catch((data)=>{
