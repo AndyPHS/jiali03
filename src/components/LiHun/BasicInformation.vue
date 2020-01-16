@@ -1819,7 +1819,7 @@
           }).catch((data)=>{
           })
         },
-        getQiTaCaiChanMsg (){// 查询保险模块数据
+        getQiTaCaiChanMsg (){// 查询其他财产
           returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询保险模块数据
             this.aa.QiTaCaiChan= data.data.data
             this.mokuai.push({
@@ -1829,7 +1829,12 @@
             })
             this.mokuai.sort(this.compare('id'));
             for ( let i = 0 ;i < this.aa.QiTaCaiChan.length; i++) {
-              this.aa.QiTaCaiChan[i][0].questions[0].answer = JSON.parse(this.aa.QiTaCaiChan[i][0].questions[0].answer)
+              if(this.aa.QiTaCaiChan[i][0].questions[0].answer == 1){
+                this.aa.QiTaCaiChan[i][0].questions[0].answer = []
+              }else{
+                this.aa.QiTaCaiChan[i][0].questions[0].answer = JSON.parse(this.aa.QiTaCaiChan[i][0].questions[0].answer)
+              }
+              
             }
           }).catch((data)=>{
 
