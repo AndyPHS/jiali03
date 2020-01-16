@@ -66,8 +66,8 @@
                     <!-- 多选框 -->
                     <div v-if="$$item.type == 'checkbox'">
                       <el-form-item :label="$$item.isRequired==false ?'(选填)'+$$item.title:$$item.title">
-                        <el-checkbox-group v-model="$$item.answer">
-                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                        <el-checkbox-group v-model="$$item.answer" >
+                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change='userAddAnswerAction($$item)'>{{list.label}}</el-checkbox>
                         </el-checkbox-group>
                       </el-form-item>
                       <div v-if="$$item.grandson">
@@ -808,6 +808,9 @@
         },
         NextPage () {
           this.$router.replace("/ZhaiQuan");
+        },
+        userAddAnswerAction(e){
+          console.log(e.answer)
         },
         addChildBirthday1 (e) {
            console.log(e,12312313)

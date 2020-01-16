@@ -198,8 +198,8 @@
                             <div v-if="$$item.type == 'checkbox'">
                               <el-form-item label="">
                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
-                                <el-checkbox-group v-model="$$item.answer"  @change='userAddAnswerAction($$item)'>
-                                  <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                                <el-checkbox-group v-model="$$item.answer" >
+                                  <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change='userAddAnswerAction($$item)'>{{list.label}}</el-checkbox>
                                 </el-checkbox-group>
                               </el-form-item>
                               <div v-if="$$item.grandson">
@@ -408,8 +408,8 @@
                                   <div v-if="$$$item.type == 'checkbox'">
                                     <el-form-item label="" class="text-base">
                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-checkbox-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
-                                        <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex" >{{list.label}}</el-checkbox>
+                                      <el-checkbox-group v-model="$$$item.answer">
+                                        <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
                                       </el-checkbox-group>
                                     </el-form-item>
                                     <div v-if="$$$item.grandson">
@@ -1270,7 +1270,15 @@
                                     </el-select>
                                   </el-form-item>
                                 </div>
-
+                                <!-- 多选框 -->
+                                <div v-if="$$$item.type == 'checkbox'">
+                                    <el-form-item label="" class="text-base">
+                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                      <el-checkbox-group v-model="$$$item.answer">
+                                        <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
+                                      </el-checkbox-group>
+                                    </el-form-item>
+                                 </div>
                                 <!-- 三级问题 -->
 
                                 <div v-if="$$$item.questions ">
@@ -1442,6 +1450,15 @@
                                           </el-select>
                                         </el-form-item>
                                       </div> 
+                                      <!-- 多选框 -->
+                                      <div v-if="$$$$item.type == 'checkbox'">
+                                        <el-form-item label="" class="text-base">
+                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                          <el-checkbox-group v-model="$$$$item.answer">
+                                            <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$$item)">{{list.label}}</el-checkbox>
+                                          </el-checkbox-group>
+                                        </el-form-item>
+                                     </div>
                                   </div>
                                 </div>
                               </div>
@@ -1636,6 +1653,7 @@
         this.getBaoXianMsg() // 查询保险模块数据
         this.getZhaiQuanMsg()  // 查询债权模块数据
         this.getZhaiWuMsg()  // 查询债务模块数据
+        this.getQiTaCaiChanMsg() // 查询其他财产
         // this.getShengChengXieYi() // 生成协议弹框
       },
       mounted (){
@@ -1801,6 +1819,22 @@
           }).catch((data)=>{
           })
         },
+        getQiTaCaiChanMsg (){// 查询保险模块数据
+          returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询保险模块数据
+            this.aa.QiTaCaiChan= data.data.data
+            this.mokuai.push({
+              title: '其他财产', 
+              part: 'QiTaCaiChan',
+              id: 12
+            })
+            this.mokuai.sort(this.compare('id'));
+            for ( let i = 0 ;i < this.aa.QiTaCaiChan.length; i++) {
+              this.aa.QiTaCaiChan[i][0].questions[0].answer = JSON.parse(this.aa.QiTaCaiChan[i][0].questions[0].answer)
+            }
+          }).catch((data)=>{
+
+          })
+        },
         getZiNv () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
@@ -1857,6 +1891,12 @@
           }).catch((data)=>{
           })
         },
+        getQiTaCaiChan(){
+          returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询债务模块数据
+            this.aa.QiTaCaiChan= data.data.data
+          }).catch((data)=>{
+          })
+        },
         compare(property){
           return function(a,b){
             let value1 = a[property];
@@ -1907,10 +1947,23 @@
                   })
                 }
               }else{
+                  console.log(e.answer)
                  if(Array.isArray(e.answer)){
                   if(e.type == "select_city"){
                     userAddAnswer({
                       value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
+                      qpid: e.id, // 关联id
+                      // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                      quid: localStorage.getItem('quid') //用户的问卷id
+                    }).then((data)=>{
+                      // console.log("保存成功")
+                    }).catch((data)=>{
+                       // console.log("保存失败")
+                    })
+                  }else if(e.type == "checkbox"){
+                    console.log(e.answer)
+                    userAddAnswer({
+                      value: JSON.stringify(e.answer),  // 值
                       qpid: e.id, // 关联id
                       // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                       quid: localStorage.getItem('quid') //用户的问卷id

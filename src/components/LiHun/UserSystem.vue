@@ -423,18 +423,18 @@ export default {
           message: '请先选择需要新增的问卷类型',
           type: 'error'
         });
+      }else{
+        localStorage.setItem('qid',this.questionnaireSelecter) 
+        userAddQuestionnaire({
+          qid: this.questionnaireSelecter
+        }).then((data)=>{
+          localStorage.setItem('quid', data.data.data)
+          localStorage.removeItem('qid');
+          this.$router.replace("/ChuShi");
+          // console.log(data.data.data)
+        }).catch((data)=>{
+        })
       }
-      localStorage.setItem('qid',this.questionnaireSelecter) 
-      userAddQuestionnaire({
-        qid: this.questionnaireSelecter
-      }).then((data)=>{
-        localStorage.setItem('quid', data.data.data)
-        localStorage.removeItem('qid');
-        this.$router.replace("/ChuShi");
-        // console.log(data.data.data)
-      }).catch((data)=>{
-
-      })
     },
     EditWenJuan(index, row) {   // 点击修改问卷
       localStorage.setItem('quid',row.id)
