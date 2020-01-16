@@ -799,8 +799,18 @@ export const questionnaire = params => {
     data: params
   });
 };
-// 查询问卷
+// 通过类型查询问卷
 export const questionnaireSelect = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.questionnaireSelect + '?type=' + params.type,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 通过类型查询问卷
+export const questionnaireSelectAll = params => {
   return axios({
     method: "get",
     dataType: 'json',

@@ -140,7 +140,7 @@
 <script>
 import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
 import {questionnaire} from '@/api/api/requestLogin.js' // 获取问卷类型
-import {questionnaireSelect} from '@/api/api/requestLogin.js' // 查询问卷
+import {questionnaireSelectAll} from '@/api/api/requestLogin.js' // 查询问卷
 import {addQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {updateQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
@@ -187,7 +187,7 @@ export default {
   },
   methods: {
     getQuestionnaireSelect(){  // 查询问卷
-      questionnaireSelect().then((data)=>{
+      questionnaireSelectAll().then((data)=>{
         if(data.data.status_code == 200 ){
           this.QuestionnaireSelectArr = data.data.data
           // console.log(this.QuestionnaireSelectArr)
