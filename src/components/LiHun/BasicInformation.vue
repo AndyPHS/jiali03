@@ -1829,7 +1829,7 @@
             })
             this.mokuai.sort(this.compare('id'));
             for ( let i = 0 ;i < this.aa.QiTaCaiChan.length; i++) {
-              if(this.aa.QiTaCaiChan[i][0].questions[0].answer == 1){
+              if(this.aa.QiTaCaiChan[i][0].questions[0].answer == 1 || this.aa.QiTaCaiChan[i][0].questions[0].answer == ""){
                 this.aa.QiTaCaiChan[i][0].questions[0].answer = []
               }else{
                 this.aa.QiTaCaiChan[i][0].questions[0].answer = JSON.parse(this.aa.QiTaCaiChan[i][0].questions[0].answer)
