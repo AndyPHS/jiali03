@@ -804,7 +804,7 @@ export const questionnaireSelect = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.questionnaireSelect + '?type=' + params.type,
+    url: apiUrl.questionnaireSelect,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

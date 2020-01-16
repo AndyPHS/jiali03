@@ -205,6 +205,7 @@ export default {
       questionnaire().then((data)=>{
         if(data.data.status_code == 200 ){
           this.questionnaireType = data.data.data.questionnaireType
+          // console.log(this.questionnaireType)
         }else{
           this.$message({
             message: '问卷类型获取失败',
