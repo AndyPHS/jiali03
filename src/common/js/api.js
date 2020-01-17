@@ -226,7 +226,15 @@ const apiUrl = {
   // 新增副本
   copyUserQuestionnaire: baseLiHunURL + 'page/copy_user_questionnaire/',
   // 置顶
-  userUpdateOrderId: baseLiHunURL + 'page/user_update_orderId/'
+  userUpdateOrderId: baseLiHunURL + 'page/user_update_orderId/',
+
+  // 起诉状
+  // 获取文本内容
+  selectUqContent: baseLiHunURL + 'label/select_uq_content/',
+  // 查询标签
+  selectLabel: baseLiHunURL + 'label/select_label',
+  // 查询标签内容
+  selectLabelContent: baseLiHunURL + 'label/select_label_content/'
 }
 export{
   apiUrl

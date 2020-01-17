@@ -39,10 +39,14 @@
                   <!-- <el-menu-item index="BasicInformation"><router-link to="BasicInformation">填写问卷</router-link></el-menu-item> -->
                 </el-submenu>
             </el-submenu>
-            
+            <div class="text-right text-white mt-4 mr-3">
+                <span class="mr-3 cursor-pointer" @click="Exit">[退出]</span>
+                <span >你好！{{user}}</span>
+            </div>
+            <!-- <h2 class=" pt-2 text-white"></h2> -->
             
         </el-menu>
-        <div class="container mx-auto">
+        <!-- <div class="container mx-auto">
             <dl class="text-left flex items-center py-2">
                 <dt>
                     <img class="w-1/2" src="@/assets/images/logo.png" alt="">
@@ -55,7 +59,7 @@
                     <h2>你好！{{user}}</h2>
                 </dd>
             </dl>
-        </div>
+        </div> -->
     </div>
 
 </template>
@@ -115,6 +119,10 @@
         }).catch((data)=>{
 
         })
+      },
+      Exit(){
+        this.$router.replace("/");
+        localStorage.removeItem('token')
       }
     }
   }

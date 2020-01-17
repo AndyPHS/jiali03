@@ -909,3 +909,44 @@ export const userUpdateOrderId = params => {
     data: params
   });
 };
+// 获取文本内容
+export const selectUqContent = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectUqContent + localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 获取标签
+export const selectLabel = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectLabel + '?status=1',
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询标签
+export const selectLabelChoose = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectLabel + '?title=' + params.title +'&&status=' + params.status + '&&flid=' + params.flid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询标签内容
+
+export const selectLabelContent = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectLabelContent + params.qlid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};

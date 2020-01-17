@@ -438,7 +438,11 @@ export default {
     },
     EditWenJuan(index, row) {   // 点击修改问卷
       localStorage.setItem('quid',row.id)
-      this.$router.replace("/BasicInformation");
+      if(this.questionnaireTypeSelect=="起诉状"){
+        this.$router.replace("/QiSuComplate");
+      }else if(this.questionnaireTypeSelect=="离婚协议书"){
+        this.$router.replace("/BasicInformation");
+      }
     },
     // EditQuestionnaireOk(){  // 点击修改问卷确定按钮
     //   updateQuestionnaire({
