@@ -418,6 +418,7 @@
                 // localStorage.setItem('wid',5) 
                 wordSelectTree().then((data)=>{
                     this.wordTreeList = data.data.data
+                    console.log(data.data.data)
                     localStorage.removeItem('wid');
                 }).catch((data)=>{
                     this.$message({
