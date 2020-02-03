@@ -52,7 +52,7 @@
             </div>
             <div class="w-1/2">
                 <div class="border border-1 rounded">
-                    <h2 class="text-xl py-2">离婚协议书</h2>
+                    <h2 class="text-xl py-2">{{treeTitle}}</h2>
                     <div class="h-40 overflow-scroll">
                         <el-tree
                           :data="treeList"
@@ -292,6 +292,7 @@
                     title: ''        // 点击获取当前选中的组合规则树节点title名称
                 },
                treeList: [],    // 离婚协议书节点树数据 
+               treeTitle: '',    // 离婚协议书节点树title
                defaultProps: {  // 离婚协议书节点树数据树相关
                   children: 'child',
                   label: 'title'
@@ -392,6 +393,7 @@
             selectTree () {   // 查询树结构
                 selectTree().then((data)=>{
                     this.treeList = data.data.data
+                    this.treeTitle= data.data.data.title
                 }).catch((data)=>{
                     this.$router.replace("/");
                 })
@@ -413,7 +415,7 @@
 
             // 左侧模块开始
             wordSelectTree () {  // 查询组合规则tree结构
-                localStorage.setItem('wid',5) 
+                // localStorage.setItem('wid',5) 
                 wordSelectTree().then((data)=>{
                     this.wordTreeList = data.data.data
                     localStorage.removeItem('wid');

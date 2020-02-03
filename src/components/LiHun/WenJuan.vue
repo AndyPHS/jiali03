@@ -42,14 +42,14 @@
             label="关联管理"
             width="150">
             <template slot-scope="scope">
-              <span style="margin-left: 10px;display: inline-block;cursor: pointer;">查看关联</span>
+              <span style="margin-left: 10px;display: inline-block;cursor: pointer;" @click="checkGuanLian(scope.$index, scope.row)">查看关联</span>
             </template>
           </el-table-column>
           <el-table-column
             label="word模板"
             width="150">
             <template slot-scope="scope">
-              <span style="margin-left: 10px;display: inline-block;cursor: pointer;">查看模板</span>
+              <span style="margin-left: 10px;display: inline-block;cursor: pointer;" @click="checkModel(scope.$index, scope.row)">查看模板</span>
             </template>
           </el-table-column>
           <el-table-column label="操作">
@@ -252,6 +252,15 @@ export default {
     },
     cancelAddQuestionnaire(){  // 点击新增取消按钮
       this.dialogNewWenJuan = false;
+    },
+    checkGuanLian(index, row){ // 点击查看关联
+      localStorage.setItem('qid',row.id)
+      this.$router.replace("/GuanLianManagement");
+    },
+    checkModel(index, row){  // 点击查看模板
+      localStorage.setItem('wid',row.id)
+      localStorage.setItem('qid',row.id)
+      this.$router.replace("/DisplayRule");
     },
     EditWenJuan(index, row) {   // 点击修改问卷
       this.dialogEditWenJuan = true

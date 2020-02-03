@@ -511,7 +511,7 @@ export const selectTree = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.selectTree,
+    url: apiUrl.selectTree + localStorage.getItem('qid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -934,18 +934,27 @@ export const selectLabelChoose = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.selectLabel + '?title=' + params.title +'&&status=' + params.status + '&&flid=' + params.flid,
+    url: apiUrl.selectLabel + '?title=' + params.title +'&&status=' + params.status + '&&flId=' + params.flId,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
 // 查询标签内容
-
 export const selectLabelContent = params => {
   return axios({
     method: "get",
     dataType: 'json',
     url: apiUrl.selectLabelContent + params.qlid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增标签内容
+export const AddLabelContent = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.AddLabelContent + localStorage.getItem('qlid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

@@ -149,7 +149,7 @@ const apiUrl = {
   // 删除选项
   deleteAnswer: baseLiHunURL + 'problem/delete_answer/',
   // 查询关系树
-  selectTree: baseLiHunURL + 'ProblemQ/select_tree',
+  selectTree: baseLiHunURL + 'ProblemQ/select_tree/',
   // 模糊查询关联
   selectVague: baseLiHunURL + 'ProblemQ/select_vague',
   // 新增关联
@@ -234,7 +234,9 @@ const apiUrl = {
   // 查询标签
   selectLabel: baseLiHunURL + 'label/select_label',
   // 查询标签内容
-  selectLabelContent: baseLiHunURL + 'label/select_label_content/'
+  selectLabelContent: baseLiHunURL + 'label/select_label_content/',
+  // 新增标签内容
+  AddLabelContent: baseLiHunURL + 'label/add_label_content/'
 }
 export{
   apiUrl

@@ -4,7 +4,7 @@
         <div class="container mx-auto flex">
             <div class="w-1/2">
                 <div class="border border-1 rounded">
-                    <h2 class="text-xl py-2 cursor-pointer" @click="addTreeTitle()">离婚协议书</h2>
+                    <h2 class="text-xl py-2 cursor-pointer" @click="addTreeTitle()">{{treeTitle}}</h2>
                     <div class="h-40 overflow-scroll">
 
                         <el-tree
@@ -442,6 +442,7 @@
                 // fileList: [],   // 实例图片
                 treeId: null, // 树结构前面的节点
                 treeList: [],    // 节点树数据
+                treeTitle:'',    // 节点标题
                 dataFilterValueArr: [], // 点击修改弹出的绑定问题模糊搜索
                 selectVagueValueArr: [], // 点击修改弹出的绑定问题模糊搜索关联搜索结果
                 // whereArr: [{
@@ -656,8 +657,9 @@
             selectTree () {   // 查询树结构
                 selectTree().then((data)=>{
                     this.treeList = data.data.data
+                    this.treeTitle = data.data.data.title
                     // this.treeId = this.$refs.tree.currentNode.node.data.id
-                    // console.log(this.treeList)
+                    // console.log(data.data)
                 }).catch((data)=>{
                     console.log("请求失败")
                 })

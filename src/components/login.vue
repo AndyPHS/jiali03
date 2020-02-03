@@ -101,6 +101,7 @@ export default {
               this.$router.replace("/FileList");
               // this.showDialog = true
             }).catch((data)=>{
+              console.log(data)
               this.errorAlert('验证码错误')
             });
           } else {
