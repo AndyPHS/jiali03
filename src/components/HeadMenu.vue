@@ -28,8 +28,8 @@
                 <el-submenu index="3-1" v-show="this.wenjuan.questionnaireAdmin">
                   <template slot="title">问题模块</template>
                   <el-menu-item index="QuestionManagement"><router-link to="QuestionManagement">问题管理</router-link></el-menu-item>
-                  <el-menu-item index="GuanLianManagement"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
-                  <el-menu-item index="DisplayRule"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
+                  <el-menu-item v-show="false" index="GuanLianManagement"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
+                  <el-menu-item v-show="false" index="DisplayRule"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
                 </el-submenu>
                 <el-submenu index="3-2" v-show="this.wenjuan.questionnaire">
                   <template slot="title">问卷模块</template>
