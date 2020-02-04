@@ -656,7 +656,7 @@
             },
             selectTree () {   // 查询树结构
                 selectTree().then((data)=>{
-                    this.treeList = data.data.data
+                    this.treeList = data.data.data.data
                     this.treeTitle = data.data.data.title
                     // this.treeId = this.$refs.tree.currentNode.node.data.id
                     // console.log(data.data)
