@@ -508,7 +508,7 @@
                 // fqaspId: null,   // 当前选中的树形结构的节点
                 nodeChild: null, // 当前选中的树形结构是否有子集
                 problemqAdd: {   
-                    questionnaireId: 3,
+                    questionnaireId: localStorage.getItem('qid'),
                     problemId: null,
                     problemTitle: '',
                     problemType: null,
@@ -604,10 +604,9 @@
                 })
             },
             bangdingQuestion (e) {  // 点击修改弹框，选择绑定问题后获取绑定问题的值
-
                 localStorage.setItem('pid',e)
                 updateProblemQ({
-                    questionnaireId: 3,
+                    questionnaireId: localStorage.getItem('qid'),
                     problemId: this.problemqAdd.problemId,
                     orderId: this.problemqAdd.orderId,
                     fqaspId: this.problemqAdd.fqaspId,
@@ -705,7 +704,7 @@
             addTreeTitleOk () { // 确认添加标题
                 if(this.problemqAdd.id ==null){
                     ProblemQAdd({
-                        questionnaireId: 3,
+                        questionnaireId: localStorage.getItem('qid'),
                         orderId: 0,
                         fqaspId: 0,
                         class: this.problemqAdd.class,
@@ -722,7 +721,7 @@
                     })
                 }else{
                     ProblemQAdd({
-                        questionnaireId: 3,
+                        questionnaireId: localStorage.getItem('qid'),
                         orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
                         class: this.problemqAdd.class,
@@ -741,7 +740,7 @@
             },
             configTreeTitleOk(){ // 点击标题进行修改的时候提交到修改接口
                 updateProblemQ({
-                    questionnaireId: 3,
+                    questionnaireId: localStorage.getItem('qid'),
                     problemId: this.problemqAdd.problemId,
                     orderId: this.problemqAdd.orderId,
                     fqaspId: this.problemqAdd.fqaspId,
@@ -833,7 +832,7 @@
             addQuestionConfig () {  // 点击确定提交当前问题的配置
                 if(this.problemqAdd.type==6 || this.problemqAdd.type==7 || this.problemqAdd.type==8 || this.problemqAdd.type==9 ){
                     ProblemQAdd({
-                        questionnaireId: 3,
+                        questionnaireId: localStorage.getItem('qid'),
                         problemId: this.problemqAdd.problemId,
                         orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
@@ -860,7 +859,7 @@
                     })
                 }else{
                     ProblemQAdd({
-                        questionnaireId: 3,
+                        questionnaireId: localStorage.getItem('qid'),
                         problemId: this.problemqAdd.problemId,
                         orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.id,
@@ -886,7 +885,7 @@
              addQuestionConfigUpdate () {  // 修改配置点击确定提交当前问题的配置
                 if(this.problemqAdd.type==6 || this.problemqAdd.type==7 || this.problemqAdd.type==8 || this.problemqAdd.type==9 ){
                     updateProblemQ({
-                        questionnaireId: 3,
+                        questionnaireId: localStorage.getItem('qid'),
                         problemId: this.problemqAdd.problemId,
                         orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.fqaspId,
@@ -908,7 +907,7 @@
                     })
                 }else{
                     updateProblemQ({
-                        questionnaireId: 3,
+                        questionnaireId: localStorage.getItem('qid'),
                         problemId: this.problemqAdd.problemId,
                         orderId: this.problemqAdd.orderId,
                         fqaspId: this.problemqAdd.fqaspId,
