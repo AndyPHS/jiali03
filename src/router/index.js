@@ -15,6 +15,7 @@ import UsersPermission from '@/components/users/UsersPermission'  // 用户权�
 import QuestionManagement from '@/components/LiHun/QuestionManagement'         // 问题管理页面
 import GuanLianManagement from '@/components/LiHun/GuanLianManagement'         // 关联管理页面
 import ZuHeManagement from '@/components/LiHun/ZuHeManagement'         // 组合管理页面
+import LabelManagement from '@/components/LiHun/LabelManagement'         // 标签管理页面
 import DisplayRule from '@/components/LiHun/DisplayRule'         // 显示规则修改页面
 import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 import SearchCase from '@/components/SearchCase'   // 案例搜索
@@ -70,6 +71,8 @@ export default new Router({
     {path: '/GuanLianManagement', name: 'GuanLianManagement', component: GuanLianManagement},
     // 组合管理
     {path: '/ZuHeManagement', name: 'ZuHeManagement', component: ZuHeManagement},
+    // 标签管理
+    {path: '/LabelManagement', name: 'LabelManagement', component: LabelManagement},
     // 显示规则页面
     {path: '/DisplayRule', name: 'DisplayRule', component: DisplayRule},
     // 搜索页面

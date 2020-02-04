@@ -40,16 +40,23 @@
           </el-table-column>
           <el-table-column
             label="关联管理"
-            width="150">
+            width="100">
             <template slot-scope="scope">
               <span style="margin-left: 10px;display: inline-block;cursor: pointer;" @click="checkGuanLian(scope.$index, scope.row)">查看关联</span>
             </template>
           </el-table-column>
           <el-table-column
             label="word模板"
-            width="150">
+            width="100">
             <template slot-scope="scope">
               <span style="margin-left: 10px;display: inline-block;cursor: pointer;" @click="checkModel(scope.$index, scope.row)">查看模板</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="标签池"
+            width="100">
+            <template slot-scope="scope">
+              <span style="margin-left: 10px;display: inline-block;cursor: pointer;" @click="checkLabel(scope.$index, scope.row)">查看标签</span>
             </template>
           </el-table-column>
           <el-table-column label="操作">
@@ -261,6 +268,10 @@ export default {
       localStorage.setItem('wid',row.id)
       localStorage.setItem('qid',row.id)
       this.$router.replace("/DisplayRule");
+    },
+    checkLabel(index, row){  // 点击标签池
+      localStorage.setItem('qid',row.id)
+      this.$router.replace("/LabelManagement");
     },
     EditWenJuan(index, row) {   // 点击修改问卷
       this.dialogEditWenJuan = true

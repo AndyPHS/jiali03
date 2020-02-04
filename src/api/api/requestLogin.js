@@ -924,7 +924,17 @@ export const selectLabel = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.selectLabel + '?status=1',
+    url: apiUrl.selectLabel + localStorage.getItem('qid')+'?status='+params.status,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 获取关键词
+export const selectKeyWord = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectLabel + localStorage.getItem('qid')+'?status='+params.status+'&&flId='+params.flId,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -955,6 +965,46 @@ export const AddLabelContent = params => {
     method: "post",
     dataType: 'json',
     url: apiUrl.AddLabelContent + localStorage.getItem('qlid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除标签
+export const deleteLabel = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteLabel + localStorage.getItem('qlid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增标签
+export const addLabel = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addLabel,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除标签内容
+export const deleteLabelContent = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteLabelContent + params.qldid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改标签
+export const updateLabel = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateLabel + localStorage.getItem('qlid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

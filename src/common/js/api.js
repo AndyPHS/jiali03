@@ -232,11 +232,19 @@ const apiUrl = {
   // 获取文本内容
   selectUqContent: baseLiHunURL + 'label/select_uq_content/',
   // 查询标签
-  selectLabel: baseLiHunURL + 'label/select_label',
+  selectLabel: baseLiHunURL + 'label/select_label/',
   // 查询标签内容
   selectLabelContent: baseLiHunURL + 'label/select_label_content/',
   // 新增标签内容
-  AddLabelContent: baseLiHunURL + 'label/add_label_content/'
+  AddLabelContent: baseLiHunURL + 'label/add_label_content/',
+  // 删除标签
+  deleteLabel: baseLiHunURL + 'label/delete_label/',
+  // 新增标签
+  addLabel: baseLiHunURL + 'label/add_label',
+  // 删除标签内容
+  deleteLabelContent: baseLiHunURL + 'label/delete_label_content/',
+  // 修改标签
+  updateLabel: baseLiHunURL + 'label/update_label/'
 }
 export{
   apiUrl
