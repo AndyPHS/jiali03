@@ -392,7 +392,7 @@
             // 右侧模块开始
             selectTree () {   // 查询树结构
                 selectTree().then((data)=>{
-                    this.treeList = data.data.data
+                    this.treeList = data.data.data.data
                     this.treeTitle= data.data.data.title
                 }).catch((data)=>{
                     this.$router.replace("/");
@@ -418,7 +418,6 @@
                 // localStorage.setItem('wid',5) 
                 wordSelectTree().then((data)=>{
                     this.wordTreeList = data.data.data
-                    console.log(data.data.data)
                     localStorage.removeItem('wid');
                 }).catch((data)=>{
                     this.$message({
