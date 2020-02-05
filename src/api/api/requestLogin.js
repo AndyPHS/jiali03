@@ -666,7 +666,7 @@ export const wordSelectTree = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.wordSelectTree + localStorage.getItem('wid'),
+    url: apiUrl.wordSelectTree + localStorage.getItem('qid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
