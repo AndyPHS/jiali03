@@ -385,7 +385,7 @@
         },
         mounted () {
           this.selectTree() // 获取关系列表
-          this.wordSelectTree() // 查询组合规则数结构
+          this.getWordSelectTree() // 查询组合规则数结构
           // this.selectOnlyQuestion() // 查询单独问题
         },
         methods:{
@@ -414,7 +414,7 @@
             // 右侧模块结束
 
             // 左侧模块开始
-            wordSelectTree () {  // 查询组合规则tree结构
+            getWordSelectTree () {  // 查询组合规则tree结构
                 // localStorage.setItem('wid',5) 
                 wordSelectTree().then((data)=>{
                     this.wordTreeList = data.data.data
@@ -500,7 +500,7 @@
                         this.wordAddWhere.type = null
                         this.wordAddWhere.value = ''
                         this.wordAddWhere.replate = ''
-                        this.wordSelectTree(); // 重新获取数结构
+                        this.getWordSelectTree(); // 重新获取数结构
                         // localStorage.removeItem('pid');
                         this.dialogNewWord = false;
                         this.$message({
@@ -516,7 +516,7 @@
                         qpid: this.wordAdd.qpid,
                         orderWords: this.wordAdd.orderWords
                     }).then((data)=>{
-                        this.wordSelectTree(); // 重新获取数结构
+                        this.getWordSelectTree(); // 重新获取数结构
                         this.wordAdd.title = ''
                         this.wordAdd.where = []
                         this.wordAdd.qpid = []
@@ -575,7 +575,7 @@
             },
             dialogDeleteWordOk () { // 点击删除组合规则确定键，删除所选的组合规则
               deleteWord().then((data)=>{
-                this.wordSelectTree()
+                this.getWordSelectTree()
                 localStorage.removeItem('fWordId'); 
                 this.dialogDeleteWord = false;
                 this.$message({
@@ -621,7 +621,7 @@
                     qpid: this.wordAdd.qpid,
                     orderWords: this.wordAdd.orderWords
                 }).then((data)=>{
-                    this.wordSelectTree(); // 重新获取数结构
+                    this.getWordSelectTree(); // 重新获取数结构
                     this.wordAdd.title = ''
                     this.wordAdd.where = []
                     this.wordAdd.qpid = []
