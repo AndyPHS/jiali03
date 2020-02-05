@@ -4,7 +4,7 @@
         <div class="container mx-auto flex">
             <div class="w-1/2">
                 <div class="border border-1 rounded">
-                    <h2 class="text-xl py-2 cursor-pointer"><span @click="addRootWord">离婚协议书组合规则</span><el-button type="primary" plain size="small" @click="editDisplayContent">新增组合规则</el-button></h2>
+                    <h2 class="text-xl py-2 cursor-pointer"><span @click="addRootWord">{{treeTitle}}组合规则</span><el-button type="primary" plain size="small" @click="editDisplayContent">新增组合规则</el-button></h2>
                     <div class="h-40 overflow-scroll">
                         <el-tree
                           :data="wordTreeList"
@@ -644,8 +644,8 @@
                 if(this.wordTreeMsg.fqaspId !==null){
                   localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 }else{
-                  localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId)
-                  // localStorage.setItem('fWordId',6) // 保存选中组合规则的id到本地缓存
+                  // localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId)
+                  localStorage.setItem('fWordId',localStorage.getItem('qid')) // 保存选中组合规则的id到本地缓存
                 }
                 wordSelect().then((data)=>{
                     this.selectGuiZe.selectGuiZeArr = data.data.data.json
