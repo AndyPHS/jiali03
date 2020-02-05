@@ -415,7 +415,7 @@
 
             // 左侧模块开始
             getWordSelectTree () {  // 查询组合规则tree结构
-                // localStorage.setItem('wid',5) 
+                localStorage.setItem('wid',localStorage.getItem('qid')) 
                 wordSelectTree().then((data)=>{
                     this.wordTreeList = data.data.data
                 }).catch((data)=>{

@@ -265,7 +265,7 @@ export default {
       this.$router.replace("/GuanLianManagement");
     },
     checkModel(index, row){  // 点击查看模板
-      // localStorage.setItem('wid',row.id)
+      localStorage.setItem('wid',row.id)
       localStorage.setItem('qid',row.id)
       this.$router.replace("/DisplayRule");
     },
