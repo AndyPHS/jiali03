@@ -944,7 +944,7 @@ export const selectLabelChoose = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.selectLabel + '?title=' + params.title +'&&status=' + params.status + '&&flId=' + params.flId,
+    url: apiUrl.selectLabel + localStorage.getItem('qid') + '?title=' + params.title +'&&status=' + params.status + '&&flId=' + params.flId,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

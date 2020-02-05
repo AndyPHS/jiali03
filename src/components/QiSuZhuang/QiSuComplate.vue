@@ -13,12 +13,24 @@
                     <p class="text-left w-2/5 pb-1">事实与理由：</p>
                     <div class="my-2 h-40">
                         <ul>
-                            <li class="pb-2 text-left"  v-for="(item, index) in this.Content.UqContent" :key="index">
+                            <!-- <li class="pb-2 text-left"  v-for="(item, index) in this.Content.UqContent" :key="index">
                                 <div  v-show="item.status == 1" ref="outside" class="px-2 py-1 border rounded">
                                     <textarea :rows='3' id="textarea_left" class="textarea w-full" placeholder="" v-model="item.content"  @blur="submitMsg"></textarea>
                                 </div>
-                            </li>
-                            <!-- <vuedraggable class="wrapper">
+                            </li> -->
+                            <draggable
+                                v-model="Content.UqContent"
+                                @change="dragChange"
+                                @start="dragStart"
+                                @end="dragEnd"
+                            >
+                                <li class="pb-2 text-left"  v-for="(item, index) in Content.UqContent" :key="index">
+                                    <div  v-show="item.status == 1" ref="outside" class="px-2 py-1 border rounded">
+                                        <textarea :rows='3' id="textarea_left" class="textarea w-full" placeholder="" v-model="item.content"  @blur="submitMsg"></textarea>
+                                    </div>
+                                </li>
+                            </draggable>
+                            <!-- <draggable class="wrapper">
                                 <transition-group v-model="this.Content.UqContent">
                                   <li class="pb-2 text-left"  v-for="(item, index) in this.Content.UqContent" :key="index">
                                         <div  v-show="item.status == 1" ref="outside" class="px-2 py-1 border rounded">
@@ -26,7 +38,7 @@
                                         </div>
                                     </li>
                                 </transition-group>
-                            </vuedraggable> -->
+                            </draggable> -->
                         </ul>
                     </div>
                     <div class="text-center">
@@ -34,15 +46,15 @@
                         <el-button type="primary" @click="makeOut">生成起诉状</el-button>
                     </div>
                     <div class="addBox" v-show="daligeAddBox">
-                       <h2 class="py-4 text-center text-white">添加的文本描述</h2>
+                       <h2 class="py-4 text-center text-white">添加文本</h2>
                        <el-form ref="chooseLabel" :model="chooseLabel" class="ml-2">
                             <el-form-item label-position="left" label="所属标签">
-                                <el-input class="w-1/2" size="small" v-model="chooseLabel.addLabelMsg"></el-input>
+                                <el-input class="w-2/3" size="small" v-model="chooseLabel.addLabelMsg"></el-input>
+                            </el-form-item>
+                            <el-form-item label-position="left" label="内容文本">
+                                <textarea :rows='2' id="textarea_left" class="textarea w-2/3 mx-auto border rounded" placeholder="" v-model="contentMsg.content"></textarea>
                             </el-form-item>
                         </el-form>
-                       <div class="w-full bg-green-500">
-                           <textarea :rows='4' id="textarea_left" class="textarea w-11/12 mx-auto border rounded" placeholder="" v-model="contentMsg.content"></textarea>
-                       </div>
                        <div class="mt-2 w-2/3 mx-auto flex justify-around">
                            <el-button @click='cancleAddBox'>取消</el-button>
                             <el-button type="primary" @click.native="AddBoxOk(item, index)">确定</el-button>
@@ -119,7 +131,7 @@
     </div>
 </template>
 <script>
-    import vuedraggable from 'vuedraggable'   // 引入拖拽事件
+    import draggable from 'vuedraggable'   // 引入拖拽事件
     import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
     import {selectUqContent} from '@/api/api/requestLogin.js'  // 获取文本内容
     import {selectLabel} from '@/api/api/requestLogin.js'  // 获取标签
@@ -132,12 +144,13 @@
     export default {
         components:{
             HeadMenu,
-            vuedraggable,
+            draggable,
         },
         data () {
             return {
                 Content:{ 
                     UqContent: [], // 获取的文本内容
+                    con:'',         // 将文本内容拼接成字符串
                     title: ''    // 获取标题
                 },
                 contentMsg:{  // 添加新文本
@@ -145,7 +158,7 @@
                     content: ''
                 },
                 contentDiv: false,  // 新增文本隐藏
-                daligeAddBox: true, // 新增文本弹窗
+                daligeAddBox: false, // 新增文本弹窗
                 LabelArr: [], // 获取标签
                 labelForm:{   // 标签表单
                     title: '',
@@ -222,32 +235,13 @@
                 }
             },
             makeOut(){
-                var str = '';
-                let mes = this.Content.UqContent
-                mes.forEach(function(e){
-                    str += e.content
-                })
-                userUpdateQuestionnaire({
-                    content: this.Content.UqContent
-                }).then((data)=>{
-                    if(data.data.status_code ==200){
-                        this.daligeAddBox = false;
-                        this.contentMsg.content = '';
-                        this.chooseLabel.addLabelMsg = '';
-                        this.getSelectUqContent()
-                    }else{
-                        this.$message({
-                          message: '添加失败，请重新操作',
-                          type: 'error'
-                        });
-                    }
-                    
-                }).catch((data)=>{
-
-                })
+                alert("暂没有生成页面")
+                // this.$router.replace("/");
             },
             getSelectLabel(){ // 获取标签
-                selectLabel().then((data)=>{
+                selectLabel({
+                    status:1
+                }).then((data)=>{
                     if(data.data.status_code==200){
                         this.LabelArr = data.data.data
                     }else{
@@ -257,7 +251,10 @@
                         });
                     }
                 }).catch((data)=>{
-
+                    this.$message({
+                      message: '标签获取失败，请联系后台管理人员',
+                      type: 'error'
+                    });
                 })
             },
             chooseLabelAction(item){ // 点击标签获取标签内容
@@ -285,7 +282,7 @@
                         title: this.labelForm.title,
                         status: 1
                     }).then((data)=>{
-                        console.log(data.data)
+                        // console.log(data.data)
                         if(data.data.status_code==200){
                             this.LabelArr = data.data.data
                         }
@@ -305,7 +302,7 @@
                           setTimeout(() => {
                             this.loading = false;
                             this.keyWord.states = data.data.data
-                            console.log(data.data.data)
+                            // console.log(data.data.data)
                             this.keyWord.list = this.keyWord.states.map(item => {
                                 return { value: `${item.id}`, label: `${item.title}` };
                             });
@@ -358,6 +355,38 @@
             },
             submitMsg(){
                 // alert(1)
+            },
+            dragChange(){
+
+            },
+            dragStart(){
+
+            },
+            dragEnd(){
+                let arr=[]
+                this.Content.UqContent.forEach((item)=>{
+                    arr.push(item.content)
+                    
+                })
+                this.Content.con = arr.join('')
+                userUpdateQuestionnaire({
+                    content: this.Content.con
+                }).then((data)=>{
+                    if(data.data.status_code ==200){
+                        this.daligeAddBox = false;
+                        this.contentMsg.content = '';
+                        this.chooseLabel.addLabelMsg = '';
+                        this.getSelectUqContent()
+                    }else{
+                        this.$message({
+                          message: '添加失败，请重新操作',
+                          type: 'error'
+                        });
+                    }
+                    
+                }).catch((data)=>{
+
+                })
             }
         }
     }
@@ -365,7 +394,7 @@
 
 <style scoped>
 .h-40{height: 480px;overflow: scroll;}
-.addBox{ position: absolute;top:30px;left: 30px;width:400px;height: 260px;background: #343434;border-radius: 10px;}
+.addBox{ position: absolute;top:30px;left: 30px;width:400px;height: 260px;background: #98aab4;border-radius: 10px;}
 .el-form-item{margin-bottom: 0 !important}
 .addIcon{height: 18px;width:20px;line-height: 19px;text-align: center;border: 1px solid #343434;border-radius: 10px;margin-left: 5px;display: inline-table;font-weight: bolder;color:#343434;cursor:pointer;}
 .addIcon:hover{
