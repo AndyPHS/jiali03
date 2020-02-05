@@ -418,7 +418,6 @@
                 // localStorage.setItem('wid',5) 
                 wordSelectTree().then((data)=>{
                     this.wordTreeList = data.data.data
-                    localStorage.removeItem('wid');
                 }).catch((data)=>{
                     this.$message({
                       message: '获取组合规则失败',
@@ -502,7 +501,7 @@
                         this.wordAddWhere.value = ''
                         this.wordAddWhere.replate = ''
                         this.wordSelectTree(); // 重新获取数结构
-                        localStorage.removeItem('pid');
+                        // localStorage.removeItem('pid');
                         this.dialogNewWord = false;
                         this.$message({
                           message: '添加成功',
@@ -527,7 +526,7 @@
                         this.wordAddWhere.value = ''
                         this.wordAddWhere.replate = ''
                         this.wordTreeMsg.fqaspId = null
-                        localStorage.removeItem('pid');
+                        // localStorage.removeItem('pid');
                         this.dialogNewWord = false;
                         this.$message({
                           message: '添加成功',
@@ -632,8 +631,8 @@
                     this.wordAddWhere.value = ''
                     this.wordAddWhere.replate = ''
                     this.wordTreeMsg.fqaspId = null
-                    localStorage.removeItem('pid');
-                    localStorage.removeItem('fWordId');
+                    // localStorage.removeItem('pid');
+                    // localStorage.removeItem('fWordId');
                     this.dialogUpdateWord = false;
                 })
             },
@@ -645,7 +644,8 @@
                 if(this.wordTreeMsg.fqaspId !==null){
                   localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 }else{
-                  localStorage.setItem('fWordId',6) // 保存选中组合规则的id到本地缓存
+                  localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId)
+                  // localStorage.setItem('fWordId',6) // 保存选中组合规则的id到本地缓存
                 }
                 wordSelect().then((data)=>{
                     this.selectGuiZe.selectGuiZeArr = data.data.data.json
