@@ -30,15 +30,6 @@
                                     </div>
                                 </li>
                             </draggable>
-                            <!-- <draggable class="wrapper">
-                                <transition-group v-model="this.Content.UqContent">
-                                  <li class="pb-2 text-left"  v-for="(item, index) in this.Content.UqContent" :key="index">
-                                        <div  v-show="item.status == 1" ref="outside" class="px-2 py-1 border rounded">
-                                            <textarea :rows='3' id="textarea_left" class="textarea w-full" placeholder="" v-model="item.content"  @blur="submitMsg"></textarea>
-                                        </div>
-                                    </li>
-                                </transition-group>
-                            </draggable> -->
                         </ul>
                     </div>
                     <div class="text-center">
