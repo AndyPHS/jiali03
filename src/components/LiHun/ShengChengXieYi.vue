@@ -123,7 +123,11 @@
           })
         },
         GoBasicInformationPage(){   // 点击返回填写按钮
+          if(localStorage.getItem('questionnaireType')==1){
            this.$router.replace("/BasicInformation");
+          }else if(localStorage.getItem('questionnaireType')==2){
+           this.$router.replace("/QiSuBasicInformation");
+          }
         },
         dialogDownLoadWenJuanOk(){   // 点击下载弹出确定按钮
           if(this.form.type){

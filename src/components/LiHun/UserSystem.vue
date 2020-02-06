@@ -321,7 +321,7 @@ export default {
             type: 'error'
           });
         }
-        console.log(this.QuestionnaireSelectArr)
+        // console.log(this.QuestionnaireSelectArr)
       }).catch((data)=>{
 
       })
@@ -350,7 +350,7 @@ export default {
         status: 1
       }).then((data)=>{
         if(data.data.status_code == 200 ){
-          console.log(data.data.data)
+          // console.log(data.data.data)
           this.QuestionnaireSelectArr = data.data.data
           this.statusType = 1
           // console.log(this.QuestionnaireSelectArr)
@@ -429,8 +429,13 @@ export default {
           qid: this.questionnaireSelecter
         }).then((data)=>{
           localStorage.setItem('quid', data.data.data)
-          localStorage.removeItem('qid');
-          this.$router.replace("/ChuShi");
+          // localStorage.removeItem('qid');
+          if(this.questionnaireTypeSelect=="起诉状"){
+            localStorage.setItem('questionnaireType', 2) // 1代表离婚协议书，2代表起诉状
+            this.$router.replace("/QiSuBasicInformation");
+          }else if(this.questionnaireTypeSelect=="离婚协议书"){
+            this.$router.replace("/ChuShi");
+          }
           // console.log(data.data.data)
         }).catch((data)=>{
         })

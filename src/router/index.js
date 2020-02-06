@@ -38,6 +38,8 @@ import ZhaiQuan from '@/components/LiHun/ZhaiQuan'         // 添加离婚协议
 import ZhaiWu from '@/components/LiHun/ZhaiWu'         // 添加离婚协议书债务页面
 import ShengChengXieYi from '@/components/LiHun/ShengChengXieYi'         // 添加离婚协议书债务页面
 import QiSuComplate from '@/components/QiSuZhuang/QiSuComplate'    // 起诉状生成页
+import QiSuBasicInformation from '@/components/QiSuZhuang/QiSuBasicInformation'    // 起诉状基本信息填写
+
 Vue.use(Router)
 
 export default new Router({
@@ -114,7 +116,9 @@ export default new Router({
     // 生成离婚协议书页面
     {path: '/ShengChengXieYi', name: 'ShengChengXieYi', component: ShengChengXieYi},
     // 起诉状生成页
-    {path: '/QiSuComplate', name: 'QiSuComplate', component: QiSuComplate}
+    {path: '/QiSuComplate', name: 'QiSuComplate', component: QiSuComplate},
+    // 起诉状基本信息
+    {path: '/QiSuBasicInformation', name: 'QiSuBasicInformation', component: QiSuBasicInformation},
 
   ]
 })

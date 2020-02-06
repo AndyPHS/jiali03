@@ -708,7 +708,7 @@ export const returnQuestionnaireJson = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.returnQuestionnaireJson + localStorage.getItem('quid') +'?qpid='+params.qpid,
+    url: apiUrl.returnQuestionnaireJson + params.qpid +'?quid='+localStorage.getItem('quid')+'&qid='+ localStorage.getItem('qid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
