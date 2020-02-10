@@ -1467,9 +1467,6 @@
                         </div>
                       </div>
                       <div>
-                        <div v-if="mo.title==='起诉原因' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(948,index)">删除起诉原因</div>
-                        </div>
                         <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(941,index)">删除孩子</div>
                         </div>
@@ -1482,24 +1479,9 @@
                         <div v-if="mo.title==='诉讼法院' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(975,index)">删除诉讼法院</div>
                         </div>
-                        <div v-if="mo.title==='家具家电' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(636,index)">删除家具家电</div>
-                        </div>
-                        <div v-if="mo.title==='保险' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(524,index)">删除保险</div>
-                        </div>
-                        <div v-if="mo.title==='债权' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(655,index)">删除债权</div>
-                        </div>
-                        <div v-if="mo.title==='债务' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(656,index)">删除债务</div>
-                        </div>
                       </div>
                     </div>
                     <div>
-                      <div v-if="mo.title== '起诉原因' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(948)">添加起诉原因</div>
-                      </div>
                       <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(941)">添加孩子</div>
                       </div>
@@ -1511,18 +1493,6 @@
                       </div>
                       <div v-if="mo.title== '诉讼法院' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(975)">添加诉讼法院</div>
-                      </div>
-                      <div v-if="mo.title== '家具家电' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(636)">添加家具家电</div>
-                      </div>
-                      <div v-if="mo.title== '保险' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(524)">添加保险</div>
-                      </div>
-                      <div v-if="mo.title== '债权' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(655)">添加债权</div>
-                      </div>
-                      <div v-if="mo.title== '债务' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(656)">添加债务</div>
                       </div>
                     </div>
                   </div>
@@ -1739,9 +1709,11 @@
               id: 4
             })
             this.mokuai.sort(this.compare('id'));
-            for ( let i = 0 ;i < this.aa.QiSuYuanYin.length; i++) {
-              this.aa.QiSuYuanYin[i][0].questions[2].answer = JSON.parse(this.aa.QiSuYuanYin[i][0].questions[2].answer)
-            }
+            if(this.aa.QiSuYuanYin[0][0].questions[0].answer == 1 || this.aa.QiSuYuanYin[0][0].questions[0].answer == ""){
+                this.aa.QiSuYuanYin[0][0].questions[0].answer = []
+              }else{
+                this.aa.QiSuYuanYin[0][0].questions[0].answer = JSON.parse(this.aa.QiSuYuanYin[0][0].questions[0].answer)
+              }
           }).catch((data)=>{
           })
         },
@@ -1865,7 +1837,7 @@
                   })
                 }
               }else{
-                  console.log(e.answer)
+                  // console.log(e)
                  if(Array.isArray(e.answer)){
                   if(e.type == "select_city"){
                     userAddAnswer({
@@ -2211,7 +2183,7 @@
                 }else{
                   this.$notify({
                     title: '保存成功',
-                    message: '车辆信息模块已成功保存',
+                    message: '诉讼请求模块已成功保存',
                     type: 'success'
                   });
                   if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");

@@ -443,7 +443,7 @@ export default {
     },
     EditWenJuan(index, row) {   // 点击修改问卷
       localStorage.setItem('quid',row.id)  // 获取文本内容用
-      localStorage.setItem('qid',row.id)  // 查询标签时候用
+      localStorage.setItem('qid',row.qid)  // 查询标签时候用
       if(this.questionnaireTypeSelect=="起诉状"){
         this.$router.replace("/QiSuComplate");
       }else if(this.questionnaireTypeSelect=="离婚协议书"){
