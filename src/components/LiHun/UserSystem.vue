@@ -328,8 +328,10 @@ export default {
     },
     questionnaireTypeChange(){
       if(this.questionnaireTypeSelect =='离婚协议书'){
+        localStorage.setItem('questionnaireType',1)
         this.questionnaireTypeSelectNum = 1
       }else if(this.questionnaireTypeSelect =='起诉状'){
+        localStorage.setItem('questionnaireType',2)
         this.questionnaireTypeSelectNum = 2
       }else if(this.questionnaireTypeSelect =='申请书'){
         this.questionnaireTypeSelectNum = 3
