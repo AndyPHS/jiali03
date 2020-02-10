@@ -261,7 +261,7 @@ export default {
       this.dialogNewWenJuan = false;
     },
     checkGuanLian(index, row){ // 点击查看关联
-      localStorage.setItem('qid',row.id)
+      localStorage.setItem('qid',row.wid)
       this.$router.replace("/GuanLianManagement");
     },
     checkModel(index, row){  // 点击查看模板
