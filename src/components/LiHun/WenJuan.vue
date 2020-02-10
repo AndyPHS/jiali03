@@ -261,11 +261,11 @@ export default {
       this.dialogNewWenJuan = false;
     },
     checkGuanLian(index, row){ // 点击查看关联
-      localStorage.setItem('qid',row.wid)
+      localStorage.setItem('qid',row.id)
       this.$router.replace("/GuanLianManagement");
     },
     checkModel(index, row){  // 点击查看模板
-      localStorage.setItem('wid',row.id)
+      localStorage.setItem('wid',row.wid)
       localStorage.setItem('qid',row.id)
       this.$router.replace("/DisplayRule");
     },
