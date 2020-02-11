@@ -226,8 +226,8 @@
                 }
             },
             makeOut(){
-                alert("暂没有生成页面")
-                // this.$router.replace("/");
+                // alert("暂没有生成页面")
+                this.$router.replace("/ShengChengXieYi");
             },
             getSelectLabel(){ // 获取标签
                 selectLabel({

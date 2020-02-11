@@ -19,7 +19,7 @@
                       <!-- 大问题块 -->
                       <div>
                         <div v-if="mo.title=='子女状况' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女</h2>
+                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女情况</h2>
                         </div>
                         <!-- <div v-if="mo.title=='起诉原因' ">
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">起诉原因{{index+1}}</h2>
@@ -1468,11 +1468,11 @@
                       </div>
                       <div>
                         <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(941,index)">删除孩子</div>
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(941,index)">删除孩子情况</div>
                         </div>
-                        <div v-if="mo.title==='起诉经历' " class="text-right flex justify-end">
+                        <!-- <div v-if="mo.title==='起诉经历' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(950,index)">删除起诉经历</div>
-                        </div>
+                        </div> -->
                         <!-- <div v-if="mo.title==='诉讼请求' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(968,index)">删除诉讼请求</div>
                         </div>
@@ -1483,7 +1483,7 @@
                     </div>
                     <div>
                       <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(941)">添加孩子</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(941)">添加孩子情况</div>
                       </div>
                       <!-- <div v-if="mo.title== '起诉经历' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(950)">添加起诉经历</div>
@@ -1547,7 +1547,7 @@
         </div>
         <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev">上一步</el-button>
         <el-button v-if="active < this.mokuai.length-1 " class="my-5" @click="next">下一步</el-button>
-        <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
+        <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">个性化修改</el-button>
       </div>
     </div>
     <div class="absolute returnUserList right-0">
@@ -1597,7 +1597,7 @@
               QiSuJingLi:[],     // 起诉经历
               SuSongQingQiu:[],  // 诉讼请求
               QiSuFaYuan: [],    // 起诉法院
-              GeXingHuaXiuGai: [], // 个性化修改
+              // GeXingHuaXiuGai: [], // 个性化修改
               
             },           
             IsShow: false,
@@ -1609,7 +1609,7 @@
               // {title: '起诉经历', part: 'QiSuJingLi',id:5},
               // {title: '诉讼请求', part: 'SuSongQingQiu',id:6},
               // {title: '起诉法院', part: 'QiSuFaYuan',id:7},
-              {title: '个性化修改', part: 'GeXingHuaXiuGai',id:8},
+              // {title: '个性化修改', part: 'GeXingHuaXiuGai',id:8},
 
             ],
             active: 0,
@@ -1980,14 +1980,6 @@
               if(data.data.status_code == 200 ){
                 if(e==941){
                   this.getZiNv()  // 查询子女模块数据
-                }else if(e==948){
-                  this.getQiSuYuanYin() // 查询起诉原因模块数据
-                }else if(e==950){
-                  this.getQiSuJingLi()  // 查询起诉经历模块数据
-                }else if(e==968){
-                  this.getSuSongQingQiu()   // 查询诉讼请求模块数据
-                }else if(e==1000){
-                  this.getQiSuFaYuan()  // 查询诉讼法院模块数据
                 }
                 this.$message({
                   message: '添加成功',
@@ -2044,7 +2036,8 @@
         },
         complate () {
           this.IsShow = false;
-          this.$router.replace("/ShengChengXieYi");
+          this.$router.replace("/QiSuComplate"); // 进入小问卷修改页面
+          // this.$router.replace("/ShengChengXieYi");
         },
         stepClick (val) {
           var _that = this;
@@ -2083,7 +2076,7 @@
                   message: '基本信息模块已成功保存',
                   type: 'success'
                 });
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
               }
             }).catch((data)=>{
             })
@@ -2101,7 +2094,7 @@
                   message: '婚姻状况信息已成功保存',
                   type: 'success'
                 });
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
               }
             }).catch((data)=>{
             })
@@ -2121,12 +2114,12 @@
                     message: '子女状况模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
             }
             
           }else if(this.mokuai[this.active].title == '起诉原因'){
@@ -2144,12 +2137,12 @@
                     message: '起诉原因信息模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
             }
           }else if(this.mokuai[this.active].title == '起诉经历'){
             localStorage.setItem('qpid', 950)
@@ -2166,12 +2159,12 @@
                     message: '起诉经历信息模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
             }
           }else if(this.mokuai[this.active].title == '诉讼请求'){
             localStorage.setItem('qpid', 968)
@@ -2188,12 +2181,12 @@
                     message: '诉讼请求模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
             }
           }else if(this.mokuai[this.active].title == '诉讼法院'){
             localStorage.setItem('qpid', 1000)
@@ -2210,12 +2203,12 @@
                     message: '诉讼法院信息模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
+              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
             }
           }
         },
@@ -2242,6 +2235,7 @@
     }
 </script>
 <style>
+html{height: 100%;background-color: #f7fafc;}
 .min{width:600px;margin:0 auto;}
 .ban{width:100% !important;}
 .returnUserList{top:110px;right: 20px;}

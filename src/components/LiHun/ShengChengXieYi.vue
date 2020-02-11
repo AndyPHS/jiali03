@@ -3,7 +3,7 @@
     <div class=" containermin mx-auto py-10">
       <div class="bg-white rounded-lg">
         <div class="outputword rounded-lg shadow-lg relative">
-          <h2 class="py-2 text-2xl font-bold">离婚协议书</h2>
+          <h2 class="py-2 text-2xl font-bold">{{ TitleMsg }}</h2>
           <div class="absolute top-0 right-0 mt-4 mr-6">
             <el-button class="text-right" type="primary" @click="GoBasicInformationPage">返回填写</el-button>
           </div>
@@ -85,6 +85,7 @@
           return {
            downloadMsg: '', // 后台返回的下载资源
            outputWord: '',  // 获取离婚协议书
+           TitleMsg: '',     // 标题
            status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
            dialogDownLoadWenJuan: false,  // 点击下载弹出免责弹窗
            form:{
@@ -117,6 +118,11 @@
                 console.log(this.missField)
             }else if(this.status_code == 200){
                 this.outputWord = data.data.data
+            }
+            if(localStorage.getItem('questionnaireType')==1){
+             this.TitleMsg = '离婚协议书';
+            }else if(localStorage.getItem('questionnaireType')==2){
+             this.TitleMsg = '起诉状';
             }
           }).catch((data)=>{
               // this.$router.replace("/");
