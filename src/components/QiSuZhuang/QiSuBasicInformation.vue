@@ -21,7 +21,7 @@
                         <div v-if="mo.title=='子女状况' ">
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女</h2>
                         </div>
-                        <div v-if="mo.title=='起诉原因' ">
+                        <!-- <div v-if="mo.title=='起诉原因' ">
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">起诉原因{{index+1}}</h2>
                         </div>
                         <div v-if="mo.title=='起诉经历' ">
@@ -41,7 +41,7 @@
                         </div>
                         <div v-if="mo.title=='债务' ">
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债务</h2>
-                        </div>
+                        </div> -->
                       </div>
                       
                      
@@ -1473,27 +1473,27 @@
                         <div v-if="mo.title==='起诉经历' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(950,index)">删除起诉经历</div>
                         </div>
-                        <div v-if="mo.title==='诉讼请求' " class="text-right flex justify-end">
+                        <!-- <div v-if="mo.title==='诉讼请求' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(968,index)">删除诉讼请求</div>
                         </div>
                         <div v-if="mo.title==='诉讼法院' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(975,index)">删除诉讼法院</div>
-                        </div>
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(1000,index)">删除诉讼法院</div>
+                        </div> -->
                       </div>
                     </div>
                     <div>
                       <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(941)">添加孩子</div>
                       </div>
-                      <div v-if="mo.title== '起诉经历' " class="text-right flex justify-end">
+                      <!-- <div v-if="mo.title== '起诉经历' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(950)">添加起诉经历</div>
                       </div>
                       <div v-if="mo.title== '诉讼请求' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(968)">添加诉讼请求</div>
                       </div>
                       <div v-if="mo.title== '诉讼法院' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(975)">添加诉讼法院</div>
-                      </div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1000)">添加诉讼法院</div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
@@ -1738,14 +1738,16 @@
               id: 6
             })
             this.mokuai.sort(this.compare('id'));
-            for ( let i = 0 ;i < this.aa.SuSongQingQiu.length; i++) {
-              this.aa.SuSongQingQiu[i][0].questions[2].answer = JSON.parse(this.aa.SuSongQingQiu[i][0].questions[2].answer)
+            if(this.aa.SuSongQingQiu[0][2].questions[0].answer == 1 || this.aa.SuSongQingQiu[0][2].questions[0].answer == ""){
+              this.aa.SuSongQingQiu[0][2].questions[0].answer = []
+            }else{
+              this.aa.SuSongQingQiu[0][2].questions[0].answer = JSON.parse(this.aa.SuSongQingQiu[0][2].questions[0].answer)
             }
           }).catch((data)=>{
           })
         },
         getQiSuFaYuanMsg () { // 查询诉讼法院模块数据
-          returnQuestionnaireJson({'qpid': 975}).then((data)=>{  // 查询诉讼法院模块数据
+          returnQuestionnaireJson({'qpid': 1000}).then((data)=>{  // 查询诉讼法院模块数据
             this.aa.QiSuFaYuan= data.data.data
             this.mokuai.push({
               title: '诉讼法院', 
@@ -1782,7 +1784,7 @@
           })
         },
         getQiSuFaYuan () { // 查询诉讼法院模块数据
-          returnQuestionnaireJson({'qpid': 975}).then((data)=>{  // 查询诉讼法院模块数据
+          returnQuestionnaireJson({'qpid': 1000}).then((data)=>{  // 查询诉讼法院模块数据
             this.aa.QiSuFaYuan= data.data.data
           }).catch((data)=>{
           })
@@ -1984,7 +1986,7 @@
                   this.getQiSuJingLi()  // 查询起诉经历模块数据
                 }else if(e==968){
                   this.getSuSongQingQiu()   // 查询诉讼请求模块数据
-                }else if(e==975){
+                }else if(e==1000){
                   this.getQiSuFaYuan()  // 查询诉讼法院模块数据
                 }
                 this.$message({
@@ -2015,7 +2017,7 @@
                   this.getQiSuJingLi()  // 查询起诉经历模块数据
                 }else if(e==968){
                   this.getSuSongQingQiu()   // 查询诉讼请求模块数据
-                }else if(e==975){
+                }else if(e==1000){
                   this.getQiSuFaYuan()  // 查询诉讼法院模块数据
                 }
                 this.$message({
@@ -2194,10 +2196,10 @@
               if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
             }
           }else if(this.mokuai[this.active].title == '诉讼法院'){
-            localStorage.setItem('qpid', 975)
+            localStorage.setItem('qpid', 1000)
             if(this.aa.QiSuFaYuan !== undefined){
               demoYanZheng({
-                qpid: 975
+                qpid: 1000
               }).then((data)=>{
                 if(data.data.status_code == 330){
                   this.missMsgBox = true
