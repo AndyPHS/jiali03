@@ -152,7 +152,7 @@
                               </el-form-item>
                               <div v-if="$$item.grandson">
                                 <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
-                                  <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
+                                  <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]" :key="$$$$index">
                                     <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
                                       <el-form-item label="" class="text-base">
                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
@@ -204,7 +204,7 @@
                               </el-form-item>
                               <div v-if="$$item.grandson">
                                 <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
-                                  <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]">
+                                  <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]" :key="$$$$index">
                                     <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
                                       <el-form-item label="" class="text-base">
                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
@@ -240,7 +240,7 @@
                                 <el-select v-model="$$item.answer"  @change='userAddAnswerAction($$item)' size="small">
                                   <el-option
                                     v-for="(s,i) in $$item.listData"
-                                    :key="s.value"
+                                    :key="i"
                                     :label="s.label"
                                     :value="s.value">
                                   </el-option>
@@ -362,7 +362,7 @@
                                    </el-form-item>
                                     <div v-if="$$$item.grandson">
                                       <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
-                                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]" :key="$$$$$index">
                                           <!-- 省市三级联动 -->
                                           <div v-if="$$$$$item.type == 'select_city'">
                                             <el-form-item label="">
@@ -414,7 +414,7 @@
                                     </el-form-item>
                                     <div v-if="$$$item.grandson">
                                       <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
-                                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]" :key="$$$$$index">
                                           <!-- 省市三级联动 -->
                                           <div v-if="$$$$$item.type == 'select_city'">
                                             <el-form-item label="">
@@ -1283,7 +1283,7 @@
 
                                 <div v-if="$$$item.questions ">
                                   <h2 class="text-left text-blue-500">{{$$$item.title}}</h2>
-                                  <div v-for="($$$$item, $$$$index) in $$$item.questions">
+                                  <div v-for="($$$$item, $$$$index) in $$$item.questions" :key="$$$$index">
                                     <!-- 省市三级联动 -->
                                     <div v-if="$$$$item.type == 'select_city'">
                                       <el-form-item label="">
@@ -1858,7 +1858,7 @@
                        // console.log("保存失败")
                     })
                   }else if(e.type == "checkbox"){
-                    console.log(e.answer)
+                    // console.log(e.answer)
                     userAddAnswer({
                       value: JSON.stringify(e.answer),  // 值
                       qpid: e.id, // 关联id
@@ -2041,7 +2041,19 @@
         },
         complate () {
           this.IsShow = false;
-          this.$router.replace("/QiSuComplate"); // 进入小问卷修改页面
+          outPutWord().then((data)=>{
+            this.status_code = data.data.status_code
+            // console.log(this.status_code)
+            if(this.status_code == 330 ){
+                this.missField = data.data.data
+            }else if(this.status_code == 200){
+                this.missAlert = false
+                // this.$router.replace("/QiSuComplate"); // 进入小问卷修改页面
+                this.$router.replace("/ShengChengXieYi");
+            }
+          }).catch((data)=>{
+          })
+          
           // this.$router.replace("/ShengChengXieYi");
         },
         stepClick (val) {
@@ -2081,7 +2093,7 @@
                   message: '基本信息模块已成功保存',
                   type: 'success'
                 });
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+                if (this.active++ >this.mokuai.length-1) ;
               }
             }).catch((data)=>{
             })
@@ -2099,7 +2111,7 @@
                   message: '婚姻状况信息已成功保存',
                   type: 'success'
                 });
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+                if (this.active++ >this.mokuai.length-1) ;
               }
             }).catch((data)=>{
             })
@@ -2109,7 +2121,7 @@
               demoYanZheng({
                 qpid: 941
               }).then((data)=>{
-                console.log(data.data)
+                // console.log(data.data)
                 if(data.data.status_code == 330){
                   this.missMsgBox = true
                   this.missMsg = data.data.data
@@ -2119,12 +2131,12 @@
                     message: '子女状况模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+                  if (this.active++ >this.mokuai.length-1) ;
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+              if (this.active++ >this.mokuai.length-1) ;
             }
             
           }else if(this.mokuai[this.active].title == '起诉原因'){
@@ -2142,12 +2154,12 @@
                     message: '起诉原因信息模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+                  if (this.active++ >this.mokuai.length-1) ;
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+              if (this.active++ >this.mokuai.length-1) ;
             }
           }else if(this.mokuai[this.active].title == '起诉经历'){
             localStorage.setItem('qpid', 950)
@@ -2164,12 +2176,12 @@
                     message: '起诉经历信息模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+                  if (this.active++ >this.mokuai.length-1);
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+              if (this.active++ >this.mokuai.length-1) ;
             }
           }else if(this.mokuai[this.active].title == '诉讼请求'){
             localStorage.setItem('qpid', 968)
@@ -2186,12 +2198,12 @@
                     message: '诉讼请求模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+                  if (this.active++ >this.mokuai.length-1) ;
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+              if (this.active++ >this.mokuai.length-1) ;
             }
           }else if(this.mokuai[this.active].title == '诉讼法院'){
             localStorage.setItem('qpid', 1000)
@@ -2208,12 +2220,12 @@
                     message: '诉讼法院信息模块已成功保存',
                     type: 'success'
                   });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+                  if (this.active++ >this.mokuai.length-1) ;
                 }
               }).catch((data)=>{
               })
             }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/QiSuComplate");
+              if (this.active++ >this.mokuai.length-1);
             }
           }
         },

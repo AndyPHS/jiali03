@@ -193,7 +193,7 @@
 .returnUserList{top:110px;right: 20px;}
 .outputword{padding:20px;border:1px solid #ecf5ec;}
 .outputword>h2{border-bottom: 1px solid #dbe2db;}
-.outputword .msg{white-space:pre-wrap;margin-top: -50px;}
+.outputword .msg{white-space:pre-wrap;}
 #outputwordmsg p{font-weight:bolder !important;}
 /*#outputwordmsg{height: 500px;}*/
 </style>
