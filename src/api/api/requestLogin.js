@@ -624,7 +624,7 @@ export const updateWord = params => {
   return axios({
     method: "put",
     dataType: 'json',
-    url: apiUrl.updateWord + localStorage.getItem('wid'),
+    url: apiUrl.updateWord + localStorage.getItem('fWordId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -634,7 +634,7 @@ export const wordSelect = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.wordSelect + localStorage.getItem('wid'),
+    url: apiUrl.wordSelect + localStorage.getItem('fWordId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -655,7 +655,7 @@ export const deleteWord = params => {
   return axios({
     method: "delete",
     dataType: 'json',
-    url: apiUrl.deleteWord + localStorage.getItem('wid'),
+    url: apiUrl.deleteWord + localStorage.getItem('fWordId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -677,7 +677,7 @@ export const addWordJson = params => {
   return axios({
     method: "post",
     dataType: 'json',
-    url: apiUrl.addWordJson + localStorage.getItem('wid'),
+    url: apiUrl.addWordJson + localStorage.getItem('fWordId'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });

@@ -122,7 +122,7 @@
             if(localStorage.getItem('questionnaireType')==1){
              this.TitleMsg = '离婚协议书';
             }else if(localStorage.getItem('questionnaireType')==2){
-             this.TitleMsg = '起诉状';
+             this.TitleMsg = '离婚起诉状';
             }
           }).catch((data)=>{
               // this.$router.replace("/");
