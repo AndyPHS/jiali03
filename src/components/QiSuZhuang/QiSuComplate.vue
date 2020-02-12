@@ -89,8 +89,8 @@
                                     @change="searchKeyWordAction"
                                     :loading="loading">
                                     <el-option
-                                      v-for="item in keyWord.options"
-                                      :key="item.value"
+                                      v-for="(item, index) in keyWord.options"
+                                      :key="index"
                                       :label="item.label"
                                       :value="item.value">
                                     </el-option>

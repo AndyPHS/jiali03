@@ -1697,6 +1697,11 @@
                 this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer)
               }
             }
+            // if(this.aa.ZiNv[0][0].questions[0].answer == 1 || this.aa.ZiNv[0][0].questions[0].answer == ""){
+            //     this.aa.ZiNv[0][0].questions[0].answer = []
+            // }else{
+            //   this.aa.ZiNv[0][0].questions[0].answer = JSON.parse(this.aa.ZiNv[0][0].questions[0].answer)
+            // }
           }).catch((data)=>{
           })
         },

@@ -79,6 +79,9 @@
               <el-button 
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">编辑</el-button>
+              <el-button v-show="questionnaireTypeSelect =='起诉状'" 
+                size="mini"
+                @click="TestEditWenJuan(scope.$index, scope.row)">测试编辑</el-button>  
               <el-button 
                 size="mini"
                 @click="DownLoadWenJuan(scope.$index, scope.row)">下载</el-button>
@@ -262,6 +265,7 @@ export default {
   data () {
     return{
       questionnaireType: {},   // 问卷数组类型
+      chooseQuestionnaireType: null, // 选择的数组类型
       questionnaireTypeSelect: '', // 选择问卷数组类型
       questionnaireTypeSelectNum: null, // 选择问卷数组类型数字
       questionnaireSelecter: null, // 选择问卷
@@ -451,6 +455,11 @@ export default {
       }else if(this.questionnaireTypeSelect=="离婚协议书"){
         this.$router.replace("/BasicInformation");
       }
+    },
+    TestEditWenJuan(index, row){ // 测试编辑，临时添加
+      localStorage.setItem('quid',row.id)  // 获取文本内容用
+      localStorage.setItem('qid',row.qid)  // 查询标签时候用
+      this.$router.replace("/QiSuBasicInformation");
     },
     // EditQuestionnaireOk(){  // 点击修改问卷确定按钮
     //   updateQuestionnaire({
