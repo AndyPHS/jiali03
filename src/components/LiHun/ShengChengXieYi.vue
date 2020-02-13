@@ -76,7 +76,7 @@
 <script>
 
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
-  import {getWord} from '@/api/api/requestLogin.js'  // 下载离婚协议书
+  // import {getWord} from '@/api/api/requestLogin.js'  // 下载离婚协议书
   import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
   
   
@@ -117,7 +117,7 @@
                 this.missField = data.data.data
                 console.log(this.missField)
             }else if(this.status_code == 200){
-                this.outputWord = data.data.data
+                this.outputWord = data.data.data.content
             }
             if(localStorage.getItem('questionnaireType')==1){
              this.TitleMsg = '离婚协议书';
@@ -137,9 +137,10 @@
         },
         dialogDownLoadWenJuanOk(){   // 点击下载弹出确定按钮
           if(this.form.type){
-            getWord().then((data)=>{
+            outPutWord().then((data)=>{
+              // console.log(data.data.data)
               if(data.status==200){
-                window.open('http://office365.aladdinlaw.com:3921/word/离婚协议书.docx')
+                window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data.wordFilePath)
               }
               this.dialogDownLoadWenJuan = false;
             }).catch((data)=>{

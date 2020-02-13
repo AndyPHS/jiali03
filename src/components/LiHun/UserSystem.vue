@@ -248,7 +248,6 @@ import {selectUserQuestionnaire} from '@/api/api/requestLogin.js' // 查找用�
 import {selectUserDeleteQuestionnaire} from '@/api/api/requestLogin.js' // 查找用户回收站
 import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js' // 修改用户问卷
 import {outPutWord} from '@/api/api/requestLogin.js' // 生成数据
-import {getWord} from '@/api/api/requestLogin.js' // 下载word
 import {userAddQuestionnaire} from '@/api/api/requestLogin.js' // 新增用户问卷
 import {copyUserQuestionnaire} from '@/api/api/requestLogin.js' // 新增副本
 
@@ -378,11 +377,16 @@ export default {
       this.chooseList.title = row.title
       outPutWord().then((data)=>{
         if(data.data.status_code == 200 ){
-          localStorage.removeItem('quid');
-          this.chooseList.content = data.data.data
+          // localStorage.removeItem('quid');
+          this.chooseList.content = data.data.data.content
+        }else if(data.data.status_code == 330){
+          this.$message({
+            message: '问卷未填写完，无法查看',
+            type: 'error'
+          });
         }else{
           this.$message({
-            message: '查看失败，请联系管理员',
+            message: '获取失败请联系后台',
             type: 'error'
           });
         }
@@ -504,9 +508,14 @@ export default {
     },
     dialogDownLoadWenJuanOk(){
       if(this.form.type){
-        getWord().then((data)=>{
-          if(data.status==200){
-            window.open('http://office365.aladdinlaw.com:3921/word/离婚协议书.docx')
+        outPutWord().then((data)=>{
+          if(data.data.status_code == 200){
+            window.open('http://office365.aladdinlaw.com:3921/word/'+data.data.data.wordFilePath)
+          }else if(data.data.status_code == 330){
+            this.$message({
+              message: '信息未填写完，无法下载',
+              type: 'error'
+            });
           }
           this.dialogDownLoadWenJuan = false;
         }).catch((data)=>{
