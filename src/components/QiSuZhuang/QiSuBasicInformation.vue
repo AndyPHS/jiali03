@@ -1660,8 +1660,8 @@
           returnQuestionnaireJson({'qpid': 933}).then((data)=>{  // 查询婚姻状况模块数据
             this.aa.HunYinStatus = data.data.data
             this.mokuai.sort(this.compare('id'));
-            let cityAnswer = JSON.parse(this.aa.HunYinStatus[0][0].questions[1].answer)
-            this.aa.HunYinStatus[0][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
+            let cityAnswer = JSON.parse(this.aa.HunYinStatus[0][0].questions[3].answer)
+            this.aa.HunYinStatus[0][0].questions[3].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
           })
         },
@@ -1760,6 +1760,8 @@
               id: 7
             })
             this.mokuai.sort(this.compare('id'));
+            let cityAnswer = JSON.parse(this.aa.QiSuFaYuan[0][0].questions[0].answer)
+            this.aa.QiSuFaYuan[0][0].questions[0].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
           })
         },
