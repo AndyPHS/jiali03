@@ -1468,7 +1468,7 @@
                       </div>
                       <div>
                         <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(941,index)">删除孩子情况</div>
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(990,index)">删除孩子情况</div>
                         </div>
                         <!-- <div v-if="mo.title==='起诉经历' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(950,index)">删除起诉经历</div>
@@ -1483,7 +1483,7 @@
                     </div>
                     <div>
                       <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(941)">添加孩子情况</div>
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(990)">添加孩子情况</div>
                       </div>
                       <!-- <div v-if="mo.title== '起诉经历' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(950)">添加起诉经历</div>
@@ -1666,7 +1666,7 @@
           })
         },
         getZiNvMsg () { // 查询子女模块数据
-          returnQuestionnaireJson({'qpid': 941}).then((data)=>{ // 查询子女模块数据
+          returnQuestionnaireJson({'qpid': 990}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
             this.mokuai.push({
               title: '子女状况', 
@@ -1766,7 +1766,7 @@
           })
         },
         getZiNv () { // 查询子女模块数据
-          returnQuestionnaireJson({'qpid': 941}).then((data)=>{ // 查询子女模块数据
+          returnQuestionnaireJson({'qpid': 990}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
             console.log(this.aa.ZiNv)
           }).catch((data)=>{
@@ -1985,7 +1985,7 @@
               quid: localStorage.getItem('quid')
             }).then((data)=>{
               if(data.data.status_code == 200 ){
-                if(e==941){
+                if(e==990){
                   this.getZiNv()  // 查询子女模块数据
                 }
                 this.$message({
@@ -2008,7 +2008,7 @@
                 quid: localStorage.getItem('quid'),
                 fornum: index+1
               }).then((data)=>{
-                if(e==941){
+                if(e==990){
                   this.getZiNv()  // 查询子女模块数据
                 }else if(e==948){
                   this.getQiSuYuanYin() // 查询起诉原因模块数据
@@ -2118,10 +2118,10 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '子女状况'){
-            localStorage.setItem('qpid', 941)
+            localStorage.setItem('qpid', 990)
             if(this.aa.ZiNv !== undefined){
               demoYanZheng({
-                qpid: 941
+                qpid: 990
               }).then((data)=>{
                 // console.log(data.data)
                 if(data.data.status_code == 330){
