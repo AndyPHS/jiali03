@@ -331,13 +331,14 @@ export default {
       })
     },
     questionnaireTypeChange(){
-      if(this.questionnaireTypeSelect =='离婚协议书'){
+      if(this.questionnaireTypeSelect =='协议书类'){
         localStorage.setItem('questionnaireType',1)
         this.questionnaireTypeSelectNum = 1
-      }else if(this.questionnaireTypeSelect =='起诉状'){
+      }else if(this.questionnaireTypeSelect =='起诉状类'){
         localStorage.setItem('questionnaireType',2)
         this.questionnaireTypeSelectNum = 2
-      }else if(this.questionnaireTypeSelect =='申请书'){
+      }else if(this.questionnaireTypeSelect =='申请书类'){
+        localStorage.setItem('questionnaireType',3)
         this.questionnaireTypeSelectNum = 3
       }
       questionnaireSelect({
@@ -436,10 +437,11 @@ export default {
         }).then((data)=>{
           localStorage.setItem('quid', data.data.data)
           // localStorage.removeItem('qid');
-          if(this.questionnaireTypeSelect=="起诉状"){
-            localStorage.setItem('questionnaireType', 2) // 1代表离婚协议书，2代表起诉状
+          if(this.questionnaireTypeSelect=="起诉状类"){
+            localStorage.setItem('questionnaireType', 2) // 1代表协议书类，2代表起诉状类
             this.$router.replace("/QiSuBasicInformation");
-          }else if(this.questionnaireTypeSelect=="离婚协议书"){
+          }else if(this.questionnaireTypeSelect=="协议书类"){
+            localStorage.setItem('questionnaireType', 1)
             this.$router.replace("/ChuShi");
           }
           // console.log(data.data.data)
@@ -450,9 +452,11 @@ export default {
     EditWenJuan(index, row) {   // 点击修改问卷
       localStorage.setItem('quid',row.id)  // 获取文本内容用
       localStorage.setItem('qid',row.qid)  // 查询标签时候用
-      if(this.questionnaireTypeSelect=="起诉状"){
+      if(this.questionnaireTypeSelect=="起诉状类"){
         this.$router.replace("/QiSuComplate");
-      }else if(this.questionnaireTypeSelect=="离婚协议书"){
+      }else if(this.questionnaireTypeSelect=="协议书类"){
+        this.$router.replace("/BasicInformation");
+      }else if(this.questionnaireTypeSelect=="申请书类"){
         this.$router.replace("/BasicInformation");
       }
     },
