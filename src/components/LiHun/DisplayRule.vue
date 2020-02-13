@@ -645,7 +645,7 @@
                   localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 }else{
                   // localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId)
-                  localStorage.setItem('fWordId',localStorage.getItem('qid')) // 保存选中组合规则的id到本地缓存
+                  localStorage.setItem('fWordId',localStorage.getItem('wid')) // 保存选中组合规则的id到本地缓存
                 }
                 wordSelect().then((data)=>{
                     this.selectGuiZe.selectGuiZeArr = data.data.data.json
