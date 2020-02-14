@@ -202,6 +202,36 @@
                                   <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change='userAddAnswerAction($$item)'>{{list.label}}</el-checkbox>
                                 </el-checkbox-group>
                               </el-form-item>
+                              <div v-if="$$item.childQuestion">
+                                <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
+                                  <div v-for="($$$$item,$$$$index) in $$item.childQuestion[$$$item]" :key="$$$$index">
+                                    <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                                      <el-form-item label="" class="text-base">
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                        <el-input
+                                          type="text"
+                                          class="ban"
+                                          v-model="$$$$item.answer"
+                                          size="small"
+                                          :placeholder="$$$$item.placeholder"
+                                          @blur="userAddAnswerAction($$$$item)"
+                                        ></el-input>
+                                      </el-form-item>
+                                    </div>
+                                    <!-- 省市三级联动 -->
+                                    <div v-if="$$$$item.type == 'select_city'">
+                                      <el-form-item label="">
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                        <el-cascader
+                                        v-model="$$$$item.answer"
+                                        :options="options"
+                                        @change="userAddAnswerAction($$$$item)">
+                                        </el-cascader>
+                                      </el-form-item>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                               <div v-if="$$item.grandson">
                                 <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
                                   <div v-for="($$$$item,$$$$index) in $$item.grandson[$$$item]" :key="$$$$index">
@@ -412,8 +442,51 @@
                                         <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
                                       </el-checkbox-group>
                                     </el-form-item>
+                                    <div v-if="$$$item.childQuestion">
+                                      <div v-for="($$$$item, $$$$index) in JSON.parse($$$item.answer)" :key="$$$$index">
+                                        <div v-for="($$$$$item,$$$$$index) in $$$item.childQuestion[$$$$item]" :key="$$$$$index">
+                                          <!-- 省市三级联动 -->
+                                          <div v-if="$$$$$item.type == 'select_city'">
+                                            <el-form-item label="">
+                                              <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                              <el-cascader
+                                              v-model="$$$$$item.answer"
+                                              :options="options"
+                                              @change="userAddAnswerAction($$$$$item)">
+                                              </el-cascader>
+                                            </el-form-item>
+                                          </div>
+                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                            <el-form-item label="" class="text-base">
+                                              <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                              <el-input
+                                                type="text"
+                                                class="ban"
+                                                v-model="$$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$$item.placeholder"
+                                                @blur="userAddAnswerAction($$$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
+                                            <el-form-item label="" class="text-base">
+                                              <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                              <el-input
+                                                type="text"
+                                                class="ban"
+                                                v-model="$$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$$item.placeholder"
+                                                @blur="userAddAnswerAction($$$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                                     <div v-if="$$$item.grandson">
-                                      <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                                      <div v-for="($$$$item, $$$$index) in JSON.parse($$$item.answer)" :key="$$$$index">
                                         <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]" :key="$$$$$index">
                                           <!-- 省市三级联动 -->
                                           <div v-if="$$$$$item.type == 'select_city'">
@@ -427,6 +500,19 @@
                                             </el-form-item>
                                           </div>
                                           <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                            <el-form-item label="" class="text-base">
+                                              <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                              <el-input
+                                                type="text"
+                                                class="ban"
+                                                v-model="$$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$$item.placeholder"
+                                                @blur="userAddAnswerAction($$$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
                                             <el-form-item label="" class="text-base">
                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
                                               <el-input
@@ -1278,6 +1364,49 @@
                                         <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
                                       </el-checkbox-group>
                                     </el-form-item>
+                                    <div v-if="$$$item.childQuestion">
+                                      <div v-for="($$$$item, $$$$index) in JSON.parse($$$item.answer)" :key="$$$$index">
+                                        <div v-for="($$$$$item,$$$$$index) in $$$item.childQuestion[$$$$item]">
+                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                            <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                              <el-input
+                                                type="text"
+                                                class="ban"
+                                                v-model="$$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$$item.placeholder"
+                                                @blur="userAddAnswerAction($$$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
+                                            <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title" class="text-base">
+                                              <el-input
+                                                type="text"
+                                                class="ban"
+                                                v-model="$$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$$item.placeholder"
+                                                @blur="userAddAnswerAction($$$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <div v-if="$$$$$item.type == 'select'">
+                                            <el-form-item :label="$$$$$item.isRequired==false ?'(选填)'+$$$$$item.title:$$$$$item.title">
+                                              <el-select v-model="$$$$$item.answer" @change="userAddAnswerAction($$$$$item)">
+                                                <el-option
+                                                  size="small"
+                                                  v-for="(s,i) in $$$$$item.listData"
+                                                  :key="i"
+                                                  :label="s.label"
+                                                  :value="s.value">
+                                                </el-option>
+                                              </el-select>
+                                            </el-form-item>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                                  </div>
                                 <!-- 三级问题 -->
 
@@ -1458,6 +1587,92 @@
                                             <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$$item)">{{list.label}}</el-checkbox>
                                           </el-checkbox-group>
                                         </el-form-item>
+                                        <div v-if="$$$$item.grandson">
+                                          <div v-for="($$$$$item, $$$$$index) in JSON.parse($$$$item.answer)" :key="$$$$$index">
+                                            <div v-for="($$$$$$item,$$$$$$index) in $$$$item.grandson[$$$$$item]">
+                                              <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='number'">
+                                                <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
+                                                  <el-input
+                                                    type="text"
+                                                    class="ban"
+                                                    v-model="$$$$$$item.answer"
+                                                    size="small"
+                                                    :placeholder="$$$$$$item.placeholder"
+                                                    @blur="userAddAnswerAction($$$$$$item)"
+                                                  ></el-input>
+                                                </el-form-item>
+                                              </div>
+                                              <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='text'">
+                                                <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
+                                                  <el-input
+                                                    type="text"
+                                                    class="ban"
+                                                    v-model="$$$$$$item.answer"
+                                                    size="small"
+                                                    :placeholder="$$$$$$item.placeholder"
+                                                    @blur="userAddAnswerAction($$$$$$item)"
+                                                  ></el-input>
+                                                </el-form-item>
+                                              </div>
+                                              <div v-if="$$$$$$item.type == 'select'">
+                                                <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title">
+                                                  <el-select v-model="$$$$$$item.answer" @change="userAddAnswerAction($$$$$$item)">
+                                                    <el-option
+                                                      size="small"
+                                                      v-for="(s,i) in $$$$$$item.listData"
+                                                      :key="i"
+                                                      :label="s.label"
+                                                      :value="s.value">
+                                                    </el-option>
+                                                  </el-select>
+                                                </el-form-item>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div v-if="$$$$item.childQuestion">
+                                          <div v-for="($$$$$item, $$$$$index) in JSON.parse($$$$item.answer)" :key="$$$$$index">
+                                            <div v-for="($$$$$$item,$$$$$$index) in $$$$item.childQuestion[$$$$$item]">
+                                              <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='number'">
+                                                <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
+                                                  <el-input
+                                                    type="text"
+                                                    class="ban"
+                                                    v-model="$$$$$$item.answer"
+                                                    size="small"
+                                                    :placeholder="$$$$$$item.placeholder"
+                                                    @blur="userAddAnswerAction($$$$$$item)"
+                                                  ></el-input>
+                                                </el-form-item>
+                                              </div>
+                                              <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='text'">
+                                                <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
+                                                  <el-input
+                                                    type="text"
+                                                    class="ban"
+                                                    v-model="$$$$$$item.answer"
+                                                    size="small"
+                                                    :placeholder="$$$$$$item.placeholder"
+                                                    @blur="userAddAnswerAction($$$$$$item)"
+                                                  ></el-input>
+                                                </el-form-item>
+                                              </div>
+                                              <div v-if="$$$$$$item.type == 'select'">
+                                                <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title">
+                                                  <el-select v-model="$$$$$$item.answer" @change="userAddAnswerAction($$$$$$item)">
+                                                    <el-option
+                                                      size="small"
+                                                      v-for="(s,i) in $$$$$$item.listData"
+                                                      :key="i"
+                                                      :label="s.label"
+                                                      :value="s.value">
+                                                    </el-option>
+                                                  </el-select>
+                                                </el-form-item>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
                                      </div>
                                   </div>
                                 </div>
@@ -1743,10 +1958,11 @@
               id: 6
             })
             this.mokuai.sort(this.compare('id'));
-            if(this.aa.SuSongQingQiu[0][2].questions[0].answer == 1 || this.aa.SuSongQingQiu[0][2].questions[0].answer == ""){
+            if(this.aa.SuSongQingQiu[0][2].questions[0].answer == "" || this.aa.SuSongQingQiu[0][2].questions[0].answer == 1 ){
               this.aa.SuSongQingQiu[0][2].questions[0].answer = []
             }else{
               this.aa.SuSongQingQiu[0][2].questions[0].answer = JSON.parse(this.aa.SuSongQingQiu[0][2].questions[0].answer)
+              // console.log(this.aa.SuSongQingQiu[0][2].questions[0].answer)
             }
           }).catch((data)=>{
           })
@@ -1787,6 +2003,12 @@
         getSuSongQingQiu () { // 查询诉讼请求模块数据
           returnQuestionnaireJson({'qpid': 968}).then((data)=>{  // 查询诉讼请求模块数据
             this.aa.SuSongQingQiu= data.data.data
+            if(this.aa.SuSongQingQiu[0][2].questions[0].answer == "" || this.aa.SuSongQingQiu[0][2].questions[0].answer == 1 ){
+              this.aa.SuSongQingQiu[0][2].questions[0].answer = []
+            }else{
+              this.aa.SuSongQingQiu[0][2].questions[0].answer = JSON.parse(this.aa.SuSongQingQiu[0][2].questions[0].answer)
+              // console.log(this.aa.SuSongQingQiu[0][2].questions[0].answer)
+            }
           }).catch((data)=>{
           })
         },
@@ -1804,23 +2026,23 @@
           }
         },
         userAddAnswerAction (e){
-          if( e.isRequired == true){ 
-            if(e.answer == '' || e.answer == null){
+          if( e.isRequired == true){ // 必填字段
+            if( e.answer == '' || e.answer == null){  // 必填项验证
               this.$message.error('必填项内容不能为空');
             }else{
-              if(e.fornum !== undefined){
-                if(Array.isArray(e.answer)){
+              if(e.fornum !== undefined){  // 必填多子女
+                if(Array.isArray(e.answer)){ // 必填多子女数组类型
                   if(e.type == "select_city"){
                       userAddAnswer({
-                      value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
-                      qpid: e.id, // 关联id
-                      fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                      quid: localStorage.getItem('quid') //用户的问卷id
-                    }).then((data)=>{
-                      console.log("保存成功")
-                    }).catch((data)=>{
-                       console.log("保存失败")
-                    }) 
+                        value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
+                        qpid: e.id, // 关联id
+                        fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                        quid: localStorage.getItem('quid') //用户的问卷id
+                      }).then((data)=>{
+                        console.log("保存成功")
+                      }).catch((data)=>{
+                         console.log("保存失败")
+                      }) 
                   }else{
                     userAddAnswer({
                       value: JSON.stringify(e.answer),  // 值
@@ -1834,7 +2056,7 @@
                     })  
                   }
                 }else{
-                  userAddAnswer({
+                  userAddAnswer({  // 必填多子女普通类型
                     value: e.answer,  // 值
                     qpid: e.id, // 关联id
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
@@ -1845,9 +2067,8 @@
                      console.log("保存失败")
                   })
                 }
-              }else{
-                  // console.log(e)
-                 if(Array.isArray(e.answer)){
+              }else{   // 必填非多子女类型
+                if(Array.isArray(e.answer)){  // 必填非多子女类型数组类型
                   if(e.type == "select_city"){
                     userAddAnswer({
                       value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
@@ -1867,7 +2088,18 @@
                       // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                       quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
-                      // console.log("保存成功")
+                      if(e.id == 973){
+                        console.log(typeof(e.answer))
+                        let a = e.answer
+                        let e =[]
+                        for(var i=0;i<a.length;i++){
+                          // a[i] += a[i]+''
+                         console.log(a[i])
+                        }
+                        console.log(e)
+                        this.getSuSongQingQiuMsg()
+                        console.log(this.aa.SuSongQingQiu[0][2].questions[0].answer)
+                      }
                     }).catch((data)=>{
                        // console.log("保存失败")
                     })
@@ -1897,20 +2129,20 @@
                 }
               }
             }
-          }else{
-            if(e.fornum !== undefined){
+          }else{  // 选填字段
+            if(e.fornum !== undefined){  // 选填多子女
               if(Array.isArray(e.answer)){
                 if(e.type == "select_city"){
                     userAddAnswer({
-                    value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
-                    qpid: e.id, // 关联id
-                    fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: localStorage.getItem('quid') //用户的问卷id
-                  }).then((data)=>{
-                    console.log("保存成功")
-                  }).catch((data)=>{
-                     console.log("保存失败")
-                  }) 
+                      value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
+                      qpid: e.id, // 关联id
+                      fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                      quid: localStorage.getItem('quid') //用户的问卷id
+                    }).then((data)=>{
+                      console.log("保存成功")
+                    }).catch((data)=>{
+                       console.log("保存失败")
+                    }) 
                 }else{
                   userAddAnswer({
                     value: JSON.stringify(e.answer),  // 值
@@ -1935,8 +2167,8 @@
                    console.log("保存失败")
                 })
               }
-            }else{
-               if(Array.isArray(e.answer)){
+            }else{  // 选填非多子女
+              if(Array.isArray(e.answer)){  // 选填非多子女数组类型
                 if(e.type == "select_city"){
                   userAddAnswer({
                     value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
@@ -1945,6 +2177,17 @@
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     // console.log("保存成功")
+                  }).catch((data)=>{
+                     // console.log("保存失败")
+                  })
+                }else if(e.type== "checkbox"){
+                  userAddAnswer({
+                    value: e.answer,  // 值
+                    qpid: e.id, // 关联id
+                    // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: localStorage.getItem('quid') //用户的问卷id
+                  }).then((data)=>{
+                    // this.getSuSongQingQiuMsg()
                   }).catch((data)=>{
                      // console.log("保存失败")
                   })
@@ -1960,7 +2203,7 @@
                      // console.log("保存失败")
                   })
                 }
-              }else{
+              }else{  // 选填非多子女普通类型
                 userAddAnswer({
                   value: e.answer,  // 值
                   qpid: e.id, // 关联id

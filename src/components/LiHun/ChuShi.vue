@@ -691,36 +691,36 @@
                                     </el-checkbox-group>
                                   </el-form-item>
                                   <div v-if="$$$$item.grandson">
-                                  <div v-for="($$$$$item, $$$$$index) in $$$$item.answer" :key="$$$$$index">
-                                    <div v-for="($$$$$$item,$$$$$$index) in $$$$item.grandson[$$$$$item]">
-                                      <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='number'">
-                                        <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
-                                          <el-input
-                                            type="text"
-                                            class="ban"
-                                            v-model="$$$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$$$item.placeholder"
-                                            @blur="userAddAnswerAction($$$$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <div v-if="$$$$$$item.type == 'select'">
-                                        <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title">
-                                          <el-select v-model="$$$$$$item.answer" @change="userAddAnswerAction($$$$$$item)">
-                                            <el-option
+                                    <div v-for="($$$$$item, $$$$$index) in $$$$item.answer" :key="$$$$$index">
+                                      <div v-for="($$$$$$item,$$$$$$index) in $$$$item.grandson[$$$$$item]">
+                                        <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='number'">
+                                          <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title" class="text-base">
+                                            <el-input
+                                              type="text"
+                                              class="ban"
+                                              v-model="$$$$$$item.answer"
                                               size="small"
-                                              v-for="(s,i) in $$$$$$item.listData"
-                                              :key="i"
-                                              :label="s.label"
-                                              :value="s.value">
-                                            </el-option>
-                                          </el-select>
-                                        </el-form-item>
+                                              :placeholder="$$$$$$item.placeholder"
+                                              @blur="userAddAnswerAction($$$$$$item)"
+                                            ></el-input>
+                                          </el-form-item>
+                                        </div>
+                                        <div v-if="$$$$$$item.type == 'select'">
+                                          <el-form-item :label="$$$$$$item.isRequired==false ?'(选填)'+$$$$$$item.title:$$$$$$item.title">
+                                            <el-select v-model="$$$$$$item.answer" @change="userAddAnswerAction($$$$$$item)">
+                                              <el-option
+                                                size="small"
+                                                v-for="(s,i) in $$$$$$item.listData"
+                                                :key="i"
+                                                :label="s.label"
+                                                :value="s.value">
+                                              </el-option>
+                                            </el-select>
+                                          </el-form-item>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
                                 </div>
                                 <!--下拉框-->
                                 <div v-if="$$$$item.type == 'select'">
@@ -1231,7 +1231,8 @@
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: localStorage.getItem('quid') //用户的问卷id
             }).then((data)=>{
-              console.log("保存成功")
+              console.log(e.answer)
+              console.log(typeof(e.answer))
             }).catch((data)=>{
                console.log("保存失败")
             })
@@ -1303,6 +1304,16 @@
                 userAddAnswer({
                   value: 1,  // 值
                   qpid: 524, // 关联id
+                  quid: localStorage.getItem('quid') //用户的问卷id
+                }).then((data)=>{
+                  console.log("保存成功")
+                }).catch((data)=>{
+                   console.log("保存失败")
+                })
+              }else if(item==7){
+                userAddAnswer({
+                  value: 1,  // 值
+                  qpid: 332, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
                   console.log("保存成功")

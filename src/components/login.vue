@@ -91,20 +91,35 @@ export default {
 
         // 为表单绑定验证功能
         this.$refs[formName].validate((valid) => {
-
           if (valid) {
             // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
             requestLogin(this.loginForm).then((data)=>{
-              localStorage.setItem('name', this.loginForm.name);
-              localStorage.setItem('password', this.loginForm.password);
-              localStorage.setItem('token',data.data.data.token)
-              this.$router.replace("/FileList");
+              if(data.data.status_code==200){
+                localStorage.setItem('name', this.loginForm.name);
+                localStorage.setItem('password', this.loginForm.password);
+                localStorage.setItem('token',data.data.data.token)
+                this.$router.replace("/FileList");
+              }else if(data.data.status_code==100){
+                this.errorAlert(data.data.message)
+                // this.$router.replace("/FileList");
+              }else if(data.data.status_code==102){
+                this.errorAlert(data.data.message)
+              }else{
+                return
+              }
               // this.showDialog = true
             }).catch((data)=>{
-              console.log(data)
-              this.errorAlert('验证码错误')
+              this.errorAlert('密码或验证码错误，请重试')
+              // console.log(data.message)
+              if(data.data.status_code == 100 ){
+                this.errorAlert('验证码错误')
+              }else if(data.data.status_code == 102 ){
+                this.errorAlert('密码错误')
+              }
+              
             });
           } else {
+            this.errorAlert('重新登录')
             return false;
           };
         });
