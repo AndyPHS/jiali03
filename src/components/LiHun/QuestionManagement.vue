@@ -58,12 +58,15 @@
                   <el-input v-model="user.title" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="类型" :label-width="formLabelWidth">
-                    <el-select v-model="user.type" placeholder="选择问题类型">
+                    <el-select v-model="user.type" class="w-1/2" placeholder="选择问题类型">
                       <el-option v-for="(item, index) in problemType" :key="index" :label="item" :value="index"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="注释" :label-width="formLabelWidth">
                   <el-input v-model="user.placeholder" class="w-1/2" autocomplete="off"></el-input>
+                </el-form-item>
+                <el-form-item label="小贴士" :label-width="formLabelWidth">
+                  <el-input v-model="user.description" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="验证类型" :label-width="formLabelWidth" v-if="user.type==1 ">
                     <el-select v-model="user.re" placeholder="选择输入类型">
@@ -107,12 +110,15 @@
                   <el-input v-model="user.title" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="类型" :label-width="formLabelWidth">
-                    <el-select v-model="user.type" placeholder="选择问题类型">
+                    <el-select v-model="user.type" class="w-1/2"  placeholder="选择问题类型">
                       <el-option v-for="(item, index) in problemType" :key="index" :label="item" :value="index">{{item}}</el-option>
                     </el-select>
                 </el-form-item>
                  <el-form-item label="注释" :label-width="formLabelWidth">
                   <el-input v-model="user.placeholder" class="w-1/2" autocomplete="off"></el-input>
+                </el-form-item>
+                 <el-form-item label="小贴士" :label-width="formLabelWidth">
+                  <el-input v-model="user.description" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="验证类型" :label-width="formLabelWidth" v-if="user.type==1 ">
                     <el-select v-model="user.re" placeholder="选择输入类型">
@@ -198,6 +204,7 @@
                     re: null,
                     status: null,    // 是否禁用
                     placeholder: '', // 注释
+                    description: '', // 小贴士
                     imgs: []       // 添加实例
                 },
                 add_answer: [],   // 修改页面添加选项
@@ -323,6 +330,7 @@
                 this.user.title = '';
                 this.user.type = '';
                 this.user.placeholder = '';
+                this.user.description = '';
                 this.user.status = '';
                 this.dialogQuestionAdd = true
             },
@@ -332,12 +340,14 @@
                     type: this.user.type,
                     re: this.user.re,
                     placeholder: this.user.placeholder,
+                    description: this.user.description,
                     status: this.user.status
                 }).then((data)=>{
                     this.user.title = '';
                     this.user.type = '';
                     this.user.re = '';
                     this.user.placeholder = '';
+                    this.user.description = '';
                     this.user.status = '';
                     this.handleQuestionList()
                     localStorage.setItem('pid',data.data.data)
@@ -365,6 +375,7 @@
                 this.user.title = item.title;
                 this.user.type = item.type;
                 this.user.re = item.re;
+                this.user.description = item.description;
                 this.user.placeholder = item.placeholder
                 this.user.status = item.status;
                 this.dialogFormVisible = true
@@ -387,6 +398,7 @@
                         title: this.user.title,
                         type: this.user.type,
                         re: this.user.re,
+                        description: this.user.description,
                         placeholder: this.user.placeholder,
                         status: this.user.status
                     }).then((data)=>{
@@ -399,17 +411,19 @@
                         this.handleQuestionList()
                         this.dialogFormVisible = false
                     })
-                } if(this.user.type==6 || this.user.type==7 || this.user.type==8 || this.user.type==9 ){
+                }else if(this.user.type==6 || this.user.type==7 || this.user.type==8 || this.user.type==9 ){
                     updateQuestion({
                         title: this.user.title,
                         type: this.user.type,
                         placeholder: this.user.placeholder,
+                        description: this.user.description,
                         status: this.user.status
                     }).then((data)=>{
                         this.user.title = '';
                         this.user.type = null;
                         this.user.status = null;
                         this.user.placeholder = '';
+                        this.user.description = '';
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
                         this.dialogFormVisible = false
@@ -420,11 +434,13 @@
                         type: this.user.type,
                         re: this.user.re,
                         placeholder: this.user.placeholder,
+                        description: this.user.description,
                         status: this.user.status
                     }).then((data)=>{
                         this.user.title = '';
                         this.user.type = null;
                         this.user.placeholder = '';
+                        this.user.description = '';
                         this.user.status = null;
                         this.user.re = null;
                         localStorage.removeItem('pid');

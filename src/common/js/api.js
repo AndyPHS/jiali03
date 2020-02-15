@@ -216,7 +216,7 @@ const apiUrl = {
   // 删除问卷
   deleteQuestionnaire: baseLiHunURL + 'questionnaire/delete/',
   // 查找用户问卷
-  selectUserQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire',
+  selectUserQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire/',
   // 查找用户回收站
   selectUserDeleteQuestionnaire: baseLiHunURL + 'page/select_user_questionnaire/',
   // 修改用户问卷
