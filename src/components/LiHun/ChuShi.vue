@@ -825,6 +825,8 @@
 </template>
 <script>
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
+  import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
+  
   export default {
     components: {
       // label_case,
@@ -842,9 +844,7 @@
           }
       },
       name: 'FangChan',
-      mounted () {
 
-      },
       mounted () {
         this.childList();
       },
@@ -1311,15 +1311,14 @@
                    console.log("保存失败")
                 })
               }else if(item==7){
-                userAddAnswer({
-                  value: 1,  // 值
-                  qpid: 332, // 关联id
-                  quid: localStorage.getItem('quid') //用户的问卷id
-                }).then((data)=>{
-                  console.log("保存成功")
-                }).catch((data)=>{
-                   console.log("保存失败")
-                })
+                // getOnlyValue({
+                //   qpid: 332, // 关联id
+                //   quid: localStorage.getItem('quid') //用户的问卷id
+                // }).then((data)=>{
+                //   console.log("保存成功")
+                // }).catch((data)=>{
+                //    console.log("保存失败")
+                // })
               }
             })
           }else if(e.id == 654){

@@ -724,6 +724,16 @@ export const userAddAnswer = params => {
     data: params
   });
 };
+ // 获取单独问题的值
+export const getOnlyValue = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.getOnlyValue,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 重复问题+1 添加子女房产
 export const userAddSelectAnswer = params => {
   return axios({

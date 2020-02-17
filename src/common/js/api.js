@@ -193,6 +193,8 @@ const apiUrl = {
   returnQuestionnaireJson: baseLiHunURL + 'word/returnQuestionnaireJson/',
   // 用户添加问卷的内容
   userAddAnswer: baseLiHunURL + 'word/user_add_answer',
+  // 获取单独问题的值
+  getOnlyValue: baseLiHunURL + 'page/get_only_value',
   // 重复问题+1 添加孩子房产等信息
   userAddSelectAnswer: baseLiHunURL + 'page/user_add_select_answer',
   // 重复问题-1 删除孩子房产等信息

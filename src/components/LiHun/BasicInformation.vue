@@ -2116,6 +2116,9 @@
                       <div v-if="mo.title== '保险' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(524)">添加保险</div>
                       </div>
+                      <div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="addCaiChan">添加财产</div>
+                      </div>
                       <div v-if="mo.title== '债权' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(655)">添加债权</div>
                       </div>
@@ -2191,7 +2194,7 @@
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
   import {verificationWord} from '@/api/api/requestLogin.js'    // 验证单独word
   import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
-  
+  import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
   
@@ -2252,7 +2255,7 @@
         this.getBaoXianMsg() // 查询保险模块数据
         this.getZhaiQuanMsg()  // 查询债权模块数据
         this.getZhaiWuMsg()  // 查询债务模块数据
-        this.getQiTaCaiChanMsg() // 查询其他财产
+        // this.getQiTaCaiChanMsg() // 查询其他财产
         // this.getShengChengXieYi() // 生成协议弹框
       },
       mounted (){
@@ -2260,12 +2263,31 @@
        },
       methods: {
         getChuShi () {
-          
+          getOnlyValue({
+            qpid: 520, // 关联id
+            quid: Number(localStorage.getItem('quid')) //用户的问卷id
+          }).then((data)=>{
+            console.log(JSON.parse(data.data.data))
+            let getmodel = JSON.parse(data.data.data)
+            if(getmodel.indexOf("7") > -1){
+              this.getQiTaCaiChanMsg()
+            }else{
+              
+            }
+            
+          }).catch((data)=>{
+             console.log("保存失败")
+          })
         },
         getBasicInformation (){ // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 595}).then((data)=>{  // 查询双方基本信息模块数据
             this.aa.BasicInformation = data.data.data
             // console.log(this.aa.BasicInformation)
+            this.mokuai.push({
+              title: '其他财产', 
+              part: 'QiTaCaiChan',
+              id: 10
+            })
           }).catch((data)=>{
 
           })
@@ -2397,11 +2419,7 @@
         getQiTaCaiChanMsg (){// 查询其他财产
           returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询保险模块数据
             this.aa.QiTaCaiChan= data.data.data
-            this.mokuai.push({
-              title: '其他财产', 
-              part: 'QiTaCaiChan',
-              id: 10
-            })
+            
             this.mokuai.sort(this.compare('id'));
             for ( let i = 0 ;i < this.aa.QiTaCaiChan.length; i++) {
               if(this.aa.QiTaCaiChan[i][0].questions[0].answer == 1 || this.aa.QiTaCaiChan[i][0].questions[0].answer == ""){
@@ -2496,12 +2514,12 @@
           }).catch((data)=>{
           })
         },
-        getQiTaCaiChan(){
-          returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询债务模块数据
-            this.aa.QiTaCaiChan= data.data.data
-          }).catch((data)=>{
-          })
-        },
+        // getQiTaCaiChan(){
+        //   returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询债务模块数据
+        //     this.aa.QiTaCaiChan= data.data.data
+        //   }).catch((data)=>{
+        //   })
+        // },
         compare(property){
           return function(a,b){
             let value1 = a[property];
@@ -2718,6 +2736,9 @@
             }).catch((data)=>{
                this.$message.error('添加失败，请联系管理员');
             })
+        },
+        addCaiChan(){ // 添加财产
+          this.getQiTaCaiChanMsg()
         },
         userDeleteSelectAnswerAction (e,index) { // 删除子女或者房产等信息
           this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
