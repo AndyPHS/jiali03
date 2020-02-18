@@ -3170,9 +3170,9 @@
         </div>
         <div v-show="missAlert" id="missAlert" v-if="this.status_code == 330">
           <h2>尚未填写的信息</h2>
-          <div class="px-1 mx-auto text-red-500" style="overflow-y: scroll;" >
+          <div class="px-1 mx-auto text-red-500" style="overflow-y: scroll;height: 380px;white-space: hidden" >
             <ul>
-              <li class="my-2 text-left" v-for="(item, index) in missField" :key="index">{{index+1}}、{{item.problemTitle}}</li>
+              <li class="my-1 mx-1 text-left" v-for="(item, index) in missField" :key="index">{{index+1}}、{{item.problemTitle}}</li>
             </ul>
           </div>
         </div>
@@ -3236,16 +3236,7 @@
             missMsg:[],   // 验证的时候漏填项
             missAlert: true, // 尚未填写的信息弹框
             status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
-            missField: [], // 未填写项目
-            gridData: [{
-              img: 'http://society.eastday.com/images/thumbnailimg/month_1706/201706290640566047.png'
-            }, {
-              img: 'http://society.eastday.com/images/thumbnailimg/month_1706/201706290640566047.png'
-            }, {
-              img: 'http://society.eastday.com/images/thumbnailimg/month_1706/201706290640566047.png'
-            }, {
-              img: 'http://society.eastday.com/images/thumbnailimg/month_1706/201706290640566047.png'
-            }]
+            missField: [] // 未填写项目
           }
       },
       name: 'WenJuan2',
@@ -3800,8 +3791,9 @@
           this.IsShow = false;
         },
         complate () {
-          this.IsShow = false;
-          this.$router.replace("/ShengChengXieYi");
+          this.GetOutPutWord();  // 请求是否能获取到
+          
+          
         },
         stepClick (val) {
           var _that = this;
@@ -4097,7 +4089,10 @@
             // console.log(this.status_code)
             if(this.status_code == 330 ){
                 this.missField = data.data.data
+                this.IsShow = false;
             }else if(this.status_code == 200){
+                
+                this.$router.replace("/ShengChengXieYi");
                 this.missAlert = false
             }
           }).catch((data)=>{
@@ -4124,8 +4119,8 @@
 #missMsgBox{width:400px;height:400px;position:fixed;top:50%;margin-top:-200px;left:50%;margin-left:-200px;z-index: 1;background: #e2e5d9}
 #missMsgBox h2{margin:20px 0;font-weight: bold;font-size: 20px;}
 #missMsgBox .queren{width:80%;justify-content: space-around;position: absolute;bottom:10px;left:10%;}
-#missAlert{width:250px;height:450px;position:fixed;top:20%;right:2%;z-index: 1;background: #e2e5d9}
-#missAlert h2{margin:20px 0;font-weight: bold;font-size: 20px;}
+#missAlert{width:250px;height:450px;position:fixed;top:24%;right:2%;z-index: 1;background: #e2e5d9}
+#missAlert h2{margin:10px 0;font-weight: bold;font-size: 20px;}
 .el-tooltip__popper.is-dark{background-color: #f7fafc !important;color:#343434 !important; border:1px solid #eae3e3 !important;border-radius: 15px !important;box-shadow: 0px 0px 5px 2px #e6dddd}
 .el-tooltip__popper {width: 200px !important;height: 150px !important;overflow-y: scroll !important;}
 </style>
