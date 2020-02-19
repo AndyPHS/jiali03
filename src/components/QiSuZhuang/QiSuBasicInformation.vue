@@ -241,7 +241,7 @@
                             <div v-if="$$item.type == 'radio'">
                               <el-form-item label="">
                                 <div>
-                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
+                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                   <el-tooltip  v-if="$$item.description !='' && $$item.description !=undefined  && $$item.description != null" placement="right">
                                     <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$item.description }}</div>
                                     <i class="el-icon-question"></i>
@@ -2054,7 +2054,7 @@
                                           </el-select>
                                         </el-form-item>
                                         <div  v-if="$$$$item.grandson && $$$$item.grandson[$$$$item.answer]">
-                                          <div v-for="($$$$$item, $$$$$index) in $$$$item.grandson[JSON.parse($$$$item.answer)]" :key="$$$$$index">
+                                          <div v-for="($$$$$item, $$$$$index) in $$$$item.grandson[$$$$item.answer]" :key="$$$$$index">
                                             <!-- 省市三级联动 -->
                                             <div v-if="$$$$$item.type == 'select_city'">
                                               <el-form-item label="">

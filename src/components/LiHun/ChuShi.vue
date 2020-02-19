@@ -1349,7 +1349,7 @@
 
         },
         NextPage () {
-          this.$router.replace("/BasicInformation");
+          this.$router.replace("/QueDing");
         },
         returnUserList(){
            this.$router.replace("/UserSystem");
