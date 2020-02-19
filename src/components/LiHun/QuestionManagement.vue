@@ -66,7 +66,7 @@
                   <el-input v-model="user.placeholder" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="小贴士" :label-width="formLabelWidth">
-                  <el-input v-model="user.description" class="w-1/2" autocomplete="off"></el-input>
+                  <el-input type="textarea" :rows="3" v-model="user.description" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="验证类型" :label-width="formLabelWidth" v-if="user.type==1 ">
                     <el-select v-model="user.re" placeholder="选择输入类型">
@@ -118,7 +118,7 @@
                   <el-input v-model="user.placeholder" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                  <el-form-item label="小贴士" :label-width="formLabelWidth">
-                  <el-input v-model="user.description" class="w-1/2" autocomplete="off"></el-input>
+                  <el-input type="textarea" :rows="3" v-model="user.description" class="w-1/2" autocomplete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="验证类型" :label-width="formLabelWidth" v-if="user.type==1 ">
                     <el-select v-model="user.re" placeholder="选择输入类型">
