@@ -3176,7 +3176,7 @@
                                   </el-form-item>
                                 </div>
                                 <!-- 多选框 -->
-                                <div v-if="$$$item.type == 'checkbox'">
+                                <!-- <div v-if="$$$item.type == 'checkbox'">
                                     <el-form-item label="" class="text-base">
                                       <div>
                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
@@ -3202,7 +3202,7 @@
                                         <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
                                       </el-checkbox-group>
                                     </el-form-item>
-                                </div>
+                                </div> -->
 
                                 <!-- 三级问题 -->
 
@@ -3948,35 +3948,29 @@
               part: 'ZiNv',
               id: 3
             })
-            // console.log(this.aa.ZiNv)
             this.mokuai.sort(this.compare('id'));
-            // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
             for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
-              if(this.aa.ZiNv[i][1].questions[0].answer == 1){
-                this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer)
-              }else if(this.aa.ZiNv[i][1].questions[0].answer == 2){
-                this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer)
-              }else if(this.aa.ZiNv[i][1].questions[0].answer == 3){
-                if(this.aa.ZiNv[i][1].questions[1].answer ==2){
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer)
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer)
-                }else if(this.aa.ZiNv[i][1].questions[1].answer ==3){
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer)
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer)
-                }
-                this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer)
-                this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer)
+              if(this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer ==1 || this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer == ""){
+                this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer = []
+              }else {
+                this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer)
+              }
+              if(this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer ==1 || this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer ==""){
+                this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer = []
+              }else{
+                this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer)
+              }
+              if(this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer == 1 || this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer ==""){
+                this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer = []
+              }else{
+                this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer)
+              }
+              if(this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer ==1 || this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer ==""){
+                this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer = []
+              }else{
+                this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer)
               }
             }
-            // if(this.aa.ZiNv[0][0].questions[0].answer == 1 || this.aa.ZiNv[0][0].questions[0].answer == ""){
-            //     this.aa.ZiNv[0][0].questions[0].answer = []
-            // }else{
-            //   this.aa.ZiNv[0][0].questions[0].answer = JSON.parse(this.aa.ZiNv[0][0].questions[0].answer)
-            // }
           }).catch((data)=>{
           })
         },
@@ -4041,10 +4035,31 @@
           }).catch((data)=>{
           })
         },
-        getZiNv () { // 查询子女模块数据
+        getZiNv() { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 990}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
-            console.log(this.aa.ZiNv)
+            for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
+              if(this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer ==1 || this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer == ""){
+                this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer = []
+              }else {
+                this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer)
+              }
+              if(this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer ==1 || this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer ==""){
+                this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer = []
+              }else{
+                this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[3].childQuestion[2][0].answer)
+              }
+              if(this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer == 1 || this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer ==""){
+                this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer = []
+              }else{
+                this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[4].childQuestion[1][0].answer)
+              }
+              if(this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer ==1 || this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer ==""){
+                this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer = []
+              }else{
+                this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][0].questions[4].childQuestion[2][0].answer)
+              }
+            }
           }).catch((data)=>{
           })
         },

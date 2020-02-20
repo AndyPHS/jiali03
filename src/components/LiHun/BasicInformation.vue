@@ -892,7 +892,7 @@
                                                 </el-popover>
                                               </div>
                                               <el-input
-                                                type="text"
+                                                type="number"
                                                 class="ban"
                                                 v-model="$$$$$item.answer"
                                                 size="small"
@@ -3175,7 +3175,7 @@
                                   </el-form-item>
                                 </div>
                                 <!-- 多选框 -->
-                                <div v-if="$$$item.type == 'checkbox'">
+                                <!-- <div v-if="$$$item.type == 'checkbox'">
                                     <el-form-item label="" class="text-base">
                                       <div>
                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
@@ -3201,7 +3201,7 @@
                                         <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
                                       </el-checkbox-group>
                                     </el-form-item>
-                                 </div>
+                                 </div> -->
                                 <!-- 三级问题 -->
 
                                 <div v-if="$$$item.questions ">
