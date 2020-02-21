@@ -4780,6 +4780,7 @@
     }
 </script>
 <style>
+html{height: 100%;background-color: #f7fafc;}
 .min{width:600px;margin:0 auto;}
 .ban{width:100% !important;}
 .returnUserList{top:110px;right: 20px;}

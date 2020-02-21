@@ -3814,9 +3814,9 @@
         </div>
         <div v-show="missAlert" id="missAlert" v-if="this.status_code == 330">
           <h2>尚未填写的信息</h2>
-          <div class="px-1 mx-auto text-red-500" style="overflow-y: scroll;" >
+          <div class="px-1 mx-auto text-red-500" style="overflow-y: scroll;height: 380px;white-space: hidden" >
             <ul>
-              <li class="my-2 text-left" v-for="(item, index) in missField" :key="index">{{index+1}}、{{item.problemTitle}}</li>
+              <li class="my-1 mx-1 text-left" v-for="(item, index) in missField" :key="index">{{index+1}}、{{item.problemTitle}}</li>
             </ul>
           </div>
         </div>
@@ -4360,21 +4360,7 @@
           this.IsShow = false;
         },
         complate () {
-          this.IsShow = false;
-          outPutWord().then((data)=>{
-            this.status_code = data.data.status_code
-            // console.log(this.status_code)
-            if(this.status_code == 330 ){
-                this.missField = data.data.data
-            }else if(this.status_code == 200){
-                this.missAlert = false
-                // this.$router.replace("/QiSuComplate"); // 进入小问卷修改页面
-                this.$router.replace("/ShengChengXieYi");
-            }
-          }).catch((data)=>{
-          })
-          
-          // this.$router.replace("/ShengChengXieYi");
+          this.GetOutPutWord();
         },
         stepClick (val) {
           var _that = this;
@@ -4559,7 +4545,10 @@
             // console.log(this.status_code)
             if(this.status_code == 330 ){
                 this.missField = data.data.data
+                this.IsShow = false;
             }else if(this.status_code == 200){
+                
+                this.$router.replace("/QiSuComplate");
                 this.missAlert = false
             }
           }).catch((data)=>{
@@ -4587,8 +4576,9 @@ html{height: 100%;background-color: #f7fafc;}
 #missMsgBox{width:400px;height:400px;position:fixed;top:50%;margin-top:-200px;left:50%;margin-left:-200px;z-index: 1;background: #e2e5d9}
 #missMsgBox h2{margin:20px 0;font-weight: bold;font-size: 20px;}
 #missMsgBox .queren{width:80%;justify-content: space-around;position: absolute;bottom:10px;left:10%;}
-#missAlert{width:250px;height:450px;position:fixed;top:20%;right:2%;z-index: 1;background: #e2e5d9}
+#missAlert{width:250px;height:450px;position:fixed;top:24%;right:2%;z-index: 1;background: #e2e5d9}
 #missAlert h2{margin:20px 0;font-weight: bold;font-size: 20px;}
+#caseMsg{line-height:30px !important;text-indent:2em;}
 .el-tooltip__popper.is-dark{background-color: #f7fafc !important;color:#343434 !important; border:1px solid #eae3e3 !important;border-radius: 15px !important;box-shadow: 0px 0px 5px 2px #e6dddd}
 .el-tooltip__popper {width: 200px !important;height: 150px !important;overflow-y: scroll !important;}
 </style>

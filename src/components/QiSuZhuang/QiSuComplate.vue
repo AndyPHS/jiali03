@@ -213,13 +213,15 @@
                         status: 1,
                         content: this.contentMsg.content
                     })
+                    this.daligeAddBox = false;
+                    this.contentMsg.content = '';
                 }else{
                    localStorage.setItem('qlid', this.keyWord.flid) 
                    AddLabelContent({
                        content: this.contentMsg.content
                    }).then((data)=>{
-                        // this.contentMsg.content = '';
-                        // this.daligeAddBox = false;
+                        this.contentMsg.content = '';
+                        this.daligeAddBox = false;
                    }).catch((data)=>{
 
                    })
@@ -341,7 +343,6 @@
             chooseLabelContent(item){  // 点击适用添加该文案到文本内容
                 this.chooseLabel.addTextareaMsg = item.content
                 this.chooseLabel.addLabelMsg = item.qlTitle
-                console.log(item)
                 this.contentMsg.content += this.chooseLabel.addTextareaMsg
             },
             submitMsg(){
