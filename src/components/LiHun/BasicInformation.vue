@@ -306,7 +306,7 @@
                                         </el-popover>
                                       </div>
                                       <el-input
-                                        type="text"
+                                        type="number"
                                         class="ban"
                                         v-model="$$$item.answer"
                                         size="small"

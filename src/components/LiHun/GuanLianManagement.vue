@@ -175,6 +175,9 @@
                     <el-radio :label="2">否</el-radio>
                 </el-radio-group>
             </el-form-item>
+            <el-form-item label="小贴士" :label-width="formLabelWidth">
+              <el-input type="textarea" :rows="3" v-model="problemqAdd.description" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
             <div v-if="problemqAdd.type==6 || problemqAdd.type==7 || problemqAdd.type==8 || problemqAdd.type==9 " >
                 <div class="relative wenti">
                     <span class="h-1"></span>
@@ -269,6 +272,9 @@
                     <el-radio :label="1">是</el-radio>
                     <el-radio :label="2">否</el-radio>
                 </el-radio-group>
+            </el-form-item>
+            <el-form-item label="小贴士" :label-width="formLabelWidth">
+              <el-input type="textarea" :rows="3" v-model="problemqAdd.description" class="w-1/2" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="绑定问题" :label-width="formLabelWidth">
                 <el-select v-model="problemqAdd.problemId" filterable :filter-method="dataFilter" @change="bangdingQuestion(problemqAdd.problemId)" placeholder="请选择">
@@ -513,6 +519,7 @@
                     problemTitle: '',
                     problemType: null,
                     orderId: null,
+                    description: '', //小贴士
                     fqaspId: null,
                     important: null,
                     id: null,   // 当前选中的树形结构的节点
@@ -675,7 +682,7 @@
                 this.problemqAdd.orderId = this.$refs.tree.currentNode.node.data.orderId // 当前选择的orderID
                 this.nodeChild = this.$refs.tree.currentNode.node.data.child
                 this.problemqAdd.title = this.$refs.tree.currentNode.node.data.title
-                // console.log(this.problemqAdd.id)
+                this.problemqAdd.description = this.$refs.tree.currentNode.node.data.description  // 绑定问题的小贴士
             },
             getCheckedNodes() { // 通过 node 获取
                 console.log(this.$refs.tree.getCheckedNodes());
@@ -839,13 +846,15 @@
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
                         class: this.problemqAdd.class,
-                        title: this.problemqAdd.title
+                        title: this.problemqAdd.title,
+                        description: this.problemqAdd.description
                     }).then((data)=>{
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
                         this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
+                        this.problemqAdd.description = '';
                         localStorage.setItem('qpid',data.data.data)
                         // this.whereArr.forEach((item)=>{
                             
@@ -866,7 +875,8 @@
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
                         class: this.problemqAdd.class,
-                        title: this.problemqAdd.title
+                        title: this.problemqAdd.title,
+                        description: this.problemqAdd.description
                     }).then((data)=>{
                         this.dialogQuestionConfig = false;
                         this.problemqAdd.title = '';
@@ -874,7 +884,7 @@
                         this.problemqAdd.type = '';
                         this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
-                        // console.log(data.data.data) 
+                        this.problemqAdd.description = '';
                         this.selectTree()
                     }).catch((data)=>{
 
@@ -892,16 +902,18 @@
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
                         class: this.problemqAdd.class,
-                        title: this.problemqAdd.title
+                        title: this.problemqAdd.title,
+                        description: this.problemqAdd.description
                     }).then((data)=>{
                         this.problemqAdd.title = '';
                         this.problemqAdd.class = '';
                         this.problemqAdd.type = '';
                         this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
+                        this.problemqAdd.description = '';
                         localStorage.removeItem('qpid')
                         this.dialogQuestionConfigUpdate = false;
-                        // this.selectTree()
+                        this.selectTree()
                     }).catch((data)=>{
 
                     })
@@ -914,7 +926,8 @@
                         important: this.problemqAdd.important,
                         type: this.problemqAdd.type,
                         class: this.problemqAdd.class,
-                        title: this.problemqAdd.title
+                        title: this.problemqAdd.title,
+                        description: this.problemqAdd.description
                     }).then((data)=>{
                         this.dialogQuestionConfigUpdate = false;
                         this.problemqAdd.title = '';
@@ -922,8 +935,8 @@
                         this.problemqAdd.type = '';
                         this.problemqAdd.orderId = null
                         this.problemqAdd.important = null;
-                        // console.log(data.data.data) 
-                        // this.selectTree()
+                        this.problemqAdd.description = '';
+                        this.selectTree()
                     }).catch((data)=>{
 
                     })
