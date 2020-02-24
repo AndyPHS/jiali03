@@ -221,7 +221,7 @@
                 this.dialogAddLabel = false;
                 this.addLabelMsg.title = '';
                 this.addLabelMsg.description = '';
-                localStorage.removeItem('qlid');
+                // localStorage.removeItem('qlid');
                 this.getLabel()
               }).catch((data)=>{
                 this.$message({
@@ -265,7 +265,7 @@
                 this.dialogAddKeyWord = false;
                 this.addKeyWordMsg.title = '';
                 this.addKeyWordMsg.description = '';
-                localStorage.removeItem('qlid');
+                // localStorage.removeItem('qlid');
                 this.getLabel()
               }).catch((data)=>{
                 this.$message({
@@ -355,7 +355,7 @@
                 message: '标签修改成功',
                 type: 'success'
               });
-              localStorage.removeItem('qlid');
+              // localStorage.removeItem('qlid');
               this.getLabel()
             }else{
               this.$message({
@@ -380,7 +380,7 @@
                 message: '关键词修改成功',
                 type: 'success'
               });
-              localStorage.removeItem('qlid');
+              // localStorage.removeItem('qlid');
             }else{
               this.$message({
                 message: '关键词修改失败',
@@ -409,7 +409,7 @@
               });
               this.ContenBox.content.push({content:this.addLabelContentMsg.description})
               this.addLabelContentMsg.description = ''
-              localStorage.removeItem('qlid');
+              // localStorage.removeItem('qlid');
               this.dialogAddLabelContent = false
             }else{
               this.$message({
