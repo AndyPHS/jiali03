@@ -311,7 +311,21 @@ export default {
   },
   methods: {
     getSelectUserQuestionnaire(){  // 查找用户问卷
-      
+      selectUserDeleteQuestionnaire({
+        status:1
+      }).then((data)=>{
+        if(data.data.status_code == 200 ){
+          // console.log(data.data.data)
+          this.QuestionnaireSelectArr = data.data.data
+          this.statusType = 1
+          // console.log(this.QuestionnaireSelectArr)
+        }else{
+          this.$message({
+            message: '问卷获取失败',
+            type: 'error'
+          });
+        }
+      })
     },
     getQuestionnaire(){   // 获取问卷类型
       questionnaire().then((data)=>{
@@ -394,6 +408,7 @@ export default {
 
       })
     },
+
     deleteWenJuanIcon(){    // 点击回收站按钮
       this.ListShow = false
       this.DeleteShow = true
