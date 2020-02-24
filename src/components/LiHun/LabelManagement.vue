@@ -44,9 +44,9 @@
          <el-form-item label="关键词名称" :label-width="formLabelWidth" class="mb-1">
           <el-input v-model="addKeyWordMsg.title" class="w-1/2" autocomplete="off"></el-input>
         </el-form-item>
-        <el-form-item label="关键词描述" :label-width="formLabelWidth" class="mb-1">
+       <!--  <el-form-item label="关键词描述" :label-width="formLabelWidth" class="mb-1">
           <el-input type='textarea' rows='3' v-model="addKeyWordMsg.description" class="w-1/2" autocomplete="off"></el-input>
-        </el-form-item>
+        </el-form-item> -->
     </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelAddKeyWord">取 消</el-button>
@@ -368,7 +368,7 @@
           })
         },
         editKeyWord(){ // 修改关键词
-          console.log(this.addKeyWordMsg.flId)
+          // console.log(this.addKeyWordMsg.flId)
           localStorage.setItem("qlid",this.addKeyWordMsg.flId)
           updateLabel({
             qid: localStorage.getItem('qid'),
@@ -393,12 +393,18 @@
         },
         addLabelContentBtn(){ // 点击新加标签内容
           this.dialogAddLabelContent = true
-          localStorage.setItem("qlid",this.ContenBox.id)
+          if(this.isKeyWord==1){
+            localStorage.setItem("qlid",this.ContenBox.id)
+          }else if(this.isKeyWord==2){
+            localStorage.setItem("qlid",this.ContenBox.keyid)
+          }
+          
         },
         cancelAddLabelContent(){ // 点击新增表内容弹窗的取消按钮
            this.dialogAddLabelContent = false
         },
         AddLabelContentOk(){  // 点击新增标签内容弹窗的确定按钮
+          // localStorage.setItem("qlid",this.addKeyWordMsg.flId)
           AddLabelContent({
             content:this.addLabelContentMsg.description
           }).then((data)=>{
