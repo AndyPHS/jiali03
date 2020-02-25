@@ -706,6 +706,8 @@
                 this.$refs.tree.setCheckedKeys([]);
               },
             addTreeTitle () {  // 添加标题
+                this.problemqAdd.title = '';
+                this.problemqAdd.orderId = null;
                 this.dialogaddTreeTitle = true;
             },
             addTreeTitleOk () { // 确认添加标题
@@ -801,11 +803,12 @@
                         message: '有子集无法删除'
                       });  
                     }) 
+                    this.problemqAdd.id = null
                 }).catch(() => {
                   this.$message({
                     type: 'info',
                     message: '已取消删除'
-                  });          
+                  }); 
                 });
             },
             delete_answer_btn (index) {   // 点击删除，删除当前选项
