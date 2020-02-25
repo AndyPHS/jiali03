@@ -989,6 +989,16 @@ export const deleteLabel = params => {
     data: params
   });
 };
+// 删除关键词
+export const deleteKeyWord = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteKeyWord + localStorage.getItem('qlid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 新增标签
 export const addLabel = params => {
   return axios({

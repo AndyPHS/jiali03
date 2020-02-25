@@ -18,7 +18,7 @@
         <h3 class="text-lg">离婚起诉状关键词池<i @click="addKeyWordBtn" class="el-icon-circle-plus-outline ml-2"></i></h3>
         <div class="con">
           <ul class="text-left">
-            <span class="px-2 py-1 text-white bg-blue-300 inline-block rounded mx-2 mt-2"  v-for="(item, index) in keyWordArr" :key="index" ><span @dblclick="openKeyWordMsg(item, index)">{{ item.title }}</span></span>
+            <span class="px-2 py-1 text-white bg-blue-300 inline-block rounded mx-2 mt-2"  v-for="(item, index) in keyWordArr" :key="index" ><span @dblclick="openKeyWordMsg(item, index)">{{ item.title }}</span><i @click="deleteKeyWordBtn(item, index)" class="el-icon-close ml-2 cursor-pointer"></i></span>
           </ul>
         </div>
       </div>
@@ -101,6 +101,7 @@
   import {selectKeyWord} from '@/api/api/requestLogin.js' // 查询关键词
   import {addLabel} from '@/api/api/requestLogin.js' // 添加标签
   import {deleteLabel} from '@/api/api/requestLogin.js' // 删除标签
+  import {deleteKeyWord} from '@/api/api/requestLogin.js' // 删除关键词
   import {updateLabel} from '@/api/api/requestLogin.js' // 修改标签
   import {AddLabelContent} from '@/api/api/requestLogin.js' // 新增标签内容
   import {deleteLabelContent} from '@/api/api/requestLogin.js' // 删除标签内容
@@ -457,6 +458,15 @@
           this.labelArr.splice(index, 1)
           localStorage.setItem('qlid',item.id) 
           deleteLabel().then((data)=>{
+
+          }).catch((data)=>{
+
+          })
+        },
+        deleteKeyWordBtn(item, index){  // 删除关键词
+          this.keyWordArr.splice(index, 1)
+          localStorage.setItem('qlid',item.id) 
+          deleteKeyWord().then((data)=>{
 
           }).catch((data)=>{
 

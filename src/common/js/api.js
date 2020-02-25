@@ -241,6 +241,8 @@ const apiUrl = {
   AddLabelContent: baseLiHunURL + 'label/add_label_content/',
   // 删除标签
   deleteLabel: baseLiHunURL + 'label/delete_label/',
+  // 删除关键词
+  deleteKeyWord: baseLiHunURL + 'label/delete_label/',
   // 新增标签
   addLabel: baseLiHunURL + 'label/add_label',
   // 删除标签内容
