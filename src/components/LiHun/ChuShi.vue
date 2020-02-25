@@ -858,7 +858,7 @@
               title: '',
               questions: [
                 {
-                  title: '1、您离婚想要达到的诉求是什么？',
+                  title: '1、您离婚想要达到的诉求是什么？（可多选）',
                   id: '649',
                   isRequired: false,
                   type: 'select_multiple',
@@ -877,7 +877,8 @@
                     { label: '债务均归属对方', value: '10' },
                     { label: '平均分配债权债务', value: '11' },
                     { label: '债权赠与孩子', value: '12' },
-                    { label: '其他', value: '13' }
+                    { label: '合理分配财产', value: '13' },
+                    { label: '其他', value: '14' }
                   ]
                 },
                 {
@@ -1114,7 +1115,7 @@
                   }
                 },
                 {
-                  title: '6、外债的具体情形？',
+                  title: '6、外债的具体情形？（自己借/欠了别人钱，或别人借/欠了自己钱）',
                   id: '653',
                   isRequired: true,
                   type: 'radio',
