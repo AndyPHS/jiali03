@@ -79,9 +79,9 @@
               <el-button 
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">编辑</el-button>
-              <el-button v-show="questionnaireTypeSelect =='起诉状'" 
+              <!-- <el-button v-show="questionnaireTypeSelect =='起诉状类'" 
                 size="mini"
-                @click="TestEditWenJuan(scope.$index, scope.row)">测试编辑</el-button>  
+                @click="TestEditWenJuan(scope.$index, scope.row)">测试编辑</el-button>   -->
               <el-button 
                 size="mini"
                 @click="DownLoadWenJuan(scope.$index, scope.row)">下载</el-button>
@@ -151,8 +151,8 @@
     <!-- 查看问卷 -->
     <el-dialog :title="chooseList.title" :visible.sync="dialogViewWenJuan">
       <div>
-        <!-- <h2>{{}}</h2> -->
-        <div v-html="chooseList.content"></div>
+        <h2 class="text-lg mb-1 text-bold" v-if="chooseList.title==null ">暂无标题</h2>
+        <textarea :rows='20' class="textarea w-full h-auto" placeholder="" readonly="readonly" v-model="chooseList.content" ></textarea>
       </div>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelViewWenJuan">取 消</el-button>
@@ -435,6 +435,7 @@ export default {
     returnListShow(){
       this.ListShow = true
       this.DeleteShow = false
+      this.getSelectUserQuestionnaire()
     },
     cancelViewWenJuan(){  // 点击预览弹窗中的取消按钮
       this.dialogViewWenJuan = false;
@@ -478,12 +479,22 @@ export default {
       }else if(this.questionnaireTypeSelect=="申请书类"){
         this.$router.replace("/BasicInformation");
       }
+      if(row.qid==3){  // 协议书类跳转的路径
+        this.$router.replace("/BasicInformation");
+      }else if(row.qid ==9 || row.qid ==10){ // 起诉状类跳转的路径
+        this.$router.replace("/QiSuComplate");
+      }else{ // 其他数据的提示
+         this.$message({
+            message: '此数据为垃圾数据，不做处理',
+            type: 'error'
+          });
+      }
     },
-    TestEditWenJuan(index, row){ // 测试编辑，临时添加
-      localStorage.setItem('quid',row.id)  // 获取文本内容用
-      localStorage.setItem('qid',row.qid)  // 查询标签时候用
-      this.$router.replace("/QiSuBasicInformation");
-    },
+    // TestEditWenJuan(index, row){ // 测试编辑，临时添加
+    //   localStorage.setItem('quid',row.id)  // 获取文本内容用
+    //   localStorage.setItem('qid',row.qid)  // 查询标签时候用
+    //   this.$router.replace("/QiSuBasicInformation");
+    // },
     // EditQuestionnaireOk(){  // 点击修改问卷确定按钮
     //   updateQuestionnaire({
     //     title: this.addMsg.title,
@@ -558,6 +569,7 @@ export default {
           }).then((data)=>{
             if(data.data.status_code == 200 ){
               localStorage.removeItem('quid');
+              // this.getSelectUserQuestionnaire()
               this.questionnaireChange()
               this.$message({
                 message: '删除成功',
@@ -625,6 +637,7 @@ export default {
               localStorage.removeItem('quid');
               this.questionnaireChange()
               this.deleteWenJuanIcon()
+              this.selectUserDeleteQuestionnaire() 
               this.$message({
                 message: '删除成功',
                 type: 'success',
