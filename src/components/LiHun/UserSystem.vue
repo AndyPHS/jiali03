@@ -480,8 +480,10 @@ export default {
         this.$router.replace("/BasicInformation");
       }
       if(row.qid==3){  // 协议书类跳转的路径
+        localStorage.setItem('questionnaireType', 1)
         this.$router.replace("/BasicInformation");
       }else if(row.qid ==9 || row.qid ==10){ // 起诉状类跳转的路径
+        localStorage.setItem('questionnaireType', 2)
         this.$router.replace("/QiSuComplate");
       }else{ // 其他数据的提示
          this.$message({
