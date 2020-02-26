@@ -5,17 +5,17 @@
         <el-form :rules="loginFormRules" ref="loginForm" :model="loginForm" label-position="right" label-width="auto" show-message>
             <span class="login-title text-xl">欢迎登录</span>
             <div style="margin-top: 5px"></div>
-            <el-form-item label="用户名" prop="loginName">
+            <el-form-item label="用户名" prop="name">
                 <el-col :span="22">
                     <el-input type="text" v-model="loginForm.name"></el-input>
                 </el-col>
             </el-form-item>
-            <el-form-item label="密码" prop="loginPassword">
+            <el-form-item label="密码" prop="password">
                 <el-col :span="22">
                     <el-input type="password" v-model="loginForm.password"></el-input>
                 </el-col>
             </el-form-item>
-            <el-form-item label="验证码" prop="loginVerifyCode">
+            <el-form-item label="验证码" prop="code">
                 <el-col :span="22">
                     <el-input :type="identifyCodeMsg.type"
                               v-model="loginForm.code"
@@ -68,6 +68,9 @@ export default {
           ],
           password: [
             {required: true, message: '密码不可为空', trigger: 'blur'}
+          ],
+          code: [
+            {required: true, message: '验证码不可为空', trigger: 'blur'}
           ]
         },
         verifyCode: '', // 验证图形
@@ -83,11 +86,11 @@ export default {
     methods: {
       
       loginSubmit(formName) {
-        if(this.loginForm.name == "" || this.loginForm.password == ""){
-          this.errorAlert('用户名和密码不能为空')
-        }else{
-          this.denglu = '登录'
-        }
+        // if(this.loginForm.name == "" || this.loginForm.password == ""){
+        //   this.errorAlert('用户名和密码不能为空')
+        // }else{
+        //   this.denglu = '登录'
+        // }
 
         // 为表单绑定验证功能
         this.$refs[formName].validate((valid) => {
