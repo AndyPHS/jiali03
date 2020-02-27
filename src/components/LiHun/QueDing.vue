@@ -64,41 +64,9 @@
             <img src="@/assets/images/lihun/cunzhe01.png" alt="存折">
           </div>
         </div>
-        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.liCai">
-          <div class="w-2/6">
-            示例六（理财协议）：
-          </div>
-          <div class="w-4/6">
-            <img src="@/assets/images/lihun/licaixieyi01.png" alt="理财协议">
-          </div>
-        </div>
-        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.car">
-          <div class="w-2/6">
-            示例七（机动车登记证）：
-          </div>
-          <div class="w-4/6">
-            <img src="@/assets/images/lihun/jidongchedengjizheng01.png" alt="机动车登记证">
-          </div>
-        </div>
-        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.car">
-          <div class="w-2/6">
-            示例八（机动车行驶证）：
-          </div>
-          <div class="w-4/6">
-            <img src="@/assets/images/lihun/jidongchexingshizheng01.png" alt="机动车行驶证">
-          </div>
-        </div>
-        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.baoXian">
-          <div class="w-2/6">
-            示例九（保险合同）：
-          </div>
-          <div class="w-4/6">
-            <img src="@/assets/images/lihun/baoxian01.png" alt="保险合同">
-          </div>
-        </div>
         <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.house">
           <div class="w-2/6">
-            示例十（房产证）：
+            示例六（房产证）：
           </div>
           <div class="w-4/6">
             <img src="@/assets/images/lihun/fangchanzheng01.png" alt="房产证">
@@ -106,12 +74,45 @@
         </div>
         <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.house">
           <div class="w-2/6">
-            示例十一（房屋买卖合同）：
+            示例七（房屋买卖合同）：
           </div>
           <div class="w-4/6">
             <img src="@/assets/images/lihun/fangwumaimaihetong01.png" alt="房屋买卖合同">
           </div>
         </div>
+        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.liCai">
+          <div class="w-2/6">
+            示例八（理财协议）：
+          </div>
+          <div class="w-4/6">
+            <img src="@/assets/images/lihun/licaixieyi01.png" alt="理财协议">
+          </div>
+        </div>
+        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.car">
+          <div class="w-2/6">
+            示例九（机动车登记证）：
+          </div>
+          <div class="w-4/6">
+            <img src="@/assets/images/lihun/jidongchedengjizheng01.png" alt="机动车登记证">
+          </div>
+        </div>
+        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.car">
+          <div class="w-2/6">
+            示例十（机动车行驶证）：
+          </div>
+          <div class="w-4/6">
+            <img src="@/assets/images/lihun/jidongchexingshizheng01.png" alt="机动车行驶证">
+          </div>
+        </div>
+        <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.baoXian">
+          <div class="w-2/6">
+            示例十一（保险合同）：
+          </div>
+          <div class="w-4/6">
+            <img src="@/assets/images/lihun/baoxian01.png" alt="保险合同">
+          </div>
+        </div>
+        
         <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.child !=='' ">
           <div class="w-2/6">
             示例十二（孩子出生证明）：
@@ -147,11 +148,11 @@
                 img: ''
               },
               {
-                title: '银行账户（四）',
+                title: '银行账户（示例四）',
                 img: ''
               },
               {
-                title: '存折（五）',
+                title: '存折（示例五）',
                 img: ''
               }
             ], 
@@ -188,28 +189,28 @@
               if(item==1){
                 this.ChuShiMsg.house = true
                 this.ChuShiMsgArr.push({
-                    title: '房产证（示例十）',
+                    title: '房产证（示例六）',
                     img: ''
                  })
                 this.ChuShiMsgArr.push({
-                    title: '房屋买卖合同（示例十一）',
+                    title: '房屋买卖合同（示例七）',
                     img: ''
                  })
               }else if(item==2){
                 this.ChuShiMsg.money = true
               }else if(item==3){
                 this.ChuShiMsgArr.push({
-                    title: '理财协议（示例六）',
+                    title: '理财协议（示例八）',
                     img: ''
                  })
                 this.ChuShiMsg.liCai = true
               }else if(item==4){
                 this.ChuShiMsgArr.push({
-                    title: '机动车登记证（示例七）',
+                    title: '机动车登记证（示例九）',
                     img: ''
                  })
                 this.ChuShiMsgArr.push({
-                    title: '机动车行驶证（示例八）',
+                    title: '机动车行驶证（示例十）',
                     img: ''
                  })
                 this.ChuShiMsg.car = true
@@ -218,7 +219,7 @@
               }else if(item==6){
                 this.ChuShiMsg.baoXian = true
                 this.ChuShiMsgArr.push({
-                    title: '保险合同（示例九）',
+                    title: '保险合同（示例十一）',
                     img: ''
                  })
               }
