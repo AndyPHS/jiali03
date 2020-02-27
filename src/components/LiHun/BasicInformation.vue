@@ -2191,8 +2191,8 @@
                                       <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
                                     </el-radio-group>
                                   </el-form-item>
-                                  <div v-if="$$$item.childQuestion && $$$item.childQuestion[$$$item.answer]">
-                                    <div v-for="($$$$item, $$$$index) in $$$item.childQuestion[$$$item.answer]" :key="$$$$index">
+                                  <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
+                                    <div v-for="($$$$item, $$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
                                       <!-- 省市三级联动 -->
                                       <div v-if="$$$$item.type == 'select_city'">
                                         <el-form-item label="">
