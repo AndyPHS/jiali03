@@ -25,8 +25,8 @@
                                 @end="dragEnd"
                             >
                                 <li class="pb-2 text-left"  v-for="(item, index) in Content.UqContent" :key="index">
-                                    <div  v-show="item.status == 1" ref="outside" class="px-2 py-1 border rounded">
-                                        <textarea :rows='3' id="textarea_left" class="textarea w-full" placeholder="" v-model="item.content"  @blur="submitMsg"></textarea>
+                                    <div ref="outside" class="px-2 py-1 border rounded">
+                                        <textarea :rows='3' id="textarea_left" class="textarea w-full" placeholder="" v-model="item.content"  @blur="submitMsg(item.content)"></textarea>
                                     </div>
                                 </li>
                             </draggable>
@@ -229,7 +229,32 @@
             },
             makeOut(){
                 // alert("暂没有生成页面")
-                this.$router.replace("/ShengChengXieYi");
+                let arr=[]
+                this.Content.UqContent.forEach((item)=>{
+                    arr.push(item.content)
+                    
+                })
+                this.Content.con = arr.join('|||||')
+                userUpdateQuestionnaire({
+                    content: this.Content.con
+                }).then((data)=>{
+                    if(data.data.status_code ==200){
+                        this.daligeAddBox = false;
+                        this.contentMsg.content = '';
+                        this.chooseLabel.addLabelMsg = '';
+                        this.getSelectUqContent()
+                        this.$router.replace("/ShengChengXieYi");
+                    }else{
+                        this.$message({
+                          message: '添加失败，请重新操作',
+                          type: 'error'
+                        });
+                    }
+                    
+                }).catch((data)=>{
+
+                })
+                
             },
             getSelectLabel(){ // 获取标签
                 selectLabel({
@@ -346,21 +371,12 @@
                 this.contentMsg.content += this.chooseLabel.addTextareaMsg
             },
             submitMsg(){
-                // alert(1)
-            },
-            dragChange(){
-
-            },
-            dragStart(){
-
-            },
-            dragEnd(){
                 let arr=[]
                 this.Content.UqContent.forEach((item)=>{
                     arr.push(item.content)
                     
                 })
-                this.Content.con = arr.join('')
+                this.Content.con = arr.join('|||||')
                 userUpdateQuestionnaire({
                     content: this.Content.con
                 }).then((data)=>{
@@ -379,6 +395,15 @@
                 }).catch((data)=>{
 
                 })
+            },
+            dragChange(){
+
+            },
+            dragStart(){
+
+            },
+            dragEnd(){
+                
             }
         }
     }

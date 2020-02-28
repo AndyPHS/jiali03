@@ -18,6 +18,13 @@
               <div v-if="this.status_code ==200" >
                 <div id="outputwordmsg" v-html="outputWord"></div>
               </div>
+              <div>
+                <ul>
+                  <li class="pb-2 text-left"  v-for="(item, index) in this.QiSuContent" :key="index">
+                      <div  v-show="item.status == 1" v-html='item.content'></div>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="my-4">
               <!-- <el-button class="text-right" type="primary" @click='DownLoadWord'>
@@ -73,8 +80,9 @@
 </template>
 <script>
 
-  import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
-  // import {getWord} from '@/api/api/requestLogin.js'  // 下载离婚协议书
+  import {outPutWord} from '@/api/api/requestLogin.js'  // 离婚协议书生成数据接口
+  import {getWord} from '@/api/api/requestLogin.js'  // 起诉状生成数据接口
+  import {selectUqContent} from '@/api/api/requestLogin.js'  // 获取文本内容
   import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
   
   
@@ -83,6 +91,7 @@
           return {
            downloadMsg: '', // 后台返回的下载资源
            outputWord: '',  // 获取离婚协议书
+           QiSuContent: [],  // 起诉状内容
            TitleMsg: '',     // 标题
            downLoadBtnMsg: '', // 下载按钮文字
            status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
@@ -110,45 +119,73 @@
       },
       methods: {
         GetOutPutWord () {   // 获取协议
-          outPutWord().then((data)=>{
-            this.status_code = data.data.status_code
-            if(this.status_code == 330 ){
-                this.missField = data.data.data
-            }else if(this.status_code == 200){
-                this.outputWord = data.data.data.content
-            }
-            if(localStorage.getItem('questionnaireType')==1 ){
-             this.TitleMsg = '离婚协议书';
-             this.downLoadBtnMsg = '下载协议';
-            }else if(localStorage.getItem('questionnaireType')==2 ){
-             this.TitleMsg = '离婚起诉状';
-             this.downLoadBtnMsg = '下载起诉状';
-            }
-          }).catch((data)=>{
-              // this.$router.replace("/");
-          })
+          if(localStorage.getItem('questionnaireType')==2 ){
+            this.TitleMsg = '离婚起诉状';
+            this.downLoadBtnMsg = '下载起诉状';
+            selectUqContent().then((data)=>{
+              if(data.data.status_code == 200){
+                 this.QiSuContent = data.data.data.content
+              }else{
+                  this.$message({
+                    message: '获取获取文本失败',
+                    type: 'error'
+                  });
+              }
+            }).catch((data)=>{
+
+            })
+          }else if(localStorage.getItem('questionnaireType')==1){
+            this.TitleMsg = '离婚协议书';
+            this.downLoadBtnMsg = '下载协议';
+            outPutWord().then((data)=>{
+              this.status_code = data.data.status_code
+              if(this.status_code == 330 ){
+                  this.missField = data.data.data
+              }else if(this.status_code == 200){
+                  this.outputWord = data.data.data.content
+              }
+              
+            }).catch((data)=>{
+                // this.$router.replace("/");
+            })
+          }
+          
         },
         GoBasicInformationPage(){   // 点击返回填写按钮
           if(localStorage.getItem('questionnaireType')==1){
            this.$router.replace("/BasicInformation");
           }else if(localStorage.getItem('questionnaireType')==2){
-           this.$router.replace("/QiSuBasicInformation");
+           this.$router.replace("/QiSuComplate");
           }
         },
         dialogDownLoadWenJuanOk(){   // 点击下载弹出确定按钮
           if(this.form.type){
-            outPutWord().then((data)=>{
-              // console.log(data.data.data)
-              if(data.status==200){
-                window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data.wordFilePath)
-              }
-              this.dialogDownLoadWenJuan = false;
-            }).catch((data)=>{
-              this.$message({
-                message: '下载失败,请联系管理员',
-                type: 'error'
-              });
-            })
+            if(localStorage.getItem('questionnaireType')==1){
+              outPutWord().then((data)=>{
+                if(data.status==200){
+                  window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data.wordFilePath)
+                }
+                this.dialogDownLoadWenJuan = false;
+              }).catch((data)=>{
+                this.$message({
+                  message: '下载失败,请联系管理员',
+                  type: 'error'
+                });
+              })
+            }else if(localStorage.getItem('questionnaireType')==2){
+              getWord().then((data)=>{
+                if(data.data.status_code==200){
+                  window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data)
+                }
+                this.dialogDownLoadWenJuan = false;
+              }).catch((data)=>{
+                this.$message({
+                  message: '下载失败,请联系管理员',
+                  type: 'error'
+                });
+              })
+            }
+            
           }else{
             this.$message({
               message: '请先勾选免责条款',

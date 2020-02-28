@@ -250,7 +250,6 @@ import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js' // 修改用�
 import {outPutWord} from '@/api/api/requestLogin.js' // 生成数据
 import {userAddQuestionnaire} from '@/api/api/requestLogin.js' // 新增用户问卷
 import {copyUserQuestionnaire} from '@/api/api/requestLogin.js' // 新增副本
-
 import {questionnaireSelect} from '@/api/api/requestLogin.js' // 查询问卷
 import {userUpdateOrderId} from '@/api/api/requestLogin.js' // 置顶
 
@@ -537,13 +536,8 @@ export default {
     dialogDownLoadWenJuanOk(){
       if(this.form.type){
         outPutWord().then((data)=>{
-          if(data.data.status_code == 200){
-            window.open('http://office365.aladdinlaw.com:3921/word/'+data.data.data.wordFilePath)
-          }else if(data.data.status_code == 330){
-            this.$message({
-              message: '信息未填写完，无法下载',
-              type: 'error'
-            });
+          if(data.status==200){
+            window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data.wordFilePath)
           }
           this.dialogDownLoadWenJuan = false;
         }).catch((data)=>{
