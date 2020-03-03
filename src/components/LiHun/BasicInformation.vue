@@ -4805,8 +4805,8 @@
           </div>
         </div>
         <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev">上一步</el-button>
-        <el-button v-if="active < this.mokuai.length-1 " class="my-5" @click="next">下一步</el-button>
-        <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
+        <el-button v-if="active < this.mokuai.length" class="my-5" @click="next">下一步</el-button>
+        <el-button v-if="active==this.mokuai.length" class="my-5" @click="GoComplatePage">生成协议</el-button>
       </div>
     </div>
     <div class="absolute returnUserList right-0">
@@ -5637,7 +5637,6 @@
             }else{
               if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
             }
-            
           }else if(this.mokuai[this.active].title == '房产'){
             localStorage.setItem('qpid', 521)
             if(this.aa.FangChan !== undefined){
@@ -5814,7 +5813,6 @@
             }else{
               if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
             }
-            
           }else if(this.mokuai[this.active].title == '债务'){
             localStorage.setItem('qpid', 656)
             if(this.aa.ZhaiQuan !== undefined){
@@ -5843,7 +5841,6 @@
           this.missMsgBox = false
         },
         GetOutPutWord () {   // 获取离婚协议书未填写项
-          // localStorage.setItem('qid',5)
           outPutWord().then((data)=>{
             this.status_code = data.data.status_code
             // console.log(this.status_code)

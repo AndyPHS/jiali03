@@ -205,6 +205,7 @@
         },
         canceldialogSaveWenJuan(){   // 取消保存按钮
           this.dialogSavedWenJuan = false;
+          this.$router.replace("/UserSystem");
         },
         dialogSaveWenJuanOk(){  // 点击保存确定按钮保存
           userUpdateQuestionnaire({
@@ -215,12 +216,13 @@
           }).then((data)=>{
             this.userWenJuan.title = '';
             this.dialogSavedWenJuan = false;
+            this.$router.replace("/UserSystem");
           }).catch((data)=>{
 
           })
         },
         returnUserList(){  // 返回协议列表
-           this.$router.replace("/UserSystem");
+          this.dialogSavedWenJuan = true;
         }
       }
     }
