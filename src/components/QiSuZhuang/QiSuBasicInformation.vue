@@ -5052,7 +5052,7 @@
             return value1 - value2
           }
         },
-        userAddAnswerAction (e){
+        userAddAnswerAction (e){ // 提交答案
           if( e.isRequired == true){ // 必填字段
             if( e.answer == '' || e.answer == null){  // 必填项验证
               this.$message.error('必填项内容不能为空');
@@ -5077,7 +5077,7 @@
                       fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                       quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
-                      console.log("保存成功")
+                      console.log(data.data)
                     }).catch((data)=>{
                        console.log("保存失败")
                     })  
@@ -5089,7 +5089,7 @@
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
-                    console.log("保存成功")
+                    console.log(data)
                   }).catch((data)=>{
                      console.log("保存失败")
                   })
@@ -5149,7 +5149,23 @@
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
-                    // console.log("保存成功")
+                    if(data.data.status_code==202){
+                      if(this.active==0){// 第一个模块刷新基本信息
+                        this.getBasicInformation()
+                      }else if(this.active==1){// 第二个模块刷新婚姻状况
+                        this.getHunYinStatus()
+                      }else if(this.active==2){// 第三个模块刷新子女状况
+                        this.getZiNvMsg()
+                      }else if(this.active==3){// 第四个模块刷新起诉原因
+                        this.getQiSuYuanYinMsg()
+                      }else if(this.active==4){// 第五个模块刷新起诉经历
+                        this.getQiSuJingLiMsg()
+                      }else if(this.active==5){// 第六个模块刷新诉讼请求
+                        this.getSuSongQingQiuMsg()
+                      }else if(this.active==6){// 第七个模块刷新诉讼法院
+                        this.getQiSuFaYuanMsg()
+                      }
+                    }
                   }).catch((data)=>{
                      // console.log("保存失败")
                   })

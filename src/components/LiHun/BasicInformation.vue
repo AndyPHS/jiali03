@@ -5244,14 +5244,40 @@
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
-                    // console.log("保存成功")
+                   if(data.data.status_code==202){
+                      if(this.active==0){// 第一个模块刷新基本信息
+                        this.getBasicInformation()
+                      }else if(this.active==1){// 第二个模块刷新婚姻状况
+                        this.getHunYinStatus()
+                      }else if(this.active==2){// 第三个模块刷新子女状况
+                        this.getZiNvMsg()
+                      }else if(this.active==3){// 第四个模块刷新房产
+                        this.getFangChanMsg()
+                      }else if(this.active==4){// 第五个模块刷新存款
+                        this.getCunKuanMsg()
+                      }else if(this.active==5){// 第六个模块刷新车子
+                        this.getCarMsg()
+                      }else if(this.active==6){// 第七个模块刷新理财
+                        this.getLiCaiMsg()
+                      }else if(this.active==7){// 第八个模块刷新家具家电
+                        this.getJiaDianMsg()
+                      }else if(this.active==8){// 第九个模块刷新保险
+                        this.getBaoXianMsg()
+                      }else if(this.active==9){// 第十个模块刷新其他财产
+                        this.getQiTaCaiChanMsg()
+                      }else if(this.active==10){// 第十一个模块刷新债权
+                        this.getZhaiQuanMsg()
+                      }else if(this.active==11){// 第十二个模块刷新债务
+                        this.getZhaiWuMsg()
+                      }
+                    }
                   }).catch((data)=>{
                      // console.log("保存失败")
                   })
                 }
               }
             }
-          }else{
+          }else{ // 选填字段
             if(e.fornum !== undefined){
               if(Array.isArray(e.answer)){
                 if(e.type == "select_city"){
