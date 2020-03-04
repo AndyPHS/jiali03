@@ -487,7 +487,7 @@
                 if(this.wordTreeMsg.fqaspId == null){
                     addWord({
                         title:this.wordAdd.title,
-                        fWordId :localStorage.getItem('qid'),
+                        fWordId :localStorage.getItem('wid'),
                         where: this.wordAdd.where,
                         qpid: this.wordAdd.qpid,
                         orderWords: this.wordAdd.orderWords
