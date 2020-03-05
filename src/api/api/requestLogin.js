@@ -1029,3 +1029,13 @@ export const updateLabel = params => {
     data: params
   });
 };
+// 添加示例图
+export const demoAddImg = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.demoAddImg,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};

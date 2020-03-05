@@ -462,6 +462,9 @@ export default {
           }else if(this.questionnaireTypeSelect=="协议书类"){
             localStorage.setItem('questionnaireType', 1)
             this.$router.replace("/ChuShi");
+          }else if(this.questionnaireTypeSelect=="申请书类"){
+            localStorage.setItem('questionnaireType', 3)
+            this.$router.replace("/RequestStart");
           }
           // console.log(data.data.data)
         }).catch((data)=>{
@@ -476,7 +479,7 @@ export default {
       }else if(this.questionnaireTypeSelect=="协议书类"){
         this.$router.replace("/BasicInformation");
       }else if(this.questionnaireTypeSelect=="申请书类"){
-        this.$router.replace("/BasicInformation");
+        this.$router.replace("/RequestBasic");
       }
       if(row.qid==3){  // 协议书类跳转的路径
         localStorage.setItem('questionnaireType', 1)
@@ -484,6 +487,9 @@ export default {
       }else if(row.qid ==9 || row.qid ==10){ // 起诉状类跳转的路径
         localStorage.setItem('questionnaireType', 2)
         this.$router.replace("/QiSuComplate");
+      }else if(row.qid ==16){ // 起诉状类跳转的路径
+        localStorage.setItem('questionnaireType', 3)
+        this.$router.replace("/RequestPersonalize");
       }else{ // 其他数据的提示
          this.$message({
             message: '此数据为垃圾数据，不做处理',

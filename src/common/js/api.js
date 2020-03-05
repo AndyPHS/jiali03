@@ -148,6 +148,8 @@ const apiUrl = {
   addAnswer: baseLiHunURL + 'problem/add_answer/',
   // 删除选项
   deleteAnswer: baseLiHunURL + 'problem/delete_answer/',
+  // 添加示例图
+  demoAddImg: baseLiHunURL + 'problem/demo_addimg',
   // 查询关系树
   selectTree: baseLiHunURL + 'ProblemQ/select_tree/',
   // 模糊查询关联

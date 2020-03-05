@@ -27,8 +27,11 @@
                                 <td class="border text-black">{{ item.title }}</td>
                                 <td class="border text-black">{{ problemType[item.type] }}</td>
                                 <td class="border text-black">无备注</td>
-                                <td class="border text-black" v-for="($item, $index) in JSON.parse(item.imgs)" :key="$index"><img :src="$item"></td>
-                                <td class="border text-black" v-if="item.imgs == null ">
+                                <td class="border text-black" v-if="item.imgs !==null">
+                                    <div  v-for="($item, $index) in JSON.parse(item.imgs)" :key="$index">
+                                        <img :src="$item">
+                                    </div></td>
+                                <td class="border text-black" v-if="item.imgs == null || item.imgs ==[]">
                                     无实例
                                 </td>
                                 <td class="border text-black justify-around">
@@ -70,6 +73,38 @@
                       <el-option v-for="(item, index) in problemRe" :key="index" :label="item" :value="index"></el-option>
                     </el-select>
                 </el-form-item>
+                <!-- <el-form-item label="示例图" :label-width="formLabelWidth">
+                    <el-upload
+                        id="attachmentInputs"
+                        method="POST"
+                        class="upload-demo" 
+                        accept="image/jpeg,image/gif,image/png"
+                        ref="upload" 
+                        action="http://office365.aladdinlaw.com:3921/api/Questionnaire/v1/problem/add"  
+                        :on-exceed="exceedFile"
+                        :before-upload="onBeforeUpload"
+                        :on-success="handleSuccess"
+                        :on-error="handleError"
+                        name='imgs[]'
+                        list-type="picture-card"
+                        :auto-upload="true"
+                        multiple
+                        :limit="3"
+                        :on-change="fileChange"
+                        :file-list="fileList"
+                      >
+                        <i class="el-icon-plus"></i>
+                        <div slot="tip" class="el-upload__tip">请上传图片格式文件</div>
+                      </el-upload>
+                </el-form-item> -->
+                <!-- <div class="w-1/2 mx-auto">
+                    <form  target="#returngo" ref="form" id="form1" action="http://office365.aladdinlaw.com:3921/api/jiali_api/v1/problem/add"  method="POST" enctype="multipart/form-data"  @submit.prevent="changeInfo($event)">
+                        <input name="imgs[]" multiple type="file">
+                        <input type="submit" value="上传图片" >
+                    </form>
+                    <iframe id="returngo" src="" style="display: none"></iframe>
+                </div> -->
+                 
                 <div  v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 " >
                     <div  v-for="(item, index) in addQuestion_answer" :key="index" class="flex justify-between " >
                         <el-form-item label="选项名称" :label-width="formLabelWidth">
@@ -151,12 +186,18 @@
                 <el-button type="primary" @click="updataQuestionMsg">确 定</el-button>
               </div>
             </el-dialog>
-
+            <!-- <form action="http://office365.aladdinlaw.com:3921/api/jiali_api/v1/problem/demo_addimg"  method="POST" enctype="multipart/form-data">
+                <input name="imgs[]" multiple type="file">
+                <input type="text" name="title">
+                <button>上传</button>
+            </form> -->
         </div>
         
 </template>
-
+<!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
 <script>
+    import axios from 'axios'
+    import {apiUrl} from '@/common/js/api.js'
     import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
     import {addQuestion} from '@/api/api/requestLogin.js'   // 新增问题
     import {addAnswer} from '@/api/api/requestLogin.js'    // 添加选项
@@ -167,6 +208,8 @@
     import {deleteQuestion} from '@/api/api/requestLogin.js'   // 删除问题
     import {selectOnlyQuestion} from '@/api/api/requestLogin.js'   // 查询单独问题
     import {QuestionArr} from '@/api/api/requestLogin.js'    // 问题数组
+    import {demoAddImg} from '@/api/api/requestLogin.js'    // 添加示例图
+    
 
     export default {
         components:{
@@ -174,6 +217,13 @@
         },
         data () {
             return {
+                testform:{
+                    title: '',
+                    type: null,
+                    re: null,
+                    status: null,    // 是否禁用
+                    placeholder: '' // 注释
+                },
                 pageInfo:[
                  {
                     id: '',
@@ -196,9 +246,12 @@
                     title: '',
                     type: null,
                     re: null,
+                    imgs: null,
                     status: null,    // 是否禁用
-                    placeholder: '', // 注释
-                    imgs: []       // 添加实例
+                    placeholder: '' // 注释
+                },
+                form:{
+                    file:'',
                 },
                 add_answer: [],   // 修改页面添加选项
                 answerName: '',   // 修改页面点击添加选项绑定的值
@@ -226,6 +279,7 @@
                 pagesize:20,    //    每页的数据
                 area: '', // 擅长领域
                 pageNum: 1, // 第几页
+                fileList: [] // 待上传的示例图
             }
         },
         mounted () {
@@ -325,15 +379,35 @@
                 this.user.placeholder = '';
                 this.user.status = '';
                 this.dialogQuestionAdd = true
+            }, 
+            
+            onBeforeUpload(file) {
+              const isIMAGE = file.type === 'image/jpeg'||'image/gif'||'image/png';
+              const isLt1M = file.size / 1024 / 1024 < 1;
+
+              if (!isIMAGE) {
+                this.$message.error('上传文件只能是图片格式!');
+              }
+              if (!isLt1M) {
+                this.$message.error('上传文件大小不能超过 1MB!');
+              }
+              return isIMAGE && isLt1M;
             },
             addNewQuestion () {   // 新增问题
-                addQuestion({
-                    title: this.user.title,
-                    type: this.user.type,
-                    re: this.user.re,
-                    placeholder: this.user.placeholder,
-                    status: this.user.status
-                }).then((data)=>{
+                const formData = new FormData();
+
+                // let files = this.$refs.form
+                // formData.append('imgs[]', files)
+                // console.log(this.$refs.upload)
+                // for (var i=0;i<files.length;i++){
+                //      formData.append('imgs[]', files[i]);
+                // }
+                formData.append('title', this.user.title);
+                formData.append('type', this.user.type);
+                formData.append('re', this.user.re);
+                formData.append('placeholder', this.user.placeholder);
+                formData.append('status', this.user.status);
+                addQuestion(formData).then((data)=>{
                     this.user.title = '';
                     this.user.type = '';
                     this.user.re = '';
@@ -358,6 +432,7 @@
                 }).catch((data)=>{
 
                 })
+               
             },
 
             updateQuestion (item) {    // 点击修改问题
@@ -456,16 +531,83 @@
                 
             },
             handleRemove(file, fileList) {
-              console.log(file, fileList);
+              // console.log(file, fileList);
             },
-            handlePreview(file) {
-               console.log(file);
+             // 文件状态改变时的钩子
+            fileChange(file, fileList) {
+                console.log(file)
+                console.log(fileList)
+              this.form.file = file.raw
+              this.fileList = fileList
+              const isIMAGE = (file.raw.type === 'image/jpeg' || file.raw.type === 'image/png'|| file.raw.type === 'image/gif');
+                const isLt1M = file.size / 1024 / 1024 < 1;
+
+                if (!isIMAGE) {
+                  this.$message.error('上传文件只能是图片格式!');
+                  return false;
+                }
+                if (!isLt1M) {
+                  this.$message.error('上传文件大小不能超过 1MB!');
+                  return false;
+                }
+                var reader = new FileReader();
+                reader.readAsDataURL(file.raw);
+                reader.onload = function(e){
+                    // console.log(this.result)//图片的base64数据
+                }
+                // this.$refs.upload.submit();
+                
             },
-            handleExceed(files, fileList) {
+             // 文件超出时的钩子
+            exceedFile(files, fileList) {
                 this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
             },
             beforeRemove(file, fileList) {
                 return this.$confirm(`确定移除 ${ file.name }？`);
+            },
+            handleSuccess(res, file, fileList) {
+
+              console.log(res)
+              console.log(file)
+              console.log(fileList)
+              this.$notify.success({
+                title: '成功',
+                message: `文件上传成功`
+              });
+              this.imageUrl = URL.createObjectURL(file.raw);
+            },
+            // 文件上传失败时的钩子
+            handleError(err, file, fileList) {
+              this.$notify.error({
+                title: '错误',
+                message: `文件上传失败`
+              });
+            },
+            changeInfo($event) {
+                var formData = new FormData(this.$refs.form);         //获取表单数据
+                let config = {
+                     headers: {
+                       "Authorization":'bearer ' + localStorage.getItem('token')
+                     }
+                 }
+
+
+                 axios.post(apiUrl.addQuestion, formData, config)         
+
+                .then(res => {
+                $('#form1').serialize()
+                console.log(res)
+                return false;
+
+                    if(res.data.error_code==0){
+
+                        this.tabshow=false
+
+                            this.$emit('closeall',this.tabshow);
+
+                      }
+
+                })
             }
         }
     }
@@ -475,4 +617,48 @@
 /*.searchBox{ margin-right: 150px;}*/
 .h-500{height: 500px;overflow: scroll;}
 .el-form-item{margin-bottom:0.25rem;}
+
+/*测试表单提交*/
+.content{
+        width:800px;
+        margin:50px auto;
+    }
+    .title{
+        font-size:18px;
+        font-weight:bold;
+        padding-left:340px;
+        margin-bottom:30px;
+    }
+    input{
+        border:1px solid #a9a9a9;
+        height:34px;
+        line-height:34px;
+        width:550px;
+        margin-bottom:20px;
+        padding-left:5px;
+    }
+    label{
+        width:120px;
+        text-align:right;
+        display:inline-block;
+    }
+    #registerBtn{
+        background:#3498db;
+        color:#fff;
+        font-size:14px;
+        text-align:center;
+        width:100px;
+        line-height:34px;
+        border:none 0;
+        cursor:pointer;
+        margin:20px 20px 0 0;
+        margin-left:120px;
+    }
+    label span{
+        color:red;
+    }
+    #errContent{
+        padding:20px 0 0 30px;
+        text-align:center;
+    }
 </style>
