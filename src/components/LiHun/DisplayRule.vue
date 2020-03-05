@@ -456,13 +456,14 @@
                   this.$delete(this.wordAdd.where[i], 'label')
                   this.$delete(this.wordAdd.where[i], 'title')
                 }
+                console.log(this.wordAddWhere)
                 if(JSON.stringify(this.wordAdd.where) == '{}'){
                     this.wordAdd.where.splice(1,1)
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
-                    this.wordAddWhere = {} // 清空组合绑定的问题
+
                 }else{
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
-                    this.wordAddWhere = {} // 清空组合绑定的问题
+                    
                 }
             },
             cancelAddWord () {
@@ -476,11 +477,13 @@
               this.wordAdd.orderWords = null
             },
             addWordOk () {   // 点击新增组合确定按钮提交表单
-                this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
+                
                 for(let i = 0;i<this.wordAdd.where.length;i++){
                   this.$delete(this.wordAdd.where[i], 'label')
                   this.$delete(this.wordAdd.where[i], 'title')
+                  this.$delete(this.wordAdd.where[i], 'id')
                 }
+                this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
                 this.wordAdd.qpid = JSON.stringify(this.wordAdd.qpid)
                 this.wordAdd.orderWords = JSON.stringify(this.wordAdd.orderWords)
@@ -588,7 +591,7 @@
             },
             updateWordAlert (){ // 点击修改组合弹出修改组合对话框
                 this.dialogUpdateWord = true;
-
+                // this.wordAddWhere = {} // 清空组合绑定的问题
                 this.wordAdd.title = this.wordTreeMsg.title
                 localStorage.setItem('fWordId',this.wordTreeMsg.fqaspId) // 保存选中组合规则的id到本地缓存
                 wordSelect().then((data)=>{
@@ -604,12 +607,12 @@
                 })
             },
             updateWordOk () {   // 点击修改组合确定按钮提交表单
-                this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
-                this.wordAddWhere = {} // 清空组合绑定的问题
+                // this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
+                
                 for(let i = 0;i<this.wordAdd.where.length;i++){
                   this.$delete(this.wordAdd.where[i], 'label')
                   this.$delete(this.wordAdd.where[i], 'title')
-                  this.$delete(this.wordAdd.where[i], 'id')
+                  // this.$delete(this.wordAdd.where[i], 'id')
                 }
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
                 this.wordAdd.qpid = JSON.stringify(this.wordAdd.qpid)
