@@ -738,8 +738,8 @@
                                 </el-checkbox-group>
                               </el-form-item>
                               <div v-if="$$item.childQuestion">
-                                <div v-for="($$$item, $$$$index) in $$item.answer" :key="$$$$index">
-                                  <div v-for="($$$$item,$$$$$index) in $$item.childQuestion[$$$item]" :key="$$$$$index">
+                                <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
+                                  <div v-for="($$$$item,$$$$index) in $$item.childQuestion[$$$item]" :key="$$$$index">
                                     <!-- 数字类型输入框 -->
                                     <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
                                       <el-form-item label="" class="text-base">

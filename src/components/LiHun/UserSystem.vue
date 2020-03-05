@@ -457,7 +457,7 @@ export default {
           localStorage.setItem('quid', data.data.data)
           // localStorage.removeItem('qid');
           if(this.questionnaireTypeSelect=="起诉状类"){
-            localStorage.setItem('questionnaireType', 2) // 1代表协议书类，2代表起诉状类
+            localStorage.setItem('questionnaireType', 2) // 1代表协议书类，2代表起诉状类 ，3申请书类
             this.$router.replace("/QiSuBasicInformation");
           }else if(this.questionnaireTypeSelect=="协议书类"){
             localStorage.setItem('questionnaireType', 1)
@@ -479,7 +479,7 @@ export default {
       }else if(this.questionnaireTypeSelect=="协议书类"){
         this.$router.replace("/BasicInformation");
       }else if(this.questionnaireTypeSelect=="申请书类"){
-        this.$router.replace("/RequestBasic");
+        this.$router.replace("/RequestPersonalize");
       }
       if(row.qid==3){  // 协议书类跳转的路径
         localStorage.setItem('questionnaireType', 1)

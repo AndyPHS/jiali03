@@ -739,8 +739,8 @@
                                 </el-checkbox-group>
                               </el-form-item>
                               <div v-if="$$item.childQuestion">
-                                <div v-for="($$$item, $$$$index) in $$item.answer" :key="$$$$index">
-                                  <div v-for="($$$$item,$$$$$index) in $$item.childQuestion[$$$item]" :key="$$$$$index">
+                                <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
+                                  <div v-for="($$$$item,$$$$index) in $$item.childQuestion[$$$item]" :key="$$$$index">
                                     <!-- 数字类型输入框 -->
                                     <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
                                       <el-form-item label="" class="text-base">
@@ -5884,490 +5884,401 @@
             })
           }else if(this.mokuai[this.active].title == '申请法院'){
             localStorage.setItem('qpid', 1236)
-            if(this.aa.ZiNv !== undefined){
-              demoYanZheng({
-                qpid: 1236
-              }).then((data)=>{
-                // console.log(data.data)
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '申请法院模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) ;
-            }
-
+            demoYanZheng({
+              qpid: 1236
+            }).then((data)=>{
+              // console.log(data.data)
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '申请法院模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '报警出警记录'){
             localStorage.setItem('qpid', 1116)
-            if(this.aa.QiSuYuanYin !== undefined){
-              demoYanZheng({
-                qpid: 1116
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '报警出警记录信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) ;
-            }
+            demoYanZheng({
+              qpid: 1116
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '报警出警记录信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '开房记录'){
             localStorage.setItem('qpid', 1125)
-            if(this.aa.QiSuJingLi !== undefined){
-              demoYanZheng({
-                qpid: 1125
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '开房记录信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1);
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) ;
-            }
+            demoYanZheng({
+              qpid: 1125
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '开房记录信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1);
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '病例资料'){
             localStorage.setItem('qpid', 1131)
-            if(this.aa.SuSongQingQiu !== undefined){
-              demoYanZheng({
-                qpid: 1131
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '病例资料模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) ;
-            }
+            demoYanZheng({
+              qpid: 1131
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '病例资料模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '婚姻登记信息'){
             localStorage.setItem('qpid', 1141)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1141
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '婚姻登记信息信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1141
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '婚姻登记信息信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '监控录像资料'){
             localStorage.setItem('qpid', 1147)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1147
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '监控录像资料信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1147
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '监控录像资料信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '房产'){
             localStorage.setItem('qpid', 1148)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1148
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '房产信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1148
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '房产信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '车辆'){
             localStorage.setItem('qpid', 1149)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1149
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '车辆信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1149
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '车辆信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '存款'){
             localStorage.setItem('qpid', 1150)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1150
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '存款信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1150
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '存款信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '公积金'){
             localStorage.setItem('qpid', 1151)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1151
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '公积金信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1151
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '公积金信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '股票'){
             localStorage.setItem('qpid', 1152)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1152
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '股票信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1152
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '股票信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '股权'){
             localStorage.setItem('qpid', 1153)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1153
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '股权信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1153
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '股权信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '微信钱包'){
             localStorage.setItem('qpid', 1154)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1154
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '微信钱包信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1154
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '微信钱包信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '支付宝'){
             localStorage.setItem('qpid', 1155)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1155
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '支付宝信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1155
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '支付宝信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '理财'){
             localStorage.setItem('qpid', 1156)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1156
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '理财信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1156
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '理财信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '拆迁档案'){
             localStorage.setItem('qpid', 1157)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1157
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '拆迁档案信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1157
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '拆迁档案信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '收入明细'){
             localStorage.setItem('qpid', 1158)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1158
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '收入明细信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1158
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '收入明细信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '保险'){
             localStorage.setItem('qpid', 1159)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1159
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '保险信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1159
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '保险信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '抚恤金'){
             localStorage.setItem('qpid', 1160)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1160
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '抚恤金信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1160
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '抚恤金信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '丧葬金'){
             localStorage.setItem('qpid', 1161)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1161
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '丧葬金信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1161
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '丧葬金信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '笔迹'){
             localStorage.setItem('qpid', 1162)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1162
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '笔迹信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1162
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '笔迹信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }else if(this.mokuai[this.active].title == '其他'){
             localStorage.setItem('qpid', 1163)
-            if(this.aa.QiSuFaYuan !== undefined){
-              demoYanZheng({
-                qpid: 1163
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '其他信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) ;
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1);
-            }
+            demoYanZheng({
+              qpid: 1163
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '其他信息模块已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
           }
         },
         closeMissMsgBox () {   // 关闭未填写项弹窗
