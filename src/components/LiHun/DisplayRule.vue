@@ -476,7 +476,7 @@
               this.wordAdd.orderWords = null
             },
             addWordOk () {   // 点击新增组合确定按钮提交表单
-                // this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
+                this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
                 for(let i = 0;i<this.wordAdd.where.length;i++){
                   this.$delete(this.wordAdd.where[i], 'label')
                   this.$delete(this.wordAdd.where[i], 'title')

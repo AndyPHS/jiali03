@@ -18,9 +18,9 @@
                     <div v-for="(item,index) in aa[mo.part]" :key="index">
                       <!-- 大问题块 -->
                       <div>
-                        <div v-if="mo.title=='子女状况' ">
+                        <!-- <div v-if="mo.title=='子女状况' ">
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女情况</h2>
-                        </div>
+                        </div> -->
                         <!-- <div v-if="mo.title=='起诉原因' ">
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">起诉原因{{index+1}}</h2>
                         </div>
@@ -43,7 +43,6 @@
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债务</h2>
                         </div> -->
                       </div>
-
 
                       <!-- 大问题块 -->
                       <div v-for="($item, $index) in item"  :key="$index">
@@ -740,7 +739,7 @@
                               </el-form-item>
                               <div v-if="$$item.childQuestion">
                                 <div v-for="($$$item, $$$index) in $$item.answer" :key="$$$index">
-                                  <div v-for="($$$$item,$$$$index) in $$item.childQuestion[$$$item]" :key="$$$$index">
+                                  <div v-for="($$$$item,$$$$index) in $$item.childQuestion[$$$item]" :key="$$$$index+$$$item">
                                     <!-- 数字类型输入框 -->
                                     <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
                                       <el-form-item label="" class="text-base">
@@ -4862,9 +4861,9 @@
                         </div>
                       </div>
                       <div>
-                        <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
+                        <!-- <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(990,index)">删除孩子情况</div>
-                        </div>
+                        </div> -->
                         <!-- <div v-if="mo.title==='起诉经历' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(950,index)">删除起诉经历</div>
                         </div> -->
@@ -4877,9 +4876,9 @@
                       </div>
                     </div>
                     <div>
-                      <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
+                      <!-- <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(990)">添加孩子情况</div>
-                      </div>
+                      </div> -->
                       <!-- <div v-if="mo.title== '起诉经历' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(950)">添加起诉经历</div>
                       </div>
@@ -5295,6 +5294,11 @@
               part: 'chaiqian',
               id: 17
             })
+            if(this.aa.chaiqian[0][0].questions[7].answer == 1 || this.aa.chaiqian[0][0].questions[7].answer == ""){
+                this.aa.chaiqian[0][0].questions[7].answer = []
+            }else{
+              this.aa.chaiqian[0][0].questions[7].answer = JSON.parse(this.aa.chaiqian[0][0].questions[7].answer)
+            }
           }).catch((data)=>{
           })
           this.mokuai.sort(this.compare('id'));

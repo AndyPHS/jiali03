@@ -905,10 +905,10 @@
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: localStorage.getItem('quid') //用户的问卷id
             }).then((data)=>{
-              console.log(e.answer)
-              console.log(typeof(e.answer))
+              // console.log(e.answer)
+              // console.log(typeof(e.answer))
             }).catch((data)=>{
-               console.log("保存失败")
+               // console.log("保存失败")
             })
           }else{
             userAddAnswer({
@@ -917,9 +917,9 @@
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: localStorage.getItem('quid') //用户的问卷id
             }).then((data)=>{
-              console.log("保存成功")
+              // console.log("保存成功")
             }).catch((data)=>{
-               console.log("保存失败")
+               // console.log("保存失败")
             })
           }
           if(e.id == 1098){
@@ -930,9 +930,9 @@
                   qpid: 1116, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
+                   // console.log("保存失败")
                 })
               }else if(item==2){   // 添加开房记录
                 userAddAnswer({
@@ -940,9 +940,9 @@
                   qpid: 1125, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
+                   // console.log("保存失败")
                 })
               }else if(item==3){  // 病例资料
                 userAddAnswer({
@@ -950,9 +950,9 @@
                   qpid: 1131, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
+                   // console.log("保存失败")
                 })
               }else if(item==4){  // 添加婚姻登记信息
                 userAddAnswer({
@@ -960,9 +960,9 @@
                   qpid: 1141, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
+                   // console.log("保存失败")
                 })
               }else if(item==5){   // 添加监控录像资料
                 userAddAnswer({
@@ -970,9 +970,9 @@
                   qpid: 1147, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
+                   // console.log("保存失败")
                 })
               }else if(item==6){     // 添加房产
                 userAddAnswer({
@@ -980,9 +980,9 @@
                   qpid: 1148, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
+                   // console.log("保存失败")
                 })
               }else if(item==7){  // 添加车辆
                 userAddAnswer({
@@ -990,9 +990,9 @@
                   qpid: 1149, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==8){  // 添加存款
                 userAddAnswer({
@@ -1000,9 +1000,9 @@
                   qpid: 1150, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==9){  // 添加公积金
                 userAddAnswer({
@@ -1010,9 +1010,9 @@
                   qpid: 1151, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==10){  // 添加股票
                 userAddAnswer({
@@ -1020,9 +1020,9 @@
                   qpid: 1152, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==11){  // 添加股权
                 userAddAnswer({
@@ -1030,9 +1030,9 @@
                   qpid: 1153, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==12){  // 添加微信钱包
                 userAddAnswer({
@@ -1040,9 +1040,9 @@
                   qpid: 1154, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==13){  // 添加支付宝
                 userAddAnswer({
@@ -1050,9 +1050,9 @@
                   qpid: 1155, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==14){  // 添加理财
                 userAddAnswer({
@@ -1060,9 +1060,9 @@
                   qpid: 1156, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==15){  // 添加拆迁档案（分家析产）
                 userAddAnswer({
@@ -1070,9 +1070,9 @@
                   qpid: 1157, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==16){  // 添加收入明细
                 userAddAnswer({
@@ -1080,9 +1080,9 @@
                   qpid: 1158, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==17){  // 添加保险
                 userAddAnswer({
@@ -1090,9 +1090,9 @@
                   qpid: 1159, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==18){  // 添加抚恤金
                 userAddAnswer({
@@ -1100,9 +1100,9 @@
                   qpid: 1160, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==19){  // 添加丧葬费
                 userAddAnswer({
@@ -1110,9 +1110,9 @@
                   qpid: 1161, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==20){  // 添加笔迹
                 userAddAnswer({
@@ -1120,9 +1120,9 @@
                   qpid: 1162, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }else if(item==21){  // 添加其他
                 userAddAnswer({
@@ -1130,9 +1130,9 @@
                   qpid: 1163, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
+                  // console.log("保存成功")
                 }).catch((data)=>{
-                  console.log("保存失败")
+                  // console.log("保存失败")
                 })
               }
             })
