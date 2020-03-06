@@ -148,6 +148,21 @@
             }).catch((data)=>{
                 // this.$router.replace("/");
             })
+          }else if(localStorage.getItem('questionnaireType')==3){
+            this.TitleMsg = '调查取证申请书';
+            this.downLoadBtnMsg = '下载申请';
+            selectUqContent().then((data)=>{
+              if(data.data.status_code == 200){
+                 this.QiSuContent = data.data.data.content
+              }else{
+                  this.$message({
+                    message: '获取获取文本失败',
+                    type: 'error'
+                  });
+              }
+            }).catch((data)=>{
+
+            })
           }
           
         },
@@ -156,6 +171,8 @@
            this.$router.replace("/BasicInformation");
           }else if(localStorage.getItem('questionnaireType')==2){
            this.$router.replace("/QiSuComplate");
+          }else if(localStorage.getItem('questionnaireType')==3){
+           this.$router.replace("/RequestPersonalize");
           }
         },
         dialogDownLoadWenJuanOk(){   // 点击下载弹出确定按钮
@@ -172,7 +189,7 @@
                   type: 'error'
                 });
               })
-            }else if(localStorage.getItem('questionnaireType')==2){
+            }else if(localStorage.getItem('questionnaireType')==2 || localStorage.getItem('questionnaireType')==3 ){
               getWord().then((data)=>{
                 if(data.data.status_code==200){
                   window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data)
