@@ -6,6 +6,7 @@
           <h2 class="py-2 text-2xl font-bold">{{ this.TitleMsg }}</h2>
           <div class="absolute top-0 right-0 mt-4 mr-6">
             <el-button class="text-right" type="primary" @click="GoBasicInformationPage">返回填写</el-button>
+            <el-button class="text-right" type="primary" v-if="this.TitleMsg == '离婚起诉状' || this.TitleMsg == '调查取证申请书'" @click="GoPersonalPage">返回个性化修改</el-button>
           </div>
           <div class="w-full">
             <div class="text-left px-4 py-3 msg">
@@ -166,10 +167,17 @@
           }
           
         },
-        GoBasicInformationPage(){   // 点击返回填写按钮
+        GoBasicInformationPage(){   // 点击返回基本信息
           if(localStorage.getItem('questionnaireType')==1){
            this.$router.replace("/BasicInformation");
           }else if(localStorage.getItem('questionnaireType')==2){
+           this.$router.replace("/QiSuBasicInformation");
+          }else if(localStorage.getItem('questionnaireType')==3){
+           this.$router.replace("/RequestBasic");
+          }
+        },
+        GoPersonalPage(){ // 返回个性化页面
+          if(localStorage.getItem('questionnaireType')==2){
            this.$router.replace("/QiSuComplate");
           }else if(localStorage.getItem('questionnaireType')==3){
            this.$router.replace("/RequestPersonalize");
