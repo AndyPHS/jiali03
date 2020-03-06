@@ -612,7 +612,7 @@
                 for(let i = 0;i<this.wordAdd.where.length;i++){
                   this.$delete(this.wordAdd.where[i], 'label')
                   this.$delete(this.wordAdd.where[i], 'title')
-                  // this.$delete(this.wordAdd.where[i], 'id')
+                  this.$delete(this.wordAdd.where[i], 'id')
                 }
                 this.wordAdd.where = JSON.stringify(this.wordAdd.where)
                 this.wordAdd.qpid = JSON.stringify(this.wordAdd.qpid)
