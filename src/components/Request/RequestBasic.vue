@@ -4897,7 +4897,7 @@
         </div>
 
         <div v-show='IsShow' id="alert_xieyi">
-          <h2>您已填写完毕，确认生成起诉状吗？</h2>
+          <h2>您已填写完毕，确认生成申请书吗？</h2>
           <div class="queren flex mx-auto">
              <div class="w-24 mr-2">
               <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='quxiao'>
@@ -5016,11 +5016,9 @@
       beforeMount () {
         this.getBasicInformation() // 查询双方基本信息模块数据
         this.getshishi()   // 获取事实与理由
-        this.getChuShi()
-        
       },
       mounted () {
-
+        this.getChuShi()
        },
       methods: {
         getChuShi () {
@@ -5093,6 +5091,7 @@
               this.getqita()
             }
             this.getshenqingfayuan()  // 申请法院
+            
           }).catch((data)=>{
             console.log("保存失败")
           })
@@ -5100,13 +5099,14 @@
         getBasicInformation () { // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 1079}).then((data)=>{  // 查询双方基本信息模块数据
             this.aa.BasicInformation = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getshishi () {
           returnQuestionnaireJson({'qpid': 1100}).then((data)=>{  // 查询事实与理由模块数据
             this.aa.shishi = data.data.data
+            this.mokuai.sort(this.compare('id'));
             if(this.aa.shishi[0][0].questions[1].answer == 1 || this.aa.shishi[0][0].questions[1].answer == ""){
                 this.aa.shishi[0][0].questions[1].answer = []
               }else{
@@ -5114,7 +5114,6 @@
               }
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getbaojing () {
           returnQuestionnaireJson({'qpid': 1116}).then((data)=>{  // 查询报警记录模块数据
@@ -5124,11 +5123,11 @@
               part: 'baojing',
               id: 3
             })
+            this.mokuai.sort(this.compare('id'));
             let cityAnswer = JSON.parse(this.aa.baojing[0][0].questions[1].answer)
             this.aa.baojing[0][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getkaifang () {
           returnQuestionnaireJson({'qpid': 1125}).then((data)=>{  // 查询开房记录模块数据
@@ -5138,9 +5137,9 @@
               part: 'kaifang',
               id: 4
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getbingli () {
           returnQuestionnaireJson({'qpid': 1131}).then((data)=>{  // 查询病例资料模块数据
@@ -5150,9 +5149,9 @@
               part: 'bingli',
               id: 5
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         gethunyin () {
           returnQuestionnaireJson({'qpid': 1141}).then((data)=>{  // 查询婚姻登记记录模块数据
@@ -5162,9 +5161,9 @@
               part: 'hunyin',
               id: 6
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getjiankong () {
           returnQuestionnaireJson({'qpid': 1147}).then((data)=>{  // 查询监控录像资料模块数据
@@ -5174,9 +5173,9 @@
               part: 'jiankong',
               id: 7
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getfangchan () {
           returnQuestionnaireJson({'qpid': 1148}).then((data)=>{  // 查询房产模块数据
@@ -5186,9 +5185,9 @@
               part: 'fangchan',
               id: 8
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getcar () {
           returnQuestionnaireJson({'qpid': 1149}).then((data)=>{  // 查询车辆模块数据
@@ -5198,9 +5197,9 @@
               part: 'car',
               id: 9
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getcunkuan () {
           returnQuestionnaireJson({'qpid': 1150}).then((data)=>{  // 查询存款模块数据
@@ -5210,9 +5209,9 @@
               part: 'cunkuan',
               id: 10
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getgongjijin () {
           returnQuestionnaireJson({'qpid': 1151}).then((data)=>{  // 查询公积金模块数据
@@ -5222,9 +5221,9 @@
               part: 'gongjijin',
               id: 11
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getgupiao () {
           returnQuestionnaireJson({'qpid': 1152}).then((data)=>{  // 查询股票模块数据
@@ -5234,9 +5233,9 @@
               part: 'gupiao',
               id: 12
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getguquan () {
           returnQuestionnaireJson({'qpid': 1153}).then((data)=>{  // 查询股权模块数据
@@ -5246,9 +5245,9 @@
               part: 'guquan',
               id: 13
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getweixin () {
           returnQuestionnaireJson({'qpid': 1154}).then((data)=>{  // 查询微信钱包模块数据
@@ -5258,9 +5257,9 @@
               part: 'weixin',
               id: 14
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getzhifubao () {
           returnQuestionnaireJson({'qpid': 1155}).then((data)=>{  // 查询支付宝模块数据
@@ -5270,9 +5269,9 @@
               part: 'zhifubao',
               id: 15
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getlicai () {
           returnQuestionnaireJson({'qpid': 1156}).then((data)=>{  // 查询理财模块数据
@@ -5282,9 +5281,9 @@
               part: 'licai',
               id: 16
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getchaiqian () {
           returnQuestionnaireJson({'qpid': 1157}).then((data)=>{  // 查询拆迁档案（分家析产）模块数据
@@ -5294,6 +5293,7 @@
               part: 'chaiqian',
               id: 17
             })
+            this.mokuai.sort(this.compare('id'));
             if(this.aa.chaiqian[0][0].questions[7].answer == 1 || this.aa.chaiqian[0][0].questions[7].answer == ""){
                 this.aa.chaiqian[0][0].questions[7].answer = []
             }else{
@@ -5301,7 +5301,6 @@
             }
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getshouru () {
           returnQuestionnaireJson({'qpid': 1158}).then((data)=>{  // 查询收入明细模块数据
@@ -5311,9 +5310,9 @@
               part: 'shouru',
               id: 18
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getbaoxian () {
           returnQuestionnaireJson({'qpid': 1159}).then((data)=>{  // 查询保险模块数据
@@ -5323,9 +5322,9 @@
               part: 'baoxian',
               id: 19
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getfuxujin () {
           returnQuestionnaireJson({'qpid': 1160}).then((data)=>{  // 查询抚恤金模块数据
@@ -5335,9 +5334,9 @@
               part: 'fuxujin',
               id: 20
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getsangzang () {
           returnQuestionnaireJson({'qpid': 1161}).then((data)=>{  // 查询丧葬费模块数据
@@ -5346,10 +5345,10 @@
               title: '丧葬费',
               part: 'sangzang',
               id: 21
-            })
+            })  
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getbiji () {
           returnQuestionnaireJson({'qpid': 1162}).then((data)=>{  // 查询笔迹模块数据
@@ -5359,6 +5358,7 @@
               part: 'biji',
               id: 22
             })
+            this.mokuai.sort(this.compare('id'));
             if(this.aa.biji[0][0].questions[1].answer == 1 || this.aa.biji[0][0].questions[1].answer == ""){
                 this.aa.biji[0][0].questions[1].answer = []
               }else{
@@ -5366,7 +5366,6 @@
               }
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getqita () {
           returnQuestionnaireJson({'qpid': 1163}).then((data)=>{  // 查询其他模块数据
@@ -5376,9 +5375,9 @@
               part: 'qita',
               id: 23
             })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         getshenqingfayuan(){
           returnQuestionnaireJson({'qpid': 1236}).then((data)=>{  // 查询申请法院模块数据
@@ -5388,11 +5387,11 @@
               part: 'shenqingfayuan',
               id: 23
             })
+            this.mokuai.sort(this.compare('id'));
             let cityAnswer = JSON.parse(this.aa.shenqingfayuan[0][0].questions[0].answer)
             this.aa.shenqingfayuan[0][0].questions[0].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
           })
-          this.mokuai.sort(this.compare('id'));
         },
         compare (property) {
           return function(a,b){
@@ -5830,8 +5829,26 @@
           });
         },
 
-        GoComplatePage () {
-          this.IsShow = true;
+        GoComplatePage () { // 点击个性化修改的时候先验证申请法院是否填写，如果填写则弹出框
+          localStorage.setItem('qpid', 1236) // 验证申请法院
+          demoYanZheng({
+            qpid: 1236
+          }).then((data)=>{
+            // console.log(data.data)
+            if(data.data.status_code == 330){
+              this.missMsgBox = true
+              this.missMsg = data.data.data
+            }else{
+              this.$notify({
+                title: '保存成功',
+                message: '申请法院模块已成功保存',
+                type: 'success'
+              });
+              this.IsShow = true;
+            }
+          }).catch((data)=>{
+          })
+          
         },
         quxiao (){
           this.IsShow = false;
