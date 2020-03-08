@@ -401,38 +401,75 @@
                 // console.log(this.$refs.upload)
                 // for (var i=0;i<files.length;i++){
                 //      formData.append('imgs[]', files[i]);
-                // }
-                formData.append('title', this.user.title);
-                formData.append('type', this.user.type);
-                formData.append('re', this.user.re);
-                formData.append('placeholder', this.user.placeholder);
-                formData.append('status', this.user.status);
-                addQuestion(formData).then((data)=>{
-                    this.user.title = '';
-                    this.user.type = '';
-                    this.user.re = '';
-                    this.user.placeholder = '';
-                    this.user.status = '';
-                    this.handleQuestionList()
-                    localStorage.setItem('pid',data.data.data)
-                    this.addQuestion_answer.forEach((item)=>{
-                        addAnswer({
-                            status: 1,
-                            label: item.label
-                        }).then((data)=>{
-                            
+                // // }
+                // formData.append('title', this.user.title);
+                // formData.append('type', this.user.type);
+                // formData.append('re', this.user.re);
+                // formData.append('placeholder', this.user.placeholder);
+                // formData.append('status', this.user.status);
+                if(this.user.type==1){
+                    addQuestion({
+                        title:this.user.title,
+                        type:this.user.type,
+                        re:this.user.re,
+                        placeholder:this.user.placeholder,
+                        status:this.user.status
+                    }).then((data)=>{
+                        this.user.title = '';
+                        this.user.type = '';
+                        this.user.re = '';
+                        this.user.placeholder = '';
+                        this.user.status = '';
+                        this.handleQuestionList()
+                        localStorage.setItem('pid',data.data.data)
+                        this.addQuestion_answer.forEach((item)=>{
+                            addAnswer({
+                                status: 1,
+                                label: item.label
+                            }).then((data)=>{
+                                
+                            })
                         })
-                    })
-                    this.$message({
-                        type: 'success',
-                        message: '成功添加问题!'
-                    });
-                    localStorage.removeItem('pid');
-                    this.dialogQuestionAdd = false
-                }).catch((data)=>{
+                        this.$message({
+                            type: 'success',
+                            message: '成功添加问题!'
+                        });
+                        localStorage.removeItem('pid');
+                        this.dialogQuestionAdd = false
+                    }).catch((data)=>{
 
-                })
-               
+                    })
+                }else {
+                    addQuestion({
+                        title:this.user.title,
+                        type:this.user.type,
+                        placeholder:this.user.placeholder,
+                        status:this.user.status
+                    }).then((data)=>{
+                        this.user.title = '';
+                        this.user.type = '';
+                        this.user.placeholder = '';
+                        this.user.status = '';
+                        this.handleQuestionList()
+                        localStorage.setItem('pid',data.data.data)
+                        this.addQuestion_answer.forEach((item)=>{
+                            addAnswer({
+                                status: 1,
+                                label: item.label
+                            }).then((data)=>{
+                                
+                            })
+                        })
+                        this.$message({
+                            type: 'success',
+                            message: '成功添加问题!'
+                        });
+                        localStorage.removeItem('pid');
+                        this.dialogQuestionAdd = false
+                    }).catch((data)=>{
+
+                    })
+                }
             },
 
             updateQuestion (item) {    // 点击修改问题
