@@ -316,8 +316,8 @@
                     orderWords: []   // word排序ID
                 },
                 wordAddWhere:{  // 单独绑定的组合规则
-                    title: '',
-                    label: '',
+                    // title: '',
+                    // label: '',
                     qpid: null,
                     type: null,
                     value: '',
