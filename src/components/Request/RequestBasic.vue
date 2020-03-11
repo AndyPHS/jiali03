@@ -18,30 +18,69 @@
                     <div v-for="(item,index) in aa[mo.part]" :key="index">
                       <!-- 大问题块 -->
                       <div>
-                        <!-- <div v-if="mo.title=='子女状况' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女情况</h2>
-                        </div> -->
-                        <!-- <div v-if="mo.title=='起诉原因' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">起诉原因{{index+1}}</h2>
+                        <div v-if="mo.title== '报警出警记录' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个报警出警记录</h2>
                         </div>
-                        <div v-if="mo.title=='起诉经历' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔起诉经历</h2>
+                        <div v-if="mo.title== '开房记录' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个开房记录</h2>
                         </div>
-                        <div v-if="mo.title=='诉讼请求' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}辆诉讼请求</h2>
+                        <div v-if="mo.title== '病例资料' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个病例资料</h2>
                         </div>
-                        <div v-if="mo.title=='诉讼法院' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔诉讼法院</h2>
+                        <div v-if="mo.title== '婚姻登记信息' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个婚姻登记信息</h2>
                         </div>
-                        <div v-if="mo.title=='保险' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}份保险</h2>
+                        <div v-if="mo.title== '监控录像资料' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个监控录像资料</h2>
                         </div>
-                        <div v-if="mo.title=='债权' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债权</h2>
+                        <div v-if="mo.title== '房产' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个房产</h2>
                         </div>
-                        <div v-if="mo.title=='债务' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债务</h2>
-                        </div> -->
+                        <div v-if="mo.title== '车辆' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个车辆</h2>
+                        </div>
+                        <div v-if="mo.title== '存款' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个存款</h2>
+                        </div>
+                        <div v-if="mo.title== '公积金' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个公积金</h2>
+                        </div>
+                        <div v-if="mo.title== '股票' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个股票</h2>
+                        </div>
+                        <div v-if="mo.title== '股权' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个股权</h2>
+                        </div>
+                        <div v-if="mo.title== '微信钱包' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个微信钱包</h2>
+                        </div>
+                        <div v-if="mo.title== '支付宝' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个支付宝</h2>
+                        </div>
+                        <div v-if="mo.title== '理财' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个理财</h2>
+                        </div>
+                        <div v-if="mo.title== '拆迁档案' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个拆迁档案</h2>
+                        </div>
+                        <div v-if="mo.title== '收入明细' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个收入明细</h2>
+                        </div>
+                        <div v-if="mo.title== '保险' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个保险</h2>
+                        </div>
+                        <div v-if="mo.title== '抚恤金' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个抚恤金</h2>
+                        </div>
+                        <div v-if="mo.title== '丧葬费' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个丧葬费</h2>
+                        </div>
+                        <div v-if="mo.title== '笔迹' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个笔迹</h2>
+                        </div>
+                        <div v-if="mo.title== '其他' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个其他</h2>
+                        </div>
                       </div>
 
                       <!-- 大问题块 -->
@@ -4861,33 +4900,135 @@
                         </div>
                       </div>
                       <div>
-                        <!-- <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(990,index)">删除孩子情况</div>
-                        </div> -->
-                        <!-- <div v-if="mo.title==='起诉经历' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(950,index)">删除起诉经历</div>
-                        </div> -->
-                        <!-- <div v-if="mo.title==='诉讼请求' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(968,index)">删除诉讼请求</div>
+                        <div v-if="mo.title== '报警出警记录' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(1116,index)">删除报警出警记录</div>
                         </div>
-                        <div v-if="mo.title==='诉讼法院' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(1000,index)">删除诉讼法院</div>
-                        </div> -->
+                        <div v-if="mo.title== '开房记录' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1125,index)">删除开房记录</div>
+                        </div>
+                        <div v-if="mo.title== '病例资料' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1131,index)">删除病例资料</div>
+                        </div>
+                        <div v-if="mo.title== '婚姻登记信息' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1141,index)">删除婚姻登记信息</div>
+                        </div>
+                        <div v-if="mo.title== '监控录像资料' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1147,index)">删除监控录像资料</div>
+                        </div>
+                        <div v-if="mo.title== '房产' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1148,index)">删除房产</div>
+                        </div>
+                        <div v-if="mo.title== '车辆' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1149,index)">删除车辆</div>
+                        </div>
+                        <div v-if="mo.title== '存款' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1150,index)">删除存款</div>
+                        </div>
+                        <div v-if="mo.title== '公积金' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1151,index)">删除公积金</div>
+                        </div>
+                        <div v-if="mo.title== '股票' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1152,index)">删除股票</div>
+                        </div>
+                        <div v-if="mo.title== '股权' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1153,index)">删除股权</div>
+                        </div>
+                        <div v-if="mo.title== '微信钱包' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1154,index)">删除微信钱包</div>
+                        </div>
+                        <div v-if="mo.title== '支付宝' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1155,index)">删除支付宝</div>
+                        </div>
+                        <div v-if="mo.title== '理财' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1156,index)">删除理财</div>
+                        </div>
+                        <div v-if="mo.title== '拆迁档案' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1157,index)">删除拆迁档案</div>
+                        </div>
+                        <div v-if="mo.title== '收入明细' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1158,index)">删除收入明细</div>
+                        </div>
+                        <div v-if="mo.title== '保险' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1159,index)">删除保险</div>
+                        </div>
+                        <div v-if="mo.title== '抚恤金' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1160,index)">删除抚恤金</div>
+                        </div>
+                        <div v-if="mo.title== '丧葬费' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1161,index)">删除丧葬费</div>
+                        </div>
+                        <div v-if="mo.title== '笔迹' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1162,index)">删除笔迹</div>
+                        </div>
+                        <div v-if="mo.title== '其他' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(1163,index)">删除其他</div>
+                        </div>
                       </div>
                     </div>
                     <div>
-                      <!-- <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(990)">添加孩子情况</div>
-                      </div> -->
-                      <!-- <div v-if="mo.title== '起诉经历' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(950)">添加起诉经历</div>
+                      <div v-if="mo.title== '报警出警记录' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(1116)">添加报警出警记录</div>
                       </div>
-                      <div v-if="mo.title== '诉讼请求' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(968)">添加诉讼请求</div>
+                      <div v-if="mo.title== '开房记录' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1125)">添加开房记录</div>
                       </div>
-                      <div v-if="mo.title== '诉讼法院' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1000)">添加诉讼法院</div>
-                      </div> -->
+                      <div v-if="mo.title== '病例资料' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1131)">添加病例资料</div>
+                      </div>
+                      <div v-if="mo.title== '婚姻登记信息' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1141)">添加婚姻登记信息</div>
+                      </div>
+                      <div v-if="mo.title== '监控录像资料' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1147)">添加监控录像资料</div>
+                      </div>
+                      <div v-if="mo.title== '房产' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1148)">添加房产</div>
+                      </div>
+                      <div v-if="mo.title== '车辆' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1149)">添加车辆</div>
+                      </div>
+                      <div v-if="mo.title== '存款' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1150)">添加存款</div>
+                      </div>
+                      <div v-if="mo.title== '公积金' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1151)">添加公积金</div>
+                      </div>
+                      <div v-if="mo.title== '股票' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1152)">添加股票</div>
+                      </div>
+                      <div v-if="mo.title== '股权' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1153)">添加股权</div>
+                      </div>
+                      <div v-if="mo.title== '微信钱包' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1154)">添加微信钱包</div>
+                      </div>
+                      <div v-if="mo.title== '支付宝' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1155)">添加支付宝</div>
+                      </div>
+                      <div v-if="mo.title== '理财' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1156)">添加理财</div>
+                      </div>
+                      <div v-if="mo.title== '拆迁档案' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1157)">添加拆迁档案</div>
+                      </div>
+                      <div v-if="mo.title== '收入明细' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1158)">添加收入明细</div>
+                      </div>
+                      <div v-if="mo.title== '保险' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1159)">添加保险</div>
+                      </div>
+                      <div v-if="mo.title== '抚恤金' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1160)">添加抚恤金</div>
+                      </div>
+                      <div v-if="mo.title== '丧葬费' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1161)">添加丧葬费</div>
+                      </div>
+                      <div v-if="mo.title== '笔迹' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1162)">添加笔迹</div>
+                      </div>
+                      <div v-if="mo.title== '其他' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(1163)">添加其他</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -5097,14 +5238,14 @@
           })
         },
         getBasicInformation () { // 查询双方基本信息模块数据
-          returnQuestionnaireJson({'qpid': 1079}).then((data)=>{  // 查询双方基本信息模块数据
+          returnQuestionnaireJson({'qpid': 1079}).then((data)=>{ 
             this.aa.BasicInformation = data.data.data
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
-        getshishi () {
-          returnQuestionnaireJson({'qpid': 1100}).then((data)=>{  // 查询事实与理由模块数据
+        getshishi () {  // 查询事实与理由模块数据
+          returnQuestionnaireJson({'qpid': 1100}).then((data)=>{  
             this.aa.shishi = data.data.data
             this.mokuai.sort(this.compare('id'));
             if(this.aa.shishi[0][0].questions[1].answer == 1 || this.aa.shishi[0][0].questions[1].answer == ""){
@@ -5115,8 +5256,8 @@
           }).catch((data)=>{
           })
         },
-        getbaojing () {
-          returnQuestionnaireJson({'qpid': 1116}).then((data)=>{  // 查询报警记录模块数据
+        getbaojing () {  // 查询报警记录模块数据
+          returnQuestionnaireJson({'qpid': 1116}).then((data)=>{ 
             this.aa.baojing = data.data.data
             this.mokuai.push({
               title: '报警出警记录',
@@ -5124,13 +5265,27 @@
               id: 3
             })
             this.mokuai.sort(this.compare('id'));
-            let cityAnswer = JSON.parse(this.aa.baojing[0][0].questions[1].answer)
-            this.aa.baojing[0][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
+            for(var i=0;i<this.aa.baojing.length;i++){
+            		let cityAnswer = JSON.parse(this.aa.baojing[i][0].questions[1].answer)
+            		this.aa.baojing[i][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
+            }
           }).catch((data)=>{
           })
         },
-        getkaifang () {
-          returnQuestionnaireJson({'qpid': 1125}).then((data)=>{  // 查询开房记录模块数据
+        refreshBaoJing (){ // 刷新报警记录模块数据
+          returnQuestionnaireJson({'qpid': 1116}).then((data)=>{
+            this.aa.baojing = data.data.data
+            this.mokuai.sort(this.compare('id'));
+            for(var i=0;i<this.aa.baojing.length;i++){
+            		let cityAnswer = JSON.parse(this.aa.baojing[i][0].questions[1].answer)
+            		this.aa.baojing[i][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
+            }
+            
+          }).catch((data)=>{
+          })
+        },
+        getkaifang () {// 查询开房记录模块数据
+          returnQuestionnaireJson({'qpid': 1125}).then((data)=>{  
             this.aa.kaifang = data.data.data
             this.mokuai.push({
               title: '开房记录',
@@ -5141,8 +5296,15 @@
           }).catch((data)=>{
           })
         },
-        getbingli () {
-          returnQuestionnaireJson({'qpid': 1131}).then((data)=>{  // 查询病例资料模块数据
+        refreshKaiFang () { // shua新开房记录模块数据
+          returnQuestionnaireJson({'qpid': 1125}).then((data)=>{  
+            this.aa.kaifang = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getbingli () {// 查询病例资料模块数据
+          returnQuestionnaireJson({'qpid': 1131}).then((data)=>{  
             this.aa.bingli = data.data.data
             this.mokuai.push({
               title: '病例资料',
@@ -5153,8 +5315,15 @@
           }).catch((data)=>{
           })
         },
-        gethunyin () {
-          returnQuestionnaireJson({'qpid': 1141}).then((data)=>{  // 查询婚姻登记记录模块数据
+        refreshBingLi(){// 刷新病例资料模块数据
+          returnQuestionnaireJson({'qpid': 1131}).then((data)=>{
+            this.aa.bingli = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        gethunyin () { // 查询婚姻登记记录模块数据
+          returnQuestionnaireJson({'qpid': 1141}).then((data)=>{ 
             this.aa.hunyin = data.data.data
             this.mokuai.push({
               title: '婚姻登记信息',
@@ -5165,8 +5334,15 @@
           }).catch((data)=>{
           })
         },
-        getjiankong () {
-          returnQuestionnaireJson({'qpid': 1147}).then((data)=>{  // 查询监控录像资料模块数据
+        refreshHunYin (){// 刷新婚姻登记记录模块数据
+          returnQuestionnaireJson({'qpid': 1141}).then((data)=>{
+            this.aa.hunyin = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getjiankong () {// 查询监控录像资料模块数据
+          returnQuestionnaireJson({'qpid': 1147}).then((data)=>{  
             this.aa.jiankong = data.data.data
             this.mokuai.push({
               title: '监控录像资料',
@@ -5177,8 +5353,15 @@
           }).catch((data)=>{
           })
         },
-        getfangchan () {
-          returnQuestionnaireJson({'qpid': 1148}).then((data)=>{  // 查询房产模块数据
+        refreshJianKong () {// 刷新监控录像资料模块数据
+          returnQuestionnaireJson({'qpid': 1147}).then((data)=>{
+            this.aa.jiankong = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getfangchan () { // 查询房产模块数据
+          returnQuestionnaireJson({'qpid': 1148}).then((data)=>{ 
             this.aa.fangchan = data.data.data
             this.mokuai.push({
               title: '房产',
@@ -5189,8 +5372,15 @@
           }).catch((data)=>{
           })
         },
-        getcar () {
-          returnQuestionnaireJson({'qpid': 1149}).then((data)=>{  // 查询车辆模块数据
+        refreshFangChan (){ // 刷新房产模块数据
+          returnQuestionnaireJson({'qpid': 1148}).then((data)=>{
+            this.aa.fangchan = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getcar () {// 查询车辆模块数据
+          returnQuestionnaireJson({'qpid': 1149}).then((data)=>{  
             this.aa.car = data.data.data
             this.mokuai.push({
               title: '车辆',
@@ -5201,8 +5391,15 @@
           }).catch((data)=>{
           })
         },
-        getcunkuan () {
-          returnQuestionnaireJson({'qpid': 1150}).then((data)=>{  // 查询存款模块数据
+        refreshCar () { // 刷新车辆模块数据
+          returnQuestionnaireJson({'qpid': 1149}).then((data)=>{ 
+            this.aa.car = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getcunkuan () {// 查询存款模块数据
+          returnQuestionnaireJson({'qpid': 1150}).then((data)=>{  
             this.aa.cunkuan = data.data.data
             this.mokuai.push({
               title: '存款',
@@ -5213,8 +5410,15 @@
           }).catch((data)=>{
           })
         },
-        getgongjijin () {
-          returnQuestionnaireJson({'qpid': 1151}).then((data)=>{  // 查询公积金模块数据
+        refreshCunKuan () {// 刷新存款模块数据
+          returnQuestionnaireJson({'qpid': 1150}).then((data)=>{  
+            this.aa.cunkuan = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getgongjijin () {// 查询公积金模块数据
+          returnQuestionnaireJson({'qpid': 1151}).then((data)=>{  
             this.aa.gongjijin = data.data.data
             this.mokuai.push({
               title: '公积金',
@@ -5225,8 +5429,15 @@
           }).catch((data)=>{
           })
         },
-        getgupiao () {
-          returnQuestionnaireJson({'qpid': 1152}).then((data)=>{  // 查询股票模块数据
+        refreshGongJiJin () {// 刷新公积金模块数据
+          returnQuestionnaireJson({'qpid': 1151}).then((data)=>{  
+            this.aa.gongjijin = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getgupiao () {// 查询股票模块数据
+          returnQuestionnaireJson({'qpid': 1152}).then((data)=>{  
             this.aa.gupiao = data.data.data
             this.mokuai.push({
               title: '股票',
@@ -5237,8 +5448,15 @@
           }).catch((data)=>{
           })
         },
-        getguquan () {
-          returnQuestionnaireJson({'qpid': 1153}).then((data)=>{  // 查询股权模块数据
+        refreshGuPiao () {// 刷新股票模块数据
+          returnQuestionnaireJson({'qpid': 1152}).then((data)=>{  
+            this.aa.gupiao = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getguquan () {// 查询股权模块数据
+          returnQuestionnaireJson({'qpid': 1153}).then((data)=>{  
             this.aa.guquan = data.data.data
             this.mokuai.push({
               title: '股权',
@@ -5249,8 +5467,15 @@
           }).catch((data)=>{
           })
         },
-        getweixin () {
-          returnQuestionnaireJson({'qpid': 1154}).then((data)=>{  // 查询微信钱包模块数据
+        refreshGuQuan () {// 刷新股权模块数据
+          returnQuestionnaireJson({'qpid': 1153}).then((data)=>{  
+            this.aa.guquan = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getweixin () {// 查询微信钱包模块数据
+          returnQuestionnaireJson({'qpid': 1154}).then((data)=>{  
             this.aa.weixin = data.data.data
             this.mokuai.push({
               title: '微信钱包',
@@ -5261,8 +5486,15 @@
           }).catch((data)=>{
           })
         },
-        getzhifubao () {
-          returnQuestionnaireJson({'qpid': 1155}).then((data)=>{  // 查询支付宝模块数据
+        refreshWeiXin () {//刷新微信钱包模块数据
+          returnQuestionnaireJson({'qpid': 1154}).then((data)=>{  
+            this.aa.weixin = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getzhifubao () {// 查询支付宝模块数据
+          returnQuestionnaireJson({'qpid': 1155}).then((data)=>{  
             this.aa.zhifubao = data.data.data
             this.mokuai.push({
               title: '支付宝',
@@ -5273,8 +5505,15 @@
           }).catch((data)=>{
           })
         },
-        getlicai () {
-          returnQuestionnaireJson({'qpid': 1156}).then((data)=>{  // 查询理财模块数据
+        refreshZhiFuBao () {// 刷新支付宝模块数据
+          returnQuestionnaireJson({'qpid': 1155}).then((data)=>{  
+            this.aa.zhifubao = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getlicai () {// 查询理财模块数据
+          returnQuestionnaireJson({'qpid': 1156}).then((data)=>{  
             this.aa.licai = data.data.data
             this.mokuai.push({
               title: '理财',
@@ -5285,28 +5524,51 @@
           }).catch((data)=>{
           })
         },
-        getchaiqian () {
-          returnQuestionnaireJson({'qpid': 1157}).then((data)=>{  // 查询拆迁档案（分家析产）模块数据
+        refreshLiCai () {// 刷新理财模块数据
+          returnQuestionnaireJson({'qpid': 1156}).then((data)=>{  
+            this.aa.licai = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getchaiqian () {// 查询拆迁档案（分家析产）模块数据
+          returnQuestionnaireJson({'qpid': 1157}).then((data)=>{  
             this.aa.chaiqian = data.data.data
             this.mokuai.push({
-              title: '拆迁档案（分家析产）',
+              title: '拆迁档案',
               part: 'chaiqian',
               id: 17
             })
             this.mokuai.sort(this.compare('id'));
-            if(this.aa.chaiqian[0][0].questions[7].answer == 1 || this.aa.chaiqian[0][0].questions[7].answer == ""){
-                this.aa.chaiqian[0][0].questions[7].answer = []
-            }else{
-              this.aa.chaiqian[0][0].questions[7].answer = JSON.parse(this.aa.chaiqian[0][0].questions[7].answer)
+            for(var i=0;i<this.aa.chaiqian.length;i++){
+            		if(this.aa.chaiqian[i][0].questions[7].answer == 1 || this.aa.chaiqian[i][0].questions[7].answer == ""){
+	                this.aa.chaiqian[i][0].questions[7].answer = []
+	            }else{
+	              this.aa.chaiqian[i][0].questions[7].answer = JSON.parse(this.aa.chaiqian[i][0].questions[7].answer)
+	            }
             }
           }).catch((data)=>{
           })
         },
-        getshouru () {
-          returnQuestionnaireJson({'qpid': 1158}).then((data)=>{  // 查询收入明细模块数据
+        refreshChaiQian () {// 刷新拆迁档案（分家析产）模块数据
+          returnQuestionnaireJson({'qpid': 1157}).then((data)=>{  
+            this.aa.chaiqian = data.data.data
+            this.mokuai.sort(this.compare('id'));
+            for(var i=0;i<this.aa.chaiqian.length;i++){
+            		if(this.aa.chaiqian[i][0].questions[7].answer == 1 || this.aa.chaiqian[i][0].questions[7].answer == ""){
+	                this.aa.chaiqian[i][0].questions[7].answer = []
+	            }else{
+	              this.aa.chaiqian[i][0].questions[7].answer = JSON.parse(this.aa.chaiqian[i][0].questions[7].answer)
+	            }
+            }
+          }).catch((data)=>{
+          })
+        },
+        getshouru () {// 查询收入明细模块数据
+          returnQuestionnaireJson({'qpid': 1158}).then((data)=>{  
             this.aa.shouru = data.data.data
             this.mokuai.push({
-              title: '收支明细',
+              title: '收入明细',
               part: 'shouru',
               id: 18
             })
@@ -5314,8 +5576,15 @@
           }).catch((data)=>{
           })
         },
-        getbaoxian () {
-          returnQuestionnaireJson({'qpid': 1159}).then((data)=>{  // 查询保险模块数据
+        refreshShouRu () {// 刷新收入明细模块数据
+          returnQuestionnaireJson({'qpid': 1158}).then((data)=>{  
+            this.aa.shouru = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getbaoxian () {// 查询保险模块数据
+          returnQuestionnaireJson({'qpid': 1159}).then((data)=>{  
             this.aa.baoxian = data.data.data
             this.mokuai.push({
               title: '保险',
@@ -5326,8 +5595,15 @@
           }).catch((data)=>{
           })
         },
-        getfuxujin () {
-          returnQuestionnaireJson({'qpid': 1160}).then((data)=>{  // 查询抚恤金模块数据
+        refreshBaoXian () {// 刷新保险模块数据
+          returnQuestionnaireJson({'qpid': 1159}).then((data)=>{  
+            this.aa.baoxian = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getfuxujin () {// 查询抚恤金模块数据
+          returnQuestionnaireJson({'qpid': 1160}).then((data)=>{  
             this.aa.fuxujin = data.data.data
             this.mokuai.push({
               title: '抚恤金',
@@ -5338,8 +5614,15 @@
           }).catch((data)=>{
           })
         },
-        getsangzang () {
-          returnQuestionnaireJson({'qpid': 1161}).then((data)=>{  // 查询丧葬费模块数据
+        refreshFuXuJin () {// 刷新抚恤金模块数据
+          returnQuestionnaireJson({'qpid': 1160}).then((data)=>{  
+            this.aa.fuxujin = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getsangzang () { // 查询丧葬费模块数据
+          returnQuestionnaireJson({'qpid': 1161}).then((data)=>{ 
             this.aa.sangzang = data.data.data
             this.mokuai.push({
               title: '丧葬费',
@@ -5350,8 +5633,15 @@
           }).catch((data)=>{
           })
         },
-        getbiji () {
-          returnQuestionnaireJson({'qpid': 1162}).then((data)=>{  // 查询笔迹模块数据
+        refreshSangZangFei () { // 刷新丧葬费模块数据
+          returnQuestionnaireJson({'qpid': 1161}).then((data)=>{ 
+            this.aa.sangzang = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        getbiji () {// 查询笔迹模块数据
+          returnQuestionnaireJson({'qpid': 1162}).then((data)=>{  
             this.aa.biji = data.data.data
             this.mokuai.push({
               title: '笔迹',
@@ -5359,22 +5649,46 @@
               id: 22
             })
             this.mokuai.sort(this.compare('id'));
-            if(this.aa.biji[0][0].questions[1].answer == 1 || this.aa.biji[0][0].questions[1].answer == ""){
-                this.aa.biji[0][0].questions[1].answer = []
-              }else{
-                this.aa.biji[0][0].questions[1].answer = JSON.parse(this.aa.biji[0][0].questions[1].answer)
-              }
+            for(var i=0;i<this.aa.biji.length;i++){
+            		if(this.aa.biji[i][0].questions[1].answer == 1 || this.aa.biji[i][0].questions[1].answer == ""){
+	                this.aa.biji[i][0].questions[1].answer = []
+	              }else{
+	                this.aa.biji[i][0].questions[1].answer = JSON.parse(this.aa.biji[i][0].questions[1].answer)
+	              }
+            }
           }).catch((data)=>{
           })
         },
-        getqita () {
-          returnQuestionnaireJson({'qpid': 1163}).then((data)=>{  // 查询其他模块数据
+        refreshBiJi () {// 刷新笔迹模块数据
+          returnQuestionnaireJson({'qpid': 1162}).then((data)=>{  
+            this.aa.biji = data.data.data
+            this.mokuai.sort(this.compare('id'));
+            for(var i=0;i<this.aa.biji.length;i++){
+            		if(this.aa.biji[i][0].questions[1].answer == 1 || this.aa.biji[i][0].questions[1].answer == ""){
+	                this.aa.biji[i][0].questions[1].answer = []
+	              }else{
+	                this.aa.biji[i][0].questions[1].answer = JSON.parse(this.aa.biji[i][0].questions[1].answer)
+	              }
+            }
+            
+          }).catch((data)=>{
+          })
+        },
+        getqita () {// 查询其他模块数据
+          returnQuestionnaireJson({'qpid': 1163}).then((data)=>{  
             this.aa.qita = data.data.data
             this.mokuai.push({
               title: '其他',
               part: 'qita',
               id: 23
             })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshQiTa () {// 刷新其他模块数据
+          returnQuestionnaireJson({'qpid': 1163}).then((data)=>{  
+            this.aa.qita = data.data.data
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
@@ -5769,7 +6083,7 @@
             }
           }
         },
-        userAddSelectAnswerAction (e){   // 添加子女或者起诉原因等
+        userAddSelectAnswerAction (e){   // 添加多子女模块按钮
             this.$message({
               message:'添加中请稍后……',
               duration: 1000
@@ -5779,8 +6093,48 @@
               quid: localStorage.getItem('quid')
             }).then((data)=>{
               if(data.data.status_code == 200 ){
-                if(e==990){
-                  this.getZiNv()  // 查询子女模块数据
+                if(e==1116){
+                  this.refreshBaoJing()  // 刷新报警出警记录模块
+                }else if(e==1125){
+                  this.refreshKaiFang()  // 刷新开房记录模块
+                }else if(e==1131){
+                  this.refreshBingLi()  // 刷新病例资料模块
+                }else if(e==1141){
+                  this.refreshHunYin()  // 刷新婚姻登记信息模块
+                }else if(e==1147){
+                  this.refreshJianKong()  // 刷新监控录像资料模块
+                }else if(e==1148){
+                  this.refreshFangChan()  // 刷新房产模块
+                }else if(e==1149){
+                  this.refreshCar()  // 刷新车辆模块
+                }else if(e==1150){
+                  this.refreshCunKuan()  // 刷新存款模块
+                }else if(e==1151){
+                  this.refreshGongJiJin()  // 刷新公积金模块
+                }else if(e==1152){
+                  this.refreshGuPiao()  // 刷新股票模块
+                }else if(e==1153){
+                  this.refreshGuQuan()  // 刷新股权模块
+                }else if(e==1154){
+                  this.refreshWeiXin()  // 刷新微信钱包模块
+                }else if(e==1155){
+                  this.refreshZhiFuBao()  // 刷新支付宝模块
+                }else if(e==1156){
+                  this.refreshLiCai()  // 刷新理财模块
+                }else if(e==1157){
+                  this.refreshChaiQian()  // 刷新拆迁模块
+                }else if(e==1158){
+                  this.refreshShouRu()  // 刷新收入模块
+                }else if(e==1159){
+                  this.refreshBaoXian()  // 刷新保险模块
+                }else if(e==1160){
+                  this.refreshFuXuJin()  // 刷新抚恤金模块
+                }else if(e==1161){
+                  this.refreshSangZangFei()  // 刷新丧葬费模块
+                }else if(e==1162){
+                  this.refreshBiJi()  // 刷新笔迹模块
+                }else if(e==1163){
+                  this.refreshQiTa()  // 刷新其他模块
                 }
                 this.$message({
                   message: '添加成功',
@@ -5791,7 +6145,7 @@
                this.$message.error('添加失败，请联系管理员');
             })
         },
-        userDeleteSelectAnswerAction (e,index) { // 删除子女或者起诉原因等信息
+        userDeleteSelectAnswerAction (e,index) { // 删除多子女模块按钮
           this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
@@ -5802,16 +6156,48 @@
                 quid: localStorage.getItem('quid'),
                 fornum: index+1
               }).then((data)=>{
-                if(e==990){
-                  this.getZiNv()  // 查询子女模块数据
-                }else if(e==948){
-                  this.getQiSuYuanYin() // 查询起诉原因模块数据
-                }else if(e==950){
-                  this.getQiSuJingLi()  // 查询起诉经历模块数据
-                }else if(e==968){
-                  this.getSuSongQingQiu()   // 查询诉讼请求模块数据
-                }else if(e==1000){
-                  this.getQiSuFaYuan()  // 查询诉讼法院模块数据
+                if(e==1116){
+                  this.refreshBaoJing()  // 刷新报警出警记录模块
+                }else if(e==1125){
+                  this.refreshKaiFang()  // 刷新开房记录模块
+                }else if(e==1131){
+                  this.refreshBingLi()  // 刷新病例资料模块
+                }else if(e==1141){
+                  this.refreshHunYin()  // 刷新婚姻登记信息模块
+                }else if(e==1147){
+                  this.refreshJianKong()  // 刷新监控录像资料模块
+                }else if(e==1148){
+                  this.refreshFangChan()  // 刷新房产模块
+                }else if(e==1149){
+                  this.refreshCar()  // 刷新车辆模块
+                }else if(e==1150){
+                  this.refreshCunKuan()  // 刷新存款模块
+                }else if(e==1151){
+                  this.refreshGongJiJin()  // 刷新公积金模块
+                }else if(e==1152){
+                  this.refreshGuPiao()  // 刷新股票模块
+                }else if(e==1153){
+                  this.refreshGuQuan()  // 刷新股权模块
+                }else if(e==1154){
+                  this.refreshWeiXin()  // 刷新微信钱包模块
+                }else if(e==1155){
+                  this.refreshZhiFuBao()  // 刷新支付宝模块
+                }else if(e==1156){
+                  this.refreshLiCai()  // 刷新理财模块
+                }else if(e==1157){
+                  this.refreshChaiQian()  // 刷新拆迁模块
+                }else if(e==1158){
+                  this.refreshShouRu()  // 刷新收入模块
+                }else if(e==1159){
+                  this.refreshBaoXian()  // 刷新保险模块
+                }else if(e==1160){
+                  this.refreshFuXuJin()  // 刷新抚恤金模块
+                }else if(e==1161){
+                  this.refreshSangZangFei()  // 刷新丧葬费模块
+                }else if(e==1162){
+                  this.refreshBiJi()  // 刷新笔迹模块
+                }else if(e==1163){
+                  this.refreshQiTa()  // 刷新其他模块
                 }
                 this.$message({
                   message: '删除成功',
