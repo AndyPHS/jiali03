@@ -859,7 +859,7 @@
               questions: [
                 {
                   title: '1.是否有现有的财产需要约定？',
-                  id: '1695',
+                  id: '2356',
                   isRequired: true,
                   type: 'radio',
                   answer: '',
@@ -870,7 +870,7 @@
                 },
                 {
                   title: '2.请您勾选需要处理的现有的财产（可多选）',
-                  id: '1713',
+                  id: '2357',
                   isRequired: true,
                   type: 'checkbox',
                   tip: '提示',
@@ -881,14 +881,15 @@
                     { label: '理财', value: '3' },
                     { label: '车子', value: '4' },
                     { label: '保险', value: '5' },
-                    { label: '股权', value: '6' },
-                    { label: '其他', value: '7' }
+                    { label: '家具家电', value: '6' },
+                    { label: '股权', value: '7' },
+                    { label: '其他', value: '8' }
                   ],
-                  requireQidAndAnswer: { id: '1695', answer: '1' }
+                  requireQidAndAnswer: { id: '2356', answer: '1' }
                 },
                 {
                   title: '3.是否对未来可能拥有的财产进行约定？',
-                  id: '1735',
+                  id: '2360',
                   isRequired: true,
                   type: 'radio',
                   answer: '',
@@ -899,7 +900,7 @@
                 },
                 {
                   title: '4.是否有实际存在的外债（债权、债务）需要约定？',
-                  id: '1737',
+                  id: '2358',
                   isRequired: true,
                   type: 'radio',
                   answer: '',
@@ -910,20 +911,20 @@
                 },
                 {
                   title: '5.现有的外债的具体情形是（可多选）',
-                  id: '1738',
+                  id: '2359',
                   isRequired: true,
                   type: 'checkbox',
                   tip: '提示',
                   answer: [],
                   listData: [
-                    { label: '由债权(别人欠/借你钱)', value: '1' },
+                    { label: '有债权(别人欠/借你钱)', value: '1' },
                     { label: '有债务(你欠/借了别人钱)', value: '2' }
                   ],
-                  requireQidAndAnswer: { id: '1737', answer: '1' }
+                  requireQidAndAnswer: { id: '2358', answer: '1' }
                 },
                 {
                   title: '6.是否需要对不明确的外债或未来的外债进行约定？',
-                  id: '1741',
+                  id: '2361',
                   isRequired: true,
                   type: 'radio',
                   answer: '',
@@ -934,16 +935,16 @@
                 },
                 {
                   title: '7.不明确的外债或未来的外债的具体情形是（可多选）',
-                  id: '1740',
+                  id: '2362',
                   isRequired: true,
                   type: 'checkbox',
                   tip: '提示',
                   answer: [],
                   listData: [
-                    { label: '由未来债权(别人欠/借你钱)', value: '1' },
+                    { label: '有未来债权(别人欠/借你钱)', value: '1' },
                     { label: '有未来债务(你欠/借了别人钱)', value: '2' }
                   ],
-                  requireQidAndAnswer: { id: '1741', answer: '1' }
+                  requireQidAndAnswer: { id: '2361', answer: '1' }
                 }
               ]
             }
@@ -962,10 +963,7 @@
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: localStorage.getItem('quid') //用户的问卷id
             }).then((data)=>{
-              // console.log(e.answer)
-              // console.log(typeof(e.answer))
             }).catch((data)=>{
-               // console.log("保存失败")
             })
           }else{
             userAddAnswer({
@@ -974,125 +972,113 @@
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: localStorage.getItem('quid') //用户的问卷id
             }).then((data)=>{
-              // console.log("保存成功")
             }).catch((data)=>{
-               // console.log("保存失败")
             })
           }
-          if(e.id == 1713){
+          if(e.id == 2357){
             e.answer.forEach((item)=>{
               if(item==1){     // 添加房产
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1462, // 关联id
+                  qpid: 2172, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==2){   // 添加存款
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1612, // 关联id
+                  qpid: 2283, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==3){  // 理财
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1549, // 关联id
+                  qpid: 2485, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==4){  // 添加车子
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1523, // 关联id
+                  qpid: 2224, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==5){   // 添加保险
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1575, // 关联id
+                  qpid: 2261, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
-              }else if(item==6){     // 添加股权
+              }else if(item==6){     // 添加家具家电
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1714, // 关联id
+                  qpid: 2460, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
-              }else if(item==7){  // 添加其他
+              }else if(item==7){  // 添加股权
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1316, // 关联id
+                  qpid: 2296, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                  // console.log("保存失败")
+                })
+              }else if(item==8){  // 添加其他
+                userAddAnswer({
+                  value: 1,  // 值
+                  qpid: 2310, // 关联id
+                  quid: localStorage.getItem('quid') //用户的问卷id
+                }).then((data)=>{
+                }).catch((data)=>{
                 })
               }
             })
-          }else if(e.id==1735){
+          }else if(e.id==2360){
             if(e.answer==1){
               userAddAnswer({
                 value: 1,  // 值
-                qpid: 1743, // 关联id
+                qpid: 2313, // 关联id
                 quid: localStorage.getItem('quid') //用户的问卷id
               }).then((data)=>{
               }).catch((data)=>{
               })
             }
-          }else if(e.id ==1738){
+          }else if(e.id ==2359){
             e.answer.forEach((item)=>{
               if(item==1){     // 添加债权
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1653, // 关联id
+                  qpid: 2324, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==2){   // 添加债务
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1672, // 关联id
+                  qpid: 2336, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }
             })
-          }else if(e.id==1740){
+          }else if(e.id==2362){
             e.answer.forEach((item)=>{
               if(item==1){     // 添加未来债权
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1751, // 关联id
+                  qpid: 2348, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
                 }).catch((data)=>{
@@ -1100,7 +1086,7 @@
               }else if(item==2){   // 添加未来债务
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 1757, // 关联id
+                  qpid: 2353, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
                 }).catch((data)=>{
@@ -1110,7 +1096,7 @@
           }
         },
         NextPage () {
-          this.$router.replace("/HunQianBasic");
+          this.$router.replace("/HunNeiBasic");
         },
         returnUserList () {
            this.$router.replace("/UserSystem");

@@ -51,10 +51,10 @@
                 <div slot="reference" class="name-wrapper">
                   <el-tag size="medium">{{ scope.row.title }}</el-tag>
                   <i class="el-icon-more ml-2"></i>
-                  <span v-if="scope.row.orderId == 1" class="ml-2 px-1 font-weight rounded-sm border border-red-800 text-red-800">顶</span> 
+                  <span v-if="scope.row.orderId == 1" class="ml-2 px-1 font-weight rounded-sm border border-red-800 text-red-800">顶</span>
                 </div>
               </el-popover>
-              
+
             </template>
           </el-table-column>
           <el-table-column
@@ -73,16 +73,16 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope" >
-              <el-button 
+              <el-button
                 size="mini"
                 @click="ViewWenJuan(scope.$index, scope.row)">查看</el-button>
-              <el-button 
+              <el-button
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">编辑</el-button>
-              <!-- <el-button v-show="questionnaireTypeSelect =='起诉状类'" 
+              <!-- <el-button v-show="questionnaireTypeSelect =='起诉状类'"
                 size="mini"
                 @click="TestEditWenJuan(scope.$index, scope.row)">测试编辑</el-button>   -->
-              <el-button 
+              <el-button
                 size="mini"
                 @click="DownLoadWenJuan(scope.$index, scope.row)">下载</el-button>
               <el-button
@@ -136,7 +136,7 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-                <el-button 
+                <el-button
                 size="mini"
                 @click="RenewWenJuan(scope.$index, scope.row)">恢复</el-button>
               <el-button
@@ -239,7 +239,7 @@
       </div>
     </el-dialog> -->
   </div>
-  
+
 </template>
 <script>
 import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
@@ -309,15 +309,13 @@ export default {
     this.getSelectUserQuestionnaire()   // 查找用户问卷
   },
   methods: {
-    getSelectUserQuestionnaire(){  // 查找用户问卷
+    getSelectUserQuestionnaire () {  // 查找用户问卷
       selectUserDeleteQuestionnaire({
-        status:1
+        status: 1
       }).then((data)=>{
         if(data.data.status_code == 200 ){
-          // console.log(data.data.data)
           this.QuestionnaireSelectArr = data.data.data
           this.statusType = 1
-          // console.log(this.QuestionnaireSelectArr)
         }else{
           this.$message({
             message: '问卷获取失败',
@@ -386,7 +384,7 @@ export default {
     ViewWenJuan(index, row){ // 点击查看问卷
       this.chooseList.content = '';
       this.dialogViewWenJuan = true;
-      localStorage.setItem('quid',row.id) 
+      localStorage.setItem('quid',row.id)
       this.chooseList.title = row.title
       outPutWord().then((data)=>{
         if(data.data.status_code == 200 ){
@@ -450,7 +448,7 @@ export default {
           type: 'error'
         });
       }else{
-        localStorage.setItem('qid',this.questionnaireSelecter) 
+        localStorage.setItem('qid',this.questionnaireSelecter)
         userAddQuestionnaire({
           qid: this.questionnaireSelecter
         }).then((data)=>{
@@ -480,16 +478,19 @@ export default {
     EditWenJuan(index, row) {   // 点击修改问卷
       localStorage.setItem('quid',row.id)  // 获取文本内容用
       localStorage.setItem('qid',row.qid)  // 查询标签时候用
-      if(row.qid==3){  // 离婚协议书类跳转的路径
+      if(row.qid==3){  // 离婚协议书
         localStorage.setItem('questionnaireType', 1)
         this.$router.replace("/BasicInformation");
-      }else if(row.qid==17){  // 离婚协议书类跳转的路径
+      }else if(row.qid==17){  // 婚前财产协议
         localStorage.setItem('questionnaireType', 1)
         this.$router.replace("/HunQianBasic");
-      }else if(row.qid ==10){ // 离婚起诉状类跳转的路径
+      }else if(row.qid==19){  // 婚内财产协议
+        localStorage.setItem('questionnaireType', 1)
+        this.$router.replace("/HunNeiBasic");
+      }else if(row.qid ==10){ // 离婚起诉状
         localStorage.setItem('questionnaireType', 2)
         this.$router.replace("/QiSuComplate");
-      }else if(row.qid ==16){ // 调查取证申请书跳转的路径
+      }else if(row.qid ==16){ // 调查取证申请书
         localStorage.setItem('questionnaireType', 3)
         this.$router.replace("/RequestPersonalize");
       }else{ // 其他数据的提示
@@ -499,41 +500,7 @@ export default {
           });
       }
     },
-    // TestEditWenJuan(index, row){ // 测试编辑，临时添加
-    //   localStorage.setItem('quid',row.id)  // 获取文本内容用
-    //   localStorage.setItem('qid',row.qid)  // 查询标签时候用
-    //   this.$router.replace("/QiSuBasicInformation");
-    // },
-    // EditQuestionnaireOk(){  // 点击修改问卷确定按钮
-    //   updateQuestionnaire({
-    //     title: this.addMsg.title,
-    //     type: this.addMsg.type,
-    //     description: this.addMsg.description,
-    //     purpose: this.addMsg.purpose,
-    //     status: this.addMsg.status
-    //   }).then((data)=>{
-    //     if(data.data.status_code == 200 ){
-    //       localStorage.removeItem('qid');
-    //       this.dialogNewWenJuan = false;
-    //       this.getQuestionnaireSelect()
-    //       this.$message({
-    //         message: '修改成功',
-    //         type: 'success'
-    //       });
-    //       this.dialogEditWenJuan = false
-    //     }else{
-    //       this.$message({
-    //         message: '修改失败，请联系管理员',
-    //         type: 'error'
-    //       });
-    //     }
-    //   }).catch((data)=>{
-
-    //   })
-    // },
-    // cancelEditQuestionnaire(){  // 点击修改问卷取消按钮
-    //   this.dialogEditWenJuan = false
-    // },
+   
     canceldialogDownLoadWenJuan(){  // 点击下载弹框中取消按钮
       this.dialogDownLoadWenJuan = false;
     },
@@ -567,7 +534,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-         localStorage.setItem('quid',row.id) 
+         localStorage.setItem('quid',row.id)
           userUpdateQuestionnaire({
             status: 2
           }).then((data)=>{
@@ -583,7 +550,7 @@ export default {
             }else{
               this.$message.error('删除失败，请联系管理员');
             }
-            
+
           }).catch((data)=>{
             this.$message.error('删除失败，请联系管理员');
           })
@@ -591,7 +558,7 @@ export default {
         this.$message({
           type: 'info',
           message: '已取消删除'
-        });          
+        });
       });
     },
     RenewWenJuan(index, row){   // 点击回收站里边的恢复文件按钮 恢复操作
@@ -600,7 +567,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-         localStorage.setItem('quid',row.id) 
+         localStorage.setItem('quid',row.id)
           userUpdateQuestionnaire({
             status: 1
           }).then((data)=>{
@@ -616,7 +583,7 @@ export default {
             }else{
               this.$message.error('恢复失败，请联系管理员');
             }
-            
+
           }).catch((data)=>{
             this.$message.error('恢复失败，请联系管理员');
           })
@@ -624,7 +591,7 @@ export default {
         this.$message({
           type: 'info',
           message: '已取消恢复'
-        });          
+        });
       });
     },
     DeleteWasteWenJuan(index, row){   // 点击回收站里边的删除文件按钮 删除操作
@@ -633,7 +600,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-         localStorage.setItem('quid',row.id) 
+         localStorage.setItem('quid',row.id)
           userUpdateQuestionnaire({
             status: 3
           }).then((data)=>{
@@ -641,7 +608,7 @@ export default {
               localStorage.removeItem('quid');
               this.questionnaireChange()
               this.deleteWenJuanIcon()
-              this.selectUserDeleteQuestionnaire() 
+              this.selectUserDeleteQuestionnaire()
               this.$message({
                 message: '删除成功',
                 type: 'success',
@@ -650,7 +617,7 @@ export default {
             }else{
               this.$message.error('删除失败，请联系管理员');
             }
-            
+
           }).catch((data)=>{
             this.$message.error('删除失败，请联系管理员');
           })
@@ -658,7 +625,7 @@ export default {
         this.$message({
           type: 'info',
           message: '已取消删除'
-        });          
+        });
       });
     },
     Renaming(index, row){ // 点击重命名按钮
@@ -687,7 +654,7 @@ export default {
         }else{
           this.$message.error('重命名失败，请联系管理员');
         }
-        
+
       }).catch((data)=>{
         this.$message.error('重命名失败，请联系管理员');
       })
