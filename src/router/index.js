@@ -42,7 +42,8 @@ import QiSuBasicInformation from '@/components/QiSuZhuang/QiSuBasicInformation' 
 import RequestStart from '@/components/Request/RequestStart'    // 申请书初始化页面
 import RequestBasic from '@/components/Request/RequestBasic'   // 申请书信息填写页
 import RequestPersonalize from '@/components/Request/RequestPersonalize'  // 申请书个性化页面
-
+import HunQianStart from '@/components/HunQianXieYi/HunQianStart' // 婚前协议小问卷
+import HunQianBasic from '@/components/HunQianXieYi/HunQianBasic' // 婚前协议基本信息
 Vue.use(Router)
 
 export default new Router({
@@ -128,5 +129,9 @@ export default new Router({
     {path: '/RequestBasic', name: 'RequestBasic', component: RequestBasic},
     // 申请书个性化页面
     {path: '/RequestPersonalize', name: 'RequestPersonalize', component: RequestPersonalize},
+    // 婚前协议小问卷
+    {path: '/HunQianStart', name: 'HunQianStart', component: HunQianStart},
+    // 婚前协议基本信息
+    {path: '/HunQianBasic', name: 'HunQianBasic', component: HunQianBasic},
   ]
 })

@@ -6,7 +6,7 @@
           <h2 class="py-2 text-2xl font-bold">{{ this.TitleMsg }}</h2>
           <div class="absolute top-0 right-0 mt-4 mr-6">
             <el-button class="text-right" type="primary" @click="GoBasicInformationPage">返回填写</el-button>
-            <el-button class="text-right" type="primary" v-if="this.TitleMsg == '离婚起诉状' || this.TitleMsg == '调查取证申请书'" @click="GoPersonalPage">返回个性化修改</el-button>
+            <el-button class="text-right" type="primary" v-if="this.questionnaireType == 2 || this.questionnaireType == 3" @click="GoPersonalPage">返回个性化修改</el-button>
           </div>
           <div class="w-full">
             <div class="text-left px-4 py-3 msg">
@@ -90,6 +90,7 @@
   export default {
       data () {
           return {
+           questionnaireType:localStorage.getItem('questionnaireType'), // 问卷类型1 协议书类 2起诉状类，3申请书类
            downloadMsg: '', // 后台返回的下载资源
            outputWord: '',  // 获取离婚协议书
            QiSuContent: [],  // 起诉状内容
@@ -120,8 +121,32 @@
       },
       methods: {
         GetOutPutWord () {   // 获取协议
-          if(localStorage.getItem('questionnaireType')==2 ){
-            this.TitleMsg = '离婚起诉状';
+          if(localStorage.getItem('questionnaireType')==1){ // 协议书类
+            if(localStorage.getItem('qid')==3){
+              this.TitleMsg = '离婚协议书';
+            }else if(localStorage.getItem('qid')==17){
+              this.TitleMsg = '婚前财产协议书';
+            }else if(localStorage.getItem('qid')==19){
+              this.TitleMsg = '婚内财产协议书';
+            }
+            this.downLoadBtnMsg = '下载协议';
+            outPutWord().then((data)=>{
+              this.status_code = data.data.status_code
+              if(this.status_code == 330 ){
+                  this.missField = data.data.data
+              }else if(this.status_code == 200){
+                  this.outputWord = data.data.data.content
+              }
+              
+            }).catch((data)=>{
+                // this.$router.replace("/");
+            })
+          }else if(localStorage.getItem('questionnaireType')==2 ){  // 起诉状类
+            if(localStorage.getItem('qid')==10 ){
+              this.TitleMsg = '离婚起诉状';
+            }else if(localStorage.getItem('qid')==9 ){
+              this.TitleMsg = '继承起诉状';
+            }
             this.downLoadBtnMsg = '下载起诉状';
             selectUqContent().then((data)=>{
               if(data.data.status_code == 200){
@@ -135,22 +160,10 @@
             }).catch((data)=>{
 
             })
-          }else if(localStorage.getItem('questionnaireType')==1){
-            this.TitleMsg = '离婚协议书';
-            this.downLoadBtnMsg = '下载协议';
-            outPutWord().then((data)=>{
-              this.status_code = data.data.status_code
-              if(this.status_code == 330 ){
-                  this.missField = data.data.data
-              }else if(this.status_code == 200){
-                  this.outputWord = data.data.data.content
-              }
-              
-            }).catch((data)=>{
-                // this.$router.replace("/");
-            })
-          }else if(localStorage.getItem('questionnaireType')==3){
-            this.TitleMsg = '调查取证申请书';
+          }else if(localStorage.getItem('questionnaireType')==3){// 申请书类
+            if(localStorage.getItem('qid')==16){
+              this.TitleMsg = '调查取证申请书';
+            }
             this.downLoadBtnMsg = '下载申请';
             selectUqContent().then((data)=>{
               if(data.data.status_code == 200){
@@ -168,25 +181,44 @@
           
         },
         GoBasicInformationPage(){   // 点击返回基本信息
-          if(localStorage.getItem('questionnaireType')==1){
+          if(localStorage.getItem('qid')==3){ //离婚协议书
            this.$router.replace("/BasicInformation");
-          }else if(localStorage.getItem('questionnaireType')==2){
+          }else if(localStorage.getItem('qid')==17){ // 婚前财产协议书
+           this.$router.replace("/HunQianBasic");
+          }else if(localStorage.getItem('qid')==19){ // 婚内财产协议书
+           this.$router.replace("/HunNeiBasic");
+          }else if(localStorage.getItem('qid')==10){ // 离婚起诉状
            this.$router.replace("/QiSuBasicInformation");
-          }else if(localStorage.getItem('questionnaireType')==3){
+          }else if(localStorage.getItem('qid')==9){ // 继承起诉状
+             this.$message({
+               message: '球球还未编写起诉状问卷，请稍后再试',
+               type: 'error'
+             });
+          }else if(localStorage.getItem('qid')==16){ // 调查取证申请书
            this.$router.replace("/RequestBasic");
+          }else{
+            this.$message({
+              message: '请先确定问卷类型，然后返回到具体填写页面，请联系前端管理员操作',
+              type: 'error'
+            });
           }
         },
-        GoPersonalPage(){ // 返回个性化页面
-          if(localStorage.getItem('questionnaireType')==2){
+        GoPersonalPage(){ // 申请书类和起诉状类有返回个性化页面
+          if(localStorage.getItem('qid')==10){ // 离婚起诉状个性化页面
            this.$router.replace("/QiSuComplate");
-          }else if(localStorage.getItem('questionnaireType')==3){
+          }else if(localStorage.getItem('qid')==16){ // 调查取证申请书个性化页面
            this.$router.replace("/RequestPersonalize");
+          }else{
+            this.$message({
+              message: '返回失败，请先确定问卷类型，然后返回到指定页面',
+              type: 'error'
+            });
           }
         },
         dialogDownLoadWenJuanOk(){   // 点击下载弹出确定按钮
           if(this.form.type){
             if(localStorage.getItem('questionnaireType')==1){
-              outPutWord().then((data)=>{
+              outPutWord().then((data)=>{ // 协议书类的下载路径
                 if(data.status==200){
                   window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data.wordFilePath)
                 }
@@ -198,7 +230,7 @@
                 });
               })
             }else if(localStorage.getItem('questionnaireType')==2 || localStorage.getItem('questionnaireType')==3 ){
-              getWord().then((data)=>{
+              getWord().then((data)=>{ // 申请书和起诉状等有个性化页面的下载路径
                 if(data.data.status_code==200){
                   window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data)
                 }

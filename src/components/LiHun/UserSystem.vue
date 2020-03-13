@@ -456,13 +456,19 @@ export default {
         }).then((data)=>{
           localStorage.setItem('quid', data.data.data)
           // localStorage.removeItem('qid');
-          if(this.questionnaireTypeSelect=="起诉状类"){
+          if(this.questionnaireSelecter==10){ // 离婚起诉状跳转页面
             localStorage.setItem('questionnaireType', 2) // 1代表协议书类，2代表起诉状类 ，3申请书类
             this.$router.replace("/QiSuBasicInformation");
-          }else if(this.questionnaireTypeSelect=="协议书类"){
+          }else if(this.questionnaireSelecter==3){ // 离婚协议书跳转页
             localStorage.setItem('questionnaireType', 1)
             this.$router.replace("/ChuShi");
-          }else if(this.questionnaireTypeSelect=="申请书类"){
+          }else if(this.questionnaireSelecter==17){ // 婚前财产协议书跳转页
+            localStorage.setItem('questionnaireType', 1)
+            this.$router.replace("/HunQianStart");
+          }else if(this.questionnaireSelecter==19){ // 婚内财产协议书跳转页
+            localStorage.setItem('questionnaireType', 1)
+            this.$router.replace("/HunNeiStart");
+          }else if(this.questionnaireSelecter==16){  // 调查取证申请书
             localStorage.setItem('questionnaireType', 3)
             this.$router.replace("/RequestStart");
           }
@@ -474,20 +480,16 @@ export default {
     EditWenJuan(index, row) {   // 点击修改问卷
       localStorage.setItem('quid',row.id)  // 获取文本内容用
       localStorage.setItem('qid',row.qid)  // 查询标签时候用
-      if(this.questionnaireTypeSelect=="起诉状类"){
-        this.$router.replace("/QiSuComplate");
-      }else if(this.questionnaireTypeSelect=="协议书类"){
-        this.$router.replace("/BasicInformation");
-      }else if(this.questionnaireTypeSelect=="申请书类"){
-        this.$router.replace("/RequestPersonalize");
-      }
-      if(row.qid==3){  // 协议书类跳转的路径
+      if(row.qid==3){  // 离婚协议书类跳转的路径
         localStorage.setItem('questionnaireType', 1)
         this.$router.replace("/BasicInformation");
-      }else if(row.qid ==9 || row.qid ==10){ // 起诉状类跳转的路径
+      }else if(row.qid==17){  // 离婚协议书类跳转的路径
+        localStorage.setItem('questionnaireType', 1)
+        this.$router.replace("/HunQianBasic");
+      }else if(row.qid ==10){ // 离婚起诉状类跳转的路径
         localStorage.setItem('questionnaireType', 2)
         this.$router.replace("/QiSuComplate");
-      }else if(row.qid ==16){ // 起诉状类跳转的路径
+      }else if(row.qid ==16){ // 调查取证申请书跳转的路径
         localStorage.setItem('questionnaireType', 3)
         this.$router.replace("/RequestPersonalize");
       }else{ // 其他数据的提示
