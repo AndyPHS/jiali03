@@ -4,7 +4,7 @@
       <div>
         <el-form label-position="top" label-width="160px">
           <div class="ml-5">
-            <div class="text-2xl font-bold text-center py-8">为了更高效地为您定制申请书，请填写如下问题：</div>
+            <div class="text-2xl font-bold text-center py-8">为了更高效地为您定制婚前财产协议书，请填写如下问题：</div>
             <div class="w-3/5 text-left mx-auto bg-white px-5 py-5 border-2 border-green-200 rounded-lg shadow-lg">
               <!--遍历孩子的基本信息-->
               <div v-for="(item,index) in childAll" :key="index">
@@ -980,6 +980,7 @@
             })
           }
           if(e.id == 1713){
+            console.log(e.answer)
             e.answer.forEach((item)=>{
               if(item==1){     // 添加房产
                 userAddAnswer({

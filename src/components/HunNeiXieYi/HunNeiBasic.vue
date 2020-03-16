@@ -36,6 +36,12 @@
                         <div v-if="mo.title== '股权' ">
                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个股权</h2>
                         </div>
+                        <div v-if="mo.title== '债权' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个债权</h2>
+                        </div>
+                        <div v-if="mo.title== '债务' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个债务</h2>
+                        </div>
                       </div>
 
                       <!-- 大问题块 -->
@@ -4873,6 +4879,12 @@
                         <div v-if="mo.title== '股权' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2296,index)">删除股权</div>
                         </div>
+                        <div v-if="mo.title== '债权' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2324,index)">删除债权</div>
+                        </div>
+                        <div v-if="mo.title== '债务' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2336,index)">删除债务</div>
+                        </div>
                       </div>
                     </div>
                     <div>
@@ -4894,7 +4906,12 @@
                       <div v-if="mo.title== '股权' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2296)">添加股权</div>
                       </div>
-
+                      <div v-if="mo.title== '债权' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2324)">添加债权</div>
+                      </div>
+                      <div v-if="mo.title== '债务' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2336)">添加债务</div>
+                      </div>
                     </div>
                   </div>
                 </div>

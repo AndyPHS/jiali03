@@ -9,7 +9,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import 'tailwindcss/base.css'
 import 'tailwindcss/components.css'
 import 'tailwindcss/utilities.css'
-import VueResource from 'vue-resource'
+import VueResource from 'vue-resource'  // 请求数据
 // 引入mock.js
 // require('./mock.js')
 

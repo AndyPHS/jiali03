@@ -139,5 +139,7 @@ export default new Router({
     {path: '/HunNeiStart', name: 'HunNeiStart', component: HunNeiStart},
     // 婚内协议基本信息
     {path: '/HunNeiBasic', name: 'HunNeiBasic', component: HunNeiBasic},
+    // 访问错误页面跳转到登录页面
+    {path: '*',redirect: '/'}
   ]
 })
