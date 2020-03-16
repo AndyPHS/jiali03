@@ -46,6 +46,9 @@ import HunQianStart from '@/components/HunQianXieYi/HunQianStart' // 婚前协�
 import HunQianBasic from '@/components/HunQianXieYi/HunQianBasic' // 婚前协议基本信息
 import HunNeiStart from '@/components/HunNeiXieYi/HunNeiStart' // 婚内协议小问卷
 import HunNeiBasic from '@/components/HunNeiXieYi/HunNeiBasic' // 婚内协议基本信息
+import BaoQuanStart from '@/components/BaoQuanRequest/BaoQuanStart'    // 保全申请书初始化页面
+import BaoQuanBasic from '@/components/BaoQuanRequest/BaoQuanBasic'   // 保全申请书信息填写页
+import BaoQuanPersonalize from '@/components/BaoQuanRequest/BaoQuanPersonalize'  // 保全申请书个性化页面
 Vue.use(Router)
 
 export default new Router({
@@ -139,6 +142,12 @@ export default new Router({
     {path: '/HunNeiStart', name: 'HunNeiStart', component: HunNeiStart},
     // 婚内协议基本信息
     {path: '/HunNeiBasic', name: 'HunNeiBasic', component: HunNeiBasic},
+    // 保全申请书初始化页面
+    {path: '/BaoQuanStart', name: 'BaoQuanStart', component: BaoQuanStart},
+    // 保全申请书基本信息页面
+    {path: '/BaoQuanBasic', name: 'BaoQuanBasic', component: BaoQuanBasic},
+    // 保全申请书个性化页面
+    {path: '/BaoQuanPersonalize', name: 'BaoQuanPersonalize', component: BaoQuanPersonalize},
     // 访问错误页面跳转到登录页面
     {path: '*',redirect: '/'}
   ]

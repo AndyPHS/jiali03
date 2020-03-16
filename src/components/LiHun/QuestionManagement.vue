@@ -19,7 +19,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr 
+                            <tr
                                 v-for="(item, index) in pageInfo"
                                 :key="index"
                             >
@@ -49,7 +49,7 @@
                     class="my-10"
                     layout="prev, pager, next"
                     @current-change="handleQuestionList"
-                    :page-size="pagesize" 
+                    :page-size="pagesize"
                     :current-page.sync="currentPage"
                     :total="this.min.total">
                 </el-pagination>
@@ -77,10 +77,10 @@
                     <el-upload
                         id="attachmentInputs"
                         method="POST"
-                        class="upload-demo" 
+                        class="upload-demo"
                         accept="image/jpeg,image/gif,image/png"
-                        ref="upload" 
-                        action="http://office365.aladdinlaw.com:3921/api/Questionnaire/v1/problem/add"  
+                        ref="upload"
+                        action="http://office365.aladdinlaw.com:3921/api/Questionnaire/v1/problem/add"
                         :on-exceed="exceedFile"
                         :before-upload="onBeforeUpload"
                         :on-success="handleSuccess"
@@ -104,7 +104,7 @@
                     </form>
                     <iframe id="returngo" src="" style="display: none"></iframe>
                 </div> -->
-                 
+
                 <div  v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 " >
                     <div  v-for="(item, index) in addQuestion_answer" :key="index" class="flex justify-between " >
                         <el-form-item label="选项名称" :label-width="formLabelWidth">
@@ -114,12 +114,12 @@
                             <el-button @click="deleteQuestion_answer_btn(index)">删除</el-button>
                         </div>
                     </div>
-                    <div   class="flex justify-between"> 
+                    <div   class="flex justify-between">
                         <el-form-item label="选项名称" :label-width="formLabelWidth">
                              <el-input v-model="addQuestion_answerName" class="w-1/2" autocomplete="off"></el-input>
                         </el-form-item>
                         <div>
-                            <el-button @click="addQuestion_answer_btn">添加</el-button>
+                            <el-button @click="addQuestion_answer_btn(index)">添加</el-button>
                         </div>
                     </div>
                 </div>
@@ -164,7 +164,7 @@
                             <el-button @click="delete_answer_btn(item,index)">删除</el-button>
                         </div>
                     </div>
-                    <div   class="flex justify-between"> 
+                    <div   class="flex justify-between">
                         <el-form-item label="选项名称" :label-width="formLabelWidth">
                              <el-input v-model="answerName" class="w-1/2" autocomplete="off"></el-input>
                         </el-form-item>
@@ -173,7 +173,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <el-form-item label="是否禁用" :label-width="formLabelWidth">
                     <el-radio-group v-model="user.status">
                         <el-radio :label="1">是</el-radio>
@@ -192,7 +192,7 @@
                 <button>上传</button>
             </form> -->
         </div>
-        
+
 </template>
 <!-- <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script> -->
 <script>
@@ -209,7 +209,7 @@
     import {selectOnlyQuestion} from '@/api/api/requestLogin.js'   // 查询单独问题
     import {QuestionArr} from '@/api/api/requestLogin.js'    // 问题数组
     import {demoAddImg} from '@/api/api/requestLogin.js'    // 添加示例图
-    
+
 
     export default {
         components:{
@@ -230,7 +230,7 @@
                     title: '',
                     type: '',
                     other: '',
-                    imgs: []   
+                    imgs: []
                  }
                 ],
                 titleSearchMsg: '',
@@ -324,7 +324,7 @@
                     console.log(data)
                 })
               },
-            QuestionArrOk () {  
+            QuestionArrOk () {
                 QuestionArr().then((data)=>{
                     this.problemType = data.data.data.problemType
                     this.problemRe = data.data.data.problemRe
@@ -355,11 +355,25 @@
 
                 })
             },
-            addQuestion_answer_btn () {  // 新增问题页面点击添加选项
+            addQuestion_answer_btn (index) {  // 新增问题页面点击添加选项
                 this.addQuestion_answer.push({
                     status: 1,
-                    label:this.addQuestion_answerName
+                    label:this.addQuestion_answerName,
+                    order: index
                 })
+                var arr = this.addQuestion_answer
+                var compar = function(obj1, obj2){
+                  var val1 = obj1.order;
+                  var val2 = obj2.order;
+                  if(val1<val2){
+                    return -1
+                  }else if(val1>val2){
+                    return 1
+                  }else{
+                    return 0
+                  }
+                }
+                arr.sort(compar)
                 this.addQuestion_answerName = ''
             },
             deleteQuestion_answer_btn (index) { // 新增问题页面点击删除选项
@@ -371,7 +385,7 @@
             handleCurrentChange (currentPage) {    //点击哪一页
                 this.currentPage = currentPage;
             },
-            
+
             handleQuestionAdd () {    // 点击新增问题
                 localStorage.removeItem('pid');
                 this.user.title = '';
@@ -379,8 +393,8 @@
                 this.user.placeholder = '';
                 this.user.status = '';
                 this.dialogQuestionAdd = true
-            }, 
-            
+            },
+
             onBeforeUpload(file) {
               const isIMAGE = file.type === 'image/jpeg'||'image/gif'||'image/png';
               const isLt1M = file.size / 1024 / 1024 < 1;
@@ -422,14 +436,16 @@
                         this.user.status = '';
                         this.handleQuestionList()
                         localStorage.setItem('pid',data.data.data)
-                        this.addQuestion_answer.forEach((item)=>{
-                            addAnswer({
-                                status: 1,
-                                label: item.label
-                            }).then((data)=>{
-                                
-                            })
-                        })
+
+                        // this.addQuestion_answer.forEach((item)=>{
+                        //   addAnswer({
+                        //       status: 1,
+                        //       label: item.label
+                        //   }).then((data)=>{
+
+                        //   })
+
+                        // })
                         this.$message({
                             type: 'success',
                             message: '成功添加问题!'
@@ -452,12 +468,13 @@
                         this.user.status = '';
                         this.handleQuestionList()
                         localStorage.setItem('pid',data.data.data)
+                        console.log(this.addQuestion_answer)
                         this.addQuestion_answer.forEach((item)=>{
                             addAnswer({
                                 status: 1,
                                 label: item.label
                             }).then((data)=>{
-                                
+
                             })
                         })
                         this.$message({
@@ -486,7 +503,7 @@
             },
             selectOnlyQuestionList () {  // 修改页面查询当前问题下的选项列表
                 selectOnlyQuestion().then((data)=>{
-                     this.add_answer = data.data.child       
+                     this.add_answer = data.data.child
                 }).catch((data)=>{
                 })
             },
@@ -525,7 +542,7 @@
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
                         this.dialogFormVisible = false
-                    })  
+                    })
                 }else{
                    updateQuestion({
                         title: this.user.title,
@@ -542,9 +559,9 @@
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
                         this.dialogFormVisible = false
-                    }) 
+                    })
                 }
-                
+
             },
             deleteQuestion (e) {   // 删除用户
                 this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
@@ -563,9 +580,9 @@
                   this.$message({
                     type: 'info',
                     message: '已取消删除'
-                  });          
+                  });
                 });
-                
+
             },
             handleRemove(file, fileList) {
               // console.log(file, fileList);
@@ -593,7 +610,7 @@
                     // console.log(this.result)//图片的base64数据
                 }
                 // this.$refs.upload.submit();
-                
+
             },
              // 文件超出时的钩子
             exceedFile(files, fileList) {

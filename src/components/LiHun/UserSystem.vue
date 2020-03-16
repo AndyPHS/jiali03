@@ -469,8 +469,10 @@ export default {
           }else if(this.questionnaireSelecter==16){  // 调查取证申请书
             localStorage.setItem('questionnaireType', 3)
             this.$router.replace("/RequestStart");
+          }else if(this.questionnaireSelecter==20){  // 保全申请书
+            localStorage.setItem('questionnaireType', 3)
+            this.$router.replace("/BaoQuanStart");
           }
-          // console.log(data.data.data)
         }).catch((data)=>{
         })
       }
@@ -493,6 +495,9 @@ export default {
       }else if(row.qid ==16){ // 调查取证申请书
         localStorage.setItem('questionnaireType', 3)
         this.$router.replace("/RequestPersonalize");
+      }else if(row.qid ==20){ // 保全申请书
+        localStorage.setItem('questionnaireType', 3)
+        this.$router.replace("/BaoQuanPersonalize");
       }else{ // 其他数据的提示
          this.$message({
             message: '此数据为垃圾数据，不做处理',

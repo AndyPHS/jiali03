@@ -5114,7 +5114,7 @@
             aa: {
               BasicInformation: [],    //基本信息
               shishi: [],  //事实理由
-              baojingjilu: [],   // 报警记录
+              baojing: [],   // 报警记录
               kaifang: [],   //开房记录
               bingli: [],   //病例资料
               hunyin: [],   //婚姻登记信息

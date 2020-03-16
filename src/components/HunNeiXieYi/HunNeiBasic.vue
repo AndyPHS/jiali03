@@ -5004,11 +5004,11 @@
               cunkuan: [],   // 存款
               guquan: [],   // 股权
               qitacaichan: [], // 其他财产
-              // weilaicaichan: [], // 未来财产
+              weilaicaichan: [], // 未来财产
               zhaiquan: [], // 债权
-              zhaiwu: [] // 债务
-              // weilaizhaiquan: [], //未来债权
-              // weilaizhaiwu: [] // 未来债务
+              zhaiwu: [], // 债务
+              weilaizhaiquan: [], //未来债权
+              weilaizhaiwu: [] // 未来债务
             },
             IsShow: false,
             mokuai: [
@@ -5022,11 +5022,11 @@
               {title: '家具家电', part: 'jiaju',id:8}, // 2460
               {title: '股权', part: 'guquan',id:9}, // 2296
               {title: '其他财产', part: 'qitacaichan',id:10}, // 2309
-              {title: '未来财产', part: 'weilaicaichan',id:11},  // 2313
+              {title: '未来财产', part: 'weilaicaichan',id:11},  // 2690
               {title: '债权', part: 'zhaiquan',id:12}, // 2324
               {title: '债务', part: 'zhaiwu',id:13},  // 2336
-              {title: '未来债权', part: 'weilaizhaiquan',id:14}, // 2348
-              {title: '未来债务', part: 'weilaizhaiwu',id:15}, //2353
+              {title: '未来债权', part: 'weilaizhaiquan',id:14}, // 2692
+              {title: '未来债务', part: 'weilaizhaiwu',id:15}, //2693
             ],
             active: 0,
             options: regionData,  // 省市联动
@@ -5139,7 +5139,7 @@
           })
         },
         getweilaicaichan () { // 查询未来财产
-          returnQuestionnaireJson({'qpid': 2313}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2690}).then((data)=>{
             this.aa.weilaicaichan = data.data.data
             this.mokuai.sort(this.compare('id'))
           }).catch((data)=>{
@@ -5160,14 +5160,14 @@
           })
         },
         getweilaizhaiquan () {// 查询未来债权
-          returnQuestionnaireJson({'qpid': 2348}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2692}).then((data)=>{
             this.aa.weilaizhaiquan = data.data.data
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getweilaizhaiwu () {// 查询未来债务
-          returnQuestionnaireJson({'qpid': 2353}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2693}).then((data)=>{
             this.aa.weilaizhaiwu = data.data.data
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
@@ -5629,9 +5629,9 @@
         },
 
         GoComplatePage () { // 点击个性化修改的时候先验证申请法院是否填写，如果填写则弹出框
-          localStorage.setItem('qpid', 2353) // 验证未来债务
+          localStorage.setItem('qpid', 2693) // 验证未来债务
           demoYanZheng({
-            qpid: 2353
+            qpid: 2693
           }).then((data)=>{
             // console.log(data.data)
             if(data.data.status_code == 330){
@@ -5848,9 +5848,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '未来财产'){
-            localStorage.setItem('qpid', 2313)
+            localStorage.setItem('qpid', 2690)
             demoYanZheng({
-              qpid: 2313
+              qpid: 2690
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5902,9 +5902,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '未来债权'){
-            localStorage.setItem('qpid', 2348)
+            localStorage.setItem('qpid', 2692)
             demoYanZheng({
-              qpid: 2348
+              qpid: 2692
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5920,9 +5920,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '未来债务'){
-            localStorage.setItem('qpid', 2353)
+            localStorage.setItem('qpid', 2693)
             demoYanZheng({
-              qpid: 2353
+              qpid: 2693
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
