@@ -5142,6 +5142,11 @@
           returnQuestionnaireJson({'qpid': 2690}).then((data)=>{
             this.aa.weilaicaichan = data.data.data
             this.mokuai.sort(this.compare('id'))
+            if(this.aa.weilaicaichan[0][0].questions[1].answer == 1 || this.aa.weilaicaichan[0][0].questions[1].answer == ""){
+              this.aa.weilaicaichan[0][0].questions[1].answer = []
+            }else{
+              this.aa.weilaicaichan[0][0].questions[1].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[1].answer)
+            }
           }).catch((data)=>{
           })
         },
