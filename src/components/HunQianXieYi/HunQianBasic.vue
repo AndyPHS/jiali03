@@ -5117,10 +5117,10 @@
           returnQuestionnaireJson({'qpid': 2683}).then((data)=>{
             this.aa.weilaicaichan = data.data.data
             this.mokuai.sort(this.compare('id'))
-            if(this.aa.weilaicaichan[0][0].questions[0].childQuestion[2].answer == 1 || this.aa.weilaicaichan[0][0].questions[0].childQuestion[2].answer == ""){
-              this.aa.weilaicaichan[0][0].questions[0].childQuestion[2].answer = []
+            if(this.aa.weilaicaichan[0][0].questions[1].answer == 1 || this.aa.weilaicaichan[0][0].questions[1].answer == ""){
+              this.aa.weilaicaichan[0][0].questions[1].answer = []
             }else{
-              this.aa.weilaicaichan[0][0].questions[0].childQuestion[2].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[0].childQuestion[2].answer)
+              this.aa.weilaicaichan[0][0].questions[1].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[1].answer)
             }
           }).catch((data)=>{
           })
