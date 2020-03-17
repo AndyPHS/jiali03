@@ -865,15 +865,15 @@
                   tip: '提示',
                   answer: [],
                   listData: [
-                    { label: '存款', value: '1' },
-                    { label: '理财', value: '2' },
-                    { label: '车辆', value: '3' },
-                    { label: '房产', value: '4' },
-                    { label: '股票', value: '5' },
-                    { label: '股权', value: '6' },
-                    { label: '股份', value: '7' },
-                    { label: '保险金', value: '8' },
-                    { label: '其他', value: '9' }
+                    { label: '存款', value: '1' },  // 2564
+                    { label: '理财', value: '2' },  // 2566
+                    { label: '车辆', value: '3' },  // 2567
+                    { label: '房产', value: '4' },  // 2568
+                    { label: '股票', value: '5' },  // 2569
+                    { label: '股权', value: '6' },  // 2570
+                    { label: '股份', value: '7' },  // 2571
+                    { label: '保险金', value: '8' }, // 2572
+                    { label: '其他', value: '9' }   // 2573
                   ]
                 }
               ]
@@ -918,9 +918,7 @@
                   qpid: 2564, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==2){   // 添加理财
                 userAddAnswer({
@@ -928,9 +926,7 @@
                   qpid: 2566, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==3){  // 病例车辆
                 userAddAnswer({
@@ -938,9 +934,7 @@
                   qpid: 2567, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==4){  // 添加房产
                 userAddAnswer({
@@ -948,9 +942,7 @@
                   qpid: 2568, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==5){   // 添加股票
                 userAddAnswer({
@@ -958,9 +950,7 @@
                   qpid: 2569, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==6){     // 添加股权
                 userAddAnswer({
@@ -968,9 +958,7 @@
                   qpid: 2570, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                   // console.log("保存失败")
                 })
               }else if(item==7){  // 添加股份
                 userAddAnswer({
@@ -978,9 +966,7 @@
                   qpid: 2571, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                  // console.log("保存失败")
                 })
               }else if(item==8){  // 添加保险金
                 userAddAnswer({
@@ -988,9 +974,7 @@
                   qpid: 2572, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                  // console.log("保存失败")
                 })
               }else if(item==9){  // 添加其他
                 userAddAnswer({
@@ -998,9 +982,7 @@
                   qpid: 2573, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // console.log("保存成功")
                 }).catch((data)=>{
-                  // console.log("保存失败")
                 })
               }
             })

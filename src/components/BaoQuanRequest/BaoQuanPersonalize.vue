@@ -5,7 +5,7 @@
             <h2 class="py-2 text-lg text-center w-2/5">
               {{this.Content.title}} 
             </h2>
-            <p class="pb-1 text-base text-center w-2/5">民事起诉状</p>
+            <p class="pb-1 text-base text-center w-2/5">保全申请书</p>
             
 
             <div class="flex">
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class="w-1/5 mx-4">
-                    <h2 class="py-2 text-lg text-center w-full">离婚原因标签</h2>
+                    <h2 class="py-2 text-lg text-center w-full">保全申请书标签</h2>
                     <div class="flex align-items-center justify-around">
                         <el-form ref="labelForm" :model="labelForm">
                             <el-form-item >
@@ -188,7 +188,7 @@
                        this.Content.title = data.data.data.title
                     }else{
                         this.$message({
-                          message: '获取获取文本失败',
+                          message: '获取文本失败',
                           type: 'error'
                         });
                     }
