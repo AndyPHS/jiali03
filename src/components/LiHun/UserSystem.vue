@@ -468,10 +468,16 @@ export default {
             this.$router.replace("/HunNeiStart");
           }else if(this.questionnaireSelecter==16){  // 调查取证申请书
             localStorage.setItem('questionnaireType', 3)
-            this.$router.replace("/RequestStart");
+            this.$router.replace("/DiaoChaQuZhengStart");
           }else if(this.questionnaireSelecter==20){  // 保全申请书
             localStorage.setItem('questionnaireType', 3)
             this.$router.replace("/BaoQuanStart");
+          }else if(this.questionnaireSelecter==21){  // 抚养权起诉状
+            localStorage.setItem('questionnaireType', 2)
+            this.$router.replace("/FuYangQuanBasic");
+          }else if(this.questionnaireSelecter==22){  // 抚养费起诉状
+            localStorage.setItem('questionnaireType', 2)
+            this.$router.replace("/FuYangFeiBasic");
           }
         }).catch((data)=>{
         })
@@ -492,9 +498,15 @@ export default {
       }else if(row.qid ==10){ // 离婚起诉状
         localStorage.setItem('questionnaireType', 2)
         this.$router.replace("/QiSuComplate");
+      }else if(row.qid ==21){ // 抚养权起诉状
+        localStorage.setItem('questionnaireType', 2)
+        this.$router.replace("/FuYangQuanPersonalize");
+      }else if(row.qid ==22){ // 抚养费起诉状
+        localStorage.setItem('questionnaireType', 2)
+        this.$router.replace("/FuYangFeiPersonalize");
       }else if(row.qid ==16){ // 调查取证申请书
         localStorage.setItem('questionnaireType', 3)
-        this.$router.replace("/RequestPersonalize");
+        this.$router.replace("/DiaoChaQuZhengPersonalize");
       }else if(row.qid ==20){ // 保全申请书
         localStorage.setItem('questionnaireType', 3)
         this.$router.replace("/BaoQuanPersonalize");
@@ -505,7 +517,7 @@ export default {
           });
       }
     },
-   
+
     canceldialogDownLoadWenJuan(){  // 点击下载弹框中取消按钮
       this.dialogDownLoadWenJuan = false;
     },

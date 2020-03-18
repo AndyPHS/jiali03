@@ -77,7 +77,7 @@
       <el-button type="primary" @click="returnUserList">返回用户列表</el-button>
     </div>
   </div>
-  
+
 </template>
 <script>
 
@@ -85,8 +85,8 @@
   import {getWord} from '@/api/api/requestLogin.js'  // 起诉状生成数据接口
   import {selectUqContent} from '@/api/api/requestLogin.js'  // 获取文本内容
   import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
-  
-  
+
+
   export default {
       data () {
           return {
@@ -115,7 +115,7 @@
           }
       },
       name: 'WenJuan2',
-      
+
       mounted () {
         this.GetOutPutWord () // 获取离婚协议书
       },
@@ -137,7 +137,7 @@
               }else if(this.status_code == 200){
                   this.outputWord = data.data.data.content
               }
-              
+
             }).catch((data)=>{
                 // this.$router.replace("/");
             })
@@ -146,7 +146,18 @@
               this.TitleMsg = '离婚起诉状';
             }else if(localStorage.getItem('qid')==9 ){
               this.TitleMsg = '继承起诉状';
+            }else if(localStorage.getItem('qid')==21 ){
+              this.TitleMsg = '抚养权起诉状';
+            }else if(localStorage.getItem('qid')==22 ){
+              this.TitleMsg = '抚养费起诉状';
+            }else if(localStorage.getItem('qid')==23 ){
+              this.TitleMsg = '分家析产纠纷起诉状';
+            }else if(localStorage.getItem('qid')==24 ){
+              this.TitleMsg = '民间借贷起诉状';
+            }else if(localStorage.getItem('qid')==27 ){
+              this.TitleMsg = '离婚后财产纠纷起诉状';
             }
+
             this.downLoadBtnMsg = '下载起诉状';
             selectUqContent().then((data)=>{
               if(data.data.status_code == 200){
@@ -163,8 +174,18 @@
           }else if(localStorage.getItem('questionnaireType')==3){// 申请书类
             if(localStorage.getItem('qid')==16){
               this.TitleMsg = '调查取证申请书';
+            }else if(localStorage.getItem('qid')==20){
+              this.TitleMsg = '保全申请书';
+            }else if(localStorage.getItem('qid')==25 ){
+              this.TitleMsg = '证人出庭作证申请书';
+            }else if(localStorage.getItem('qid')==26 ){
+              this.TitleMsg = '房屋评估申请书';
+            }else if(localStorage.getItem('qid')==28 ){
+              this.TitleMsg = '笔迹鉴定申请书';
+            }else if(localStorage.getItem('qid')==29 ){
+              this.TitleMsg = '精神状态鉴定申请书';
             }
-            this.downLoadBtnMsg = '下载申请';
+            this.downLoadBtnMsg = '下载申请书';
             selectUqContent().then((data)=>{
               if(data.data.status_code == 200){
                  this.QiSuContent = data.data.data.content
@@ -178,7 +199,7 @@
 
             })
           }
-          
+
         },
         GoBasicInformationPage(){   // 点击返回基本信息
           if(localStorage.getItem('qid')==3){ //离婚协议书
@@ -195,7 +216,27 @@
                type: 'error'
              });
           }else if(localStorage.getItem('qid')==16){ // 调查取证申请书
-           this.$router.replace("/RequestBasic");
+           this.$router.replace("/DiaoChaQuZhengBasic");
+          }else if(localStorage.getItem('qid')==20){ // 保全申请书
+           this.$router.replace("/BaoQuanBasic");
+          }else if(localStorage.getItem('qid')==21){ // 抚养权起诉状
+           this.$router.replace("/FuYangQuanBasic");
+          }else if(localStorage.getItem('qid')==22){ // 抚养费起诉状
+           this.$router.replace("/FuYangFeiBasic");
+          }else if(localStorage.getItem('qid')==23){ // 分家析产纠纷起诉状
+           this.$router.replace("/FenJiaXiChanBasic");
+          }else if(localStorage.getItem('qid')==24){ // 民间借贷起诉状
+           this.$router.replace("/MinJianJieDaiBasic");
+          }else if(localStorage.getItem('qid')==25){ // 证人出庭作证申请书
+           this.$router.replace("/ZhengRenChuTingBasic");
+          }else if(localStorage.getItem('qid')==26){ // 房屋评估申请书
+           this.$router.replace("/FangWuPingGuBasic");
+          }else if(localStorage.getItem('qid')==27){ // 离婚后财产纠纷起诉状
+           this.$router.replace("/LiHunHouCaiChanBasic");
+          }else if(localStorage.getItem('qid')==28){ // 笔迹鉴定申请书
+           this.$router.replace("/BiJiJianDingBasic");
+          }else if(localStorage.getItem('qid')==29){ // 精神状态鉴定申请书
+           this.$router.replace("/JingShenZhuangTaiBasic");
           }else{
             this.$message({
               message: '请先确定问卷类型，然后返回到具体填写页面，请联系前端管理员操作',
@@ -207,7 +248,27 @@
           if(localStorage.getItem('qid')==10){ // 离婚起诉状个性化页面
            this.$router.replace("/QiSuComplate");
           }else if(localStorage.getItem('qid')==16){ // 调查取证申请书个性化页面
-           this.$router.replace("/RequestPersonalize");
+           this.$router.replace("/DiaoChaQuZhengPersonalize");
+          }else if(localStorage.getItem('qid')==20){ // 保全申请书个性化页面
+           this.$router.replace("/BaoQuanPersonalize");
+          }else if(localStorage.getItem('qid')==21){ // 抚养权起诉状个性化页面
+           this.$router.replace("/FuYangQuanPersonalize");
+          }else if(localStorage.getItem('qid')==22){ // 抚养费起诉状个性化页面
+           this.$router.replace("/FuYangFeiPersonalize");
+          }else if(localStorage.getItem('qid')==23){ // 分家析产纠纷起诉状
+           this.$router.replace("/FenJiaXiChanPersonalize");
+          }else if(localStorage.getItem('qid')==24){ // 民间借贷起诉状
+           this.$router.replace("/MinJianJieDaiPersonalize");
+          }else if(localStorage.getItem('qid')==25){ // 证人出庭作证申请书
+           this.$router.replace("/ZhengRenChuTingPersonalize");
+          }else if(localStorage.getItem('qid')==26){ // 房屋评估申请书
+           this.$router.replace("/FangWuPingGuPersonalize");
+          }else if(localStorage.getItem('qid')==27){ // 离婚后财产纠纷起诉状
+           this.$router.replace("/LiHunHouCaiChanPersonalize");
+          }else if(localStorage.getItem('qid')==28){ // 笔迹鉴定申请书
+           this.$router.replace("/BiJiJianDingPersonalize");
+          }else if(localStorage.getItem('qid')==29){ // 精神状态鉴定申请书
+           this.$router.replace("/JingShenZhuangTaiPersonalize");
           }else{
             this.$message({
               message: '返回失败，请先确定问卷类型，然后返回到指定页面',
@@ -242,14 +303,14 @@
                 });
               })
             }
-            
+
           }else{
             this.$message({
               message: '请先勾选免责条款',
               type: 'error'
             });
           }
-          
+
         },
         canceldialogDownLoadWenJuan(){  // 点击下载弹框取消按钮
           this.dialogDownLoadWenJuan = false;

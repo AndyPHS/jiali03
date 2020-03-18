@@ -843,7 +843,7 @@
             ChildName: ''
           }
       },
-      name: 'RequestStart',
+      name: 'DiaoChaQuZhengStart',
 
       mounted () {
         this.childList();
@@ -1139,7 +1139,7 @@
           }
         },
         NextPage () {
-          this.$router.replace("/RequestBasic");
+          this.$router.replace("/DiaoChaQuZhengBasic");
         },
         returnUserList () {
            this.$router.replace("/UserSystem");

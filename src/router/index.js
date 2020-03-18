@@ -39,9 +39,9 @@ import ZhaiWu from '@/components/LiHun/ZhaiWu'         // 添加离婚协议书�
 import ShengChengXieYi from '@/components/LiHun/ShengChengXieYi'         // 添加离婚协议书债务页面
 import QiSuComplate from '@/components/QiSuZhuang/QiSuComplate'    // 起诉状生成页
 import QiSuBasicInformation from '@/components/QiSuZhuang/QiSuBasicInformation'    // 起诉状基本信息填写
-import RequestStart from '@/components/Request/RequestStart'    // 申请书初始化页面
-import RequestBasic from '@/components/Request/RequestBasic'   // 申请书信息填写页
-import RequestPersonalize from '@/components/Request/RequestPersonalize'  // 申请书个性化页面
+import DiaoChaQuZhengStart from '@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengStart'    // 调查取证申请书初始化页面
+import DiaoChaQuZhengBasic from '@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengBasic'   // 调查取证申请书信息填写页
+import DiaoChaQuZhengPersonalize from '@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengPersonalize'  // 调查取证申请书个性化页面
 import HunQianStart from '@/components/HunQianXieYi/HunQianStart' // 婚前协议小问卷
 import HunQianBasic from '@/components/HunQianXieYi/HunQianBasic' // 婚前协议基本信息
 import HunNeiStart from '@/components/HunNeiXieYi/HunNeiStart' // 婚内协议小问卷
@@ -49,6 +49,10 @@ import HunNeiBasic from '@/components/HunNeiXieYi/HunNeiBasic' // 婚内协议�
 import BaoQuanStart from '@/components/BaoQuanRequest/BaoQuanStart'    // 保全申请书初始化页面
 import BaoQuanBasic from '@/components/BaoQuanRequest/BaoQuanBasic'   // 保全申请书信息填写页
 import BaoQuanPersonalize from '@/components/BaoQuanRequest/BaoQuanPersonalize'  // 保全申请书个性化页面
+import FuYangQuanBasic from '@/components/FuYangQuanQiSuZhuang/FuYangQuanBasic'   // 抚养权起诉状信息填写页
+import FuYangQuanPersonalize from '@/components/FuYangQuanQiSuZhuang/FuYangQuanPersonalize'  // 抚养权起诉状个性化页面
+import FuYangFeiBasic from '@/components/FuYangFeiQiSuZhuang/FuYangFeiBasic'   // 抚养费起诉状信息填写页
+import FuYangFeiPersonalize from '@/components/FuYangFeiQiSuZhuang/FuYangFeiPersonalize'  // 抚养费起诉状个性化页面
 Vue.use(Router)
 
 export default new Router({
@@ -128,12 +132,12 @@ export default new Router({
     {path: '/QiSuComplate', name: 'QiSuComplate', component: QiSuComplate},
     // 起诉状基本信息
     {path: '/QiSuBasicInformation', name: 'QiSuBasicInformation', component: QiSuBasicInformation},
-    // 申请书初始化页面
-    {path: '/RequestStart', name: 'RequestStart', component: RequestStart},
-    // 申请书基本信息页面
-    {path: '/RequestBasic', name: 'RequestBasic', component: RequestBasic},
-    // 申请书个性化页面
-    {path: '/RequestPersonalize', name: 'RequestPersonalize', component: RequestPersonalize},
+    // 调查取证申请书初始化页面
+    {path: '/DiaoChaQuZhengStart', name: 'DiaoChaQuZhengStart', component: DiaoChaQuZhengStart},
+    // 调查取证申请书基本信息页面
+    {path: '/DiaoChaQuZhengBasic', name: 'DiaoChaQuZhengBasic', component: DiaoChaQuZhengBasic},
+    // 调查取证申请书个性化页面
+    {path: '/DiaoChaQuZhengPersonalize', name: 'DiaoChaQuZhengPersonalize', component: DiaoChaQuZhengPersonalize},
     // 婚前协议小问卷
     {path: '/HunQianStart', name: 'HunQianStart', component: HunQianStart},
     // 婚前协议基本信息
@@ -148,6 +152,14 @@ export default new Router({
     {path: '/BaoQuanBasic', name: 'BaoQuanBasic', component: BaoQuanBasic},
     // 保全申请书个性化页面
     {path: '/BaoQuanPersonalize', name: 'BaoQuanPersonalize', component: BaoQuanPersonalize},
+    // 抚养权基本信息页面
+    {path: '/FuYangQuanBasic', name: 'FuYangQuanBasic', component: FuYangQuanBasic},
+    // 抚养权个性化页面
+    {path: '/FuYangQuanPersonalize', name: 'FuYangQuanPersonalize', component: FuYangQuanPersonalize},
+    // 抚养费基本信息页面
+    {path: '/FuYangFeiBasic', name: 'FuYangFeiBasic', component: FuYangFeiBasic},
+    // 抚养费个性化页面
+    {path: '/FuYangFeiPersonalize', name: 'FuYangFeiPersonalize', component: FuYangFeiPersonalize},
     // 访问错误页面跳转到登录页面
     {path: '*',redirect: '/'}
   ]

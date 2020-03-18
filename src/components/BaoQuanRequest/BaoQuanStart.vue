@@ -847,8 +847,26 @@
 
       mounted () {
         this.childList();
+        this.getStart()
       },
       methods: {
+        getStart(){
+          // 默认添加一个申请人和被申请人
+          userAddAnswer({
+            value: 1,  // 值
+            qpid: 2542, // 关联id
+            quid: localStorage.getItem('quid') //用户的问卷id
+          }).then((data)=>{
+          }).catch((data)=>{
+          })
+          userAddAnswer({
+            value: 1,  // 值
+            qpid: 2543, // 关联id
+            quid: localStorage.getItem('quid') //用户的问卷id
+          }).then((data)=>{
+          }).catch((data)=>{
+          })
+        },
         getId (index) {
           return 'box_' + index
         },
