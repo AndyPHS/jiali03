@@ -321,7 +321,7 @@
                                   class="ban"
                                   v-model="$$item.answer"
                                   size="small"
-                                  placeholder="$$item.placeholder"
+                                  :placeholder="$$item.placeholder"
                                   @blur="numAddAnswer($$item)"
                                 ></el-input>
                               </el-form-item>
