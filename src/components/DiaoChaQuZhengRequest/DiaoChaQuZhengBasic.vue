@@ -321,7 +321,7 @@
                                   class="ban"
                                   v-model="$$item.answer"
                                   size="small"
-                                  placeholder="请输入18位证件号"
+                                  placeholder="$$item.placeholder"
                                   @blur="numAddAnswer($$item)"
                                 ></el-input>
                               </el-form-item>
