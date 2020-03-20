@@ -53,6 +53,10 @@ import FuYangQuanBasic from '@/components/FuYangQuanQiSuZhuang/FuYangQuanBasic' 
 import FuYangQuanPersonalize from '@/components/FuYangQuanQiSuZhuang/FuYangQuanPersonalize'  // 抚养权起诉状个性化页面
 import FuYangFeiBasic from '@/components/FuYangFeiQiSuZhuang/FuYangFeiBasic'   // 抚养费起诉状信息填写页
 import FuYangFeiPersonalize from '@/components/FuYangFeiQiSuZhuang/FuYangFeiPersonalize'  // 抚养费起诉状个性化页面
+import FenJiaXiChanBasic from '@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanBasic'   // 分家析产纠纷起诉状信息填写页
+import FenJiaXiChanPersonalize from '@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanPersonalize'  // 分家析产纠纷起诉状个性化页面
+import MinJianJieDaiBasic from '@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiBasic'   // 民间借贷起诉状信息填写页
+import MinJianJieDaiPersonalize from '@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiPersonalize'  // 民间借贷起诉状个性化页面
 Vue.use(Router)
 
 export default new Router({
@@ -160,6 +164,14 @@ export default new Router({
     {path: '/FuYangFeiBasic', name: 'FuYangFeiBasic', component: FuYangFeiBasic},
     // 抚养费个性化页面
     {path: '/FuYangFeiPersonalize', name: 'FuYangFeiPersonalize', component: FuYangFeiPersonalize},
+    // 分家析产基本信息页面
+    {path: '/FenJiaXiChanBasic', name: 'FenJiaXiChanBasic', component: FenJiaXiChanBasic},
+    // 分家析产个性化页面
+    {path: '/FenJiaXiChanPersonalize', name: 'FenJiaXiChanPersonalize', component: FenJiaXiChanPersonalize},
+    // 民间借贷基本信息页面
+    {path: '/MinJianJieDaiBasic', name: 'MinJianJieDaiBasic', component: MinJianJieDaiBasic},
+    // 民间借贷个性化页面
+    {path: '/MinJianJieDaiPersonalize', name: 'MinJianJieDaiPersonalize', component: MinJianJieDaiPersonalize},
     // 访问错误页面跳转到登录页面
     {path: '*',redirect: '/'}
   ]

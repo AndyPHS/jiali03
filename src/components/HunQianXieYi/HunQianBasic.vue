@@ -5012,19 +5012,19 @@
             },
             IsShow: false,
             mokuai: [
-              {title: '基本信息', part: 'BasicInformation',id:1},
-              {title: '房产', part: 'fangchan',id:2},
-              {title: '车辆', part: 'car',id:3},
-              {title: '理财', part: 'licai',id:4},
-              {title: '保险', part: 'baoxian',id:5},
-              {title: '存款', part: 'cunkuan',id:6},
-              {title: '股权', part: 'guquan',id:7},
-              {title: '其他财产', part: 'qitacaichan',id:8},
-              {title: '未来财产', part: 'weilaicaichan',id:9},  // 2683
-              {title: '债权', part: 'zhaiquan',id:10},
-              {title: '债务', part: 'zhaiwu',id:11},
-              {title: '未来债权', part: 'weilaizhaiquan',id:12}, // 2685
-              {title: '未来债务', part: 'weilaizhaiwu',id:13}, // 2687
+              {title: '基本信息', part: 'BasicInformation',id:1, num:1320},
+              {title: '房产', part: 'fangchan',id:2, num:1462},
+              {title: '车辆', part: 'car',id:3, num:1523},
+              {title: '理财', part: 'licai',id:4, num:1549},
+              {title: '保险', part: 'baoxian',id:5, num:1575},
+              {title: '存款', part: 'cunkuan',id:6, num:1612},
+              {title: '股权', part: 'guquan',id:7, num:1714},
+              {title: '其他财产', part: 'qitacaichan',id:8, num:1316},
+              {title: '未来财产', part: 'weilaicaichan',id:9, num:2683},  // 2683
+              {title: '债权', part: 'zhaiquan',id:10, num:1653},
+              {title: '债务', part: 'zhaiwu',id:11, num:1672},
+              {title: '未来债权', part: 'weilaizhaiquan',id:12, num:2685}, // 2685
+              {title: '未来债务', part: 'weilaizhaiwu',id:13, num:2687}, // 2687
             ],
             active: 0,
             options: regionData,  // 省市联动
@@ -5032,7 +5032,8 @@
             missMsg: [],   // 验证的时候漏填项
             missAlert: true, // 尚未填写的信息弹框
             status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
-            missField: [] // 未填写项目
+            missField: [], // 未填写项目
+            flag: false   // 生成协议弹窗是否出现开关
           }
       },
       name: 'RequestBasic',
@@ -5060,63 +5061,59 @@
         getBasicInformation () { // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 1320}).then((data)=>{
             this.aa.BasicInformation = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getfangchan () {  // 查询房产模块数据
           returnQuestionnaireJson({'qpid': 1462}).then((data)=>{
             this.aa.fangchan = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getcar () {  // 查询车辆
           returnQuestionnaireJson({'qpid': 1523}).then((data)=>{
             this.aa.car = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getlicai () {// 查询理财
           returnQuestionnaireJson({'qpid': 1549}).then((data)=>{
             this.aa.licai = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getbaoxian () {// 查询保险
           returnQuestionnaireJson({'qpid': 1575}).then((data)=>{
             this.aa.baoxian = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getcunkuan () { // 查询存款
           returnQuestionnaireJson({'qpid': 1612}).then((data)=>{
             this.aa.cunkuan = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getguquan () {// 查询股权
           returnQuestionnaireJson({'qpid': 1714}).then((data)=>{
             this.aa.guquan = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getqitacaichan () { // 查询其他财产
           returnQuestionnaireJson({'qpid': 1316}).then((data)=>{
             this.aa.qitacaichan = data.data.data
-            this.mokuai.sort(this.compare('id'))
+            if(this.aa.qitacaichan[0][0].questions[0].answer == 1 || this.aa.qitacaichan[0][0].questions[0].answer == ""){
+              this.aa.qitacaichan[0][0].questions[0].answer = []
+            }else{
+              this.aa.qitacaichan[0][0].questions[0].answer = JSON.parse(this.aa.qitacaichan[0][0].questions[0].answer)
+            }
           }).catch((data)=>{
           })
         },
         getweilaicaichan () { // 查询未来财产
           returnQuestionnaireJson({'qpid': 2683}).then((data)=>{
             this.aa.weilaicaichan = data.data.data
-            this.mokuai.sort(this.compare('id'))
             if(this.aa.weilaicaichan[0][0].questions[1].answer == 1 || this.aa.weilaicaichan[0][0].questions[1].answer == ""){
               this.aa.weilaicaichan[0][0].questions[1].answer = []
             }else{
@@ -5128,28 +5125,24 @@
         getzhaiquan () {// 查询债权
           returnQuestionnaireJson({'qpid': 1653}).then((data)=>{
             this.aa.zhaiquan = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getzhaiwu () {// 查询债务
           returnQuestionnaireJson({'qpid': 1672}).then((data)=>{
             this.aa.zhaiwu = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getweilaizhaiquan () {// 查询未来债权
           returnQuestionnaireJson({'qpid': 2685}).then((data)=>{
             this.aa.weilaizhaiquan = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getweilaizhaiwu () {// 查询未来债务
           returnQuestionnaireJson({'qpid': 2687}).then((data)=>{
             this.aa.weilaizhaiwu = data.data.data
-            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
@@ -5601,25 +5594,25 @@
         },
 
         GoComplatePage () { // 点击个性化修改的时候先验证申请法院是否填写，如果填写则弹出框
-          localStorage.setItem('qpid', 1672) // 验证申请法院
-          demoYanZheng({
-            qpid: 1672
-          }).then((data)=>{
-            // console.log(data.data)
-            if(data.data.status_code == 330){
-              this.missMsgBox = true
-              this.missMsg = data.data.data
-            }else{
-              this.$notify({
-                title: '保存成功',
-                message: '申请法院模块已成功保存',
-                type: 'success'
-              });
-              this.IsShow = true;
-            }
-          }).catch((data)=>{
-          })
-
+          let mokuai = this.mokuai
+          for(var i =0;i<mokuai.length;i++){
+            localStorage.setItem('qpid', mokuai[i].num)
+            demoYanZheng({
+              qpid: mokuai[i].num
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+                this.flag = false
+              }else{
+                this.flag = true
+              }
+            }).catch((data)=>{
+            })
+          }
+          if(this.flag==true){
+            this.IsShow = true;
+          }
         },
         quxiao (){
           this.IsShow = false;
@@ -5877,6 +5870,7 @@
         },
         closeMissMsgBox () {   // 关闭未填写项弹窗
           this.missMsgBox = false
+          this.flag=false
         },
         GetOutPutWord () {   // 获取离婚协议书未填写项
           // localStorage.setItem('qid',5)

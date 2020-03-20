@@ -4942,6 +4942,7 @@
             a: {},
             aa: {
               BasicInformation: [],    //基本信息
+              anyou: [],  // 案由
               shishi: [],  //事实与理由
               qisuyuanyin: [],   // 起诉原因
               susongqingqiu: [],   // 诉讼请求
@@ -4949,11 +4950,12 @@
             },
             IsShow: false,
             mokuai: [
-              {title: '基本信息', part: 'BasicInformation',id:1,num:2697},
-              {title: '事实与理由', part: 'shishi',id:2,num:2743},
-              {title: '起诉原因', part: 'qisuyuanyin',id:3,num:2786},
-              {title: '诉讼请求', part: 'susongqingqiu',id:4,num:2731},
-              {title: '起诉法院', part: 'qisufayuan',id:5,num:2789}
+              {title: '基本信息', part: 'BasicInformation',id:1,num:2630},
+              {title: '案由', part: 'anyou',id:2,num:2775},
+              {title: '事实与理由', part: 'shishi',id:3,num:2647},
+              {title: '起诉原因', part: 'qisuyuanyin',id:4,num:2668},
+              {title: '诉讼请求', part: 'susongqingqiu',id:5,num:2678},
+              {title: '起诉法院', part: 'qisufayuan',id:6,num:2675}
             ],
             active: 0,
             options: regionData,  // 省市联动
@@ -4969,6 +4971,7 @@
 
       beforeMount () {
         this.getBasicInformation() // 查询双方基本信息模块数据
+        this.getanyou()
         this.getshishi()   // 获取事实与理由
         this.getqisuyuanyin()
         this.getsusongqingqiu()
@@ -4978,19 +4981,25 @@
        },
       methods: {
         getBasicInformation () { // 查询双方基本信息模块数据
-          returnQuestionnaireJson({'qpid': 2697}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2630}).then((data)=>{
             this.aa.BasicInformation = data.data.data
           }).catch((data)=>{
           })
         },
+        getanyou(){
+          returnQuestionnaireJson({'qpid': 2775}).then((data)=>{
+            this.aa.anyou = data.data.data
+          }).catch((data)=>{
+          })
+        },
         getshishi () {  // 查询事实与理由模块数据
-          returnQuestionnaireJson({'qpid': 2743}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2647}).then((data)=>{
             this.aa.shishi = data.data.data
           }).catch((data)=>{
           })
         },
         getqisuyuanyin () {  // 查询起诉原因模块数据
-          returnQuestionnaireJson({'qpid': 2786}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2668}).then((data)=>{
             this.aa.qisuyuanyin = data.data.data
             if(this.aa.qisuyuanyin[0][0].questions[0].answer == 1 || this.aa.qisuyuanyin[0][0].questions[0].answer == ""){
               this.aa.qisuyuanyin[0][0].questions[0].answer = []
@@ -5001,7 +5010,7 @@
           })
         },
         getsusongqingqiu () {// 查询诉讼请求模块数据
-          returnQuestionnaireJson({'qpid': 2731}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2678}).then((data)=>{
             this.aa.susongqingqiu = data.data.data
             if(this.aa.susongqingqiu[0][0].questions[0].answer == 1 || this.aa.susongqingqiu[0][0].questions[0].answer == ""){
               this.aa.susongqingqiu[0][0].questions[0].answer = []
@@ -5012,7 +5021,7 @@
           })
         },
         getqisufayuan () {// 查询起诉法院模块数据
-          returnQuestionnaireJson({'qpid': 2789}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 2675}).then((data)=>{
             this.aa.qisufayuan = data.data.data
             let cityAnswer = JSON.parse(this.aa.qisufayuan[0][0].questions[0].answer)
             this.aa.qisufayuan[0][0].questions[0].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
@@ -5358,7 +5367,17 @@
               qpid: e,
               quid: localStorage.getItem('quid')
             }).then((data)=>{
-              
+              if(data.data.status_code == 200 ){
+                if(e==2670){
+                  this.getqisuyuanyin()  // 刷新起诉原因模块
+                }else if(e==2680){
+                  this.getsusongqingqiu()  // 刷新诉讼请求模块
+                }
+                this.$message({
+                  message: '添加成功',
+                  type: 'success'
+                });
+              }
             }).catch((data)=>{
                this.$message.error('添加失败，请联系管理员');
             })
@@ -5374,7 +5393,16 @@
                 quid: localStorage.getItem('quid'),
                 fornum: index+1
               }).then((data)=>{
-                
+                if(e==2670){
+                  this.getqisuyuanyin()  // 刷新起诉原因模块
+                }else if(e==2680){
+                  this.getsusongqingqiu()  // 刷新诉讼请求模块
+                }
+                this.$message({
+                  message: '删除成功',
+                  type: 'success',
+                  duration: 1000
+                });
               }).catch((data)=>{
                 this.$message.error('删除失败，请联系管理员');
               })
@@ -5426,9 +5454,9 @@
         next () {
           localStorage.setItem('active',this.active)
           if(this.mokuai[this.active].title == '基本信息'){
-            localStorage.setItem('qpid', 2697)
+            localStorage.setItem('qpid', 2630)
             demoYanZheng({
-              qpid: 2697
+              qpid: 2630
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5443,10 +5471,28 @@
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '事实与理由'){
-            localStorage.setItem('qpid', 2743)
+          }else if(this.mokuai[this.active].title == '案由'){
+            localStorage.setItem('qpid', 2775)
             demoYanZheng({
-              qpid: 2743
+              qpid: 2775
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '案由信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '事实与理由'){
+            localStorage.setItem('qpid', 2647)
+            demoYanZheng({
+              qpid: 2647
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5462,9 +5508,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '起诉原因'){
-            localStorage.setItem('qpid', 2786)
+            localStorage.setItem('qpid', 2668)
             demoYanZheng({
-              qpid: 2786
+              qpid: 2668
             }).then((data)=>{
               // console.log(data.data)
               if(data.data.status_code == 330){
@@ -5481,9 +5527,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '诉讼请求'){
-            localStorage.setItem('qpid', 2731)
+            localStorage.setItem('qpid', 2678)
             demoYanZheng({
-              qpid: 2731
+              qpid: 2678
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5499,9 +5545,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '起诉法院'){
-            localStorage.setItem('qpid', 2789)
+            localStorage.setItem('qpid', 2675)
             demoYanZheng({
-              qpid: 2789
+              qpid: 2675
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5529,7 +5575,7 @@
                 this.missField = data.data.data
                 this.IsShow = false;
             }else if(this.status_code == 200){
-                this.$router.replace("/FuYangFeiPersonalize");
+                this.$router.replace("/FenJiaXiChanPersonalize");
                 this.missAlert = false
             }
           }).catch((data)=>{

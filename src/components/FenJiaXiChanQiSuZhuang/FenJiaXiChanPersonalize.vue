@@ -5,9 +5,7 @@
             <h2 class="py-2 text-lg text-center w-2/5">
               {{this.Content.title}} 
             </h2>
-            <p class="pb-1 text-base text-center w-2/5">抚养费起诉状</p>
-            
-
+            <p class="pb-1 text-base text-center w-2/5">抚养权起诉状</p>
             <div class="flex">
                 <div class="w-2/5 mx-1 relative">
                     <p class="text-left w-2/5 pb-1">事实与理由：</p>
@@ -53,7 +51,7 @@
                     </div>
                 </div>
                 <div class="w-1/5 mx-4">
-                    <h2 class="py-2 text-lg text-center w-full">抚养费标签</h2>
+                    <h2 class="py-2 text-lg text-center w-full">起诉原因标签</h2>
                     <div class="flex align-items-center justify-around">
                         <el-form ref="labelForm" :model="labelForm">
                             <el-form-item >

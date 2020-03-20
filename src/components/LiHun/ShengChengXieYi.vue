@@ -179,7 +179,7 @@
             }else if(localStorage.getItem('qid')==25 ){
               this.TitleMsg = '证人出庭作证申请书';
             }else if(localStorage.getItem('qid')==26 ){
-              this.TitleMsg = '房屋评估申请书';
+              this.TitleMsg = '评估申请书';
             }else if(localStorage.getItem('qid')==28 ){
               this.TitleMsg = '笔迹鉴定申请书';
             }else if(localStorage.getItem('qid')==29 ){
@@ -229,8 +229,8 @@
            this.$router.replace("/MinJianJieDaiBasic");
           }else if(localStorage.getItem('qid')==25){ // 证人出庭作证申请书
            this.$router.replace("/ZhengRenChuTingBasic");
-          }else if(localStorage.getItem('qid')==26){ // 房屋评估申请书
-           this.$router.replace("/FangWuPingGuBasic");
+          }else if(localStorage.getItem('qid')==26){ // 评估申请书
+           this.$router.replace("/PingGuBasic");
           }else if(localStorage.getItem('qid')==27){ // 离婚后财产纠纷起诉状
            this.$router.replace("/LiHunHouCaiChanBasic");
           }else if(localStorage.getItem('qid')==28){ // 笔迹鉴定申请书
@@ -261,8 +261,8 @@
            this.$router.replace("/MinJianJieDaiPersonalize");
           }else if(localStorage.getItem('qid')==25){ // 证人出庭作证申请书
            this.$router.replace("/ZhengRenChuTingPersonalize");
-          }else if(localStorage.getItem('qid')==26){ // 房屋评估申请书
-           this.$router.replace("/FangWuPingGuPersonalize");
+          }else if(localStorage.getItem('qid')==26){ // 评估申请书
+           this.$router.replace("/PingGuPersonalize");
           }else if(localStorage.getItem('qid')==27){ // 离婚后财产纠纷起诉状
            this.$router.replace("/LiHunHouCaiChanPersonalize");
           }else if(localStorage.getItem('qid')==28){ // 笔迹鉴定申请书
