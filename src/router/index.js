@@ -24,18 +24,6 @@ import UserSystem from '@/components/LiHun/UserSystem'         // 添加用户�
 import WenJuan1 from '@/components/LiHun/WenJuan1'         // 添加问卷测试页面
 import ChuShi from '@/components/LiHun/ChuShi'         // 小问卷初始页面
 import QueDing from '@/components/LiHun/QueDing'         // 确定初始页面
-import BasicInformation from '@/components/LiHun/BasicInformation'         // 添加离婚协议书双方基本信息页面HunYinStatus
-import HunYinStatus from '@/components/LiHun/HunYinStatus'         // 添加离婚协议书婚姻情况页面
-import ZiNv from '@/components/LiHun/ZiNv'         // 添加离婚协议书子女页面
-import FangChan from '@/components/LiHun/FangChan'         // 添加离婚协议书房产页面
-import CunKuan from '@/components/LiHun/CunKuan'         // 添加离婚协议书存款页面
-import Car from '@/components/LiHun/Car'         // 添加离婚协议书车子页面
-import LiCai from '@/components/LiHun/LiCai'         // 添加离婚协议书理财页面
-import JiaDian from '@/components/LiHun/JiaDian'         // 添加离婚协议书家电页面
-import BaoXian from '@/components/LiHun/BaoXian'         // 添加离婚协议书保险页面
-import QiTaCaiChan from '@/components/LiHun/QiTaCaiChan'         // 添加离婚协议书其他财产页面
-import ZhaiQuan from '@/components/LiHun/ZhaiQuan'         // 添加离婚协议书债权页面
-import ZhaiWu from '@/components/LiHun/ZhaiWu'         // 添加离婚协议书债务页面
 import ShengChengXieYi from '@/components/LiHun/ShengChengXieYi'         // 添加离婚协议书债务页面
 import QiSuComplate from '@/components/QiSuZhuang/QiSuComplate'    // 起诉状生成页
 import QiSuBasicInformation from '@/components/QiSuZhuang/QiSuBasicInformation'    // 起诉状基本信息填写
@@ -57,6 +45,11 @@ import FenJiaXiChanBasic from '@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanB
 import FenJiaXiChanPersonalize from '@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanPersonalize'  // 分家析产纠纷起诉状个性化页面
 import MinJianJieDaiBasic from '@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiBasic'   // 民间借贷起诉状信息填写页
 import MinJianJieDaiPersonalize from '@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiPersonalize'  // 民间借贷起诉状个性化页面
+import ZhengRenChuTingBasic from '@/components/ZhengRenChuTingRequest/ZhengRenChuTingBasic'   // 证人出庭作证申请书信息填写页
+import ZhengRenChuTingPersonalize from '@/components/ZhengRenChuTingRequest/ZhengRenChuTingPersonalize'  // 证人出庭作证申请书个性化页面
+import PingGuStart from '@/components/PingGuRequest/PingGuStart'    // 评估请书初始化页面
+import PingGuBasic from '@/components/PingGuRequest/PingGuBasic'   // 评估请书信息填写页
+import PingGuPersonalize from '@/components/PingGuRequest/PingGuPersonalize'  // 评估请书个性化页面
 Vue.use(Router)
 
 export default new Router({
@@ -106,30 +99,6 @@ export default new Router({
     {path: '/ChuShi', name: 'ChuShi', component: ChuShi},
     // 确定初始页面
     {path: '/QueDing', name: 'QueDing', component: QueDing},
-    // 基本信息页面
-    {path: '/BasicInformation', name: 'BasicInformation', component: BasicInformation},
-    // 婚姻情况页面
-    {path: '/HunYinStatus', name: 'HunYinStatus', component: HunYinStatus},
-    // 子女页面
-    {path: '/ZiNv', name: 'ZiNv', component: ZiNv},
-    // 房产页面
-    {path: '/FangChan', name: 'FangChan', component: FangChan},
-    // 存款页面
-    {path: '/CunKuan', name: 'CunKuan', component: CunKuan},
-    // 车子页面
-    {path: '/Car', name: 'Car', component: Car},
-    // 理财页面
-    {path: '/LiCai', name: 'LiCai', component: LiCai},
-    // 家电页面
-    {path: '/JiaDian', name: 'JiaDian',component: JiaDian},
-    // 保险页面
-    {path: '/BaoXian', name: 'BaoXian', component: BaoXian},
-    // 其他财产页面
-    {path: '/QiTaCaiChan', name: 'QiTaCaiChan', component: QiTaCaiChan},
-    // 债权页面
-    {path: '/ZhaiQuan', name: 'ZhaiQuan', component: ZhaiQuan},
-    // 债务页面
-    {path: '/ZhaiWu', name: 'ZhaiWu', component: ZhaiWu},
     // 生成离婚协议书页面
     {path: '/ShengChengXieYi', name: 'ShengChengXieYi', component: ShengChengXieYi},
     // 起诉状生成页
@@ -172,6 +141,16 @@ export default new Router({
     {path: '/MinJianJieDaiBasic', name: 'MinJianJieDaiBasic', component: MinJianJieDaiBasic},
     // 民间借贷个性化页面
     {path: '/MinJianJieDaiPersonalize', name: 'MinJianJieDaiPersonalize', component: MinJianJieDaiPersonalize},
+    // 证人出庭作证基本信息页面
+    {path: '/ZhengRenChuTingBasic', name: 'ZhengRenChuTingBasic', component: ZhengRenChuTingBasic},
+    // 证人出庭作证个性化页面
+    {path: '/ZhengRenChuTingPersonalize', name: 'ZhengRenChuTingPersonalize', component: ZhengRenChuTingPersonalize},
+    // 评估请书初始化页面
+    {path: '/PingGuStart', name: 'PingGuStart', component: PingGuStart},
+    // 评估基本信息页面
+    {path: '/PingGuBasic', name: 'PingGuBasic', component: PingGuBasic},
+    // 评估个性化页面
+    {path: '/PingGuPersonalize', name: 'PingGuPersonalize', component: PingGuPersonalize},
     // 访问错误页面跳转到登录页面
     {path: '*',redirect: '/'}
   ]

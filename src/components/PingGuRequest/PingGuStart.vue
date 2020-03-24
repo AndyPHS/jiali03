@@ -4,7 +4,7 @@
       <div>
         <el-form label-position="top" label-width="160px">
           <div class="ml-5">
-            <div class="text-2xl font-bold text-center py-8">为了更高效地为您定制专属协议，请填写如下问题：</div>
+            <div class="text-2xl font-bold text-center py-8">为了更高效地为您定制申请书，请填写如下问题：</div>
             <div class="w-3/5 text-left mx-auto bg-white px-5 py-5 border-2 border-green-200 rounded-lg shadow-lg">
               <!--遍历孩子的基本信息-->
               <div v-for="(item,index) in childAll" :key="index">
@@ -843,12 +843,30 @@
             ChildName: ''
           }
       },
-      name: 'ChuShi',
+      name: 'RequestStart',
 
       mounted () {
         this.childList();
+        this.getStart()
       },
       methods: {
+        getStart(){
+          // 默认添加一个申请人和被申请人
+          userAddAnswer({
+            value: 1,  // 值
+            qpid: 2542, // 关联id
+            quid: localStorage.getItem('quid') //用户的问卷id
+          }).then((data)=>{
+          }).catch((data)=>{
+          })
+          userAddAnswer({
+            value: 1,  // 值
+            qpid: 2543, // 关联id
+            quid: localStorage.getItem('quid') //用户的问卷id
+          }).then((data)=>{
+          }).catch((data)=>{
+          })
+        },
         getId (index) {
           return 'box_' + index
         },
@@ -858,362 +876,18 @@
               title: '',
               questions: [
                 {
-                  title: '1、您离婚想要达到的诉求是什么？（可多选）',
-                  id: '649',
-                  isRequired: false,
-                  type: 'select_multiple',
-                  tip: '',
-                  answer: '',
+                  title: '您想要申请的事项有哪些',
+                  id: '2857',
+                  isRequired: true,
+                  type: 'checkbox',
+                  tip: '提示',
+                  answer: [],
                   listData: [
-                    { label: '离婚', value: '1' },
-                    { label: '自己抚养孩子', value: '2' },
-                    { label: '对方抚养孩子', value: '3' },
-                    { label: '对方不分财产', value: '4' },
-                    { label: '对方少分财产', value: '5' },
-                    { label: '自己多分财产', value: '6' },
-                    { label: '平均分配财产', value: '7' },
-                    { label: '财产赠与孩子', value: '8' },
-                    { label: '债权均归属自己', value: '9' },
-                    { label: '债务均归属对方', value: '10' },
-                    { label: '平均分配债权债务', value: '11' },
-                    { label: '债权赠与孩子', value: '12' },
-                    { label: '合理分配财产', value: '13' },
-                    { label: '其他', value: '14' }
+                    { label: '房产', value: '1' },  // 2858
+                    { label: '车辆', value: '2' },  // 2862
+                    { label: '股权', value: '3' },  // 2863
+                    { label: '其他', value: '4' }   // 2864
                   ]
-                },
-                {
-                  title: '2、你们感情破裂的原因是什么？（可多选）',
-                  id: '650',
-                  isRequired: false,
-                  type: 'select_multiple',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '婚前感情基础薄弱', value: '1' },
-                    { label: '性格不合，琐事矛盾', value: '2' },
-                    { label: '出轨', value: '3' },
-                    { label: '与人同居', value: '4' },
-                    { label: '重婚', value: '5' },
-                    { label: '虐待', value: '6' },
-                    { label: '遗弃', value: '7' },
-                    { label: '赌博', value: '8' },
-                    { label: '吸毒', value: '9' },
-                    { label: '沉迷网络游戏', value: '10' },
-                    { label: '嫖娼', value: '11' },
-                    { label: '酗酒', value: '12' },
-                    { label: '暴力倾向', value: '13' },
-                    { label: '家庭成员矛盾', value: '14' },
-                    { label: '子女抚养方面的矛盾', value: '15' },
-                    { label: '隐瞒疾病', value: '16' },
-                    { label: '长期分居两地', value: '17' },
-                    { label: '对方在服刑', value: '18' },
-                    { label: '其他', value: '19' }
-                  ]
-                },
-                {
-                  title: '3、你们都是初婚吗？',
-                  id: '3',
-                  isRequired: false,
-                  type: 'select',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '均初婚', value: '1' },
-                    { label: '均再婚', value: '2' },
-                    { label: '男方初婚，女方再婚', value: '3' },
-                    { label: '女方初婚，男方再婚', value: '4' }
-                  ]
-                },
-                {
-                  title:'4、您与配偶是否育有子女？',
-                  id: '875',
-                  isRequired: true,
-                  type: 'radio',
-                  answer: '',
-                  listData: [
-                    { label: '是', value: '1' },
-                    { label: '否', value: '2' }
-                  ]
-                },
-                {
-                  title: '您与配偶生育了几个子女？',
-                  id: '518',
-                  isRequired: true,
-                  type: 'select',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '1', value: '1' },
-                    { label: '2', value: '2' },
-                    { label: '3', value: '3' },
-                    { label: '4', value: '4' },
-                    { label: '5', value: '5' },
-                    { label: '6', value: '6' },
-                    { label: '7', value: '7' }
-                  ],
-                  requireQidAndAnswer: { id: '875', answer: '1' }
-                },
-                {
-                  title: '5、是否有需要处理的共同财产？',
-                  id: '652',
-                  isRequired: true,
-                  type: 'radio',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '无夫妻共同财产', value: '1' },
-                    { label: '有财产待处理', value: '2' }
-                  ],
-                  childQuestion: {
-                    2: [
-                      {
-                        title: '请勾选您需要处理的夫妻共同财产',
-                        id: '520',
-                        isRequired: true,
-                        type: 'checkbox',
-                        tip: '提示',
-                        answer: [],
-                        listData: [
-                          { label: '房子', value: '1' },
-                          { label: '存款', value: '2' },
-                          { label: '理财', value: '3' },
-                          { label: '车子', value: '4' },
-                          { label: '家具家电', value: '5' },
-                          { label: '保险', value: '6' },
-                          { label: '其他', value: '7' }
-                        ],
-                        grandson: {
-                          1: [
-                            {
-                              title: '您与配有有几套房产需要处理？',
-                              id: '521',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          2: [
-                            {
-                              title: '您与配有有几笔存款需要处理？',
-                              id: '637',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          3: [
-                            {
-                              title: '您与配有有几笔理财需要处理？',
-                              id: '523',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          4: [
-                            {
-                              title: '您与配有有几辆车子需要处理？',
-                              id: '522',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          5: [
-                            {
-                              title: '您与配有有多少家电需要处理？',
-                              id: '636',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          6: [
-                            {
-                              title: '您与配有有几份保险需要处理？',
-                              id: '524',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ]
-                        }
-                      }
-                    ]
-                  }
-                },
-                {
-                  title: '6、外债的具体情形？（自己借/欠了别人钱，或别人借/欠了自己钱）',
-                  id: '653',
-                  isRequired: true,
-                  type: 'radio',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '无外债', value: '1' },
-                    { label: '有外债', value: '2' }
-                  ],
-                  childQuestion: {
-                    2: [
-                      {
-                        title: '外债的具体情形是',
-                        id: '654',
-                        isRequired: true,
-                        type: 'checkbox',
-                        tip: '提示',
-                        answer: [],
-                        listData: [
-                          { label: '有债权（别人欠/借你们钱）', value: '1' },
-                          { label: '有债务（你们欠/借了别人钱）', value: '2' }
-                        ],
-                        // grandson: {
-                        //   1: [
-                        //     {
-                        //       title: '您与配有有几笔债权需要处理？',
-                        //       id: '655',
-                        //       isRequired: true,
-                        //       type: 'select',
-                        //       // input_type: 'number',
-                        //       placeholder: '如：3',
-                        //       tip: '提示',
-                        //       answer: '',
-                        //       listData: [
-                        //         { label: '1', value: '1' },
-                        //         { label: '2', value: '2' },
-                        //         { label: '3', value: '3' },
-                        //         { label: '4', value: '4' },
-                        //         { label: '5', value: '5' },
-                        //         { label: '6', value: '6' },
-                        //         { label: '7', value: '7' }
-                        //       ]
-                        //     }
-                        //   ],
-                        //   2: [
-                        //     {
-                        //       title: '您与配有有几笔债务需要处理？',
-                        //       id: '656',
-                        //       isRequired: true,
-                        //       type: 'select',
-                        //       // input_type: 'number',
-                        //       placeholder: '如：3',
-                        //       tip: '提示',
-                        //       answer: '',
-                        //       listData: [
-                        //         { label: '1', value: '1' },
-                        //         { label: '2', value: '2' },
-                        //         { label: '3', value: '3' },
-                        //         { label: '4', value: '4' },
-                        //         { label: '5', value: '5' },
-                        //         { label: '6', value: '6' },
-                        //         { label: '7', value: '7' }
-                        //       ]
-                        //     }
-                        //   ]
-                        // }
-                      }
-                    ]
-                  }
-                },
-                {
-                  title: '7、您与配偶对离婚是否达成一致？',
-                  id: '657',
-                  isRequired: true,
-                  type: 'radio',
-                  tip: '',
-                  answer: '',
-                  listData: [
-                    { label: '是', value: '1' },
-                    { label: '否', value: '2' }
-                  ],
-                  childQuestion: {
-                    2: [
-                      {
-                        title: '您与配偶对离婚的争议是什么？',
-                        id: '658',
-                        isRequired: true,
-                        type: 'checkbox',
-                        tip: '提示',
-                        answer: [],
-                        listData: [
-                          { label: '子女', value: '1' },
-                          { label: '财产', value: '2' },
-                          { label: '外债', value: '3' }
-                        ]
-                      }
-                    ]
-                  }
                 }
               ]
             }
@@ -1232,10 +906,10 @@
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: localStorage.getItem('quid') //用户的问卷id
             }).then((data)=>{
-              console.log(e.answer)
-              console.log(typeof(e.answer))
+              // console.log(e.answer)
+              // console.log(typeof(e.answer))
             }).catch((data)=>{
-               console.log("保存失败")
+               // console.log("保存失败")
             })
           }else{
             userAddAnswer({
@@ -1244,115 +918,53 @@
               fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
               quid: localStorage.getItem('quid') //用户的问卷id
             }).then((data)=>{
-              console.log("保存成功")
+              // console.log("保存成功")
             }).catch((data)=>{
-               console.log("保存失败")
+               // console.log("保存失败")
             })
           }
-          if(e.id == 520){
+          if(e.id == 2857){
             e.answer.forEach((item)=>{
-              if(item==1){
+              if(item==1){     // 添加房产
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 521, // 关联id
+                  qpid: 2858, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
                 })
-              }else if(item==2){
+              }else if(item==2){   // 添加车辆
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 637, // 关联id
+                  qpid: 2862, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
                 })
-              }else if(item==3){
+              }else if(item==3){  // 病例股权
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 523, // 关联id
+                  qpid: 2863, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
                 })
-              }else if(item==4){
+              }else if(item==4){  // 添加房产
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 522, // 关联id
+                  qpid: 2864, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  console.log("保存成功")
                 }).catch((data)=>{
-                   console.log("保存失败")
-                })
-              }else if(item==5){
-                userAddAnswer({
-                  value: 1,  // 值
-                  qpid: 636, // 关联id
-                  quid: localStorage.getItem('quid') //用户的问卷id
-                }).then((data)=>{
-                  console.log("保存成功")
-                }).catch((data)=>{
-                   console.log("保存失败")
-                })
-              }else if(item==6){
-                userAddAnswer({
-                  value: 1,  // 值
-                  qpid: 524, // 关联id
-                  quid: localStorage.getItem('quid') //用户的问卷id
-                }).then((data)=>{
-                  console.log("保存成功")
-                }).catch((data)=>{
-                   console.log("保存失败")
-                })
-              }else if(item==7){
-                // getOnlyValue({
-                //   qpid: 332, // 关联id
-                //   quid: localStorage.getItem('quid') //用户的问卷id
-                // }).then((data)=>{
-                //   console.log("保存成功")
-                // }).catch((data)=>{
-                //    console.log("保存失败")
-                // })
-              }
-            })
-          }else if(e.id == 654){
-            e.answer.forEach((item)=>{
-              if(item==1){
-                userAddAnswer({
-                  value: 1,  // 值
-                  qpid: 655, // 关联id
-                  quid: localStorage.getItem('quid') //用户的问卷id
-                }).then((data)=>{
-                  console.log("保存成功")
-                }).catch((data)=>{
-                   console.log("保存失败")
-                })
-              }else if(item==2){
-                userAddAnswer({
-                  value: 1,  // 值
-                  qpid: 656, // 关联id
-                  quid: localStorage.getItem('quid') //用户的问卷id
-                }).then((data)=>{
-                  console.log("保存成功")
-                }).catch((data)=>{
-                   console.log("保存失败")
                 })
               }
             })
           }
-
         },
         NextPage () {
-          this.$router.replace("/QueDing");
+          this.$router.replace("/PingGuBasic");
         },
-        returnUserList(){
+        returnUserList () {
            this.$router.replace("/UserSystem");
         }
       }

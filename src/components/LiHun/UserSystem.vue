@@ -478,6 +478,12 @@ export default {
           }else if(this.questionnaireSelecter==22){  // 抚养费起诉状
             localStorage.setItem('questionnaireType', 2)
             this.$router.replace("/FuYangFeiBasic");
+          }else if(this.questionnaireSelecter==25){  // 证人出庭作证申请书
+            localStorage.setItem('questionnaireType', 3)
+            this.$router.replace("/ZhengRenChuTingBasic");
+          }else if(this.questionnaireSelecter==26){  // 评估申请书
+            localStorage.setItem('questionnaireType', 3)
+            this.$router.replace("/PingGuStart");
           }
         }).catch((data)=>{
         })
@@ -510,6 +516,12 @@ export default {
       }else if(row.qid ==20){ // 保全申请书
         localStorage.setItem('questionnaireType', 3)
         this.$router.replace("/BaoQuanPersonalize");
+      }else if(row.qid ==25){ // 证人出庭作证申请书
+        localStorage.setItem('questionnaireType', 3)
+        this.$router.replace("/ZhengRenChuTingPersonalize");
+      }else if(row.qid ==26){ // 评估申请书
+        localStorage.setItem('questionnaireType', 3)
+        this.$router.replace("/PingGuPersonalize");
       }else{ // 其他数据的提示
          this.$message({
             message: '此数据为垃圾数据，不做处理',
