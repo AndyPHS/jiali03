@@ -43,8 +43,8 @@
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债务</h2>
                         </div>
                       </div>
-                      
-                     
+
+
                       <!-- 大问题块 -->
                       <div v-for="($item, $index) in item"  :key="$index">
                         <div class="py-2">
@@ -157,7 +157,7 @@
                            <div v-if="$$item.type == 'dateTime_Day_Interval'">
                              <el-form-item label="" class="text-base">
                               <div>
-                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>  
+                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{ $$item.title }}</label>
                                 <el-tooltip  v-if="$$item.description !='' && $$item.description !=undefined  && $$item.description != null" placement="right">
                                   <div slot="content">
                                       <h3 class="text-base w-full font-bold">小贴士</h3><br/>
@@ -2062,7 +2062,7 @@
                             </div>
 
                             <!-- 二级问题块 -->
-                            
+
                             <div v-if="$$item.childQuestion && $$item.childQuestion[$$item.answer]">
                               <div v-for="($$$item,$$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
                                 <!-- 省市三级联动 -->
@@ -4188,7 +4188,7 @@
                                     </el-select>
                                   </el-form-item>
                                 </div>
-                                
+
                                 <!-- 三级问题 -->
 
                                 <div v-if="$$$item.questions ">
@@ -4653,7 +4653,7 @@
                                           </el-option>
                                         </el-select>
                                       </el-form-item>
-                                    </div> 
+                                    </div>
                                     <!-- 多选框 -->
                                     <div v-if="$$$$item.type == 'checkbox'">
                                       <el-form-item label="" class="text-base">
@@ -4928,7 +4928,7 @@
             </div>
           </div>
         </div>
-        
+
         <div v-show='IsShow' id="alert_xieyi">
           <h2>您已填写完毕，确认生成协议吗？</h2>
           <div class="queren flex mx-auto">
@@ -4983,7 +4983,7 @@
   </div>
 </template>
 <script>
-  
+
   import {returnQuestionnaireJson} from '@/api/api/requestLogin.js'    // 查询问卷json
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
@@ -4993,7 +4993,7 @@
   import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
-  
+
   export default {
     components: {
       // label_case,
@@ -5008,23 +5008,23 @@
 
             },
             aa: {
-              BasicInformation: [],    //基本信息
-              HunYinStatus: [],  // 婚姻状况
-              ZiNv: [],  // 子女
-              FangChan: [],               // 房产状况
-              CunKuan: [],                // 存款
-              Car: [],                // 车子
-              LiCai: [],                // 理财
-              JiaDian: [],                // 家具家电
-              BaoXian: [],          // 保险
-              QiTaCaiChan: [],       // 其他财产
-              ZhaiQuan: [],         // 债权
-              ZhaiWu: []            // 债务
-            },           
+              BasicInformation: [],    //基本信息595
+              HunYinStatus: [],  // 婚姻状况596
+              ZiNv: [],  // 子女518
+              FangChan: [],               // 房产状况521
+              CunKuan: [],                // 存款637
+              Car: [],                // 车子522
+              LiCai: [],                // 理财523
+              JiaDian: [],                // 家具家电636
+              BaoXian: [],          // 保险524
+              QiTaCaiChan: [],       // 其他财产332
+              ZhaiQuan: [],         // 债权655
+              ZhaiWu: []            // 债务656
+            },
             IsShow: false,
             mokuai: [
-              {title: '基本信息', part: 'BasicInformation',id:1},
-              {title: '婚姻状况', part: 'HunYinStatus',id:2}
+              {title: '基本信息', part: 'BasicInformation',id:1, num:595},
+              {title: '婚姻状况', part: 'HunYinStatus',id:2, num:596}
             ],
             active: 0,
             options: regionData,  // 省市联动
@@ -5033,6 +5033,7 @@
             missAlert: true, // 尚未填写的信息弹框
             status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
             missField: [], // 未填写项目
+            flag: false,   // 生成协议弹窗是否出现开关
             rules:{
               IdCard:[
                 { min: 17, max: 18, message: '身份证位数不对', trigger: 'blur' }
@@ -5041,7 +5042,7 @@
           }
       },
       name: 'WenJuan2',
-      
+
       beforeMount () {
         // this.getChuShi();  // 初始化保存当前页面
         this.getBasicInformation() // 查询双方基本信息模块数据
@@ -5072,7 +5073,7 @@
               this.getQiTaCaiChanMsg()
             }else{
             }
-            
+
           }).catch((data)=>{
              console.log("保存失败")
           })
@@ -5080,16 +5081,11 @@
         getBasicInformation (){ // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 595}).then((data)=>{  // 查询双方基本信息模块数据
             this.aa.BasicInformation = data.data.data
-            // console.log(this.aa.BasicInformation)
-            this.mokuai.push({
-              title: '其他财产', 
-              part: 'QiTaCaiChan',
-              id: 10
-            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
 
           })
-          this.mokuai.sort(this.compare('id'));
+
         },
         getHunYinStatus () {// 查询婚姻状况模块数据
           returnQuestionnaireJson({'qpid': 596}).then((data)=>{  // 查询婚姻状况模块数据
@@ -5104,9 +5100,10 @@
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
             this.mokuai.push({
-              title: '子女状况', 
+              title: '子女状况',
               part: 'ZiNv',
-              id: 3
+              id: 3,
+              num:518
             })
             // console.log(this.aa.ZiNv)
             this.mokuai.sort(this.compare('id'));
@@ -5139,9 +5136,10 @@
           returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
             this.aa.FangChan= data.data.data
             this.mokuai.push({
-              title: '房产', 
+              title: '房产',
               part: 'FangChan',
-              id: 4
+              id: 4,
+              num:521
             })
             this.mokuai.sort(this.compare('id'));
             for ( let i = 0 ;i < this.aa.FangChan.length; i++) {
@@ -5154,9 +5152,10 @@
           returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
             this.aa.CunKuan= data.data.data
             this.mokuai.push({
-              title: '存款', 
+              title: '存款',
               part: 'CunKuan',
-              id: 5
+              id: 5,
+              num:637
             })
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
@@ -5166,9 +5165,10 @@
           returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
             this.aa.Car= data.data.data
             this.mokuai.push({
-              title: '车子', 
+              title: '车子',
               part: 'Car',
-              id: 6
+              id: 6,
+              num:522
             })
             this.mokuai.sort(this.compare('id'));
             for ( let i = 0 ;i < this.aa.Car.length; i++) {
@@ -5181,9 +5181,10 @@
           returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
             this.aa.LiCai= data.data.data
             this.mokuai.push({
-              title: '理财', 
+              title: '理财',
               part: 'LiCai',
-              id: 7
+              id: 7,
+              num:523
             })
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
@@ -5193,9 +5194,10 @@
           returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家具家电模块数据
             this.aa.JiaDian= data.data.data
             this.mokuai.push({
-              title: '家具家电', 
+              title: '家具家电',
               part: 'JiaDian',
-              id: 8
+              id: 8,
+              num:636
             })
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
@@ -5205,9 +5207,10 @@
           returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
             this.aa.BaoXian= data.data.data
             this.mokuai.push({
-              title: '保险', 
+              title: '保险',
               part: 'BaoXian',
-              id: 9
+              id: 9,
+              num:524
             })
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
@@ -5215,9 +5218,14 @@
           })
         },
         getQiTaCaiChanMsg (){// 查询其他财产
-          returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询保险模块数据
+          returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询其他财产模块数据
             this.aa.QiTaCaiChan= data.data.data
-            
+            this.mokuai.push({
+              title: '其他财产',
+              part: 'QiTaCaiChan',
+              id: 10,
+              num:332
+            })
             this.mokuai.sort(this.compare('id'));
             for ( let i = 0 ;i < this.aa.QiTaCaiChan.length; i++) {
               if(this.aa.QiTaCaiChan[i][0].questions[0].answer == 1 || this.aa.QiTaCaiChan[i][0].questions[0].answer == ""){
@@ -5225,7 +5233,7 @@
               }else{
                 this.aa.QiTaCaiChan[i][0].questions[0].answer = JSON.parse(this.aa.QiTaCaiChan[i][0].questions[0].answer)
               }
-              
+
             }
           }).catch((data)=>{
 
@@ -5235,9 +5243,10 @@
           returnQuestionnaireJson({'qpid': 655}).then((data)=>{  // 查询债权模块数据
             this.aa.ZhaiQuan= data.data.data
             this.mokuai.push({
-              title: '债权', 
+              title: '债权',
               part: 'ZhaiQuan',
-              id: 11
+              id: 11,
+              num:655
             })
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
@@ -5247,15 +5256,16 @@
           returnQuestionnaireJson({'qpid': 656}).then((data)=>{  // 查询债务模块数据
             this.aa.ZhaiWu= data.data.data
             this.mokuai.push({
-              title: '债务', 
+              title: '债务',
               part: 'ZhaiWu',
-              id: 12
+              id: 12,
+              num:656
             })
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
-        
+
         getZiNv () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
             this.aa.ZiNv = data.data.data
@@ -5326,7 +5336,7 @@
           }
         },
         userAddAnswerAction (e){
-          if( e.isRequired == true){ 
+          if( e.isRequired == true){
             if(e.answer == '' || e.answer == null){
               this.$message.error('必填项内容不能为空');
             }else{
@@ -5342,7 +5352,7 @@
                       console.log("保存成功")
                     }).catch((data)=>{
                        console.log("保存失败")
-                    }) 
+                    })
                   }else{
                     userAddAnswer({
                       value: JSON.stringify(e.answer),  // 值
@@ -5353,7 +5363,7 @@
                       console.log("保存成功")
                     }).catch((data)=>{
                        console.log("保存失败")
-                    })  
+                    })
                   }
                 }else{
                   userAddAnswer({
@@ -5458,7 +5468,7 @@
                     console.log("保存成功")
                   }).catch((data)=>{
                      console.log("保存失败")
-                  }) 
+                  })
                 }else{
                   userAddAnswer({
                     value: JSON.stringify(e.answer),  // 值
@@ -5469,7 +5479,7 @@
                     console.log("保存成功")
                   }).catch((data)=>{
                      console.log("保存失败")
-                  })  
+                  })
                 }
               }else{
                 userAddAnswer({
@@ -5728,20 +5738,37 @@
             this.$message({
               type: 'info',
               message: '已取消删除'
-            });          
+            });
           });
         },
 
         GoComplatePage () {
-          this.IsShow = true;
+         let mokuai = this.mokuai
+         for(var i =0;i<mokuai.length;i++){
+           localStorage.setItem('qpid', mokuai[i].num)
+           demoYanZheng({
+             qpid: mokuai[i].num
+           }).then((data)=>{
+             if(data.data.status_code == 330){
+               this.missMsgBox = true
+               this.missMsg = data.data.data
+               this.flag = false
+             }else{
+               this.flag = true
+             }
+           }).catch((data)=>{
+           })
+         }
+         if(this.flag==true){
+           this.IsShow = true;
+         }
         },
         quxiao (){
           this.IsShow = false;
+          this.flag = false
         },
         complate () {
           this.GetOutPutWord();  // 请求是否能获取到
-          
-          
         },
         stepClick (val) {
           var _that = this;
@@ -5755,18 +5782,6 @@
         next () {
           localStorage.setItem('active',this.active)
           if(this.mokuai[this.active].title == '基本信息'){
-            // localStorage.setItem('wid',16) 
-            // verificationWord ({
-            //   quid: 6
-            // }).then((data)=>{
-            //   if(data.data.status_code == 330){
-            //     this.missMsgBox = true
-            //     this.missMsg = data.data.data
-            //   }else{
-            //     if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            //   }
-            // }).catch((data)=>{
-            // })
             localStorage.setItem('qpid', 595)
             demoYanZheng({
               qpid: 595
@@ -6027,6 +6042,7 @@
         },
         closeMissMsgBox () {   // 关闭未填写项弹窗
           this.missMsgBox = false
+          this.flag=false
         },
         GetOutPutWord () {   // 获取离婚协议书未填写项
           outPutWord().then((data)=>{
@@ -6036,7 +6052,7 @@
                 this.missField = data.data.data
                 this.IsShow = false;
             }else if(this.status_code == 200){
-                
+
                 this.$router.replace("/ShengChengXieYi");
                 this.missAlert = false
             }
