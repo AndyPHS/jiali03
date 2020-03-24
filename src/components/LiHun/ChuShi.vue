@@ -982,134 +982,134 @@
                           { label: '保险', value: '6' },
                           { label: '其他', value: '7' }
                         ],
-                        grandson: {
-                          1: [
-                            {
-                              title: '您与配有有几套房产需要处理？',
-                              id: '521',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          2: [
-                            {
-                              title: '您与配有有几笔存款需要处理？',
-                              id: '637',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          3: [
-                            {
-                              title: '您与配有有几笔理财需要处理？',
-                              id: '523',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          4: [
-                            {
-                              title: '您与配有有几辆车子需要处理？',
-                              id: '522',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          5: [
-                            {
-                              title: '您与配有有多少家电需要处理？',
-                              id: '636',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ],
-                          6: [
-                            {
-                              title: '您与配有有几份保险需要处理？',
-                              id: '524',
-                              isRequired: true,
-                              type: 'select',
-                              // input_type: 'number',
-                              placeholder: '如：3',
-                              tip: '提示',
-                              answer: '',
-                              listData: [
-                                { label: '1', value: '1' },
-                                { label: '2', value: '2' },
-                                { label: '3', value: '3' },
-                                { label: '4', value: '4' },
-                                { label: '5', value: '5' },
-                                { label: '6', value: '6' },
-                                { label: '7', value: '7' }
-                              ]
-                            }
-                          ]
-                        }
+                        // grandson: {
+                        //   1: [
+                        //     {
+                        //       title: '您与配有有几套房产需要处理？',
+                        //       id: '521',
+                        //       isRequired: true,
+                        //       type: 'select',
+                        //       // input_type: 'number',
+                        //       placeholder: '如：3',
+                        //       tip: '提示',
+                        //       answer: '',
+                        //       listData: [
+                        //         { label: '1', value: '1' },
+                        //         { label: '2', value: '2' },
+                        //         { label: '3', value: '3' },
+                        //         { label: '4', value: '4' },
+                        //         { label: '5', value: '5' },
+                        //         { label: '6', value: '6' },
+                        //         { label: '7', value: '7' }
+                        //       ]
+                        //     }
+                        //   ],
+                        //   2: [
+                        //     {
+                        //       title: '您与配有有几笔存款需要处理？',
+                        //       id: '637',
+                        //       isRequired: true,
+                        //       type: 'select',
+                        //       // input_type: 'number',
+                        //       placeholder: '如：3',
+                        //       tip: '提示',
+                        //       answer: '',
+                        //       listData: [
+                        //         { label: '1', value: '1' },
+                        //         { label: '2', value: '2' },
+                        //         { label: '3', value: '3' },
+                        //         { label: '4', value: '4' },
+                        //         { label: '5', value: '5' },
+                        //         { label: '6', value: '6' },
+                        //         { label: '7', value: '7' }
+                        //       ]
+                        //     }
+                        //   ],
+                        //   3: [
+                        //     {
+                        //       title: '您与配有有几笔理财需要处理？',
+                        //       id: '523',
+                        //       isRequired: true,
+                        //       type: 'select',
+                        //       // input_type: 'number',
+                        //       placeholder: '如：3',
+                        //       tip: '提示',
+                        //       answer: '',
+                        //       listData: [
+                        //         { label: '1', value: '1' },
+                        //         { label: '2', value: '2' },
+                        //         { label: '3', value: '3' },
+                        //         { label: '4', value: '4' },
+                        //         { label: '5', value: '5' },
+                        //         { label: '6', value: '6' },
+                        //         { label: '7', value: '7' }
+                        //       ]
+                        //     }
+                        //   ],
+                        //   4: [
+                        //     {
+                        //       title: '您与配有有几辆车子需要处理？',
+                        //       id: '522',
+                        //       isRequired: true,
+                        //       type: 'select',
+                        //       // input_type: 'number',
+                        //       placeholder: '如：3',
+                        //       tip: '提示',
+                        //       answer: '',
+                        //       listData: [
+                        //         { label: '1', value: '1' },
+                        //         { label: '2', value: '2' },
+                        //         { label: '3', value: '3' },
+                        //         { label: '4', value: '4' },
+                        //         { label: '5', value: '5' },
+                        //         { label: '6', value: '6' },
+                        //         { label: '7', value: '7' }
+                        //       ]
+                        //     }
+                        //   ],
+                        //   5: [
+                        //     {
+                        //       title: '您与配有有多少家电需要处理？',
+                        //       id: '636',
+                        //       isRequired: true,
+                        //       type: 'select',
+                        //       // input_type: 'number',
+                        //       placeholder: '如：3',
+                        //       tip: '提示',
+                        //       answer: '',
+                        //       listData: [
+                        //         { label: '1', value: '1' },
+                        //         { label: '2', value: '2' },
+                        //         { label: '3', value: '3' },
+                        //         { label: '4', value: '4' },
+                        //         { label: '5', value: '5' },
+                        //         { label: '6', value: '6' },
+                        //         { label: '7', value: '7' }
+                        //       ]
+                        //     }
+                        //   ],
+                        //   6: [
+                        //     {
+                        //       title: '您与配有有几份保险需要处理？',
+                        //       id: '524',
+                        //       isRequired: true,
+                        //       type: 'select',
+                        //       // input_type: 'number',
+                        //       placeholder: '如：3',
+                        //       tip: '提示',
+                        //       answer: '',
+                        //       listData: [
+                        //         { label: '1', value: '1' },
+                        //         { label: '2', value: '2' },
+                        //         { label: '3', value: '3' },
+                        //         { label: '4', value: '4' },
+                        //         { label: '5', value: '5' },
+                        //         { label: '6', value: '6' },
+                        //         { label: '7', value: '7' }
+                        //       ]
+                        //     }
+                        //   ]
+                        // }
                       }
                     ]
                   }
