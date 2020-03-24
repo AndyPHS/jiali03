@@ -24,6 +24,7 @@ import UserSystem from '@/components/LiHun/UserSystem'         // 添加用户�
 import WenJuan1 from '@/components/LiHun/WenJuan1'         // 添加问卷测试页面
 import ChuShi from '@/components/LiHun/ChuShi'         // 小问卷初始页面
 import QueDing from '@/components/LiHun/QueDing'         // 确定初始页面
+import BasicInformation from '@/components/LiHun/BasicInformation'         // 基本信息填写页面
 import ShengChengXieYi from '@/components/LiHun/ShengChengXieYi'         // 添加离婚协议书债务页面
 import QiSuComplate from '@/components/QiSuZhuang/QiSuComplate'    // 起诉状生成页
 import QiSuBasicInformation from '@/components/QiSuZhuang/QiSuBasicInformation'    // 起诉状基本信息填写
@@ -99,6 +100,8 @@ export default new Router({
     {path: '/ChuShi', name: 'ChuShi', component: ChuShi},
     // 确定初始页面
     {path: '/QueDing', name: 'QueDing', component: QueDing},
+	// 基本信息填写页面
+	{path: '/BasicInformation', name: 'BasicInformation', component: BasicInformation},
     // 生成离婚协议书页面
     {path: '/ShengChengXieYi', name: 'ShengChengXieYi', component: ShengChengXieYi},
     // 起诉状生成页
