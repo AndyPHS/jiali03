@@ -135,6 +135,18 @@
                 <el-radio :label="2">否</el-radio>
             </el-radio-group>
         </el-form-item>
+        <el-form-item label="问卷关联" :label-width="formLabelWidth">
+
+          <el-select v-model="addMsg.Ofqp" multiple placeholder="请选择">
+            <el-option
+              size="small"
+              v-for="(item,index) in OfqpListData"
+              :key="index"
+              :label="item.title"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </el-form-item>
     </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelEditQuestionnaire">取 消</el-button>
@@ -142,7 +154,7 @@
       </div>
     </el-dialog>
   </div>
-  
+
 </template>
 <script>
 import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
@@ -151,6 +163,7 @@ import {questionnaireSelectAll} from '@/api/api/requestLogin.js' // 查询问卷
 import {addQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {updateQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
+import {selectTree} from '@/api/api/requestLogin.js'    // 查询关系
 
 // import {answer} from '@/api/api/requestLogin.js'
 export default {
@@ -175,12 +188,14 @@ export default {
       formLabelWidth: '80px',   // 表单标签宽度
       dialogNewWenJuan: false,  // 新增问卷弹框
       dialogEditWenJuan: false,  // 编辑问卷弹框
+      OfqpListData: [],  // 获取问卷所有的关联
       addMsg: {  // 新增问卷字段
         title: '',  // 标题
         type: null,  // 问卷类型
         description: '', // 备注
         purpose: '', // 用途
-        status: null  // 是否禁止访问
+        status: null,  // 是否禁止访问
+        Ofqp: []   // 问卷默认加载一个内容
       }
     }
   },
@@ -280,9 +295,13 @@ export default {
       this.addMsg.description = row.description;
       this.addMsg.purpose = row.purpose;
       this.addMsg.status = row.status;
-      localStorage.setItem('qid',row.id) 
-      // this.addMsg.type = this.questionnaireType[this.addMsg.type]
-      console.log(index, row);
+      this.addMsg.Ofqp = row.Ofqp;
+      localStorage.setItem('qid',row.id)
+      selectTree().then((data)=>{
+          this.OfqpListData = data.data.data.data
+      }).catch((data)=>{
+          console.log("请求失败")
+      })
     },
     EditQuestionnaireOk(){  // 点击修改问卷确定按钮
       updateQuestionnaire({
@@ -290,7 +309,8 @@ export default {
         type: this.addMsg.type,
         description: this.addMsg.description,
         purpose: this.addMsg.purpose,
-        status: this.addMsg.status
+        status: this.addMsg.status,
+        Ofqp: JSON.stringify(this.addMsg.Ofqp)
       }).then((data)=>{
         if(data.data.status_code == 200 ){
           localStorage.removeItem('qid');
@@ -333,7 +353,7 @@ export default {
             }else{
               this.$message.error('删除失败，请联系管理员');
             }
-            
+
           }).catch((data)=>{
             this.$message.error('删除失败，请联系管理员');
           })
@@ -341,7 +361,7 @@ export default {
         this.$message({
           type: 'info',
           message: '已取消删除'
-        });          
+        });
       });
     }
   }
