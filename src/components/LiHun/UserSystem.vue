@@ -478,6 +478,12 @@ export default {
           }else if(this.questionnaireSelecter==22){  // 抚养费起诉状
             localStorage.setItem('questionnaireType', 2)
             this.$router.replace("/FuYangFeiBasic");
+          }else if(this.questionnaireSelecter==23){  // 分家析产纠纷起诉状
+            localStorage.setItem('questionnaireType', 2)
+            this.$router.replace("/FenJiaXiChanStart");
+          }else if(this.questionnaireSelecter==24){  // 民间借贷纠纷起诉状
+            localStorage.setItem('questionnaireType', 2)
+            this.$router.replace("/MinJianJieDaiBasic");
           }else if(this.questionnaireSelecter==25){  // 证人出庭作证申请书
             localStorage.setItem('questionnaireType', 3)
             this.$router.replace("/ZhengRenChuTingBasic");
@@ -510,6 +516,12 @@ export default {
       }else if(row.qid ==22){ // 抚养费起诉状
         localStorage.setItem('questionnaireType', 2)
         this.$router.replace("/FuYangFeiPersonalize");
+      }else if(row.qid ==23){ // 分家析产起诉状
+        localStorage.setItem('questionnaireType', 2)
+        this.$router.replace("/FenJiaXiChanPersonalize");
+      }else if(row.qid ==24){ // 抚养费起诉状
+        localStorage.setItem('questionnaireType', 2)
+        this.$router.replace("/MinJianJieDaiPersonalize");
       }else if(row.qid ==16){ // 调查取证申请书
         localStorage.setItem('questionnaireType', 3)
         this.$router.replace("/DiaoChaQuZhengPersonalize");

@@ -5404,12 +5404,13 @@
             }).catch((data)=>{
             })
           }
-          if(this.flag==true){
-            this.IsShow = true;
-          }
+          // if(this.flag==true){
+          //   this.IsShow = true;
+          // }
         },
         quxiao (){
           this.IsShow = false;
+          this.flag = false
         },
         complate () {
           this.GetOutPutWord();

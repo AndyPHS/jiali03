@@ -5,7 +5,7 @@
             <h2 class="py-2 text-lg text-center w-2/5">
               {{this.Content.title}} 
             </h2>
-            <p class="pb-1 text-base text-center w-2/5">抚养权起诉状</p>
+            <p class="pb-1 text-base text-center w-2/5">民间借贷纠纷起诉状</p>
             <div class="flex">
                 <div class="w-2/5 mx-1 relative">
                     <p class="text-left w-2/5 pb-1">事实与理由：</p>

@@ -18,12 +18,39 @@
                     <div v-for="(item,index) in aa[mo.part]" :key="index">
                       <!-- 大问题块 -->
                       <div>
-                        <!-- <div v-if="mo.title== '起诉原因' ">
-                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个起诉原因</h2>
+                        <div v-if="mo.title== '原告基本信息' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个原告基本信息</h2>
                         </div>
-                        <div v-if="mo.title== '诉讼请求' ">
-                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个诉讼请求</h2>
-                        </div> -->
+                        <div v-if="mo.title== '被告基本信息' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个被告基本信息</h2>
+                        </div>
+                        <div v-if="mo.title== '儿子' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个儿子</h2>
+                        </div>
+                        <div v-if="mo.title== '女儿' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个女儿</h2>
+                        </div>
+                        <div v-if="mo.title== '儿媳' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个儿媳</h2>
+                        </div>
+                        <div v-if="mo.title== '女婿' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个女婿</h2>
+                        </div>
+                        <div v-if="mo.title== '孙子' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个孙子</h2>
+                        </div>
+                        <div v-if="mo.title== '孙女' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个孙女</h2>
+                        </div>
+                        <div v-if="mo.title== '外孙' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个外孙</h2>
+                        </div>
+                        <div v-if="mo.title== '外孙女' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个外孙女</h2>
+                        </div>
+                        <div v-if="mo.title== '其他' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个其他</h2>
+                        </div>
                       </div>
 
                       <!-- 大问题块 -->
@@ -4843,21 +4870,75 @@
                         </div>
                       </div>
                       <div>
-                        <!-- <div v-if="mo.title== '起诉原因' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2670,index)">删除起诉原因</div>
+                        <div v-if="mo.title== '原告基本信息' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3132,index)">删除原告基本信息</div>
                         </div>
-                        <div v-if="mo.title== '诉讼请求' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(2680,index)">删除诉讼请求</div>
-                        </div> -->
+                        <div v-if="mo.title== '被告基本信息' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3133,index)">删除被告基本信息</div>
+                          <div v-if="mo.title== '儿子' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3181,index)">删除儿子</div>
+                          </div>
+                          <div v-if="mo.title== '女儿' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3182,index)">删除女儿</div>
+                          </div>
+                          <div v-if="mo.title== '儿媳' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3183,index)">删除儿媳</div>
+                          </div>
+                          <div v-if="mo.title== '女婿' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3184,index)">删除女婿</div>
+                          </div>
+                          <div v-if="mo.title== '孙子' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3185,index)">删除孙子</div>
+                          </div>
+                          <div v-if="mo.title== '孙女' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3186,index)">删除孙女</div>
+                          </div>
+                          <div v-if="mo.title== '外孙' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3187,index)">删除外孙</div>
+                          </div>
+                          <div v-if="mo.title== '外孙女' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3188,index)">删除外孙女</div>
+                          </div>
+                          <div v-if="mo.title== '其他' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3189,index)">删除其他</div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div>
-                      <!-- <div v-if="mo.title== '起诉原因' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(2670)">添加起诉原因</div>
+                      <div v-if="mo.title== '原告基本信息' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(3132)">添加原告基本信息</div>
                       </div>
-                      <div v-if="mo.title== '诉讼请求' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2680)">添加诉讼请求</div>
-                      </div> -->
+                      <div v-if="mo.title== '被告基本信息' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3133)">添加被告基本信息</div>
+                      </div>
+                      <div v-if="mo.title== '儿子' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3181)">添加儿子</div>
+                      </div>
+                      <div v-if="mo.title== '女儿' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3182)">添加女儿</div>
+                      </div>
+                      <div v-if="mo.title== '儿媳' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3183)">添加儿媳</div>
+                      </div>
+                      <div v-if="mo.title== '女婿' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3184)">添加女婿</div>
+                      </div>
+                      <div v-if="mo.title== '孙子' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3185)">添加孙子</div>
+                      </div>
+                      <div v-if="mo.title== '孙女' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3186)">添加孙女</div>
+                      </div>
+                      <div v-if="mo.title== '外孙' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3187)">添加外孙</div>
+                      </div>
+                      <div v-if="mo.title== '外孙女' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3188)">添加外孙女</div>
+                      </div>
+                      <div v-if="mo.title== '其他' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3189)">添加其他</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -4867,7 +4948,7 @@
         </div>
 
         <div v-show='IsShow' id="alert_xieyi">
-          <h2>您已填写完毕，确认生成抚养权起诉状吗？</h2>
+          <h2>您已填写完毕，确认生成分家析产起诉状吗？</h2>
           <div class="queren flex mx-auto">
              <div class="w-24 mr-2">
               <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='quxiao'>
@@ -4941,21 +5022,35 @@
             mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             a: {},
             aa: {
-              BasicInformation: [],    //基本信息
-              anyou: [],  // 案由
-              shishi: [],  //事实与理由
-              qisuyuanyin: [],   // 起诉原因
-              susongqingqiu: [],   // 诉讼请求
-              qisufayuan: []   // 起诉法院
+              yuangaoinfo: [],    //原告基本信息1
+              beigaoinfo: [],   // 被告基本信息2
+              zufu:[],  // 3
+              zumu:[], // 4
+              waizufu:[],  // 5
+              waizumu:[],// 6
+              fuqin:[],// 7
+              muqin:[],// 8
+              erzi:[],// 9
+              nver:[],// 10
+              erxi:[],// 11
+              nvxu:[],// 12
+              sunzi:[],// 13
+              sunnv:[],// 14
+              waisun:[],// 15
+              waisunnv:[],// 16
+              qita:[],// 17
+              shishiyuliyou:[],// 18
+              susongqingqiu:[],// 19
+              qisufayuan:[]// 20
+
             },
             IsShow: false,
             mokuai: [
-              {title: '基本信息', part: 'BasicInformation',id:1,num:2630},
-              {title: '案由', part: 'anyou',id:2,num:2775},
-              {title: '事实与理由', part: 'shishi',id:3,num:2647},
-              {title: '起诉原因', part: 'qisuyuanyin',id:4,num:2668},
-              {title: '诉讼请求', part: 'susongqingqiu',id:5,num:2678},
-              {title: '起诉法院', part: 'qisufayuan',id:6,num:2675}
+              {title: '原告基本信息', part: 'yuangaoinfo',id:1,num:3132},
+              {title: '被告基本信息', part: 'beigaoinfo',id:2,num:3133},
+              {title: '事实与理由', part: 'shishiyuliyou',id:18,num:3277},
+              {title: '诉讼请求', part: 'susongqingqiu',id:19,num:3292},
+              {title: '起诉法院', part: 'qisufayuan',id:20,num:3296}
             ],
             active: 0,
             options: regionData,  // 省市联动
@@ -4970,48 +5065,403 @@
       name: 'RequestBasic',
 
       beforeMount () {
-        this.getBasicInformation() // 查询双方基本信息模块数据
-        this.getanyou()
-        this.getshishi()   // 获取事实与理由
-        this.getqisuyuanyin()
+        this.getyuangaoinfo() // 查询双方原告基本信息模块数据
+        this.getbeigaoinfo()
+        this.getshishiyuliyou()
         this.getsusongqingqiu()
         this.getqisufayuan()
       },
       mounted () {
+        this.getChuShi()
        },
       methods: {
-        getBasicInformation () { // 查询双方基本信息模块数据
-          returnQuestionnaireJson({'qpid': 2630}).then((data)=>{
-            this.aa.BasicInformation = data.data.data
+        getChuShi () {
+          getOnlyValue({
+            qpid: 3172, // 关联id
+            quid: Number(localStorage.getItem('quid')) //用户的问卷id
+          }).then((data)=>{
+            let getmodel = JSON.parse(data.data.data)
+            if(getmodel.indexOf("1") > -1){
+              this.getzufu()
+            }
+            if(getmodel.indexOf("2") > -1){
+              this.getzumu()
+            }
+            if(getmodel.indexOf("3") > -1){
+              this.getwaizufu()
+            }
+            if(getmodel.indexOf("4") > -1){
+              this.getwaizumu()
+            }
+            if(getmodel.indexOf("5") > -1){
+              this.getfuqin()
+            }
+            if(getmodel.indexOf("6") > -1){
+              this.getmuqin()
+            }
+            if(getmodel.indexOf("7") > -1){
+              this.geterzi()
+            }
+            if(getmodel.indexOf("8") > -1){
+              this.getnver()
+            }
+            if(getmodel.indexOf("9") > -1){
+              this.geterxi()
+            }
+            if(getmodel.indexOf("10") > -1){
+              this.getnvxu()
+            }
+            if(getmodel.indexOf("11") > -1){
+              this.getsunzi()
+            }
+            if(getmodel.indexOf("12") > -1){
+              this.getsunnv()
+            }
+            if(getmodel.indexOf("13") > -1){
+              this.getwaisun()
+            }
+            if(getmodel.indexOf("14") > -1){
+              this.getwaisunnv()
+            }
+            if(getmodel.indexOf("15") > -1){
+              this.getqita()
+            }
           }).catch((data)=>{
+            console.log("保存失败")
           })
         },
-        getanyou(){
-          returnQuestionnaireJson({'qpid': 2775}).then((data)=>{
-            this.aa.anyou = data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getshishi () {  // 查询事实与理由模块数据
-          returnQuestionnaireJson({'qpid': 2647}).then((data)=>{
-            this.aa.shishi = data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getqisuyuanyin () {  // 查询起诉原因模块数据
-          returnQuestionnaireJson({'qpid': 2668}).then((data)=>{
-            this.aa.qisuyuanyin = data.data.data
-            if(this.aa.qisuyuanyin[0][0].questions[0].answer == 1 || this.aa.qisuyuanyin[0][0].questions[0].answer == ""){
-              this.aa.qisuyuanyin[0][0].questions[0].answer = []
-            }else{
-              this.aa.qisuyuanyin[0][0].questions[0].answer = JSON.parse(this.aa.qisuyuanyin[0][0].questions[0].answer)
+        getyuangaoinfo () { // 查询双方原告基本信息模块数据
+          returnQuestionnaireJson({'qpid': 3132}).then((data)=>{
+            this.aa.yuangaoinfo = data.data.data
+            this.mokuai.sort(this.compare('id'));
+            if(this.aa.yuangaoinfo==undefined){
+              userAddAnswer({
+                value: 1,  // 值
+                qpid: 3132, // 关联id
+                quid: localStorage.getItem('quid') //用户的问卷id
+              }).then((data)=>{
+                this.getyuangaoinfo()
+              }).catch((data)=>{
+            
+              })
             }
           }).catch((data)=>{
           })
         },
+        getbeigaoinfo(){
+          returnQuestionnaireJson({'qpid': 3133}).then((data)=>{
+            this.aa.beigaoinfo = data.data.data
+            this.mokuai.sort(this.compare('id'));
+            if(this.aa.beigaoinfo==undefined){
+              userAddAnswer({
+                value: 1,  // 值
+                qpid: 3133, // 关联id
+                quid: localStorage.getItem('quid') //用户的问卷id
+              }).then((data)=>{
+                this.getbeigaoinfo()
+              }).catch((data)=>{
+            
+              })
+            }
+          }).catch((data)=>{
+          })
+        },
+        getzufu () {
+          returnQuestionnaireJson({'qpid': 3175}).then((data)=>{
+            this.aa.zufu = data.data.data
+            this.mokuai.push({
+              title: '祖父',
+              part: 'zufu',
+              id: 3,
+              num:3175
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshzufu () {
+          returnQuestionnaireJson({'qpid': 3175}).then((data)=>{
+            this.aa.zufu = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getzumu () {
+          returnQuestionnaireJson({'qpid': 3176}).then((data)=>{
+            this.aa.zumu = data.data.data
+            this.mokuai.push({
+              title: '祖母',
+              part: 'zumu',
+              id: 4,
+              num:3176
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshzumu () {
+          returnQuestionnaireJson({'qpid': 3176}).then((data)=>{
+            this.aa.zumu = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getwaizufu () {
+          returnQuestionnaireJson({'qpid': 3177}).then((data)=>{
+            this.aa.waizufu = data.data.data
+            this.mokuai.push({
+              title: '外祖父',
+              part: 'waizufu',
+              id: 5,
+              num:3177
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshwaizufu () {
+          returnQuestionnaireJson({'qpid': 3177}).then((data)=>{
+            this.aa.waizufu = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getwaizumu () {
+          returnQuestionnaireJson({'qpid': 3178}).then((data)=>{
+            this.aa.waizumu = data.data.data
+            this.mokuai.push({
+              title: '外祖母',
+              part: 'waizumu',
+              id: 5,
+              num:3178
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshwaizumu () {
+          returnQuestionnaireJson({'qpid': 3178}).then((data)=>{
+            this.aa.waizumu = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getfuqin () {
+          returnQuestionnaireJson({'qpid': 3179}).then((data)=>{
+            this.aa.fuqin = data.data.data
+            this.mokuai.push({
+              title: '父亲',
+              part: 'fuqin',
+              id: 7,
+              num:3179
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshfuqin () {
+          returnQuestionnaireJson({'qpid': 3179}).then((data)=>{
+            this.aa.fuqin = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getmuqin () {
+          returnQuestionnaireJson({'qpid': 3180}).then((data)=>{
+            this.aa.muqin = data.data.data
+            this.mokuai.push({
+              title: '母亲',
+              part: 'muqin',
+              id: 8,
+              num:3180
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshmuqin () {
+          returnQuestionnaireJson({'qpid': 3180}).then((data)=>{
+            this.aa.muqin = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        geterzi () {
+          returnQuestionnaireJson({'qpid': 3181}).then((data)=>{
+            this.aa.erzi = data.data.data
+            this.mokuai.push({
+              title: '儿子',
+              part: 'erzi',
+              id: 9,
+              num:3181
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refresherzi () {
+          returnQuestionnaireJson({'qpid': 3181}).then((data)=>{
+            this.aa.erzi = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getnver () {
+          returnQuestionnaireJson({'qpid': 3182}).then((data)=>{
+            this.aa.nver = data.data.data
+            this.mokuai.push({
+              title: '女儿',
+              part: 'nver',
+              id: 10,
+              num:3182
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshnver () {
+          returnQuestionnaireJson({'qpid': 3182}).then((data)=>{
+            this.aa.nver = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        geterxi () {
+          returnQuestionnaireJson({'qpid': 3183}).then((data)=>{
+            this.aa.erxi = data.data.data
+            this.mokuai.push({
+              title: '外祖父',
+              part: 'erxi',
+              id: 11,
+              num:3183
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refresherxi () {
+          returnQuestionnaireJson({'qpid': 3183}).then((data)=>{
+            this.aa.erxi = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getnvxu () {
+          returnQuestionnaireJson({'qpid': 3184}).then((data)=>{
+            this.aa.nvxu = data.data.data
+            this.mokuai.push({
+              title: '女婿',
+              part: 'nvxu',
+              id: 12,
+              num:3184
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshnvxu () {
+          returnQuestionnaireJson({'qpid': 3184}).then((data)=>{
+            this.aa.nvxu = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getsunzi () {
+          returnQuestionnaireJson({'qpid': 3185}).then((data)=>{
+            this.aa.sunzi = data.data.data
+            this.mokuai.push({
+              title: '孙子',
+              part: 'sunzi',
+              id: 13,
+              num:3185
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshsunzi () {
+          returnQuestionnaireJson({'qpid': 3185}).then((data)=>{
+            this.aa.sunzi = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getsunnv () {
+          returnQuestionnaireJson({'qpid': 3186}).then((data)=>{
+            this.aa.sunnv = data.data.data
+            this.mokuai.push({
+              title: '孙女',
+              part: 'sunnv',
+              id: 14,
+              num:3186
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshsunnv () {
+          returnQuestionnaireJson({'qpid': 3186}).then((data)=>{
+            this.aa.sunnv = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getwaisun () {
+          returnQuestionnaireJson({'qpid': 3187}).then((data)=>{
+            this.aa.waisun = data.data.data
+            this.mokuai.push({
+              title: '外孙',
+              part: 'waisun',
+              id: 15,
+              num:3187
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshwaisun () {
+          returnQuestionnaireJson({'qpid': 3187}).then((data)=>{
+            this.aa.waisun = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getwaisunnv () {
+          returnQuestionnaireJson({'qpid': 3188}).then((data)=>{
+            this.aa.waisunnv = data.data.data
+            this.mokuai.push({
+              title: '外孙女',
+              part: 'waisunnv',
+              id: 16,
+              num:3188
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshwaisunnv () {
+          returnQuestionnaireJson({'qpid': 3188}).then((data)=>{
+            this.aa.waisunnv = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getqita () {
+          returnQuestionnaireJson({'qpid': 3189}).then((data)=>{
+            this.aa.qita = data.data.data
+            this.mokuai.push({
+              title: '其他',
+              part: 'qita',
+              id: 17,
+              num:3189
+            })
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
+        refreshqita () {
+          returnQuestionnaireJson({'qpid': 3189}).then((data)=>{
+            this.aa.qita = data.data.data
+          }).catch((data)=>{
+          })
+        },
+        getshishiyuliyou () {
+          returnQuestionnaireJson({'qpid': 3277}).then((data)=>{
+            this.aa.shishiyuliyou = data.data.data
+            this.mokuai.sort(this.compare('id'));
+          }).catch((data)=>{
+          })
+        },
         getsusongqingqiu () {// 查询诉讼请求模块数据
-          returnQuestionnaireJson({'qpid': 2678}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 3292}).then((data)=>{
             this.aa.susongqingqiu = data.data.data
+            this.mokuai.sort(this.compare('id'));
             if(this.aa.susongqingqiu[0][0].questions[0].answer == 1 || this.aa.susongqingqiu[0][0].questions[0].answer == ""){
               this.aa.susongqingqiu[0][0].questions[0].answer = []
             }else{
@@ -5021,12 +5471,20 @@
           })
         },
         getqisufayuan () {// 查询起诉法院模块数据
-          returnQuestionnaireJson({'qpid': 2675}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 3296}).then((data)=>{
             this.aa.qisufayuan = data.data.data
+            this.mokuai.sort(this.compare('id'));
             let cityAnswer = JSON.parse(this.aa.qisufayuan[0][0].questions[0].answer)
             this.aa.qisufayuan[0][0].questions[0].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
           })
+        },
+        compare(property){
+          return function(a,b){
+            let value1 = a[property];
+            let value2 = b[property];
+            return value1 - value2
+          }
         },
         userAddAnswerAction (e){ // 提交答案
           if( e.isRequired == true){ // 必填字段
@@ -5074,17 +5532,45 @@
                       quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
                       if(data.data.status_code==202){
-                        if(this.active==0){// 第一个模块刷新基本信息
-                          this.getBasicInformation()
+                        if(this.active==0){// 第一个模块刷新原告基本信息
+                          this.getyuangaoinfo()
                         }else if(this.active==1){// 第二个模块刷新案由
-                          this.getanyou()
+                          this.getbeigaoinfo()
                         }else if(this.active==2){// 第三个模块刷新事实与理由
-                          this.getshishi()
+                          this.refreshzufu()
                         }else if(this.active==3){// 第四个模块刷新起诉原因
-                          this.getqisuyuanyin()
+                          this.refreshzumu()
                         }else if(this.active==4){// 第五个模块刷新诉讼请求
+                          this.refreshwaizufu()
+                        }else if(this.active==5){
+                          this.refreshwaizumu()
+                        }else if(this.active==6){
+                          this.refreshfuqin()
+                        }else if(this.active==7){
+                          this.refreshmuqin()
+                        }else if(this.active==8){
+                          this.refresherzi()
+                        }else if(this.active==9){
+                          this.refreshnver()
+                        }else if(this.active==10){
+                          this.refresherxi()
+                        }else if(this.active==11){
+                          this.refreshnvxu()
+                        }else if(this.active==12){
+                          this.refreshsunzi()
+                        }else if(this.active==13){
+                          this.refreshsunnv()
+                        }else if(this.active==14){
+                          this.refreshwaisun()
+                        }else if(this.active==15){
+                          this.refreshwaisunnv()
+                        }else if(this.active==16){
+                          this.refreshqita()
+                        }else if(this.active==17){
+                          this.getshishiyuliyou()
+                        }else if(this.active==18){
                           this.getsusongqingqiu()
-                        }else if(this.active==5){// 第六个模块刷新起诉法院
+                        }else if(this.active==19){
                           this.getqisufayuan()
                         }
                       }
@@ -5120,17 +5606,45 @@
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     if(data.data.status_code==202){
-                      if(this.active==0){// 第一个模块刷新基本信息
-                        this.getBasicInformation()
+                      if(this.active==0){// 第一个模块刷新原告基本信息
+                        this.getyuangaoinfo()
                       }else if(this.active==1){// 第二个模块刷新案由
-                        this.getanyou()
+                        this.getbeigaoinfo()
                       }else if(this.active==2){// 第三个模块刷新事实与理由
-                        this.getshishi()
+                        this.refreshzufu()
                       }else if(this.active==3){// 第四个模块刷新起诉原因
-                        this.getqisuyuanyin()
+                        this.refreshzumu()
                       }else if(this.active==4){// 第五个模块刷新诉讼请求
+                        this.refreshwaizufu()
+                      }else if(this.active==5){
+                        this.refreshwaizumu()
+                      }else if(this.active==6){
+                        this.refreshfuqin()
+                      }else if(this.active==7){
+                        this.refreshmuqin()
+                      }else if(this.active==8){
+                        this.refresherzi()
+                      }else if(this.active==9){
+                        this.refreshnver()
+                      }else if(this.active==10){
+                        this.refresherxi()
+                      }else if(this.active==11){
+                        this.refreshnvxu()
+                      }else if(this.active==12){
+                        this.refreshsunzi()
+                      }else if(this.active==13){
+                        this.refreshsunnv()
+                      }else if(this.active==14){
+                        this.refreshwaisun()
+                      }else if(this.active==15){
+                        this.refreshwaisunnv()
+                      }else if(this.active==16){
+                        this.refreshqita()
+                      }else if(this.active==17){
+                        this.getshishiyuliyou()
+                      }else if(this.active==18){
                         this.getsusongqingqiu()
-                      }else if(this.active==5){// 第六个模块刷新起诉法院
+                      }else if(this.active==19){
                         this.getqisufayuan()
                       }
                     }
@@ -5181,17 +5695,45 @@
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     if(data.data.status_code==202){
-                      if(this.active==0){// 第一个模块刷新基本信息
-                        this.getBasicInformation()
+                      if(this.active==0){// 第一个模块刷新原告基本信息
+                        this.getyuangaoinfo()
                       }else if(this.active==1){// 第二个模块刷新案由
-                        this.getanyou()
+                        this.getbeigaoinfo()
                       }else if(this.active==2){// 第三个模块刷新事实与理由
-                        this.getshishi()
+                        this.refreshzufu()
                       }else if(this.active==3){// 第四个模块刷新起诉原因
-                        this.getqisuyuanyin()
+                        this.refreshzumu()
                       }else if(this.active==4){// 第五个模块刷新诉讼请求
+                        this.refreshwaizufu()
+                      }else if(this.active==5){
+                        this.refreshwaizumu()
+                      }else if(this.active==6){
+                        this.refreshfuqin()
+                      }else if(this.active==7){
+                        this.refreshmuqin()
+                      }else if(this.active==8){
+                        this.refresherzi()
+                      }else if(this.active==9){
+                        this.refreshnver()
+                      }else if(this.active==10){
+                        this.refresherxi()
+                      }else if(this.active==11){
+                        this.refreshnvxu()
+                      }else if(this.active==12){
+                        this.refreshsunzi()
+                      }else if(this.active==13){
+                        this.refreshsunnv()
+                      }else if(this.active==14){
+                        this.refreshwaisun()
+                      }else if(this.active==15){
+                        this.refreshwaisunnv()
+                      }else if(this.active==16){
+                        this.refreshqita()
+                      }else if(this.active==17){
+                        this.getshishiyuliyou()
+                      }else if(this.active==18){
                         this.getsusongqingqiu()
-                      }else if(this.active==5){// 第六个模块刷新起诉法院
+                      }else if(this.active==19){
                         this.getqisufayuan()
                       }
                     }
@@ -5368,10 +5910,28 @@
               quid: localStorage.getItem('quid')
             }).then((data)=>{
               if(data.data.status_code == 200 ){
-                if(e==2670){
-                  this.getqisuyuanyin()  // 刷新起诉原因模块
-                }else if(e==2680){
-                  this.getsusongqingqiu()  // 刷新诉讼请求模块
+                if(e==3132){
+                  this.getyuangaoinfo()
+                }else if(e==3133){
+                  this.getbeigaoinfo()
+                }else if(e==3181){
+                  this.refresherzi()
+                }else if(e==3182){
+                  this.refreshnver()
+                }else if(e==3183){
+                  this.refresherxi()
+                }else if(e==3184){
+                  this.refreshnvxu()
+                }else if(e==3185){
+                  this.refreshsunzi()
+                }else if(e==3186){
+                  this.refreshsunnv()
+                }else if(e==3187){
+                  this.refreshwaisun()
+                }else if(e==3188){
+                  this.refreshwaisunnv()
+                }else if(e==3189){
+                  this.refreshqita()
                 }
                 this.$message({
                   message: '添加成功',
@@ -5393,10 +5953,28 @@
                 quid: localStorage.getItem('quid'),
                 fornum: index+1
               }).then((data)=>{
-                if(e==2670){
-                  this.getqisuyuanyin()  // 刷新起诉原因模块
-                }else if(e==2680){
-                  this.getsusongqingqiu()  // 刷新诉讼请求模块
+                if(e==3132){
+                  this.getyuangaoinfo()
+                }else if(e==3133){
+                  this.getbeigaoinfo()
+                }else if(e==3181){
+                  this.refresherzi()
+                }else if(e==3182){
+                  this.refreshnver()
+                }else if(e==3183){
+                  this.refresherxi()
+                }else if(e==3184){
+                  this.refreshnvxu()
+                }else if(e==3185){
+                  this.refreshsunzi()
+                }else if(e==3186){
+                  this.refreshsunnv()
+                }else if(e==3187){
+                  this.refreshwaisun()
+                }else if(e==3188){
+                  this.refreshwaisunnv()
+                }else if(e==3189){
+                  this.refreshqita()
                 }
                 this.$message({
                   message: '删除成功',
@@ -5432,12 +6010,13 @@
             }).catch((data)=>{
             })
           }
-          if(this.flag==true){
-            this.IsShow = true;
-          }
+          // if(this.flag==true){
+          //   this.IsShow = true;
+          // }
         },
         quxiao (){
           this.IsShow = false;
+          this.flag = false
         },
         complate () {
           this.GetOutPutWord();
@@ -5453,10 +6032,10 @@
         },
         next () {
           localStorage.setItem('active',this.active)
-          if(this.mokuai[this.active].title == '基本信息'){
-            localStorage.setItem('qpid', 2630)
+          if(this.mokuai[this.active].title == '原告基本信息'){
+            localStorage.setItem('qpid', 3132)
             demoYanZheng({
-              qpid: 2630
+              qpid: 3132
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5464,17 +6043,17 @@
               }else{
                 this.$notify({
                   title: '保存成功',
-                  message: '基本信息模块已成功保存',
+                  message: '原告基本信息模块已成功保存',
                   type: 'success'
                 });
                 if (this.active++ >this.mokuai.length-1) ;
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '案由'){
-            localStorage.setItem('qpid', 2775)
+          }else if(this.mokuai[this.active].title == '被告基本信息'){
+            localStorage.setItem('qpid', 3133)
             demoYanZheng({
-              qpid: 2775
+              qpid: 3133
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5482,7 +6061,277 @@
               }else{
                 this.$notify({
                   title: '保存成功',
-                  message: '案由信息已成功保存',
+                  message: '被告基本信息信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '祖父'){
+            localStorage.setItem('qpid', 3175)
+            demoYanZheng({
+              qpid: 3175
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '祖父信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '祖母'){
+            localStorage.setItem('qpid', 3176)
+            demoYanZheng({
+              qpid: 3176
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '祖母信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '外祖父'){
+            localStorage.setItem('qpid', 3177)
+            demoYanZheng({
+              qpid: 3177
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '外祖父信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '外祖母'){
+            localStorage.setItem('qpid', 3178)
+            demoYanZheng({
+              qpid: 3178
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '外祖母信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '父亲'){
+            localStorage.setItem('qpid', 3179)
+            demoYanZheng({
+              qpid: 3179
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '父亲信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '母亲'){
+            localStorage.setItem('qpid', 3180)
+            demoYanZheng({
+              qpid: 3180
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '母亲信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '儿子'){
+            localStorage.setItem('qpid', 3181)
+            demoYanZheng({
+              qpid: 3181
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '儿子信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '女儿'){
+            localStorage.setItem('qpid', 3182)
+            demoYanZheng({
+              qpid: 3182
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '女儿信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '儿媳'){
+            localStorage.setItem('qpid', 3183)
+            demoYanZheng({
+              qpid: 3183
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '儿媳信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '女婿'){
+            localStorage.setItem('qpid', 3184)
+            demoYanZheng({
+              qpid: 3184
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '女婿信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '孙子'){
+            localStorage.setItem('qpid', 3185)
+            demoYanZheng({
+              qpid: 3185
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '孙子信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '孙女'){
+            localStorage.setItem('qpid', 3186)
+            demoYanZheng({
+              qpid: 3186
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '孙女信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '外孙'){
+            localStorage.setItem('qpid', 3187)
+            demoYanZheng({
+              qpid: 3187
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '外孙信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '外孙女'){
+            localStorage.setItem('qpid', 3188)
+            demoYanZheng({
+              qpid: 3188
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '外孙女信息已成功保存',
+                  type: 'success'
+                });
+                if (this.active++ >this.mokuai.length-1) ;
+              }
+            }).catch((data)=>{
+            })
+          }else if(this.mokuai[this.active].title == '其他'){
+            localStorage.setItem('qpid', 3189)
+            demoYanZheng({
+              qpid: 3189
+            }).then((data)=>{
+              if(data.data.status_code == 330){
+                this.missMsgBox = true
+                this.missMsg = data.data.data
+              }else{
+                this.$notify({
+                  title: '保存成功',
+                  message: '其他信息已成功保存',
                   type: 'success'
                 });
                 if (this.active++ >this.mokuai.length-1) ;
@@ -5490,9 +6339,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '事实与理由'){
-            localStorage.setItem('qpid', 2647)
+            localStorage.setItem('qpid', 3277)
             demoYanZheng({
-              qpid: 2647
+              qpid: 3277
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5507,29 +6356,10 @@
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '起诉原因'){
-            localStorage.setItem('qpid', 2668)
-            demoYanZheng({
-              qpid: 2668
-            }).then((data)=>{
-              // console.log(data.data)
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                this.$notify({
-                  title: '保存成功',
-                  message: '起诉原因模块已成功保存',
-                  type: 'success'
-                });
-                if (this.active++ >this.mokuai.length-1) ;
-              }
-            }).catch((data)=>{
-            })
           }else if(this.mokuai[this.active].title == '诉讼请求'){
-            localStorage.setItem('qpid', 2678)
+            localStorage.setItem('qpid', 3292)
             demoYanZheng({
-              qpid: 2678
+              qpid: 3292
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5545,9 +6375,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '起诉法院'){
-            localStorage.setItem('qpid', 2675)
+            localStorage.setItem('qpid', 3296)
             demoYanZheng({
-              qpid: 2675
+              qpid: 3296
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true

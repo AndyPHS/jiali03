@@ -18,12 +18,12 @@
                     <div v-for="(item,index) in aa[mo.part]" :key="index">
                       <!-- 大问题块 -->
                       <div>
-                        <!-- <div v-if="mo.title== '起诉原因' ">
-                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个起诉原因</h2>
+                        <div v-if="mo.title== '原告基本信息' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个原告基本信息</h2>
                         </div>
-                        <div v-if="mo.title== '诉讼请求' ">
-                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个诉讼请求</h2>
-                        </div> -->
+                        <div v-if="mo.title== '被告基本信息' ">
+                          <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个被告基本信息</h2>
+                        </div>
                       </div>
 
                       <!-- 大问题块 -->
@@ -4843,21 +4843,21 @@
                         </div>
                       </div>
                       <div>
-                        <!-- <div v-if="mo.title== '起诉原因' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2670,index)">删除起诉原因</div>
+                        <div v-if="mo.title== '原告基本信息' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3085,index)">删除原告基本信息</div>
                         </div>
-                        <div v-if="mo.title== '诉讼请求' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(2680,index)">删除诉讼请求</div>
-                        </div> -->
+                        <div v-if="mo.title== '被告基本信息' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3086,index)">删除被告基本信息</div>
+                        </div>
                       </div>
                     </div>
                     <div>
-                      <!-- <div v-if="mo.title== '起诉原因' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(2670)">添加起诉原因</div>
+                      <div v-if="mo.title== '原告基本信息' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(3085)">添加原告基本信息</div>
                       </div>
-                      <div v-if="mo.title== '诉讼请求' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2680)">添加诉讼请求</div>
-                      </div> -->
+                      <div v-if="mo.title== '被告基本信息' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3086)">添加被告基本信息</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -4923,8 +4923,8 @@
 
   import {returnQuestionnaireJson} from '@/api/api/requestLogin.js'    // 查询问卷json
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
-  import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者起诉原因等
-  import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者起诉原因等
+  import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者起诉理由等
+  import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者起诉理由等
   import {verificationWord} from '@/api/api/requestLogin.js'    // 验证单独word
   import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
   import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
@@ -4941,21 +4941,21 @@
             mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             a: {},
             aa: {
-              BasicInformation: [],    //基本信息
-              anyou: [],  // 案由
+              yuangaoinfo: [],    //原告基本信息
+              beigaoinfo: [],  // 被告基本信息
               shishi: [],  //事实与理由
-              qisuyuanyin: [],   // 起诉原因
+              qisuliyou: [],   // 起诉理由
               susongqingqiu: [],   // 诉讼请求
               qisufayuan: []   // 起诉法院
             },
             IsShow: false,
             mokuai: [
-              {title: '基本信息', part: 'BasicInformation',id:1,num:2630},
-              {title: '案由', part: 'anyou',id:2,num:2775},
-              {title: '事实与理由', part: 'shishi',id:3,num:2647},
-              {title: '起诉原因', part: 'qisuyuanyin',id:4,num:2668},
-              {title: '诉讼请求', part: 'susongqingqiu',id:5,num:2678},
-              {title: '起诉法院', part: 'qisufayuan',id:6,num:2675}
+              {title: '原告基本信息', part: 'yuangaoinfo',id:1,num:3085},
+              {title: '被告基本信息', part: 'beigaoinfo',id:2,num:3086},
+              {title: '事实与理由', part: 'shishi',id:3,num:3089},
+              {title: '起诉理由', part: 'qisuliyou',id:4,num:3091},
+              {title: '诉讼请求', part: 'susongqingqiu',id:5,num:3092},
+              {title: '起诉法院', part: 'qisufayuan',id:6,num:3093}
             ],
             active: 0,
             options: regionData,  // 省市联动
@@ -4970,47 +4970,69 @@
       name: 'RequestBasic',
 
       beforeMount () {
-        this.getBasicInformation() // 查询双方基本信息模块数据
-        this.getanyou()
+        this.getyuangaoinfo() // 查询双方原告基本信息模块数据
+        this.getbeigaoinfo()
         this.getshishi()   // 获取事实与理由
-        this.getqisuyuanyin()
+        this.getqisuliyou()
         this.getsusongqingqiu()
         this.getqisufayuan()
       },
       mounted () {
        },
       methods: {
-        getBasicInformation () { // 查询双方基本信息模块数据
-          returnQuestionnaireJson({'qpid': 2630}).then((data)=>{
-            this.aa.BasicInformation = data.data.data
+        getyuangaoinfo () { // 查询双方原告基本信息模块数据
+          returnQuestionnaireJson({'qpid': 3085}).then((data)=>{
+            this.aa.yuangaoinfo = data.data.data
+            if(this.aa.yuangaoinfo==undefined){
+              userAddAnswer({
+                value: 1,  // 值
+                qpid: 3085, // 关联id
+                quid: localStorage.getItem('quid') //用户的问卷id
+              }).then((data)=>{
+                this.getyuangaoinfo ()
+              }).catch((data)=>{
+            
+              })
+            }
           }).catch((data)=>{
           })
         },
-        getanyou(){
-          returnQuestionnaireJson({'qpid': 2775}).then((data)=>{
-            this.aa.anyou = data.data.data
+        getbeigaoinfo(){
+          returnQuestionnaireJson({'qpid': 3086}).then((data)=>{
+            this.aa.beigaoinfo = data.data.data
+            if(this.aa.beigaoinfo==undefined){
+              userAddAnswer({
+                value: 1,  // 值
+                qpid: 3086, // 关联id
+                quid: localStorage.getItem('quid') //用户的问卷id
+              }).then((data)=>{
+                this.getbeigaoinfo ()
+              }).catch((data)=>{
+            
+              })
+            }
           }).catch((data)=>{
           })
         },
         getshishi () {  // 查询事实与理由模块数据
-          returnQuestionnaireJson({'qpid': 2647}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 3089}).then((data)=>{
             this.aa.shishi = data.data.data
           }).catch((data)=>{
           })
         },
-        getqisuyuanyin () {  // 查询起诉原因模块数据
-          returnQuestionnaireJson({'qpid': 2668}).then((data)=>{
-            this.aa.qisuyuanyin = data.data.data
-            if(this.aa.qisuyuanyin[0][0].questions[0].answer == 1 || this.aa.qisuyuanyin[0][0].questions[0].answer == ""){
-              this.aa.qisuyuanyin[0][0].questions[0].answer = []
+        getqisuliyou () {  // 查询起诉理由模块数据
+          returnQuestionnaireJson({'qpid': 3091}).then((data)=>{
+            this.aa.qisuliyou = data.data.data
+            if(this.aa.qisuliyou[0][0].questions[0].answer == 1 || this.aa.qisuliyou[0][0].questions[0].answer == ""){
+              this.aa.qisuliyou[0][0].questions[0].answer = []
             }else{
-              this.aa.qisuyuanyin[0][0].questions[0].answer = JSON.parse(this.aa.qisuyuanyin[0][0].questions[0].answer)
+              this.aa.qisuliyou[0][0].questions[0].answer = JSON.parse(this.aa.qisuliyou[0][0].questions[0].answer)
             }
           }).catch((data)=>{
           })
         },
         getsusongqingqiu () {// 查询诉讼请求模块数据
-          returnQuestionnaireJson({'qpid': 2678}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 3092}).then((data)=>{
             this.aa.susongqingqiu = data.data.data
             if(this.aa.susongqingqiu[0][0].questions[0].answer == 1 || this.aa.susongqingqiu[0][0].questions[0].answer == ""){
               this.aa.susongqingqiu[0][0].questions[0].answer = []
@@ -5021,7 +5043,7 @@
           })
         },
         getqisufayuan () {// 查询起诉法院模块数据
-          returnQuestionnaireJson({'qpid': 2675}).then((data)=>{
+          returnQuestionnaireJson({'qpid': 3093}).then((data)=>{
             this.aa.qisufayuan = data.data.data
             let cityAnswer = JSON.parse(this.aa.qisufayuan[0][0].questions[0].answer)
             this.aa.qisufayuan[0][0].questions[0].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
@@ -5074,14 +5096,14 @@
                       quid: localStorage.getItem('quid') //用户的问卷id
                     }).then((data)=>{
                       if(data.data.status_code==202){
-                        if(this.active==0){// 第一个模块刷新基本信息
-                          this.getBasicInformation()
-                        }else if(this.active==1){// 第二个模块刷新案由
-                          this.getanyou()
+                        if(this.active==0){// 第一个模块刷新原告基本信息
+                          this.getyuangaoinfo()
+                        }else if(this.active==1){// 第二个模块刷新被告基本信息
+                          this.getbeigaoinfo()
                         }else if(this.active==2){// 第三个模块刷新事实与理由
                           this.getshishi()
-                        }else if(this.active==3){// 第四个模块刷新起诉原因
-                          this.getqisuyuanyin()
+                        }else if(this.active==3){// 第四个模块刷新起诉理由
+                          this.getqisuliyou()
                         }else if(this.active==4){// 第五个模块刷新诉讼请求
                           this.getsusongqingqiu()
                         }else if(this.active==5){// 第六个模块刷新起诉法院
@@ -5120,14 +5142,14 @@
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     if(data.data.status_code==202){
-                      if(this.active==0){// 第一个模块刷新基本信息
-                        this.getBasicInformation()
-                      }else if(this.active==1){// 第二个模块刷新案由
-                        this.getanyou()
+                      if(this.active==0){// 第一个模块刷新原告基本信息
+                        this.getyuangaoinfo()
+                      }else if(this.active==1){// 第二个模块刷新被告基本信息
+                        this.getbeigaoinfo()
                       }else if(this.active==2){// 第三个模块刷新事实与理由
                         this.getshishi()
-                      }else if(this.active==3){// 第四个模块刷新起诉原因
-                        this.getqisuyuanyin()
+                      }else if(this.active==3){// 第四个模块刷新起诉理由
+                        this.getqisuliyou()
                       }else if(this.active==4){// 第五个模块刷新诉讼请求
                         this.getsusongqingqiu()
                       }else if(this.active==5){// 第六个模块刷新起诉法院
@@ -5181,14 +5203,14 @@
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
                     if(data.data.status_code==202){
-                      if(this.active==0){// 第一个模块刷新基本信息
-                        this.getBasicInformation()
-                      }else if(this.active==1){// 第二个模块刷新案由
-                        this.getanyou()
+                      if(this.active==0){// 第一个模块刷新原告基本信息
+                        this.getyuangaoinfo()
+                      }else if(this.active==1){// 第二个模块刷新被告基本信息
+                        this.getbeigaoinfo()
                       }else if(this.active==2){// 第三个模块刷新事实与理由
                         this.getshishi()
-                      }else if(this.active==3){// 第四个模块刷新起诉原因
-                        this.getqisuyuanyin()
+                      }else if(this.active==3){// 第四个模块刷新起诉理由
+                        this.getqisuliyou()
                       }else if(this.active==4){// 第五个模块刷新诉讼请求
                         this.getsusongqingqiu()
                       }else if(this.active==5){// 第六个模块刷新起诉法院
@@ -5369,7 +5391,7 @@
             }).then((data)=>{
               if(data.data.status_code == 200 ){
                 if(e==2670){
-                  this.getqisuyuanyin()  // 刷新起诉原因模块
+                  this.getqisuliyou()  // 刷新起诉理由模块
                 }else if(e==2680){
                   this.getsusongqingqiu()  // 刷新诉讼请求模块
                 }
@@ -5394,7 +5416,7 @@
                 fornum: index+1
               }).then((data)=>{
                 if(e==2670){
-                  this.getqisuyuanyin()  // 刷新起诉原因模块
+                  this.getqisuliyou()  // 刷新起诉理由模块
                 }else if(e==2680){
                   this.getsusongqingqiu()  // 刷新诉讼请求模块
                 }
@@ -5432,12 +5454,13 @@
             }).catch((data)=>{
             })
           }
-          if(this.flag==true){
-            this.IsShow = true;
-          }
+          // if(this.flag==true){
+          //   this.IsShow = true;
+          // }
         },
         quxiao (){
           this.IsShow = false;
+          this.flag = false
         },
         complate () {
           this.GetOutPutWord();
@@ -5453,10 +5476,10 @@
         },
         next () {
           localStorage.setItem('active',this.active)
-          if(this.mokuai[this.active].title == '基本信息'){
-            localStorage.setItem('qpid', 2630)
+          if(this.mokuai[this.active].title == '原告基本信息'){
+            localStorage.setItem('qpid', 3085)
             demoYanZheng({
-              qpid: 2630
+              qpid: 3085
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5464,17 +5487,17 @@
               }else{
                 this.$notify({
                   title: '保存成功',
-                  message: '基本信息模块已成功保存',
+                  message: '原告基本信息模块已成功保存',
                   type: 'success'
                 });
                 if (this.active++ >this.mokuai.length-1) ;
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '案由'){
-            localStorage.setItem('qpid', 2775)
+          }else if(this.mokuai[this.active].title == '被告基本信息'){
+            localStorage.setItem('qpid', 3086)
             demoYanZheng({
-              qpid: 2775
+              qpid: 3086
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5482,7 +5505,7 @@
               }else{
                 this.$notify({
                   title: '保存成功',
-                  message: '案由信息已成功保存',
+                  message: '被告基本信息信息已成功保存',
                   type: 'success'
                 });
                 if (this.active++ >this.mokuai.length-1) ;
@@ -5490,9 +5513,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '事实与理由'){
-            localStorage.setItem('qpid', 2647)
+            localStorage.setItem('qpid', 3089)
             demoYanZheng({
-              qpid: 2647
+              qpid: 3089
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5507,10 +5530,10 @@
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '起诉原因'){
-            localStorage.setItem('qpid', 2668)
+          }else if(this.mokuai[this.active].title == '起诉理由'){
+            localStorage.setItem('qpid', 3091)
             demoYanZheng({
-              qpid: 2668
+              qpid: 3091
             }).then((data)=>{
               // console.log(data.data)
               if(data.data.status_code == 330){
@@ -5519,7 +5542,7 @@
               }else{
                 this.$notify({
                   title: '保存成功',
-                  message: '起诉原因模块已成功保存',
+                  message: '起诉理由模块已成功保存',
                   type: 'success'
                 });
                 if (this.active++ >this.mokuai.length-1) ;
@@ -5527,9 +5550,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '诉讼请求'){
-            localStorage.setItem('qpid', 2678)
+            localStorage.setItem('qpid', 3092)
             demoYanZheng({
-              qpid: 2678
+              qpid: 3092
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5545,9 +5568,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '起诉法院'){
-            localStorage.setItem('qpid', 2675)
+            localStorage.setItem('qpid', 3093)
             demoYanZheng({
-              qpid: 2675
+              qpid: 3093
             }).then((data)=>{
               if(data.data.status_code == 330){
                 this.missMsgBox = true
@@ -5575,7 +5598,7 @@
                 this.missField = data.data.data
                 this.IsShow = false;
             }else if(this.status_code == 200){
-                this.$router.replace("/FenJiaXiChanPersonalize");
+                this.$router.replace("/MinJianJieDaiPersonalize");
                 this.missAlert = false
             }
           }).catch((data)=>{
