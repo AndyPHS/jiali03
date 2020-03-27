@@ -5427,7 +5427,8 @@
                 this.flag = false
                 this.IsShow = false;
               }else{
-                this.flag = true
+                this.flag = true;
+                this.IsShow = true;
               }
             }).catch((data)=>{
             })

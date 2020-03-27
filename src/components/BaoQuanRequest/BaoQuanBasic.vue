@@ -5639,10 +5639,11 @@ export default {
         }).then((data)=>{
           if(data.data.status_code == 330){
             this.missMsgBox = true
-            this.missMsg = data.data.data
+            this.missMsg = data.data.data;
             this.flag = false
           }else{
-            this.flag = true
+            this.flag = true;
+            this.IsShow = true;
           }
         }).catch((data)=>{
         })

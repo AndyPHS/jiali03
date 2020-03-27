@@ -6082,7 +6082,8 @@
                 this.missMsg = data.data.data
                 this.flag = false
               }else{
-                this.flag = true
+                this.flag = true;
+                this.IsShow = true;
               }
             }).catch((data)=>{
             })

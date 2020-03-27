@@ -6006,6 +6006,7 @@
                 this.IsShow = false;
               }else{
                 this.flag = true
+                this.IsShow = true;
               }
             }).catch((data)=>{
             })
