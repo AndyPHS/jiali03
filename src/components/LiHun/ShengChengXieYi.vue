@@ -145,7 +145,7 @@
             if(localStorage.getItem('qid')==10 ){
               this.TitleMsg = '离婚起诉状';
             }else if(localStorage.getItem('qid')==9 ){
-              this.TitleMsg = '继承起诉状';
+              this.TitleMsg = '继承纠纷起诉状';
             }else if(localStorage.getItem('qid')==21 ){
               this.TitleMsg = '抚养权起诉状';
             }else if(localStorage.getItem('qid')==22 ){
@@ -210,11 +210,8 @@
            this.$router.replace("/HunNeiBasic");
           }else if(localStorage.getItem('qid')==10){ // 离婚起诉状
            this.$router.replace("/QiSuBasicInformation");
-          }else if(localStorage.getItem('qid')==9){ // 继承起诉状
-             this.$message({
-               message: '球球还未编写起诉状问卷，请稍后再试',
-               type: 'error'
-             });
+          }else if(localStorage.getItem('qid')==9){ // 继承纠纷起诉状
+             this.$router.replace("/JiChengJiuFenBasic");
           }else if(localStorage.getItem('qid')==16){ // 调查取证申请书
            this.$router.replace("/DiaoChaQuZhengBasic");
           }else if(localStorage.getItem('qid')==20){ // 保全申请书
@@ -232,7 +229,7 @@
           }else if(localStorage.getItem('qid')==26){ // 评估申请书
            this.$router.replace("/PingGuBasic");
           }else if(localStorage.getItem('qid')==27){ // 离婚后财产纠纷起诉状
-           this.$router.replace("/LiHunHouCaiChanBasic");
+           this.$router.replace("/HunHouCaiChanBasic");
           }else if(localStorage.getItem('qid')==28){ // 笔迹鉴定申请书
            this.$router.replace("/BiJiJianDingBasic");
           }else if(localStorage.getItem('qid')==29){ // 精神状态鉴定申请书
@@ -245,7 +242,9 @@
           }
         },
         GoPersonalPage(){ // 申请书类和起诉状类有返回个性化页面
-          if(localStorage.getItem('qid')==10){ // 离婚起诉状个性化页面
+          if(localStorage.getItem('qid')==9){ //继承纠纷起诉状个性化页面
+           this.$router.replace("/JiChengJiuFenPersonalize");
+          }else if(localStorage.getItem('qid')==10){ // 离婚起诉状个性化页面
            this.$router.replace("/QiSuComplate");
           }else if(localStorage.getItem('qid')==16){ // 调查取证申请书个性化页面
            this.$router.replace("/DiaoChaQuZhengPersonalize");
@@ -264,7 +263,7 @@
           }else if(localStorage.getItem('qid')==26){ // 评估申请书
            this.$router.replace("/PingGuPersonalize");
           }else if(localStorage.getItem('qid')==27){ // 离婚后财产纠纷起诉状
-           this.$router.replace("/LiHunHouCaiChanPersonalize");
+           this.$router.replace("/HunHouCaiChanPersonalize");
           }else if(localStorage.getItem('qid')==28){ // 笔迹鉴定申请书
            this.$router.replace("/BiJiJianDingPersonalize");
           }else if(localStorage.getItem('qid')==29){ // 精神状态鉴定申请书

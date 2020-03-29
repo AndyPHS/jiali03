@@ -52,6 +52,16 @@ import ZhengRenChuTingPersonalize from '@/components/ZhengRenChuTingRequest/Zhen
 import PingGuStart from '@/components/PingGuRequest/PingGuStart'    // 评估请书初始化页面
 import PingGuBasic from '@/components/PingGuRequest/PingGuBasic'   // 评估请书信息填写页
 import PingGuPersonalize from '@/components/PingGuRequest/PingGuPersonalize'  // 评估请书个性化页面
+import JiChengJiuFenStart from '@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenStart'   // 继承纠纷起诉状小问卷
+import JiChengJiuFenBasic from '@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenBasic'   // 继承纠纷起诉状信息填写页
+import JiChengJiuFenPersonalize from '@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenPersonalize'  // 继承纠纷起诉状个性化页面
+import HunHouCaiChanStart from '@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanStart'   // 婚后财产纠纷起诉状小问卷
+import HunHouCaiChanBasic from '@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanBasic'   // 婚后财产纠纷起诉状信息填写页
+import HunHouCaiChanPersonalize from '@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanPersonalize'  // 婚后财产纠纷起诉状个性化页面
+import BiJiJianDingBasic from '@/components/BiJiJianDingRequest/BiJiJianDingBasic'   // 笔迹鉴定申请书信息填写页
+import BiJiJianDingPersonalize from '@/components/BiJiJianDingRequest/BiJiJianDingPersonalize'  // 笔迹鉴定申请书个性化页面
+import JingShenZhuangTaiBasic from '@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiBasic'   // 精神状态鉴定申请书信息填写页
+import JingShenZhuangTaiPersonalize from '@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiPersonalize'  // 精神状态鉴定申请书个性化页面
 Vue.use(Router)
 
 export default new Router({
@@ -157,6 +167,26 @@ export default new Router({
     {path: '/PingGuBasic', name: 'PingGuBasic', component: PingGuBasic},
     // 评估个性化页面
     {path: '/PingGuPersonalize', name: 'PingGuPersonalize', component: PingGuPersonalize},
+    // 继承纠纷起诉状
+    {path: '/JiChengJiuFenStart', name: 'JiChengJiuFenStart', component: JiChengJiuFenStart},
+    // 继承纠纷基本信息页面
+    {path: '/JiChengJiuFenBasic', name: 'JiChengJiuFenBasic', component: JiChengJiuFenBasic},
+    // 继承纠纷个性化页面
+    {path: '/JiChengJiuFenPersonalize', name: 'JiChengJiuFenPersonalize', component: JiChengJiuFenPersonalize},
+    // 婚后财产纠纷起诉状
+    {path: '/HunHouCaiChanStart', name: 'HunHouCaiChanStart', component: HunHouCaiChanStart},
+    // 婚后财产纠纷基本信息页面
+    {path: '/HunHouCaiChanBasic', name: 'HunHouCaiChanBasic', component: HunHouCaiChanBasic},
+    // 婚后财产纠纷个性化页面
+    {path: '/HunHouCaiChanPersonalize', name: 'HunHouCaiChanPersonalize', component: HunHouCaiChanPersonalize},
+    // 笔迹鉴定申请书基本信息页面
+    {path: '/BiJiJianDingBasic', name: 'BiJiJianDingBasic', component: BiJiJianDingBasic},
+    // 笔迹鉴定申请书个性化页面
+    {path: '/BiJiJianDingPersonalize', name: 'BiJiJianDingPersonalize', component: BiJiJianDingPersonalize},
+    // 精神状态鉴定申请书基本信息页面
+    {path: '/JingShenZhuangTaiBasic', name: 'JingShenZhuangTaiBasic', component: JingShenZhuangTaiBasic},
+    // 精神状态鉴定申请书个性化页面
+    {path: '/JingShenZhuangTaiPersonalize', name: 'JingShenZhuangTaiPersonalize', component: JingShenZhuangTaiPersonalize},
     // 访问错误页面跳转到登录页面
     {path: '*',redirect: '/'}
   ]

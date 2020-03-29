@@ -454,7 +454,10 @@ export default {
         }).then((data)=>{
           localStorage.setItem('quid', data.data.data)
           // localStorage.removeItem('qid');
-          if(this.questionnaireSelecter==10){ // 离婚起诉状跳转页面
+          if(this.questionnaireSelecter==9){ // 继承纠纷诉状跳转页面
+            localStorage.setItem('questionnaireType', 2) // 1代表协议书类，2代表起诉状类 ，3申请书类
+            this.$router.replace("/JiChengJiuFenStart");
+          }else if(this.questionnaireSelecter==10){ // 离婚起诉状跳转页面
             localStorage.setItem('questionnaireType', 2) // 1代表协议书类，2代表起诉状类 ，3申请书类
             this.$router.replace("/QiSuBasicInformation");
           }else if(this.questionnaireSelecter==3){ // 离婚协议书跳转页
@@ -490,6 +493,15 @@ export default {
           }else if(this.questionnaireSelecter==26){  // 评估申请书
             localStorage.setItem('questionnaireType', 3)
             this.$router.replace("/PingGuStart");
+          }else if(this.questionnaireSelecter==27){  // 婚后财产纠纷起诉状
+            localStorage.setItem('questionnaireType', 2)
+            this.$router.replace("/HunHouCaiChanStart");
+          }else if(this.questionnaireSelecter==28){  // 笔迹鉴定申请书
+            localStorage.setItem('questionnaireType', 3)
+            this.$router.replace("/BiJiJianDingBasic");
+          }else if(this.questionnaireSelecter==29){  // 精神状态鉴定申请书
+            localStorage.setItem('questionnaireType', 3)
+            this.$router.replace("/JingShenZhuangTaiBasic");
           }
         }).catch((data)=>{
         })
@@ -501,6 +513,9 @@ export default {
       if(row.qid==3){  // 离婚协议书
         localStorage.setItem('questionnaireType', 1)
         this.$router.replace("/BasicInformation");
+      }else if(row.qid==9){  // 继承纠纷起诉状
+        localStorage.setItem('questionnaireType', 2)
+        this.$router.replace("/JiChengJiuFenBasic");
       }else if(row.qid==17){  // 婚前财产协议
         localStorage.setItem('questionnaireType', 1)
         this.$router.replace("/HunQianBasic");
@@ -534,6 +549,15 @@ export default {
       }else if(row.qid ==26){ // 评估申请书
         localStorage.setItem('questionnaireType', 3)
         this.$router.replace("/PingGuPersonalize");
+      }else if(row.qid ==27){ // 婚后财产纠纷起诉状
+        localStorage.setItem('questionnaireType', 2)
+        this.$router.replace("/HunHouCaiChanBasic");
+      }else if(row.qid ==28){ // 笔迹鉴定申请书
+        localStorage.setItem('questionnaireType', 3)
+        this.$router.replace("/BiJiJianDingBasic");
+      }else if(row.qid ==29){ // 精神状态鉴定申请书
+        localStorage.setItem('questionnaireType', 3)
+        this.$router.replace("/JingShenZhuangTaiBasic");
       }else{ // 其他数据的提示
          this.$message({
             message: '此数据为垃圾数据，不做处理',
