@@ -4858,13 +4858,13 @@
                         <div v-if="mo.title== '车辆' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3472,index)">删除车辆</div>
                           <div v-if="mo.title== '理财' " class="text-right flex justify-end">
-                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3743,index)">删除理财</div>
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3473,index)">删除理财</div>
                           </div>
                           <div v-if="mo.title== '存款' " class="text-right flex justify-end">
                             <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3474,index)">删除存款</div>
                           </div>
-                          <div v-if="mo.title== '其他3475' " class="text-right flex justify-end">
-                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3183,index)">删除其他3475</div>
+                          <div v-if="mo.title== '其他' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userDeleteSelectAnswerAction(3475,index)">删除其他</div>
                           </div>
                         </div>
                       </div>

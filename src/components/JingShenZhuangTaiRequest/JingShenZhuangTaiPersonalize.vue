@@ -5,7 +5,7 @@
             <h2 class="py-2 text-lg text-center w-2/5">
               {{this.Content.title}} 
             </h2>
-            <p class="pb-1 text-base text-center w-2/5">评估申请书</p>
+            <p class="pb-1 text-base text-center w-2/5">精神状态鉴定申请书</p>
             
 
             <div class="flex">
