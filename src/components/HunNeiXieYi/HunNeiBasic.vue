@@ -33,6 +33,9 @@
                         <div v-if="mo.title== '保险' ">
                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个保险</h2>
                         </div>
+						<div v-if="mo.title== '家具家电' ">
+						  <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个家具家电</h2>
+						</div>
                         <div v-if="mo.title== '股权' ">
                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个股权</h2>
                         </div>
@@ -42,6 +45,9 @@
                         <div v-if="mo.title== '债务' ">
                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个债务</h2>
                         </div>
+						<div v-if="mo.title== '其他财产' ">
+						  <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个其他财产</h2>
+						</div>
                       </div>
 
                       <!-- 大问题块 -->
@@ -4876,6 +4882,9 @@
                         <div v-if="mo.title== '保险' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2261,index)">删除保险</div>
                         </div>
+						<div v-if="mo.title== '家具家电' " class="text-right flex justify-end">
+						  <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2460,index)">删除家具家电</div>
+						</div>
                         <div v-if="mo.title== '股权' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2296,index)">删除股权</div>
                         </div>
@@ -4885,6 +4894,9 @@
                         <div v-if="mo.title== '债务' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2336,index)">删除债务</div>
                         </div>
+						<div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
+						  <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2309,index)">删除其他财产</div>
+						</div>
                       </div>
                     </div>
                     <div>
@@ -4903,6 +4915,9 @@
                       <div v-if="mo.title== '保险' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2261)">添加保险</div>
                       </div>
+					  <div v-if="mo.title== '家具家电' " class="text-right flex justify-end">
+					    <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2460)">添加家具家电</div>
+					  </div>
                       <div v-if="mo.title== '股权' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2296)">添加股权</div>
                       </div>
@@ -4912,6 +4927,9 @@
                       <div v-if="mo.title== '债务' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2336)">添加债务</div>
                       </div>
+					  <div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
+					    <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2309)">添加其他财产</div>
+					  </div>
                     </div>
                   </div>
                 </div>
@@ -5568,6 +5586,8 @@
                   this.getjiaju()  // 刷新家具
                 }else if(e==2296){
                   this.getguquan()  // 刷新股权
+                }else if(e==2310){
+                  this.getqitacaichan()  // 刷新其他财产
                 }
                 this.$message({
                   message: '添加成功',

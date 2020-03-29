@@ -916,7 +916,7 @@
                   tip: '提示',
                   answer: [],
                   listData: [
-                    { label: '由债权(别人欠/借你钱)', value: '1' },
+                    { label: '有债权(别人欠/借你钱)', value: '1' },
                     { label: '有债务(你欠/借了别人钱)', value: '2' }
                   ],
                   requireQidAndAnswer: { id: '1737', answer: '1' }
@@ -940,7 +940,7 @@
                   tip: '提示',
                   answer: [],
                   listData: [
-                    { label: '由未来债权(别人欠/借你钱)', value: '1' },
+                    { label: '有未来债权(别人欠/借你钱)', value: '1' },
                     { label: '有未来债务(你欠/借了别人钱)', value: '2' }
                   ],
                   requireQidAndAnswer: { id: '1741', answer: '1' }
