@@ -14,7 +14,7 @@ import VueResource from 'vue-resource'  // 请求数据
 // require('./mock.js')
 
 Vue.prototype.$axios = Axios
-Axios.defaults.baseURL = '/api'
+Axios.defaults.baseURL = ':3921/api'
 // Axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 Axios.defaults.headers.post['Content-Type'] = 'application/json';
 
