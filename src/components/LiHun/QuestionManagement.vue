@@ -97,14 +97,9 @@
                         <div slot="tip" class="el-upload__tip">请上传图片格式文件</div>
                       </el-upload>
                 </el-form-item> -->
-                <!-- <div class="w-1/2 mx-auto">
-                    <form  target="#returngo" ref="form" id="form1" action="http://office365.aladdinlaw.com:3921/api/jiali_api/v1/problem/add"  method="POST" enctype="multipart/form-data"  @submit.prevent="changeInfo($event)">
-                        <input name="imgs[]" multiple type="file">
-                        <input type="submit" value="上传图片" >
-                    </form>
-                    <iframe id="returngo" src="" style="display: none"></iframe>
-                </div> -->
-
+                <el-form-item label="示例图" :label-width="formLabelWidth">
+                   <input name="imgs" multiple type="file" id='file'>
+                </el-form-item>
                 <div  v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 " >
                     <div  v-for="(item, index) in addQuestion_answer" :key="index" class="flex justify-between " >
                         <el-form-item label="选项名称" :label-width="formLabelWidth">
@@ -186,11 +181,6 @@
                 <el-button type="primary" @click="updataQuestionMsg">确 定</el-button>
               </div>
             </el-dialog>
-            <!-- <form action="http://office365.aladdinlaw.com:3921/api/jiali_api/v1/problem/demo_addimg"  method="POST" enctype="multipart/form-data">
-                <input name="imgs[]" multiple type="file">
-                <input type="text" name="title">
-                <button>上传</button>
-            </form> -->
         </div>
 
 </template>
@@ -209,7 +199,6 @@
     import {selectOnlyQuestion} from '@/api/api/requestLogin.js'   // 查询单独问题
     import {QuestionArr} from '@/api/api/requestLogin.js'    // 问题数组
     import {demoAddImg} from '@/api/api/requestLogin.js'    // 添加示例图
-
 
     export default {
         components:{
@@ -409,84 +398,32 @@
             },
             addNewQuestion () {   // 新增问题
                 const formData = new FormData();
-
-                // let files = this.$refs.form
-                // formData.append('imgs[]', files)
-                // console.log(this.$refs.upload)
-                // for (var i=0;i<files.length;i++){
-                //      formData.append('imgs[]', files[i]);
-                // // }
-                // formData.append('title', this.user.title);
-                // formData.append('type', this.user.type);
-                // formData.append('re', this.user.re);
-                // formData.append('placeholder', this.user.placeholder);
-                // formData.append('status', this.user.status);
+                let files = $("#file")[0].files[0];
+                formData.append('imgs[0]', files)
+                formData.append('title', this.user.title);
+                formData.append('type', this.user.type);
+                formData.append('placeholder', this.user.placeholder);
+                formData.append('status', this.user.status);
                 if(this.user.type==1){
-                    addQuestion({
-                        title:this.user.title,
-                        type:this.user.type,
-                        re:this.user.re,
-                        placeholder:this.user.placeholder,
-                        status:this.user.status
-                    }).then((data)=>{
-                        this.user.title = '';
-                        this.user.type = '';
-                        this.user.re = '';
-                        this.user.placeholder = '';
-                        this.user.status = '';
-                        this.handleQuestionList()
-                        localStorage.setItem('pid',data.data.data)
-
-                        // this.addQuestion_answer.forEach((item)=>{
-                        //   addAnswer({
-                        //       status: 1,
-                        //       label: item.label
-                        //   }).then((data)=>{
-
-                        //   })
-
-                        // })
-                        this.$message({
-                            type: 'success',
-                            message: '成功添加问题!'
-                        });
-                        localStorage.removeItem('pid');
-                        this.dialogQuestionAdd = false
-                    }).catch((data)=>{
-
-                    })
-                }else {
-                    addQuestion({
-                        title:this.user.title,
-                        type:this.user.type,
-                        placeholder:this.user.placeholder,
-                        status:this.user.status
-                    }).then((data)=>{
-                        this.user.title = '';
-                        this.user.type = '';
-                        this.user.placeholder = '';
-                        this.user.status = '';
-                        this.handleQuestionList()
-                        localStorage.setItem('pid',data.data.data)
-                        console.log(this.addQuestion_answer)
-                        this.addQuestion_answer.forEach((item)=>{
-                            addAnswer({
-                                status: 1,
-                                label: item.label
-                            }).then((data)=>{
-
-                            })
-                        })
-                        this.$message({
-                            type: 'success',
-                            message: '成功添加问题!'
-                        });
-                        localStorage.removeItem('pid');
-                        this.dialogQuestionAdd = false
-                    }).catch((data)=>{
-
-                    })
+                  formData.append('re', this.user.re);
                 }
+                addQuestion(formData).then((data)=>{
+                  this.user.title = '';
+                  this.user.type = '';
+                  this.user.re = '';
+                  this.user.placeholder = '';
+                  this.user.status = '';
+                  this.handleQuestionList()
+                  localStorage.setItem('pid',data.data.data)
+                  this.$message({
+                      type: 'success',
+                      message: '成功添加问题!'
+                  });
+                  localStorage.removeItem('pid');
+                  this.dialogQuestionAdd = false
+                }).catch((data)=>{
+
+                })
             },
 
             updateQuestion (item) {    // 点击修改问题
@@ -714,5 +651,10 @@
     #errContent{
         padding:20px 0 0 30px;
         text-align:center;
+    }
+    #file{
+      width: 220px;
+      height: 40px;
+      padding-left: 0;
     }
 </style>
