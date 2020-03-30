@@ -12,11 +12,11 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-        target:'http://office365.aladdinlaw.com:3921/api/',
+        target:'http://office365.aladdinlaw.com/api/',
         // target: 'http://case.net/api/',
         changeOrigin:true,//允许跨域
         pathRewrite:{
-          '/api':''
+          '/api':'http://office365.aladdinlaw.com:3921/api/'
         }
       }
     },
