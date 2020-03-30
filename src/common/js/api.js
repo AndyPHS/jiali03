@@ -20,7 +20,7 @@ var host = location.host,
 
 if(host.indexOf('office365.aladdinlaw.com') > -1){
   //线上环境
-  baseHost = environment.onLine
+  baseHost = environment.onLine+':3921/'
 }else {
   //测试环境
   baseHost = environment.dev
