@@ -8,7 +8,7 @@
 var environment = {
   onLine: "线上地址",
   // dev:"测试环境地址",
-  dev: '/',
+  dev: ':3921/',
   devOfflin:"http://192.168.1.242/h5"
 }
 // 接口前缀
