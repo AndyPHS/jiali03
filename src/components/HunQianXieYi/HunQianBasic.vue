@@ -5128,6 +5128,11 @@
             }else{
               this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer)
             }
+            if(this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer == 1 || this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer == ""){
+              this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer = []
+            }else{
+              this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer)
+            }
           }).catch((data)=>{
           })
         },

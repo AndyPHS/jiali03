@@ -149,6 +149,9 @@
                       <el-option v-for="(item, index) in problemRe" :key="index" :label="item" :value="index">{{item}}</el-option>
                     </el-select>
                 </el-form-item>
+                <el-form-item label="示例图" :label-width="formLabelWidth">
+                   <input name="imgs" multiple type="file" id='fileUpdate'>
+                </el-form-item>
                 <div v-if="user.type==6 || user.type==7 || user.type==8 || user.type==9 ">
                     <div  v-for="(item, index) in add_answer" :key="index"  class="flex justify-between" >
                         <el-form-item label="选项名称" :label-width="formLabelWidth">
@@ -451,30 +454,29 @@
                 this.chooseUserRole = value
             },
             updataQuestionMsg () {   // 确定修改用户信息
+                const formData = new FormData();
+                let fileAll = $("#fileUpdate")[0].files;
+                for(var i =0;i<fileAll.length;i++){
+                  formData.append('imgs['+i+']', fileAll[i])
+                }
+                formData.append('title', this.user.title);
+                formData.append('type', this.user.type);
+                formData.append('placeholder', this.user.placeholder);
+                formData.append('status', this.user.status);
                 if(this.user.type==1){
-                    updateQuestion({
-                        title: this.user.title,
-                        type: this.user.type,
-                        re: this.user.re,
-                        placeholder: this.user.placeholder,
-                        status: this.user.status
-                    }).then((data)=>{
+                   formData.append('re', this.user.re);
+                    updateQuestion(formData).then((data)=>{
                         this.user.title = '';
-                        this.user.type = '';
-                        this.user.re = '';
+                        this.user.type = null;
+                        this.user.re = null;
                         this.user.placeholder = '';
-                        this.user.status = '';
+                        this.user.status = null;
                         localStorage.removeItem('pid');
                         this.handleQuestionList()
                         this.dialogFormVisible = false
                     })
                 }else if(this.user.type==6 || this.user.type==7 || this.user.type==8 || this.user.type==9 ){
-                    updateQuestion({
-                        title: this.user.title,
-                        type: this.user.type,
-                        placeholder: this.user.placeholder,
-                        status: this.user.status
-                    }).then((data)=>{
+                    updateQuestion(formData).then((data)=>{
                         this.user.title = '';
                         this.user.type = null;
                         this.user.status = null;
@@ -484,13 +486,8 @@
                         this.dialogFormVisible = false
                     })
                 }else{
-                   updateQuestion({
-                        title: this.user.title,
-                        type: this.user.type,
-                        re: this.user.re,
-                        placeholder: this.user.placeholder,
-                        status: this.user.status
-                    }).then((data)=>{
+                  formData.append('re', this.user.re);
+                   updateQuestion(formData).then((data)=>{
                         this.user.title = '';
                         this.user.type = null;
                         this.user.placeholder = '';
@@ -656,6 +653,11 @@
         text-align:center;
     }
     #file{
+      width: 220px;
+      height: 40px;
+      padding-left: 0;
+    }
+    #fileUpdate{
       width: 220px;
       height: 40px;
       padding-left: 0;
