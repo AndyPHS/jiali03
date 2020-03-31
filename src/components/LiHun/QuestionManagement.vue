@@ -398,8 +398,11 @@
             },
             addNewQuestion () {   // 新增问题
                 const formData = new FormData();
-                let files = $("#file")[0].files[0];
-                formData.append('imgs[0]', files)
+                let fileAll = $("#file")[0].files;
+                for(var i =0;i<fileAll.length;i++){
+                  console.log(fileAll[i])
+                  formData.append('imgs['+i+']', fileAll[i])
+                }
                 formData.append('title', this.user.title);
                 formData.append('type', this.user.type);
                 formData.append('placeholder', this.user.placeholder);

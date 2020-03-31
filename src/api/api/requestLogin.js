@@ -469,7 +469,7 @@ export const deleteQuestion = params => {
 // 修改问题
 export const updateQuestion = params => {
   return axios({
-    method: "put",
+    method: "post",
     dataType: 'json',
     url: apiUrl.updateQuestion + localStorage.getItem('pid'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
