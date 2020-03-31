@@ -709,6 +709,34 @@
                                               </el-cascader>
                                             </el-form-item>
                                           </div>
+                                          <!-- 单选 -->
+                                          <div  v-if="$$$$$item.type == 'radio'">
+                                            <el-form-item label="" class="text-base">
+                                             <div>
+                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
+                                                 <div slot="content">
+                                                   <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                   <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                 </div>
+                                                 <i class="el-icon-question"></i>
+                                               </el-tooltip>
+                                               <el-popover
+                                               v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
+                                               placement="right"
+                                               width="400"
+                                               trigger="hover">
+                                                 <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                    <img :src="imgModel">
+                                                 </div>
+                                                 <i  slot="reference" class="el-icon-picture"></i>
+                                               </el-popover>
+                                             </div>
+                                             <el-radio-group v-model="$$$$$item.answer" @change="userAddAnswerAction($$$$$item)">
+                                              <el-radio :label="list.value" v-for="(list, listIndex) in $$$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                                             </el-radio-group>
+                                            </el-form-item>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
