@@ -3499,4 +3499,5 @@ html{height: 100%;background-color: #f7fafc;}
 #caseMsg{line-height:30px !important;text-indent:2em;}
 .el-tooltip__popper.is-dark{background-color: #f7fafc !important;color:#343434 !important; border:1px solid #eae3e3 !important;border-radius: 15px !important;box-shadow: 0px 0px 5px 2px #e6dddd}
 .el-tooltip__popper {width: 200px !important;height: 150px !important;overflow-y: scroll !important;}
+.el-radio{line-height: 30px !important;}
 </style>
