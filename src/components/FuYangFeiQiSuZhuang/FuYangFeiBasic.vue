@@ -2879,7 +2879,7 @@
             flag: false   // 生成协议弹窗是否出现开关
           }
       },
-      name: 'RequestBasic',
+      name: 'FuYangFeiBasic',
 
       beforeMount () {
         this.getBasicInformation() // 查询双方基本信息模块数据
@@ -3469,7 +3469,7 @@
             this.dialogSavedWenJuan = false;
             this.$router.replace("/UserSystem");
           }).catch((data)=>{
-        
+
           })
         },
         returnUserList(){  // 返回协议列表
