@@ -22,14 +22,14 @@
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女情况</h2>
                         </div>
                       </div>
-                      
-                     
+
+
                       <!-- 大问题块 -->
                       <div v-for="($item, $index) in item"  :key="$index">
                         <div class="py-2">
                           <el-divider> <h2 class="text-center text-xl">{{$item.title}}</h2></el-divider>
                         </div>
-                        
+
                         <!-- 一级问题块 -->
                         <div v-for="($$item,$$index) in $item.questions" :key="$$index">
                           <div v-show="!$$item.requireQidAndAnswer || ($$item.requireQidAndAnswer && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0] && $item.questions.filter(filterItme=>{return filterItme.id == $$item.requireQidAndAnswer.id})[0].answer == $$item.requireQidAndAnswer.answer)">
@@ -2734,7 +2734,7 @@
                                 </div>
                               </div>
                             </div>
-                        
+
                             <!-- 二级问题块 -->
                           </div>
                         </div>
@@ -2756,7 +2756,7 @@
             </div>
           </div>
         </div>
-        
+
         <div v-show='IsShow' id="alert_xieyi">
           <h2>您已填写完毕，确认生成起诉状吗？</h2>
           <div class="queren flex mx-auto">
@@ -2822,7 +2822,7 @@
   </div>
 </template>
 <script>
-  
+
   import {returnQuestionnaireJson} from '@/api/api/requestLogin.js'    // 查询问卷json
   import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
@@ -2831,7 +2831,7 @@
   import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
-  
+
   export default {
     components: {
       // label_case,
@@ -2857,8 +2857,8 @@
               SuSongQingQiu:[],  // 诉讼请求
               QiSuFaYuan: [],    // 起诉法院
               // GeXingHuaXiuGai: [], // 个性化修改
-              
-            },           
+
+            },
             IsShow: false,
             mokuai: [
               {title: '基本信息', part: 'BasicInformation',id:1,num:914},
@@ -2879,7 +2879,7 @@
           }
       },
       name: 'WenJuan2',
-      
+
       beforeMount () {
         // this.getChuShi();  // 初始化保存当前页面
         this.getBasicInformation() // 查询双方基本信息模块数据
@@ -2895,7 +2895,7 @@
        },
       methods: {
         getChuShi () {
-          
+
         },
         getBasicInformation (){ // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 914}).then((data)=>{  // 查询双方基本信息模块数据
@@ -2916,7 +2916,18 @@
         },
         getZiNvMsg () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 990}).then((data)=>{ // 查询子女模块数据
-            this.aa.ZiNv = data.data.data
+          this.aa.ZiNv = data.data.data
+            if(this.aa.ZiNv==undefined){
+              userAddAnswer({
+                value: 1,  // 值
+                qpid: 990, // 关联id
+                quid: localStorage.getItem('quid') //用户的问卷id
+              }).then((data)=>{
+                this.getZiNvMsg()
+              }).catch((data)=>{
+            
+              })
+            }
             for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
               if(this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer ==1 || this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer == ""){
                 this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer = []
@@ -2942,7 +2953,7 @@
           }).catch((data)=>{
           })
         },
-        
+
         getQiSuYuanYinMsg () {// 查询起诉原因模块数据
           returnQuestionnaireJson({'qpid': 948}).then((data)=>{ // 查询起诉原因模块数据
             this.aa.QiSuYuanYin= data.data.data
@@ -3004,7 +3015,7 @@
                         console.log("保存成功")
                       }).catch((data)=>{
                          console.log("保存失败")
-                      }) 
+                      })
                   }else{
                     userAddAnswer({
                       value: JSON.stringify(e.answer),  // 值
@@ -3015,7 +3026,7 @@
                       console.log(data.data)
                     }).catch((data)=>{
                        console.log("保存失败")
-                    })  
+                    })
                   }
                 }else{
                   userAddAnswer({  // 必填多子女普通类型
@@ -3136,7 +3147,7 @@
                       console.log("保存成功")
                     }).catch((data)=>{
                        console.log("保存失败")
-                    }) 
+                    })
                 }else{
                   userAddAnswer({
                     value: JSON.stringify(e.answer),  // 值
@@ -3147,7 +3158,7 @@
                     console.log("保存成功")
                   }).catch((data)=>{
                      console.log("保存失败")
-                  })  
+                  })
                 }
               }else{
                 userAddAnswer({
@@ -3412,7 +3423,7 @@
             this.$message({
               type: 'info',
               message: '已取消删除'
-            });          
+            });
           });
         },
 
@@ -3495,7 +3506,7 @@
             }else{
               if (this.active++ >this.mokuai.length-1) ;
             }
-            
+
           }else if(this.mokuai[this.active].title == '起诉原因'){
             localStorage.setItem('qpid', 948)
             if(this.aa.QiSuYuanYin !== undefined){
@@ -3598,7 +3609,7 @@
                 this.missField = data.data.data
                 this.IsShow = false;
             }else if(this.status_code == 200){
-                
+
                 this.$router.replace("/QiSuComplate");
                 this.missAlert = false
             }
@@ -3623,7 +3634,7 @@
             this.dialogSavedWenJuan = false;
             this.$router.replace("/UserSystem");
           }).catch((data)=>{
-        
+
           })
         },
         returnUserList(){  // 返回协议列表
