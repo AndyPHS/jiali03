@@ -2909,6 +2909,17 @@
             </ul>
           </div>
         </div>
+        <el-dialog title="保存问卷" :visible.sync="dialogSavedWenJuan">
+          <el-form :model="userWenJuan">
+             <el-form-item label="名称" :label-width="formLabelWidth" class="mb-1">
+              <el-input v-model="userWenJuan.title" class="w-1/2" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-form>
+          <div slot="footer" class="dialog-footer">
+            <el-button @click="canceldialogSaveWenJuan">取 消</el-button>
+            <el-button type="primary" @click="dialogSaveWenJuanOk">保 存</el-button>
+          </div>
+        </el-dialog>
         <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev">上一步</el-button>
         <el-button v-if="active < this.mokuai.length-1 " class="my-5" @click="next">下一步</el-button>
         <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
@@ -2922,11 +2933,10 @@
 <script>
 
   import {returnQuestionnaireJson} from '@/api/api/requestLogin.js'    // 查询问卷json
+  import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者起诉原因等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者起诉原因等
-  import {verificationWord} from '@/api/api/requestLogin.js'    // 验证单独word
-  import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
   import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
@@ -2940,6 +2950,11 @@
             days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
             mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             a: {},
+            formLabelWidth: '80px',   // 表单标签宽度
+            dialogSavedWenJuan: false,   // 点击保存弹出保存弹框
+            userWenJuan:{ // 修改用户问卷
+              title: '',     // 标题
+            },
             aa: {
               BasicInformation: [], //基本信息
               hunyin: [], // 婚姻状况
@@ -3903,12 +3918,30 @@
           }).catch((data)=>{
           })
         },
-        returnUserList(){
-           this.$router.replace("/UserSystem");
-        },
         errorAlert(e) {
           this.$message.error(e);
         },
+        canceldialogSaveWenJuan(){   // 取消保存按钮
+          this.dialogSavedWenJuan = false;
+          this.$router.replace("/UserSystem");
+        },
+        dialogSaveWenJuanOk(){  // 点击保存确定按钮保存
+          userUpdateQuestionnaire({
+            status: 1,
+            title: this.userWenJuan.title,
+            exemption: 1,
+            complete: 1
+          }).then((data)=>{
+            this.userWenJuan.title = '';
+            this.dialogSavedWenJuan = false;
+            this.$router.replace("/UserSystem");
+          }).catch((data)=>{
+        
+          })
+        },
+        returnUserList(){  // 返回协议列表
+          this.dialogSavedWenJuan = true;
+        }
       }
     }
 </script>
