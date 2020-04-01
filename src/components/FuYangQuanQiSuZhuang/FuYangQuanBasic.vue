@@ -2371,6 +2371,7 @@
 
       beforeMount () {
         this.getBasicInformation() // 查询双方基本信息模块数据
+        this.getanyou()
         this.getshishi()   // 获取事实与理由
         this.getqisuyuanyin()
         this.getsusongqingqiu()
