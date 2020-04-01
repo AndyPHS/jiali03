@@ -2351,7 +2351,7 @@
             IsShow: false,
             mokuai: [
               {title: '基本信息', part: 'BasicInformation',id:1,num:2630},
-              {title: '案由', part: 'shishi',id:2,num:2775},
+              {title: '案由', part: 'anyou',id:2,num:2775},
               {title: '事实与理由', part: 'shishi',id:3,num:2647},
               {title: '起诉原因', part: 'qisuyuanyin',id:4,num:2668},
               {title: '诉讼请求', part: 'susongqingqiu',id:5,num:2678},
