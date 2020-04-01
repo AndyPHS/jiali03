@@ -936,6 +936,201 @@
                                         </el-cascader>
                                       </el-form-item>
                                     </div>
+                                    <!-- 单选 -->
+                                    <div v-if="$$$$item.type == 'radio'">
+                                      <el-form-item label="">
+                                        <div>
+                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                            <div slot="content">
+                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                            </div>
+                                            <i class="el-icon-question"></i>
+                                          </el-tooltip>
+                                          <el-popover
+                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                            placement="right"
+                                            width="400"
+                                            trigger="hover">
+                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                               <img :src="imgModel">
+                                            </div>
+                                            <i  slot="reference" class="el-icon-picture"></i>
+                                          </el-popover>
+                                        </div>
+                                        <el-radio-group v-model="$$$$item.answer" @change='userAddAnswerAction($$$$item)'>
+                                          <el-radio :label="$$$$$item.value" v-for="($$$$$item, $$$$$index) in $$$$item.listData" :key="$$$$$index" >{{$$$$$item.label}}</el-radio>
+                                        </el-radio-group>
+                                      </el-form-item>
+                                    </div>
+                                    <!-- 多选 -->
+                                    <div v-if="$$$$item.type == 'checkbox'">
+                                      <el-form-item label="">
+                                        <div>
+                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                            <div slot="content">
+                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                            </div>
+                                            <i class="el-icon-question"></i>
+                                          </el-tooltip>
+                                          <el-popover
+                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                            placement="right"
+                                            width="400"
+                                            trigger="hover">
+                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                               <img :src="imgModel">
+                                            </div>
+                                            <i  slot="reference" class="el-icon-picture"></i>
+                                          </el-popover>
+                                        </div>
+                                        <el-checkbox-group v-model="$$$$item.answer" >
+                                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex"  @change='userAddAnswerAction($$$$item)'>{{list.label}}</el-checkbox>
+                                        </el-checkbox-group>
+                                      </el-form-item>
+                                      <div v-if="$$$$item.grandson">
+                                        <div v-for="($$$$$item, $$$$$index) in $$$$item.answer" :key="$$$$$index">
+                                          <div v-for="($$$$$$item, $$$$$$index) in $$$$item.grandson[$$$$$item]" :key="$$$$$$index">
+                                            <!-- 输入框文字类型 -->
+                                            <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='text'">
+                                              <el-form-item label="" class="text-base">
+                                                <div>
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$$item.isRequired==false ">选填</span>{{ $$$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$$item.description !='' && $$$$$$item.description !=undefined  && $$$$$$item.description != null" placement="right">
+                                                    <div slot="content">
+                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                    </div>
+                                                    <i class="el-icon-question"></i>
+                                                  </el-tooltip>
+                                                  <el-popover
+                                                    v-if="$$$$$$item.imgDate !=[] && $$$$$$item.imgDate !=undefined  && $$$$$$item.imgDate != null"
+                                                    placement="right"
+                                                    width="400"
+                                                    trigger="hover">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                       <img :src="imgModel">
+                                                    </div>
+                                                    <i  slot="reference" class="el-icon-picture"></i>
+                                                  </el-popover>
+                                                </div>
+                                                <el-input
+                                                  type="text"
+                                                  class="ban"
+                                                  v-model="$$$$$$item.answer"
+                                                  size="small"
+                                                  :placeholder="$$$$$$item.placeholder"
+                                                  @blur="userAddAnswerAction($$$$$$item)"
+                                                ></el-input>
+                                              </el-form-item>
+                                            </div>
+                                            <!-- 银行卡类型 -->
+                                            <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='BankCard'">
+                                              <el-form-item label="" class="text-base">
+                                                <div>
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$$item.isRequired==false ">选填</span>{{ $$$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$$item.description !='' && $$$$$$item.description !=undefined  && $$$$$$item.description != null" placement="right">
+                                                    <div slot="content">
+                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                    </div>
+                                                    <i class="el-icon-question"></i>
+                                                  </el-tooltip>
+                                                  <el-popover
+                                                    v-if="$$$$$$item.imgDate !=[] && $$$$$$item.imgDate !=undefined  && $$$$$$item.imgDate != null"
+                                                    placement="right"
+                                                    width="400"
+                                                    trigger="hover">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                       <img :src="imgModel">
+                                                    </div>
+                                                    <i  slot="reference" class="el-icon-picture"></i>
+                                                  </el-popover>
+                                                </div>
+                                                <el-input
+                                                  type="number"
+                                                  class="ban"
+                                                  v-model="$$$$$$item.answer"
+                                                  size="small"
+                                                  :placeholder="$$$$$$item.placeholder"
+                                                  @blur="numAddAnswer($$$$$$item)"
+                                                ></el-input>
+                                              </el-form-item>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <!-- 下拉单选 -->
+                                    <div v-if="$$$$item.type == 'select'">
+                                      <el-form-item label="">
+                                        <div>
+                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                            <div slot="content">
+                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                            </div>
+                                            <i class="el-icon-question"></i>
+                                          </el-tooltip>
+                                          <el-popover
+                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                            placement="right"
+                                            width="400"
+                                            trigger="hover">
+                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                               <img :src="imgModel">
+                                            </div>
+                                            <i  slot="reference" class="el-icon-picture"></i>
+                                          </el-popover>
+                                        </div>
+                                        <el-select v-model="$$$$item.answer"  @change='userAddAnswerAction($$$$item)' size="small">
+                                          <el-option
+                                            v-for="(s,i) in $$$$item.listData"
+                                            :key="s.value"
+                                            :label="s.label"
+                                            :value="s.value">
+                                          </el-option>
+                                        </el-select>
+                                      </el-form-item>
+                                    </div>
+                                    <!-- 日期  精确到日 -->
+                                    <div v-if="$$$$item.type == 'dateTime_day'">
+                                      <el-form-item label="">
+                                        <div>
+                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                            <div slot="content">
+                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                            </div>
+                                            <i class="el-icon-question"></i>
+                                          </el-tooltip>
+                                          <el-popover
+                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                            placement="right"
+                                            width="400"
+                                            trigger="hover">
+                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                               <img :src="imgModel">
+                                            </div>
+                                            <i  slot="reference" class="el-icon-picture"></i>
+                                          </el-popover>
+                                        </div>
+                                        <el-date-picker
+                                          v-model="$$$$item.answer"
+                                          type="date"
+                                          size="small"
+                                          placeholder="选择日期"
+                                          format="yyyy 年 MM 月 dd 日"
+                                          @change="userAddAnswerAction($$$$item)"
+                                          value-format="yyyy-MM-dd">
+                                        </el-date-picker>
+                                      </el-form-item>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1009,472 +1204,40 @@
                             <!--只有问题无答案-->
                             <div v-if="$$item.type =='question'">
                               <h2 class="text-sm font-bold"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$item.isRequired==false ">选填</span>{{$$item.title}}</h2>
-                               <div  v-for="($$$item,$$$index) in $$item.childQuestion" :key="$$$index">
-                                <!-- 省市三级联动 -->
-                                <div v-if="$$$item.type == 'select_city'">
-                                  <el-form-item label="">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-cascader
-                                    v-model="$$$item.answer"
-                                    :options="options"
-                                    @change="userAddAnswerAction($$$item)">
-                                    </el-cascader>
-                                  </el-form-item>
-                                </div>
-                                 <!--日期-精确到日-->
-                                 <div v-if="$$$item.type == 'dateTime_day'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                     <el-date-picker
-                                       v-model="$$$item.answer"
-                                       type="date"
-                                       size="small"
-                                       placeholder="选择日期"
-                                       @change="userAddAnswerAction($$$item)"
-                                       format="yyyy 年 MM 月 dd 日"
-                                       value-format="yyyy-MM-dd">
-                                     </el-date-picker>
-                                   </el-form-item>
-                                 </div>
-                                 <!--日期-区间几点到几点-->
-                                 <div v-if="$$$item.type == 'dateTime_Time_Interval'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                     <el-time-picker
-                                       v-model="$$$item.answer"
-                                       @change="userAddAnswerAction($$$item)"
-                                       type="datetimerange"
-                                       is-range
-                                       size="small"
-                                       range-separator="至"
-                                       start-placeholder="开始日期"
-                                       end-placeholder="结束日期"
-                                       placeholder="选择时间范围">
-                                     </el-time-picker>
-                                   </el-form-item>
-                                 </div>
-                                 <!--日期-区间几号到几号-->
-                                 <div v-if="$$$item.type == 'dateTime_Day_Interval'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                     <el-date-picker
-                                       v-model="$$$item.answer"
-                                       @change="userAddAnswerAction($$$item)"
-                                       type="daterange"
-                                       size="small"
-                                       range-separator="至"
-                                       start-placeholder="开始日期"
-                                       end-placeholder="结束日期"
-                                       placeholder="选择日期范围">
-                                     </el-date-picker>
-                                   </el-form-item>
-                                 </div>
-                                 <!--输入框-文字类型-->
-                                 <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                     <el-input
-                                       type="text"
-                                       class="ban"
-                                       v-model="$$$item.answer"
-                                       size="small"
-                                       :placeholder="$$$item.placeholder"
-                                       @blur="userAddAnswerAction($$$item)"
-                                     ></el-input>
-                                   </el-form-item>
-                                 </div>
-                                 <!--输入框-数字类型（类似身份证号、金额）-->
-                                 <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                     <el-input
-                                       type="number"
-                                       class="ban"
-                                       v-model="$$$item.answer"
-                                       size="small"
-                                       :placeholder="$$$item.placeholder"
-                                       @blur="userAddAnswerAction($$$item)"
-                                     ></el-input>
-                                   </el-form-item>
-                                 </div>
-                                 <!-- 银行卡 -->
-                                 <div v-if="$$$item.type == 'input' && $$$item.input_type=='BankCard'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                     <el-input
-                                       type="number"
-                                       class="ban"
-                                       v-model="$$$item.answer"
-                                       size="small"
-                                       :placeholder="$$$item.placeholder"
-                                       @blur="numAddAnswer($$$item)"
-                                     ></el-input>
-                                   </el-form-item>
-                                 </div>
-                                 <!-- 手机号 -->
-                                 <div v-if="$$$item.type == 'input' && $$$item.input_type=='PhoneNum'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                     <el-input
-                                       type="number"
-                                       class="ban"
-                                       v-model="$$$item.answer"
-                                       size="small"
-                                       :placeholder="$$$item.placeholder"
-                                       @blur="numAddAnswer($$$item)"
-                                     ></el-input>
-                                   </el-form-item>
-                                 </div>
-                                 <!--单选框-->
-                                 <div v-if="$$$item.type == 'radio'">
-                                   <el-form-item label="" class="text-base">
-                                    <div>
-                                      <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                      v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                      placement="right"
-                                      width="400"
-                                      trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
-                                     <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                    </el-radio-group>
-                                   </el-form-item>
-                                    <div v-if="$$$item.grandson">
-                                      <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
-                                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
-                                          <!-- 省市三级联动 -->
-                                          <div v-if="$$$$$item.type == 'select_city'">
-                                            <el-form-item label="">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-cascader
-                                              v-model="$$$$$item.answer"
-                                              :options="options"
-                                              @change="userAddAnswerAction($$$$$item)">
-                                              </el-cascader>
-                                            </el-form-item>
+                              <div  v-for="($$$item,$$$index) in $$item.childQuestion" :key="$$$index">
+                                <div v-show="!$$$item.requireQidAndAnswer || ($$$item.requireQidAndAnswer && $$item.childQuestion.filter(filterItme=>{return filterItme.id == $$$item.requireQidAndAnswer.id})[0] && $$item.childQuestion.filter(filterItme=>{return filterItme.id == $$$item.requireQidAndAnswer.id})[0].answer == $$$item.requireQidAndAnswer.answer)">
+                                  <!-- 省市三级联动 -->
+                                  <div v-if="$$$item.type == 'select_city'">
+                                    <el-form-item label="">
+                                      <div>
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                          <div slot="content">
+                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
                                           </div>
-                                          <!-- 数字类型 -->
-                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
-                                            <el-form-item label="" class="text-base">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-input
-                                                type="text"
-                                                class="ban"
-                                                v-model="$$$$$item.answer"
-                                                size="small"
-                                                :placeholder="$$$$$item.placeholder"
-                                                @blur="userAddAnswerAction($$$$$item)"
-                                              ></el-input>
-                                            </el-form-item>
+                                          <i class="el-icon-question"></i>
+                                        </el-tooltip>
+                                        <el-popover
+                                          v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                          placement="right"
+                                          width="400"
+                                          trigger="hover">
+                                          <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                             <img :src="imgModel">
                                           </div>
-                                          <!-- 银行卡 -->
-                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='BankCard'">
-                                            <el-form-item label="" class="text-base">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-input
-                                                type="number"
-                                                class="ban"
-                                                v-model="$$$$$item.answer"
-                                                size="small"
-                                                :placeholder="$$$$$item.placeholder"
-                                                @blur="numAddAnswer($$$$$item)"
-                                              ></el-input>
-                                            </el-form-item>
-                                          </div>
-                                          <!-- 手机号 -->
-                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='PhoneNum'">
-                                            <el-form-item label="" class="text-base">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-input
-                                                type="number"
-                                                class="ban"
-                                                v-model="$$$$$item.answer"
-                                                size="small"
-                                                :placeholder="$$$$$item.placeholder"
-                                                @blur="numAddAnswer($$$$$item)"
-                                              ></el-input>
-                                            </el-form-item>
-                                          </div>
-                                          <!-- 文本类型 -->
-                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
-                                            <el-form-item label="" class="text-base">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-input
-                                                type="text"
-                                                class="ban"
-                                                v-model="$$$$$item.answer"
-                                                size="small"
-                                                :placeholder="$$$$$item.placeholder"
-                                                @blur="userAddAnswerAction($$$$$item)"
-                                              ></el-input>
-                                            </el-form-item>
-                                          </div>
-                                        </div>
+                                          <i  slot="reference" class="el-icon-picture"></i>
+                                        </el-popover>
                                       </div>
-                                    </div>
-                                 </div>
-                                 <!-- 多选框 -->
-                                  <div v-if="$$$item.type == 'checkbox'">
+                                      <el-cascader
+                                      v-model="$$$item.answer"
+                                      :options="options"
+                                      @change="userAddAnswerAction($$$item)">
+                                      </el-cascader>
+                                    </el-form-item>
+                                  </div>
+                                   <!--日期-精确到日-->
+                                   <div v-if="$$$item.type == 'dateTime_day'">
                                     <el-form-item label="" class="text-base">
                                       <div>
                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
@@ -1496,574 +1259,22 @@
                                           <i  slot="reference" class="el-icon-picture"></i>
                                         </el-popover>
                                       </div>
-                                      <el-checkbox-group v-model="$$$item.answer">
-                                        <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
-                                      </el-checkbox-group>
-                                    </el-form-item>
-                                    <div v-if="$$$item.grandson">
-                                      <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
-                                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
-                                          <!-- 省市三级联动 -->
-                                          <div v-if="$$$$$item.type == 'select_city'">
-                                            <el-form-item label="">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-cascader
-                                              v-model="$$$$$item.answer"
-                                              :options="options"
-                                              @change="userAddAnswerAction($$$$$item)">
-                                              </el-cascader>
-                                            </el-form-item>
-                                          </div>
-                                          <!-- 数字类型 -->
-                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
-                                            <el-form-item label="" class="text-base">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-input
-                                                type="text"
-                                                class="ban"
-                                                v-model="$$$$$item.answer"
-                                                size="small"
-                                                :placeholder="$$$$$item.placeholder"
-                                                @blur="userAddAnswerAction($$$$$item)"
-                                              ></el-input>
-                                            </el-form-item>
-                                          </div>
-                                          <!-- 银行卡 -->
-                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='BankCard'">
-                                            <el-form-item label="" class="text-base">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-input
-                                                type="number"
-                                                class="ban"
-                                                v-model="$$$$$item.answer"
-                                                size="small"
-                                                :placeholder="$$$$$item.placeholder"
-                                                @blur="numAddAnswer($$$$$item)"
-                                              ></el-input>
-                                            </el-form-item>
-                                          </div>
-                                          <!-- 手机号 -->
-                                          <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='PhoneNum'">
-                                            <el-form-item label="" class="text-base">
-                                              <div>
-                                                <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                  <div slot="content">
-                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                  </div>
-                                                  <i class="el-icon-question"></i>
-                                                </el-tooltip>
-                                                <el-popover
-                                                  v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                  placement="right"
-                                                  width="400"
-                                                  trigger="hover">
-                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                     <img :src="imgModel">
-                                                  </div>
-                                                  <i  slot="reference" class="el-icon-picture"></i>
-                                                </el-popover>
-                                              </div>
-                                              <el-input
-                                                type="number"
-                                                class="ban"
-                                                v-model="$$$$$item.answer"
-                                                size="small"
-                                                :placeholder="$$$$$item.placeholder"
-                                                @blur="numAddAnswer($$$$$item)"
-                                              ></el-input>
-                                            </el-form-item>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                 <!-- 下拉单选 -->
-                                 <div v-if="$$$item.type == 'select'">
-                                   <el-form-item label="" class="text-base">
-                                      <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                          <div slot="content">
-                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                          </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                      </div>
-                                     <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)">
-                                       <el-option
-                                         v-for="(s,i) in $$$item.listData"
-                                         :key="i"
-                                         :label="s.label"
-                                         :value="s.value">
-                                       </el-option>
-                                     </el-select>
-                                   </el-form-item>
-                                   <!--下拉框中的问题又会迁出子问题-->
-                                   <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
-                                      <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
-                                        <!-- 省市三级联动 -->
-                                        <div v-if="$$$$item.type == 'select_city'">
-                                          <el-form-item label="">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-cascader
-                                            v-model="$$$$item.answer"
-                                            :options="options"
-                                            @change="userAddAnswerAction($$$$item)">
-                                            </el-cascader>
-                                          </el-form-item>
-                                        </div>
-                                        <!--日期-精确到日-->
-                                        <div v-if="$$$$item.type == 'dateTime_day'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-date-picker
-                                              v-model="$$$$item.answer"
-                                              type="date"
-                                              size="small"
-                                               @change="userAddAnswerAction($$$$item)"
-                                              placeholder="选择日期"
-                                              format="yyyy 年 MM 月 dd 日"
-                                              value-format="yyyy-MM-dd">
-                                            </el-date-picker>
-                                          </el-form-item>
-                                        </div>
-                                        <!--日期-区间几点到几点-->
-                                        <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
-                                         <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-time-picker
-                                              v-model="$$$$item.answer"
-                                              is-range
-                                              @change="userAddAnswerAction($$$$item)"
-                                              type="datetimerange"
-                                              size="small"
-                                              range-separator="至"
-                                              start-placeholder="开始日期"
-                                              end-placeholder="结束日期"
-                                              placeholder="选择时间范围">
-                                            </el-time-picker>
-                                          </el-form-item>
-                                        </div>
-                                        <!--日期-区间几号到几号-->
-                                        <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-date-picker
-                                              v-model="$$$$item.answer"
-                                              @change="userAddAnswerAction($$$$item)"
-                                              type="daterange"
-                                              size="small"
-                                              range-separator="至"
-                                              start-placeholder="开始日期"
-                                              end-placeholder="结束日期"
-                                              placeholder="选择日期范围">
-                                            </el-date-picker>
-                                          </el-form-item>
-                                        </div>
-                                        <!--输入框-文字类型-->
-                                        <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-input
-                                              type="text"
-                                              class="ban"
-                                              v-model="$$$$item.answer"
-                                              size="small"
-                                              :placeholder="$$$$item.placeholder"
-                                              @blur="userAddAnswerAction($$$$item)"
-                                            ></el-input>
-                                          </el-form-item>
-                                        </div>
-                                        <!--输入框-数字类型（类似身份证号、金额）-->
-                                        <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-input
-                                              type="number"
-                                              class="ban"
-                                              v-model="$$$$item.answer"
-                                              size="small"
-                                              :placeholder="$$$$item.placeholder"
-                                              @blur="userAddAnswerAction($$$$item)"
-                                            ></el-input>
-                                          </el-form-item>
-                                        </div>
-                                        <!-- 银行卡 -->
-                                        <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='BankCard'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-input
-                                              type="number"
-                                              class="ban"
-                                              v-model="$$$$item.answer"
-                                              size="small"
-                                              :placeholder="$$$$item.placeholder"
-                                              @blur="numAddAnswer($$$$item)"
-                                            ></el-input>
-                                          </el-form-item>
-                                        </div>
-                                        <!-- 手机号 -->
-                                        <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='PhoneNum'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-input
-                                              type="number"
-                                              class="ban"
-                                              v-model="$$$$item.answer"
-                                              size="small"
-                                              :placeholder="$$$$item.placeholder"
-                                              @blur="numAddAnswer($$$$item)"
-                                            ></el-input>
-                                          </el-form-item>
-                                        </div>
-                                        <!--单选框-->
-                                        <div v-if="$$$$item.type == 'radio'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                              <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                            </el-radio-group>
-                                          </el-form-item>
-                                        </div>
-                                        <!--下拉框-->
-                                        <div v-if="$$$$item.type == 'select'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                              <el-option
-                                                size="small"
-                                                v-for="(s,i) in $$$$item.listData"
-                                                :key="i"
-                                                :label="s.label"
-                                                :value="s.value">
-                                              </el-option>
-                                            </el-select>
-                                          </el-form-item>
-                                        </div>
-                                        <!-- 下拉框多选 -->
-                                        <div v-if="$$$$item.type == 'select_multiple'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
-                                              <el-option
-                                                v-for="(s,i) in $$$$item.listData"
-                                                :key="i"
-                                                :label="s.label"
-                                                :value="s.value">
-                                              </el-option>
-                                            </el-select>
-                                          </el-form-item>
-                                        </div>
-                                        <!-- 下拉框时间 -->
-                                        <div v-if="$$$$item.type == 'select_day'">
-                                          <el-form-item label="" class="text-base">
-                                            <div>
-                                               <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                              <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                                <div slot="content">
-                                                  <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                  <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                </div>
-                                                <i class="el-icon-question"></i>
-                                              </el-tooltip>
-                                              <el-popover
-                                                v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                                placement="right"
-                                                width="400"
-                                                trigger="hover">
-                                                <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                   <img :src="imgModel">
-                                                </div>
-                                                <i  slot="reference" class="el-icon-picture"></i>
-                                              </el-popover>
-                                            </div>
-                                            <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                              <el-option
-                                                v-for="(s,i) in days"
-                                                :key="i"
-                                                :label="s"
-                                                :value="s">
-                                              </el-option>
-                                            </el-select>
-                                          </el-form-item>
-                                        </div>
-                                      </div>
+                                      <el-date-picker
+                                         v-model="$$$item.answer"
+                                         type="date"
+                                         size="small"
+                                         placeholder="选择日期"
+                                         @change="userAddAnswerAction($$$item)"
+                                         format="yyyy 年 MM 月 dd 日"
+                                         value-format="yyyy-MM-dd">
+                                      </el-date-picker>
+                                     </el-form-item>
                                    </div>
-                                 </div>
-                                 <!-- 下拉多选 -->
-                                 <div v-if="$$$item.type == 'select_multiple'">
-                                    <el-form-item label="" class="text-base">
+                                   <!--日期-区间几点到几点-->
+                                   <div v-if="$$$item.type == 'dateTime_Time_Interval'">
+                                     <el-form-item label="" class="text-base">
                                       <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
                                         <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
                                           <div slot="content">
                                             <h3 class="text-base w-full font-bold">小贴士</h3><br/>
@@ -2082,1685 +1293,221 @@
                                           <i  slot="reference" class="el-icon-picture"></i>
                                         </el-popover>
                                       </div>
-                                      <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
-                                        <el-option
-                                          v-for="(s,i) in $$$item.listData"
-                                          :key="i"
-                                          :label="s.label"
-                                          :value="s.value">
-                                        </el-option>
-                                      </el-select>
-                                    </el-form-item>
-                                  </div>
-                               </div>
-                            </div>
-
-                            <!-- 二级问题块 -->
-
-                            <div v-if="$$item.childQuestion && $$item.childQuestion[$$item.answer]">
-                              <div v-for="($$$item,$$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
-                                <!-- 省市三级联动 -->
-                                <div v-if="$$$item.type == 'select_city'">
-                                  <el-form-item label="">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-cascader
-                                    v-model="$$$item.answer"
-                                    :options="options"
-                                    @change="userAddAnswerAction($$$item)">
-                                    </el-cascader>
-                                  </el-form-item>
-                                </div>
-                                <!--日期-精确到日-->
-                                <div v-if="$$$item.type == 'dateTime_day'">
-                                  <el-form-item label="" class="text-base">
+                                       <el-time-picker
+                                         v-model="$$$item.answer"
+                                         @change="userAddAnswerAction($$$item)"
+                                         type="datetimerange"
+                                         is-range
+                                         size="small"
+                                         range-separator="至"
+                                         start-placeholder="开始日期"
+                                         end-placeholder="结束日期"
+                                         placeholder="选择时间范围">
+                                       </el-time-picker>
+                                     </el-form-item>
+                                   </div>
+                                   <!--日期-区间几号到几号-->
+                                   <div v-if="$$$item.type == 'dateTime_Day_Interval'">
+                                     <el-form-item label="" class="text-base">
                                       <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-date-picker
-                                      v-model="$$$item.answer"
-                                      @change="userAddAnswerAction($$$item)"
-                                      type="date"
-                                      size="small"
-                                      placeholder="选择日期"
-                                      format="yyyy 年 MM 月 dd 日"
-                                      value-format="yyyy-MM-dd">
-                                    </el-date-picker>
-                                  </el-form-item>
-                                </div>
-                                <!--日期-区间几点到几点-->
-                                <div v-if="$$$item.type == 'dateTime_Time_Interval'">
-                                  <el-form-item label="" class="text-base">
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                          <div slot="content">
+                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                          </div>
+                                          <i class="el-icon-question"></i>
+                                        </el-tooltip>
+                                        <el-popover
+                                          v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                          placement="right"
+                                          width="400"
+                                          trigger="hover">
+                                          <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                             <img :src="imgModel">
+                                          </div>
+                                          <i  slot="reference" class="el-icon-picture"></i>
+                                        </el-popover>
+                                      </div>
+                                       <el-date-picker
+                                         v-model="$$$item.answer"
+                                         @change="userAddAnswerAction($$$item)"
+                                         type="daterange"
+                                         size="small"
+                                         range-separator="至"
+                                         start-placeholder="开始日期"
+                                         end-placeholder="结束日期"
+                                         placeholder="选择日期范围">
+                                       </el-date-picker>
+                                     </el-form-item>
+                                   </div>
+                                   <!--输入框-文字类型-->
+                                   <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
+                                     <el-form-item label="" class="text-base">
                                       <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-time-picker
-                                      v-model="$$$item.answer"
-                                      @change="userAddAnswerAction($$$item)"
-                                      type="datetimerange"
-                                      is-range
-                                      size="small"
-                                      range-separator="至"
-                                      start-placeholder="开始日期"
-                                      end-placeholder="结束日期"
-                                      placeholder="选择时间范围">
-                                    </el-time-picker>
-                                  </el-form-item>
-                                </div>
-                                <!--日期-区间几号到几号-->
-                                <div v-if="$$$item.type == 'dateTime_Day_Interval'">
-                                  <el-form-item label="" class="text-base">
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                          <div slot="content">
+                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                          </div>
+                                          <i class="el-icon-question"></i>
+                                        </el-tooltip>
+                                        <el-popover
+                                          v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                          placement="right"
+                                          width="400"
+                                          trigger="hover">
+                                          <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                             <img :src="imgModel">
+                                          </div>
+                                          <i  slot="reference" class="el-icon-picture"></i>
+                                        </el-popover>
+                                      </div>
+                                       <el-input
+                                         type="text"
+                                         class="ban"
+                                         v-model="$$$item.answer"
+                                         size="small"
+                                         :placeholder="$$$item.placeholder"
+                                         @blur="userAddAnswerAction($$$item)"
+                                       ></el-input>
+                                     </el-form-item>
+                                   </div>
+                                   <!--输入框-数字类型（类似身份证号、金额）-->
+                                   <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
+                                     <el-form-item label="" class="text-base">
                                       <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                          <div slot="content">
+                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                          </div>
+                                          <i class="el-icon-question"></i>
+                                        </el-tooltip>
+                                        <el-popover
+                                          v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                          placement="right"
+                                          width="400"
+                                          trigger="hover">
+                                          <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                             <img :src="imgModel">
+                                          </div>
+                                          <i  slot="reference" class="el-icon-picture"></i>
+                                        </el-popover>
+                                      </div>
+                                       <el-input
+                                         type="number"
+                                         class="ban"
+                                         v-model="$$$item.answer"
+                                         size="small"
+                                         :placeholder="$$$item.placeholder"
+                                         @blur="userAddAnswerAction($$$item)"
+                                       ></el-input>
+                                     </el-form-item>
+                                   </div>
+                                   <!-- 银行卡 -->
+                                   <div v-if="$$$item.type == 'input' && $$$item.input_type=='BankCard'">
+                                     <el-form-item label="" class="text-base">
+                                      <div>
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                          <div slot="content">
+                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                          </div>
+                                          <i class="el-icon-question"></i>
+                                        </el-tooltip>
+                                        <el-popover
+                                          v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                          placement="right"
+                                          width="400"
+                                          trigger="hover">
+                                          <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                             <img :src="imgModel">
+                                          </div>
+                                          <i  slot="reference" class="el-icon-picture"></i>
+                                        </el-popover>
+                                      </div>
+                                       <el-input
+                                         type="number"
+                                         class="ban"
+                                         v-model="$$$item.answer"
+                                         size="small"
+                                         :placeholder="$$$item.placeholder"
+                                         @blur="numAddAnswer($$$item)"
+                                       ></el-input>
+                                     </el-form-item>
+                                   </div>
+                                   <!-- 手机号 -->
+                                   <div v-if="$$$item.type == 'input' && $$$item.input_type=='PhoneNum'">
+                                     <el-form-item label="" class="text-base">
+                                      <div>
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                          <div slot="content">
+                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                          </div>
+                                          <i class="el-icon-question"></i>
+                                        </el-tooltip>
+                                        <el-popover
+                                          v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                          placement="right"
+                                          width="400"
+                                          trigger="hover">
+                                          <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                             <img :src="imgModel">
+                                          </div>
+                                          <i  slot="reference" class="el-icon-picture"></i>
+                                        </el-popover>
+                                      </div>
+                                       <el-input
+                                         type="number"
+                                         class="ban"
+                                         v-model="$$$item.answer"
+                                         size="small"
+                                         :placeholder="$$$item.placeholder"
+                                         @blur="numAddAnswer($$$item)"
+                                       ></el-input>
+                                     </el-form-item>
+                                   </div>
+                                   <!--单选框-->
+                                   <div v-if="$$$item.type == 'radio'">
+                                     <el-form-item label="" class="text-base">
+                                      <div>
+                                        <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                        <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                          <div slot="content">
+                                            <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                            <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                          </div>
+                                          <i class="el-icon-question"></i>
+                                        </el-tooltip>
+                                        <el-popover
                                         v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
                                         placement="right"
                                         width="400"
                                         trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-date-picker
-                                      v-model="$$$item.answer"
-                                      @change="userAddAnswerAction($$$item)"
-                                      type="daterange"
-                                      size="small"
-                                      range-separator="至"
-                                      start-placeholder="开始日期"
-                                      end-placeholder="结束日期"
-                                      placeholder="选择日期范围">
-                                    </el-date-picker>
-                                  </el-form-item>
-                                </div>
-                                <!--输入框-文字类型-->
-                                <div v-if="$$$item.type == 'input' && $$$item.input_type=='text'">
-                                  <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-input
-                                      type="text"
-                                      class="ban"
-                                      v-model="$$$item.answer"
-                                      size="small"
-                                      :placeholder="$$$item.placeholder"
-                                      @blur="userAddAnswerAction($$$item)"
-                                    ></el-input>
-                                  </el-form-item>
-                                </div>
-                                <!--输入框-数字类型（类似身份证号、金额）-->
-                                <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
-                                  <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-input
-                                      type="number"
-                                      class="ban"
-                                      v-model="$$$item.answer"
-                                      size="small"
-                                      :placeholder="$$$item.placeholder"
-                                      @blur="userAddAnswerAction($$$item)"
-                                    ></el-input>
-                                  </el-form-item>
-                                </div>
-                                <!-- 银行卡 -->
-                                <div v-if="$$$item.type == 'input' && $$$item.input_type=='BankCard'">
-                                  <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-input
-                                      type="number"
-                                      class="ban"
-                                      v-model="$$$item.answer"
-                                      size="small"
-                                      :placeholder="$$$item.placeholder"
-                                      @blur="numAddAnswer($$$item)"
-                                    ></el-input>
-                                  </el-form-item>
-                                </div>
-                                <!-- 手机号 -->
-                                <div v-if="$$$item.type == 'input' && $$$item.input_type=='PhoneNum'">
-                                  <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-input
-                                      type="number"
-                                      class="ban"
-                                      v-model="$$$item.answer"
-                                      size="small"
-                                      :placeholder="$$$item.placeholder"
-                                      @blur="numAddAnswer($$$item)"
-                                    ></el-input>
-                                  </el-form-item>
-                                </div>
-                                <!--单选框-->
-                                <div v-if="$$$item.type == 'radio'">
-                                 <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
-                                      <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                    </el-radio-group>
-                                  </el-form-item>
-                                  <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
-                                    <div v-for="($$$$item, $$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
-                                      <!-- 省市三级联动 -->
-                                      <div v-if="$$$$item.type == 'select_city'">
-                                        <el-form-item label="">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
+                                          <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                             <img :src="imgModel">
                                           </div>
-                                          <el-cascader
-                                          v-model="$$$$item.answer"
-                                          :options="options"
-                                          @change="userAddAnswerAction($$$$item)">
-                                          </el-cascader>
-                                        </el-form-item>
+                                          <i  slot="reference" class="el-icon-picture"></i>
+                                        </el-popover>
                                       </div>
-                                      <!-- 30天以内的下拉选项 -->
-                                      <div v-if="$$$$item.type == 'select_day'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                            <el-option
-                                              v-for="(s,i) in days"
-                                              :key="i"
-                                              :label="s"
-                                              :value="s">
-                                            </el-option>
-                                          </el-select>
-                                        </el-form-item>
-                                      </div>
-                                      <!--日期-精确到日-->
-                                      <div v-if="$$$$item.type == 'dateTime_day'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-date-picker
-                                            v-model="$$$$item.answer"
-                                            @change="userAddAnswerAction($$$$item)"
-                                            type="date"
-                                            size="small"
-                                            placeholder="选择日期"
-                                            format="yyyy 年 MM 月 dd 日"
-                                            value-format="yyyy-MM-dd">
-                                          </el-date-picker>
-                                        </el-form-item>
-                                      </div>
-                                      <!--日期-区间几点到几点-->
-                                      <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
-                                        <el-form-item label="" class="text-base">
-                                            <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-time-picker
-                                            v-model="$$$$item.answer"
-                                            @change="userAddAnswerAction($$$$item)"
-                                            type="datetimerange"
-                                            is-range
-                                            size="small"
-                                            range-separator="至"
-                                            start-placeholder="开始日期"
-                                            end-placeholder="结束日期"
-                                            placeholder="选择时间范围">
-                                          </el-time-picker>
-                                        </el-form-item>
-                                      </div>
-                                      <!--日期-区间几号到几号-->
-                                      <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
-                                        <el-form-item label="" class="text-base">
-                                            <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-date-picker
-                                            v-model="$$$$item.answer"
-                                            @change="userAddAnswerAction($$$$item)"
-                                            type="daterange"
-                                            size="small"
-                                            range-separator="至"
-                                            start-placeholder="开始日期"
-                                            end-placeholder="结束日期"
-                                            placeholder="选择日期范围">
-                                          </el-date-picker>
-                                        </el-form-item>
-                                      </div>
-                                      <!--输入框-文字类型-->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="text"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="userAddAnswerAction($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!--输入框-数字类型（类似身份证号、金额）-->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="number"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="userAddAnswerAction($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!-- 银行卡 -->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='BankCard'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="number"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="numAddAnswer($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!-- 手机号 -->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='PhoneNum'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="number"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="numAddAnswer($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!--单选框-->
-                                      <div v-if="$$$$item.type == 'radio'">
-                                       <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                            <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                          </el-radio-group>
-                                        </el-form-item>
-                                      </div>
-                                      <!-- 下拉框 -->
-                                      <div v-if="$$$$item.type == 'select'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                            <el-option
-                                              v-for="(s,i) in $$$$item.listData"
-                                              :key="i"
-                                              :label="s.label"
-                                              :value="s.value">
-                                            </el-option>
-                                          </el-select>
-                                        </el-form-item>
-                                        <div  v-if="$$$$item.grandson && $$$$item.grandson[$$$$item.answer]">
-                                          <div v-for="($$$$$item, $$$$$index) in $$$$item.grandson[$$$$item.answer]" :key="$$$$$index">
+                                      <el-radio-group v-model="$$$item.answer" @change="userAddAnswerAction($$$item)">
+                                       <el-radio :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                                      </el-radio-group>
+                                     </el-form-item>
+                                      <div v-if="$$$item.grandson">
+                                        <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                                          <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
                                             <!-- 省市三级联动 -->
                                             <div v-if="$$$$$item.type == 'select_city'">
                                               <el-form-item label="">
                                                 <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-cascader
-                                                v-model="$$$$$item.answer"
-                                                :options="options"
-                                                @change="userAddAnswerAction($$$$$item)">
-                                                </el-cascader>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 30天以内的下拉选项 -->
-                                            <div v-if="$$$$$item.type == 'select_day'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-select v-model="$$$$$item.answer" size="small" @change="userAddAnswerAction($$$$$item)">
-                                                  <el-option
-                                                    v-for="(s,i) in days"
-                                                    :key="i"
-                                                    :label="s"
-                                                    :value="s">
-                                                  </el-option>
-                                                </el-select>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-精确到日-->
-                                            <div v-if="$$$$$item.type == 'dateTime_day'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-date-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="date"
-                                                  size="small"
-                                                  placeholder="选择日期"
-                                                  format="yyyy 年 MM 月 dd 日"
-                                                  value-format="yyyy-MM-dd">
-                                                </el-date-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-区间几点到几点-->
-                                            <div v-if="$$$$$item.type == 'dateTime_Time_Interval'">
-                                              <el-form-item label="" class="text-base">
-                                                  <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-time-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="datetimerange"
-                                                  is-range
-                                                  size="small"
-                                                  range-separator="至"
-                                                  start-placeholder="开始日期"
-                                                  end-placeholder="结束日期"
-                                                  placeholder="选择时间范围">
-                                                </el-time-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-区间几号到几号-->
-                                            <div v-if="$$$$$item.type == 'dateTime_Day_Interval'">
-                                              <el-form-item label="" class="text-base">
-                                                  <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-date-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="daterange"
-                                                  size="small"
-                                                  range-separator="至"
-                                                  start-placeholder="开始日期"
-                                                  end-placeholder="结束日期"
-                                                  placeholder="选择日期范围">
-                                                </el-date-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--输入框-文字类型-->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="text"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!--输入框-数字类型（类似身份证号、金额）-->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 银行卡 -->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='BankCard'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 手机号 -->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='PhoneNum'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!--单选框-->
-                                            <div v-if="$$$$$item.type == 'radio'">
-                                             <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-radio-group v-model="$$$$$item.answer" @change="userAddAnswerAction($$$$$item)">
-                                                  <el-radio :label="list.value" v-for="(list, listIndex) in $$$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                                </el-radio-group>
-                                              </el-form-item>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <!-- 多选框 -->
-                                      <div v-if="$$$$item.type == 'checkbox'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$item.description }}</div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                            <el-option
-                                              v-for="(ss,ii) in $$$$item.listData"
-                                              :key="ii"
-                                              :label="ss.label"
-                                              :value="ss.value">
-                                            </el-option>
-                                          </el-select>
-                                        </el-form-item>
-                                        <div  v-if="$$$$item.grandson && $$$$item.grandson[$$$$item.answer]">
-                                          <div v-for="($$$$$item, $$$$$index) in $$$$item.grandson[$$$$item.answer]" :key="$$$$$index">
-                                            <!-- 省市三级联动 -->
-                                            <div v-if="$$$$$item.type == 'select_city'">
-                                              <el-form-item label="">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-cascader
-                                                v-model="$$$$$item.answer"
-                                                :options="options"
-                                                @change="userAddAnswerAction($$$$$item)">
-                                                </el-cascader>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 30天以内的下拉选项 -->
-                                            <div v-if="$$$$$item.type == 'select_day'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-select v-model="$$$$$item.answer" size="small" @change="userAddAnswerAction($$$$$item)">
-                                                  <el-option
-                                                    v-for="(s,i) in days"
-                                                    :key="i"
-                                                    :label="s"
-                                                    :value="s">
-                                                  </el-option>
-                                                </el-select>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-精确到日-->
-                                            <div v-if="$$$$$item.type == 'dateTime_day'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-date-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="date"
-                                                  size="small"
-                                                  placeholder="选择日期"
-                                                  format="yyyy 年 MM 月 dd 日"
-                                                  value-format="yyyy-MM-dd">
-                                                </el-date-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-区间几点到几点-->
-                                            <div v-if="$$$$$item.type == 'dateTime_Time_Interval'">
-                                              <el-form-item label="" class="text-base">
-                                                  <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-time-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="datetimerange"
-                                                  is-range
-                                                  size="small"
-                                                  range-separator="至"
-                                                  start-placeholder="开始日期"
-                                                  end-placeholder="结束日期"
-                                                  placeholder="选择时间范围">
-                                                </el-time-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-区间几号到几号-->
-                                            <div v-if="$$$$$item.type == 'dateTime_Day_Interval'">
-                                              <el-form-item label="" class="text-base">
-                                                  <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-date-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="daterange"
-                                                  size="small"
-                                                  range-separator="至"
-                                                  start-placeholder="开始日期"
-                                                  end-placeholder="结束日期"
-                                                  placeholder="选择日期范围">
-                                                </el-date-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--输入框-文字类型-->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="text"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!--输入框-数字类型（类似身份证号、金额）-->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 银行卡 -->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='BankCard'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 手机号 -->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='PhoneNum'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!--单选框-->
-                                            <div v-if="$$$$$item.type == 'radio'">
-                                             <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content"><h3 class="text-base w-full font-bold">小贴士</h3><br/>{{ $$$$$item.description }}</div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-radio-group v-model="$$$$$item.answer" @change="userAddAnswerAction($$$$$item)">
-                                                  <el-radio :label="list.value" v-for="(list, listIndex) in $$$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                                </el-radio-group>
-                                              </el-form-item>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <!--下拉框-->
-                                <div v-if="$$$item.type == 'select'">
-                                  <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)">
-                                      <el-option
-                                        v-for="(s,i) in $$$item.listData"
-                                        :key="i"
-                                        :label="s.label"
-                                        :value="s.value">
-                                      </el-option>
-                                    </el-select>
-                                  </el-form-item>
-                                  <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
-                                    <div v-for="($$$$item, $$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
-                                      <!-- 省市三级联动 -->
-                                      <div v-if="$$$$item.type == 'select_city'">
-                                        <el-form-item label="">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-cascader
-                                          v-model="$$$$item.answer"
-                                          :options="options"
-                                          @change="userAddAnswerAction($$$$item)">
-                                          </el-cascader>
-                                        </el-form-item>
-                                      </div>
-                                      <!-- 30天以内的下拉选项 -->
-                                      <div v-if="$$$$item.type == 'select_day'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                            <el-option
-                                              v-for="(s,i) in days"
-                                              :key="i"
-                                              :label="s"
-                                              :value="s">
-                                            </el-option>
-                                          </el-select>
-                                        </el-form-item>
-                                      </div>
-                                      <!--日期-精确到日-->
-                                      <div v-if="$$$$item.type == 'dateTime_day'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-date-picker
-                                            v-model="$$$$item.answer"
-                                            @change="userAddAnswerAction($$$$item)"
-                                            type="date"
-                                            size="small"
-                                            placeholder="选择日期"
-                                            format="yyyy 年 MM 月 dd 日"
-                                            value-format="yyyy-MM-dd">
-                                          </el-date-picker>
-                                        </el-form-item>
-                                      </div>
-                                      <!--日期-区间几点到几点-->
-                                      <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
-                                        <el-form-item label="" class="text-base">
-                                            <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-time-picker
-                                            v-model="$$$$item.answer"
-                                            @change="userAddAnswerAction($$$$item)"
-                                            type="datetimerange"
-                                            is-range
-                                            size="small"
-                                            range-separator="至"
-                                            start-placeholder="开始日期"
-                                            end-placeholder="结束日期"
-                                            placeholder="选择时间范围">
-                                          </el-time-picker>
-                                        </el-form-item>
-                                      </div>
-                                      <!--日期-区间几号到几号-->
-                                      <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
-                                        <el-form-item label="" class="text-base">
-                                            <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-date-picker
-                                            v-model="$$$$item.answer"
-                                            @change="userAddAnswerAction($$$$item)"
-                                            type="daterange"
-                                            size="small"
-                                            range-separator="至"
-                                            start-placeholder="开始日期"
-                                            end-placeholder="结束日期"
-                                            placeholder="选择日期范围">
-                                          </el-date-picker>
-                                        </el-form-item>
-                                      </div>
-                                      <!--输入框-文字类型-->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="text"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="userAddAnswerAction($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!--输入框-数字类型（类似身份证号、金额）-->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="number"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="userAddAnswerAction($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!-- 银行卡 -->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='BankCard'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="number"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="numAddAnswer($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!-- 电话卡 -->
-                                      <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='PhoneNum'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-input
-                                            type="number"
-                                            class="ban"
-                                            v-model="$$$$item.answer"
-                                            size="small"
-                                            :placeholder="$$$$item.placeholder"
-                                            @blur="numAddAnswer($$$$item)"
-                                          ></el-input>
-                                        </el-form-item>
-                                      </div>
-                                      <!--单选框-->
-                                      <div v-if="$$$$item.type == 'radio'">
-                                       <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                            <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                          </el-radio-group>
-                                        </el-form-item>
-                                      </div>
-                                      <!-- 下拉框 -->
-                                      <div v-if="$$$$item.type == 'select'">
-                                        <el-form-item label="" class="text-base">
-                                          <div>
-                                             <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                            <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                              <div slot="content">
-                                                <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                              </div>
-                                              <i class="el-icon-question"></i>
-                                            </el-tooltip>
-                                            <el-popover
-                                              v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                              placement="right"
-                                              width="400"
-                                              trigger="hover">
-                                              <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                 <img :src="imgModel">
-                                              </div>
-                                              <i  slot="reference" class="el-icon-picture"></i>
-                                            </el-popover>
-                                          </div>
-                                          <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                            <el-option
-                                              v-for="(s,i) in $$$$item.listData"
-                                              :key="i"
-                                              :label="s.label"
-                                              :value="s.value">
-                                            </el-option>
-                                          </el-select>
-                                        </el-form-item>
-                                        <div  v-if="$$$$item.grandson && $$$$item.grandson[$$$$item.answer]">
-                                          <div v-for="($$$$$item, $$$$$index) in $$$$item.grandson[$$$$item.answer]" :key="$$$$$index">
-                                            <!-- 省市三级联动 -->
-                                            <div v-if="$$$$$item.type == 'select_city'">
-                                              <el-form-item label="">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
                                                   <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
                                                     <div slot="content">
                                                       <h3 class="text-base w-full font-bold">小贴士</h3><br/>
@@ -3786,989 +1533,57 @@
                                                 </el-cascader>
                                               </el-form-item>
                                             </div>
-                                            <!-- 30天以内的下拉选项 -->
-                                            <div v-if="$$$$$item.type == 'select_day'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-select v-model="$$$$$item.answer" size="small" @change="userAddAnswerAction($$$$$item)">
-                                                  <el-option
-                                                    v-for="(s,i) in days"
-                                                    :key="i"
-                                                    :label="s"
-                                                    :value="s">
-                                                  </el-option>
-                                                </el-select>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-精确到日-->
-                                            <div v-if="$$$$$item.type == 'dateTime_day'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-date-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="date"
-                                                  size="small"
-                                                  placeholder="选择日期"
-                                                  format="yyyy 年 MM 月 dd 日"
-                                                  value-format="yyyy-MM-dd">
-                                                </el-date-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-区间几点到几点-->
-                                            <div v-if="$$$$$item.type == 'dateTime_Time_Interval'">
-                                              <el-form-item label="" class="text-base">
-                                                  <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-time-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="datetimerange"
-                                                  is-range
-                                                  size="small"
-                                                  range-separator="至"
-                                                  start-placeholder="开始日期"
-                                                  end-placeholder="结束日期"
-                                                  placeholder="选择时间范围">
-                                                </el-time-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--日期-区间几号到几号-->
-                                            <div v-if="$$$$$item.type == 'dateTime_Day_Interval'">
-                                              <el-form-item label="" class="text-base">
-                                                  <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-date-picker
-                                                  v-model="$$$$$item.answer"
-                                                  @change="userAddAnswerAction($$$$$item)"
-                                                  type="daterange"
-                                                  size="small"
-                                                  range-separator="至"
-                                                  start-placeholder="开始日期"
-                                                  end-placeholder="结束日期"
-                                                  placeholder="选择日期范围">
-                                                </el-date-picker>
-                                              </el-form-item>
-                                            </div>
-                                            <!--输入框-文字类型-->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="text"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!--输入框-数字类型（类似身份证号、金额）-->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 银行卡 -->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='BankCard'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!-- 手机号 -->
-                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='PhoneNum'">
-                                              <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-input
-                                                  type="number"
-                                                  class="ban"
-                                                  v-model="$$$$$item.answer"
-                                                  size="small"
-                                                  :placeholder="$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$item)"
-                                                ></el-input>
-                                              </el-form-item>
-                                            </div>
-                                            <!--单选框-->
-                                            <div v-if="$$$$$item.type == 'radio'">
-                                             <el-form-item label="" class="text-base">
-                                                <div>
-                                                   <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
-                                                    <div slot="content">
-                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                                    </div>
-                                                    <i class="el-icon-question"></i>
-                                                  </el-tooltip>
-                                                  <el-popover
-                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
-                                                    placement="right"
-                                                    width="400"
-                                                    trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                                       <img :src="imgModel">
-                                                    </div>
-                                                    <i  slot="reference" class="el-icon-picture"></i>
-                                                  </el-popover>
-                                                </div>
-                                                <el-radio-group v-model="$$$$$item.answer" @change="userAddAnswerAction($$$$$item)">
-                                                  <el-radio :label="list.value" v-for="(list, listIndex) in $$$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                                </el-radio-group>
-                                              </el-form-item>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                 <!--下拉框(多选)-->
-                                <div v-if="$$$item.type == 'select_multiple'">
-                                  <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
-                                      <el-option
-                                        v-for="(s,i) in $$$item.listData"
-                                        :key="i"
-                                        :label="s.label"
-                                        :value="s.value">
-                                      </el-option>
-                                    </el-select>
-                                  </el-form-item>
-                                </div>
-                                <!--下拉框选择每月几号-->
-                                <div v-if="$$$item.type == 'select_day_per'">
-                                    <el-form-item label="" class="text-base">
-                                      <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                      <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)">
-                                        <el-option
-                                          v-for="(s,i) in days"
-                                          :key="i"
-                                          :label="s"
-                                          :value="s">
-                                        </el-option>
-                                      </el-select>
-                                    </el-form-item>
-                                </div>
-                                <!--下拉框选择月几号-->
-                                <div v-if="$$$item.type == 'select_day'">
-                                    <el-form-item label="" class="text-base">
-                                      <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                      <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)" >
-                                        <el-option
-                                          v-for="(s,i) in days"
-                                          :key="i"
-                                          :label="s"
-                                          :value="s">
-                                        </el-option>
-                                      </el-select>
-                                    </el-form-item>
-                                </div>
-                                <!--下拉选择一年中哪个月-->
-                                <div v-if="$$$item.type == 'select_year'">
-                                  <el-form-item label="" class="text-base">
-                                    <div>
-                                       <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
-                                      <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
-                                        <div slot="content">
-                                          <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                          <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                        </div>
-                                        <i class="el-icon-question"></i>
-                                      </el-tooltip>
-                                      <el-popover
-                                        v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
-                                        placement="right"
-                                        width="400"
-                                        trigger="hover">
-                                        <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                           <img :src="imgModel">
-                                        </div>
-                                        <i  slot="reference" class="el-icon-picture"></i>
-                                      </el-popover>
-                                    </div>
-                                    <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)">
-                                      <el-option
-                                        v-for="(s,i) in mon"
-                                        :key="i"
-                                        :label="s"
-                                        :value="s">
-                                      </el-option>
-                                    </el-select>
-                                  </el-form-item>
-                                </div>
-
-                                <!-- 三级问题 -->
-
-                                <div v-if="$$$item.questions ">
-                                  <h2 class="text-left text-blue-500">{{$$$item.title}}</h2>
-                                  <div v-for="($$$$item, $$$$index) in $$$item.questions" :key="$$$$index">
-                                    <!-- 省市三级联动 -->
-                                    <div v-if="$$$$item.type == 'select_city'">
-                                      <el-form-item label="">
-                                        <div>
-                                           <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                            <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                            <i class="el-icon-question"></i>
-                                          </el-tooltip>
-                                          <el-popover
-                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                            placement="right"
-                                            width="400"
-                                            trigger="hover">
-                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                               <img :src="imgModel">
-                                            </div>
-                                            <i  slot="reference" class="el-icon-picture"></i>
-                                          </el-popover>
-                                        </div>
-                                        <el-cascader
-                                        v-model="$$$$item.answer"
-                                        :options="options"
-                                        @change="userAddAnswerAction($$$$item)">
-                                        </el-cascader>
-                                      </el-form-item>
-                                    </div>
-                                    <!--日期-精确到日-->
-                                    <div v-if="$$$$item.type == 'dateTime_day'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-date-picker
-                                          v-model="$$$$item.answer"
-                                          @change="userAddAnswerAction($$$$item)"
-                                          type="date"
-                                          size="small"
-                                          placeholder="选择日期"
-                                          format="yyyy 年 MM 月 dd 日"
-                                          value-format="yyyy-MM-dd">
-                                        </el-date-picker>
-                                      </el-form-item>
-                                    </div>
-                                    <!--日期-区间几点到几点-->
-                                    <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-time-picker
-                                          v-model="$$$$item.answer"
-                                          @change="userAddAnswerAction($$$$item)"
-                                          type="datetimerange"
-                                          is-range
-                                          size="small"
-                                          range-separator="至"
-                                          start-placeholder="开始日期"
-                                          end-placeholder="结束日期"
-                                          placeholder="选择时间范围">
-                                        </el-time-picker>
-                                      </el-form-item>
-                                    </div>
-                                    <!--日期-区间几号到几号-->
-                                    <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-date-picker
-                                          v-model="$$$$item.answer"
-                                          @change="userAddAnswerAction($$$$item)"
-                                          type="daterange"
-                                          size="small"
-                                          range-separator="至"
-                                          start-placeholder="开始日期"
-                                          end-placeholder="结束日期"
-                                          placeholder="选择日期范围">
-                                        </el-date-picker>
-                                      </el-form-item>
-                                    </div>
-                                    <!--输入框-文字类型-->
-                                    <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-input
-                                          type="text"
-                                          class="ban"
-                                          v-model="$$$$item.answer"
-                                          size="small"
-                                          :placeholder="$$$$item.placeholder"
-                                          @blur="userAddAnswerAction($$$$item)"
-                                        ></el-input>
-                                      </el-form-item>
-                                    </div>
-                                    <!--输入框-数字类型（类似身份证号、金额）-->
-                                    <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-input
-                                          type="number"
-                                          class="ban"
-                                          v-model="$$$$item.answer"
-                                          size="small"
-                                          :placeholder="$$$$item.placeholder"
-                                          @blur="userAddAnswerAction($$$$item)"
-                                        ></el-input>
-                                      </el-form-item>
-                                    </div>
-                                    <!-- 银行卡 -->
-                                    <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='BankCard'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-input
-                                          type="number"
-                                          class="ban"
-                                          v-model="$$$$item.answer"
-                                          size="small"
-                                          :placeholder="$$$$item.placeholder"
-                                          @blur="numAddAnswer($$$$item)"
-                                        ></el-input>
-                                      </el-form-item>
-                                    </div>
-                                    <!-- 手机号 -->
-                                    <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='PhoneNum'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-input
-                                          type="number"
-                                          class="ban"
-                                          v-model="$$$$item.answer"
-                                          size="small"
-                                          :placeholder="$$$$item.placeholder"
-                                          @blur="numAddAnswer($$$$item)"
-                                        ></el-input>
-                                      </el-form-item>
-                                    </div>
-                                    <!--单选框-->
-                                    <div v-if="$$$$item.type == 'radio'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
-                                          <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
-                                        </el-radio-group>
-                                      </el-form-item>
-                                    </div>
-                                    <!--下拉框-->
-                                    <div v-if="$$$$item.type == 'select'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                          <el-option
-                                            v-for="(s,i) in $$$$item.listData"
-                                            :key="i"
-                                            :label="s.label"
-                                            :value="s.value">
-                                          </el-option>
-                                        </el-select>
-                                      </el-form-item>
-                                    </div>
-                                     <!--下拉框(多选)-->
-                                    <div v-if="$$$$item.type == 'select_multiple'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
-                                          <el-option
-                                            v-for="(s,i) in $$$$item.listData"
-                                            :key="i"
-                                            :label="s.label"
-                                            :value="s.value">
-                                          </el-option>
-                                        </el-select>
-                                      </el-form-item>
-                                    </div>
-                                    <!--下拉框选择每月几号-->
-                                    <div v-if="$$$$item.type == 'select_day_per'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                            <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                            <i class="el-icon-question"></i>
-                                          </el-tooltip>
-                                          <el-popover
-                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                            placement="right"
-                                            width="400"
-                                            trigger="hover">
-                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                               <img :src="imgModel">
-                                            </div>
-                                            <i  slot="reference" class="el-icon-picture"></i>
-                                          </el-popover>
-                                        </div>
-                                        <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                          <el-option
-                                            v-for="(s,i) in days"
-                                            :key="i"
-                                            :label="s"
-                                            :value="s">
-                                          </el-option>
-                                        </el-select>
-                                      </el-form-item>
-                                    </div>
-                                    <!--下拉框选择月几号-->
-                                    <div v-if="$$$$item.type == 'select_day'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                           <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                            <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                            <i class="el-icon-question"></i>
-                                          </el-tooltip>
-                                          <el-popover
-                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                            placement="right"
-                                            width="400"
-                                            trigger="hover">
-                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                               <img :src="imgModel">
-                                            </div>
-                                            <i  slot="reference" class="el-icon-picture"></i>
-                                          </el-popover>
-                                        </div>
-                                        <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                          <el-option
-                                            v-for="(s,i) in days"
-                                            :key="i"
-                                            :label="s"
-                                            :value="s">
-                                          </el-option>
-                                        </el-select>
-                                      </el-form-item>
-                                    </div>
-                                    <!--下拉选择一年中哪个月-->
-                                    <div v-if="$$$$item.type == 'select_year'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                         <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                          <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                          <i class="el-icon-question"></i>
-                                        </el-tooltip>
-                                        <el-popover
-                                          v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                          placement="right"
-                                          width="400"
-                                          trigger="hover">
-                                          <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                             <img :src="imgModel">
-                                          </div>
-                                          <i  slot="reference" class="el-icon-picture"></i>
-                                        </el-popover>
-                                      </div>
-                                        <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)">
-                                          <el-option
-                                            v-for="(s,i) in mon"
-                                            :key="i"
-                                            :label="s"
-                                            :value="s">
-                                          </el-option>
-                                        </el-select>
-                                      </el-form-item>
-                                    </div>
-                                    <!-- 多选框 -->
-                                    <div v-if="$$$$item.type == 'checkbox'">
-                                      <el-form-item label="" class="text-base">
-                                        <div>
-                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
-                                          <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
-                                            <div slot="content">
-                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
-                                            </div>
-                                            <i class="el-icon-question"></i>
-                                          </el-tooltip>
-                                          <el-popover
-                                            v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
-                                            placement="right"
-                                            width="400"
-                                            trigger="hover">
-                                            <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
-                                               <img :src="imgModel">
-                                            </div>
-                                            <i  slot="reference" class="el-icon-picture"></i>
-                                          </el-popover>
-                                        </div>
-                                        <el-checkbox-group v-model="$$$$item.answer">
-                                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$$item)">{{list.label}}</el-checkbox>
-                                        </el-checkbox-group>
-                                      </el-form-item>
-                                      <div v-if="$$$$item.grandson">
-                                        <div v-for="($$$$$item, $$$$$index) in $$$$item.answer" :key="$$$$$index">
-                                          <div v-for="($$$$$$item,$$$$$$index) in $$$$item.grandson[$$$$$item]">
                                             <!-- 数字类型 -->
-                                            <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='number'">
+                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
                                               <el-form-item label="" class="text-base">
                                                 <div>
-                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$$item.isRequired==false ">选填</span>{{ $$$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$$item.description !='' && $$$$$$item.description !=undefined  && $$$$$$item.description != null" placement="right">
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
                                                     <div slot="content">
                                                       <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
                                                     </div>
                                                     <i class="el-icon-question"></i>
                                                   </el-tooltip>
                                                   <el-popover
-                                                    v-if="$$$$$$item.imgDate !=[] && $$$$$$item.imgDate !=undefined  && $$$$$$item.imgDate != null"
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
                                                     placement="right"
                                                     width="400"
                                                     trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
                                                        <img :src="imgModel">
                                                     </div>
                                                     <i  slot="reference" class="el-icon-picture"></i>
                                                   </el-popover>
                                                 </div>
                                                 <el-input
-                                                  type="number"
+                                                  type="text"
                                                   class="ban"
-                                                  v-model="$$$$$$item.answer"
+                                                  v-model="$$$$$item.answer"
                                                   size="small"
-                                                  :placeholder="$$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$$item)"
+                                                  :placeholder="$$$$$item.placeholder"
+                                                  @blur="userAddAnswerAction($$$$$item)"
                                                 ></el-input>
                                               </el-form-item>
                                             </div>
                                             <!-- 银行卡 -->
-                                            <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='BankCard'">
+                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='BankCard'">
                                               <el-form-item label="" class="text-base">
                                                 <div>
-                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$$item.isRequired==false ">选填</span>{{ $$$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$$item.description !='' && $$$$$$item.description !=undefined  && $$$$$$item.description != null" placement="right">
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
                                                     <div slot="content">
                                                       <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
                                                     </div>
                                                     <i class="el-icon-question"></i>
                                                   </el-tooltip>
                                                   <el-popover
-                                                    v-if="$$$$$$item.imgDate !=[] && $$$$$$item.imgDate !=undefined  && $$$$$$item.imgDate != null"
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
                                                     placement="right"
                                                     width="400"
                                                     trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
                                                        <img :src="imgModel">
                                                     </div>
                                                     <i  slot="reference" class="el-icon-picture"></i>
@@ -4777,31 +1592,31 @@
                                                 <el-input
                                                   type="number"
                                                   class="ban"
-                                                  v-model="$$$$$$item.answer"
+                                                  v-model="$$$$$item.answer"
                                                   size="small"
-                                                  :placeholder="$$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$$item)"
+                                                  :placeholder="$$$$$item.placeholder"
+                                                  @blur="numAddAnswer($$$$$item)"
                                                 ></el-input>
                                               </el-form-item>
                                             </div>
                                             <!-- 手机号 -->
-                                            <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='PhoneNum'">
+                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='PhoneNum'">
                                               <el-form-item label="" class="text-base">
                                                 <div>
-                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$$item.isRequired==false ">选填</span>{{ $$$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$$item.description !='' && $$$$$$item.description !=undefined  && $$$$$$item.description != null" placement="right">
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
                                                     <div slot="content">
                                                       <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
                                                     </div>
                                                     <i class="el-icon-question"></i>
                                                   </el-tooltip>
                                                   <el-popover
-                                                    v-if="$$$$$$item.imgDate !=[] && $$$$$$item.imgDate !=undefined  && $$$$$$item.imgDate != null"
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
                                                     placement="right"
                                                     width="400"
                                                     trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
                                                        <img :src="imgModel">
                                                     </div>
                                                     <i  slot="reference" class="el-icon-picture"></i>
@@ -4810,31 +1625,31 @@
                                                 <el-input
                                                   type="number"
                                                   class="ban"
-                                                  v-model="$$$$$$item.answer"
+                                                  v-model="$$$$$item.answer"
                                                   size="small"
-                                                  :placeholder="$$$$$$item.placeholder"
-                                                  @blur="numAddAnswer($$$$$$item)"
+                                                  :placeholder="$$$$$item.placeholder"
+                                                  @blur="numAddAnswer($$$$$item)"
                                                 ></el-input>
                                               </el-form-item>
                                             </div>
                                             <!-- 文本类型 -->
-                                            <div v-if="$$$$$$item.type == 'input' && $$$$$$item.input_type=='text'">
+                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='text'">
                                               <el-form-item label="" class="text-base">
                                                 <div>
-                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$$item.isRequired==false ">选填</span>{{ $$$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$$item.description !='' && $$$$$$item.description !=undefined  && $$$$$$item.description != null" placement="right">
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
                                                     <div slot="content">
                                                       <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
                                                     </div>
                                                     <i class="el-icon-question"></i>
                                                   </el-tooltip>
                                                   <el-popover
-                                                    v-if="$$$$$$item.imgDate !=[] && $$$$$$item.imgDate !=undefined  && $$$$$$item.imgDate != null"
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
                                                     placement="right"
                                                     width="400"
                                                     trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
                                                        <img :src="imgModel">
                                                     </div>
                                                     <i  slot="reference" class="el-icon-picture"></i>
@@ -4843,54 +1658,642 @@
                                                 <el-input
                                                   type="text"
                                                   class="ban"
-                                                  v-model="$$$$$$item.answer"
+                                                  v-model="$$$$$item.answer"
                                                   size="small"
-                                                  :placeholder="$$$$$$item.placeholder"
-                                                  @blur="userAddAnswerAction($$$$$$item)"
+                                                  :placeholder="$$$$$item.placeholder"
+                                                  @blur="userAddAnswerAction($$$$$item)"
                                                 ></el-input>
                                               </el-form-item>
                                             </div>
-                                            <div v-if="$$$$$$item.type == 'select'">
-                                              <el-form-item label="" class="text-base">
+                                          </div>
+                                        </div>
+                                      </div>
+                                   </div>
+                                   <!-- 多选框 -->
+                                    <div v-if="$$$item.type == 'checkbox'">
+                                      <el-form-item label="" class="text-base">
+                                        <div>
+                                          <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                          <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                            <div slot="content">
+                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                            </div>
+                                            <i class="el-icon-question"></i>
+                                          </el-tooltip>
+                                          <el-popover
+                                            v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                            placement="right"
+                                            width="400"
+                                            trigger="hover">
+                                            <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                               <img :src="imgModel">
+                                            </div>
+                                            <i  slot="reference" class="el-icon-picture"></i>
+                                          </el-popover>
+                                        </div>
+                                        <el-checkbox-group v-model="$$$item.answer">
+                                          <el-checkbox :label="list.value" v-for="(list, listIndex) in $$item.listData" :key="'list'+listIndex"  @change="userAddAnswerAction($$$item)">{{list.label}}</el-checkbox>
+                                        </el-checkbox-group>
+                                      </el-form-item>
+                                      <div v-if="$$$item.grandson">
+                                        <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
+                                          <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                                            <!-- 省市三级联动 -->
+                                            <div v-if="$$$$$item.type == 'select_city'">
+                                              <el-form-item label="">
                                                 <div>
-                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$$item.isRequired==false ">选填</span>{{ $$$$$$item.title }}</label>
-                                                  <el-tooltip  v-if="$$$$$$item.description !='' && $$$$$$item.description !=undefined  && $$$$$$item.description != null" placement="right">
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
                                                     <div slot="content">
                                                       <h3 class="text-base w-full font-bold">小贴士</h3><br/>
-                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
                                                     </div>
                                                     <i class="el-icon-question"></i>
                                                   </el-tooltip>
                                                   <el-popover
-                                                    v-if="$$$$$$item.imgDate !=[] && $$$$$$item.imgDate !=undefined  && $$$$$$item.imgDate != null"
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
                                                     placement="right"
                                                     width="400"
                                                     trigger="hover">
-                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
                                                        <img :src="imgModel">
                                                     </div>
                                                     <i  slot="reference" class="el-icon-picture"></i>
                                                   </el-popover>
                                                 </div>
-                                                <el-select v-model="$$$$$$item.answer" @change="userAddAnswerAction($$$$$$item)">
-                                                  <el-option
-                                                    size="small"
-                                                    v-for="(s,i) in $$$$$$item.listData"
-                                                    :key="i"
-                                                    :label="s.label"
-                                                    :value="s.value">
-                                                  </el-option>
-                                                </el-select>
+                                                <el-cascader
+                                                v-model="$$$$$item.answer"
+                                                :options="options"
+                                                @change="userAddAnswerAction($$$$$item)">
+                                                </el-cascader>
+                                              </el-form-item>
+                                            </div>
+                                            <!-- 数字类型 -->
+                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='number'">
+                                              <el-form-item label="" class="text-base">
+                                                <div>
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
+                                                    <div slot="content">
+                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                    </div>
+                                                    <i class="el-icon-question"></i>
+                                                  </el-tooltip>
+                                                  <el-popover
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
+                                                    placement="right"
+                                                    width="400"
+                                                    trigger="hover">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                       <img :src="imgModel">
+                                                    </div>
+                                                    <i  slot="reference" class="el-icon-picture"></i>
+                                                  </el-popover>
+                                                </div>
+                                                <el-input
+                                                  type="text"
+                                                  class="ban"
+                                                  v-model="$$$$$item.answer"
+                                                  size="small"
+                                                  :placeholder="$$$$$item.placeholder"
+                                                  @blur="userAddAnswerAction($$$$$item)"
+                                                ></el-input>
+                                              </el-form-item>
+                                            </div>
+                                            <!-- 银行卡 -->
+                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='BankCard'">
+                                              <el-form-item label="" class="text-base">
+                                                <div>
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
+                                                    <div slot="content">
+                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                    </div>
+                                                    <i class="el-icon-question"></i>
+                                                  </el-tooltip>
+                                                  <el-popover
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
+                                                    placement="right"
+                                                    width="400"
+                                                    trigger="hover">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                       <img :src="imgModel">
+                                                    </div>
+                                                    <i  slot="reference" class="el-icon-picture"></i>
+                                                  </el-popover>
+                                                </div>
+                                                <el-input
+                                                  type="number"
+                                                  class="ban"
+                                                  v-model="$$$$$item.answer"
+                                                  size="small"
+                                                  :placeholder="$$$$$item.placeholder"
+                                                  @blur="numAddAnswer($$$$$item)"
+                                                ></el-input>
+                                              </el-form-item>
+                                            </div>
+                                            <!-- 手机号 -->
+                                            <div v-if="$$$$$item.type == 'input' && $$$$$item.input_type=='PhoneNum'">
+                                              <el-form-item label="" class="text-base">
+                                                <div>
+                                                  <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$$item.isRequired==false ">选填</span>{{ $$$$$item.title }}</label>
+                                                  <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right">
+                                                    <div slot="content">
+                                                      <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                      <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                    </div>
+                                                    <i class="el-icon-question"></i>
+                                                  </el-tooltip>
+                                                  <el-popover
+                                                    v-if="$$$$$item.imgDate !=[] && $$$$$item.imgDate !=undefined  && $$$$$item.imgDate != null"
+                                                    placement="right"
+                                                    width="400"
+                                                    trigger="hover">
+                                                    <div  v-for="(imgModel, imgModelIndex) in $$$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                       <img :src="imgModel">
+                                                    </div>
+                                                    <i  slot="reference" class="el-icon-picture"></i>
+                                                  </el-popover>
+                                                </div>
+                                                <el-input
+                                                  type="number"
+                                                  class="ban"
+                                                  v-model="$$$$$item.answer"
+                                                  size="small"
+                                                  :placeholder="$$$$$item.placeholder"
+                                                  @blur="numAddAnswer($$$$$item)"
+                                                ></el-input>
                                               </el-form-item>
                                             </div>
                                           </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
+                                   <!-- 下拉单选 -->
+                                   <div v-if="$$$item.type == 'select'">
+                                     <el-form-item label="" class="text-base">
+                                        <div>
+                                           <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                          <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                            <div slot="content">
+                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                            </div>
+                                            <i class="el-icon-question"></i>
+                                          </el-tooltip>
+                                        </div>
+                                       <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)">
+                                         <el-option
+                                           v-for="(s,i) in $$$item.listData"
+                                           :key="i"
+                                           :label="s.label"
+                                           :value="s.value">
+                                         </el-option>
+                                       </el-select>
+                                     </el-form-item>
+                                     <!--下拉框中的问题又会迁出子问题-->
+                                     <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
+                                        <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
+                                          <!-- 省市三级联动 -->
+                                          <div v-if="$$$$item.type == 'select_city'">
+                                            <el-form-item label="">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-cascader
+                                              v-model="$$$$item.answer"
+                                              :options="options"
+                                              @change="userAddAnswerAction($$$$item)">
+                                              </el-cascader>
+                                            </el-form-item>
+                                          </div>
+                                          <!--日期-精确到日-->
+                                          <div v-if="$$$$item.type == 'dateTime_day'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-date-picker
+                                                v-model="$$$$item.answer"
+                                                type="date"
+                                                size="small"
+                                                 @change="userAddAnswerAction($$$$item)"
+                                                placeholder="选择日期"
+                                                format="yyyy 年 MM 月 dd 日"
+                                                value-format="yyyy-MM-dd">
+                                              </el-date-picker>
+                                            </el-form-item>
+                                          </div>
+                                          <!--日期-区间几点到几点-->
+                                          <div v-if="$$$$item.type == 'dateTime_Time_Interval'">
+                                           <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-time-picker
+                                                v-model="$$$$item.answer"
+                                                is-range
+                                                @change="userAddAnswerAction($$$$item)"
+                                                type="datetimerange"
+                                                size="small"
+                                                range-separator="至"
+                                                start-placeholder="开始日期"
+                                                end-placeholder="结束日期"
+                                                placeholder="选择时间范围">
+                                              </el-time-picker>
+                                            </el-form-item>
+                                          </div>
+                                          <!--日期-区间几号到几号-->
+                                          <div v-if="$$$$item.type == 'dateTime_Day_Interval'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-date-picker
+                                                v-model="$$$$item.answer"
+                                                @change="userAddAnswerAction($$$$item)"
+                                                type="daterange"
+                                                size="small"
+                                                range-separator="至"
+                                                start-placeholder="开始日期"
+                                                end-placeholder="结束日期"
+                                                placeholder="选择日期范围">
+                                              </el-date-picker>
+                                            </el-form-item>
+                                          </div>
+                                          <!--输入框-文字类型-->
+                                          <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='text'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-input
+                                                type="text"
+                                                class="ban"
+                                                v-model="$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$item.placeholder"
+                                                @blur="userAddAnswerAction($$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <!--输入框-数字类型（类似身份证号、金额）-->
+                                          <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='number'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-input
+                                                type="number"
+                                                class="ban"
+                                                v-model="$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$item.placeholder"
+                                                @blur="userAddAnswerAction($$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <!-- 银行卡 -->
+                                          <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='BankCard'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-input
+                                                type="number"
+                                                class="ban"
+                                                v-model="$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$item.placeholder"
+                                                @blur="numAddAnswer($$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <!-- 手机号 -->
+                                          <div v-if="$$$$item.type == 'input' && $$$$item.input_type=='PhoneNum'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-input
+                                                type="number"
+                                                class="ban"
+                                                v-model="$$$$item.answer"
+                                                size="small"
+                                                :placeholder="$$$$item.placeholder"
+                                                @blur="numAddAnswer($$$$item)"
+                                              ></el-input>
+                                            </el-form-item>
+                                          </div>
+                                          <!--单选框-->
+                                          <div v-if="$$$$item.type == 'radio'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-radio-group v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                                <el-radio :label="list.value" v-for="(list, listIndex) in $$$$item.listData" :key="'list'+listIndex" >{{list.label}}</el-radio>
+                                              </el-radio-group>
+                                            </el-form-item>
+                                          </div>
+                                          <!--下拉框-->
+                                          <div v-if="$$$$item.type == 'select'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                                <el-option
+                                                  size="small"
+                                                  v-for="(s,i) in $$$$item.listData"
+                                                  :key="i"
+                                                  :label="s.label"
+                                                  :value="s.value">
+                                                </el-option>
+                                              </el-select>
+                                            </el-form-item>
+                                          </div>
+                                          <!-- 下拉框多选 -->
+                                          <div v-if="$$$$item.type == 'select_multiple'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-select v-model="$$$$item.answer" size="small" @change="userAddAnswerAction($$$$item)" multiple placeholder="请选择">
+                                                <el-option
+                                                  v-for="(s,i) in $$$$item.listData"
+                                                  :key="i"
+                                                  :label="s.label"
+                                                  :value="s.value">
+                                                </el-option>
+                                              </el-select>
+                                            </el-form-item>
+                                          </div>
+                                          <!-- 下拉框时间 -->
+                                          <div v-if="$$$$item.type == 'select_day'">
+                                            <el-form-item label="" class="text-base">
+                                              <div>
+                                                 <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$$item.isRequired==false ">选填</span>{{ $$$$item.title }}</label>
+                                                <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right">
+                                                  <div slot="content">
+                                                    <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                                    <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                                  </div>
+                                                  <i class="el-icon-question"></i>
+                                                </el-tooltip>
+                                                <el-popover
+                                                  v-if="$$$$item.imgDate !=[] && $$$$item.imgDate !=undefined  && $$$$item.imgDate != null"
+                                                  placement="right"
+                                                  width="400"
+                                                  trigger="hover">
+                                                  <div  v-for="(imgModel, imgModelIndex) in $$$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                                     <img :src="imgModel">
+                                                  </div>
+                                                  <i  slot="reference" class="el-icon-picture"></i>
+                                                </el-popover>
+                                              </div>
+                                              <el-select v-model="$$$$item.answer" @change="userAddAnswerAction($$$$item)">
+                                                <el-option
+                                                  v-for="(s,i) in days"
+                                                  :key="i"
+                                                  :label="s"
+                                                  :value="s">
+                                                </el-option>
+                                              </el-select>
+                                            </el-form-item>
+                                          </div>
+                                        </div>
+                                     </div>
+                                   </div>
+                                   <!-- 下拉多选 -->
+                                   <div v-if="$$$item.type == 'select_multiple'">
+                                      <el-form-item label="" class="text-base">
+                                        <div>
+                                           <label slot="label"><span class="mr-1 px-2 py-1 rounded bg-green-500 text-white" v-if="$$$item.isRequired==false ">选填</span>{{ $$$item.title }}</label>
+                                          <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right">
+                                            <div slot="content">
+                                              <h3 class="text-base w-full font-bold">小贴士</h3><br/>
+                                              <textarea :rows="20" id="caseMsg" class="textarea w-full" placeholder="" v-model="$$$item.description" readonly="readonly" disabled="disabled"></textarea>
+                                            </div>
+                                            <i class="el-icon-question"></i>
+                                          </el-tooltip>
+                                          <el-popover
+                                            v-if="$$$item.imgDate !=[] && $$$item.imgDate !=undefined  && $$$item.imgDate != null"
+                                            placement="right"
+                                            width="400"
+                                            trigger="hover">
+                                            <div  v-for="(imgModel, imgModelIndex) in $$$item.imgDate" :key="imgModelIndex" popper-class="overflow-y:scroll">
+                                               <img :src="imgModel">
+                                            </div>
+                                            <i  slot="reference" class="el-icon-picture"></i>
+                                          </el-popover>
+                                        </div>
+                                        <el-select v-model="$$$item.answer" size="small" @change="userAddAnswerAction($$$item)" multiple placeholder="请选择">
+                                          <el-option
+                                            v-for="(s,i) in $$$item.listData"
+                                            :key="i"
+                                            :label="s.label"
+                                            :value="s.value">
+                                          </el-option>
+                                        </el-select>
+                                      </el-form-item>
+                                    </div>
                                 </div>
                               </div>
                             </div>
+
+                            <!-- 二级问题块 -->
+
                           </div>
                         </div>
                       </div>
@@ -5179,10 +2582,10 @@
         getweilaicaichan () { // 查询未来财产
           returnQuestionnaireJson({'qpid': 2690}).then((data)=>{
             this.aa.weilaicaichan = data.data.data
-            if(this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer == 1 || this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer == ""){
-              this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer = []
+            if(this.aa.weilaicaichan[0][0].questions[1].answer == 1 || this.aa.weilaicaichan[0][0].questions[1].answer == ""){
+              this.aa.weilaicaichan[0][0].questions[1].answer = []
             }else{
-              this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer)
+              this.aa.weilaicaichan[0][0].questions[1].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[1].answer)
             }
             if(this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer == 1 || this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer == ""){
               this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer = []
