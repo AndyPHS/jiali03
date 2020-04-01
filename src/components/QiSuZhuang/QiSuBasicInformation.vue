@@ -2925,7 +2925,7 @@
               }).then((data)=>{
                 this.getZiNvMsg()
               }).catch((data)=>{
-            
+
               })
             }
             for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
@@ -3483,7 +3483,7 @@
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '子女状况'){
+          }else if(this.mokuai[this.active].title == '子女情况'){
             localStorage.setItem('qpid', 990)
             if(this.aa.ZiNv !== undefined){
               demoYanZheng({
@@ -3573,7 +3573,7 @@
             }else{
               if (this.active++ >this.mokuai.length-1) ;
             }
-          }else if(this.mokuai[this.active].title == '诉讼法院'){
+          }else if(this.mokuai[this.active].title == '起诉法院'){
             localStorage.setItem('qpid', 1000)
             if(this.aa.QiSuFaYuan !== undefined){
               demoYanZheng({
