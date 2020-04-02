@@ -4289,10 +4289,10 @@
               quid: localStorage.getItem('quid')
             }).then((data)=>{
               if(data.data.status_code == 200 ){
-                if(e==2670){
-                  this.getqisuliyou()  // 刷新起诉理由模块
-                }else if(e==2680){
-                  this.getsusongqingqiu()  // 刷新诉讼请求模块
+                if(e==3085){
+                  this.getyuangaoinfo()  // 刷新原告基本信息
+                }else if(e==3086){
+                  this.getbeigaoinfo()  // 刷新被告信息
                 }
                 this.$message({
                   message: '添加成功',
@@ -4314,10 +4314,10 @@
                 quid: localStorage.getItem('quid'),
                 fornum: index+1
               }).then((data)=>{
-                if(e==2670){
-                  this.getqisuliyou()  // 刷新起诉理由模块
-                }else if(e==2680){
-                  this.getsusongqingqiu()  // 刷新诉讼请求模块
+                if(e==3085){
+                  this.getyuangaoinfo()  // 刷新原告基本信息
+                }else if(e==3086){
+                  this.getbeigaoinfo()  // 刷新被告信息
                 }
                 this.$message({
                   message: '删除成功',
