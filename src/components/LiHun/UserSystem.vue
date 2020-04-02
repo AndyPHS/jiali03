@@ -571,7 +571,7 @@ export default {
           this.$router.replace("/BaoQuanPersonalize");
         }
         localStorage.setItem('questionnaireType', 3)
-      }else if(row.qid ==25){ // 证人出庭作证申请书 
+      }else if(row.qid ==25){ // 证人出庭作证申请书
         if(row.complete ==2){
           this.$router.replace("/ZhengRenChuTingBasic");
         }else{
@@ -654,7 +654,7 @@ export default {
             if(data.data.status_code == 200 ){
               localStorage.removeItem('quid');
               // this.getSelectUserQuestionnaire()
-              if(localStorage.getItem('qid')==null){
+              if(localStorage.getItem('qid')==undefined){
                 this.getSelectUserQuestionnaire ()
               }else{
                 this.questionnaireChange()
