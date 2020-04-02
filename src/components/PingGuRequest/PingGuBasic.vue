@@ -4594,7 +4594,7 @@ export default {
         status: 1,
         title: this.userWenJuan.title,
         exemption: 1,
-        complete: 1
+        complete: 2
       }).then((data)=>{
         this.userWenJuan.title = '';
         this.dialogSavedWenJuan = false;

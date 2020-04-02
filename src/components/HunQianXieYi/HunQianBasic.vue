@@ -4022,15 +4022,15 @@
         getweilaicaichan () { // 查询未来财产
           returnQuestionnaireJson({'qpid': 2683}).then((data)=>{
             this.aa.weilaicaichan = data.data.data
-            if(this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer == 1 || this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer == ""){
-              this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer = []
+            if(this.aa.weilaicaichan[0][0].questions[0].childQuestion[2][0].answer == 1 || this.aa.weilaicaichan[0][0].questions[0].childQuestion[2][0].answer == ""){
+              this.aa.weilaicaichan[0][0].questions[0].childQuestion[2][0].answer = []
             }else{
-              this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[0].childQuestion[1][0].answer)
+              this.aa.weilaicaichan[0][0].questions[0].childQuestion[2][0].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[0].childQuestion[2][0].answer)
             }
-            if(this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer == 1 || this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer == ""){
-              this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer = []
+            if(this.aa.weilaicaichan[0][0].questions[2].childQuestion[2][0].answer == 1 || this.aa.weilaicaichan[0][0].questions[2].childQuestion[2][0].answer == ""){
+              this.aa.weilaicaichan[0][0].questions[2].childQuestion[2][0].answer = []
             }else{
-              this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[2].childQuestion[1][1].answer)
+              this.aa.weilaicaichan[0][0].questions[2].childQuestion[2][0].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[2].childQuestion[2][0].answer)
             }
           }).catch((data)=>{
           })
@@ -4819,7 +4819,7 @@
             status: 1,
             title: this.userWenJuan.title,
             exemption: 1,
-            complete: 1
+            complete: 2
           }).then((data)=>{
             this.userWenJuan.title = '';
             this.dialogSavedWenJuan = false;

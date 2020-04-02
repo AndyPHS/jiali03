@@ -178,9 +178,9 @@ export default {
     prevClick () {
       console.log('上一页')
     },
-    pagesize (size) {
-      this.pagesize = size
-    },
+    // pagesize (size) {
+    //   this.pagesize = size
+    // },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage// 点击第几页
     }
