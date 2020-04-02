@@ -3889,12 +3889,11 @@ export default {
 
   beforeMount () {
     this.getshenqinginfo() // 查询申请人信息
-    
+    this.getshishiyuliyou()
+    this.getshenqingfayuan()
   },
   mounted () {
     this.getchushi()
-    this.getshishiyuliyou()
-    this.getshenqingfayuan()
   },
   methods: {
     getchushi(){
@@ -3915,7 +3914,6 @@ export default {
         if(getmodel.indexOf("4") > -1){
           this.getqita()
         }
-        
       }).catch((data)=>{
 
       })

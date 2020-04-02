@@ -3778,7 +3778,7 @@
                                 </div>
                               </div>
                             </div>
-                        
+
                             <!-- 二级问题块 -->
                           </div>
                         </div>
@@ -4150,9 +4150,9 @@
             this.mokuai.sort(this.compare('id'));
             if(this.aa.shishi[0][0].questions[1].answer == 1 || this.aa.shishi[0][0].questions[1].answer == ""){
                 this.aa.shishi[0][0].questions[1].answer = []
-              }else{
+            }else{
                 this.aa.shishi[0][0].questions[1].answer = JSON.parse(this.aa.shishi[0][0].questions[1].answer)
-              }
+            }
           }).catch((data)=>{
           })
         },
@@ -4235,12 +4235,26 @@
               num:1141
             })
             this.mokuai.sort(this.compare('id'));
+            for(var i=0;i<this.aa.hunyin.length;i++){
+            	if(this.aa.hunyin[i][0].questions[2].answer == 1 || this.aa.hunyin[i][0].questions[2].answer == ""){
+            	    this.aa.hunyin[i][0].questions[2].answer = []
+            	}else{
+            	    this.aa.hunyin[i][0].questions[2].answer = JSON.parse(this.aa.hunyin[i][0].questions[2].answer)
+            	}
+            }
           }).catch((data)=>{
           })
         },
         refreshHunYin (){// 刷新婚姻登记记录模块数据
           returnQuestionnaireJson({'qpid': 1141}).then((data)=>{
             this.aa.hunyin = data.data.data
+            for(var i=0;i<this.aa.hunyin.length;i++){
+            	if(this.aa.hunyin[i][0].questions[2].answer == 1 || this.aa.hunyin[i][0].questions[2].answer == ""){
+            	    this.aa.hunyin[i][0].questions[2].answer = []
+            	}else{
+            	    this.aa.hunyin[i][0].questions[2].answer = JSON.parse(this.aa.hunyin[i][0].questions[2].answer)
+            	}
+            }
             this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
@@ -5668,7 +5682,7 @@
             this.dialogSavedWenJuan = false;
             this.$router.replace("/UserSystem");
           }).catch((data)=>{
-        
+
           })
         },
         returnUserList(){  // 返回协议列表
