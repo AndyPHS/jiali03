@@ -523,41 +523,89 @@ export default {
         localStorage.setItem('questionnaireType', 1)
         this.$router.replace("/HunNeiBasic");
       }else if(row.qid ==10){ // 离婚起诉状
+        if(row.complete ==2){
+           this.$router.replace("/QiSuBasicInformation");
+        }else{
+           this.$router.replace("/QiSuComplate");
+        }
         localStorage.setItem('questionnaireType', 2)
-        this.$router.replace("/QiSuComplate");
       }else if(row.qid ==21){ // 抚养权起诉状
+        if(row.complete ==2){
+           this.$router.replace("/FuYangQuanBasic");
+        }else{
+           this.$router.replace("/FuYangQuanPersonalize");
+        }
         localStorage.setItem('questionnaireType', 2)
-        this.$router.replace("/FuYangQuanPersonalize");
       }else if(row.qid ==22){ // 抚养费起诉状
+        if(row.complete ==2){
+           this.$router.replace("/FuYangFeiBasic");
+        }else{
+           this.$router.replace("/FuYangFeiPersonalize");
+        }
         localStorage.setItem('questionnaireType', 2)
-        this.$router.replace("/FuYangFeiPersonalize");
       }else if(row.qid ==23){ // 分家析产起诉状
+        if(row.complete ==2){
+           this.$router.replace("/FenJiaXiChanBasic");
+        }else{
+           this.$router.replace("/FenJiaXiChanPersonalize");
+        }
         localStorage.setItem('questionnaireType', 2)
-        this.$router.replace("/FenJiaXiChanPersonalize");
-      }else if(row.qid ==24){ // 抚养费起诉状
-        localStorage.setItem('questionnaireType', 2)
+      }else if(row.qid ==24){ // 民间借贷纠纷起诉状
+        if(row.complete ==2){
+           this.$router.replace("/MinJianJieDaiBasic");
+        }else{
         this.$router.replace("/MinJianJieDaiPersonalize");
+        }
+        localStorage.setItem('questionnaireType', 2)
       }else if(row.qid ==16){ // 调查取证申请书
-        localStorage.setItem('questionnaireType', 3)
+        if(row.complete ==2){
+           this.$router.replace("/DiaoChaQuZhengBasic");
+        }else{
         this.$router.replace("/DiaoChaQuZhengPersonalize");
+        }
+        localStorage.setItem('questionnaireType', 3)
       }else if(row.qid ==20){ // 保全申请书
+        if(row.complete ==2){
+           this.$router.replace("/BaoQuanBasic");
+        }else{
+          this.$router.replace("/BaoQuanPersonalize");
+        }
         localStorage.setItem('questionnaireType', 3)
-        this.$router.replace("/BaoQuanPersonalize");
-      }else if(row.qid ==25){ // 证人出庭作证申请书
+      }else if(row.qid ==25){ // 证人出庭作证申请书 
+        if(row.complete ==2){
+          this.$router.replace("/ZhengRenChuTingBasic");
+        }else{
+          this.$router.replace("/ZhengRenChuTingPersonalize");
+        }
         localStorage.setItem('questionnaireType', 3)
-        this.$router.replace("/ZhengRenChuTingPersonalize");
       }else if(row.qid ==26){ // 评估申请书
         localStorage.setItem('questionnaireType', 3)
-        this.$router.replace("/PingGuPersonalize");
+        if(row.complete ==2){
+          this.$router.replace("/PingGuBasic");
+        }else{
+          this.$router.replace("/PingGuPersonalize");
+        }
       }else if(row.qid ==27){ // 婚后财产纠纷起诉状
         localStorage.setItem('questionnaireType', 2)
-        this.$router.replace("/HunHouCaiChanBasic");
+        if(row.complete ==2){
+          this.$router.replace("/HunHouCaiChanBasic");
+        }else{
+          this.$router.replace("/HunHouCaiChanPersonalize");
+        }
       }else if(row.qid ==28){ // 笔迹鉴定申请书
         localStorage.setItem('questionnaireType', 3)
-        this.$router.replace("/BiJiJianDingBasic");
+        if(row.complete ==2){
+          this.$router.replace("/BiJiJianDingBasic");
+        }else{
+          this.$router.replace("/BiJiJianDingPersonalize");
+        }
       }else if(row.qid ==29){ // 精神状态鉴定申请书
         localStorage.setItem('questionnaireType', 3)
-        this.$router.replace("/JingShenZhuangTaiBasic");
+        if(row.complete ==2){
+          this.$router.replace("/JingShenZhuangTaiBasic");
+        }else{
+          this.$router.replace("/JingShenZhuangTaiPersonalize");
+        }
       }else{ // 其他数据的提示
          this.$message({
             message: '此数据为垃圾数据，不做处理',
@@ -606,7 +654,11 @@ export default {
             if(data.data.status_code == 200 ){
               localStorage.removeItem('quid');
               // this.getSelectUserQuestionnaire()
-              this.questionnaireChange()
+              if(localStorage.getItem('qid')==null){
+                this.getSelectUserQuestionnaire ()
+              }else{
+                this.questionnaireChange()
+              }
               this.$message({
                 message: '删除成功',
                 type: 'success',

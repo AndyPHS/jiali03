@@ -4027,10 +4027,10 @@
             }else{
               this.aa.weilaicaichan[0][0].questions[1].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[1].answer)
             }
-            if(this.aa.weilaicaichan[0][0].questions[4].answer == 1 || this.aa.weilaicaichan[0][0].questions[4].answer == ""){
-              this.aa.weilaicaichan[0][0].questions[4].answer = []
+            if(this.aa.weilaicaichan[0][0].questions[6].answer == 1 || this.aa.weilaicaichan[0][0].questions[6].answer == ""){
+              this.aa.weilaicaichan[0][0].questions[6].answer = []
             }else{
-              this.aa.weilaicaichan[0][0].questions[4].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[4].answer)
+              this.aa.weilaicaichan[0][0].questions[6].answer = JSON.parse(this.aa.weilaicaichan[0][0].questions[6].answer)
             }
           }).catch((data)=>{
           })
