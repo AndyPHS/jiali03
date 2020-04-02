@@ -3,12 +3,11 @@
         <head-menu></head-menu>
         <div class="w-full px-10 mx-auto">
             <h2 class="py-2 text-lg text-center w-2/5">
-              {{this.Content.title}} 
+              {{this.Content.title}}
             </h2>
-            <p class="pb-1 text-base text-center w-2/5">抚养权起诉状</p>
+            <p class="pb-1 text-base text-center w-2/5">分家析产纠纷起诉状</p>
             <div class="flex">
                 <div class="w-2/5 mx-1 relative">
-                    <p class="text-left w-2/5 pb-1">事实与理由：</p>
                     <div class="my-2 h-40">
                         <ul>
                             <!-- <li class="pb-2 text-left"  v-for="(item, index) in this.Content.UqContent" :key="index">
@@ -47,7 +46,7 @@
                        <div class="mt-2 w-2/3 mx-auto flex justify-around">
                            <el-button @click='cancleAddBox'>取消</el-button>
                             <el-button type="primary" @click.native="AddBoxOk(item, index)">确定</el-button>
-                       </div> 
+                       </div>
                     </div>
                 </div>
                 <div class="w-1/5 mx-4">
@@ -62,11 +61,11 @@
                     </div>
                     <div class="h-40">
                         <ul>
-                            <li 
-                            v-for="(item, index) in this.LabelArr" 
-                            :key="index" 
+                            <li
+                            v-for="(item, index) in this.LabelArr"
+                            :key="index"
                             @click="chooseLabelAction(item)"
-                            class="w-3/4 mx-auto bg-blue-200 rounded py-1 my-2 hover:bg-blue-400" 
+                            class="w-3/4 mx-auto bg-blue-200 rounded py-1 my-2 hover:bg-blue-400"
                             >
                                 {{item.title}}
                             </li>
@@ -98,13 +97,13 @@
                     </div>
                     <div class="h-40">
                         <ul>
-                            <li 
-                            v-for="(item, index) in this.chooseLabel.LabelContent" 
+                            <li
+                            v-for="(item, index) in this.chooseLabel.LabelContent"
                             :key="index"
-                            class="w-11/12 mx-auto mb-1 my-2" 
+                            class="w-11/12 mx-auto mb-1 my-2"
                             >
                                 <div class="text-left w-full flex justify-between">
-                                   <span class="font-bold inline-block ml-1">【 {{item.qlTitle}} 】</span> 
+                                   <span class="font-bold inline-block ml-1">【 {{item.qlTitle}} 】</span>
                                    <span class="mr-1">{{ item.uname }}</span>
                                 </div>
                                 <div class="text-left px-1 py-1 bg-blue-200 border rounded-sm">{{item.content}}</div>
@@ -128,8 +127,8 @@
     import {selectLabelContent} from '@/api/api/requestLogin.js'  // 查询标签内容
     import {AddLabelContent} from '@/api/api/requestLogin.js'  // 新增标签内容
     import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改问卷
-    
-    
+
+
     export default {
         components:{
             HeadMenu,
@@ -137,7 +136,7 @@
         },
         data () {
             return {
-                Content:{ 
+                Content:{
                     UqContent: [], // 获取的文本内容
                     con:'',         // 将文本内容拼接成字符串
                     title: ''    // 获取标题
@@ -155,7 +154,7 @@
                 keyWord:{
                     title: '', // 关键词
                     status: 2,
-                    flid: null, // 查询关键词的时候输入 标签的ID 
+                    flid: null, // 查询关键词的时候输入 标签的ID
                     value: null,  // 选择要通过关键词查找的标签的id
                     options: [],  // 查询关键词出现关键词列表
                     list: [],
@@ -168,15 +167,15 @@
                     addTextareaMsg: '', // 点击添加文本内容
                     addLabelMsg: '', // 点击选择的标签内容
                 },
-                
-                
-                
+
+
+
             }
         },
         mounted () {
             this.getSelectUqContent() // 获取离婚起诉状文本内容
             this.getSelectLabel() // 获取标签
-            
+
         },
         methods:{
             getSelectUqContent(){  //获取文本内容
@@ -214,7 +213,7 @@
                     this.daligeAddBox = false;
                     this.contentMsg.content = '';
                 }else{
-                   localStorage.setItem('qlid', this.keyWord.flid) 
+                   localStorage.setItem('qlid', this.keyWord.flid)
                    AddLabelContent({
                        content: this.contentMsg.content
                    }).then((data)=>{
@@ -230,7 +229,7 @@
                 let arr=[]
                 this.Content.UqContent.forEach((item)=>{
                     arr.push(item.content)
-                    
+
                 })
                 this.Content.con = arr.join('|||||')
                 userUpdateQuestionnaire({
@@ -248,11 +247,11 @@
                           type: 'error'
                         });
                     }
-                    
+
                 }).catch((data)=>{
 
                 })
-                
+
             },
             getSelectLabel(){ // 获取标签
                 selectLabel({
@@ -326,7 +325,7 @@
                               return item.label.toLowerCase()
                                 .indexOf(query.toLowerCase()) > -1;
                             });
-                            
+
                           }, 200);
                     }else{
                         this.keyWord.options = [];
@@ -353,7 +352,7 @@
                 }).then((data)=>{
                     if(data.data.status_code == 200){
                         this.chooseLabel.LabelContent = data.data.data
-                        
+
                     }else{
                         this.$message({
                           message: '获取标签内容失败',
@@ -372,7 +371,7 @@
                 let arr=[]
                 this.Content.UqContent.forEach((item)=>{
                     arr.push(item.content)
-                    
+
                 })
                 this.Content.con = arr.join('|||||')
                 userUpdateQuestionnaire({
@@ -389,7 +388,7 @@
                           type: 'error'
                         });
                     }
-                    
+
                 }).catch((data)=>{
 
                 })
@@ -401,7 +400,7 @@
 
             },
             dragEnd(){
-                
+
             }
         }
     }

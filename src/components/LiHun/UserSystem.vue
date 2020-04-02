@@ -642,6 +642,7 @@ export default {
       }
     },
     DeleteWenJuan(index, row) {  // 删除问卷
+      localStorage.setItem('qid',row.qid) 
       this.$confirm('此操作将把文件放入回收站, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -654,11 +655,12 @@ export default {
             if(data.data.status_code == 200 ){
               localStorage.removeItem('quid');
               // this.getSelectUserQuestionnaire()
-              if(localStorage.getItem('qid')==undefined){
-                this.getSelectUserQuestionnaire ()
-              }else{
-                this.questionnaireChange()
-              }
+              this.QuestionnaireSelectArr.splice(index,1)
+              // if(localStorage.getItem('qid')==undefined){
+              //   this.getSelectUserQuestionnaire ()
+              // }else{
+              //   this.questionnaireChange()
+              // }
               this.$message({
                 message: '删除成功',
                 type: 'success',

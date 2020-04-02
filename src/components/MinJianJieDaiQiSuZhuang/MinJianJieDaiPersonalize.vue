@@ -8,7 +8,6 @@
             <p class="pb-1 text-base text-center w-2/5">民间借贷纠纷起诉状</p>
             <div class="flex">
                 <div class="w-2/5 mx-1 relative">
-                    <p class="text-left w-2/5 pb-1">事实与理由：</p>
                     <div class="my-2 h-40">
                         <ul>
                             <!-- <li class="pb-2 text-left"  v-for="(item, index) in this.Content.UqContent" :key="index">
