@@ -5606,7 +5606,7 @@
               }
             }).catch((data)=>{
             })
-          }else if(this.mokuai[this.active].title == '丧葬金'){
+          }else if(this.mokuai[this.active].title == '丧葬费'){
             localStorage.setItem('qpid', 1161)
             demoYanZheng({
               qpid: 1161
