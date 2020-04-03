@@ -1036,7 +1036,7 @@
               }else if(item==8){  // 添加其他
                 userAddAnswer({
                   value: 1,  // 值
-                  qpid: 2310, // 关联id
+                  qpid: 2309, // 关联id
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
                 }).catch((data)=>{

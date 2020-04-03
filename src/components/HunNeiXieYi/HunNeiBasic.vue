@@ -3779,9 +3779,9 @@
                         <div v-if="mo.title== '债务' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2336,index)">删除债务</div>
                         </div>
-						<div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
-						  <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2309,index)">删除其他财产</div>
-						</div>
+                        <div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(2309,index)">删除其他财产</div>
+                        </div>
                       </div>
                     </div>
                     <div>
@@ -3812,9 +3812,9 @@
                       <div v-if="mo.title== '债务' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2336)">添加债务</div>
                       </div>
-					  <div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
-					    <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2309)">添加其他财产</div>
-					  </div>
+                      <div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
+                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(2309)">添加其他财产</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3980,7 +3980,7 @@
         // this.getChuShi()
        },
       methods: {
-
+        
         getBasicInformation () { // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 2151}).then((data)=>{
             this.aa.BasicInformation = data.data.data

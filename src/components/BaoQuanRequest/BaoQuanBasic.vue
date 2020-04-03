@@ -4052,8 +4052,10 @@ export default {
     getshishiyuliyou(){ // 获取事实与理由模块数据
       returnQuestionnaireJson({'qpid': 2617}).then((data) => {
         this.aa.shishiyuliyou = data.data.data
-        let cityAnswer = JSON.parse(this.aa.shishiyuliyou[0][0].questions[5].answer)
-        this.aa.shishiyuliyou[0][0].questions[5].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
+        let cityAnswer1 = JSON.parse(this.aa.shishiyuliyou[0][0].questions[2].answer)
+        this.aa.shishiyuliyou[0][0].questions[2].answer = [TextToCode[cityAnswer1[0]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]][cityAnswer1[2]].code]
+        let cityAnswer2 = JSON.parse(this.aa.shishiyuliyou[0][0].questions[5].answer)
+        this.aa.shishiyuliyou[0][0].questions[5].answer = [TextToCode[cityAnswer2[0]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]][cityAnswer2[2]].code]
       }).catch((data) => {
       })
     },
