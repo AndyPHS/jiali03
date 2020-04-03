@@ -3867,14 +3867,15 @@
       name: 'FuYangFeiBasic',
 
       beforeMount () {
+
+      },
+      mounted () {
         this.getBasicInformation() // 查询双方基本信息模块数据
         this.getshishi()   // 获取事实与理由
         this.getqisuyuanyin()
         this.getsusongqingqiu()
         this.getqisufayuan()
-      },
-      mounted () {
-       },
+      },
       methods: {
         getBasicInformation () { // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 2697}).then((data)=>{
@@ -3889,10 +3890,10 @@
             console.log(cityAnswer1)
             this.aa.shishi[0][0].questions[9].answer = [TextToCode[cityAnswer1[0]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]][cityAnswer1[2]].code]
             console.log(this.aa.shishi[0][0].questions[9].answer)
-            let cityAnswer2 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[2][""0""].grandson[2][2].answer)
-            this.aa.shishi[0][0].questions[10].childQuestion[2][""0""].grandson[2][2].answer = [TextToCode[cityAnswer2[0]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]][cityAnswer2[2]].code]
+            let cityAnswer2 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[2][0].grandson[2][2].answer)
+            this.aa.shishi[0][0].questions[10].childQuestion[2][0].grandson[2][2].answer = [TextToCode[cityAnswer2[0]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]][cityAnswer2[2]].code]
             console.log(cityAnswer2)
-            console.log(this.aa.shishi[0][0].questions[10].childQuestion[2][""0""].grandson[2][2].answer)
+            console.log(this.aa.shishi[0][0].questions[10].childQuestion[2][0].grandson[2][2].answer)
 
           }).catch((data)=>{
           })
