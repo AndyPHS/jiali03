@@ -43,23 +43,7 @@
                 <span class="mr-3 cursor-pointer" @click="Exit">[退出]</span>
                 <span >你好！{{user}}</span>
             </div>
-            <!-- <h2 class=" pt-2 text-white"></h2> -->
-            
         </el-menu>
-        <!-- <div class="container mx-auto">
-            <dl class="text-left flex items-center py-2">
-                <dt>
-                    <img class="w-1/2" src="@/assets/images/logo.png" alt="">
-                </dt>
-                <dd class="ml-2">
-                    <h2 class="text-xl text-orange-500">北京家理律师事务所</h2>
-
-                </dd>
-                <dd class="ml-3">
-                    <h2>你好！{{user}}</h2>
-                </dd>
-            </dl>
-        </div> -->
     </div>
 
 </template>

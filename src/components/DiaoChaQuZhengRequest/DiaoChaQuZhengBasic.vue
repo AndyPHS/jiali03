@@ -4680,6 +4680,15 @@
                        console.log("保存失败")
                     })
                   }
+                }else if(e.input_type=="text" && typeof e.answer=="number" ){
+                  userAddAnswer({ // 必填多子女普通类型
+                    value: JSON.stringify(e.answer), // 值
+                    qpid: e.id, // 关联id
+                    fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: localStorage.getItem('quid') // 用户的问卷id
+                  }).then((data) => {
+                  }).catch((data) => {
+                  })
                 }else{
                   userAddAnswer({  // 必填多子女普通类型
                     value: e.answer,  // 值
@@ -4756,6 +4765,15 @@
                        // console.log("保存失败")
                     })
                   }
+                }else if(e.input_type=="text" && typeof e.answer=="number" ){
+                  userAddAnswer({ // 必填多子女普通类型
+                    value: JSON.stringify(e.answer), // 值
+                    qpid: e.id, // 关联id
+                    fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                    quid: localStorage.getItem('quid') // 用户的问卷id
+                  }).then((data) => {
+                  }).catch((data) => {
+                  })
                 }else{
                   userAddAnswer({
                     value: e.answer,  // 值
@@ -4812,7 +4830,16 @@
                      console.log("保存失败")
                   })
                 }
-              }else{
+              }else if(e.input_type=="text" && typeof e.answer=="number" ){
+                userAddAnswer({ // 必填多子女普通类型
+                  value: JSON.stringify(e.answer), // 值
+                  qpid: e.id, // 关联id
+                  fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                  quid: localStorage.getItem('quid') // 用户的问卷id
+                }).then((data) => {
+                }).catch((data) => {
+                })
+              } else{
                 userAddAnswer({
                   value: e.answer,  // 值
                   qpid: e.id, // 关联id
@@ -4876,7 +4903,16 @@
                      // console.log("保存失败")
                   })
                 }
-              }else{  // 选填非多子女普通类型
+              }else if(e.input_type=="text" && typeof e.answer=="number" ){
+                userAddAnswer({ // 必填多子女普通类型
+                  value: JSON.stringify(e.answer), // 值
+                  qpid: e.id, // 关联id
+                  fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
+                  quid: localStorage.getItem('quid') // 用户的问卷id
+                }).then((data) => {
+                }).catch((data) => {
+                })
+              } else{  // 选填非多子女普通类型
                 userAddAnswer({
                   value: e.answer,  // 值
                   qpid: e.id, // 关联id
