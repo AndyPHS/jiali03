@@ -3886,7 +3886,9 @@
           returnQuestionnaireJson({'qpid': 2743}).then((data)=>{
             this.aa.shishi = data.data.data
             let cityAnswer1 = JSON.parse(this.aa.shishi[0][0].questions[9].answer)
+            console.log(cityAnswer1)
             this.aa.shishi[0][0].questions[9].answer = [TextToCode[cityAnswer1[0]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]][cityAnswer1[2]].code]
+            console.log(this.aa.shishi[0][0].questions[9].answer)
             let cityAnswer2 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[2][""0""].grandson[2][2].answer)
             this.aa.shishi[0][0].questions[10].childQuestion[2][""0""].grandson[2][2].answer = [TextToCode[cityAnswer2[0]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]][cityAnswer2[2]].code]
             console.log(cityAnswer2)
