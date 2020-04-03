@@ -3894,6 +3894,8 @@
         getshishi () {  // 查询事实与理由模块数据
           returnQuestionnaireJson({'qpid': 2647}).then((data)=>{
             this.aa.shishi = data.data.data
+            let cityAnswer = JSON.parse(this.aa.shishi[0][0].questions[7].answer)
+            this.aa.shishi[0][0].questions[7].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
           })
         },
