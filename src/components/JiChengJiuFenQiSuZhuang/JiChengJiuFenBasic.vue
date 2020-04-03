@@ -4006,14 +4006,43 @@
              this.getzhuanjicheng()
              this.getfeifadingjicheng()
              if(that.modle==2){ // 小问卷2884选是
-	            this.getpeiou();
-	            this.getfuqin();
-	            this.getmuqin();
-	            this.getxiongdi();
-	            this.getzufu();
-	            this.getzumu();
-	            this.getwaizufu();
-	            this.getwaizumu()
+             getOnlyValue({
+               qpid:2981,
+               quid: Number(localStorage.getItem('quid')) //用户的问卷id
+             }).then((data)=>{
+               let getmodel = JSON.parse(data.data.data)
+               if(getmodel.indexOf("1") > -1){
+                 this.getpeiou();
+               }
+               if(getmodel.indexOf("2") > -1){
+                this.getfuqin();
+               }
+               if(getmodel.indexOf("3") > -1){
+                 this.getmuqin();
+               }
+             
+             })
+             getOnlyValue({
+               qpid:2982,
+               quid: Number(localStorage.getItem('quid')) //用户的问卷id
+             }).then((data)=>{
+               let getmodel = JSON.parse(data.data.data)
+               if(getmodel.indexOf("1") > -1){
+                 this.getxiongdi();
+               }
+               if(getmodel.indexOf("2") > -1){
+                this.getzufu();
+               }
+               if(getmodel.indexOf("3") > -1){
+                 this.getzumu();
+               }
+               if(getmodel.indexOf("4") > -1){
+                 this.getwaizufu();
+               }
+               if(getmodel.indexOf("5") > -1){
+                 this.getwaizumu()
+               }
+             })
 	          }
           }).catch((data)=>{
           })
@@ -4128,27 +4157,36 @@
             }).catch((data)=>{
             })
           }else if(this.modle==2){
-            returnQuestionnaireJson({'qpid': 2988}).then((data)=>{
-              this.aa.zinv = data.data.data
-              this.mokuai.push({
-                title: '子女信息',
-                part: 'zinv',
-                id: 7,
-                num:2988
-              })
-              if(this.aa.zinv==undefined){
-                userAddAnswer({
-                  value: 1,  // 值
-                  qpid: 2988, // 关联id
-                  quid: localStorage.getItem('quid') //用户的问卷id
-                }).then((data)=>{
-                  this.refreshzinv2()
+            getOnlyValue({
+              qpid:2981,
+              quid: Number(localStorage.getItem('quid')) //用户的问卷id
+            }).then((data)=>{
+              let getmodel = JSON.parse(data.data.data)
+              if(getmodel.indexOf("4") > -1){
+                returnQuestionnaireJson({'qpid': 2988}).then((data)=>{
+                  this.aa.zinv = data.data.data
+                  this.mokuai.push({
+                    title: '子女信息',
+                    part: 'zinv',
+                    id: 7,
+                    num:2988
+                  })
+                  if(this.aa.zinv==undefined){
+                    userAddAnswer({
+                      value: 1,  // 值
+                      qpid: 2988, // 关联id
+                      quid: localStorage.getItem('quid') //用户的问卷id
+                    }).then((data)=>{
+                      this.refreshzinv2()
+                    }).catch((data)=>{
+                
+                    })
+                  }
+                  this.mokuai.sort(this.compare('id'));
                 }).catch((data)=>{
-
                 })
               }
-              this.mokuai.sort(this.compare('id'));
-            }).catch((data)=>{
+            
             })
           }
         },
