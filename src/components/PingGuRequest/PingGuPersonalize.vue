@@ -33,7 +33,7 @@
                     </div>
                     <div class="text-center">
                         <el-button type="primary" @click="addTextAction">添加文本</el-button>
-                        <el-button type="primary" @click="makeOut">生成申请书</el-button>
+                        <el-button type="primary" @click="makeOut">生成文书</el-button>
                     </div>
                     <div class="addBox" v-show="daligeAddBox">
                        <h2 class="py-4 text-center text-white">添加文本</h2>
