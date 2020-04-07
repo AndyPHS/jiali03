@@ -861,8 +861,8 @@
                   type: 'radio',
                   answer: '',
                   listData: [
-                    { label: '是', value: '1' },
-                    { label: '否', value: '2' }
+                    { label: '否', value: '1' },
+                    { label: '是', value: '2' }
                   ]
                 },
                 {
@@ -877,7 +877,7 @@
                     { label: '父亲有，母亲无', value: '3' },
                     { label: '母亲有，父亲无', value: '4' }
                   ],
-                  requireQidAndAnswer: { id: '2884', answer: '1' }
+                  requireQidAndAnswer: { id: '2884', answer: '2' }
                 },
                 {
                   title: '(1).是否是法定继承？',
@@ -889,7 +889,7 @@
                     { label: '是', value: '1' },
                     { label: '否', value: '2' }
                   ],
-                  requireQidAndAnswer: { id: '2884', answer: '2' }
+                  requireQidAndAnswer: { id: '2884', answer: '1' }
                 },
                 {
                   title: '(2).涉及顺位？',

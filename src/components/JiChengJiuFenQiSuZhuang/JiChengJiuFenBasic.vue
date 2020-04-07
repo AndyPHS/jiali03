@@ -3824,7 +3824,6 @@
                     <div v-if="mo.title== '其他' " class="text-right flex justify-end">
                       <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3030)">添加其他</div>
                     </div>
-
                   </div>
                 </div>
               </el-form>
@@ -4005,7 +4004,7 @@
              this.getdaiweijicheng()
              this.getzhuanjicheng()
              this.getfeifadingjicheng()
-             if(that.modle==2){ // 小问卷2884选是
+             if(that.modle==1){ // 小问卷2884选是
              getOnlyValue({
                qpid:2980,
                quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -4025,7 +4024,7 @@
                    if(getmodel.indexOf("3") > -1){
                      this.getmuqin();
                    }
-                 
+
                  })
                }else{
                  getOnlyValue({
@@ -4115,7 +4114,7 @@
           })
         },
         getbeijichenginfo () {
-          if(this.modle==1){
+          if(this.modle==2){
             returnQuestionnaireJson({'qpid': 2921}).then((data)=>{
               this.aa.beijichenginfo = data.data.data
               this.mokuai.push({
@@ -4127,7 +4126,7 @@
               this.mokuai.sort(this.compare('id'));
             }).catch((data)=>{
             })
-          }else if(this.modle==2){
+          }else if(this.modle==1){
             returnQuestionnaireJson({'qpid': 2969}).then((data)=>{
               this.aa.beijichenginfo = data.data.data
               this.mokuai.push({
@@ -4142,7 +4141,7 @@
           }
         },
         getzinv () {
-          if(this.modle==1){
+          if(this.modle==2){
             returnQuestionnaireJson({'qpid': 2938}).then((data)=>{
               this.aa.zinv = data.data.data
               this.mokuai.push({
@@ -4165,7 +4164,7 @@
               this.mokuai.sort(this.compare('id'));
             }).catch((data)=>{
             })
-          }else if(this.modle==2){
+          }else if(this.modle==1){
             getOnlyValue({
               qpid:2981,
               quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -4214,7 +4213,7 @@
             })
         },
         getdaiweijicheng () {
-          if(this.modle==1){
+          if(this.modle==2){
           	getOnlyValue({  // 小问卷是否选择代位继承
 	            qpid:2943,
 	            quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -4248,7 +4247,7 @@
 	          }).catch((data)=>{
 	          })
 
-          }else if(this.modle==2){
+          }else if(this.modle==1){
           	getOnlyValue({  // 小问卷是否选择代位继承
 	            qpid:2943,
 	            quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -4299,7 +4298,7 @@
             })
         },
         getzhuanjicheng () {
-          if(this.modle==1){
+          if(this.modle==2){
           	getOnlyValue({  // 小问卷是否选择转继承
 	            qpid:2944,
 	            quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -4332,7 +4331,7 @@
 	            }
 	          }).catch((data)=>{
 	          })
-          }else if(this.modle==2){
+          }else if(this.modle==1){
           	getOnlyValue({  // 小问卷是否选择转继承
 	            qpid:2944,
 	            quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -4383,7 +4382,7 @@
             })
         },
         getfeifadingjicheng () {
-          if(this.modle==1){
+          if(this.modle==2){
           	getOnlyValue({  // 小问卷父母是否有遗嘱/遗赠/遗赠扶养协议
 	            qpid:2957,
 	            quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -4417,7 +4416,7 @@
 	          }).catch((data)=>{
 	          })
 
-          }else if(this.modle==2){
+          }else if(this.modle==1){
           	getOnlyValue({  // 小问卷是否是法定继承
 	            qpid:2976,
 	            quid: Number(localStorage.getItem('quid')) //用户的问卷id
@@ -5162,9 +5161,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '被继承人信息'){
-            if(this.modle==1){
+            if(this.modle==2){
               this.qpidTip=2921
-            }else if(this.modle==2){
+            }else if(this.modle==1){
               this.qpidTip=2969
             }
             localStorage.setItem('qpid', this.qpidTip)
@@ -5185,7 +5184,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '配偶信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2974
             }else{
             }
@@ -5207,7 +5206,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '父亲信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2986
             }else{
             }
@@ -5229,7 +5228,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '母亲信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2987
             }else{
             }
@@ -5251,9 +5250,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '子女信息'){
-            if(this.modle==1){
+            if(this.modle==2){
               this.qpidTip=2938
-            }else if(this.modle==2){
+            }else if(this.modle==1){
               this.qpidTip=2988
             }
             localStorage.setItem('qpid', this.qpidTip)
@@ -5274,7 +5273,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '兄弟姐妹信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2989
             }else{
             }
@@ -5296,7 +5295,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '祖父信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2990
             }else{
             }
@@ -5318,7 +5317,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '祖母信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2991
             }else{
             }
@@ -5340,7 +5339,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '外祖父信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2992
             }else{
             }
@@ -5362,7 +5361,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '外祖母信息'){
-            if(this.modle==2){
+            if(this.modle==1){
               this.qpidTip=2993
             }else{
             }
@@ -5384,7 +5383,7 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '代位继承人信息'){
-            if(this.modle==1){
+            if(this.modle==2){
               this.qpidTip=2945
             }else{
               this.qpidTip=3061
@@ -5407,9 +5406,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '转继承人信息'){
-            if(this.modle==1){
+            if(this.modle==2){
               this.qpidTip=2946
-            }else if(this.modle==2){
+            }else if(this.modle==1){
               this.qpidTip=3062
             }
             localStorage.setItem('qpid', this.qpidTip)
@@ -5430,9 +5429,9 @@
             }).catch((data)=>{
             })
           }else if(this.mokuai[this.active].title == '非法定继承信息'){
-            if(this.modle==1){
+            if(this.modle==2){
               this.qpidTip=3063
-            }else if(this.modle==2){
+            }else if(this.modle==1){
               this.qpidTip=2958
             }
             localStorage.setItem('qpid', this.qpidTip)
