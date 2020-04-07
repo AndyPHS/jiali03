@@ -3748,7 +3748,7 @@
                                 </div>
                               </div>
                             </div>
-                        
+
                             <!-- 二级问题块 -->
                           </div>
                         </div>
@@ -4007,40 +4007,49 @@
              this.getfeifadingjicheng()
              if(that.modle==2){ // 小问卷2884选是
              getOnlyValue({
-               qpid:2981,
+               qpid:2980,
                quid: Number(localStorage.getItem('quid')) //用户的问卷id
              }).then((data)=>{
-               let getmodel = JSON.parse(data.data.data)
-               if(getmodel.indexOf("1") > -1){
-                 this.getpeiou();
-               }
-               if(getmodel.indexOf("2") > -1){
-                this.getfuqin();
-               }
-               if(getmodel.indexOf("3") > -1){
-                 this.getmuqin();
-               }
-             
-             })
-             getOnlyValue({
-               qpid:2982,
-               quid: Number(localStorage.getItem('quid')) //用户的问卷id
-             }).then((data)=>{
-               let getmodel = JSON.parse(data.data.data)
-               if(getmodel.indexOf("1") > -1){
-                 this.getxiongdi();
-               }
-               if(getmodel.indexOf("2") > -1){
-                this.getzufu();
-               }
-               if(getmodel.indexOf("3") > -1){
-                 this.getzumu();
-               }
-               if(getmodel.indexOf("4") > -1){
-                 this.getwaizufu();
-               }
-               if(getmodel.indexOf("5") > -1){
-                 this.getwaizumu()
+               if(data.data.data==1){
+                 getOnlyValue({
+                   qpid:2981,
+                   quid: Number(localStorage.getItem('quid')) //用户的问卷id
+                 }).then((data)=>{
+                   var getmodel = JSON.parse(data.data.data);
+                   if(getmodel.indexOf("1") > -1){
+                     this.getpeiou();
+                   }
+                   if(getmodel.indexOf("2") > -1){
+                    this.getfuqin();
+                   }
+                   if(getmodel.indexOf("3") > -1){
+                     this.getmuqin();
+                   }
+                 
+                 })
+               }else{
+                 getOnlyValue({
+                   qpid:2982,
+                   quid: Number(localStorage.getItem('quid')) //用户的问卷id
+                 }).then((data)=>{
+                   console.log(data.data.data)
+                   let getmodel = JSON.parse(data.data.data)
+                   if(getmodel.indexOf("1") > -1){
+                     this.getxiongdi();
+                   }
+                   if(getmodel.indexOf("2") > -1){
+                    this.getzufu();
+                   }
+                   if(getmodel.indexOf("3") > -1){
+                     this.getzumu();
+                   }
+                   if(getmodel.indexOf("4") > -1){
+                     this.getwaizufu();
+                   }
+                   if(getmodel.indexOf("5") > -1){
+                     this.getwaizumu()
+                   }
+                 })
                }
              })
 	          }
@@ -4067,7 +4076,7 @@
            this.feifadingjichengflag2 = JSON.parse(data.data.data)
           }).catch((data)=>{
           })
-          
+
         },
         getyuangaoinfo () { // 查询双方原告基本信息模块数据
           returnQuestionnaireJson({'qpid': 2885}).then((data)=>{
@@ -4161,7 +4170,7 @@
               qpid:2981,
               quid: Number(localStorage.getItem('quid')) //用户的问卷id
             }).then((data)=>{
-              let getmodel = JSON.parse(data.data.data)
+              var getmodel = JSON.parse(data.data.data);
               if(getmodel.indexOf("4") > -1){
                 returnQuestionnaireJson({'qpid': 2988}).then((data)=>{
                   this.aa.zinv = data.data.data
@@ -4179,14 +4188,14 @@
                     }).then((data)=>{
                       this.refreshzinv2()
                     }).catch((data)=>{
-                
+
                     })
                   }
                   this.mokuai.sort(this.compare('id'));
                 }).catch((data)=>{
                 })
               }
-            
+
             })
           }
         },
@@ -4229,7 +4238,7 @@
 	                  }).then((data)=>{
 	                    this.refreshdaiweijicheng1()
 	                  }).catch((data)=>{
-	
+
 	                  })
 	                }
 	                this.mokuai.sort(this.compare('id'));
@@ -4238,7 +4247,7 @@
 	            }
 	          }).catch((data)=>{
 	          })
-            
+
           }else if(this.modle==2){
           	getOnlyValue({  // 小问卷是否选择代位继承
 	            qpid:2943,
@@ -4263,7 +4272,7 @@
 	                  }).then((data)=>{
 	                    this.refreshdaiweijicheng2()
 	                  }).catch((data)=>{
-	
+
 	                  })
 	                }
 	                this.mokuai.sort(this.compare('id'));
@@ -4272,7 +4281,7 @@
 	            }
 	          }).catch((data)=>{
 	          })
-            
+
           }
         },
         refreshdaiweijicheng1 () {
@@ -4314,7 +4323,7 @@
 	                  }).then((data)=>{
 	                    this.refreshzhuanjicheng1()
 	                  }).catch((data)=>{
-	
+
 	                  })
 	                }
 	                this.mokuai.sort(this.compare('id'));
@@ -4347,7 +4356,7 @@
 	                  }).then((data)=>{
 	                    this.refreshzhuanjicheng2()
 	                  }).catch((data)=>{
-	
+
 	                  })
 	                }
 	                this.mokuai.sort(this.compare('id'));
@@ -4356,7 +4365,7 @@
 	            }
 	          }).catch((data)=>{
 	          })
-            
+
           }
         },
         refreshzhuanjicheng1 () {
@@ -4399,7 +4408,7 @@
 	                  }).then((data)=>{
 	                    this.refreshfeifadingjicheng1()
 	                  }).catch((data)=>{
-	
+
 	                  })
 	                }
 	              }).catch((data)=>{
@@ -4407,7 +4416,7 @@
 	            }
 	          }).catch((data)=>{
 	          })
-            
+
           }else if(this.modle==2){
           	getOnlyValue({  // 小问卷是否是法定继承
 	            qpid:2976,
@@ -4433,7 +4442,7 @@
 	                  }).then((data)=>{
 	                    this.refreshfeifadingjicheng2()
 	                  }).catch((data)=>{
-	
+
 	                  })
 	                }
 	              }).catch((data)=>{
@@ -4441,7 +4450,7 @@
 	            }
 	          }).catch((data)=>{
 	          })
-            
+
           }
         },
         refreshfeifadingjicheng1 () {
@@ -5588,7 +5597,7 @@
           }).catch((data)=>{
           })
         },
-        
+
         errorAlert(e) {
           this.$message.error(e);
         },
