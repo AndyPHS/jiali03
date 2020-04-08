@@ -7596,7 +7596,6 @@
               id: 3,
               num:518
             })
-            // console.log(this.aa.ZiNv)
             this.mokuai.sort(this.compare('id'));
             // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
             for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {

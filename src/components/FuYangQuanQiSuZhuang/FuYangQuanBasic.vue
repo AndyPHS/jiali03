@@ -3898,8 +3898,18 @@
         getshishi () {  // 查询事实与理由模块数据
           returnQuestionnaireJson({'qpid': 2647}).then((data)=>{
             this.aa.shishi = data.data.data
-            let cityAnswer = JSON.parse(this.aa.shishi[0][0].questions[7].answer)
-            this.aa.shishi[0][0].questions[7].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
+            let cityAnswer0 = JSON.parse(this.aa.shishi[0][0].questions[9].answer)
+            this.aa.shishi[0][0].questions[9].answer = [TextToCode[cityAnswer0[0]].code,TextToCode[cityAnswer0[0]][cityAnswer0[1]].code,TextToCode[cityAnswer0[0]][cityAnswer0[1]][cityAnswer0[2]].code]
+            let cityAnswer1 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[1][0].grandson[2][2].answer)
+            this.aa.shishi[0][0].questions[10].childQuestion[1][0].grandson[2][3].answer = [TextToCode[cityAnswer1[0]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]].code,TextToCode[cityAnswer1[0]][cityAnswer1[1]][cityAnswer1[2]].code]
+            let cityAnswer2 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[2][0].grandson[2][3].answer)
+            this.aa.shishi[0][0].questions[10].childQuestion[2][0].grandson[2][3].answer = [TextToCode[cityAnswer2[0]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]].code,TextToCode[cityAnswer2[0]][cityAnswer2[1]][cityAnswer2[2]].code]
+            let cityAnswer3 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[3][0].grandson[2][3].answer)
+            this.aa.shishi[0][0].questions[10].childQuestion[3][0].grandson[2][3].answer = [TextToCode[cityAnswer3[0]].code,TextToCode[cityAnswer3[0]][cityAnswer3[1]].code,TextToCode[cityAnswer3[0]][cityAnswer3[1]][cityAnswer3[2]].code]
+            let cityAnswer4 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[4][0].grandson[2][3].answer)
+            this.aa.shishi[0][0].questions[10].childQuestion[4][0].grandson[2][3].answer = [TextToCode[cityAnswer4[0]].code,TextToCode[cityAnswer4[0]][cityAnswer4[1]].code,TextToCode[cityAnswer4[0]][cityAnswer4[1]][cityAnswer4[2]].code]
+            let cityAnswer5 = JSON.parse(this.aa.shishi[0][0].questions[10].childQuestion[5][0].grandson[2][3].answer)
+            this.aa.shishi[0][0].questions[10].childQuestion[5][0].grandson[2][3].answer = [TextToCode[cityAnswer5[0]].code,TextToCode[cityAnswer5[0]][cityAnswer5[1]].code,TextToCode[cityAnswer5[0]][cityAnswer5[1]][cityAnswer5[2]].code]
           }).catch((data)=>{
           })
         },

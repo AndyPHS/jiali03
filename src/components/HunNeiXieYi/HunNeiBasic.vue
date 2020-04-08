@@ -712,7 +712,7 @@
                                                 </el-form-item>
                                               </div>
                                             </div>
-                        
+
                                           </div>
                                         </div>
                                       </div>
@@ -6426,7 +6426,7 @@
                                 </div>
                               </div>
                             </div>
-                        
+
                             <!-- 二级问题块 -->
                           </div>
                         </div>
@@ -6574,6 +6574,7 @@
   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者起诉原因等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者起诉原因等
+  import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
   import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
   import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
   import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
@@ -6621,11 +6622,11 @@
               {title: '家具家电', part: 'jiaju',id:8, num:2460}, // 2460
               {title: '股权', part: 'guquan',id:9, num:2296}, // 2296
               {title: '其他财产', part: 'qitacaichan',id:10, num:2309}, // 2309
-              {title: '未来财产', part: 'weilaicaichan',id:11, num:2690},  // 2690
+              // {title: '未来财产', part: 'weilaicaichan',id:11, num:2690},  // 2690
               {title: '债权', part: 'zhaiquan',id:12, num:2324}, // 2324
               {title: '债务', part: 'zhaiwu',id:13, num:2336},  // 2336
-              {title: '未来债权', part: 'weilaizhaiquan',id:14, num:2692}, // 2692
-              {title: '未来债务', part: 'weilaizhaiwu',id:15, num:2693}, //2693
+              // {title: '未来债权', part: 'weilaizhaiquan',id:14, num:2692}, // 2692
+              // {title: '未来债务', part: 'weilaizhaiwu',id:15, num:2693}, //2693
             ],
             active: 0,
             options: regionData,  // 省市联动
@@ -6650,26 +6651,53 @@
         this.getjiaju()
         this.getguquan()
         this.getqitacaichan()
-        this.getweilaicaichan()
         this.getzhaiquan()
         this.getzhaiwu()
-        this.getweilaizhaiquan()
-        this.getweilaizhaiwu()
       },
       mounted () {
-        // this.getChuShi()
+        this.getChuShi()
        },
       methods: {
-
+        getChuShi () {
+          getOnlyValue({
+            qpid: 2360, // 关联id
+            quid: Number(localStorage.getItem('quid')) //用户的问卷id
+          }).then((data)=>{
+            if(data.data.data==1){
+              this.getweilaicaichan()
+            }
+          })
+          getOnlyValue({
+            qpid: 2361, // 关联id
+            quid: Number(localStorage.getItem('quid')) //用户的问卷id
+          }).then((data)=>{
+            if(data.data.data==1){
+              getOnlyValue({
+                qpid: 2362, // 关联id
+                quid: Number(localStorage.getItem('quid')) //用户的问卷id
+              }).then((data)=>{
+                let getmodel = JSON.parse(data.data.data)
+                if(getmodel.indexOf("1") > -1){
+                  this.getweilaizhaiquan()
+                }else if(getmodel.indexOf("2") > -1){
+                  this.getweilaizhaiwu()
+                }
+        
+              })
+            }
+          })
+        },
         getBasicInformation () { // 查询双方基本信息模块数据
           returnQuestionnaireJson({'qpid': 2151}).then((data)=>{
             this.aa.BasicInformation = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         gethunyin () {  // 查询婚姻状况
           returnQuestionnaireJson({'qpid': 2364}).then((data)=>{
             this.aa.hunyin = data.data.data
+            this.mokuai.sort(this.compare('id'));
             let cityAnswer = JSON.parse(this.aa.hunyin[0][0].questions[1].answer)
             this.aa.hunyin[0][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
           }).catch((data)=>{
@@ -6678,48 +6706,56 @@
         getfangchan () {  // 查询房产模块数据
           returnQuestionnaireJson({'qpid': 2172}).then((data)=>{
             this.aa.fangchan = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getcar () {  // 查询车辆
           returnQuestionnaireJson({'qpid': 2224}).then((data)=>{
             this.aa.car = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getlicai () {// 查询理财
           returnQuestionnaireJson({'qpid': 2485}).then((data)=>{
             this.aa.licai = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getbaoxian () {// 查询保险
           returnQuestionnaireJson({'qpid': 2261}).then((data)=>{
             this.aa.baoxian = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getcunkuan () { // 查询存款
           returnQuestionnaireJson({'qpid': 2283}).then((data)=>{
             this.aa.cunkuan = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getjiaju () { // 查询存款
           returnQuestionnaireJson({'qpid': 2460}).then((data)=>{
             this.aa.jiaju = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getguquan () {// 查询股权
           returnQuestionnaireJson({'qpid': 2296}).then((data)=>{
             this.aa.guquan = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getqitacaichan () { // 查询其他财产
           returnQuestionnaireJson({'qpid': 2309}).then((data)=>{
             this.aa.qitacaichan = data.data.data
+            this.mokuai.sort(this.compare('id'));
             if(this.aa.qitacaichan[0][0].questions[0].answer == 1 || this.aa.qitacaichan[0][0].questions[0].answer == ""){
               this.aa.qitacaichan[0][0].questions[0].answer = []
             }else{
@@ -6731,6 +6767,13 @@
         getweilaicaichan () { // 查询未来财产
           returnQuestionnaireJson({'qpid': 2690}).then((data)=>{
             this.aa.weilaicaichan = data.data.data
+            this.mokuai.push({
+              title: '未来财产',
+              part: 'weilaicaichan',
+              id: 11,
+              num:2690
+            })
+            this.mokuai.sort(this.compare('id'));
             if(this.aa.weilaicaichan[0][0].questions[1].answer == 1 || this.aa.weilaicaichan[0][0].questions[1].answer == ""){
               this.aa.weilaicaichan[0][0].questions[1].answer = []
             }else{
@@ -6747,24 +6790,40 @@
         getzhaiquan () {// 查询债权
           returnQuestionnaireJson({'qpid': 2324}).then((data)=>{
             this.aa.zhaiquan = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getzhaiwu () {// 查询债务
           returnQuestionnaireJson({'qpid': 2336}).then((data)=>{
             this.aa.zhaiwu = data.data.data
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getweilaizhaiquan () {// 查询未来债权
           returnQuestionnaireJson({'qpid': 2692}).then((data)=>{
             this.aa.weilaizhaiquan = data.data.data
+            this.mokuai.push({
+              title: '未来债权',
+              part: 'weilaicaichan',
+              id: 14,
+              num:2692
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },
         getweilaizhaiwu () {// 查询未来债务
           returnQuestionnaireJson({'qpid': 2693}).then((data)=>{
             this.aa.weilaizhaiwu = data.data.data
+            this.mokuai.push({
+              title: '未来债务',
+              part: 'weilaicaichan',
+              id: 15,
+              num:2693
+            })
+            this.mokuai.sort(this.compare('id'));
           }).catch((data)=>{
           })
         },

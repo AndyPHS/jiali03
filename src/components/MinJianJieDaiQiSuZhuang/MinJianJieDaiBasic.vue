@@ -3938,6 +3938,7 @@
             }else{
               this.aa.susongqingqiu[0][0].questions[0].answer = JSON.parse(this.aa.susongqingqiu[0][0].questions[0].answer)
             }
+            this.aa.susongqingqiu[0][0].questions[0].childQuestion[2][0].grandson[4][0].answer = JSON.parse(this.aa.susongqingqiu[0][0].questions[0].childQuestion[2][0].grandson[4][0].answer)
           }).catch((data)=>{
           })
         },
