@@ -18,7 +18,7 @@
                     <div v-for="(item,index) in aa[mo.part]" :key="index">
                       <!-- 大问题块 -->
                       <div>
-                        <div v-if="mo.title=='子女状况' ">
+                        <div v-if="mo.title=='子女情况' ">
                            <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女情况</h2>
                         </div>
                       </div>
@@ -5072,13 +5072,13 @@
                         </div>
                       </div>
                       <div>
-                        <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
+                        <div v-if="mo.title==='子女情况' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(990,index)">删除孩子情况</div>
                         </div>
                       </div>
                     </div>
                     <div>
-                      <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
+                      <div v-if="mo.title== '子女情况' " class="text-right flex justify-end">
                         <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(990)">添加孩子情况</div>
                       </div>
                     </div>
@@ -5249,17 +5249,6 @@
         getZiNvMsg () { // 查询子女模块数据
           returnQuestionnaireJson({'qpid': 990}).then((data)=>{ // 查询子女模块数据
           this.aa.ZiNv = data.data.data
-            if(this.aa.ZiNv==undefined){
-              userAddAnswer({
-                value: 1,  // 值
-                qpid: 990, // 关联id
-                quid: localStorage.getItem('quid') //用户的问卷id
-              }).then((data)=>{
-                this.getZiNvMsg()
-              }).catch((data)=>{
-
-              })
-            }
             for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
               if(this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer ==1 || this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer == ""){
                 this.aa.ZiNv[i][0].questions[3].childQuestion[1][0].answer = []
@@ -5395,7 +5384,7 @@
                           this.getBasicInformation()
                         }else if(this.active==1){// 第二个模块刷新婚姻状况
                           this.getHunYinStatus()
-                        }else if(this.active==2){// 第三个模块刷新子女状况
+                        }else if(this.active==2){// 第三个模块刷新子女情况
                           this.getZiNvMsg()
                         }else if(this.active==3){// 第四个模块刷新起诉原因
                           this.getQiSuYuanYinMsg()
@@ -5466,7 +5455,7 @@
                         this.getBasicInformation()
                       }else if(this.active==1){// 第二个模块刷新婚姻状况
                         this.getHunYinStatus()
-                      }else if(this.active==2){// 第三个模块刷新子女状况
+                      }else if(this.active==2){// 第三个模块刷新子女情况
                         this.getZiNvMsg()
                       }else if(this.active==3){// 第四个模块刷新起诉原因
                         this.getQiSuYuanYinMsg()
@@ -5545,7 +5534,7 @@
                         this.getBasicInformation()
                       }else if(this.active==1){// 第二个模块刷新婚姻状况
                         this.getHunYinStatus()
-                      }else if(this.active==2){// 第三个模块刷新子女状况
+                      }else if(this.active==2){// 第三个模块刷新子女情况
                         this.getZiNvMsg()
                       }else if(this.active==3){// 第四个模块刷新起诉原因
                         this.getQiSuYuanYinMsg()
@@ -5746,7 +5735,7 @@
             }).then((data)=>{
               if(data.data.status_code == 200 ){
                 if(e==990){
-                  this.getZiNv()  // 查询子女模块数据
+                  this.getZiNvMsg()  // 查询子女模块数据
                 }
                 this.$message({
                   message: '添加成功',
@@ -5769,7 +5758,7 @@
                 fornum: index+1
               }).then((data)=>{
                 if(e==990){
-                  this.getZiNv()  // 查询子女模块数据
+                  this.getZiNvMsg()  // 查询子女模块数据
                 }else if(e==948){
                   this.getQiSuYuanYin() // 查询起诉原因模块数据
                 }else if(e==950){
@@ -5864,7 +5853,7 @@
                 }else{
                   this.$notify({
                     title: '保存成功',
-                    message: '子女状况模块已成功保存',
+                    message: '子女情况模块已成功保存',
                     type: 'success'
                   });
                   if (this.active++ >this.mokuai.length-1) ;
