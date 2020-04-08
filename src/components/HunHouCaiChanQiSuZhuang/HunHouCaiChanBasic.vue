@@ -3952,6 +3952,8 @@
 
               })
             }
+            this.aa.shishiyuliyou[0][0].questions[3].answer = JSON.parse(this.aa.shishiyuliyou[0][0].questions[3].answer)
+            this.aa.shishiyuliyou[0][0].questions[5].answer = JSON.parse(this.aa.shishiyuliyou[0][0].questions[5].answer)
           }).catch((data)=>{
           })
         },
