@@ -14,11 +14,17 @@
                         <div class="text-left py-2 flex whitespace-no-wrap">
                             <span class="md:text-xl">上传文件:</span>
                             <ul>
-                                <li><input type="file" name="upfile" id="upfile"
-                                           accept='image/jpeg, image/png, image/jpg' class="pl-2" @change="selectFile"
-                                           multiple></li>
+                                <li>
+                                  <input  type="file"
+                                          name="upfile"
+                                          id="upfile"
+                                          accept='image/jpeg, image/png, image/jpg'
+                                          class="pl-2"
+                                          multiple
+                                          @change="selectFile">
+                                </li>
                                 <li class="my-2 text-red-500">(注意：图片必须以1234……命名，切按顺序上传如：1.jpg)</li>
-                                <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="update"/>-->
+                                <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="selectFile"/>-->
                             </ul>
                         </div>
                         <div>
@@ -72,46 +78,30 @@
     methods: {
       submitClick () {
         let formData = new FormData();
-        let imgFiles = document.getElementById('upfile').files;
+        let imgFiles = $('#upfile')[0].files;
         for (let i = 0; i < imgFiles.length; i++) {
-          formData.append('imgs',imgFiles[i])
+          formData.append('imgs['+i+']',imgFiles[i])
         }
         formData.append('title',this.formMsg.title)
         creatCase(formData).then((data) => {
-          console.log(data)
+          this.$message({
+            message: '添加成功',
+            type: 'success'
+          });
           this.$router.replace('/FileList')
         }).catch((data) => {
 
         })
       },
-      selectFile: function () {
-
-
-      },
-      update(e){
-        let file = e.target.files[0];
-        let param = new FormData();
-        param.append('imgs',file,file.name);//通过append向form对象添加数据
-        param.append('title',this.formMsg.title);//添加form表单中其他数据
-        console.log(param.get('file')); //FormData私有类对象，访问不到，可以通过get判断值是否传进去
-        let config = {
-          headers: {'Content-Type':'multipart/form-data', Authorization: 'bearer ' + localStorage.getItem('token')}
-        };
-        this.$axios.post(apiUrl.creatCase,param,config).then(responsive=>{
-          console.log(responsive.data)
-        })
-      },
-      uploadImg () {
-        var files = document.getElementById('file').files
+      selectFile () {
+        var files = $('#upfile')[0].files
         if (files && files.length) {
           for (let item of files) {
             let size = item.size / 1024 / 1024
-            if (size > 2) {
-              this.$message.error('大小不能超过2M')
+            if (size > 5) {
+              this.$message.error('单张图片大小不能超过5M')
               return false
             }
-            this.fileList.push(item['name'])
-            this.files.push(item)
           }
         }
       },

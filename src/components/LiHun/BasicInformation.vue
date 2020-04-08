@@ -3555,7 +3555,7 @@
                                                   <i  slot="reference" class="el-icon-picture"></i>
                                                 </el-popover>
                                               </div>
-                                              <el-select v-model="$$$$$item.answer" size="small" @change="userAddAnswerAction($$$$$$item)">
+                                              <el-select v-model="$$$$$item.answer" size="small" @change="userAddAnswerAction($$$$$item)">
                                                 <el-option
                                                   v-for="(s,i) in mon"
                                                   :key="i"
@@ -5836,7 +5836,7 @@
                                     <i  slot="reference" class="el-icon-picture"></i>
                                   </el-popover>
                                 </div>
-                                <el-select v-model="$$item.answer" size="small" @change="userAddAnswerAction($$$item)">
+                                <el-select v-model="$$item.answer" size="small" @change="userAddAnswerAction($$item)">
                                   <el-option
                                     v-for="(s,i) in mon"
                                     :key="i"
