@@ -52,71 +52,65 @@
 </template>
 
 <script>
-  import HeadMenu from '@/components/HeadMenu'
-  import {creatCase} from '@/api/api/requestLogin.js'
-  // import {apiUrl} from '@/common/js/api.js'
-  export default {
-    name: 'caseupload',
-    components: {
-      HeadMenu,
-    },
-    data () {
-      return {
-        msg: localStorage.getItem('name'),
-        formMsg: {
-          title: '',
-          imgs: []
-        },
-        isShow: false,
-        filename: '',
-        form: {
-          fileMsg: '文件大小不能超过2M'
-        }
-
-      }
-    },
-    methods: {
-      submitClick () {
-        let formData = new FormData();
-        let imgFiles = $('#upfile')[0].files;
-        for (let i = 0; i < imgFiles.length; i++) {
-          formData.append('imgs['+i+']',imgFiles[i])
-        }
-        formData.append('title',this.formMsg.title)
-        creatCase(formData).then((data) => {
-          this.$message({
-            message: '添加成功',
-            type: 'success'
-          });
-          this.$router.replace('/FileList')
-        }).catch((data) => {
-
-        })
+import HeadMenu from '@/components/HeadMenu'
+import {creatCase} from '@/api/api/requestLogin.js'
+// import {apiUrl} from '@/common/js/api.js'
+export default {
+  name: 'caseupload',
+  components: {
+    HeadMenu
+  },
+  data () {
+    return {
+      msg: localStorage.getItem('name'),
+      formMsg: {
+        title: '',
+        imgs: []
       },
-      selectFile () {
-        var files = $('#upfile')[0].files
-        if (files && files.length) {
-          for (let item of files) {
-            let size = item.size / 1024 / 1024
-            if (size > 5) {
-              this.$message.error('单张图片大小不能超过5M')
-              return false
-            }
+      isShow: false,
+      filename: '',
+      form: {
+        fileMsg: '文件大小不能超过2M'
+      }
+
+    }
+  },
+  methods: {
+    submitClick () {
+      let formData = new FormData()
+      let imgFiles = $('#upfile')[0].files
+      for (let i = 0; i < imgFiles.length; i++) {
+        formData.append('imgs[' + i + ']', imgFiles[i])
+      }
+      formData.append('title', this.formMsg.title)
+      creatCase(formData).then((data) => {
+        this.$message({
+          message: '添加成功',
+          type: 'success'
+        })
+        this.$router.replace('/FileList')
+      }).catch((data) => {
+
+      })
+    },
+    selectFile () {
+      var files = $('#upfile')[0].files
+      if (files && files.length) {
+        for (let item of files) {
+          let size = item.size / 1024 / 1024
+          if (size > 5) {
+            this.$message.error('单张图片大小不能超过5M')
+            return false
           }
         }
-      },
-      deleteFile (index) {
-        var dom = document.getElementById('file')
-        dome.value == ''
-        this.fileList.splice(index, 1)
-        this.Files.splice(index, 1)
-      },
-      getList () {
-        this.$router.replace('/FileList')
       }
+    },
+    getList () {
+      this.$router.replace('/FileList')
     }
-
   }
+
+}
 </script>
 
 <style scoped>
