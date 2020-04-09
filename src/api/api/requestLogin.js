@@ -175,10 +175,7 @@ export const creatCase = params => {
   return axios({
     method: 'POST',
     dataType: 'json',
-    cache: true,
     async: false,
-    timeout: 5000,
-    processData: false,
     url: apiUrl.creatCase,
     headers: { Authorization: 'bearer ' + localStorage.getItem('token'), 'Content-Type': 'multipart/form-data:charset=UTF-8' },
     data: params

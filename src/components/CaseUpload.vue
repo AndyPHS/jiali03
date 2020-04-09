@@ -3,45 +3,25 @@
         <head-menu></head-menu>
         <div class="container mx-auto ">
             <div>
-                <div >
+                <div class="w-2/3 mx-auto">
                     <h2 class="md:text-3xl text-orange-500 py-4">案例上传</h2>
-                    <form action="" name="myForm" id="myForm" class="w-2/3 mx-auto" enctype="multipart/form-data">
-                        <div class="text-left">
-                            <span class="md:text-xl">文件名称</span>
-                            <input type="text" name="title" id="name" placeholder="请输入文件名称" v-model="formMsg.title"
-                                   class="md:text-xl border ml-2 text-base">
-                        </div>
-                        <div class="text-left py-2 flex whitespace-no-wrap">
-                            <span class="md:text-xl">上传文件:</span>
-                            <ul>
-                                <li>
-                                  <input  type="file"
-                                          name="upfile"
-                                          id="upfile"
-                                          accept='image/jpeg, image/png, image/jpg'
-                                          class="pl-2"
-                                          multiple
-                                          @change="selectFile">
-                                </li>
-                                <li class="my-2 text-red-500">(注意：图片必须以1234……命名，切按顺序上传如：1.jpg)</li>
-                                <!--<input class="file" name="file" type="file" accept="image/png,image/gif,image/jpeg" @change="selectFile"/>-->
-                            </ul>
-                        </div>
-                        <div>
-                            <ul>
-                                <li class="text-left my-2 w-full flex justify-between"
-                                    v-for="(item, index) in filename">
-                                    第{{index + 1}}个、{{item.name}} <br/>
-                                    <p class="errP" v-show="isShow">{{form.fileMsg}}</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="w-1/2 mx-auto pt-6">
-                            <button type="submit" class="px-6 py-2 bg-blue-500 text-white"
-                                    @click.prevent="submitClick()">确认上传
-                            </button>
-                        </div>
-                    </form>
+                    <!-- <form action="" name="myForm" id="myForm" class="w-2/3 mx-auto" enctype="multipart/form-data"> -->
+                    <el-form :model="formMsg">
+                      <el-form-item label="文件名称" :label-width="formLabelWidth">
+                        <el-input v-model="formMsg.title" class="md:text-xl border ml-2 text-base" autocomplete="off"></el-input>
+                      </el-form-item>
+                      <el-form-item label="上传文件" :label-width="formLabelWidth">
+                         <input name="imgs" class="w-full" multiple type="file" id='upfile' @change="selectFile">
+                      </el-form-item>
+                      <el-form-item>
+                        <el-button
+                          type="primary"
+                          @click="submitClick"
+                          >确认上传
+                        </el-button>
+                      </el-form-item>
+                    </el-form>
+                   <!-- </form> -->
                     <div class="my-6">
                         <a class="text-blue-500" @click="getList()">查看已上传的文件</a>
                     </div>
@@ -67,6 +47,8 @@ export default {
         title: '',
         imgs: []
       },
+      fullscreenLoading: false,  // 加载中
+      formLabelWidth: '80px',
       isShow: false,
       filename: '',
       form: {
@@ -77,26 +59,36 @@ export default {
   },
   methods: {
     submitClick () {
-      let formData = new FormData()
-      let imgFiles = $('#upfile')[0].files
+      // this.fullscreenLoading = true;
+      const loading = this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+      const formData = new FormData();
+      let imgFiles = $("#upfile")[0].files;
       for (let i = 0; i < imgFiles.length; i++) {
-        formData.append('imgs[' + i + ']', imgFiles[i])
+        formData.append('imgs['+i+']', imgFiles[i])
       }
       formData.append('title', this.formMsg.title)
       creatCase(formData).then((data) => {
+        // this.fullscreenLoading = false;
+        loading.close();
         this.$message({
           message: '添加成功',
           type: 'success'
         })
         this.$router.replace('/FileList')
-      }).catch((data) => {
-
       })
+      setTimeout(() => {
+        loading.close();
+      }, 5000);
     },
     selectFile () {
-      var files = $('#upfile')[0].files
-      if (files && files.length) {
-        for (let item of files) {
+      let imgFiles = $("#upfile")[0].files;
+      if (imgFiles && imgFiles.length) {
+        for (let item of imgFiles) {
           let size = item.size / 1024 / 1024
           if (size > 5) {
             this.$message.error('单张图片大小不能超过5M')

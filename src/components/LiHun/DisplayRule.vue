@@ -208,7 +208,7 @@
                         >
                             <td class="border text-black">{{ item.title }}</td>
                             <td class="border text-black">{{ item.type }}</td>
-                            <td class="border text-black">{{ item.label }}</td>
+                            <td class="border text-black">{{ item.value }}</td>
                             <td class="border text-black">{{ item.replate }}</td>
                             <td class="border text-black justify-around">
                                 <div class="flex justify-around py-2 w-2/3 mx-auto">
@@ -460,10 +460,10 @@
                 if(JSON.stringify(this.wordAdd.where) == '{}'){
                     this.wordAdd.where.splice(1,1)
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
-
+                    this.wordAddWhere ={}
                 }else{
                     this.wordAdd.where.push(this.wordAddWhere) // 提交组合绑定的问题
-                    
+                    this.wordAddWhere ={}
                 }
             },
             cancelAddWord () {
