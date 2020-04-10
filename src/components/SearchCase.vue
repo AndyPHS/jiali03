@@ -185,6 +185,9 @@
                                           placeholder="选择日期时间">
                                         </el-date-picker>
                                     </el-form-item>
+                                    <el-form-item label="内容" class="text-base">
+                                        <el-input v-model="selectCaseListMsg.content" size="small" @blur="addChooseContent({name:'内容', type: 'content',value: selectCaseListMsg.content})"></el-input>
+                                    </el-form-item>
                                </div>
 
                             </div>
@@ -290,6 +293,7 @@
                  <ul v-for="item in case_list" :key="item.id">
                    <li v-if='case_list !="" ' class="my-2 py-2 hover:bg-orange-200 pl-5">
                       <h2 class="hover:text-black-500 cursor-pointer" @click='openCase(item.id)'>案件标题：{{ item.title }}</h2>
+                      <div class="w-full py-1" v-html="item.content"></div>
                       <div class="flex text-sm mt-2" >
                           <span class="mr-10">{{ item.case_number }}</span>
                           <span class="mr-10">{{ item.name }}</span>
@@ -822,6 +826,15 @@
             var search = this.searchChoose;
             for (var i = 0;i<search.length;i++){
               if(search[i].name == "案号"){
+                search.splice(i,1)
+              }
+            }
+            this.searchChoose.push(e)
+          },
+          addChooseContent (e) {
+            var search = this.searchChoose;
+            for (var i = 0;i<search.length;i++){
+              if(search[i].name == "内容"){
                 search.splice(i,1)
               }
             }
