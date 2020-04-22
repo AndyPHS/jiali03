@@ -683,7 +683,12 @@ export default {
         }).then((data) => {
           if (data.data.status_code == 200) {
             localStorage.removeItem('quid')
-            this.questionnaireChange()
+			var qid = this.questionnaireSelecter
+			if(qid==null){
+				this.getSelectUserQuestionnaire();
+			}else{
+				this.questionnaireChange()
+			}
             this.deleteWenJuanIcon()
             this.$message({
               message: '恢复成功',
@@ -715,8 +720,13 @@ export default {
         }).then((data) => {
           if (data.data.status_code == 200) {
             localStorage.removeItem('quid')
-            this.questionnaireChange()
             this.deleteWenJuanIcon()
+			var qid = this.questionnaireSelecter
+			if(qid==null){
+				this.getSelectUserQuestionnaire();
+			}else{
+				this.questionnaireChange()
+			}
             this.selectUserDeleteQuestionnaire()
             this.$message({
               message: '删除成功',
@@ -751,7 +761,12 @@ export default {
       }).then((data) => {
         if (data.data.status_code == 200) {
           localStorage.removeItem('quid')
-          this.questionnaireChange()
+          var qid = this.questionnaireSelecter
+          if(qid==null){
+          	this.getSelectUserQuestionnaire();
+          }else{
+          	this.questionnaireChange()
+          }
           this.$message({
             message: '重命名成功',
             type: 'success',
@@ -780,7 +795,12 @@ export default {
       }).then((data) => {
         if (data.data.status_code == 200) {
           localStorage.removeItem('quid')
-          this.questionnaireChange()
+          var qid = this.questionnaireSelecter
+          if(qid==null){
+          	this.getSelectUserQuestionnaire();
+          }else{
+          	this.questionnaireChange()
+          }
           this.$message({
             message: '新增副本成功',
             type: 'success',
@@ -808,14 +828,24 @@ export default {
               type: 'success',
               duration: 1000
             })
-            this.questionnaireChange()
+            var qid = this.questionnaireSelecter
+            if(qid==null){
+            	this.getSelectUserQuestionnaire();
+            }else{
+            	this.questionnaireChange()
+            }
           } else {
             this.$message({
               message: '置顶成功',
               type: 'success',
               duration: 1000
             })
-            this.questionnaireChange()
+            var qid = this.questionnaireSelecter
+            if(qid==null){
+            	this.getSelectUserQuestionnaire();
+            }else{
+            	this.questionnaireChange()
+            }
           }
           this.dialogNewCopy = false
           this.chooseList.title = ''
