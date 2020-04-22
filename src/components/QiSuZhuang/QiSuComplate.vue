@@ -219,8 +219,12 @@
                    AddLabelContent({
                        content: this.contentMsg.content
                    }).then((data)=>{
-                        this.contentMsg.content = '';
-                        this.daligeAddBox = false;
+                       this.Content.UqContent.push({
+                           status: 1,
+                           content: this.contentMsg.content
+                       })
+                      this.contentMsg.content = '';
+                      this.daligeAddBox = false;
                    }).catch((data)=>{
 
                    })
