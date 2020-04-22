@@ -111,7 +111,8 @@
             exemption: null, // 免责条款 0未填写 1填写
             complete: null   // 是否完成 0未完成 1完成
            },
-           missField: [] // 未填写项目
+           missField: [] ,// 未填写项目
+           isGoBack: false   // 点击取消是否需要跳转
           }
       },
       name: 'WenJuan2',
@@ -319,9 +320,13 @@
         },
         SaveQuestionnaire(){    // 点击保存弹出保存弹框
           this.dialogSavedWenJuan = true;
+          this.isGoBack = false;
         },
         canceldialogSaveWenJuan(){   // 取消保存按钮
           this.dialogSavedWenJuan = false;
+          if(this.isGoBack){
+            this.$router.replace("/UserSystem");
+          }
         },
         dialogSaveWenJuanOk(){  // 点击保存确定按钮保存
           userUpdateQuestionnaire({
@@ -339,6 +344,7 @@
         },
         returnUserList(){  // 返回协议列表
           this.dialogSavedWenJuan = true;
+          this.isGoBack = true;
         }
       }
     }
