@@ -154,10 +154,6 @@
         <h2 class="text-lg mb-1 text-bold" v-if="chooseList.title==null ">暂无标题</h2>
         <textarea :rows='20' class="textarea w-full h-auto" placeholder="" readonly="readonly" v-model="chooseList.content" ></textarea>
       </div>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="cancelViewWenJuan">取 消</el-button>
-        <el-button type="primary" @click="ViewWenJuanOk">确 定</el-button>
-      </div>
     </el-dialog>
     <!-- 下载弹框 -->
     <el-dialog title="免责条款" :visible.sync="dialogDownLoadWenJuan">
@@ -431,12 +427,6 @@ export default {
       this.ListShow = true
       this.DeleteShow = false
       this.getSelectUserQuestionnaire()
-    },
-    cancelViewWenJuan () { // 点击预览弹窗中的取消按钮
-      this.dialogViewWenJuan = false
-    },
-    ViewWenJuanOk () { // 点击预览弹窗中的确定按钮
-      this.dialogViewWenJuan = false
     },
     addNewWenJuan () { // 新增问卷
       // this.$router.replace("/ChuShi");
