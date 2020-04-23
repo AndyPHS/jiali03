@@ -31,10 +31,10 @@
                   <el-menu-item v-show="false" index="GuanLianManagement"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
                   <el-menu-item v-show="false" index="DisplayRule"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
                 </el-submenu>
-                <el-submenu index="3-2" v-show="this.wenjuan.questionnaire">
+                <el-submenu index="3-2">
                   <template slot="title">问卷模块</template>
-                  <el-menu-item index="wenjuan"><router-link to="wenjuan">问卷管理</router-link></el-menu-item>
-                  <el-menu-item index="UserSystem"><router-link to="UserSystem">问卷列表</router-link></el-menu-item>
+                  <el-menu-item index="wenjuan" v-show="this.wenjuan.questionnaireAdmin"><router-link to="wenjuan">问卷管理</router-link></el-menu-item>
+                  <el-menu-item index="UserSystem" v-show="this.wenjuan.questionnaire"><router-link to="UserSystem">问卷列表</router-link></el-menu-item>
 
                   <!-- <el-menu-item index="BasicInformation"><router-link to="BasicInformation">填写问卷</router-link></el-menu-item> -->
                 </el-submenu>
