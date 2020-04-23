@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="headBox">
         <el-menu
                 :default-active="activeIndex"
                 class="el-menu-demo"
@@ -10,40 +10,40 @@
                 :router=true
                 active-text-color="#ffd04b">
             <!--<el-menu-item index="1">用户管理</el-menu-item>-->
-            <el-submenu index="1"  v-show="this.permissionHead.guanliyuan || this.permissionHead.quanxian || this.permissionHead.juese ">
+            <el-submenu index="1"  v-if="this.permissionHead.guanliyuan || this.permissionHead.quanxian || this.permissionHead.juese ">
                 <template slot="title">用户管理</template>
-                <el-menu-item index="Users" v-show="permissionHead.guanliyuan"><router-link  to="Users">管理员列表</router-link></el-menu-item>
-                <el-menu-item index="UsersPermission" v-show="permissionHead.quanxian"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
-                <el-menu-item index="UsersRole" v-show="permissionHead.juese"><router-link  to="UsersRole">角色列表</router-link></el-menu-item>
+                <el-menu-item index="Users" v-if="permissionHead.guanliyuan"><router-link  to="Users">管理员列表</router-link></el-menu-item>
+                <el-menu-item index="UsersPermission" v-if="permissionHead.quanxian"><router-link  to="UsersPermission">权限列表</router-link></el-menu-item>
+                <el-menu-item index="UsersRole" v-if="permissionHead.juese"><router-link  to="UsersRole">角色列表</router-link></el-menu-item>
             </el-submenu>
-            <el-submenu index="2" collapse-transition v-show="this.caseHead.caseManagement">
+            <el-submenu index="2" collapse-transition v-if="this.caseHead.caseManagement">
                 <template slot="title">案例库管理</template>
                 <el-menu-item index="CaseUpload"><router-link to="CaseUpload">上传案件</router-link></el-menu-item>
                 <el-menu-item index="FileList"><router-link to="FileList">案件列表</router-link></el-menu-item>
                 <el-menu-item index="SearchCase"><router-link to="SearchCase">案例检索</router-link></el-menu-item>
                  <el-menu-item index="CaseCourt" class="hidden"><router-link to="CaseCourt">法院管理</router-link></el-menu-item>
             </el-submenu>
-            <el-submenu index="3" collapse-transition v-show="this.wenjuan.questionnaireAdmin || this.wenjuan.questionnaire">
+            <el-submenu index="3" collapse-transition v-if="this.wenjuan.questionnaireAdmin || this.wenjuan.questionnaire">
                 <template slot="title">问卷管理</template>
-                <el-submenu index="3-1" v-show="this.wenjuan.questionnaireAdmin">
+                <el-submenu index="3-1" v-if="this.wenjuan.questionnaireAdmin">
                   <template slot="title">问题模块</template>
                   <el-menu-item index="QuestionManagement"><router-link to="QuestionManagement">问题管理</router-link></el-menu-item>
-                  <el-menu-item v-show="false" index="GuanLianManagement"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
-                  <el-menu-item v-show="false" index="DisplayRule"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
+                  <el-menu-item v-if="false" index="GuanLianManagement"><router-link to="GuanLianManagement">关联管理</router-link></el-menu-item>
+                  <el-menu-item v-if="false" index="DisplayRule"><router-link to="DisplayRule">组合管理</router-link></el-menu-item>
                 </el-submenu>
                 <el-submenu index="3-2">
                   <template slot="title">问卷模块</template>
-                  <el-menu-item index="wenjuan" v-show="this.wenjuan.questionnaireAdmin"><router-link to="wenjuan">问卷管理</router-link></el-menu-item>
-                  <el-menu-item index="UserSystem" v-show="this.wenjuan.questionnaire"><router-link to="UserSystem">问卷列表</router-link></el-menu-item>
+                  <el-menu-item index="wenjuan" v-if="this.wenjuan.questionnaireAdmin"><router-link to="wenjuan">问卷管理</router-link></el-menu-item>
+                  <el-menu-item index="UserSystem" v-if="this.wenjuan.questionnaire"><router-link to="UserSystem">问卷列表</router-link></el-menu-item>
 
                   <!-- <el-menu-item index="BasicInformation"><router-link to="BasicInformation">填写问卷</router-link></el-menu-item> -->
                 </el-submenu>
             </el-submenu>
-            <div class="text-right text-white mt-4 mr-3">
-                <span class="mr-3 cursor-pointer" @click="Exit">[退出]</span>
-                <span >你好！{{user}}</span>
-            </div>
         </el-menu>
+        <div class="text-right text-white pr-10">
+            <span class="mr-3 cursor-pointer" @click="Exit">[退出]</span>
+            <span >你好！{{user}}</span>
+        </div>
     </div>
 
 </template>
@@ -113,5 +113,13 @@
 </script>
 
 <style scoped>
-
+.el-menu.el-menu--horizontal{
+  border:none !important;
+}
+.headBox{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(84, 92, 100);
+}
 </style>
