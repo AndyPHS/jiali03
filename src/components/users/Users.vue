@@ -178,7 +178,7 @@
                     this.user.name = '';
                     this.user.email = '';
                     this.user.password = '';
-                    this.user.roles = '';
+                    this.user.roles = [];
                     this.handleUserList()
                     this.dialogUserAdd = false
                 }).catch((data)=>{
