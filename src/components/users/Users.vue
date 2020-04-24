@@ -11,7 +11,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr 
+                            <tr
                                 v-for="(item, index) in pageInfo"
                                 :key="index"
                             >
@@ -29,14 +29,14 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+
                 </div>
                 <el-pagination
                     background
                     class="my-10"
                     layout="prev, pager, next"
                     @current-change="handleUserList"
-                    :page-size="pagesize" 
+                    :page-size="pagesize"
                     :current-page.sync="currentPage"
                     :total="this.min.total">
                 </el-pagination>
@@ -82,7 +82,7 @@
               </div>
             </el-dialog>
         </div>
-        
+
 </template>
 
 <script>
@@ -105,7 +105,7 @@
                     name: '',
                     email: '',
                     created_at: '',
-                    updated_at: ''   
+                    updated_at: ''
                  }
                 ],
                 list: {
@@ -162,7 +162,7 @@
             handleCurrentChange (currentPage) {    //点击哪一页
                 this.currentPage = currentPage;
             },
-            
+
             handleUserAdd () {    // 点击新增
                 this.dialogUserAdd = true
                 this.user.roles = JSON.stringify(this.user.roles)
@@ -178,7 +178,6 @@
                     this.user.name = '';
                     this.user.email = '';
                     this.user.password = '';
-                    this.user.roles = [];
                     this.handleUserList()
                     this.dialogUserAdd = false
                 }).catch((data)=>{
@@ -204,7 +203,7 @@
             },
             handleCheckedCitiesChange (value) {
                 this.chooseUserRole = value
-                
+
             },
             updataUserMsg () {   // 确定修改用户信息
                 this.chooseUserRole = JSON.stringify(this.chooseUserRole)
@@ -244,9 +243,9 @@
                   this.$message({
                     type: 'info',
                     message: '已取消删除'
-                  });          
+                  });
                 });
-                
+
             }
         }
     }
