@@ -7429,11 +7429,6 @@
             </ul>
           </div>
           <div class="queren flex mx-auto">
-             <div class="w-24 mr-2">
-              <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='closeMissMsgBox'>
-                取消
-              </div>
-            </div>
             <div class="w-24">
               <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='closeMissMsgBox'>
                 继续填写
