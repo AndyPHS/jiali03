@@ -165,6 +165,7 @@
             
             handleUserAdd () {    // 点击新增
                 this.dialogUserAdd = true
+                this.user.roles = JSON.stringify(this.user.roles)
             },
             addNewUser () {   // 新增用户
                 this.user.roles = JSON.stringify(this.user.roles)
@@ -185,6 +186,7 @@
                 })
             },
             handleClick (item) {    // 点击修改角色
+                this.user.roles = JSON.stringify(this.user.roles)
                 let chooseUserRoleArr = [];
                 this.dialogFormVisible = true
                 this.user.name = item.name;
