@@ -62,6 +62,8 @@ import BiJiJianDingBasic from '@/components/BiJiJianDingRequest/BiJiJianDingBasi
 import BiJiJianDingPersonalize from '@/components/BiJiJianDingRequest/BiJiJianDingPersonalize'  // 笔迹鉴定申请书个性化页面
 import JingShenZhuangTaiBasic from '@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiBasic'   // 精神状态鉴定申请书信息填写页
 import JingShenZhuangTaiPersonalize from '@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiPersonalize'  // 精神状态鉴定申请书个性化页面
+
+import NewWenJuan from '@/components/NewWenJuan' // 新增问卷测试
 Vue.use(Router)
 
 export default new Router({
@@ -187,6 +189,7 @@ export default new Router({
     {path: '/JingShenZhuangTaiBasic', name: 'JingShenZhuangTaiBasic', component: JingShenZhuangTaiBasic},
     // 精神状态鉴定申请书个性化页面
     {path: '/JingShenZhuangTaiPersonalize', name: 'JingShenZhuangTaiPersonalize', component: JingShenZhuangTaiPersonalize},
+	{path: '/NewWenJuan', name: 'NewWenJuan', component: NewWenJuan},
     // 访问错误页面跳转到登录页面
     {path: '*',redirect: '/'}
   ]
