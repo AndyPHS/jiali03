@@ -178,6 +178,7 @@
                     this.user.name = '';
                     this.user.email = '';
                     this.user.password = '';
+                    this.user.roles = [];
                     this.handleUserList()
                     this.dialogUserAdd = false
                 }).catch((data)=>{
@@ -216,7 +217,7 @@
                     this.user.name = '';
                     this.user.email = '';
                     this.user.password = '';
-                    this.chooseUserRole = '';
+                    this.chooseUserRole = [];
                     localStorage.removeItem('userId');
                     this.dialogFormVisible = false
                 })
