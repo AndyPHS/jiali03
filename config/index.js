@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/api':{
-        target:'lhxys.jialilawyer.com:3921/api/',
+        target:'http://lhxys.jialilawyer.com:3921/api/',
         // target: 'http://case.net/api/',
         changeOrigin:true,//允许跨域
         pathRewrite:{
