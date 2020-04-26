@@ -57,7 +57,7 @@
                 </el-checkbox-group>
               </el-form>
               <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogUserAdd = false">取 消</el-button>
+                <!-- <el-button @click="dialogUserAdd = false">取 消</el-button> -->
                 <el-button type="primary" @click="addNewUser">确 定</el-button>
               </div>
             </el-dialog>
@@ -77,7 +77,7 @@
                 </el-checkbox-group>
               </el-form>
               <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible = false">取 消</el-button>
+                <el-button @click="cancleUpdataUserMsg">取 消</el-button>
                 <el-button type="primary" @click="updataUserMsg">确 定</el-button>
               </div>
             </el-dialog>
@@ -206,6 +206,14 @@
                 this.chooseUserRole = value
 
             },
+            cancleUpdataUserMsg () { // 取消修改用户信息
+              this.user.name = '';
+              this.user.email = '';
+              this.user.password = '';
+              this.chooseUserRole = [];
+              localStorage.removeItem('userId');
+              this.dialogFormVisible = false
+            },
             updataUserMsg () {   // 确定修改用户信息
                 this.chooseUserRole = JSON.stringify(this.chooseUserRole)
                 updateUser({
@@ -218,6 +226,7 @@
                     this.user.email = '';
                     this.user.password = '';
                     this.chooseUserRole = [];
+                    this.handleUserList()
                     localStorage.removeItem('userId');
                     this.dialogFormVisible = false
                 })

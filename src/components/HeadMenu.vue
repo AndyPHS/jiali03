@@ -89,7 +89,6 @@
             this.roles.forEach((item)=>{
               this.rolesId.push(item.name)
             })
-            console.log(this.rolesId)
             if(this.permissions !== []){
                 this.permissions.forEach((item)=>{
                   this.permissionsId.push(item.id)

@@ -115,7 +115,6 @@ export default {
                         this.roles.forEach((item)=>{
                           this.rolesId.push(item.name)
                         })
-                        console.log(this.rolesId)
                         if(this.rolesId.indexOf('questionnaireDemo')> -1){
                           this.$router.replace("/UserSystem");
                           // this.$router.push({path:'/UserSystem'});
