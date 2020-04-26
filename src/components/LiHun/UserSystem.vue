@@ -1,34 +1,38 @@
 <template>
   <div>
-    <head-menu></head-menu>
-    <div class="container mx-auto relative">
-      <div class="head_left">
-        <div class="shai">筛选</div>
-        <el-select v-model="questionnaireTypeSelect" @change="questionnaireTypeChange" placeholder="请选择">
-          <el-option
-            v-for="(item, index) in questionnaireType"
-            :key="index"
-            :label="item.index"
-            :value="item">
-          </el-option>
-        </el-select>
-        <el-select v-model="questionnaireSelecter" @change="questionnaireChange" placeholder="请选择">
-          <el-option
-            v-for="(item, index) in questionnaireAll"
-            :key="index"
-            :label="item.title"
-            :value="item.id">
-          </el-option>
-        </el-select>
+    <head-menu ref="headMenu"></head-menu>
+    <div class="container mx-auto">
+      <div class="flex justify-between items-center py-5">
+        <div class="head_left" v-if="this.questionnaireDemo==false">
+          <div class="shai">筛选</div>
+          <el-select v-model="questionnaireTypeSelect" @change="questionnaireTypeChange" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in questionnaireType"
+              :key="index"
+              :label="item.index"
+              :value="item">
+            </el-option>
+          </el-select>
+          <el-select v-model="questionnaireSelecter" @change="questionnaireChange" placeholder="请选择">
+            <el-option
+              v-for="(item, index) in questionnaireAll"
+              :key="index"
+              :label="item.title"
+              :value="item.id">
+            </el-option>
+          </el-select>
+        </div>
+        <div class="">
+          <el-button type="primary" plain @click="addNewWenJuan">新增问卷</el-button>
+        </div>
       </div>
-      <div class="absolute right-0 top-0">
-        <el-button type="primary" plain @click="addNewWenJuan">新增问卷</el-button>
-      </div>
-      <div class="absolute right-0 delete">
-        <i class="el-icon-delete"  @click="deleteWenJuanIcon"></i>
-      </div>
+
+
       <!-- 问卷列表 -->
-      <div v-show='ListShow'>
+      <div v-show='ListShow' class="relative">
+        <div class="absolute right-0 delete">
+          <i class="el-icon-delete"  @click="deleteWenJuanIcon"></i>
+        </div>
         <el-table
           :data="this.QuestionnaireSelectArr"
           height="500"
@@ -257,6 +261,7 @@ import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
 export default {
   data () {
     return {
+      questionnaireDemo: false,
       questionnaireType: {}, // 问卷数组类型
       chooseQuestionnaireType: null, // 选择的数组类型
       questionnaireTypeSelect: '', // 选择问卷数组类型
@@ -320,6 +325,11 @@ export default {
       })
     },
     getQuestionnaire () { // 获取问卷类型
+      // 获取子组件数据
+      if(this.$refs.headMenu.rolesId.indexOf('questionnaireDemo')){
+        this.questionnaireDemo = true;
+        this.questionnaireSelecter = 3;
+      }
       questionnaire().then((data) => {
         if (data.data.status_code == 200) {
           this.questionnaireType = data.data.data.questionnaireType
@@ -429,7 +439,6 @@ export default {
       this.getSelectUserQuestionnaire()
     },
     addNewWenJuan () { // 新增问卷
-      // this.$router.replace("/ChuShi");
       if (this.questionnaireSelecter == null) {
         this.$message({
           message: '请先选择需要新增的问卷类型',
@@ -854,6 +863,6 @@ export default {
 .head_left .shai{width:100px;}
 .el-select {margin-right: 10px !important;}
 .ban{width:220px !important;}
-.delete{top:70px;z-index: 1;right: 30px;cursor: pointer;}
+.delete{top:10px;z-index: 1;right: 30px;cursor: pointer;}
 .el-form-item{margin-bottom:10px !important;}
 </style>

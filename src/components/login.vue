@@ -42,12 +42,16 @@
   import Cookies from 'js-cookie'
   import {requestLogin} from '@/api/api/requestLogin.js'
   import {verifyCode} from '@/api/api/requestLogin.js'
-  
+  import {usersSelect} from '@/api/api/requestLogin.js'  // 查询角色
   // import vertical from '@/common/js/gVerify.js'
 export default {
     name: "login",
     data() {
       return {
+        permissions: [], // 用户权限
+        permissionId: [], // 用户权限数组列表
+        roles: [],
+        rolesId: [],
         loginForm: {
           name: '',
           password: '',
@@ -80,11 +84,11 @@ export default {
       }
     },
   mounted(){
-    // this.verifyCode = new GVerify('v_container')
+    this.permissionId=[];
     this.changeCode();
   },
     methods: {
-      
+
       loginSubmit(formName) {
         // if(this.loginForm.name == "" || this.loginForm.password == ""){
         //   this.errorAlert('用户名和密码不能为空')
@@ -101,7 +105,26 @@ export default {
                 localStorage.setItem('name', this.loginForm.name);
                 localStorage.setItem('password', this.loginForm.password);
                 localStorage.setItem('token',data.data.data.token)
-                this.$router.replace("/FileList");
+                usersSelect().then((data)=>{
+                    this.permissions = data.data.permissions
+                    this.roles = data.data.roles;
+                    if(this.permissions !== []){
+                        this.permissions.forEach((item)=>{
+                          this.permissionId.push(item.id)
+                        })
+                        this.roles.forEach((item)=>{
+                          this.rolesId.push(item.name)
+                        })
+                        console.log(this.rolesId)
+                        if(this.rolesId.indexOf('questionnaireDemo')> -1){
+                          this.$router.replace("/UserSystem");
+                          // this.$router.push({path:'/UserSystem'});
+                        }else{
+                          this.$router.replace("/FileList");
+                          // this.$router.push({path:'/FileList'});
+                        }
+                    }
+                })
               }else if(data.data.status_code==100){
                 this.errorAlert(data.data.message)
                 // this.$router.replace("/FileList");
@@ -119,7 +142,7 @@ export default {
               }else if(data.data.status_code == 102 ){
                 this.errorAlert('密码错误')
               }
-              
+
             });
           } else {
             this.errorAlert('重新登录')

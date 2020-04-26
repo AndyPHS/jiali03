@@ -57,6 +57,9 @@
       return {
         activeIndex: '1',
         permissions: [], // 用户权限
+        permissionsId: [], // 用户权限id
+        roles: [],
+        rolesId: [],
         permissionHead: {    // 用户管理
             guanliyuan: false,  // 管理员
             quanxian: false,   // 权限
@@ -82,8 +85,14 @@
       getUserSelect () { // 获取前用户拥有的权限
         usersSelect().then((data)=>{
             this.permissions = data.data.permissions
+            this.roles = data.data.roles;
+            this.roles.forEach((item)=>{
+              this.rolesId.push(item.name)
+            })
+            console.log(this.rolesId)
             if(this.permissions !== []){
                 this.permissions.forEach((item)=>{
+                  this.permissionsId.push(item.id)
                     if(item.id==11){
                         this.permissionHead.juese = true
                     }else if(item.id == 12){
