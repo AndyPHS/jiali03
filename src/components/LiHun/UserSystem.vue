@@ -336,7 +336,7 @@ export default {
     getQuestionnaire () { // 获取问卷类型
       // 获取子组件数据
 
-      if(this.$route.query.qudao=='hualv'){
+      if(this.$route.query.type=='questionnaireDemo'){
         this.questionnaireDemo = false;
         this.questionnaireSelecter = 3;
       }
