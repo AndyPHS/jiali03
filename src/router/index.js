@@ -15,7 +15,7 @@ import LabelManagement from '@/components/LiHun/LabelManagement'         // 标�
 import DisplayRule from '@/components/LiHun/DisplayRule'         // 显示规则修改页面
 import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
 import WenJuan from '@/components/LiHun/WenJuan'         // 添加问卷页面
-import UserSystem from '@/components/LiHun/UserSystem'         // 添加用户系统页面
+const UserSystem = resolve => require(['@/components/LiHun/UserSystem'], resolve)  // 添加用户系统页面
 import WenJuan1 from '@/components/LiHun/WenJuan1'         // 添加问卷测试页面
 import ChuShi from '@/components/LiHun/ChuShi'         // 小问卷初始页面
 import QueDing from '@/components/LiHun/QueDing'         // 确定初始页面

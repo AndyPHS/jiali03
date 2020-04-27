@@ -6,7 +6,7 @@
 // http://www.baiodu.com/api/v1/users/my_address/address_edit_before
 // 环境配置
 var environment = {
-  onLine: "线上地址",
+  onLine: "lhxys.jialilawyer.com",
   // dev:"测试环境地址",
   dev: '/',
   devOfflin:"http://192.168.1.242/h5"
@@ -18,7 +18,7 @@ var host = location.host,
   baseLiHunURL = '',
   adminBaseURL, compBaseURL
 
-if(host.indexOf('线上环境') > -1){
+if(host.indexOf('lhxys.jialilawyer.com') > -1){
   //线上环境
   baseHost = environment.onLine
 }else {
