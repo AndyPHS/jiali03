@@ -32,10 +32,6 @@ export default new Router({
     {path: '/FileList', name: 'FileList', component: FileList},
     // 修改案件基本信息
     {path: '/UpdateCase', name: 'UpdateCase', component: UpdateCase},
-    // 完成页面
-    {path: '/CaseCompleted', name: 'CaseCompleted', component: CaseCompleted},
-    // 搜索查看完成页面
-    {path: '/CaseCompletedView', name: 'CaseCompletedView', component: CaseCompletedView},
     // 导航列表
     {path: '/HeadMenu', name: 'HeadMenu', component: HeadMenu},
     // 整理案件样式页面
