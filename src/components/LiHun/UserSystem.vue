@@ -622,7 +622,7 @@ export default {
       if (this.form.type) {
         outPutWord().then((data) => {
           if (data.status == 200) {
-            window.open('http://office365.aladdinlaw.com:3921/word/' + data.data.data.wordFilePath)
+            window.open('http://lhxys.jialilawyer.com:3921/word/' + data.data.data.wordFilePath)
           }
           this.dialogDownLoadWenJuan = false
         }).catch((data) => {

@@ -281,7 +281,7 @@
             if(localStorage.getItem('questionnaireType')==1){
               outPutWord().then((data)=>{ // 协议书类的下载路径
                 if(data.status==200){
-                  window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data.wordFilePath)
+                  window.open('http://lhxys.jialilawyer.com:3921/word/'+ data.data.data.wordFilePath)
                 }
                 this.dialogDownLoadWenJuan = false;
               }).catch((data)=>{
@@ -293,7 +293,7 @@
             }else if(localStorage.getItem('questionnaireType')==2 || localStorage.getItem('questionnaireType')==3 ){
               getWord().then((data)=>{ // 申请书和起诉状等有个性化页面的下载路径
                 if(data.data.status_code==200){
-                  window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data)
+                  window.open('http://lhxys.jialilawyer.com:3921/word/'+ data.data.data)
                 }
                 this.dialogDownLoadWenJuan = false;
               }).catch((data)=>{
