@@ -3,7 +3,7 @@
     <head-menu ref="headMenu"></head-menu>
     <div class="container mx-auto">
       <div class="flex justify-between items-center py-5">
-        <div class="head_left" v-if="this.questionnaireDemo==false">
+        <div class="head_left" v-show="questionnaireDemo==true">
           <div class="shai">筛选</div>
           <el-select v-model="questionnaireTypeSelect" @change="questionnaireTypeChange" placeholder="请选择">
             <el-option
@@ -261,7 +261,7 @@ import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
 export default {
   data () {
     return {
-      questionnaireDemo: false,
+      questionnaireDemo: true,
       questionnaireType: {}, // 问卷数组类型
       chooseQuestionnaireType: null, // 选择的数组类型
       questionnaireTypeSelect: '', // 选择问卷数组类型
@@ -324,10 +324,20 @@ export default {
         }
       })
     },
+    objOfValueToArr(object) {
+        var arr = [];
+        var i = 0;
+        for (var item in object) {
+            arr[i] = object[item];
+            i++;
+        }
+        return arr;
+    },
     getQuestionnaire () { // 获取问卷类型
       // 获取子组件数据
-      if(this.$refs.headMenu.rolesId.indexOf('questionnaireDemo')){
-        this.questionnaireDemo = true;
+
+      if(this.$route.query.qudao=='hualv'){
+        this.questionnaireDemo = false;
         this.questionnaireSelecter = 3;
       }
       questionnaire().then((data) => {

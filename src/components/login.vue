@@ -116,8 +116,8 @@ export default {
                           this.rolesId.push(item.name)
                         })
                         if(this.rolesId.indexOf('questionnaireDemo')> -1){
-                          this.$router.replace("/UserSystem");
-                          // this.$router.push({path:'/UserSystem'});
+                          // this.$router.replace("/UserSystem?ee=questionnaireDemo");
+                          this.$router.push({path:'/UserSystem?qudao=hualv'});
                         }else{
                           this.$router.replace("/FileList");
                           // this.$router.push({path:'/FileList'});

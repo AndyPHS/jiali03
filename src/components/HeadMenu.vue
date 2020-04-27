@@ -89,6 +89,7 @@
             this.roles.forEach((item)=>{
               this.rolesId.push(item.name)
             })
+            this.objOfValueToArr(this.rolesId)
             if(this.permissions !== []){
                 this.permissions.forEach((item)=>{
                   this.permissionsId.push(item.id)
@@ -111,6 +112,15 @@
         }).catch((data)=>{
 
         })
+      },
+      objOfValueToArr(object) {
+          var arr = [];
+          var i = 0;
+          for (var item in object) {
+              arr[i] = object[item];
+              i++;
+          }
+          return arr;
       },
       Exit(){
         this.$router.replace("/");
