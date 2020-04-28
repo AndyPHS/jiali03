@@ -104,23 +104,24 @@ export default {
               if(data.data.status_code==200){
                 localStorage.setItem('name', this.loginForm.name);
                 localStorage.setItem('password', this.loginForm.password);
-                localStorage.setItem('token',data.data.data.token)
+                localStorage.setItem('token', data.data.data.token)
                 usersSelect().then((data)=>{
                     this.permissions = data.data.permissions
                     this.roles = data.data.roles;
-                    if(this.permissions !== []){
+                    if (this.permissions !== []) {
                         this.permissions.forEach((item)=>{
                           this.permissionId.push(item.id)
                         })
                         this.roles.forEach((item)=>{
                           this.rolesId.push(item.name)
                         })
-                        if(this.rolesId.indexOf('questionnaireDemo')> -1){
-                          // this.$router.replace("/UserSystem?ee=questionnaireDemo");
-                          this.$router.push({path:'/UserSystem?type=questionnaireDemo'});
-                        }else{
+                        if (this.rolesId.indexOf('questionnaireDemo') > -1) {
+                          localStorage.setItem('roleType', 'questionnaireDemo')
+                          this.$router.replace("/UserSystem");
+                          // this.$router.push({path:'/UserSystem?type=questionnaireDemo'});
+                        } else {
                           this.$router.replace("/FileList");
-                          
+
                           // this.$router.push({path:'/FileList'});
                         }
                     }

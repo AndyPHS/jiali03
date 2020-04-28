@@ -335,11 +335,12 @@ export default {
     },
     getQuestionnaire () { // 获取问卷类型
       // 获取子组件数据
-
-      if(this.$route.query.type=='questionnaireDemo'){
+      const roleType = localStorage.getItem("roleType")
+      if(roleType=='questionnaireDemo'){
         this.questionnaireDemo = false;
         this.questionnaireSelecter = 3;
       }
+      localStorage.getItem("roleType")
       questionnaire().then((data) => {
         if (data.data.status_code == 200) {
           this.questionnaireType = data.data.data.questionnaireType

@@ -125,6 +125,7 @@
       Exit(){
         this.$router.replace("/");
         localStorage.removeItem('token')
+        localStorage.removeItem('roleType')
       }
     }
   }
