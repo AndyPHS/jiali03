@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="absolute returnUserList right-0">
-      <el-button type="primary" @click="returnUserList">返回用户列表</el-button>
+      <el-button type="primary" @click="returnUserList">返回文书列表</el-button>
     </div>
   </div>
 

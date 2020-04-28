@@ -812,13 +812,13 @@
             <!-- <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="NextPage">
               确定
             </div> -->
-             <el-button type="primary" @click="NextPage">开始定制</el-button>
+             <el-button type="primary" @click="NextPage">下一步</el-button>
           </div>
         </div>
       </div>
     </div>
     <div class="absolute returnUserList right-0">
-      <el-button type="primary" @click="returnUserList">返回用户列表</el-button>
+      <el-button type="primary" @click="returnUserList">返回文书列表</el-button>
     </div>
   </div>
 

@@ -302,7 +302,7 @@
               </el-radio-group>
             </el-form-item>
             <div v-if="$$item.childQuestion  && $$item.childQuestion[$$item.answer]">
-              <div v-for="($$$item,$$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
+              <div v-for="($$$item, $$$index) in $$item.childQuestion[$$item.answer]" :key="$$$index">
                 <!-- 数字 -->
                 <div v-if="$$$item.type == 'input' && $$$item.input_type=='number'">
                   <el-form-item label="" class="text-base">
@@ -1073,14 +1073,14 @@
                               placement="right"
                               width="400"
                               trigger="hover">
-                              <div  v-for="($$$item, $$$index) in $$$$item.imgDate" :key="$$$index" popper-class="overflow-y:scroll">
-                                 <img :src="$$$item">
+                              <div  v-for="($$$$$item, $$$$$index) in $$$$item.imgDate" :key="$$$$$index" popper-class="overflow-y:scroll">
+                                 <img :src="$$$$$item">
                               </div>
                               <i  slot="reference" class="el-icon-picture"></i>
                             </el-popover>
                           </div>
                           <el-checkbox-group v-model="$$$$item.answer" >
-                            <el-checkbox :label="$$$item.value" v-for="($$$item, $$$index) in $$$$item.listData" :key="$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$item.label}}</el-checkbox>
+                            <el-checkbox :label="$$$$$item.value" v-for="($$$$$item, $$$$$index) in $$$$item.listData" :key="$$$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$$$item.label}}</el-checkbox>
                           </el-checkbox-group>
                         </el-form-item>
                       </div>
@@ -1242,7 +1242,7 @@
                           </div>
                           <el-select v-model="$$$$item.answer"  @change='userAddAnswerAction($$$$item)' size="small">
                             <el-option
-                              v-for="(s,i) in $$$$item.listData"
+                              v-for="(s, i) in $$$$item.listData"
                               :key="s.value"
                               :label="s.label"
                               :value="s.value">
@@ -1275,7 +1275,7 @@
                           </div>
                           <el-select v-model="$$$$item.answer" multiple placeholder="请选择" size="small" @change='userAddAnswerAction($$$$item)'>
                             <el-option
-                              v-for="(s,i) in $$$$item.listData"
+                              v-for="(s, i) in $$$$item.listData"
                               :key="i"
                               :label="s.label"
                               :value="s.value">
@@ -1410,8 +1410,8 @@
                     </div>
                     <el-select v-model="$$$item.answer"  @change='userAddAnswerAction($$$item)' size="small">
                       <el-option
-                        v-for="(s,i) in $$$item.listData"
-                        :key="s.value"
+                        v-for="(s, i) in $$$item.listData"
+                        :key="i"
                         :label="s.label"
                         :value="s.value">
                       </el-option>
@@ -1598,14 +1598,14 @@
                               placement="right"
                               width="400"
                               trigger="hover">
-                              <div  v-for="($$$item, $$$index) in $$$$item.imgDate" :key="$$$index" popper-class="overflow-y:scroll">
-                                 <img :src="$$$item">
+                              <div  v-for="($$$$$item, $$$$$index) in $$$$item.imgDate" :key="$$$$$index" popper-class="overflow-y:scroll">
+                                 <img :src="$$$$$item">
                               </div>
                               <i  slot="reference" class="el-icon-picture"></i>
                             </el-popover>
                           </div>
                           <el-checkbox-group v-model="$$$$item.answer" >
-                            <el-checkbox :label="$$$item.value" v-for="($$$item, $$$index) in $$$$item.listData" :key="$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$item.label}}</el-checkbox>
+                            <el-checkbox :label="$$$$$item.value" v-for="($$$$$item, $$$$$index) in $$$$item.listData" :key="$$$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$$$item.label}}</el-checkbox>
                           </el-checkbox-group>
                         </el-form-item>
                       </div>
@@ -1767,8 +1767,8 @@
                           </div>
                           <el-select v-model="$$$$item.answer"  @change='userAddAnswerAction($$$$item)' size="small">
                             <el-option
-                              v-for="(s,i) in $$$$item.listData"
-                              :key="s.value"
+                              v-for="(s, i) in $$$$item.listData"
+                              :key="i"
                               :label="s.label"
                               :value="s.value">
                             </el-option>
@@ -2509,8 +2509,8 @@
                             </div>
                             <el-select v-model="$$$$$item.answer"  @change='userAddAnswerAction($$$$$item)' size="small">
                               <el-option
-                                v-for="(s,i) in $$$$$item.listData"
-                                :key="s.value"
+                                v-for="(s, i) in $$$$$item.listData"
+                                :key="i"
                                 :label="s.label"
                                 :value="s.value">
                               </el-option>
@@ -2783,8 +2783,8 @@
                       </div>
                       <el-select v-model="$$$$item.answer"  @change='userAddAnswerAction($$$$item)' size="small">
                         <el-option
-                          v-for="(s,i) in $$$$item.listData"
-                          :key="s.value"
+                          v-for="(s, i) in $$$$item.listData"
+                          :key="i"
                           :label="s.label"
                           :value="s.value">
                         </el-option>
@@ -3058,7 +3058,7 @@
               <el-select v-model="$$item.answer"  @change='userAddAnswerAction($$item)' size="small">
                 <el-option
                   v-for="(s,i) in $$item.listData"
-                  :key="s.value"
+                  :key="i"
                   :label="s.label"
                   :value="s.value">
                 </el-option>
@@ -3836,14 +3836,14 @@
                               placement="right"
                               width="400"
                               trigger="hover">
-                              <div  v-for="($$$item, $$$index) in $$$$item.imgDate" :key="$$$index" popper-class="overflow-y:scroll">
-                                 <img :src="$$$item">
+                              <div  v-for="($$$$$item, $$$$$index) in $$$$item.imgDate" :key="$$$$$index" popper-class="overflow-y:scroll">
+                                 <img :src="$$$$$item">
                               </div>
                               <i  slot="reference" class="el-icon-picture"></i>
                             </el-popover>
                           </div>
                           <el-checkbox-group v-model="$$$$item.answer" >
-                            <el-checkbox :label="$$$item.value" v-for="($$$item, $$$index) in $$$$item.listData" :key="$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$item.label}}</el-checkbox>
+                            <el-checkbox :label="$$$$$item.value" v-for="($$$$$item, $$$$$index) in $$$$item.listData" :key="$$$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$$$item.label}}</el-checkbox>
                           </el-checkbox-group>
                         </el-form-item>
                       </div>
@@ -4005,8 +4005,8 @@
                           </div>
                           <el-select v-model="$$$$item.answer"  @change='userAddAnswerAction($$$$item)' size="small">
                             <el-option
-                              v-for="(s,i) in $$$$item.listData"
-                              :key="s.value"
+                              v-for="(s, i) in $$$$item.listData"
+                              :key="i"
                               :label="s.label"
                               :value="s.value">
                             </el-option>
@@ -4173,8 +4173,8 @@
                     </div>
                     <el-select v-model="$$$item.answer"  @change='userAddAnswerAction($$$item)' size="small">
                       <el-option
-                        v-for="(s,i) in $$$item.listData"
-                        :key="s.value"
+                        v-for="(s, i) in $$$item.listData"
+                        :key="i"
                         :label="s.label"
                         :value="s.value">
                       </el-option>
@@ -4361,14 +4361,14 @@
                               placement="right"
                               width="400"
                               trigger="hover">
-                              <div  v-for="($$$item, $$$index) in $$$$item.imgDate" :key="$$$index" popper-class="overflow-y:scroll">
-                                 <img :src="$$$item">
+                              <div  v-for="($$$$$item, $$$$$index) in $$$$item.imgDate" :key="$$$$$index" popper-class="overflow-y:scroll">
+                                 <img :src="$$$$$item">
                               </div>
                               <i  slot="reference" class="el-icon-picture"></i>
                             </el-popover>
                           </div>
                           <el-checkbox-group v-model="$$$$item.answer" >
-                            <el-checkbox :label="$$$item.value" v-for="($$$item, $$$index) in $$$$item.listData" :key="$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$item.label}}</el-checkbox>
+                            <el-checkbox :label="$$$$$item.value" v-for="($$$$$item, $$$$$index) in $$$$item.listData" :key="$$$$$index"  @change='userAddAnswerAction($$$$item)'>{{$$$$$item.label}}</el-checkbox>
                           </el-checkbox-group>
                         </el-form-item>
                       </div>
@@ -4530,8 +4530,8 @@
                           </div>
                           <el-select v-model="$$$$item.answer"  @change='userAddAnswerAction($$$$item)' size="small">
                             <el-option
-                              v-for="(s,i) in $$$$item.listData"
-                              :key="s.value"
+                              v-for="(s, i) in $$$$item.listData"
+                              :key="i"
                               :label="s.label"
                               :value="s.value">
                             </el-option>
@@ -5178,8 +5178,8 @@
                             </div>
                             <el-select v-model="$$$$$item.answer"  @change='userAddAnswerAction($$$$$item)' size="small">
                               <el-option
-                                v-for="(s,i) in $$$$$item.listData"
-                                :key="s.value"
+                                v-for="(s, i) in $$$$$item.listData"
+                                :key="i"
                                 :label="s.label"
                                 :value="s.value">
                               </el-option>
@@ -5452,8 +5452,8 @@
                       </div>
                       <el-select v-model="$$$$item.answer"  @change='userAddAnswerAction($$$$item)' size="small">
                         <el-option
-                          v-for="(s,i) in $$$$item.listData"
-                          :key="s.value"
+                          v-for="(s, i) in $$$$item.listData"
+                          :key="i"
                           :label="s.label"
                           :value="s.value">
                         </el-option>
@@ -6101,7 +6101,7 @@
                    </el-form-item>
                     <div v-if="$$$item.grandson">
                       <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
-                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                        <div v-for="($$$$$item, $$$$$index) in $$$item.grandson[$$$$item]" :key="$$$$$index">
                           <!-- 省市三级联动 -->
                           <div v-if="$$$$$item.type == 'select_city'">
                             <el-form-item label="">
@@ -6396,7 +6396,7 @@
                     </el-form-item>
                     <div v-if="$$$item.grandson">
                       <div v-for="($$$$item, $$$$index) in $$$item.answer" :key="$$$$index">
-                        <div v-for="($$$$$item,$$$$$index) in $$$item.grandson[$$$$item]">
+                        <div v-for="($$$$$item, $$$$$index) in $$$item.grandson[$$$$item]" :key="$$$$$index">
                           <!-- 省市三级联动 -->
                           <div v-if="$$$$$item.type == 'select_city'">
                             <el-form-item label="">
@@ -6653,7 +6653,7 @@
                    </el-form-item>
                    <!--下拉框中的问题又会迁出子问题-->
                    <div v-if="$$$item.grandson && $$$item.grandson[$$$item.answer]">
-                      <div v-for="($$$$item,$$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
+                      <div v-for="($$$$item, $$$$index) in $$$item.grandson[$$$item.answer]" :key="$$$$index">
                         <!-- 省市三级联动 -->
                         <div v-if="$$$$item.type == 'select_city'">
                           <el-form-item label="">
@@ -7335,14 +7335,13 @@
                     value: JSON.stringify(e.answer),  // 值
                     qpid: e.id, // 关联id
                     fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: localStorage.getItem('quid') //用户的问卷id
-                  }).then((data)=>{
-                    
-                  }).catch((data)=>{
-                     console.log("保存失败")
+                    quid: localStorage.getItem('quid') // 用户的问卷id
+                  }).then((data) => {
+
+                  }).catch((data) => {
                   })
                 }
-              }else if(e.input_type=="text" && typeof e.answer=="number" ){
+              } else if (e.input_type == 'text' && typeof e.answer == 'number' ) {
                 userAddAnswer({ // 必填多子女普通类型
                   value: JSON.stringify(e.answer), // 值
                   qpid: e.id, // 关联id
@@ -7351,21 +7350,20 @@
                 }).then((data) => {
                 }).catch((data) => {
                 })
-              }else{
+              } else {
                 userAddAnswer({
                   value: e.answer,  // 值
                   qpid: e.id, // 关联id
                   fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  
+
                 }).catch((data)=>{
                    console.log("保存失败")
                 })
               }
             }else{
-                // console.log(e.answer)
-               if(Array.isArray(e.answer)){
+              if(Array.isArray(e.answer)){
                 if(e.type == "select_city"){
                   userAddAnswer({
                     value: JSON.stringify([CodeToText[e.answer[0]], CodeToText[e.answer[1]], CodeToText[e.answer[2]]]),  // 值
@@ -7373,20 +7371,19 @@
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
-                    // 
+                    //
                   }).catch((data)=>{
                      // console.log("保存失败")
                   })
-                }else if(e.type == "checkbox"){
-                  console.log(e.answer)
+                } else if (e.type == 'checkbox') {
                   userAddAnswer({
                     value: JSON.stringify(e.answer),  // 值
                     qpid: e.id, // 关联id
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
-                    quid: localStorage.getItem('quid') //用户的问卷id
-                  }).then((data)=>{
-                    // 
-                  }).catch((data)=>{
+                    quid: localStorage.getItem('quid') // 用户的问卷id
+                  }).then((data) => {
+                    //
+                  }).catch((data) => {
                      // console.log("保存失败")
                   })
                 }else{
@@ -7396,7 +7393,7 @@
                     // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                     quid: localStorage.getItem('quid') //用户的问卷id
                   }).then((data)=>{
-                    // 
+                    //
                   }).catch((data)=>{
                      // console.log("保存失败")
                   })
@@ -7417,33 +7414,33 @@
                   // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                 if(data.data.status_code==202){
-                    if(this.active==0){// 第一个模块刷新基本信息
-                      this.getBasicInformation()
-                    }else if(this.active==1){// 第二个模块刷新婚姻状况
-                      this.getHunYinStatus()
-                    }else if(this.active==2){// 第三个模块刷新子女状况
-                      this.getZiNvMsg()
-                    }else if(this.active==3){// 第四个模块刷新房产
-                      this.getFangChanMsg()
-                    }else if(this.active==4){// 第五个模块刷新存款
-                      this.getCunKuanMsg()
-                    }else if(this.active==5){// 第六个模块刷新车子
-                      this.getCarMsg()
-                    }else if(this.active==6){// 第七个模块刷新理财
-                      this.getLiCaiMsg()
-                    }else if(this.active==7){// 第八个模块刷新家具家电
-                      this.getJiaDianMsg()
-                    }else if(this.active==8){// 第九个模块刷新保险
-                      this.getBaoXianMsg()
-                    }else if(this.active==9){// 第十个模块刷新其他财产
-                      this.getQiTaCaiChanMsg()
-                    }else if(this.active==10){// 第十一个模块刷新债权
-                      this.getZhaiQuanMsg()
-                    }else if(this.active==11){// 第十二个模块刷新债务
-                      this.getZhaiWuMsg()
-                    }
-                  }
+                 // if( data.data.status_code == 202 ){
+                 //    if(this.active==0){// 第一个模块刷新基本信息
+                 //      this.getBasicInformation()
+                 //    }else if(this.active==1){// 第二个模块刷新婚姻状况
+                 //      this.getHunYinStatus()
+                 //    }else if(this.active==2){// 第三个模块刷新子女状况
+                 //      this.getZiNvMsg()
+                 //    }else if(this.active==3){// 第四个模块刷新房产
+                 //      this.getFangChanMsg()
+                 //    }else if(this.active==4){// 第五个模块刷新存款
+                 //      this.getCunKuanMsg()
+                 //    }else if(this.active==5){// 第六个模块刷新车子
+                 //      this.getCarMsg()
+                 //    }else if(this.active==6){// 第七个模块刷新理财
+                 //      this.getLiCaiMsg()
+                 //    }else if(this.active==7){// 第八个模块刷新家具家电
+                 //      this.getJiaDianMsg()
+                 //    }else if(this.active==8){// 第九个模块刷新保险
+                 //      this.getBaoXianMsg()
+                 //    }else if(this.active==9){// 第十个模块刷新其他财产
+                 //      this.getQiTaCaiChanMsg()
+                 //    }else if(this.active==10){// 第十一个模块刷新债权
+                 //      this.getZhaiQuanMsg()
+                 //    }else if(this.active==11){// 第十二个模块刷新债务
+                 //      this.getZhaiWuMsg()
+                 //    }
+                 //  }
                 }).catch((data)=>{
                    // console.log("保存失败")
                 })
@@ -7460,7 +7457,7 @@
                   fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  
+
                 }).catch((data)=>{
                    console.log("保存失败")
                 })
@@ -7471,7 +7468,7 @@
                   fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  
+
                 }).catch((data)=>{
                    console.log("保存失败")
                 })
@@ -7492,7 +7489,7 @@
                 fornum: e.fornum, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                 quid: localStorage.getItem('quid') //用户的问卷id
               }).then((data)=>{
-                
+
               }).catch((data)=>{
                  console.log("保存失败")
               })
@@ -7506,7 +7503,7 @@
                   // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                   quid: localStorage.getItem('quid') //用户的问卷id
                 }).then((data)=>{
-                  // 
+                  //
                 }).catch((data)=>{
                    // console.log("保存失败")
                 })
@@ -7670,7 +7667,7 @@
       },
       errorAlert(e) {
         this.$message.error(e);
-      },
+      }
     }
   }
 </script>

@@ -171,7 +171,7 @@
       </div>
     </div>
     <div class="absolute returnUserList right-0">
-      <el-button type="primary" @click="returnUserList">返回问卷列表</el-button>
+      <el-button type="primary" @click="returnUserList">返回文书列表</el-button>
     </div>
   </div>
 </template>
@@ -179,7 +179,7 @@
   import QuestionModel from '../partials/QuestionModel.vue'   // 引入子组件
   import {returnQuestionnaireJson} from '@/api/api/requestLogin.js'    // 查询问卷json
   import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
-  import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
+  // import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
   import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
   import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
   import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
@@ -572,7 +572,7 @@
           this.getQiTaCaiChanMsg()
         },
         userDeleteSelectAnswerAction (e,index) { // 删除子女或者房产等信息
-          this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          this.$confirm('是否删除该选项？', '提示', {
             confirmButtonText: '确定',
             cancelButtonText: '取消',
             type: 'warning'
