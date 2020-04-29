@@ -105,7 +105,7 @@ export default {
             requestLogin(this.loginForm).then((data)=>{
               if(data.data.status_code==200){
                 localStorage.setItem('name', this.loginForm.name);
-                localStorage.setItem('password', this.loginForm.password);
+                // localStorage.setItem('password', this.loginForm.password);
                 localStorage.setItem('token', data.data.data.token)
                 usersSelect().then((data)=>{
                     this.permissions = data.data.permissions
