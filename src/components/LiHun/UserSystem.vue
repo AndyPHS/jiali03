@@ -153,12 +153,16 @@
       </div>
     </div>
     <!-- 查看问卷 -->
-    <el-dialog :title="chooseList.title" :visible.sync="dialogViewWenJuan">
-      <div>
-        <h2 class="text-lg mb-1 text-bold" v-if="chooseList.title==null ">暂无标题</h2>
-        <textarea :rows='20' class="textarea w-full h-auto" placeholder="" readonly="readonly" v-model="chooseList.content" ></textarea>
+    <div class="chakan" v-show="dialogViewWenJuan">
+      <div class="chakanbox">
+        <div class="chakanmin">
+          <h2>{{this.chooseList.title}}</h2>
+          <div id="outputwordmsg" v-html="this.neirong"></div>
+        </div>
+        <span class="closechakan" @click="closedialogViewWenJuan">X</span>
       </div>
-    </el-dialog>
+    </div>
+
     <!-- 下载弹框 -->
     <el-dialog title="免责条款" :visible.sync="dialogDownLoadWenJuan">
       <div class="text-left">
@@ -261,6 +265,7 @@ import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
 export default {
   data () {
     return {
+      neirong:'',
       questionnaireDemo: true,
       questionnaireType: {}, // 问卷数组类型
       chooseQuestionnaireType: null, // 选择的数组类型
@@ -404,7 +409,7 @@ export default {
       outPutWord().then((data) => {
         if (data.data.status_code == 200) {
           // localStorage.removeItem('quid');
-          this.chooseList.content = data.data.data.content
+          this.neirong = data.data.data.content
         } else if (data.data.status_code == 330) {
           this.$message({
             message: '问卷未填写完，无法查看',
@@ -420,7 +425,9 @@ export default {
 
       })
     },
-
+    closedialogViewWenJuan(){
+      this.dialogViewWenJuan = false;
+    },
     deleteWenJuanIcon () { // 点击回收站按钮
       this.ListShow = false
       this.DeleteShow = true
@@ -876,4 +883,10 @@ export default {
 .ban{width:220px !important;}
 .delete{top:10px;z-index: 1;right: 30px;cursor: pointer;}
 .el-form-item{margin-bottom:10px !important;}
+.chakan{width: 100vw;height: 100vh;background-color: rgba(0,0,0,0.5);position: fixed;top:0;left: 0;}
+.chakanbox{width: 760px;height: 500px;position: absolute;top:55%;left: 50%;margin-top:-300px;margin-left: -380px;background-color: #fff;padding:20px;}
+.chakanmin h2{font-size: 20px; font-weight: bold;color: #000000;padding:10px;border-bottom: 1px solid #dddddd;}
+#outputwordmsg{height: 400px;overflow-y:scroll;white-space: pre-wrap;text-align: left;}
+#outputwordmsg p{font-weight:bolder !important;}
+.closechakan{position: absolute;top: 0;right: 0;margin: 10px 15px;cursor: pointer;}
 </style>
