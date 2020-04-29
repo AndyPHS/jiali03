@@ -84,7 +84,9 @@ export default {
       }
     },
   mounted(){
-    this.permissionId=[];
+    if(localStorage.getItem('roleType')=='questionnaireDemo'){
+      localStorage.removeItem('roleType')
+    }
     this.changeCode();
   },
     methods: {
