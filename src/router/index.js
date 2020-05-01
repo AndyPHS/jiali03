@@ -1,69 +1,70 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/login'
-import LoginSuccess from '@/components/loginSuccess'
-import CaseCourt from '@/components/CaseCourt'
-import CaseUpload from '@/components/CaseUpload'   // 案例上传页面
-import FileList from '@/components/FileList'   // 案例展示列表页面
-import CaseCompleted from '@/components/CaseCompleted'  // 案件信息填写页面
-import CaseCompletedView from '@/components/CaseCompletedView'  // 搜索案件信息填写页面
-import HeadMenu from '@/components/HeadMenu'  // 添加头部导航按钮
-import UpdateCase from '@/components/UpdateCase' // 修改案件基本信息
-import ArrangementCase from '@/components/ArrangementCase'  // 整理案件样式页面
-import Users from '@/components/users/Users'  // 用户页面
-import UsersPermission from '@/components/users/UsersPermission'  // 用户权限页面
-import QuestionManagement from '@/components/LiHun/QuestionManagement'         // 问题管理页面
-import GuanLianManagement from '@/components/LiHun/GuanLianManagement'         // 关联管理页面
-import ZuHeManagement from '@/components/LiHun/ZuHeManagement'         // 组合管理页面
-import LabelManagement from '@/components/LiHun/LabelManagement'         // 标签管理页面
-import DisplayRule from '@/components/LiHun/DisplayRule'         // 显示规则修改页面
-import UsersRole from '@/components/users/UsersRole'  // 用户角色页面
-import SearchCase from '@/components/SearchCase'   // 案例搜索
-import WenJuan from '@/components/LiHun/WenJuan'         // 添加问卷页面
-import UserSystem from '@/components/LiHun/UserSystem'         // 添加用户系统页面
-import WenJuan1 from '@/components/LiHun/WenJuan1'         // 添加问卷测试页面
-import ChuShi from '@/components/LiHun/ChuShi'         // 小问卷初始页面
-import QueDing from '@/components/LiHun/QueDing'         // 确定初始页面
-import BasicInformation from '@/components/LiHun/BasicInformation'         // 基本信息填写页面
-import ShengChengXieYi from '@/components/LiHun/ShengChengXieYi'         // 添加离婚协议书债务页面
-import QiSuComplate from '@/components/QiSuZhuang/QiSuComplate'    // 起诉状生成页
-import QiSuBasicInformation from '@/components/QiSuZhuang/QiSuBasicInformation'    // 起诉状基本信息填写
-import DiaoChaQuZhengStart from '@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengStart'    // 调查取证申请书初始化页面
-import DiaoChaQuZhengBasic from '@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengBasic'   // 调查取证申请书信息填写页
-import DiaoChaQuZhengPersonalize from '@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengPersonalize'  // 调查取证申请书个性化页面
-import HunQianStart from '@/components/HunQianXieYi/HunQianStart' // 婚前协议小问卷
-import HunQianBasic from '@/components/HunQianXieYi/HunQianBasic' // 婚前协议基本信息
-import HunNeiStart from '@/components/HunNeiXieYi/HunNeiStart' // 婚内协议小问卷
-import HunNeiBasic from '@/components/HunNeiXieYi/HunNeiBasic' // 婚内协议基本信息
-import BaoQuanStart from '@/components/BaoQuanRequest/BaoQuanStart'    // 保全申请书初始化页面
-import BaoQuanBasic from '@/components/BaoQuanRequest/BaoQuanBasic'   // 保全申请书信息填写页
-import BaoQuanPersonalize from '@/components/BaoQuanRequest/BaoQuanPersonalize'  // 保全申请书个性化页面
-import FuYangQuanBasic from '@/components/FuYangQuanQiSuZhuang/FuYangQuanBasic'   // 抚养权起诉状信息填写页
-import FuYangQuanPersonalize from '@/components/FuYangQuanQiSuZhuang/FuYangQuanPersonalize'  // 抚养权起诉状个性化页面
-import FuYangFeiBasic from '@/components/FuYangFeiQiSuZhuang/FuYangFeiBasic'   // 抚养费起诉状信息填写页
-import FuYangFeiPersonalize from '@/components/FuYangFeiQiSuZhuang/FuYangFeiPersonalize'  // 抚养费起诉状个性化页面
-import FenJiaXiChanStart from '@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanStart'   // 分家析产纠纷起诉状小问卷
-import FenJiaXiChanBasic from '@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanBasic'   // 分家析产纠纷起诉状信息填写页
-import FenJiaXiChanPersonalize from '@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanPersonalize'  // 分家析产纠纷起诉状个性化页面
-import MinJianJieDaiBasic from '@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiBasic'   // 民间借贷起诉状信息填写页
-import MinJianJieDaiPersonalize from '@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiPersonalize'  // 民间借贷起诉状个性化页面
-import ZhengRenChuTingBasic from '@/components/ZhengRenChuTingRequest/ZhengRenChuTingBasic'   // 证人出庭作证申请书信息填写页
-import ZhengRenChuTingPersonalize from '@/components/ZhengRenChuTingRequest/ZhengRenChuTingPersonalize'  // 证人出庭作证申请书个性化页面
-import PingGuStart from '@/components/PingGuRequest/PingGuStart'    // 评估请书初始化页面
-import PingGuBasic from '@/components/PingGuRequest/PingGuBasic'   // 评估请书信息填写页
-import PingGuPersonalize from '@/components/PingGuRequest/PingGuPersonalize'  // 评估请书个性化页面
-import JiChengJiuFenStart from '@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenStart'   // 继承纠纷起诉状小问卷
-import JiChengJiuFenBasic from '@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenBasic'   // 继承纠纷起诉状信息填写页
-import JiChengJiuFenPersonalize from '@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenPersonalize'  // 继承纠纷起诉状个性化页面
-import HunHouCaiChanStart from '@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanStart'   // 婚后财产纠纷起诉状小问卷
-import HunHouCaiChanBasic from '@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanBasic'   // 婚后财产纠纷起诉状信息填写页
-import HunHouCaiChanPersonalize from '@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanPersonalize'  // 婚后财产纠纷起诉状个性化页面
-import BiJiJianDingBasic from '@/components/BiJiJianDingRequest/BiJiJianDingBasic'   // 笔迹鉴定申请书信息填写页
-import BiJiJianDingPersonalize from '@/components/BiJiJianDingRequest/BiJiJianDingPersonalize'  // 笔迹鉴定申请书个性化页面
-import JingShenZhuangTaiBasic from '@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiBasic'   // 精神状态鉴定申请书信息填写页
-import JingShenZhuangTaiPersonalize from '@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiPersonalize'  // 精神状态鉴定申请书个性化页面
+const Login = () => import('@/components/login')
+// import Login from '@/components/login'
+const LoginSuccess = () => import('@/components/loginSuccess')
+const CaseCourt = () => import('@/components/CaseCourt')
+const CaseUpload = () => import('@/components/CaseUpload')   // 案例上传页面
+const FileList = () => import('@/components/FileList')   // 案例展示列表页面
+const CaseCompleted = () => import('@/components/CaseCompleted')  // 案件信息填写页面
+const CaseCompletedView = () => import('@/components/CaseCompletedView')  // 搜索案件信息填写页面
+const HeadMenu = () => import('@/components/HeadMenu')  // 添加头部导航按钮
+const UpdateCase = () => import('@/components/UpdateCase') // 修改案件基本信息
+const ArrangementCase = () => import('@/components/ArrangementCase')  // 整理案件样式页面
+const Users = () => import('@/components/users/Users')  // 用户页面
+const UsersPermission = () => import('@/components/users/UsersPermission')  // 用户权限页面
+const QuestionManagement = () => import('@/components/LiHun/QuestionManagement')         // 问题管理页面
+const GuanLianManagement = () => import('@/components/LiHun/GuanLianManagement')         // 关联管理页面
+const ZuHeManagement = () => import('@/components/LiHun/ZuHeManagement')         // 组合管理页面
+const LabelManagement = () => import('@/components/LiHun/LabelManagement')         // 标签管理页面
+const DisplayRule = () => import('@/components/LiHun/DisplayRule')        // 显示规则修改页面
+const UsersRole = () => import('@/components/users/UsersRole')  // 用户角色页面
+const SearchCase = () => import('@/components/SearchCase')   // 案例搜索
+const WenJuan = () => import('@/components/LiHun/WenJuan')         // 添加问卷页面
+const UserSystem = () => import('@/components/LiHun/UserSystem')         // 添加用户系统页面
+const WenJuan1 = () => import('@/components/LiHun/WenJuan1')         // 添加问卷测试页面
+const ChuShi = () => import('@/components/LiHun/ChuShi')         // 小问卷初始页面
+const QueDing = () => import('@/components/LiHun/QueDing')         // 确定初始页面
+const BasicInformation = () => import('@/components/LiHun/BasicInformation')         // 基本信息填写页面
+const ShengChengXieYi = () => import('@/components/LiHun/ShengChengXieYi')         // 添加离婚协议书债务页面
+const QiSuComplate = () => import('@/components/QiSuZhuang/QiSuComplate')    // 起诉状生成页
+const QiSuBasicInformation = () => import('@/components/QiSuZhuang/QiSuBasicInformation')    // 起诉状基本信息填写
+const DiaoChaQuZhengStart = () => import('@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengStart')    // 调查取证申请书初始化页面
+const DiaoChaQuZhengBasic = () => import('@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengBasic')   // 调查取证申请书信息填写页
+const DiaoChaQuZhengPersonalize = () => import('@/components/DiaoChaQuZhengRequest/DiaoChaQuZhengPersonalize')  // 调查取证申请书个性化页面
+const HunQianStart = () => import('@/components/HunQianXieYi/HunQianStart') // 婚前协议小问卷
+const HunQianBasic = () => import('@/components/HunQianXieYi/HunQianBasic') // 婚前协议基本信息
+const HunNeiStart = () => import('@/components/HunNeiXieYi/HunNeiStart') // 婚内协议小问卷
+const HunNeiBasic = () => import('@/components/HunNeiXieYi/HunNeiBasic') // 婚内协议基本信息
+const BaoQuanStart = () => import('@/components/BaoQuanRequest/BaoQuanStart')    // 保全申请书初始化页面
+const BaoQuanBasic = () => import('@/components/BaoQuanRequest/BaoQuanBasic')  // 保全申请书信息填写页
+const BaoQuanPersonalize = () => import('@/components/BaoQuanRequest/BaoQuanPersonalize')  // 保全申请书个性化页面
+const FuYangQuanBasic = () => import('@/components/FuYangQuanQiSuZhuang/FuYangQuanBasic')   // 抚养权起诉状信息填写页
+const FuYangQuanPersonalize = () => import('@/components/FuYangQuanQiSuZhuang/FuYangQuanPersonalize')  // 抚养权起诉状个性化页面
+const FuYangFeiBasic = () => import('@/components/FuYangFeiQiSuZhuang/FuYangFeiBasic')   // 抚养费起诉状信息填写页
+const FuYangFeiPersonalize = () => import('@/components/FuYangFeiQiSuZhuang/FuYangFeiPersonalize')  // 抚养费起诉状个性化页面
+const FenJiaXiChanStart = () => import('@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanStart')   // 分家析产纠纷起诉状小问卷
+const FenJiaXiChanBasic = () => import('@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanBasic')   // 分家析产纠纷起诉状信息填写页
+const FenJiaXiChanPersonalize = () => import('@/components/FenJiaXiChanQiSuZhuang/FenJiaXiChanPersonalize')  // 分家析产纠纷起诉状个性化页面
+const MinJianJieDaiBasic = () => import('@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiBasic')   // 民间借贷起诉状信息填写页
+const MinJianJieDaiPersonalize = () => import('@/components/MinJianJieDaiQiSuZhuang/MinJianJieDaiPersonalize')  // 民间借贷起诉状个性化页面
+const ZhengRenChuTingBasic = () => import('@/components/ZhengRenChuTingRequest/ZhengRenChuTingBasic')   // 证人出庭作证申请书信息填写页
+const ZhengRenChuTingPersonalize = () => import('@/components/ZhengRenChuTingRequest/ZhengRenChuTingPersonalize')  // 证人出庭作证申请书个性化页面
+const PingGuStart = () => import('@/components/PingGuRequest/PingGuStart')    // 评估请书初始化页面
+const PingGuBasic = () => import('@/components/PingGuRequest/PingGuBasic')   // 评估请书信息填写页
+const PingGuPersonalize = () => import('@/components/PingGuRequest/PingGuPersonalize')  // 评估请书个性化页面
+const JiChengJiuFenStart = () => import('@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenStart')   // 继承纠纷起诉状小问卷
+const JiChengJiuFenBasic = () => import('@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenBasic')   // 继承纠纷起诉状信息填写页
+const JiChengJiuFenPersonalize = () => import('@/components/JiChengJiuFenQiSuZhuang/JiChengJiuFenPersonalize')  // 继承纠纷起诉状个性化页面
+const HunHouCaiChanStart = () => import('@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanStart')   // 婚后财产纠纷起诉状小问卷
+const HunHouCaiChanBasic = () => import('@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanBasic')   // 婚后财产纠纷起诉状信息填写页
+const HunHouCaiChanPersonalize = () => import('@/components/HunHouCaiChanQiSuZhuang/HunHouCaiChanPersonalize')  // 婚后财产纠纷起诉状个性化页面
+const BiJiJianDingBasic = () => import('@/components/BiJiJianDingRequest/BiJiJianDingBasic')   // 笔迹鉴定申请书信息填写页
+const BiJiJianDingPersonalize = () => import('@/components/BiJiJianDingRequest/BiJiJianDingPersonalize')  // 笔迹鉴定申请书个性化页面
+const JingShenZhuangTaiBasic = () => import('@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiBasic')  // 精神状态鉴定申请书信息填写页
+const JingShenZhuangTaiPersonalize = () => import('@/components/JingShenZhuangTaiRequest/JingShenZhuangTaiPersonalize')  // 精神状态鉴定申请书个性化页面
 
-import NewWenJuan from '@/components/NewWenJuan' // 新增问卷测试
+const NewWenJuan = () => import('@/components/NewWenJuan') // 新增问卷测试
 Vue.use(Router)
 
 export default new Router({
