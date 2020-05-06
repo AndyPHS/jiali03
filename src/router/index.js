@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const Login = () => import('@/components/login')
+const Login = () => import('../components/login')
 // import Login from '@/components/login'
 const LoginSuccess = () => import('@/components/loginSuccess')
 const CaseCourt = () => import('@/components/CaseCourt')
