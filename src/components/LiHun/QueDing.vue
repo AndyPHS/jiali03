@@ -69,7 +69,8 @@
             示例六（房产证）：
           </div>
           <div class="w-4/6">
-            <img src="@/assets/images/lihun/fangchanzheng01.png" alt="房产证">
+            <img src="@/assets/images/lihun/fangchanzheng01.jpeg" alt="房产证">
+            <img src="@/assets/images/lihun/fangchanzheng02.jpeg" alt="房产证">
           </div>
         </div>
         <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.house">
@@ -85,7 +86,7 @@
             示例八（理财协议）：
           </div>
           <div class="w-4/6">
-            <img src="@/assets/images/lihun/licaixieyi01.png" alt="理财协议">
+            <img src="@/assets/images/lihun/licaixieyi01.jpg" alt="理财协议">
           </div>
         </div>
         <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.car">
@@ -93,7 +94,7 @@
             示例九（机动车登记证）：
           </div>
           <div class="w-4/6">
-            <img src="@/assets/images/lihun/jidongchedengjizheng01.png" alt="机动车登记证">
+            <img src="@/assets/images/lihun/jidongchedengjizheng01.jpg" alt="机动车登记证">
           </div>
         </div>
         <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.car">
@@ -112,7 +113,7 @@
             <img src="@/assets/images/lihun/baoxian01.png" alt="保险合同">
           </div>
         </div>
-        
+
         <div class="flex w-2/3 mx-auto" v-if="this.ChuShiMsg.child !=='' ">
           <div class="w-2/6">
             示例十二（孩子出生证明）：
@@ -155,7 +156,7 @@
                 title: '存折（示例五）',
                 img: ''
               }
-            ], 
+            ],
             ChuShiMsg:{
               child: '',
               house: false,
@@ -224,9 +225,9 @@
                  })
               }
             })
-            
+
           }).catch((data)=>{
-             
+
           })
           getOnlyValue({
             qpid: 654, // 关联id
@@ -241,7 +242,7 @@
               }
             })
           }).catch((data)=>{
-             
+
           })
           getOnlyValue({
             qpid: 518, // 关联id
@@ -269,13 +270,13 @@
                })
             }
           }).catch((data)=>{
-             
+
           })
         },
         NextPage () {
           this.$router.replace("/BasicInformation");
         },
-        
+
       }
     }
 </script>
