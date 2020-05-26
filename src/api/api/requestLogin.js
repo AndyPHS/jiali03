@@ -1036,3 +1036,86 @@ export const demoAddImg = params => {
     data: params
   });
 };
+
+// 后台文章类型
+// 新增文章类型
+export const addAction = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addAction,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除文章类型
+export const deleteAction = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteAction + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改文章类型
+export const updateAction = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateAction + params.faId + '?title=' + params.title + '&description=' + params.description,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查看文章类型
+export const selectAction = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectAction + '1',
+    headers: {Authorization:'bearer ' + localStorage.getItem('token'),"Content-Type":'application/x-www-form-urlencoded; charset=UTF-8'},
+    data: params
+  });
+};
+
+// 删除文章
+export const deleteNews = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteNews + params.id,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 恢复文章
+export const recoveryNews = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.recoveryNews + params.id,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询文章selectNews
+export const selectNews = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectNews + '?status=' + params.status,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 筛选查找文章
+export const selectFaIDNews = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectNews + '?status=' + params.status + '&faID=' + params.faID,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};

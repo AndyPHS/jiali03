@@ -27,6 +27,12 @@ const WenJuan1 = () => import('@/components/LiHun/WenJuan1')         // 添加�
 const ChuShi = () => import('@/components/LiHun/ChuShi')         // 小问卷初始页面
 const QueDing = () => import('@/components/LiHun/QueDing')         // 确定初始页面
 const BasicInformation = () => import('@/components/LiHun/BasicInformation')         // 基本信息填写页面
+const Article = () => import('@/components/Article')         // 后台文章页面
+
+const UserList = () => import('@/components/UserList')  // 用户列表信息
+const UserWenShu = () => import('@/components/UserWenShu')  // 用户文书列表信息
+
+const UserOperate = () => import('@/components/UserOperate')  // 用户浏览操作页面
 const ShengChengXieYi = () => import('@/components/LiHun/ShengChengXieYi')         // 添加离婚协议书债务页面
 const QiSuComplate = () => import('@/components/QiSuZhuang/QiSuComplate')    // 起诉状生成页
 const QiSuBasicInformation = () => import('@/components/QiSuZhuang/QiSuBasicInformation')    // 起诉状基本信息填写
@@ -116,8 +122,16 @@ export default new Router({
     {path: '/ChuShi', name: 'ChuShi', component: ChuShi},
     // 确定初始页面
     {path: '/QueDing', name: 'QueDing', component: QueDing},
-	// 基本信息填写页面
-	{path: '/BasicInformation', name: 'BasicInformation', component: BasicInformation},
+	  // 基本信息填写页面
+	  {path: '/BasicInformation', name: 'BasicInformation', component: BasicInformation},
+    // 后台文章列表页面
+    {path: '/Article', name: 'Article', component: Article},
+    // 后台用户列表页面
+    {path: '/UserList', name: 'UserList', component: UserList},
+    // 后台用户文书页面
+    {path: '/UserWenShu', name: 'UserWenShu', component: UserWenShu},
+    // 后台用户操作界面
+    {path: '/UserOperate', name: 'UserOperate', component: UserOperate},
     // 生成离婚协议书页面
     {path: '/ShengChengXieYi', name: 'ShengChengXieYi', component: ShengChengXieYi},
     // 起诉状生成页

@@ -212,7 +212,7 @@ const apiUrl = {
   // 问卷数组
   questionnaire: baseLiHunURL + 'questionnaire/created',
   // 查询问卷
-  questionnaireSelect: baseLiHunURL + 'questionnaire/select/',
+  questionnaireSelect: baseLiHunURL + 'questionnaire/select',
   // 新增问卷
   addQuestionnaire: baseLiHunURL + 'questionnaire/add',
   // 修改问卷
@@ -250,7 +250,23 @@ const apiUrl = {
   // 删除标签内容
   deleteLabelContent: baseLiHunURL + 'label/delete_label_content/',
   // 修改标签
-  updateLabel: baseLiHunURL + 'label/update_label/'
+  updateLabel: baseLiHunURL + 'label/update_label/',
+
+  // 文章类型 case newAction
+  // 新增文章类型
+  addAction: baseLiHunURL + 'newAction/add_action',
+  // 删除文章类型
+  deleteAction: baseLiHunURL + 'newAction/delete_action/',
+  // 修改文章类型
+  updateAction: baseLiHunURL + 'newAction/update_action/',
+  // 查询文章类型 type 默认传1
+  selectAction: baseLiHunURL + 'newAction/select_action/',
+  // 后台文章
+  // 删除文章
+  deleteNews: baseLiHunURL + 'news/delete_news/',
+  recoveryNews: baseLiHunURL + 'news/recovery_news/',
+  // 查询文章
+  selectNews: baseLiHunURL + 'news/select_news/'
 }
 export{
   apiUrl
