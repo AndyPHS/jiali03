@@ -262,11 +262,18 @@ const apiUrl = {
   // 查询文章类型 type 默认传1
   selectAction: baseLiHunURL + 'newAction/select_action/',
   // 后台文章
+  // 新增文章
+  addNews: baseLiHunURL + 'news/add_news',
   // 删除文章
   deleteNews: baseLiHunURL + 'news/delete_news/',
+  // 恢复文章
   recoveryNews: baseLiHunURL + 'news/recovery_news/',
+  // 修改文章
+  updateNews: baseLiHunURL + 'news/update_news/',
   // 查询文章
-  selectNews: baseLiHunURL + 'news/select_news/'
+  selectNews: baseLiHunURL + 'news/select_news/',
+  // 查询文章内容
+  selectNewsContent: baseLiHunURL + 'news/select_news_content/'
 }
 export{
   apiUrl

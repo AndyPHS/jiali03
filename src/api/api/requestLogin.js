@@ -1053,7 +1053,7 @@ export const deleteAction = params => {
   return axios({
     method: "delete",
     dataType: 'json',
-    url: apiUrl.deleteAction + params,
+    url: apiUrl.deleteAction + localStorage.getItem('id'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -1063,7 +1063,7 @@ export const updateAction = params => {
   return axios({
     method: "put",
     dataType: 'json',
-    url: apiUrl.updateAction + params.faId + '?title=' + params.title + '&description=' + params.description,
+    url: apiUrl.updateAction + localStorage.getItem('id'),
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
@@ -1078,7 +1078,16 @@ export const selectAction = params => {
     data: params
   });
 };
-
+// 新增文章
+export const addNews = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addNews,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 删除文章
 export const deleteNews = params => {
   return axios({
@@ -1099,12 +1108,33 @@ export const recoveryNews = params => {
     data: params
   });
 };
+// 修改文章
+export const updateNews = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateNews + localStorage.getItem('articleId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 查询文章selectNews
 export const selectNews = params => {
   return axios({
     method: "get",
     dataType: 'json',
     url: apiUrl.selectNews + '?status=' + params.status,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 查询文章内容selectNewsContent
+export const selectNewsContent = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectNewsContent + params.id,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
