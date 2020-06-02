@@ -983,7 +983,6 @@ export default {
     },
     canceldialogSaveWenJuan () { // 取消保存按钮
       this.dialogSavedWenJuan = false
-      this.$router.replace('/UserSystem')
     },
     dialogSaveWenJuanOk () { // 点击保存确定按钮保存
       userUpdateQuestionnaire({
@@ -1010,7 +1009,7 @@ export default {
         this.$message({
           type: 'info',
           message: '已取消'
-        });          
+        });
       });
     },
     saveWenShu () { // 保存文书
