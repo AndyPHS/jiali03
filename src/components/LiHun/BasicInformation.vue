@@ -812,9 +812,11 @@ export default {
         _that.active = item.id
       } else if (item.id === 3) {
         _that.active = 3
+        _that.CaiIns = 3
         this.caichanNav = true
       } else if (item.id === 4) {
         _that.active = 17
+        _that.zhaiIns = 16
         this.zhaiquanNav = true
       } else if (item.id === 5) {
         _that.active = 20
@@ -831,8 +833,9 @@ export default {
     zhaiquanNavBtn (index) {
       var _that = this
       _that.zhaiIns = 16
+
       _that.zhaiIns = _that.zhaiIns + index
-      _that.active = index + 16
+      _that.active = index + 17
       localStorage.setItem('active', _that.active)
     },
     prev () {
@@ -930,6 +933,7 @@ export default {
                   _that.CaiIns++
                 }
                 this.caichanNav = true
+                this.zhaiIns = 16
                 localStorage.setItem('active', this.active)
               } else if (this.ins === 4) {
                 this.active++
