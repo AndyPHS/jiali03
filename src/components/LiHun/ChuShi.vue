@@ -3137,8 +3137,8 @@
 </template>
 <script>
 import {userAddAnswer} from '@/api/api/requestLogin.js' // 用户添加问卷的内容
-// import {getOnlyValue} from '@/api/api/requestLogin.js' // 获取单独问题的值
-
+import {getOnlyValue} from '@/api/api/requestLogin.js' // 获取单独问题的值
+import {userAddSelectAnswer} from '../../api/api/requestLogin.js' // 添加子女或者房产等
 export default {
   components: {
     // label_case,
@@ -3161,6 +3161,168 @@ export default {
     this.childList()
   },
   methods: {
+    getChuShi () {
+      getOnlyValue({
+        qpid: 520, // 关联id
+        quid: Number(localStorage.getItem('quid')) // 用户的问卷id
+      }).then((data) => {
+        let getmodel = JSON.parse(data.data.data)
+        if (getmodel.indexOf('1') > -1) {
+          userAddSelectAnswer({
+            qpid: 521,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('2') > -1) {
+          userAddSelectAnswer({
+            qpid: 522,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('3') > -1) {
+          userAddSelectAnswer({
+            qpid: 637,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('4') > -1) {
+          userAddSelectAnswer({
+            qpid: 523,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('5') > -1) {
+          userAddSelectAnswer({
+            qpid: 3614,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('6') > -1) {
+          userAddSelectAnswer({
+            qpid: 524,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('7') > -1) {
+          userAddSelectAnswer({
+            qpid: 3636,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('8') > -1) {
+          userAddSelectAnswer({
+            qpid: 3637,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('9') > -1) {
+          userAddSelectAnswer({
+            qpid: 636,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+      }).catch((data) => {
+        console.log('保存失败')
+      })
+      getOnlyValue({
+        qpid: 3853, // 关联id
+        quid: Number(localStorage.getItem('quid')) // 用户的问卷id
+      }).then((data) => {
+        let getmodel = JSON.parse(data.data.data)
+        if (getmodel.indexOf('1') > -1) {
+          userAddSelectAnswer({
+            qpid: 3638,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('2') > -1) {
+          userAddSelectAnswer({
+            qpid: 3639,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('3') > -1) {
+          userAddSelectAnswer({
+            qpid: 3640,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('4') > -1) {
+          userAddSelectAnswer({
+            qpid: 3641,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('5') > -1) {
+          userAddSelectAnswer({
+            qpid: 3642,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+      }).catch((data) => {
+        console.log('保存失败')
+      })
+      getOnlyValue({
+        qpid: 654, // 关联id
+        quid: Number(localStorage.getItem('quid')) // 用户的问卷id
+      }).then((data) => {
+        let getmodel = JSON.parse(data.data.data)
+        if (getmodel.indexOf('1') > -1) {
+          userAddSelectAnswer({
+            qpid: 655,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('2') > -1) {
+          userAddSelectAnswer({
+            qpid: 656,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+        if (getmodel.indexOf('3') > -1) {
+          userAddSelectAnswer({
+            qpid: 3855,
+            quid: localStorage.getItem('quid')
+          }).then((data) => {
+
+          })
+        }
+      }).catch((data) => {
+        console.log('保存失败')
+      })
+    },
     getId (index) {
       return 'box_' + index
     },
@@ -3480,6 +3642,7 @@ export default {
       }
     },
     NextPage () {
+      this.getChuShi() // 初始化保存当前页面
       this.$router.replace('/QueDing')
     },
     returnUserList () {

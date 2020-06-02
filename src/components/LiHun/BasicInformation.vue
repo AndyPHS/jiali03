@@ -19,10 +19,12 @@
             <li v-bind:class="{active:index+3 == CaiIns}" @click="caichanNavBtn(index)" v-for="(item, index) in caichanNavList" :key="index" >{{ item.title }}</li>
           </ul>
           <div v-if="this.ins ===3" class="othercai">其他财产 <img src="../../assets/images/open.png" alt=""></div>
-
-          <el-tabs v-if="zhaiquanNav" :tab-position="tabPosition" @tab-click="zhaiquanNavBtn" style="position: absolute; top:0;right: 70px;">
+          <ul class="caichanul" style="right: 100px;" v-if="zhaiquanNav">
+            <li v-bind:class="{active:index+16 == zhaiIns}" @click="zhaiquanNavBtn(index)" v-for="(item, index) in zhaiquanNavList" :key="index" >{{ item.title }}</li>
+          </ul>
+          <!-- <el-tabs v-if="zhaiquanNav" :tab-position="tabPosition" @tab-click="zhaiquanNavBtn" style="position: absolute; top:0;right: 70px;">
             <el-tab-pane v-for="(item, index) in zhaiquanNavList" :id="item.id" :key="index" :label="item.title"></el-tab-pane>
-          </el-tabs>
+          </el-tabs> -->
           <div v-for="(mo, key) in mokuai" :key="key" class="min">
             <div v-if="active=== key">
               <div>
@@ -94,7 +96,7 @@
                         <question-model :newlist = 'item'></question-model>
                         <div>
                           <div v-if="mo.title==='子女抚养' " class="text-right flex justify-end">
-                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(597,index)">删除孩子</div>
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3859,index)">删除孩子</div>
                           </div>
                           <div v-if="mo.title==='房产' " class="text-right flex justify-end">
                             <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(521,index)">删除房产</div>
@@ -152,7 +154,7 @@
                       </div>
                       <div>
                         <div v-if="mo.title== '子女抚养' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(597)">添加孩子</div>
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(3859)">添加孩子</div>
                         </div>
                         <div v-if="mo.title== '房产' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(521)">添加房产</div>
@@ -270,6 +272,7 @@
     </div>
     <div class="absolute returnUserList right-0">
       <el-button type="primary" @click="returnUserList">返回文书列表</el-button>
+      <el-button type="primary" @click="saveWenShu">保存</el-button>
     </div>
   </div>
 </template>
@@ -281,7 +284,7 @@ import {userUpdateQuestionnaire} from '../../api/api/requestLogin.js' // 修改�
 import {userAddSelectAnswer} from '../../api/api/requestLogin.js' // 添加子女或者房产等
 import {userDeleteSelectAnswer} from '../../api/api/requestLogin.js' // 删除子女或者房产等
 import {demoYanZheng} from '../../api/api/requestLogin.js' // 验证单独word demo
-import {getOnlyValue} from '../../api/api/requestLogin.js' // 获取单独问题的值
+
 import {outPutWord} from '../../api/api/requestLogin.js' // 生成数据接口
 import {regionData, CodeToText, TextToCode} from 'element-china-area-data' // 省市联动信息
 
@@ -295,6 +298,7 @@ export default {
       tabPosition: 'right',
       ins: 0,
       CaiIns: 3, // 财产
+      zhaiIns: 16, // 债权
       caichanNav: false,
       zhaiquanNav: false,
       demo: 4,
@@ -310,7 +314,7 @@ export default {
       aa: {
         BasicInformation: [], // 基本信息595  1
         HunYinStatus: [], // 婚姻状况596      2
-        ZiNv: [], // 子女597                 3
+        ZiNv: [], // 子女3859                 3
         FangChan: [], // 房产状况521          4
         Car: [], // 车辆522                  5
         CunKuan: [], // 存款637              6
@@ -334,7 +338,7 @@ export default {
       mokuai: [
         {title: '基本信息', part: 'BasicInformation', id: 1, num: 595},
         {title: '婚姻状况', part: 'HunYinStatus', id: 2, num: 596},
-        {title: '子女抚养', part: 'ZiNv', id: 3, num: 597},
+        {title: '子女抚养', part: 'ZiNv', id: 3, num: 3859},
         {title: '房产', part: 'FangChan', id: 4, num: 521},
         {title: '车辆', part: 'Car', id: 5, num: 522},
         {title: '存款', part: 'CunKuan', id: 6, num: 637},
@@ -426,205 +430,10 @@ export default {
     this.getTeShuYueDingMsg()
   },
   mounted () {
-    this.getChuShi() // 初始化保存当前页面
+
   },
   methods: {
-    getChuShi () {
-      getOnlyValue({
-        qpid: 520, // 关联id
-        quid: Number(localStorage.getItem('quid')) // 用户的问卷id
-      }).then((data) => {
-        let getmodel = JSON.parse(data.data.data)
-        if (getmodel.indexOf('1') > -1) {
-          userAddSelectAnswer({
-            qpid: 521,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getFangChanMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('2') > -1) {
-          userAddSelectAnswer({
-            qpid: 522,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getCarMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('3') > -1) {
-          userAddSelectAnswer({
-            qpid: 637,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getCunKuanMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('4') > -1) {
-          userAddSelectAnswer({
-            qpid: 523,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getLiCaiMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('5') > -1) {
-          userAddSelectAnswer({
-            qpid: 3614,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getGongJiJinMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('6') > -1) {
-          userAddSelectAnswer({
-            qpid: 524,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getBaoXianMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('7') > -1) {
-          userAddSelectAnswer({
-            qpid: 3636,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getGuQuanGuFenMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('8') > -1) {
-          userAddSelectAnswer({
-            qpid: 3637,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getGuPiaoZhangHuMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('9') > -1) {
-          userAddSelectAnswer({
-            qpid: 636,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getJiaDianMsg()
-            }
-          })
-        }
-      }).catch((data) => {
-        console.log('保存失败')
-      })
-      getOnlyValue({
-        qpid: 3853, // 关联id
-        quid: Number(localStorage.getItem('quid')) // 用户的问卷id
-      }).then((data) => {
-        let getmodel = JSON.parse(data.data.data)
-        if (getmodel.indexOf('1') > -1) {
-          userAddSelectAnswer({
-            qpid: 3638,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getZhuBaoShouShiMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('2') > -1) {
-          userAddSelectAnswer({
-            qpid: 3639,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getZhaiJuanMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('3') > -1) {
-          userAddSelectAnswer({
-            qpid: 3640,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getDianPuMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('4') > -1) {
-          userAddSelectAnswer({
-            qpid: 3641,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getZhaiJiDiMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('5') > -1) {
-          userAddSelectAnswer({
-            qpid: 3642,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getQiTaMsg()
-            }
-          })
-        }
-      }).catch((data) => {
-        console.log('保存失败')
-      })
-      getOnlyValue({
-        qpid: 654, // 关联id
-        quid: Number(localStorage.getItem('quid')) // 用户的问卷id
-      }).then((data) => {
-        let getmodel = JSON.parse(data.data.data)
-        if (getmodel.indexOf('1') > -1) {
-          userAddSelectAnswer({
-            qpid: 655,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getZhaiQuanMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('2') > -1) {
-          userAddSelectAnswer({
-            qpid: 656,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getZhaiWuMsg()
-            }
-          })
-        }
-        if (getmodel.indexOf('3') > -1) {
-          userAddSelectAnswer({
-            qpid: 3855,
-            quid: localStorage.getItem('quid')
-          }).then((data) => {
-            if (data.data.status_code === 200) {
-              this.getQiTaZhaiQuanMsg()
-            }
-          })
-        }
-      }).catch((data) => {
-        console.log('保存失败')
-      })
-    },
+
     getBasicInformation () { // 查询双方基本信息模块数据
       returnQuestionnaireJson({'qpid': 595}).then((data) => { // 查询双方基本信息模块数据
         this.aa.BasicInformation = data.data.data
@@ -642,7 +451,7 @@ export default {
       })
     },
     getZiNvMsg () { // 查询子女模块数据
-      returnQuestionnaireJson({'qpid': 597}).then((data) => { // 查询子女模块数据
+      returnQuestionnaireJson({'qpid': 3859}).then((data) => { // 查询子女模块数据
         this.aa.ZiNv = data.data.data
         this.mokuai.sort(this.compare('id'))
         // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
@@ -806,7 +615,31 @@ export default {
     getTeShuYueDingMsg () { // 查询特殊约定模块数据
       returnQuestionnaireJson({'qpid': 332}).then((data) => { // 查询特殊约定模块数据
         this.aa.TeShuYueDing = data.data.data
-        this.aa.TeShuYueDing[0][0].questions[0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].answer)
+        if (this.aa.TeShuYueDing[0][0].questions[0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer)
+        }
         this.fullscreenLoading = false
       }).catch((data) => {
       })
@@ -830,7 +663,7 @@ export default {
         quid: localStorage.getItem('quid')
       }).then((data) => {
         if (data.data.status_code === 200) {
-          if (e === 597) {
+          if (e === 3859) {
             this.getZiNvMsg() // 查询子女模块数据
           } else if (e === 521) {
             this.getFangChanMsg() // 查询房产模块数据
@@ -876,22 +709,19 @@ export default {
         this.$message.error('添加失败，请联系管理员')
       })
     },
-    addCaiChan () { // 添加财产
-      this.getQiTaCaiChanMsg()
-    },
     userDeleteSelectAnswerAction (e, index) { // 删除子女或者房产等信息
       this.$confirm('是否删除该选项？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.fullscreenLoading = true
+        // this.fullscreenLoading = true
         userDeleteSelectAnswer({
           qpid: e,
           quid: localStorage.getItem('quid'),
           fornum: index + 1
         }).then((data) => {
-          if (e === 597) {
+          if (e === 3859) {
             this.getZiNvMsg() // 查询子女模块数据
           } else if (e === 521) {
             this.getFangChanMsg() // 查询房产模块数据
@@ -998,13 +828,75 @@ export default {
       _that.active = index + 3
       localStorage.setItem('active', _that.active)
     },
-    zhaiquanNavBtn (tab, event) {
+    zhaiquanNavBtn (index) {
       var _that = this
-      _that.active = tab.$attrs.id
+      _that.zhaiIns = 16
+      _that.zhaiIns = _that.zhaiIns + index
+      _that.active = index + 16
       localStorage.setItem('active', _that.active)
     },
     prev () {
-      --this.active
+      let mokuai = this.mokuai
+      for (var i = 0; i < mokuai.length; i++) {
+        if (this.mokuai[this.active].title === mokuai[i].title) {
+          localStorage.setItem('qpid', mokuai[i].num)
+          demoYanZheng({
+            qpid: mokuai[i].num
+          }).then((data) => {
+            if (data.data.status_code === 330) {
+              this.missMsgBox = true
+              this.missMsg = data.data.data
+              this.fullscreenLoading = false
+            } else {
+              this.fullscreenLoading = false
+              this.caichanNav = false
+              this.zhaiquanNav = false
+              if (this.ins < 3) {
+                --this.ins
+                --this.active
+                var _that = this
+                localStorage.setItem('active', _that.active)
+              } else if (this.ins === 3) {
+                // this.active = 3
+                --this.active
+                var _that = this
+                if (_that.CaiIns > 3) {
+                  --_that.CaiIns
+                  this.caichanNav = true
+                } else if (_that.CaiIns ===3) {
+                  --this.ins
+                  this.caichanNav = false
+                }
+                localStorage.setItem('active', this.active)
+              } else if (this.ins === 4) {
+                --this.active
+                var _that = this
+                if (_that.zhaiIns > 16) {
+                 --_that.zhaiIns
+                 this.zhaiquanNav = true
+                } else if (_that.zhaiIns ===16) {
+                  this.CaiIns = 16
+                  --this.ins
+                  this.zhaiquanNav = false
+                }
+                localStorage.setItem('active', this.active)
+              } else if (this.ins ===5 ){
+                --this.ins
+                this.active = 19
+                this.zhaiIns = 19
+                this.zhaiquanNav = true
+              }
+
+              this.$notify({
+                title: '保存成功',
+                message: mokuai[i].title + '模块已成功保存',
+                type: 'success'
+              })
+            }
+          }).catch((data) => {
+          })
+        }
+      }
       if (this.active < 0) this.active = 0
     },
     next () {
@@ -1026,18 +918,36 @@ export default {
               this.zhaiquanNav = false
               if (this.ins < 3) {
                 this.ins++
+                this.active++
                 var _that = this
                 localStorage.setItem('active', _that.active)
               } else if (this.ins === 3) {
                 // this.active = 3
                 this.active++
                 var _that = this
-                _that.CaiIns++
                 console.log(_that.CaiIns)
+                if (_that.CaiIns < 17) {
+                  _that.CaiIns++
+                }
                 this.caichanNav = true
                 localStorage.setItem('active', this.active)
-              } else {
+              } else if (this.ins === 4) {
+                this.active++
+                var _that = this
+                console.log(_that.zhaiIns)
+                if (_that.zhaiIns < 20) {
+                  _that.zhaiIns++
+                }
+                this.zhaiquanNav = true
                 localStorage.setItem('active', this.active)
+              }
+              if (this.active === 17) {
+                this.caichanNav = false
+                this.zhaiquanNav = true
+                this.ins = 4
+              } else if (this.active === 20) {
+                this.ins = 5
+                this.zhaiquanNav = false
               }
               this.$notify({
                 title: '保存成功',
@@ -1090,6 +1000,20 @@ export default {
       })
     },
     returnUserList () { // 返回协议列表
+      this.$confirm('请确认已经保存该文书', '提示', {
+        confirmButtonText: '确定已保存，返回列表',
+        cancelButtonText: '取消返回',
+        type: 'warning'
+      }).then(() => {
+        this.$router.replace('/UserSystem')
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        });          
+      });
+    },
+    saveWenShu () { // 保存文书
       this.dialogSavedWenJuan = true
     }
   }
