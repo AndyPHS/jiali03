@@ -836,6 +836,7 @@ export default {
 
       _that.zhaiIns = _that.zhaiIns + index
       _that.active = index + 17
+      console.log(this.zhaiIns)
       localStorage.setItem('active', _that.active)
     },
     prev () {
@@ -886,8 +887,10 @@ export default {
               } else if (this.ins ===5 ){
                 --this.ins
                 this.active = 19
-                this.zhaiIns = 19
+                this.zhaiIns = 18
                 this.zhaiquanNav = true
+                console.log(this.zhaiIns)
+                
               }
 
               this.$notify({
