@@ -87,9 +87,6 @@
                           <div v-if="mo.title=='债务' ">
                              <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债务</h2>
                           </div>
-                          <div v-if="mo.title=='其他债权债务' ">
-                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个其他债权债务</h2>
-                          </div>
                         </div>
 
                         <!-- 大问题块 -->
@@ -147,9 +144,6 @@
                           <div v-if="mo.title==='债务' " class="text-right flex justify-end">
                             <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(656,index)">删除债务</div>
                           </div>
-                          <div v-if="mo.title==='其他债权债务' " class="text-right flex justify-end">
-                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3855,index)">删除其他债权债务</div>
-                          </div>
                         </div>
                       </div>
                       <div>
@@ -204,9 +198,6 @@
                         <div v-if="mo.title== '债务' " class="text-right flex justify-end">
                           <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(656)">添加债务</div>
                         </div>
-                        <div v-if="mo.title== '其他债权债务' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3855)">添加其他债权债务</div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -216,7 +207,7 @@
           </div>
         </div>
 
-        <div v-show='IsShow' id="alert_xieyi">
+        <div v-show='flag' id="alert_xieyi">
           <h2>您已填写完毕，确认生成协议吗？</h2>
           <div class="queren flex mx-auto">
              <div class="w-24 mr-2">
@@ -305,7 +296,7 @@ export default {
       hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
       days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
       mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-      a: {},
+      a: [],
       formLabelWidth: '80px', // 表单标签宽度
       dialogSavedWenJuan: false, // 点击保存弹出保存弹框
       userWenJuan: { // 修改用户问卷
@@ -775,26 +766,38 @@ export default {
     },
 
     GoComplatePage () {
+      this.fullscreenLoading = true
       let mokuai = this.mokuai
       for (var i = 0; i < mokuai.length; i++) {
         localStorage.setItem('qpid', mokuai[i].num)
         demoYanZheng({
           qpid: mokuai[i].num
         }).then((data) => {
-          if (data.data.status_code === 330) {
-            this.missMsgBox = true
-            this.missMsg = data.data.data
-            this.flag = false
-          } else {
-            this.flag = true
-            this.IsShow = true
-          }
+          this.a.push(data.data.status_code)
+          // if (data.data.status_code === 330) {
+          //   this.missMsgBox = true
+          //   this.missMsg = data.data.data
+          //   this.flag = false
+          // } else{
+          //   this.flag = true
+          //   this.IsShow = true
+          // }
         }).catch((data) => {
         })
       }
-      // if(this.flag==true){
-      //   this.IsShow = true;
-      // }
+      console.log(this.a)
+      var dd = this.a
+      dd.forEach(item=>{
+        if(item=='330'){
+          console.log(1)
+          this.fullscreenLoading = false
+        }
+      })
+      console.log(typeof dd)
+      if (dd.indexOf('330') > -1){
+        console.log('有未填写项目')
+      }
+
     },
     quxiao () {
       this.IsShow = false
@@ -836,7 +839,6 @@ export default {
 
       _that.zhaiIns = _that.zhaiIns + index
       _that.active = index + 17
-      console.log(this.zhaiIns)
       localStorage.setItem('active', _that.active)
     },
     prev () {
@@ -889,8 +891,6 @@ export default {
                 this.active = 19
                 this.zhaiIns = 18
                 this.zhaiquanNav = true
-                console.log(this.zhaiIns)
-                
               }
 
               this.$notify({
