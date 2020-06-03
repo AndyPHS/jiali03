@@ -75,6 +75,7 @@
     </div>
     <div class="absolute returnUserList right-0">
       <el-button type="primary" @click="returnUserList">返回文书列表</el-button>
+      <el-button type="primary" @click="saveWenShu">保存</el-button>
     </div>
   </div>
 
@@ -342,9 +343,22 @@
 
           })
         },
-        returnUserList(){  // 返回协议列表
-          this.dialogSavedWenJuan = true;
-          this.isGoBack = true;
+        returnUserList () { // 返回协议列表
+          this.$confirm('请确认已经保存该文书', '提示', {
+            confirmButtonText: '确定已保存，返回列表',
+            cancelButtonText: '取消返回',
+            type: 'warning'
+          }).then(() => {
+            this.$router.replace('/UserSystem')
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消'
+            })
+          })
+        },
+        saveWenShu () { // 保存文书
+          this.dialogSavedWenJuan = true
         }
       }
     }
@@ -357,5 +371,6 @@
 .outputword>h2{border-bottom: 1px solid #dbe2db;}
 .outputword .msg{white-space:pre-wrap;}
 #outputwordmsg p{font-weight:bolder !important;}
+.returnUserList{top:110px;right: 20px;}
 /*#outputwordmsg{height: 500px;}*/
 </style>

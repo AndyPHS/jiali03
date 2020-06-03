@@ -1019,7 +1019,7 @@ export default {
           type: 'info',
           message: '已取消'
         })
-      });
+      })
     },
     saveWenShu () { // 保存文书
       this.dialogSavedWenJuan = true
