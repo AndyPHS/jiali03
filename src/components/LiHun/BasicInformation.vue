@@ -207,7 +207,7 @@
           </div>
         </div>
 
-        <div v-show='flag' id="alert_xieyi">
+        <div v-show='IsShow' id="alert_xieyi">
           <h2>您已填写完毕，确认生成协议吗？</h2>
           <div class="queren flex mx-auto">
              <div class="w-24 mr-2">
@@ -216,7 +216,7 @@
               </div>
             </div>
             <div class="w-24">
-              <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='complate'>
+              <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='complate' v-loading.fullscreen.lock="fullscreenLoading">
                 确认
               </div>
             </div>
@@ -256,8 +256,8 @@
             <el-button type="primary" @click="dialogSaveWenJuanOk">保 存</el-button>
           </div>
         </el-dialog>
-        <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev">上一步</el-button>
-        <el-button v-if="active < this.mokuai.length-1" class="my-5" @click="next" v-loading.fullscreen.lock="fullscreenLoading">下一步</el-button>
+        <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev" :loading="prevLoading">上一步</el-button>
+        <el-button v-if="active < this.mokuai.length-1" class="my-5" @click="next" v-loading.fullscreen.lock="fullscreenLoading" :loading="nextLoading">下一步</el-button>
         <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
       </div>
     </div>
@@ -381,6 +381,8 @@ export default {
       ],
       active: 0,
       fullscreenLoading: false, // 加载框
+      nextLoading: false, // 下一步按钮加载状态
+      prevLoading: false,  // 上一步按钮加载状态
       options: regionData, // 省市联动
       missMsgBox: false, // 错误信息默认不显示
       missMsg: [], // 验证的时候漏填项
@@ -764,48 +766,6 @@ export default {
         })
       })
     },
-
-    GoComplatePage () {
-      this.fullscreenLoading = true
-      let mokuai = this.mokuai
-      for (var i = 0; i < mokuai.length; i++) {
-        localStorage.setItem('qpid', mokuai[i].num)
-        demoYanZheng({
-          qpid: mokuai[i].num
-        }).then((data) => {
-          this.a.push(data.data.status_code)
-          // if (data.data.status_code === 330) {
-          //   this.missMsgBox = true
-          //   this.missMsg = data.data.data
-          //   this.flag = false
-          // } else{
-          //   this.flag = true
-          //   this.IsShow = true
-          // }
-        }).catch((data) => {
-        })
-      }
-      console.log(this.a)
-      var dd = this.a
-      dd.forEach(item=>{
-        if(item=='330'){
-          console.log(1)
-          this.fullscreenLoading = false
-        }
-      })
-      console.log(typeof dd)
-      if (dd.indexOf('330') > -1){
-        console.log('有未填写项目')
-      }
-
-    },
-    quxiao () {
-      this.IsShow = false
-      this.flag = false
-    },
-    complate () {
-      this.GetOutPutWord() // 请求是否能获取到
-    },
     stepClick (item, index) {
       this.ins = index
       var _that = this
@@ -842,6 +802,7 @@ export default {
       localStorage.setItem('active', _that.active)
     },
     prev () {
+      this.prevLoading = true
       let mokuai = this.mokuai
       for (var i = 0; i < mokuai.length; i++) {
         if (this.mokuai[this.active].title === mokuai[i].title) {
@@ -857,6 +818,7 @@ export default {
               this.fullscreenLoading = false
               this.caichanNav = false
               this.zhaiquanNav = false
+              this.prevLoading = false
               if (this.ins < 3) {
                 --this.ins
                 --this.active
@@ -906,7 +868,7 @@ export default {
       if (this.active < 0) this.active = 0
     },
     next () {
-      // this.fullscreenLoading = true
+      this.nextLoading = true
       let mokuai = this.mokuai
       for (var i = 0; i < mokuai.length; i++) {
         if (this.mokuai[this.active].title === mokuai[i].title) {
@@ -922,6 +884,7 @@ export default {
               this.fullscreenLoading = false
               this.caichanNav = false
               this.zhaiquanNav = false
+              this.nextLoading = false
               if (this.ins < 3) {
                 this.ins++
                 this.active++
@@ -931,7 +894,6 @@ export default {
                 // this.active = 3
                 this.active++
                 var _that = this
-                console.log(_that.CaiIns)
                 if (_that.CaiIns < 17) {
                   _that.CaiIns++
                 }
@@ -971,21 +933,61 @@ export default {
     closeMissMsgBox () { // 关闭未填写项弹窗
       this.missMsgBox = false
       this.flag = false
+      this.a = []
+      this.nextLoading = false
+      this.prevLoading = false
     },
-    GetOutPutWord () { // 获取离婚协议书未填写项
+    GoComplatePage () { // 点击生成协议按钮
+      this.a = []
+      this.IsShow = true
+      let mokuai = this.mokuai
+      for (var i = 0; i < mokuai.length; i++) {
+        localStorage.setItem('qpid', mokuai[i].num)
+        demoYanZheng({
+          qpid: mokuai[i].num
+        }).then((data) => {
+          this.a.push(data.data.status_code)
+          if (data.data.status_code === 330) {
+            this.missMsg = data.data.data
+            this.flag = false
+          }
+        }).catch((data) => {
+        })
+      }
+    },
+    quxiao () {
+      this.IsShow = false
+      this.flag = false
+    },
+    complate () { // 点击生成协议确定按钮
+      this.fullscreenLoading = true
+      setTimeout(() => {
+        var dd = this.a
+        if (dd.indexOf(330) > -1 ) {
+          this.IsShow = false
+          this.missMsgBox = true
+          this.a = []
+          this.fullscreenLoading = false
+        } else {
+          this.GetOutPutWord() // 请求是否能获取到
+        }
+      }, 3000)
+    },
+    GetOutPutWord () {  // 生成离婚协议书
       outPutWord().then((data) => {
         this.status_code = data.data.status_code
         if (this.status_code === 330) {
           this.missField = data.data.data
           this.IsShow = false
         } else if (this.status_code === 200) {
+          this.fullscreenLoading = false
           this.$router.replace('/ShengChengXieYi')
           this.missAlert = false
         }
       }).catch((data) => {
       })
     },
-    errorAlert (e) {
+    errorAlert (e) { // 错误提醒
       this.$message.error(e)
     },
     canceldialogSaveWenJuan () { // 取消保存按钮
@@ -1016,7 +1018,7 @@ export default {
         this.$message({
           type: 'info',
           message: '已取消'
-        });
+        })
       });
     },
     saveWenShu () { // 保存文书
