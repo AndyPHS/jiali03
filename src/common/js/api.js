@@ -250,7 +250,26 @@ const apiUrl = {
   // 删除标签内容
   deleteLabelContent: baseLiHunURL + 'label/delete_label_content/',
   // 修改标签
-  updateLabel: baseLiHunURL + 'label/update_label/'
+  updateLabel: baseLiHunURL + 'label/update_label/',
+  
+  // 修改手机号
+  updatePhone: baseLiHunURL + 'front_user/update_phone',
+  // 修改用户基本信息
+  updateUserName: baseLiHunURL + 'front_user/update_user_name',
+  // 发送手机验证码
+  phoneCode: baseLiHunURL + 'front_user/phone_code',
+  // 发送邮件验证码
+  sendEmail: baseLiHunURL + 'front_user/send_email',
+  // 手机修改密码
+  updatePasswordPhone: baseLiHunURL + 'front_user/update_password_phone',
+  // 新增用户
+  addUser: baseLiHunURL + 'front_user/add_user',
+  // 更新用户头像
+  uploadUserPhoto: baseLiHunURL + 'front_user/upload_user_photo',
+  // 登录
+  frontLogin: baseLiHunURL + 'front_user/front_login',
+  // 邮件修改密码
+  updatePasswordEmail: baseLiHunURL + 'front_user/update_password_email'
 }
 export{
   apiUrl

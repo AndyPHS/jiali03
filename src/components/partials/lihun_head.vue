@@ -8,15 +8,19 @@
       </div>
       <div class="flex justify-between items-center">
         <ul class="nav flex justify-around items-center">
-          <li>首页</li>
+          <li><router-link to="Home">首页</router-link></li>
           <li>离婚知识</li>
-          <li>定制我的离婚协议书</li>
+          <li><router-link to="MyConsult">定制我的离婚协议书</router-link></li>
           <li>家理律所官网</li>
         </ul>
-        <div class="loginBox flex justify-around items-center">
+        <div class="loginBox flex justify-around items-center hidden">
           <span class="cursor-pointer">登录</span>
           <el-divider direction="vertical"></el-divider>
           <span class="cursor-pointer">注册</span>
+        </div>
+        <div class="flex justify-around items-center" @click="goAgreementUser">
+          <span class="text-blue-500 border-b border-blue-500 cursor-pointer">15076334887</span>
+          <img class="ml-2 cursor-pointer" src="../../assets/images/lihun/user_icon.png" alt="">
         </div>
       </div>
     </div>
@@ -24,9 +28,19 @@
 </template>
 
 <script>
-  export default {
-    name: 'lihun_head'
+export default {
+  name: 'lihun_head',
+  data () {
+    return {
+      
+    }
+  },
+  methods: {
+    goAgreementUser () {
+      this.$router.replace('/AgreementUser')
+    }
   }
+}
 </script>
 
 <style scoped>
