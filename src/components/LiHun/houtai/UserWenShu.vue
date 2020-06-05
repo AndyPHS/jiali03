@@ -7,7 +7,7 @@
       </el-menu>
       <div class="w-1/3 py-2">
         <div class="goback">
-          <img class="mr-2" src="../../assets/images/goback_icon.png" alt="">
+          <img class="mr-2" src="../../../assets/images/goback_icon.png" alt="">
           <span class="text-sm" @click="backUserList">返回用户列表</span>
         </div>
       </div>

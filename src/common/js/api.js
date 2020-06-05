@@ -273,8 +273,8 @@ const apiUrl = {
   // 查询文章
   selectNews: baseLiHunURL + 'news/select_news/',
   // 查询文章内容
-  selectNewsContent: baseLiHunURL + 'news/select_news_content/'
-  
+  selectNewsContent: baseLiHunURL + 'news/select_news_content/',
+
   // 修改手机号
   updatePhone: baseLiHunURL + 'front_user/update_phone',
   // 修改用户基本信息

@@ -31,14 +31,14 @@ const WenJuan1 = () => import('@/components/LiHun/WenJuan1')         // 添加�
 const ChuShi = () => import('@/components/LiHun/ChuShi')         // 小问卷初始页面
 const QueDing = () => import('@/components/LiHun/QueDing')         // 确定初始页面
 const BasicInformation = () => import('@/components/LiHun/BasicInformation')         // 基本信息填写页面
-const Article = () => import('@/components/houtai/Article')         // 后台文章列表页面
-const ArticleUpload = () => import('@/components/houtai/ArticleUpload')         // 后台文章上传页面
-const FenLeiOperate = () => import('@/components/houtai/FenLeiOperate')  // 分类管理
+const Article = () => import('@/components/LiHun/houtai/Article')         // 后台文章列表页面
+const ArticleUpload = () => import('@/components/LiHun/houtai/ArticleUpload')         // 后台文章上传页面
+const FenLeiOperate = () => import('@/components/LiHun/houtai/FenLeiOperate')  // 分类管理
 
-const UserList = () => import('@/components/houtai/UserList')  // 用户列表信息
-const UserWenShu = () => import('@/components/houtai/UserWenShu')  // 用户文书列表信息
+const UserList = () => import('@/components/LiHun/houtai/UserList')  // 用户列表信息
+const UserWenShu = () => import('@/components/LiHun/houtai/UserWenShu')  // 用户文书列表信息
 
-const UserOperate = () => import('@/components/houtai/UserOperate')  // 用户浏览操作页面
+const UserOperate = () => import('@/components/LiHun/houtai/UserOperate')  // 用户浏览操作页面
 const ShengChengXieYi = () => import('@/components/LiHun/ShengChengXieYi')         // 添加离婚协议书债务页面
 const QiSuComplate = () => import('@/components/QiSuZhuang/QiSuComplate')    // 起诉状生成页
 const QiSuBasicInformation = () => import('@/components/QiSuZhuang/QiSuBasicInformation')    // 起诉状基本信息填写

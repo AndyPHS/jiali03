@@ -22,7 +22,7 @@
           </el-form-item>
         </el-form>
         <div class="cursor-pointer search_icon">
-          <img src="../../assets/images/search_icon.png" alt="">
+          <img src="../../../assets/images/search_icon.png" alt="">
         </div>
       </div>
     </div>
