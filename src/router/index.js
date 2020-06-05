@@ -15,7 +15,11 @@ const Users = () => import('@/components/users/Users')  // 用户页面
 const UsersPermission = () => import('@/components/users/UsersPermission')  // 用户权限页面
 const QuestionManagement = () => import('@/components/LiHun/QuestionManagement')         // 问题管理页面
 const GuanLianManagement = () => import('@/components/LiHun/GuanLianManagement')         // 关联管理页面
-const Home = () => import('@/components/LiHun/Home') // 离婚协议书推广首页
+const Home = () => import('@/components/LiHun/Ad/Home') // 离婚协议书推广首页
+const MyConsult = () => import('@/components/LiHun/Ad/MyConsult')  // 我的离婚协议书
+const CustomAgreement = () => import('@/components/LiHun/Ad/CustomAgreement')  // 推广页定制我的离婚协议书
+const AgreementHelp = () => import('@/components/LiHun/Ad/AgreementHelp')  // 推广页定制我的离婚协议书帮助
+const AgreementUser = () => import('@/components/LiHun/Ad/AgreementUser')  // 推广页定制我的离婚协议书帮助
 const ZuHeManagement = () => import('@/components/LiHun/ZuHeManagement')         // 组合管理页面
 const LabelManagement = () => import('@/components/LiHun/LabelManagement')         // 标签管理页面
 const DisplayRule = () => import('@/components/LiHun/DisplayRule')        // 显示规则修改页面
@@ -107,7 +111,17 @@ export default new Router({
     {path: '/GuanLianManagement', name: 'GuanLianManagement', component: GuanLianManagement},
     // 组合管理
     {path: '/ZuHeManagement', name: 'ZuHeManagement', component: ZuHeManagement},
+    // 离婚协议书推广首页
     {path: '/Home', name: 'Home', component: Home,meta: {title: '登录',type: 'login'}},
+    // 离婚协议书推广我的协议书
+    {path: '/MyConsult', name: 'MyConsult', component: MyConsult},
+    // 离婚协议书推广定制协议书
+    {path: '/CustomAgreement', name: 'CustomAgreement', component: CustomAgreement},
+    // 离婚协议书推广定制协议书帮助页面
+    {path: '/AgreementHelp', name: 'AgreementHelp', component: AgreementHelp},
+    // 离婚协议书推广定制协议书用户页面
+    {path: '/AgreementUser', name: 'AgreementUser', component: AgreementUser},
+    
     // 标签管理
     {path: '/LabelManagement', name: 'LabelManagement', component: LabelManagement},
     // 显示规则页面

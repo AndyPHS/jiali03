@@ -3,115 +3,206 @@
     <div class="container mx-auto">
       <div>
         <div class="py-6">
-          <el-steps :active="active" finish-status="success" align-center>
-            <el-step :title="item.title" v-for="(item, index) in mokuai" :key="index"  @click.native ="stepClick(index)"></el-step>
-          </el-steps>
+          <ul class="flex justify-around navUl">
+            <li v-bind:class="{active:index == ins}" v-for="(item, index) in nav" :key="index" @click="stepClick(item,index)">
+              <span class="insNum">{{ index+1 }}</span>
+            {{ item.title }}
+            <span class="divider-line"></span>
+            </li>
+          </ul>
         </div>
-        <div v-for="(mo, key) in mokuai" :key="key" class="min">
-          <div v-if="active=== key">
-            <div>
-              <el-form label-position="top" label-width="160px">
-                <div class="text-left mx-auto bg-white px-5 py-5 border border-green-200 rounded-lg shadow-lg">
-                  <!--遍历有几个孩子-->
-                  <div>
-                    <!--遍历孩子的基本信息-->
-                    <div v-for="(item,index) in aa[mo.part]" :key="index">
-                      <!-- 大问题块 -->
-                      <div>
-                        <div v-if="mo.title=='子女状况' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个子女</h2>
-                        </div>
-                        <div v-if="mo.title=='房产' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">房产{{index+1}}</h2>
-                        </div>
-                        <div v-if="mo.title=='存款' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔存款</h2>
-                        </div>
-                        <div v-if="mo.title=='车子' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}辆车子</h2>
-                        </div>
-                        <div v-if="mo.title=='理财' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔理财</h2>
-                        </div>
-                        <div v-if="mo.title=='保险' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}份保险</h2>
-                        </div>
-                        <div v-if="mo.title=='债权' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债权</h2>
-                        </div>
-                        <div v-if="mo.title=='债务' ">
-                           <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债务</h2>
-                        </div>
-                      </div>
-
-
-                      <!-- 大问题块 -->
-                      <question-model :newlist = 'item'></question-model>
-                      <div>
-                        <div v-if="mo.title==='房产' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(521,index)">删除房产</div>
-                        </div>
-                        <div v-if="mo.title==='子女状况' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(518,index)">删除孩子</div>
-                        </div>
-                        <div v-if="mo.title==='存款' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(637,index)">删除存款</div>
-                        </div>
-                        <div v-if="mo.title==='车子' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(522,index)">删除车子</div>
-                        </div>
-                        <div v-if="mo.title==='理财' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(523,index)">删除理财</div>
-                        </div>
-                        <div v-if="mo.title==='家具家电' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(636,index)">删除家具家电</div>
-                        </div>
-                        <div v-if="mo.title==='保险' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(524,index)">删除保险</div>
-                        </div>
-                        <div v-if="mo.title==='债权' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(655,index)">删除债权</div>
-                        </div>
-                        <div v-if="mo.title==='债务' " class="text-right flex justify-end">
-                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(656,index)">删除债务</div>
-                        </div>
-                      </div>
-                    </div>
+        <div class="relative allmin">
+          <!-- <el-tabs v-if="this.ins ===3" :tab-position="tabPosition" @tab-click="`" style="position: absolute; top:0;right: 0px; text-align: left;">
+            <el-tab-pane v-for="(item, index) in caichanNavList" :id="item.id" :key="index" :label="item.title"></el-tab-pane>
+          </el-tabs> -->
+          <ul class="caichanul" v-if="this.ins ===3" >
+            <li v-bind:class="{active:index+3 == CaiIns}" @click="caichanNavBtn(index)" v-for="(item, index) in caichanNavList" :key="index" >{{ item.title }}</li>
+          </ul>
+          <div v-if="this.ins ===3" class="othercai">其他财产 <img src="../../assets/images/open.png" alt=""></div>
+          <ul class="caichanul" style="right: 100px;" v-if="zhaiquanNav">
+            <li v-bind:class="{active:index+16 == zhaiIns}" @click="zhaiquanNavBtn(index)" v-for="(item, index) in zhaiquanNavList" :key="index" >{{ item.title }}</li>
+          </ul>
+          <!-- <el-tabs v-if="zhaiquanNav" :tab-position="tabPosition" @tab-click="zhaiquanNavBtn" style="position: absolute; top:0;right: 70px;">
+            <el-tab-pane v-for="(item, index) in zhaiquanNavList" :id="item.id" :key="index" :label="item.title"></el-tab-pane>
+          </el-tabs> -->
+          <div v-for="(mo, key) in mokuai" :key="key" class="min">
+            <div v-if="active=== key">
+              <div>
+                <el-form label-position="top" label-width="160px">
+                  <div class="text-left mx-auto bg-white px-5 py-5 border border-green-200 rounded-lg shadow-lg">
+                    <!--遍历有几个孩子-->
                     <div>
-                      <div v-if="mo.title== '房产' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(521)">添加房产</div>
+                      <!--遍历孩子的基本信息-->
+                      <div v-for="(item,index) in aa[mo.part]" :key="index">
+                        <!-- 大问题块 -->
+                        <div>
+                          <div v-if="mo.title=='子女抚养' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个孩子</h2>
+                          </div>
+                          <div v-if="mo.title=='房产' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">房产{{index+1}}</h2>
+                          </div>
+                          <div v-if="mo.title=='车辆' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}辆车辆</h2>
+                          </div>
+                          <div v-if="mo.title=='存款' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔存款</h2>
+                          </div>
+                          <div v-if="mo.title=='理财' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔理财</h2>
+                          </div>
+                          <div v-if="mo.title=='公积金' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔公积金</h2>
+                          </div>
+                          <div v-if="mo.title=='保险' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}份保险</h2>
+                          </div>
+                          <div v-if="mo.title=='股权（股份）' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔股权（股份）</h2>
+                          </div>
+                          <div v-if="mo.title=='股票账户' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个股票账户</h2>
+                          </div>
+                          <div v-if="mo.title=='家具家电' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个家具家电</h2>
+                          </div>
+                          <div v-if="mo.title=='珠宝首饰收藏品' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}件珠宝首饰收藏品</h2>
+                          </div>
+                          <div v-if="mo.title=='债券' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个债券</h2>
+                          </div>
+                          <div v-if="mo.title=='店铺' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个店铺</h2>
+                          </div>
+                          <div v-if="mo.title=='宅基地房屋' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}处宅基地房屋</h2>
+                          </div>
+                          <div v-if="mo.title=='其他' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}个其他</h2>
+                          </div>
+                          <div v-if="mo.title=='债权' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债权</h2>
+                          </div>
+                          <div v-if="mo.title=='债务' ">
+                             <h2 class="border w-24 text-left text-base text-orange-500 px-1 py-1 text-center bg-green-100 rounded">第{{index+1}}笔债务</h2>
+                          </div>
+                        </div>
+
+                        <!-- 大问题块 -->
+                        <question-model :newlist = 'item'></question-model>
+                        <div>
+                          <div v-if="mo.title==='子女抚养' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3859,index)">删除孩子</div>
+                          </div>
+                          <div v-if="mo.title==='房产' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(521,index)">删除房产</div>
+                          </div>
+                          <div v-if="mo.title==='车辆' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(522,index)">删除车辆</div>
+                          </div>
+                          <div v-if="mo.title==='存款' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(637,index)">删除存款</div>
+                          </div>
+                          <div v-if="mo.title==='理财' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(523,index)">删除理财</div>
+                          </div>
+                          <div v-if="mo.title==='公积金' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3614,index)">删除公积金</div>
+                          </div>
+                          <div v-if="mo.title==='保险' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(524,index)">删除保险</div>
+                          </div>
+
+                          <div v-if="mo.title==='股权（股份）' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3636,index)">删除股权（股份）</div>
+                          </div>
+                          <div v-if="mo.title==='股票账户' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3637,index)">删除股票账户</div>
+                          </div>
+                          <div v-if="mo.title==='家具家电' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(636,index)">删除家具家电</div>
+                          </div>
+                          <div v-if="mo.title==='珠宝首饰收藏品' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3638,index)">删除珠宝首饰收藏品</div>
+                          </div>
+                          <div v-if="mo.title==='债券' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3639,index)">删除债券</div>
+                          </div>
+                          <div v-if="mo.title==='店铺' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3640,index)">删除店铺</div>
+                          </div>
+                          <div v-if="mo.title==='宅基地房屋' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3641,index)">删除宅基地房屋</div>
+                          </div>
+                          <div v-if="mo.title==='其他' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(3642,index)">删除其他</div>
+                          </div>
+                          <div v-if="mo.title==='债权' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(655,index)">删除债权</div>
+                          </div>
+                          <div v-if="mo.title==='债务' " class="text-right flex justify-end">
+                            <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-orange-500 hover:text-white cursor-pointer" @click="userDeleteSelectAnswerAction(656,index)">删除债务</div>
+                          </div>
+                        </div>
                       </div>
-                      <div v-if="mo.title== '子女状况' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(518)">添加孩子</div>
-                      </div>
-                      <div v-if="mo.title== '存款' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(637)">添加存款</div>
-                      </div>
-                      <div v-if="mo.title== '车子' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(522)">添加车子</div>
-                      </div>
-                      <div v-if="mo.title== '理财' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(523)">添加理财</div>
-                      </div>
-                      <div v-if="mo.title== '家具家电' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(636)">添加家具家电</div>
-                      </div>
-                      <div v-if="mo.title== '保险' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(524)">添加保险</div>
-                      </div>
-                      <div v-if="mo.title== '其他财产' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="addCaiChan">添加其他财产</div>
-                      </div>
-                      <div v-if="mo.title== '债权' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(655)">添加债权</div>
-                      </div>
-                      <div v-if="mo.title== '债务' " class="text-right flex justify-end">
-                        <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(656)">添加债务</div>
+                      <div>
+                        <div v-if="mo.title== '子女抚养' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(3859)">添加孩子</div>
+                        </div>
+                        <div v-if="mo.title== '房产' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer" @click="userAddSelectAnswerAction(521)">添加房产</div>
+                        </div>
+                        <div v-if="mo.title== '车辆' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(522)">添加车辆</div>
+                        </div>
+                        <div v-if="mo.title== '存款' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(637)">添加存款</div>
+                        </div>
+                        <div v-if="mo.title== '理财' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(523)">添加理财</div>
+                        </div>
+                        <div v-if="mo.title== '公积金' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3614)">添加公积金</div>
+                        </div>
+                        <div v-if="mo.title== '保险' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(524)">添加保险</div>
+                        </div>
+                        <div v-if="mo.title== '股权（股份）' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3636)">添加股权（股份）</div>
+                        </div>
+                        <div v-if="mo.title== '股票账户' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3637)">添加股票账户</div>
+                        </div>
+                        <div v-if="mo.title== '家具家电' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(636)">添加家具家电</div>
+                        </div>
+                        <div v-if="mo.title== '珠宝首饰收藏品' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3638)">添加珠宝首饰收藏品</div>
+                        </div>
+                        <div v-if="mo.title== '债券' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3639)">添加债券</div>
+                        </div>
+                        <div v-if="mo.title== '店铺' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3640)">添加店铺</div>
+                        </div>
+                        <div v-if="mo.title== '宅基地房屋' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3641)">添加宅基地房屋</div>
+                        </div>
+                        <div v-if="mo.title== '其他' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(3642)">添加其他</div>
+                        </div>
+                        <div v-if="mo.title== '债权' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(655)">添加债权</div>
+                        </div>
+                        <div v-if="mo.title== '债务' " class="text-right flex justify-end">
+                          <div class="ml-1 mb-3 py-1 text-base text-blue-500 px-1 rounded border border-1 hover:bg-green-500 hover:text-white cursor-pointer"  @click="userAddSelectAnswerAction(656)">添加债务</div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </el-form>
+                </el-form>
+              </div>
             </div>
           </div>
         </div>
@@ -125,7 +216,7 @@
               </div>
             </div>
             <div class="w-24">
-              <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='complate'>
+              <div class="ml-1 mb-3 py-1 text-base bg-orange-400 text-white px-1 rounded border border-1 hover:bg-orange-500 cursor-pointer" @click='complate' v-loading.fullscreen.lock="fullscreenLoading">
                 确认
               </div>
             </div>
@@ -165,803 +256,798 @@
             <el-button type="primary" @click="dialogSaveWenJuanOk">保 存</el-button>
           </div>
         </el-dialog>
-        <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev">上一步</el-button>
-        <el-button v-if="active < this.mokuai.length-1" class="my-5" @click="next">下一步</el-button>
+        <el-button v-if="active < this.mokuai.length && active > 0" class="my-5" @click="prev" :loading="prevLoading">上一步</el-button>
+        <el-button v-if="active < this.mokuai.length-1" class="my-5" @click="next" v-loading.fullscreen.lock="fullscreenLoading" :loading="nextLoading">下一步</el-button>
         <el-button v-if="active==this.mokuai.length-1" class="my-5" @click="GoComplatePage">生成协议</el-button>
       </div>
     </div>
     <div class="absolute returnUserList right-0">
       <el-button type="primary" @click="returnUserList">返回文书列表</el-button>
+      <el-button type="primary" @click="saveWenShu">保存</el-button>
     </div>
   </div>
 </template>
 <script>
-  import QuestionModel from '../partials/QuestionModel.vue'   // 引入子组件
-  import {returnQuestionnaireJson} from '@/api/api/requestLogin.js'    // 查询问卷json
-  import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
-  // import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
-  import {userAddSelectAnswer} from '@/api/api/requestLogin.js'    // 添加子女或者房产等
-  import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js'    // 删除子女或者房产等
-  import {demoYanZheng} from '@/api/api/requestLogin.js'    // 验证单独word demo
-  import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
-  import {outPutWord} from '@/api/api/requestLogin.js'  // 生成数据接口
-  import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
+import QuestionModel from '../partials/QuestionModel.vue' // 引入子组件
+import {returnQuestionnaireJson} from '../../api/api/requestLogin.js' // 查询问卷json
+import {userUpdateQuestionnaire} from '../../api/api/requestLogin.js' // 修改离婚协议书
+// import {userAddAnswer} from '../../api/api/requestLogin.js'    // 用户添加问卷的内容
+import {userAddSelectAnswer} from '../../api/api/requestLogin.js' // 添加子女或者房产等
+import {userDeleteSelectAnswer} from '../../api/api/requestLogin.js' // 删除子女或者房产等
+import {demoYanZheng} from '../../api/api/requestLogin.js' // 验证单独word demo
 
-  export default {
-    components: {
-      // label_case,
-      QuestionModel
-    },
-      data () {
-          return {
-            demo:4,
-            hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-            days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-            mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            a: {},
-            formLabelWidth: '80px',   // 表单标签宽度
-            dialogSavedWenJuan: false,   // 点击保存弹出保存弹框
-            userWenJuan:{ // 修改用户问卷
-              title: '',     // 标题
-            },
-            aa: {
-              BasicInformation: [],    //基本信息595
-              HunYinStatus: [],  // 婚姻状况596
-              ZiNv: [],  // 子女518
-              FangChan: [],               // 房产状况521
-              CunKuan: [],                // 存款637
-              Car: [],                // 车子522
-              LiCai: [],                // 理财523
-              JiaDian: [],                // 家具家电636
-              BaoXian: [],          // 保险524
-              QiTaCaiChan: [],       // 其他财产332
-              ZhaiQuan: [],         // 债权655
-              ZhaiWu: []            // 债务656
-            },
-            IsShow: false,
-            mokuai: [
-              {title: '基本信息', part: 'BasicInformation',id:1, num:595},
-              {title: '婚姻状况', part: 'HunYinStatus',id:2, num:596}
-            ],
-            active: 0,
-            options: regionData,  // 省市联动
-            missMsgBox: false,      // 错误信息默认不显示
-            missMsg:[],   // 验证的时候漏填项
-            missAlert: true, // 尚未填写的信息弹框
-            status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
-            missField: [], // 未填写项目
-            flag: false,   // 生成协议弹窗是否出现开关
-            rules:{
-              IdCard:[
-                { min: 17, max: 18, message: '身份证位数不对', trigger: 'blur' }
-              ]
-            }
-          }
+import {outPutWord} from '../../api/api/requestLogin.js' // 生成数据接口
+import {regionData, CodeToText, TextToCode} from 'element-china-area-data' // 省市联动信息
+
+export default {
+  components: {
+    // label_case,
+    QuestionModel
+  },
+  data () {
+    return {
+      tabPosition: 'right',
+      ins: 0,
+      CaiIns: 3, // 财产
+      zhaiIns: 16, // 债权
+      caichanNav: false,
+      zhaiquanNav: false,
+      demo: 4,
+      hours: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
+      days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
+      mon: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      a: [],
+      formLabelWidth: '80px', // 表单标签宽度
+      dialogSavedWenJuan: false, // 点击保存弹出保存弹框
+      userWenJuan: { // 修改用户问卷
+        title: '' // 标题
       },
-      name: 'WenJuan2',
-
-      beforeMount () {
-        // this.getChuShi();  // 初始化保存当前页面
-        this.getBasicInformation() // 查询双方基本信息模块数据
-        this.getHunYinStatus()  // 查询婚姻状况模块数据
-        this.getZiNvMsg()  // 查询子女模块数据
-        this.getFangChanMsg() // 查询房产模块数据
-        this.getCunKuanMsg()  // 查询存款模块数据
-        this.getCarMsg()   // 查询车子模块数据
-        this.getLiCaiMsg()  // 查询理财模块数据
-        this.getJiaDianMsg()  // 查询家具家电模块数据
-        this.getBaoXianMsg() // 查询保险模块数据
-        this.getZhaiQuanMsg()  // 查询债权模块数据
-        this.getZhaiWuMsg()  // 查询债务模块数据
-        // this.getQiTaCaiChanMsg() // 查询其他财产
-        // this.getShengChengXieYi() // 生成协议弹框
+      aa: {
+        BasicInformation: [], // 基本信息595  1
+        HunYinStatus: [], // 婚姻状况596      2
+        ZiNv: [], // 子女3859                 3
+        FangChan: [], // 房产状况521          4
+        Car: [], // 车辆522                  5
+        CunKuan: [], // 存款637              6
+        LiCai: [], // 理财523                7
+        GongJiJin: [], // 公积金3614        8
+        BaoXian: [], // 保险524              9
+        GuQuanGuFen: [], //  股权（股份）3636  10
+        GuPiaoZhangHu: [], // 股票账户 3637    11
+        JiaDian: [], // 家具家电636            12
+        ZhuBaoShouShi: [], // 珠宝首饰收藏品3638  13
+        ZhaiJuan: [], // 债券 3639              14
+        DianPu: [], // 店铺3640                 15
+        ZhaiJiDi: [], // 宅基地房屋 3641         16
+        QiTa: [], // 其他 3642                 17
+        ZhaiQuan: [], // 债权655                18
+        ZhaiWu: [], // 债务656                  19
+        QiTaZhaiQuan: [], // 其他债权债务3855     20
+        TeShuYueDing: [] // 特殊约定 332         21
       },
-      mounted (){
-        this.getChuShi();  // 初始化保存当前页面
-       },
-      methods: {
-        getChuShi () {
-          getOnlyValue({
-            qpid: 520, // 关联id
-            quid: Number(localStorage.getItem('quid')) //用户的问卷id
-          }).then((data)=>{
-            let getmodel = JSON.parse(data.data.data)
-            if(getmodel.indexOf("7") > -1){
-              this.getQiTaCaiChanMsg()
-            }else{
-            }
+      IsShow: false,
+      mokuai: [
+        {title: '基本信息', part: 'BasicInformation', id: 1, num: 595},
+        {title: '婚姻状况', part: 'HunYinStatus', id: 2, num: 596},
+        {title: '子女抚养', part: 'ZiNv', id: 3, num: 3859},
+        {title: '房产', part: 'FangChan', id: 4, num: 521},
+        {title: '车辆', part: 'Car', id: 5, num: 522},
+        {title: '存款', part: 'CunKuan', id: 6, num: 637},
+        {title: '理财', part: 'LiCai', id: 7, num: 523},
+        {title: '公积金', part: 'GongJiJin', id: 8, num: 3614},
+        {title: '保险', part: 'BaoXian', id: 9, num: 524},
+        {title: '股权（股份）', part: 'GuQuanGuFen', id: 10, num: 3636},
+        {title: '股票账户', part: 'GuPiaoZhangHu', id: 11, num: 3637},
+        {title: '家具家电', part: 'JiaDian', id: 12, num: 636},
+        {title: '珠宝首饰收藏品', part: 'ZhuBaoShouShi', id: 13, num: 3638},
+        {title: '债券', part: 'ZhaiJuan', id: 14, num: 3639},
+        {title: '店铺', part: 'DianPu', id: 15, num: 3640},
+        {title: '宅基地房屋', part: 'ZhaiJiDi', id: 16, num: 3641},
+        {title: '其他', part: 'QiTa', id: 17, num: 3642},
+        {title: '债权', part: 'ZhaiQuan', id: 18, num: 655},
+        {title: '债务', part: 'ZhaiWu', id: 19, num: 656},
+        {title: '其他债权债务', part: 'QiTaZhaiQuan', id: 20, num: 3855},
+        {title: '特殊约定', part: 'TeShuYueDing', id: 21, num: 332}
+      ],
+      nav: [
+        {title: '基本信息', id: 0},
+        {title: '婚姻状况', id: 1},
+        {title: '子女抚养', id: 2},
+        {title: '财产分割', id: 3},
+        {title: '债权债务', id: 4},
+        {title: '特殊约定', id: 5}
 
-          }).catch((data)=>{
-             console.log("保存失败")
-          })
-        },
-        getBasicInformation (){ // 查询双方基本信息模块数据
-          returnQuestionnaireJson({'qpid': 595}).then((data)=>{  // 查询双方基本信息模块数据
-            this.aa.BasicInformation = data.data.data
-            this.mokuai.sort(this.compare('id'));
-          }).catch((data)=>{
-
-          })
-
-        },
-        getHunYinStatus () {// 查询婚姻状况模块数据
-          returnQuestionnaireJson({'qpid': 596}).then((data)=>{  // 查询婚姻状况模块数据
-            this.aa.HunYinStatus = data.data.data
-            this.mokuai.sort(this.compare('id'));
-            let cityAnswer = JSON.parse(this.aa.HunYinStatus[0][0].questions[1].answer)
-            this.aa.HunYinStatus[0][0].questions[1].answer = [TextToCode[cityAnswer[0]].code,TextToCode[cityAnswer[0]][cityAnswer[1]].code,TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
-          }).catch((data)=>{
-          })
-        },
-        getZiNvMsg () { // 查询子女模块数据
-          returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
-            this.aa.ZiNv = data.data.data
-            this.mokuai.push({
-              title: '子女状况',
-              part: 'ZiNv',
-              id: 3,
-              num:518
-            })
-            this.mokuai.sort(this.compare('id'));
-            // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
-            for ( let i = 0 ;i < this.aa.ZiNv.length; i++) {
-              if(this.aa.ZiNv[i][1].questions[0].answer == 1){
-                this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer)
-              }else if(this.aa.ZiNv[i][1].questions[1].answer == 2){
-                this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer)
-              }if(this.aa.ZiNv[i][1].questions[1].answer ==2){
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer)
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer)
-                }else if(this.aa.ZiNv[i][1].questions[1].answer ==3){
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer)
-                  this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer)
-                }
-                this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer)
-                this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer)
-                this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer)
-            }
-          }).catch((data)=>{
-          })
-        },
-        getFangChanMsg () {// 查询房产模块数据
-          returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
-            this.aa.FangChan= data.data.data
-            this.mokuai.push({
-              title: '房产',
-              part: 'FangChan',
-              id: 4,
-              num:521
-            })
-            this.mokuai.sort(this.compare('id'));
-            for ( let i = 0 ;i < this.aa.FangChan.length; i++) {
-              this.aa.FangChan[i][0].questions[2].answer = JSON.parse(this.aa.FangChan[i][0].questions[2].answer)
-            }
-          }).catch((data)=>{
-          })
-        },
-        getCunKuanMsg () {// 查询存款模块数据
-          returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
-            this.aa.CunKuan= data.data.data
-            this.mokuai.push({
-              title: '存款',
-              part: 'CunKuan',
-              id: 5,
-              num:637
-            })
-            this.mokuai.sort(this.compare('id'));
-          }).catch((data)=>{
-          })
-        },
-        getCarMsg () { // 查询车子模块数据
-          returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
-            this.aa.Car= data.data.data
-            this.mokuai.push({
-              title: '车子',
-              part: 'Car',
-              id: 6,
-              num:522
-            })
-            this.mokuai.sort(this.compare('id'));
-            for ( let i = 0 ;i < this.aa.Car.length; i++) {
-              this.aa.Car[i][0].questions[2].answer = JSON.parse(this.aa.Car[i][0].questions[2].answer)
-            }
-          }).catch((data)=>{
-          })
-        },
-        getLiCaiMsg () { // 查询理财模块数据
-          returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
-            this.aa.LiCai= data.data.data
-            this.mokuai.push({
-              title: '理财',
-              part: 'LiCai',
-              id: 7,
-              num:523
-            })
-            this.mokuai.sort(this.compare('id'));
-          }).catch((data)=>{
-          })
-        },
-        getJiaDianMsg () { // 查询家具家电模块数据
-          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家具家电模块数据
-            this.aa.JiaDian= data.data.data
-            this.mokuai.push({
-              title: '家具家电',
-              part: 'JiaDian',
-              id: 8,
-              num:636
-            })
-            this.mokuai.sort(this.compare('id'));
-          }).catch((data)=>{
-          })
-        },
-        getBaoXianMsg (){// 查询保险模块数据
-          returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
-            this.aa.BaoXian= data.data.data
-            this.mokuai.push({
-              title: '保险',
-              part: 'BaoXian',
-              id: 9,
-              num:524
-            })
-            this.mokuai.sort(this.compare('id'));
-          }).catch((data)=>{
-
-          })
-        },
-        getQiTaCaiChanMsg (){// 查询其他财产
-          returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询其他财产模块数据
-            this.aa.QiTaCaiChan= data.data.data
-            this.mokuai.push({
-              title: '其他财产',
-              part: 'QiTaCaiChan',
-              id: 10,
-              num:332
-            })
-            this.mokuai.sort(this.compare('id'));
-            for ( let i = 0 ;i < this.aa.QiTaCaiChan.length; i++) {
-              if(this.aa.QiTaCaiChan[i][0].questions[0].answer == 1 || this.aa.QiTaCaiChan[i][0].questions[0].answer == ""){
-                this.aa.QiTaCaiChan[i][0].questions[0].answer = []
-              }else{
-                this.aa.QiTaCaiChan[i][0].questions[0].answer = JSON.parse(this.aa.QiTaCaiChan[i][0].questions[0].answer)
-              }
-
-            }
-          }).catch((data)=>{
-
-          })
-        },
-        getZhaiQuanMsg (){ // 查询债权模块数据
-          returnQuestionnaireJson({'qpid': 655}).then((data)=>{  // 查询债权模块数据
-            this.aa.ZhaiQuan= data.data.data
-            this.mokuai.push({
-              title: '债权',
-              part: 'ZhaiQuan',
-              id: 11,
-              num:655
-            })
-            this.mokuai.sort(this.compare('id'));
-          }).catch((data)=>{
-          })
-        },
-        getZhaiWuMsg (){ // 查询债务模块数据
-          returnQuestionnaireJson({'qpid': 656}).then((data)=>{  // 查询债务模块数据
-            this.aa.ZhaiWu= data.data.data
-            this.mokuai.push({
-              title: '债务',
-              part: 'ZhaiWu',
-              id: 12,
-              num:656
-            })
-            this.mokuai.sort(this.compare('id'));
-          }).catch((data)=>{
-          })
-        },
-
-        getZiNv () { // 查询子女模块数据
-          returnQuestionnaireJson({'qpid': 518}).then((data)=>{ // 查询子女模块数据
-            this.aa.ZiNv = data.data.data
-            // console.log(this.aa.ZiNv)
-          }).catch((data)=>{
-          })
-        },
-        getFangChan () {// 查询房产模块数据
-          returnQuestionnaireJson({'qpid': 521}).then((data)=>{ // 查询房产模块数据
-            this.aa.FangChan= data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getCunKuan () {// 查询存款模块数据
-          returnQuestionnaireJson({'qpid': 637}).then((data)=>{ // 查询存款模块数据
-            this.aa.CunKuan= data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getCar () { // 查询车子模块数据
-          returnQuestionnaireJson({'qpid': 522}).then((data)=>{  // 查询车子模块数据
-            this.aa.Car= data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getLiCai () { // 查询理财模块数据
-          returnQuestionnaireJson({'qpid': 523}).then((data)=>{  // 查询理财模块数据
-            this.aa.LiCai= data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getJiaDian () { // 查询家具家电模块数据
-          returnQuestionnaireJson({'qpid': 636}).then((data)=>{ // 查询家具家电模块数据
-            this.aa.JiaDian= data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getBaoXian (){// 查询保险模块数据
-          returnQuestionnaireJson({'qpid': 524}).then((data)=>{  // 查询保险模块数据
-            this.aa.BaoXian= data.data.data
-          }).catch((data)=>{
-
-          })
-        },
-        getZhaiQuan (){ // 查询债权模块数据
-          returnQuestionnaireJson({'qpid': 655}).then((data)=>{  // 查询债权模块数据
-            this.aa.ZhaiQuan= data.data.data
-          }).catch((data)=>{
-          })
-        },
-        getZhaiWu (){ // 查询债务模块数据
-          returnQuestionnaireJson({'qpid': 656}).then((data)=>{  // 查询债务模块数据
-            this.aa.ZhaiWu= data.data.data
-          }).catch((data)=>{
-          })
-        },
-        // getQiTaCaiChan(){
-        //   returnQuestionnaireJson({'qpid': 332}).then((data)=>{  // 查询债务模块数据
-        //     this.aa.QiTaCaiChan= data.data.data
-        //   }).catch((data)=>{
-        //   })
-        // },
-        compare(property){
-          return function(a,b){
-            let value1 = a[property];
-            let value2 = b[property];
-            return value1 - value2
-          }
-        },
-
-        userAddSelectAnswerAction (e){   // 添加子女或者房产等
-            this.$message({
-              message:'添加中请稍后……',
-              duration: 1000
-            });
-            userAddSelectAnswer({
-              qpid: e,
-              quid: localStorage.getItem('quid')
-            }).then((data)=>{
-              if(data.data.status_code == 200 ){
-                if(e==518){
-                  this.getZiNv()  // 查询子女模块数据
-                }else if(e==521){
-                  this.getFangChan() // 查询房产模块数据
-                }else if(e==637){
-                  this.getCunKuan()  // 查询存款模块数据
-                }else if(e==522){
-                  this.getCar()   // 查询车子模块数据
-                }else if(e==523){
-                  this.getLiCai()  // 查询理财模块数据
-                }else if(e==636){
-                  this.getJiaDian()  // 查询家具家电模块数据
-                }else if(e==524){
-                  this.getBaoXian() // 查询保险模块数据
-                }else if(e==655){
-                  this.getZhaiQuan()  // 查询债权模块数据
-                }else if(e==656){
-                  this.getZhaiWu()  // 查询债务模块数据
-                }
-                this.$message({
-                  message: '添加成功',
-                  type: 'success'
-                });
-              }
-            }).catch((data)=>{
-               this.$message.error('添加失败，请联系管理员');
-            })
-        },
-        addCaiChan(){ // 添加财产
-          this.getQiTaCaiChanMsg()
-        },
-        userDeleteSelectAnswerAction (e,index) { // 删除子女或者房产等信息
-          this.$confirm('是否删除该选项？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-              userDeleteSelectAnswer({
-                qpid: e,
-                quid: localStorage.getItem('quid'),
-                fornum: index+1
-              }).then((data)=>{
-                if(e==518){
-                  this.getZiNv()  // 查询子女模块数据
-                }else if(e==521){
-                  this.getFangChan() // 查询房产模块数据
-                }else if(e==637){
-                  this.getCunKuan()  // 查询存款模块数据
-                }else if(e==522){
-                  this.getCar()   // 查询车子模块数据
-                }else if(e==523){
-                  this.getLiCai()  // 查询理财模块数据
-                }else if(e==636){
-                  this.getJiaDian()  // 查询家具家电模块数据
-                }else if(e==524){
-                  this.getBaoXian() // 查询保险模块数据
-                }else if(e==655){
-                  this.getZhaiQuan()  // 查询债权模块数据
-                }else if(e==656){
-                  this.getZhaiWu()  // 查询债务模块数据
-                }
-                this.$message({
-                  message: '删除成功',
-                  type: 'success',
-                  duration: 1000
-                });
-              }).catch((data)=>{
-                this.$message.error('删除失败，请联系管理员');
-              })
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            });
-          });
-        },
-
-        GoComplatePage () {
-         let mokuai = this.mokuai
-         for(var i =0;i<mokuai.length;i++){
-           localStorage.setItem('qpid', mokuai[i].num)
-           demoYanZheng({
-             qpid: mokuai[i].num
-           }).then((data)=>{
-             if(data.data.status_code == 330){
-               this.missMsgBox = true
-               this.missMsg = data.data.data
-               this.flag = false
-             }else{
-               this.flag = true;
-               this.IsShow = true;
-             }
-           }).catch((data)=>{
-           })
-         }
-         // if(this.flag==true){
-         //   this.IsShow = true;
-         // }
-        },
-        quxiao (){
-          this.IsShow = false;
-          this.flag = false
-        },
-        complate () {
-          this.GetOutPutWord();  // 请求是否能获取到
-        },
-        stepClick (val) {
-          var _that = this;
-          _that.active = val;
-          localStorage.setItem('active',val)
-        },
-        prev () {
-          --this.active;
-          if(this.active < 0 ) this.active = 0;
-        },
-        next () {
-          localStorage.setItem('active',this.active)
-          if(this.mokuai[this.active].title == '基本信息'){
-            localStorage.setItem('qpid', 595)
-            demoYanZheng({
-              qpid: 595
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                this.$notify({
-                  title: '保存成功',
-                  message: '基本信息模块已成功保存',
-                  type: 'success'
-                });
-                if (this.active++ >this.mokuai.length-1);
-              }
-            }).catch((data)=>{
-            })
-          }else if(this.mokuai[this.active].title == '婚姻状况'){
-            localStorage.setItem('qpid', 596)
-            demoYanZheng({
-              qpid: 596
-            }).then((data)=>{
-              if(data.data.status_code == 330){
-                this.missMsgBox = true
-                this.missMsg = data.data.data
-              }else{
-                this.$notify({
-                  title: '保存成功',
-                  message: '婚姻状况信息已成功保存',
-                  type: 'success'
-                });
-                if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-              }
-            }).catch((data)=>{
-            })
-          }else if(this.mokuai[this.active].title == '子女状况'){
-            localStorage.setItem('qpid', 518)
-            if(this.aa.ZiNv !== undefined){
-              demoYanZheng({
-                qpid: 518
-              }).then((data)=>{
-                console.log(data.data)
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '子女状况模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '房产'){
-            localStorage.setItem('qpid', 521)
-            if(this.aa.FangChan !== undefined){
-              demoYanZheng({
-                qpid: 521
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '房产信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '存款'){
-            localStorage.setItem('qpid', 637)
-            if(this.aa.CunKuan !== undefined){
-              demoYanZheng({
-                qpid: 637
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '存款信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '车子'){
-            localStorage.setItem('qpid', 522)
-            if(this.aa.Car !== undefined){
-              demoYanZheng({
-                qpid: 522
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '车辆信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '理财'){
-            localStorage.setItem('qpid', 523)
-            if(this.aa.LiCai !== undefined){
-              demoYanZheng({
-                qpid: 523
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '理财信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '家具家电'){
-            localStorage.setItem('qpid', 636)
-            if(this.aa.JiaDian !== undefined){
-              demoYanZheng({
-                qpid: 636
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '家具家电模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '保险'){
-            localStorage.setItem('qpid', 524)
-            if(this.aa.BaoXian !== undefined){
-              demoYanZheng({
-                qpid: 524
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '保险信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '其他财产'){
-            localStorage.setItem('qpid', 332)
-            if(this.aa.ZhaiQuan !== undefined){
-              demoYanZheng({
-                qpid: 332
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '其他财产已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '债权'){
-            localStorage.setItem('qpid', 655)
-            if(this.aa.ZhaiQuan !== undefined){
-              demoYanZheng({
-                qpid: 655
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '债权信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }else if(this.mokuai[this.active].title == '债务'){
-            localStorage.setItem('qpid', 656)
-            if(this.aa.ZhaiQuan !== undefined){
-              demoYanZheng({
-                qpid: 656
-              }).then((data)=>{
-                if(data.data.status_code == 330){
-                  this.missMsgBox = true
-                  this.missMsg = data.data.data
-                }else{
-                  this.$notify({
-                    title: '保存成功',
-                    message: '债务信息模块已成功保存',
-                    type: 'success'
-                  });
-                  if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-                }
-              }).catch((data)=>{
-              })
-            }else{
-              if (this.active++ >this.mokuai.length-1) this.$router.replace("/ShengChengXieYi");
-            }
-          }
-        },
-        closeMissMsgBox () {   // 关闭未填写项弹窗
-          this.missMsgBox = false
-          this.flag=false
-        },
-        GetOutPutWord () {   // 获取离婚协议书未填写项
-          outPutWord().then((data)=>{
-            this.status_code = data.data.status_code
-            if(this.status_code == 330 ){
-                this.missField = data.data.data
-                this.IsShow = false;
-            }else if(this.status_code == 200){
-                this.$router.replace("/ShengChengXieYi");
-                this.missAlert = false
-            }
-          }).catch((data)=>{
-          })
-        },
-        errorAlert(e) {
-          this.$message.error(e);
-        },
-        canceldialogSaveWenJuan(){   // 取消保存按钮
-          this.dialogSavedWenJuan = false;
-          this.$router.replace("/UserSystem");
-        },
-        dialogSaveWenJuanOk(){  // 点击保存确定按钮保存
-          userUpdateQuestionnaire({
-            status: 1,
-            title: this.userWenJuan.title,
-            exemption: 1,
-            complete: 2
-          }).then((data)=>{
-            this.userWenJuan.title = '';
-            this.dialogSavedWenJuan = false;
-            this.$router.replace("/UserSystem");
-          }).catch((data)=>{
-
-          })
-        },
-        returnUserList(){  // 返回协议列表
-          this.dialogSavedWenJuan = true;
-        }
+      ],
+      caichanNavList: [
+        {title: '房产', id: 3},
+        {title: '车辆', id: 4},
+        {title: '存款', id: 5},
+        {title: '理财', id: 6},
+        {title: '公积金', id: 7},
+        {title: '保险', id: 8},
+        {title: '股权（股份）', id: 9},
+        {title: '股票账户', id: 10},
+        {title: '家具家电', id: 11},
+        {title: '珠宝首饰收藏品', id: 12},
+        {title: '债券', id: 13},
+        {title: '店铺', id: 14},
+        {title: '宅基地房屋', id: 15},
+        {title: '其他', id: 16}
+      ],
+      zhaiquanNavList: [
+        {title: '债权', id: 17},
+        {title: '债务', id: 18},
+        {title: '其他', id: 19}
+      ],
+      active: 0,
+      fullscreenLoading: false, // 加载框
+      nextLoading: false, // 下一步按钮加载状态
+      prevLoading: false,  // 上一步按钮加载状态
+      options: regionData, // 省市联动
+      missMsgBox: false, // 错误信息默认不显示
+      missMsg: [], // 验证的时候漏填项
+      missAlert: true, // 尚未填写的信息弹框
+      status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
+      missField: [], // 未填写项目
+      flag: false, // 生成协议弹窗是否出现开关
+      rules: {
+        IdCard: [
+          { min: 17, max: 18, message: '身份证位数不对', trigger: 'blur' }
+        ]
       }
     }
+  },
+  name: 'WenJuan2',
+
+  beforeMount () {
+    this.getBasicInformation() // 查询双方基本信息模块数据
+    this.getHunYinStatus() // 查询婚姻状况模块数据
+    this.getZiNvMsg() // 查询子女模块数据
+    this.getFangChanMsg() // 查询房产模块数据
+    this.getCarMsg() // 查询车辆模块数据
+    this.getCunKuanMsg() // 查询存款模块数据
+    this.getLiCaiMsg() // 查询理财模块数据
+    this.getGongJiJinMsg()
+    this.getBaoXianMsg() // 查询保险模块数据
+    this.getGuQuanGuFenMsg()
+    this.getGuPiaoZhangHuMsg()
+    this.getJiaDianMsg() // 查询家具家电模块数据
+    this.getZhuBaoShouShiMsg()
+    this.getZhaiJuanMsg()
+    this.getDianPuMsg()
+    this.getZhaiJiDiMsg()
+    this.getQiTaMsg()
+    this.getZhaiQuanMsg() // 查询债权模块数据
+    this.getZhaiWuMsg() // 查询债务模块数据
+    this.getQiTaZhaiQuanMsg() // 查询其他财产
+    this.getTeShuYueDingMsg()
+  },
+  mounted () {
+
+  },
+  methods: {
+
+    getBasicInformation () { // 查询双方基本信息模块数据
+      returnQuestionnaireJson({'qpid': 595}).then((data) => { // 查询双方基本信息模块数据
+        this.aa.BasicInformation = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getHunYinStatus () { // 查询婚姻状况模块数据
+      returnQuestionnaireJson({'qpid': 596}).then((data) => { // 查询婚姻状况模块数据
+        this.aa.HunYinStatus = data.data.data
+        let cityAnswer = JSON.parse(this.aa.HunYinStatus[0][0].questions[1].answer)
+        this.aa.HunYinStatus[0][0].questions[1].answer = [TextToCode[cityAnswer[0]].code, TextToCode[cityAnswer[0]][cityAnswer[1]].code, TextToCode[cityAnswer[0]][cityAnswer[1]][cityAnswer[2]].code]
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getZiNvMsg () { // 查询子女模块数据
+      returnQuestionnaireJson({'qpid': 3859}).then((data) => { // 查询子女模块数据
+        this.aa.ZiNv = data.data.data
+        this.mokuai.sort(this.compare('id'))
+        // console.log(this.aa.ZiNv[0][1].questions[7].childQuestion[1][2].answer)
+        for (let i = 0; i < this.aa.ZiNv.length; i++) {
+          if (this.aa.ZiNv[i][1].questions[0].answer === 1) {
+            this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[7].childQuestion[1][2].answer)
+            this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[8].childQuestion[2][0].answer)
+          } else if (this.aa.ZiNv[i][1].questions[1].answer === 2) {
+            this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[14].childQuestion[1][2].answer)
+            this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[15].childQuestion[2][0].answer)
+          } if (this.aa.ZiNv[i][1].questions[1].answer === 2) {
+            this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][0].answer)
+            this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[2][1].answer)
+          } else if (this.aa.ZiNv[i][1].questions[1].answer === 3) {
+            this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][0].answer)
+            this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer = JSON.parse(this.aa.ZiNv[i][1].questions[1].childQuestion[3][1].answer)
+          }
+          this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[21].childQuestion[1][2].answer)
+          this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[22].childQuestion[2][0].answer)
+          this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer = JSON.parse(this.aa.ZiNv[i][1].questions[28].childQuestion[1][2].answer)
+          this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer = JSON.parse(this.aa.ZiNv[i][1].questions[29].childQuestion[2][0].answer)
+        }
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getFangChanMsg () { // 查询房产模块数据
+      returnQuestionnaireJson({'qpid': 521}).then((data) => { // 查询房产模块数据
+        this.aa.FangChan = data.data.data
+        for (let i = 0; i < this.aa.FangChan.length; i++) {
+          this.aa.FangChan[i][0].questions[2].answer = JSON.parse(this.aa.FangChan[i][0].questions[2].answer)
+        }
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getCarMsg () { // 查询车辆模块数据
+      returnQuestionnaireJson({'qpid': 522}).then((data) => { // 查询车辆模块数据
+        this.aa.Car = data.data.data
+        for (let i = 0; i < this.aa.Car.length; i++) {
+          this.aa.Car[i][0].questions[2].answer = JSON.parse(this.aa.Car[i][0].questions[2].answer)
+        }
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getCunKuanMsg () { // 查询存款模块数据
+      returnQuestionnaireJson({'qpid': 637}).then((data) => { // 查询存款模块数据
+        this.aa.CunKuan = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getLiCaiMsg () { // 查询理财模块数据
+      returnQuestionnaireJson({'qpid': 523}).then((data) => { // 查询理财模块数据
+        this.aa.LiCai = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getGongJiJinMsg () { // 查询公积金模块数据
+      returnQuestionnaireJson({'qpid': 3614}).then((data) => { // 查询公积金模块数据
+        this.aa.GongJiJin = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getBaoXianMsg () { // 查询保险模块数据
+      returnQuestionnaireJson({'qpid': 524}).then((data) => { // 查询保险模块数据
+        this.aa.BaoXian = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+
+      })
+    },
+    getGuQuanGuFenMsg () { // 查询股权（股份）
+      returnQuestionnaireJson({'qpid': 3636}).then((data) => { // 查询股权（股份）模块数据
+        this.aa.GuQuanGuFen = data.data.data
+        this.fullscreenLoading = false
+        // for (let i = 0; i < this.aa.QiTaCaiChan.length; i++) {
+        //   if (this.aa.QiTaCaiChan[i][0].questions[0].answer === 1 || this.aa.QiTaCaiChan[i][0].questions[0].answer == '') {
+        //     this.aa.QiTaCaiChan[i][0].questions[0].answer = []
+        //   } else {
+        //     this.aa.QiTaCaiChan[i][0].questions[0].answer = JSON.parse(this.aa.QiTaCaiChan[i][0].questions[0].answer)
+        //   }
+        // }
+      }).catch((data) => {
+
+      })
+    },
+    getGuPiaoZhangHuMsg () { // 查询股票账户
+      returnQuestionnaireJson({'qpid': 3637}).then((data) => { // 查询股票账户模块数据
+        this.aa.GuPiaoZhangHu = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getJiaDianMsg () { // 查询家具家电
+      returnQuestionnaireJson({'qpid': 636}).then((data) => { // 查询家具家电模块数据
+        this.aa.JiaDian = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getZhuBaoShouShiMsg () { // 查询珠宝首饰收藏品
+      returnQuestionnaireJson({'qpid': 3638}).then((data) => { // 查询珠宝首饰收藏品模块数据
+        this.aa.ZhuBaoShouShi = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getZhaiJuanMsg () { // 查询债券
+      returnQuestionnaireJson({'qpid': 3639}).then((data) => { // 查询债券模块数据
+        this.aa.ZhaiJuan = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getDianPuMsg () { // 查询店铺
+      returnQuestionnaireJson({'qpid': 3640}).then((data) => { // 查询店铺模块数据
+        this.aa.DianPu = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getZhaiJiDiMsg () { // 查询宅基地房屋
+      returnQuestionnaireJson({'qpid': 3641}).then((data) => { // 查询宅基地房屋模块数据
+        this.aa.ZhaiJiDi = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getQiTaMsg () { // 查询其他
+      returnQuestionnaireJson({'qpid': 3642}).then((data) => { // 查询其他模块数据
+        this.aa.QiTa = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getZhaiQuanMsg () { // 查询债权模块数据
+      returnQuestionnaireJson({'qpid': 655}).then((data) => { // 查询债权模块数据
+        this.aa.ZhaiQuan = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getZhaiWuMsg () { // 查询债务模块数据
+      returnQuestionnaireJson({'qpid': 656}).then((data) => { // 查询债务模块数据
+        this.aa.ZhaiWu = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getQiTaZhaiQuanMsg () { // 查询其他债权债务模块数据
+      returnQuestionnaireJson({'qpid': 3855}).then((data) => { // 查询其他债权债务模块数据
+        this.aa.QiTaZhaiQuan = data.data.data
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+    getTeShuYueDingMsg () { // 查询特殊约定模块数据
+      returnQuestionnaireJson({'qpid': 332}).then((data) => { // 查询特殊约定模块数据
+        this.aa.TeShuYueDing = data.data.data
+        if (this.aa.TeShuYueDing[0][0].questions[0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer)
+        }
+        this.fullscreenLoading = false
+      }).catch((data) => {
+      })
+    },
+
+    compare (property) {
+      return function (a, b) {
+        let value1 = a[property]
+        let value2 = b[property]
+        return value1 - value2
+      }
+    },
+
+    userAddSelectAnswerAction (e) { // 添加子女或者房产等
+      this.$message({
+        message: '添加中请稍后……',
+        duration: 1000
+      })
+      userAddSelectAnswer({
+        qpid: e,
+        quid: localStorage.getItem('quid')
+      }).then((data) => {
+        if (data.data.status_code === 200) {
+          if (e === 3859) {
+            this.getZiNvMsg() // 查询子女模块数据
+          } else if (e === 521) {
+            this.getFangChanMsg() // 查询房产模块数据
+          } else if (e === 522) {
+            this.getCarMsg() // 查询车辆模块数据
+          } else if (e === 637) {
+            this.getCunKuanMsg() // 查询存款模块数据
+          } else if (e === 523) {
+            this.getLiCaiMsg() // 查询理财模块数据
+          } else if (e === 3614) {
+            this.getGongJiJinMsg() // 查询公积金模块数据
+          } else if (e === 524) {
+            this.getBaoXian() // 查询保险模块数据
+          } else if (e === 3636) {
+            this.getGuQuanGuFenMsg() // 查询股权股份模块数据
+          } else if (e === 3637) {
+            this.getGuPiaoZhangHuMsg() // 查询股票账户模块数据
+          } else if (e === 636) {
+            this.getJiaDianMsg() // 查询家具家电模块数据
+          } else if (e === 3638) {
+            this.getZhuBaoShouShiMsg() // 查询珠宝首饰收藏品模块数据
+          } else if (e === 3639) {
+            this.getZhaiJuanMsg() // 查询债券模块数据
+          } else if (e === 3640) {
+            this.getDianPuMsg() // 查询店铺模块数据
+          } else if (e === 3641) {
+            this.getZhaiJiDiMsg() // 查询宅基地房屋模块数据
+          } else if (e === 3642) {
+            this.getQiTaMsg() // 查询其他模块数据
+          } else if (e === 655) {
+            this.getZhaiQuanMsg() // 查询债权模块数据
+          } else if (e === 656) {
+            this.getZhaiWuMsg() // 查询债务模块数据
+          } else if (e === 3855) {
+            this.getQiTaZhaiQuanMsg() // 查询其他债权债务模块数据
+          }
+          this.$message({
+            message: '添加成功',
+            type: 'success'
+          })
+        }
+      }).catch((data) => {
+        this.$message.error('添加失败，请联系管理员')
+      })
+    },
+    userDeleteSelectAnswerAction (e, index) { // 删除子女或者房产等信息
+      this.$confirm('是否删除该选项？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        // this.fullscreenLoading = true
+        userDeleteSelectAnswer({
+          qpid: e,
+          quid: localStorage.getItem('quid'),
+          fornum: index + 1
+        }).then((data) => {
+          if (e === 3859) {
+            this.getZiNvMsg() // 查询子女模块数据
+          } else if (e === 521) {
+            this.getFangChanMsg() // 查询房产模块数据
+          } else if (e === 522) {
+            this.getCarMsg() // 查询车辆模块数据
+          } else if (e === 637) {
+            this.getCunKuanMsg() // 查询存款模块数据
+          } else if (e === 523) {
+            this.getLiCaiMsg() // 查询理财模块数据
+          } else if (e === 3614) {
+            this.getGongJiJinMsg() // 查询公积金模块数据
+          } else if (e === 524) {
+            this.getBaoXian() // 查询保险模块数据
+          } else if (e === 3636) {
+            this.getGuQuanGuFenMsg() // 查询股权股份模块数据
+          } else if (e === 3637) {
+            this.getGuPiaoZhangHuMsg() // 查询股票账户模块数据
+          } else if (e === 636) {
+            this.getJiaDianMsg() // 查询家具家电模块数据
+          } else if (e === 3638) {
+            this.getZhuBaoShouShiMsg() // 查询珠宝首饰收藏品模块数据
+          } else if (e === 3639) {
+            this.getZhaiJuanMsg() // 查询债券模块数据
+          } else if (e === 3640) {
+            this.getDianPuMsg() // 查询店铺模块数据
+          } else if (e === 3641) {
+            this.getZhaiJiDiMsg() // 查询宅基地房屋模块数据
+          } else if (e === 3642) {
+            this.getQiTaMsg() // 查询其他模块数据
+          } else if (e === 655) {
+            this.getZhaiQuanMsg() // 查询债权模块数据
+          } else if (e === 656) {
+            this.getZhaiWuMsg() // 查询债务模块数据
+          } else if (e === 3855) {
+            this.getQiTaZhaiQuanMsg() // 查询其他债权债务模块数据
+          }
+          this.$message({
+            message: '删除成功',
+            type: 'success',
+            duration: 1000
+          })
+        }).catch((data) => {
+          this.$message.error('删除失败，请联系管理员')
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    stepClick (item, index) {
+      this.ins = index
+      var _that = this
+      this.caichanNav = false
+      this.zhaiquanNav = false
+      if (item.id < 3) {
+        _that.active = item.id
+      } else if (item.id === 3) {
+        _that.active = 3
+        _that.CaiIns = 3
+        this.caichanNav = true
+      } else if (item.id === 4) {
+        _that.active = 17
+        _that.zhaiIns = 16
+        this.zhaiquanNav = true
+      } else if (item.id === 5) {
+        _that.active = 20
+      }
+      localStorage.setItem('active', _that.active)
+    },
+    caichanNavBtn (index) {
+      var _that = this
+      _that.CaiIns = 3
+      _that.CaiIns = _that.CaiIns + index
+      _that.active = index + 3
+      localStorage.setItem('active', _that.active)
+    },
+    zhaiquanNavBtn (index) {
+      var _that = this
+      _that.zhaiIns = 16
+
+      _that.zhaiIns = _that.zhaiIns + index
+      _that.active = index + 17
+      localStorage.setItem('active', _that.active)
+    },
+    prev () {
+      this.prevLoading = true
+      let mokuai = this.mokuai
+      for (var i = 0; i < mokuai.length; i++) {
+        if (this.mokuai[this.active].title === mokuai[i].title) {
+          localStorage.setItem('qpid', mokuai[i].num)
+          demoYanZheng({
+            qpid: mokuai[i].num
+          }).then((data) => {
+            if (data.data.status_code === 330) {
+              this.missMsgBox = true
+              this.missMsg = data.data.data
+              this.fullscreenLoading = false
+            } else {
+              this.fullscreenLoading = false
+              this.caichanNav = false
+              this.zhaiquanNav = false
+              this.prevLoading = false
+              if (this.ins < 3) {
+                --this.ins
+                --this.active
+                var _that = this
+                localStorage.setItem('active', _that.active)
+              } else if (this.ins === 3) {
+                // this.active = 3
+                --this.active
+                var _that = this
+                if (_that.CaiIns > 3) {
+                  --_that.CaiIns
+                  this.caichanNav = true
+                } else if (_that.CaiIns ===3) {
+                  --this.ins
+                  this.caichanNav = false
+                }
+                localStorage.setItem('active', this.active)
+              } else if (this.ins === 4) {
+                --this.active
+                var _that = this
+                if (_that.zhaiIns > 16) {
+                 --_that.zhaiIns
+                 this.zhaiquanNav = true
+                } else if (_that.zhaiIns ===16) {
+                  this.CaiIns = 16
+                  --this.ins
+                  this.zhaiquanNav = false
+                }
+                localStorage.setItem('active', this.active)
+              } else if (this.ins ===5 ){
+                --this.ins
+                this.active = 19
+                this.zhaiIns = 18
+                this.zhaiquanNav = true
+              }
+
+              this.$notify({
+                title: '保存成功',
+                message: mokuai[i].title + '模块已成功保存',
+                type: 'success'
+              })
+            }
+          }).catch((data) => {
+          })
+        }
+      }
+      if (this.active < 0) this.active = 0
+    },
+    next () {
+      this.nextLoading = true
+      let mokuai = this.mokuai
+      for (var i = 0; i < mokuai.length; i++) {
+        if (this.mokuai[this.active].title === mokuai[i].title) {
+          localStorage.setItem('qpid', mokuai[i].num)
+          demoYanZheng({
+            qpid: mokuai[i].num
+          }).then((data) => {
+            if (data.data.status_code === 330) {
+              this.missMsgBox = true
+              this.missMsg = data.data.data
+              this.fullscreenLoading = false
+            } else {
+              this.fullscreenLoading = false
+              this.caichanNav = false
+              this.zhaiquanNav = false
+              this.nextLoading = false
+              if (this.ins < 3) {
+                this.ins++
+                this.active++
+                var _that = this
+                localStorage.setItem('active', _that.active)
+              } else if (this.ins === 3) {
+                // this.active = 3
+                this.active++
+                var _that = this
+                if (_that.CaiIns < 17) {
+                  _that.CaiIns++
+                }
+                this.caichanNav = true
+                this.zhaiIns = 16
+                localStorage.setItem('active', this.active)
+              } else if (this.ins === 4) {
+                this.active++
+                var _that = this
+                console.log(_that.zhaiIns)
+                if (_that.zhaiIns < 20) {
+                  _that.zhaiIns++
+                }
+                this.zhaiquanNav = true
+                localStorage.setItem('active', this.active)
+              }
+              if (this.active === 17) {
+                this.caichanNav = false
+                this.zhaiquanNav = true
+                this.ins = 4
+              } else if (this.active === 20) {
+                this.ins = 5
+                this.zhaiquanNav = false
+              }
+              this.$notify({
+                title: '保存成功',
+                message: mokuai[i].title + '模块已成功保存',
+                type: 'success'
+              })
+              if (this.active++ > this.mokuai.length - 1) this.$router.replace('/ShengChengXieYi')
+            }
+          }).catch((data) => {
+          })
+        }
+      }
+    },
+    closeMissMsgBox () { // 关闭未填写项弹窗
+      this.missMsgBox = false
+      this.flag = false
+      this.a = []
+      this.nextLoading = false
+      this.prevLoading = false
+    },
+    GoComplatePage () { // 点击生成协议按钮
+      this.a = []
+      this.IsShow = true
+      let mokuai = this.mokuai
+      for (var i = 0; i < mokuai.length; i++) {
+        localStorage.setItem('qpid', mokuai[i].num)
+        demoYanZheng({
+          qpid: mokuai[i].num
+        }).then((data) => {
+          this.a.push(data.data.status_code)
+          if (data.data.status_code === 330) {
+            this.missMsg = data.data.data
+            this.flag = false
+          }
+        }).catch((data) => {
+        })
+      }
+    },
+    quxiao () {
+      this.IsShow = false
+      this.flag = false
+    },
+    complate () { // 点击生成协议确定按钮
+      this.fullscreenLoading = true
+      setTimeout(() => {
+        var dd = this.a
+        if (dd.indexOf(330) > -1 ) {
+          this.IsShow = false
+          this.missMsgBox = true
+          this.a = []
+          this.fullscreenLoading = false
+        } else {
+          this.GetOutPutWord() // 请求是否能获取到
+        }
+      }, 3000)
+    },
+    GetOutPutWord () {  // 生成离婚协议书
+      outPutWord().then((data) => {
+        this.status_code = data.data.status_code
+        if (this.status_code === 330) {
+          this.missField = data.data.data
+          this.IsShow = false
+        } else if (this.status_code === 200) {
+          this.fullscreenLoading = false
+          this.$router.replace('/ShengChengXieYi')
+          this.missAlert = false
+        }
+      }).catch((data) => {
+      })
+    },
+    errorAlert (e) { // 错误提醒
+      this.$message.error(e)
+    },
+    canceldialogSaveWenJuan () { // 取消保存按钮
+      this.dialogSavedWenJuan = false
+    },
+    dialogSaveWenJuanOk () { // 点击保存确定按钮保存
+      userUpdateQuestionnaire({
+        status: 1,
+        title: this.userWenJuan.title,
+        exemption: 1,
+        complete: 2
+      }).then((data) => {
+        this.userWenJuan.title = ''
+        this.dialogSavedWenJuan = false
+        this.$router.replace('/UserSystem')
+      }).catch((data) => {
+
+      })
+    },
+    returnUserList () { // 返回协议列表
+      this.$confirm('请确认已经保存该文书', '提示', {
+        confirmButtonText: '确定已保存，返回列表',
+        cancelButtonText: '取消返回',
+        type: 'warning'
+      }).then(() => {
+        this.$router.replace('/UserSystem')
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消'
+        })
+      })
+    },
+    saveWenShu () { // 保存文书
+      this.dialogSavedWenJuan = true
+    }
+  }
+}
 </script>
 <style>
 html{height: 100%;background-color: #f7fafc;}
+.el-loading-spinner{left:50% !important}
+#tab-0,#tab-1,#tab-2,#tab-3,#tab-4,#tab-5,#tab-6,#tab-7,#tab-8{font-size: 16px;}
+#tab-8{padding-bottom: 80px;}
+#tab-9{border-top: 1px solid #d2d2d2;}
+.othercai{position: absolute;top: 360px;right: 38px;width: 96px;height: 30px;line-height: 30px;font-weight: bold;font-size: 16px;color: #303133;}
+.othercai img{position: absolute;top:6px;right:-2px;}
+.navUl{width: 1024px;margin:0 auto;}
+.navUl li{width: 150px;position: relative;color:#b7baba;}
+.divider-line{position: absolute;height: 2px;background-color: #C0C4CC;top:21px;left:86px;width: 150px;}
+.navUl li:last-of-type .divider-line{display: none;}
+.navUl li.active{color: #2c3e50;}
+.insNum{width: 24px;height: 24px;line-height: 24px;text-align: center;font-size: 14px;border-radius: 50%;border:2px solid #C0C4CC;color:#C0C4CC;margin:10px auto;display: block;font-weight: bold;background: #fff;}
+.active .insNum{color:#2c3e50;border:2px solid #2c3e50;}
+html{height: 100%;background-color: #f7fafc;}
+.allmin{width: 1024px;margin:0 auto;}
+.caichanul{position: absolute; top:0;right: 0px; text-align: left;}
+.caichanul li{height: 40px;line-height: 40px;padding-left: 20px;}
+.caichanul li:nth-of-type(10){margin-top:35px}
+.caichanul li.active{color:#0055AA;border-left: 1px solid #0055AA;}
 .min{width:600px;margin:0 auto;}
 .ban{width:100% !important;}
 .returnUserList{top:110px;right: 20px;}
