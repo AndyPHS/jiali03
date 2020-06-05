@@ -20,6 +20,9 @@ const MyConsult = () => import('@/components/LiHun/Ad/MyConsult')  // 我的离�
 const CustomAgreement = () => import('@/components/LiHun/Ad/CustomAgreement')  // 推广页定制我的离婚协议书
 const AgreementHelp = () => import('@/components/LiHun/Ad/AgreementHelp')  // 推广页定制我的离婚协议书帮助
 const AgreementUser = () => import('@/components/LiHun/Ad/AgreementUser')  // 推广页定制我的离婚协议书帮助
+const Knowledge = () => import('@/components/LiHun/Ad/Knowledge') // 知识列表页面
+const KnowledgeCon = () => import('@/components/LiHun/Ad/KnowledgeCon') // 知识详情页面
+
 const ZuHeManagement = () => import('@/components/LiHun/ZuHeManagement')         // 组合管理页面
 const LabelManagement = () => import('@/components/LiHun/LabelManagement')         // 标签管理页面
 const DisplayRule = () => import('@/components/LiHun/DisplayRule')        // 显示规则修改页面
@@ -121,7 +124,11 @@ export default new Router({
     {path: '/AgreementHelp', name: 'AgreementHelp', component: AgreementHelp},
     // 离婚协议书推广定制协议书用户页面
     {path: '/AgreementUser', name: 'AgreementUser', component: AgreementUser},
-    
+    // 离婚协议书推广知识列表页面
+    {path: '/Knowledge', name: 'Knowledge', component: Knowledge},
+    // 离婚协议书推广知识详情页面
+    {path: '/KnowledgeCon', name: 'KnowledgeCon', component: KnowledgeCon},
+
     // 标签管理
     {path: '/LabelManagement', name: 'LabelManagement', component: LabelManagement},
     // 显示规则页面

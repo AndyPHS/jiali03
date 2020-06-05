@@ -9,7 +9,7 @@
       <div class="flex justify-between items-center">
         <ul class="nav flex justify-around items-center">
           <li><router-link to="Home">首页</router-link></li>
-          <li>离婚知识</li>
+          <li><router-link to="Knowledge">离婚知识</router-link></li>
           <li><router-link to="MyConsult">定制我的离婚协议书</router-link></li>
           <li>家理律所官网</li>
         </ul>
