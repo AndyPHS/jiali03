@@ -16,14 +16,13 @@
             label="选择分类"
 
           >
-            <el-select v-model="selectFenLei" @change="getFenLeiList()" placeholder="请选择">
-              <el-option
-                v-for="item in fenleiAll"
-                :key="item.id"
-                :label="item.title"
-                :value="item.id">
-              </el-option>
-            </el-select>
+            <el-cascader
+              v-model="selectFenLei"
+              @change="getFenLeiList()"
+              clearable
+              :options="fenleiAll"
+              :props="SetKesDept"
+            ></el-cascader>
           </el-form-item>
         </el-form>
       </div>
@@ -67,131 +66,142 @@
 import {selectAction} from '@/api/api/AgreementRequest.js' // 查询文章类型
 import {deleteNews} from '@/api/api/AgreementRequest.js' // 删除文章
 import {recoveryNews} from '@/api/api/AgreementRequest.js' // 恢复文章
-import {selectNews} from '@/api/api/AgreementRequest.js'  // 查询文章
-import {selectFaIDNews} from '@/api/api/AgreementRequest.js'  // 通过分类查询文章
- export default{
-   name: 'Article',
-   data() {
-     return {
-       activeIndex: '1',
-       tableData: [],
-       status: 1,
-       fenleiAll: [],  // 全部分类
-       selectFenLei: null, // 已选分类
-       fullscreenLoading: false // 加载图标
-     }
-   },
-   mounted () {
-     this.getFenlei()
-     this.getFenLeiList()
-   },
-   methods: {
-     getFenlei () { // 查询分类汇总
-       selectAction().then((data) => {
-         this.fenleiAll = data.data;
-       })
-     },
-     goBackList () { // 返回文章列表
-       this.status = 1;
-       this.getFenLeiList()
-     },
-     getFenLeiList () {  // 查询总文章
-       this.fullscreenLoading = true;
-       if(this.selectFenLei != null){
-         selectFaIDNews({
-           status: 1,
-           faID: this.selectFenLei
-         }).then((data) => {
-           this.tableData = data.data.data;
-           this.fullscreenLoading = false;
-           this.selectFenLei = null
-         })
-       }else{
-         selectNews({
-           status: 1
-         }).then((data) => {
-           this.tableData = data.data.data;
-           this.fullscreenLoading = false;
-         })
-       }
-     },
-     deleteAction () { // 点击回收站按钮
-       this.fullscreenLoading = true;
-       this.tableData = []
-       this.status = 9;
-       if(this.selectFenLei != null){
-         selectFaIDNews({
-           status: 9,
-           faID: this.selectFenLei
-         }).then((data) => {
-           this.fullscreenLoading = false;
-           this.tableData = data.data.data;
-           this.selectFenLei = null
-         })
-       }else{
-         selectNews({
-           status: 9
-         }).then((data) => {
-           this.fullscreenLoading = false;
-           this.tableData = data.data.data;
-         })
-       }
-     },
-     deleteNewsAction (index, rows) { // 删除文章
-       this.$confirm('确认删除此文章?', '提示', {
-         confirmButtonText: '确定',
-         cancelButtonText: '取消',
-         type: 'warning'
-       }).then(() => {
-         deleteNews({
-           id: rows.id
-         }).then((data)=> {
-           this.tableData.splice(index, 1)
-           this.$message({
-             type: 'success',
-             message: '删除成功!'
-           });
-         })
-       }).catch(() => {
-         this.$message({
-           type: 'info',
-           message: '已取消删除'
-         })
-       })
-     },
-     updateNewsAction (index, rows) { // 更新文章
-       this.$router.push({
-         path: '/ArticleUpload',
-         name: 'ArticleUpload',
-         params: {
-           rows: rows.id
-         }
-       })
-     },
-     reviewAction (index, rows) {  // 恢复文章
-       this.$confirm('确认恢复此文章?', '提示', {
-         confirmButtonText: '确定',
-         cancelButtonText: '取消',
-         type: 'warning'
-       }).then(() => {
-         recoveryNews({
-           id: rows.id
-         }).then((data)=> {
-           this.tableData.splice(index, 1)
-           this.$message({
-             type: 'success',
-             message: '恢复成功!'
-           });
-         })
-       }).catch(() => {
-         this.$message({
-           type: 'info',
-           message: '取消恢复'
-         })
-       })
-     }
-   }
- }
+import {selectNews} from '@/api/api/AgreementRequest.js' // 查询文章
+import {selectFaIDNews} from '@/api/api/AgreementRequest.js' // 通过分类查询文章
+export default{
+  name: 'Article',
+  data () {
+    return {
+      SetKesDept: { // 自定义  级联选择器value label
+        value: 'id',
+        label: 'title',
+        children: 'data',
+        checkStrictly: true
+      },
+      activeIndex: '1',
+      tableData: [],
+      status: 1,
+      fenleiAll: [], // 全部分类
+      selectFenLei: null, // 已选分类
+      fullscreenLoading: false // 加载图标
+    }
+  },
+  mounted () {
+    this.getFenlei()
+    this.getFenLeiList()
+  },
+  methods: {
+    getFenlei () { // 查询分类汇总
+      selectAction().then((data) => {
+        this.fenleiAll = data.data
+      })
+    },
+    goBackList () { // 返回文章列表
+      this.status = 1
+      this.getFenLeiList()
+    },
+    getFenLeiList () { // 查询总文章
+      if (this.selectFenLei.length === 2) {
+        this.selectFenLei = this.selectFenLei[1]
+      } else {
+        this.selectFenLei = this.selectFenLei[0]
+      }
+      this.fullscreenLoading = true
+      if (this.selectFenLei != null) {
+        selectFaIDNews({
+          status: 1,
+          faId: this.selectFenLei
+        }).then((data) => {
+          this.tableData = data.data.data
+          this.fullscreenLoading = false
+          this.selectFenLei = null
+        })
+      } else {
+        selectNews({
+          status: 1
+        }).then((data) => {
+          this.tableData = data.data.data
+          this.fullscreenLoading = false
+        })
+      }
+    },
+    deleteAction () { // 点击回收站按钮
+      this.fullscreenLoading = true
+      this.tableData = []
+      this.status = 9
+      if (this.selectFenLei != null) {
+        selectFaIDNews({
+          status: 9,
+          faId: this.selectFenLei
+        }).then((data) => {
+          this.fullscreenLoading = false
+          this.tableData = data.data.data
+          this.selectFenLei = null
+        })
+      } else {
+        selectNews({
+          status: 9
+        }).then((data) => {
+          this.fullscreenLoading = false
+          this.tableData = data.data.data
+        })
+      }
+    },
+    deleteNewsAction (index, rows) { // 删除文章
+      this.$confirm('确认删除此文章?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        deleteNews({
+          id: rows.id
+        }).then((data) => {
+          this.tableData.splice(index, 1)
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    },
+    updateNewsAction (index, rows) { // 更新文章
+      this.$router.push({
+        path: '/ArticleUpload',
+        name: 'ArticleUpload',
+        params: {
+          rows: rows.id
+        }
+      })
+    },
+    reviewAction (index, rows) { // 恢复文章
+      this.$confirm('确认恢复此文章?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        recoveryNews({
+          id: rows.id
+        }).then((data) => {
+          this.tableData.splice(index, 1)
+          this.$message({
+            type: 'success',
+            message: '恢复成功!'
+          })
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消恢复'
+        })
+      })
+    }
+  }
+}
 </script>
 
 <style scoped>
