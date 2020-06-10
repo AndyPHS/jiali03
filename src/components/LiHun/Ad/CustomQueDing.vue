@@ -78,7 +78,7 @@
                 示例六（房产证）：
               </div>
               <div class="shili_img">
-                <img src="@/assets/images/lihun/fangchanzheng01.jpeg" alt="房产证">
+                <img src="@/assets/images/lihun/fangchanzheng01.jpg" alt="房产证">
               </div>
             </div>
             <div class="w-1/2 text-left mb-8 px-4" v-if="this.ChuShiMsg.house">
@@ -110,7 +110,7 @@
                 示例十（机动车行驶证）：
               </div>
               <div class="shili_img">
-                <img src="@/assets/images/lihun/jidongchexingshizheng01.png" alt="机动车行驶证">
+                <img src="@/assets/images/lihun/jidongchexingshizheng01.jpg" alt="机动车行驶证">
               </div>
             </div>
             <div class="w-1/2 text-left mb-8 px-4" v-if="this.ChuShiMsg.baoXian">
@@ -118,7 +118,7 @@
                 示例十一（保险合同）：
               </div>
               <div class="shili_img">
-                <img src="@/assets/images/lihun/baoxian01.png" alt="保险合同">
+                <img src="@/assets/images/lihun/baoxian01.jpg" alt="保险合同">
               </div>
             </div>
 
@@ -127,7 +127,7 @@
                 示例十二（孩子出生证明）：
               </div>
               <div class="shili_img">
-                <img src="@/assets/images/lihun/haizichushengzhengming01.png" alt="孩子出生证明">
+                <img src="@/assets/images/lihun/haizichushengzhengming01.jpg" alt="孩子出生证明">
               </div>
             </div>
           </div>
@@ -139,7 +139,7 @@
 </template>
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
-import {getOnlyValue} from '@/api/api/requestLogin.js'    // 获取单独问题的值
+import {getOnlyValue} from '@/api/api/AgreementRequest.js'    // 获取单独问题的值
 // import {answer} from '@/api/api/requestLogin.js'
 export default {
   name: 'CustomQueDing',

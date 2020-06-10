@@ -263,9 +263,16 @@
                     <el-input v-model="userWenJuan.title" class="w-1/2" autocomplete="off"></el-input>
                   </el-form-item>
                 </el-form>
-                <div slot="footer" class="dialog-footer">
-                  <el-button @click="canceldialogSaveWenJuan">取 消</el-button>
-                  <el-button type="primary" @click="dialogSaveWenJuanOk">保 存</el-button>
+                <div slot="footer" class="dialog-footer tishi_bot pb-3">
+                  <span class="cbt" @click="canceldialogSaveWenJuan">取 消</span>
+                  <span class="cbt re" @click="dialogSaveWenJuanOk">保 存</span>
+                </div>
+              </el-dialog>
+              <el-dialog title="提示" :visible.sync="dialogTiShi" class="tishi">
+                <h2 class="text-red-500 text-xl text-center py-8">确认已经保存该文件</h2>
+                <div slot="footer" class="dialog-footer tishi_bot pb-3">
+                  <span class="cbt" @click="canceldialogTiShi">取消返回</span>
+                  <span class="cbt re" @click="alreadySave">确认已保存，返回列表</span>
                 </div>
               </el-dialog>
               <el-button class="step_btn my-5"  v-if="active < this.mokuai.length && active > 0" @click="prev" :loading="prevLoading">上一步</el-button>
@@ -414,7 +421,8 @@ export default {
         IdCard: [
           { min: 17, max: 18, message: '身份证位数不对', trigger: 'blur' }
         ]
-      }
+      },
+      dialogTiShi: false
     }
   },
   beforeMount () {
@@ -1027,18 +1035,14 @@ export default {
       })
     },
     returnUserList () { // 返回协议列表
-      this.$confirm('请确认已经保存该文书', '提示', {
-        confirmButtonText: '确定已保存，返回列表',
-        cancelButtonText: '取消返回',
-        type: 'warning'
-      }).then(() => {
-        this.$router.replace('/MyConsult')
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消'
-        })
-      })
+      this.dialogTiShi = true
+    },
+    canceldialogTiShi () { // 取消返回
+      this.dialogTiShi = false
+    },
+    alreadySave () { // 确认已保存，返回列表
+      this.dialogTiShi = false
+      this.$router.replace('/MyConsult')
     },
     saveWenShu () { // 保存文书
       this.dialogSavedWenJuan = true
@@ -1099,5 +1103,7 @@ html{height: 100%;background-color: #f7fafc;}
 .el-tooltip__popper.is-dark{background-color: #f7fafc !important;color:#343434 !important; border:1px solid #eae3e3 !important;border-radius: 15px !important;box-shadow: 0px 0px 5px 2px #e6dddd}
 .el-tooltip__popper {width: 200px !important;height: 150px !important;overflow-y: scroll !important;}
 .el-radio{line-height: 30px !important;}
+.tishi_bot{width:502px;margin:0 auto;display: flex;justify-content: space-between;}
+.cbt{width: 218px;height: 38px;line-height: 38px;text-align: center;color: #535353;border:1px solid #535353;font-size: 16px;border-radius: 19px;display: inline-block;}
 .re{border: 1px solid #ff3f68;color: #ff3f68;background-color: #fff;}
 </style>

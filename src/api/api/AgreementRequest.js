@@ -154,3 +154,198 @@ export const selectUser = params => {
     data: params
   });
 };
+// usersSelect查找用户基本信息
+export const usersSelect = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.usersSelect,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查找用户问卷
+export const selectUserQuestionnaire = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectUserQuestionnaire + '?qid=' + params.qid + '&&status=' + params.status,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 用户添加问卷的内容
+export const userAddAnswer = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.userAddAnswer,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+ // 获取单独问题的值
+export const getOnlyValue = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.getOnlyValue,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 重复问题+1 添加子女房产
+export const userAddSelectAnswer = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.userAddSelectAnswer,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 下载离婚协议书
+export const getWord = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.getWord+ localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改用户问卷
+export const userUpdateQuestionnaire = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.userUpdateQuestionnaire + localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 新增副本
+export const copyUserQuestionnaire = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.copyUserQuestionnaire + localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+
+// 后台文章类型
+// 新增文章类型
+export const addAction = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addAction,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除文章类型
+export const deleteAction = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteAction + localStorage.getItem('id'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改文章类型
+export const updateAction = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateAction + localStorage.getItem('id'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查看文章类型
+export const selectAction = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectAction + '1',
+    headers: {Authorization:'bearer ' + localStorage.getItem('token'),"Content-Type":'application/x-www-form-urlencoded; charset=UTF-8'},
+    data: params
+  });
+};
+// 新增文章
+export const addNews = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addNews,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除文章
+export const deleteNews = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteNews + params.id,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 恢复文章
+export const recoveryNews = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.recoveryNews + params.id,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改文章
+export const updateNews = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateNews + localStorage.getItem('articleId'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询文章selectNews
+export const selectNews = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectNews + '?status=' + params.status,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 查询文章内容selectNewsContent
+export const selectNewsContent = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectNewsContent + params.id,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 筛选查找文章
+export const selectFaIDNews = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectNews + '?status=' + params.status + '&faId=' + params.faId,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};

@@ -18,15 +18,21 @@
         <el-form-item label="文章标题" prop="title">
           <el-input v-model="ruleForm.title"></el-input>
         </el-form-item>
-        <el-form-item label="文章分类" prop="faId">
-          <el-select v-model="ruleForm.faId" placeholder="请选择文章分类">
+        <el-form-item label="文章分类">
+          <el-cascader
+            v-model="ruleForm.faId"
+            clearable
+            :options="fenleiAll"
+            :props="SetKesDept"
+          ></el-cascader>
+          <!-- <el-select v-model="ruleForm.faId" placeholder="请选择文章分类">
             <el-option
               v-for="item in fenleiAll"
               :key="item.id"
               :label="item.title"
               :value="item.id">
             </el-option>
-          </el-select>
+          </el-select> -->
         </el-form-item>
         <el-form-item label="文章简介" prop="description">
           <el-input type="textarea" v-model="ruleForm.description"></el-input>
@@ -68,6 +74,12 @@ export default{
   name: 'ArticleUpload',
   data () {
     return {
+      SetKesDept: { //自定义  级联选择器value label
+        value: 'id',
+        label: 'title',
+        children: 'data',
+        checkStrictly: true
+      },
       activeIndex: '1',
       defaultMsg: '',
       config: {
@@ -117,17 +129,19 @@ export default{
       let routerParams = this.$route.params.rows
       // 将数据放在当前组件的数据内
       this.articleId = routerParams
-      localStorage.setItem('articleId',this.articleId)
-      selectNewsContent({
-        id: this.articleId
-      }).then((data) => {
-        this.ruleForm.title = data.data.data.title;
-        this.ruleForm.description = data.data.data.description;
-        this.ruleForm.faId = data.data.data.faId;
-        this.ruleForm.topping = JSON.stringify(data.data.data.topping);
-        // this.ruleForm.content = data.data.data.content;
-        this.$refs.ue.setUEContent(data.data.data.content)
-      })
+      if (this.articleId != null) {
+        localStorage.setItem('articleId',this.articleId)
+        selectNewsContent({
+          id: this.articleId
+        }).then((data) => {
+          this.ruleForm.title = data.data.data.title;
+          this.ruleForm.description = data.data.data.description;
+          this.ruleForm.faId = data.data.data.faId;
+          this.ruleForm.topping = JSON.stringify(data.data.data.topping);
+          // this.ruleForm.content = data.data.data.content;
+          this.$refs.ue.setUEContent(data.data.data.content)
+        })
+      } 
     },
     goBackList () { // 返回文章列表
       this.$router.replace('/Article')
@@ -151,11 +165,17 @@ export default{
       console.log(content)
     },
     submitForm(formName) {
+      if (this.ruleForm.faId.length == 2) {
+        this.ruleForm.faId = this.ruleForm.faId[1]
+      } else {
+        this.ruleForm.faId = this.ruleForm.faId[0]
+      }
       let content = this.$refs.ue.getUEContent() // 调用子组件方法
       this.ruleForm.content = content;
+      this.ruleForm.faId = this.ruleForm.faId;
       this.$refs[formName].validate((valid) => {
         addNews(this.ruleForm).then((data) => {
-          if(data.data.status_code == 200){
+          if (data.data.status_code === 200) {
             this.$message({
               showClose: true,
               message: '文章上传成功',
@@ -182,7 +202,7 @@ export default{
           title: this.ruleForm.title,
           description: this.ruleForm.description,
           content: this.ruleForm.content,
-          faId: this.ruleForm.faId,  // 分类ID
+          faId: this.ruleForm.faId.toString(),  // 分类ID
           topping: this.ruleForm.topping //
         }).then((data) => {
           if(data.data.status_code == 200){

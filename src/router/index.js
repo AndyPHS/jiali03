@@ -26,6 +26,7 @@ const AgreementUser = () => import('@/components/LiHun/Ad/AgreementUser')  // �
 const UserAgreement = () => import('@/components/LiHun/Ad/UserAgreement')  // 推广页使用帮助
 const Knowledge = () => import('@/components/LiHun/Ad/Knowledge') // 知识列表页面
 const KnowledgeCon = () => import('@/components/LiHun/Ad/KnowledgeCon') // 知识详情页面
+const Pay = () => import('@/components/LiHun/Ad/Pay') // 支付页面
 
 const ZuHeManagement = () => import('@/components/LiHun/ZuHeManagement')         // 组合管理页面
 const LabelManagement = () => import('@/components/LiHun/LabelManagement')         // 标签管理页面
@@ -141,6 +142,8 @@ export default new Router({
     {path: '/Knowledge', name: 'Knowledge', component: Knowledge},
     // 离婚协议书推广知识详情页面
     {path: '/KnowledgeCon', name: 'KnowledgeCon', component: KnowledgeCon},
+    // 支付页面
+    {path: '/Pay', name: 'Pay', component: Pay},
 
     // 标签管理
     {path: '/LabelManagement', name: 'LabelManagement', component: LabelManagement},

@@ -5,22 +5,24 @@
       <div class="c_m_l">
         <div class="pt-10">
           <h3 class="text-center text-lg font-bold">离婚知识分类</h3>
-          <ul class="mt-5">
-            <li class="text-base leading-loose">注册分类</li>
-            <li class="text-base leading-loose">注册分类</li>
-            <li class="text-base leading-loose">注册分类</li>
+          <ul class="mt-5 pl-10">
+            <li v-for="(item, index) in fenleiAll" :key="index" class="text-base leading-loose text-left">
+              <h2 @click="searchList(item)">{{ item.title }}</h2>
+              <ul class="pl-2" v-if="item.data.length>0">
+                <li v-for="($item, $index) in item.data" :key="$index"  @click="searchList($item)">{{ $item.title }}</li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
       <div class="c_m_r text-left pb-10">
         <div class="pt-10 text-center">
-          <h2 class="text-center pb-4 text-bold text-xl">离婚争取孩子抚养权的5种方法和技巧</h2>
-          <span class="inline-block pb-6 text-sm">2020-05-05</span>
+          <h2 class="text-center pb-4 text-bold text-xl">{{ this.wenCon.title }}</h2>
+          <span class="inline-block pb-6 text-sm">{{ this.wenCon.time }}</span>
         </div>
-        <div class="m_r_m py-5">
-          这是文章
+        <div class="m_r_m py-5" v-html="wenCon.con">
         </div>
-        <div class="m_r_b py-6 px-6">
+        <div class="m_r_b py-6 px-6 hidden">
           <div class="flex items-center m_r_b_t">
             <div></div>
             <span class="font-bold text-sm">相关知识</span>
@@ -37,7 +39,7 @@
 </template>
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
-
+import {selectNewsContent, selectAction} from '@/api/api/AgreementRequest.js' // 查询文章
 // import {answer} from '@/api/api/requestLogin.js'
 export default {
   name: 'KnowledgeCon',
@@ -46,20 +48,49 @@ export default {
   },
   data () {
     return {
-      keyMsg: ''  // 关键词搜索
+      fenleiAll: [], // 文章分类汇总
+      keyMsg: ''  ,// 关键词搜索
+      wenCon: { // 文章内容
+        title: '',
+        time: '',
+        con: ''
+      }
     }
   },
   mounted () {
-
+    this.getWenZhangCon()
+    this.getWenType()
   },
   methods: {
-
+     getWenZhangCon () { // 查询单独文章
+       var Id = this.$route.params.id
+       selectNewsContent({
+         id: Id
+       }).then((data) => {
+         this.wenCon.title = data.data.data.title;
+         this.wenCon.time = data.data.data.updateTime;
+         this.wenCon.con = data.data.data.content;
+       })
+     },
+     getWenType () { // 查询分类
+       selectAction().then((data) => {
+         this.fenleiAll = data.data
+       })
+     },
+     searchList (item) { // 点击文章分类跳转到文章列表页
+       this.$router.push({
+         name: 'Knowledge',
+         params: {
+           id: item.id
+         }
+       })
+     }
   }
 }
 </script>
 <style scoped >
 .live{height: 39px;background-color:#f2f4f7;width: 100%;}
-.all{background-color: #f2f4f7;height: 100vh;}
+.all{background-color: #f2f4f7;height: auto;}
 .w{width: 1200px; margin: 0 auto;}
 .c_m{background-color: #fff;margin-top: 39px;}
 .c_m_l{width: 239px;padding:150px 0;}

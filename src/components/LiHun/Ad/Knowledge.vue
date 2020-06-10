@@ -5,10 +5,13 @@
       <div class="c_m_l">
         <div class="pt-10">
           <h3 class="text-center text-lg font-bold">离婚知识分类</h3>
-          <ul class="mt-5">
-            <li class="text-base leading-loose">注册分类</li>
-            <li class="text-base leading-loose">注册分类</li>
-            <li class="text-base leading-loose">注册分类</li>
+          <ul class="mt-5 pl-10">
+            <li v-for="(item, index) in fenleiAll" :key="index" class="text-base leading-loose text-left">
+              <h2 :class="ins === index?'default_active':'default'" @click="searchList(item, index)">{{ item.title }}</h2>
+              <ul class="pl-2" v-if="item.data.length>0">
+                <li v-for="($item, $index) in item.data" :key="$index" @click="searchList($item, $index)">{{ $item.title }}</li>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
@@ -25,20 +28,20 @@
           </ul>
         </div>
         <div class="m_r_m">
-          <ul class="hidden">
-            <li class="pb-8 border-b cursor-pointer" @click="goKnowledgeMin(1)">
+          <ul class="">
+            <li v-for="(item, index) in tableData" :key="index"  class="pb-8 border-b cursor-pointer" @click="goKnowledgeMin(item.id)">
               <div class="py-8 flex justify-between items-center">
-                <h2 class="w-4/5 overflow-hidden">女方怎样才能争取孩子的抚养权？</h2>
-                <span class="w-1/5 text-right">2020-04-03</span>
+                <h2 class="w-4/5 overflow-hidden">{{ item.title }}</h2>
+                <span class="w-1/5 text-right">{{ item.createdTime }}</span>
               </div>
-              <p>北京家理律师事务所是全国规模最大的婚姻家事法律服务专业化律所，地处北京市的中心商务区，建国门赛特大厦，拥有整层近2000平方米北京家理律师事务所是全国规模最大的婚姻家事法律服务专业化律所，地处北京市的中心商务区，建国门赛特大厦，拥有整层近2000平方米北京家理律师事务所是全国规模最大的婚姻家事法律服务专业化律所，地处北京市的中心商务区，建国门赛特大厦，拥有整层近2000平方米</p>
+              <p>{{ item.description }}</p>
             </li>
           </ul>
-          <div>
+          <div class="hidden">
             <div class="pt-12 text-center mx-auto">
               <img class="inline-block" src="../../../assets/images/lihun/no_consult_icon.png" alt="">
               <p class="text-center text-sm pt-5">
-                共找到<span class="text-red-400 font-bold">0条</span> 与 <span class="text-red-400 font-bold">"抚养权”</span> 相关的内容</br>
+                共找到<span class="text-red-400 font-bold">0条</span> 与 <span class="text-red-400 font-bold">"抚养权"</span> 相关的内容</br>
                 可尝试更换不同的关键词重新进行搜索
               </p>
             </div>
@@ -51,7 +54,7 @@
 </template>
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
-
+import {selectAction, selectFaIDNews} from '@/api/api/AgreementRequest.js'
 // import {answer} from '@/api/api/requestLogin.js'
 export default {
   name: 'Knowledge',
@@ -60,11 +63,15 @@ export default {
   },
   data () {
     return {
-      keyMsg: ''  // 关键词搜索
+      keyMsg: '', // 关键词搜索
+      fenleiAll: [], // 文章分类汇总
+      tableData: [], // 分类文章汇总
+      firstType: null,  // 初始化分类
+      ins: 0
     }
   },
   mounted () {
-
+    this.getWenType()
   },
   methods: {
     goKnowledgeMin (id) {
@@ -73,6 +80,34 @@ export default {
         params: {
           id: id
         }
+      })
+    },
+    getWenType () { // 查询分类
+      selectAction().then((data) => {
+        this.fenleiAll = data.data
+        if (this.$route.params.id != undefined) {
+          this.firstType = this.$route.params.id
+        } else {
+          this.firstType = this.fenleiAll[0].id
+        }
+        this.startList()
+      })
+    },
+    startList () { // 初始化页面查找第一个分类下的文章
+      selectFaIDNews({
+        status: 1,
+        faId: this.firstType
+      }).then((data) => {
+        this.tableData = data.data.data
+      })
+    },
+    searchList (item, index) { // 点击分类查找文章
+      this.ins = index
+      selectFaIDNews({
+        status: 1,
+        faId: item.id
+      }).then((data) => {
+        this.tableData = data.data.data
       })
     },
     searchAction () {
@@ -97,4 +132,6 @@ export default {
 .m_r_m ul li h2{font-size: 22px;color: #6a6a6a;}
 .m_r_m ul li span{color: #d1d1d1;font-size: 14px;}
 .m_r_m ul li p{font-size: 15px;color: #818181;line-height: 28px;white-space: pre-wrap;text-indent: 2em;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 3;overflow: hidden;}
+.default_active{color:red}
+.default{color:#343434;}
 </style>

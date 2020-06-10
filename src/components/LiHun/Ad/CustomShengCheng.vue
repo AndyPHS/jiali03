@@ -1,7 +1,7 @@
 <template>
   <div class="all">
     <lihun-head></lihun-head>
-    <div class="w-full bg-color relative">
+    <div class="w-full bg-color relative" v-loading="fullscreenLoading">
       <div class="w py-10">
         <div class="bg-white rounded-lg">
           <div class="outputword rounded-lg shadow-lg relative">
@@ -20,7 +20,7 @@
                     <li v-for="(item, index) in missField" :key="index">{{index+1}}、{{item.problemTitle}}</li>
                   </ul>
                 </div>
-                <div v-if="this.status_code ==200" v-loading.fullscreen.lock="fullscreenLoading">
+                <div v-if="this.status_code ==200">
                   <div id="outputwordmsg" v-html="outputWord"></div>
                 </div>
               </div>
@@ -52,12 +52,12 @@
             <el-dialog title="保存问卷" :visible.sync="dialogSavedWenJuan">
               <el-form :model="userWenJuan">
                  <el-form-item label="名称" :label-width="formLabelWidth" class="mb-1">
-                  <el-input v-model="userWenJuan.title" class="w-1/2" autocomplete="off"></el-input>
+                  <el-input v-model="userWenJuan.title" class="w-2/3" autocomplete="off"></el-input>
                 </el-form-item>
               </el-form>
-              <div slot="footer" class="dialog-footer">
-                <el-button @click="canceldialogSaveWenJuan">取 消</el-button>
-                <el-button type="primary" @click="dialogSaveWenJuanOk">保 存</el-button>
+              <div slot="footer" class="dialog-footer tishi_bot pb-3">
+                <span class="cbt" @click="canceldialogSaveWenJuan">取 消</span>
+                <span class="cbt re"  @click="dialogSaveWenJuanOk">保 存</span>
               </div>
             </el-dialog>
             <el-dialog title="提示" :visible.sync="dialogTiShi" class="tishi">
@@ -80,9 +80,9 @@
 </template>
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
-import {outPutWord} from '@/api/api/requestLogin.js'  // 离婚协议书生成数据接口
-import {getWord} from '@/api/api/requestLogin.js'  // 起诉状生成数据接口
-import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js'  // 修改离婚协议书
+import {outPutWord} from '@/api/api/requestLogin.js' // 离婚协议书生成数据接口
+import {getWord} from '@/api/api/requestLogin.js' // 起诉状生成数据接口
+import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js' // 修改离婚协议书
 export default {
   name: 'CustomShengCheng',
   components: {
@@ -93,27 +93,27 @@ export default {
       fullscreenLoading: false,
       questionnaireType: 1, // 问卷类型1 协议书类 2起诉状类，3申请书类
       downloadMsg: '', // 后台返回的下载资源
-      outputWord: '',  // 获取离婚协议书
-      QiSuContent: [],  // 起诉状内容
-      TitleMsg: '',     // 标题
+      outputWord: '', // 获取离婚协议书
+      QiSuContent: [], // 起诉状内容
+      TitleMsg: '', // 标题
       downLoadBtnMsg: '', // 下载按钮文字
       status_code: null, // 后台返回的状态码 330 缺失字段 200 成功
-      dialogDownLoadWenJuan: false,  // 点击下载弹出免责弹窗
-      form:{
-       type: false
+      dialogDownLoadWenJuan: false, // 点击下载弹出免责弹窗
+      form: {
+        type: false
       },
-       formLabelWidth: '80px',   // 表单标签宽度
-      dialogSavedWenJuan: false,   // 点击保存弹出保存弹框
-      userWenJuan:{ // 修改用户问卷
-       qid: null, // 问卷id
-       status: null,  // 状态 1正常 2回收站 3彻底删除
-       content: '',  // 内容
-       title: '',     // 标题
-       exemption: null, // 免责条款 0未填写 1填写
-       complete: null   // 是否完成 0未完成 1完成
+      formLabelWidth: '80px', // 表单标签宽度
+      dialogSavedWenJuan: false, // 点击保存弹出保存弹框
+      userWenJuan: { // 修改用户问卷
+        qid: null, // 问卷id
+        status: null, // 状态 1正常 2回收站 3彻底删除
+        content: '', // 内容
+        title: '', // 标题
+        exemption: null, // 免责条款 0未填写 1填写
+        complete: null // 是否完成 0未完成 1完成
       },
-      missField: [] ,// 未填写项目
-      isGoBack: false,   // 点击取消是否需要跳转
+      missField: [], // 未填写项目
+      isGoBack: false, // 点击取消是否需要跳转
       dialogTiShi: false
     }
   },
@@ -121,74 +121,72 @@ export default {
     this.GetOutPutWord() // 获取离婚协议书
   },
   methods: {
-    GetOutPutWord () {   // 获取协议
+    GetOutPutWord () { // 获取协议
       this.fullscreenLoading = true
-      this.TitleMsg = '离婚协议书';
-      this.downLoadBtnMsg = '下载协议';
-      outPutWord().then((data)=>{
+      this.TitleMsg = '离婚协议书'
+      this.downLoadBtnMsg = '下载协议'
+      outPutWord().then((data) => {
         this.status_code = data.data.status_code
         this.fullscreenLoading = false
-        if(this.status_code == 330 ){
-            this.missField = data.data.data
-        }else if(this.status_code == 200){
-            this.outputWord = data.data.data.content
+        if (this.status_code == 330) {
+          this.missField = data.data.data
+        } else if (this.status_code == 200) {
+          this.outputWord = data.data.data.content
         }
-
-      }).catch((data)=>{
-          // this.$router.replace("/");
+      }).catch((data) => {
+        // this.$router.replace("/");
       })
     },
-    GoBasicInformationPage(){   // 点击返回基本信息
-      this.$router.replace("/CustomBasic");
+    GoBasicInformationPage () { // 点击返回基本信息
+      this.$router.replace('/CustomBasic')
     },
-    dialogDownLoadWenJuanOk(){   // 点击下载弹出确定按钮
-      if(this.form.type){
-        getWord().then((data)=>{ // 申请书和起诉状等有个性化页面的下载路径
-          if(data.data.status_code==200){
-            window.open('http://office365.aladdinlaw.com:3921/word/'+ data.data.data)
+    dialogDownLoadWenJuanOk () { // 点击下载弹出确定按钮
+      if (this.form.type) {
+        getWord().then((data) => { // 申请书和起诉状等有个性化页面的下载路径
+          if (data.data.status_code == 200) {
+            window.open('http://office365.aladdinlaw.com:3921/word/' + data.data.data)
           }
-          this.dialogDownLoadWenJuan = false;
-        }).catch((data)=>{
+          this.dialogDownLoadWenJuan = false
+        }).catch((data) => {
           this.$message({
             message: '下载失败,请联系管理员',
             type: 'error'
-          });
+          })
         })
-      }else{
+      } else {
         this.$message({
           message: '请先勾选免责条款',
           type: 'error'
-        });
-      }
-
-    },
-    canceldialogDownLoadWenJuan(){  // 点击下载弹框取消按钮
-      this.dialogDownLoadWenJuan = false;
-    },
-    DownLoadWord () {   // 点击下载按钮
-      this.dialogDownLoadWenJuan = true;
-    },
-    SaveQuestionnaire(){    // 点击保存弹出保存弹框
-      this.dialogSavedWenJuan = true;
-      this.isGoBack = false;
-    },
-    canceldialogSaveWenJuan(){   // 取消保存按钮
-      this.dialogSavedWenJuan = false;
-      if(this.isGoBack){
-        this.$router.replace("/MyConsult");
+        })
       }
     },
-    dialogSaveWenJuanOk(){  // 点击保存确定按钮保存
+    canceldialogDownLoadWenJuan () { // 点击下载弹框取消按钮
+      this.dialogDownLoadWenJuan = false
+    },
+    DownLoadWord () { // 点击下载按钮
+      this.dialogDownLoadWenJuan = true
+    },
+    SaveQuestionnaire () { // 点击保存弹出保存弹框
+      this.dialogSavedWenJuan = true
+      this.isGoBack = false
+    },
+    canceldialogSaveWenJuan () { // 取消保存按钮
+      this.dialogSavedWenJuan = false
+      if (this.isGoBack) {
+        this.$router.replace('/MyConsult')
+      }
+    },
+    dialogSaveWenJuanOk () { // 点击保存确定按钮保存
       userUpdateQuestionnaire({
         status: 1,
         title: this.userWenJuan.title,
         exemption: 1,
         complete: 1
-      }).then((data)=>{
-        this.userWenJuan.title = '';
-        this.dialogSavedWenJuan = false;
-        this.$router.replace("/MyConsult");
-      }).catch((data)=>{
+      }).then((data) => {
+        this.userWenJuan.title = ''
+        this.dialogSavedWenJuan = false
+        this.$router.replace('/MyConsult')
+      }).catch((data) => {
 
       })
     },
@@ -233,8 +231,6 @@ export default {
 .el-dialog{width: 640px !important;}
 .save_box{width: 430px;margin:0 auto;display: flex;justify-content: space-between;padding-bottom: 100px;}
 .save_box_span{width: 192px;height: 38px;line-height: 38px;text-align: center;color: #535353;border:1px solid #535353;font-size: 16px;border-radius: 19px;display: inline-block;cursor: pointer;}
-
-
 
 .re{background-color: #ff3f68;border: 1px solid #ff3f68;color: #fff;}
 </style>
