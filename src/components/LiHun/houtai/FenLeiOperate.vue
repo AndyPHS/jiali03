@@ -99,10 +99,10 @@
 </template>
 
 <script>
-import {addAction} from '@/api/api/requestLogin.js' // 新增文章类型
-import {deleteAction} from '@/api/api/requestLogin.js' // 删除文章类型
-import {selectAction} from '@/api/api/requestLogin.js' // 查询文章类型
-import {updateAction} from '@/api/api/requestLogin.js' // 修改文章类型
+import {addAction} from '@/api/api/AgreementRequest.js' // 新增文章类型
+import {deleteAction} from '@/api/api/AgreementRequest.js' // 删除文章类型
+import {selectAction} from '@/api/api/AgreementRequest.js' // 查询文章类型
+import {updateAction} from '@/api/api/AgreementRequest.js' // 修改文章类型
 
 export default{
   name: 'ArticleUpload',

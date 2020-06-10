@@ -164,6 +164,16 @@ export const usersSelect = params => {
     data: params
   });
 };
+// 查询问卷基本信息
+export const returnQuestionnaireJson = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.returnQuestionnaireJson + params.qpid +'?quid='+localStorage.getItem('quid')+'&qid='+ localStorage.getItem('qid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 查找用户问卷
 export const selectUserQuestionnaire = params => {
   return axios({
@@ -204,6 +214,37 @@ export const userAddSelectAnswer = params => {
     data: params
   });
 };
+// 重复问题-1  删除子女
+export const userDeleteSelectAnswer = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.userDeleteSelectAnswer,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 验证单独word demo
+export const demoYanZheng = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.demoYanZheng+ localStorage.getItem('quid') +'?qpid='+params.qpid,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 生成数据
+
+export const outPutWord = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.outPutWord + localStorage.getItem('quid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 下载离婚协议书
 export const getWord = params => {
   return axios({
@@ -224,7 +265,16 @@ export const userUpdateQuestionnaire = params => {
     data: params
   });
 };
-
+// 新增用户问卷
+export const userAddQuestionnaire = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.userAddQuestionnaire + localStorage.getItem('qid'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 新增副本
 export const copyUserQuestionnaire = params => {
   return axios({

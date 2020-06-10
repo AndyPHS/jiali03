@@ -295,14 +295,14 @@
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
 import QuestionModel from '../../partials/QuestionModel.vue' // 引入子组件
-import {returnQuestionnaireJson} from '@/api/api/requestLogin.js' // 查询问卷json
-import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js' // 修改离婚协议书
+import {returnQuestionnaireJson} from '@/api/api/AgreementRequest.js' // 查询问卷json
+import {userUpdateQuestionnaire} from '@/api/api/AgreementRequest.js' // 修改离婚协议书
 // import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
-import {userAddSelectAnswer} from '@/api/api/requestLogin.js' // 添加子女或者房产等
-import {userDeleteSelectAnswer} from '@/api/api/requestLogin.js' // 删除子女或者房产等
-import {demoYanZheng} from '@/api/api/requestLogin.js' // 验证单独word demo
+import {userAddSelectAnswer} from '@/api/api/AgreementRequest.js' // 添加子女或者房产等
+import {userDeleteSelectAnswer} from '@/api/api/AgreementRequest.js' // 删除子女或者房产等
+import {demoYanZheng} from '@/api/api/AgreementRequest.js' // 验证单独word demo
 
-import {outPutWord} from '@/api/api/requestLogin.js' // 生成数据接口
+import {outPutWord} from '@/api/api/AgreementRequest.js' // 生成数据接口
 import {regionData, CodeToText, TextToCode} from 'element-china-area-data' // 省市联动信息
 export default {
   name: 'CustomBasic',

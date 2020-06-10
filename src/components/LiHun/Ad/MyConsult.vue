@@ -123,7 +123,7 @@
 </template>
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
-import {userAddQuestionnaire} from '@/api/api/requestLogin.js'
+import {userAddQuestionnaire} from '@/api/api/AgreementRequest.js'
 import {selectUserQuestionnaire, getWord, userUpdateQuestionnaire, copyUserQuestionnaire} from '@/api/api/AgreementRequest.js'
 export default {
   name: 'MyConsult',

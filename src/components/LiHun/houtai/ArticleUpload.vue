@@ -64,10 +64,10 @@
 <script>
 // import {selectAction} from '@/api/api/requestLogin.js' // 查询文章类型
 import UE from '@/components/ue/ue.vue' // 引入组件
-import {selectAction} from '@/api/api/requestLogin.js' // 查询文章类型
-import {addNews} from '@/api/api/requestLogin.js' // 新增文章
-import {updateNews} from '@/api/api/requestLogin.js' // 修改文章
-import {selectNewsContent} from '@/api/api/requestLogin.js' // 查询文章
+import {selectAction} from '@/api/api/AgreementRequest.js' // 查询文章类型
+import {addNews} from '@/api/api/AgreementRequest.js' // 新增文章
+import {updateNews} from '@/api/api/AgreementRequest.js' // 修改文章
+import {selectNewsContent} from '@/api/api/AgreementRequest.js' // 查询文章
 
 export default{
   components: {UE},

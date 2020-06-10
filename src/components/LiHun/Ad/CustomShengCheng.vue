@@ -80,9 +80,9 @@
 </template>
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
-import {outPutWord} from '@/api/api/requestLogin.js' // 离婚协议书生成数据接口
-import {getWord} from '@/api/api/requestLogin.js' // 起诉状生成数据接口
-import {userUpdateQuestionnaire} from '@/api/api/requestLogin.js' // 修改离婚协议书
+import {outPutWord} from '@/api/api/AgreementRequest.js' // 离婚协议书生成数据接口
+import {getWord} from '@/api/api/AgreementRequest.js' // 起诉状生成数据接口
+import {userUpdateQuestionnaire} from '@/api/api/AgreementRequest.js' // 修改离婚协议书
 export default {
   name: 'CustomShengCheng',
   components: {
