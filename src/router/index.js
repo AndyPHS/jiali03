@@ -18,8 +18,12 @@ const GuanLianManagement = () => import('@/components/LiHun/GuanLianManagement')
 const Home = () => import('@/components/LiHun/Ad/Home') // 离婚协议书推广首页
 const MyConsult = () => import('@/components/LiHun/Ad/MyConsult')  // 我的离婚协议书
 const CustomAgreement = () => import('@/components/LiHun/Ad/CustomAgreement')  // 推广页定制我的离婚协议书
+const CustomQueDing = () => import('@/components/LiHun/Ad/CustomQueDing')  // 推广页离婚协议书
+const CustomBasic = () => import('@/components/LiHun/Ad/CustomBasic')  // 推广页离婚协议书信息填写页面
+const CustomShengCheng = () => import('@/components/LiHun/Ad/CustomShengCheng')  // 推广页离婚协议书生成页面
 const AgreementHelp = () => import('@/components/LiHun/Ad/AgreementHelp')  // 推广页定制我的离婚协议书帮助
 const AgreementUser = () => import('@/components/LiHun/Ad/AgreementUser')  // 推广页定制我的离婚协议书帮助
+const UserAgreement = () => import('@/components/LiHun/Ad/UserAgreement')  // 推广页使用帮助
 const Knowledge = () => import('@/components/LiHun/Ad/Knowledge') // 知识列表页面
 const KnowledgeCon = () => import('@/components/LiHun/Ad/KnowledgeCon') // 知识详情页面
 
@@ -120,10 +124,19 @@ export default new Router({
     {path: '/MyConsult', name: 'MyConsult', component: MyConsult},
     // 离婚协议书推广定制协议书
     {path: '/CustomAgreement', name: 'CustomAgreement', component: CustomAgreement},
+    // 离婚协议书推广页面确定页面
+    {path: '/CustomQueDing', name: 'CustomQueDing', component: CustomQueDing},
+    // 离婚协议书推广页面问题填写页面
+    {path: '/CustomBasic', name: 'CustomBasic', component: CustomBasic},
+    // 离婚协议书推广页面生成协议页面
+    {path: '/CustomShengCheng', name: 'CustomShengCheng', component: CustomShengCheng},
+
     // 离婚协议书推广定制协议书帮助页面
     {path: '/AgreementHelp', name: 'AgreementHelp', component: AgreementHelp},
     // 离婚协议书推广定制协议书用户页面
     {path: '/AgreementUser', name: 'AgreementUser', component: AgreementUser},
+    // 离婚协议书推广使用协议帮助
+    {path: '/UserAgreement', name: 'UserAgreement', component: UserAgreement},
     // 离婚协议书推广知识列表页面
     {path: '/Knowledge', name: 'Knowledge', component: Knowledge},
     // 离婚协议书推广知识详情页面
@@ -233,8 +246,6 @@ export default new Router({
     {path: '/JingShenZhuangTaiBasic', name: 'JingShenZhuangTaiBasic', component: JingShenZhuangTaiBasic},
     // 精神状态鉴定申请书个性化页面
     {path: '/JingShenZhuangTaiPersonalize', name: 'JingShenZhuangTaiPersonalize', component: JingShenZhuangTaiPersonalize},
-	{path: '/NewWenJuan', name: 'NewWenJuan', component: NewWenJuan},
-    // 访问错误页面跳转到登录页面
-    {path: '*',redirect: '/'}
+	{path: '/NewWenJuan', name: 'NewWenJuan', component: NewWenJuan}
   ]
 })

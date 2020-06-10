@@ -7,21 +7,23 @@
           我的协议书
         </h2>
         <div class="c_m_h_r flex justify-between items-center">
-          <span><router-link to="CustomAgreement">定制我的协议书</router-link></span>
-          <span>协议书定制说明</span>
-          <span>协议书如何谈判</span>
+          <span @click="dingzhiBtn"><router-link to="CustomAgreement">定制我的协议书</router-link></span>
+          <a class="hover:text-blue-400" href="/UserAgreement">协议书定制说明</a>
+          <a class="hover:text-blue-400" href="">协议书如何谈判</a>
+          <!-- <span><router-link to="UserAgreement">协议书定制说明</router-link></span>
+          <span>协议书如何谈判</span> -->
         </div>
       </div>
       <div class="c_m_m px-12">
-        <div class="c_m_m_h flex justify-between items-center">
-          <h2 class="w-1/2 text-center font-bold">协议书详情</h2>
-          <div class="c_m_m_h_r w-1/2 flex justify-around items-center">
-            <span class="w-1/3 inline-block text-center font-bold">版本</span>
-            <span class="w-1/3 inline-block text-center font-bold">状态</span>
-            <span class="w-1/3 inline-block text-center font-bold">操作</span>
+        <div class="c_m_m_m hidden">
+          <div class="c_m_m_h flex justify-between items-center">
+            <h2 class="w-1/2 text-center font-bold">协议书详情</h2>
+            <div class="c_m_m_h_r w-1/2 flex justify-around items-center">
+              <span class="w-1/3 inline-block text-center font-bold">版本</span>
+              <span class="w-1/3 inline-block text-center font-bold">状态</span>
+              <span class="w-1/3 inline-block text-center font-bold">操作</span>
+            </div>
           </div>
-        </div>
-        <div class="c_m_m_m">
           <ul>
             <li>
               <h4 class="flex justify-between items-center px-6">
@@ -70,11 +72,10 @@
             </li>
           </ul>
         </div>
-        <div class="no_consult hidden">
-          <h2></h2>
+        <div class="no_consult ">
           <div class="w py-20">
             <img class="inline-block mb-6" src="../../../assets/images/lihun/no_consult_icon.png" alt="">
-            <h3 class="text-base text-center">暂无协议书，可以点击<span class="inline-block text-red-500 underline cursor-pointer">定制我的协议书</span></h3>
+            <h3 class="text-base text-center">暂无协议书，可以点击<span class="inline-block text-red-500 underline cursor-pointer" @click="dingzhiBtn">定制我的协议书</span></h3>
           </div>
         </div>
       </div>
@@ -85,8 +86,7 @@
 </template>
 <script>
 import lihun_head from '../../partials/lihun_head.vue'
-
-// import {answer} from '@/api/api/requestLogin.js'
+import {userAddQuestionnaire} from '@/api/api/requestLogin.js'
 export default {
   name: 'MyConsult',
   components: {
@@ -101,13 +101,22 @@ export default {
 
   },
   methods: {
-
+    dingzhiBtn () {
+      localStorage.setItem('qid', 3)
+      userAddQuestionnaire({
+          qid: 3
+        }).then((data) => {
+          localStorage.setItem('quid', data.data.data)
+          localStorage.setItem('questionnaireType', 1)
+          this.$router.replace('/CustomAgreement')
+        })
+    }
   }
 }
 </script>
 <style scoped >
 .live{height: 39px;background-color:#f2f4f7;width: 100%;}
-.all{background-color: #f2f4f7;}
+.all{background-color: #f2f4f7;height: 100vh;}
 .w{width: 1200px; margin: 0 auto;}
 .c_m{background-color: #fff;}
 .c_m_h{height:109px;border-bottom: 2px solid #f2f4f7;margin-top: 39px;}
@@ -125,5 +134,4 @@ export default {
 .c_m_m_m_m_r span{width: 58px;height: 24px;text-align: center;line-height: 24px;border-radius: 12px;border:1px solid #547ce0;color:#547ce0;font-size: 14px;}
 .c_m_m_m_m_r span:hover{background-color: #547ce0;color:#fff;}
 .c_m_m_m_m_r_n span{width: 58px;height: 24px;text-align: center;line-height: 24px;border-radius: 12px;border:1px solid #cfcfcf;color:#cfcfcf;font-size: 14px;}
-.no_consult h2{height: 34px;width: 100%;background-color:#f2f4f7;}
 </style>

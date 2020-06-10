@@ -61,7 +61,7 @@ export default {
 </script>
 <style scoped >
 .live{height: 39px;background-color:#f2f4f7;width: 100%;}
-.all{background-color: #f2f4f7;}
+.all{background-color: #f2f4f7;height: 100vh;}
 .w{width: 1200px; margin: 0 auto;}
 .c_m{background-color: #fff;margin-top: 39px;}
 .c_m_t{margin-left: 239px;text-align: center;font-size: 25px;font-weight: bold;}

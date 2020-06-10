@@ -8,6 +8,7 @@ export const updatePhone = params => {
     method: 'post',
     dataType: 'json',
     url: apiUrl.updatePhone,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
@@ -17,6 +18,7 @@ export const updateUserName = params => {
     method: 'post',
     dataType: 'json',
     url: apiUrl.updateUserName,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
@@ -26,6 +28,7 @@ export const phoneCode = params => {
 	  method: 'post',
 	  dataType: 'json',
 	  url: apiUrl.phoneCode,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
 	  data: params
 	});
 };
@@ -35,6 +38,7 @@ export const sendEmail = params => {
 	  method: 'post',
 	  dataType: 'json',
 	  url: apiUrl.sendEmail,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
 	  data: params
 	});
 };
@@ -44,6 +48,7 @@ export const updatePasswordPhone = params => {
     method: 'post',
     dataType: 'json',
     url: apiUrl.updatePasswordPhone,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
@@ -62,6 +67,7 @@ export const uploadUserPhoto = params => {
     method: 'post',
     dataType: 'json',
     url: apiUrl.uploadUserPhoto,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
@@ -74,17 +80,28 @@ export const frontLogin = params => {
     data: params
   });
 };
+// 修改邮件
+export const updateUserEmail = params => {
+  return axios({
+    method: 'post',
+    dataType: 'json',
+    url: apiUrl.updateUserEmail,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 邮件修改密码
 export const updatePasswordEmail = params => {
   return axios({
     method: 'post',
     dataType: 'json',
     url: apiUrl.updatePasswordEmail,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
 
-  
+
 
 // 验证码接口
 export const verifyCode = params => {
@@ -92,6 +109,7 @@ export const verifyCode = params => {
     method: "GET",
     dataType: 'json',
     url: apiUrl.loginCode,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: qs.stringify(params)
   });
 };
@@ -101,6 +119,7 @@ export const requestLogin = params => {
     method: 'post',
     dataType: 'json',
     url: apiUrl.login,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
 };
@@ -135,4 +154,3 @@ export const selectUser = params => {
     data: params
   });
 };
-

@@ -279,6 +279,8 @@ const apiUrl = {
   updatePhone: baseLiHunURL + 'front_user/update_phone',
   // 修改用户基本信息
   updateUserName: baseLiHunURL + 'front_user/update_user_name',
+  // 修改邮件
+  updateUserEmail: baseLiHunURL + 'front_user/update_user_email',
   // 发送手机验证码
   phoneCode: baseLiHunURL + 'front_user/phone_code',
   // 发送邮件验证码
