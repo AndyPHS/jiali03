@@ -27,11 +27,12 @@
                                 <td class="border text-black">{{ item.title }}</td>
                                 <td class="border text-black">{{ problemType[item.type] }}</td>
                                 <td class="border text-black">无备注</td>
-                                <td class="border text-black" v-if="item.imgs !==null">
-                                    <div  v-for="($item, $index) in JSON.parse(item.imgs)" :key="$index">
+                                <td class="border text-black" v-if="item.imgs !==null ">
+                                    <div  v-for="($item, $index) in item.imgs" :key="$index">
                                         <img :src="$item">
-                                    </div></td>
-                                <td class="border text-black" v-if="item.imgs == null || item.imgs ==[]">
+                                    </div>
+                                </td>
+                                <td class="border text-black" v-else>
                                     无实例
                                 </td>
                                 <td class="border text-black justify-around">
@@ -282,10 +283,16 @@
             handleQuestionList () { // 获取问题
                 selectQuestion({page:this.currentPage}).then((data)=>{
                     this.pageInfo = data.data.data.data
+                    var oo = this.pageInfo
+                    for(var i=0;i<oo.length;i++){
+                      if(oo[i].imgs!==null){
+                        this.pageInfo[i].imgs=JSON.parse(oo[i].imgs)
+
+                       }
+                    }
                     this.min = data.data.data
-                    // this.fileList = this.pageInfo.imgs
                 }).catch((data)=>{
-                    this.$router.replace("/");
+                    // this.$router.replace("/");
                 })
             },
             encodeSearchParams(obj) {   // 通过条件查找问题
@@ -310,6 +317,13 @@
               titleSearch () {  // 点击查找开始查找问题
                 selectQuestionList("title="+this.titleSearchMsg).then((data)=>{
                     this.pageInfo = data.data.data.data
+                    var oo = this.pageInfo
+                    for(var i=0;i<oo.length;i++){
+                      if(oo[i].imgs!==null){
+                        this.pageInfo[i].imgs=JSON.parse(oo[i].imgs)
+                    
+                       }
+                    }
                     this.min = data.data.data
                     this.total = data.data.total
                 }).catch((data)=>{
