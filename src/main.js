@@ -13,11 +13,6 @@ import 'tailwindcss/utilities.css'
 import VueResource from 'vue-resource'  // 请求数据
 // 引入mock.js
 // require('./mock.js')
-import '../static/UE/ueditor.config.js'
-import '../static/UE/ueditor.all.min.js'
-import '../static/UE/lang/zh-cn/zh-cn.js'
-import '../static/UE/ueditor.parse.min.js'
-
 
 Vue.prototype.$axios = Axios
 Axios.defaults.baseURL = '/api'
