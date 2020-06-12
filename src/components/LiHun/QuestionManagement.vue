@@ -283,11 +283,11 @@
             handleQuestionList () { // 获取问题
                 selectQuestion({page:this.currentPage}).then((data)=>{
                     this.pageInfo = data.data.data.data
+                    console.log(this.pageInfo)
                     var oo = this.pageInfo
                     for(var i=0;i<oo.length;i++){
-                      if(oo[i].imgs!==null){
+                      if(oo[i].imgs!== ''){
                         this.pageInfo[i].imgs=JSON.parse(oo[i].imgs)
-
                        }
                     }
                     this.min = data.data.data
@@ -319,9 +319,9 @@
                     this.pageInfo = data.data.data.data
                     var oo = this.pageInfo
                     for(var i=0;i<oo.length;i++){
-                      if(oo[i].imgs!==null){
+                      if(oo[i].imgs!== ''){
                         this.pageInfo[i].imgs=JSON.parse(oo[i].imgs)
-                    
+                         
                        }
                     }
                     this.min = data.data.data
