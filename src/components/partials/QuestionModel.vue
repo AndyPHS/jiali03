@@ -7543,18 +7543,26 @@
                      // console.log("保存失败")
                   })
                 } else if (e.type == 'checkbox') {
-                  if (e.answer.length == 0 ) {
+                  if (e.answer == '' ) {
                   	userAddAnswer({
                   	  value: '',  // 值
                   	  qpid: e.id, // 关联id
                   	  quid: localStorage.getItem('quid') // 用户的问卷id
-                  	})
+                  	}).then((data)=>{
+                    //
+                  }).catch((data)=>{
+                     // console.log("保存失败")
+                  })
                   } else {
                   	userAddAnswer({
                   	  value: JSON.stringify(e.answer),  // 值
                   	  qpid: e.id, // 关联id
                   	  quid: localStorage.getItem('quid') // 用户的问卷id
-                  	})
+                  	}).then((data)=>{
+                    //
+                  }).catch((data)=>{
+                     // console.log("保存失败")
+                  })
                   }
                 } else {
                   userAddAnswer({
@@ -7678,18 +7686,26 @@
                    // console.log("保存失败")
                 })
               } else if (e.type == 'checkbox') {
-                  if (e.answer == [] ) {
+                  if (e.answer == '' ) {
                   	userAddAnswer({
                   	  value: '',  // 值
                   	  qpid: e.id, // 关联id
                   	  quid: localStorage.getItem('quid') // 用户的问卷id
-                  	})
+                  	}).then((data)=>{
+                    //
+                    }).catch((data)=>{
+                       // console.log("保存失败")
+                    })
                   } else {
                   	userAddAnswer({
                   	  value: JSON.stringify(e.answer),  // 值
                   	  qpid: e.id, // 关联id
                   	  quid: localStorage.getItem('quid') // 用户的问卷id
-                  	})
+                  	}).then((data)=>{
+                    //
+                    }).catch((data)=>{
+                       // console.log("保存失败")
+                    })
                   }
                 } else {
                 userAddAnswer({
