@@ -7543,23 +7543,17 @@
                      // console.log("保存失败")
                   })
                 } else if (e.type == 'checkbox') {
-                  if (e.answer == [] ) {
+                  if (e.answer.length == 0 ) {
                   	userAddAnswer({
                   	  value: '',  // 值
                   	  qpid: e.id, // 关联id
-                  	  // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                   	  quid: localStorage.getItem('quid') // 用户的问卷id
                   	})
                   } else {
                   	userAddAnswer({
                   	  value: JSON.stringify(e.answer),  // 值
                   	  qpid: e.id, // 关联id
-                  	  // fornum: null, // 是否为重复问题下的子问题，是的话传for的层级，没有的话不传递
                   	  quid: localStorage.getItem('quid') // 用户的问卷id
-                  	}).then((data) => {
-                  	  //
-                  	}).catch((data) => {
-                  	   // console.log("保存失败")
                   	})
                   }
                 } else {
@@ -7637,7 +7631,7 @@
                 }).catch((data)=>{
                    console.log("保存失败")
                 })
-              }else{
+              } else {
                 userAddAnswer({
                   value: JSON.stringify(e.answer),  // 值
                   qpid: e.id, // 关联id
@@ -7683,7 +7677,21 @@
                 }).catch((data)=>{
                    // console.log("保存失败")
                 })
-              }else{
+              } else if (e.type == 'checkbox') {
+                  if (e.answer == [] ) {
+                  	userAddAnswer({
+                  	  value: '',  // 值
+                  	  qpid: e.id, // 关联id
+                  	  quid: localStorage.getItem('quid') // 用户的问卷id
+                  	})
+                  } else {
+                  	userAddAnswer({
+                  	  value: JSON.stringify(e.answer),  // 值
+                  	  qpid: e.id, // 关联id
+                  	  quid: localStorage.getItem('quid') // 用户的问卷id
+                  	})
+                  }
+                } else {
                 userAddAnswer({
                   value: JSON.stringify(e.answer),  // 值
                   qpid: e.id, // 关联id
