@@ -261,8 +261,9 @@
               <tbody>
                 <tr v-for="(item, index) in selectPofPList" :key="index">
                   <td class="border text-black hover:cursor-pointer">{{ item.value }}</td>
-                  <td class="border text-black">{{ whereType[item.type] }}</td>
                   <td class="border text-black">{{ item.ofqpid }}</td>
+                  <td class="border text-black">{{ whereType[item.type] }}</td>
+
                   <td class="border text-black">{{ item.ofvalue }}</td>
                   <td class="border text-black justify-around">
                     <div class="flex justify-around py-2 w-2/3 mx-auto">
@@ -385,7 +386,7 @@
             <el-form-item label="问题" :label-width="formLabelWidth">
               <el-select v-model="Pof.ofqpid" filterable :filter-method="ProPFilter" @change="bangdingxuanxiang(Pof.ofqpid)"
                 placeholder="请选择">
-                <el-option v-for="item in selectPofPFilterArr" :key="item.id" :label="item.title" :value="item.id">
+                <el-option v-for="item in selectPofPFilterArr" :key="item.id" :label="item.qpTitle" :value="item.problemId">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -1138,8 +1139,8 @@
         })
       },
       ProPFilter(val) { // 点击修改弹出的绑定问题模糊搜索
-        selectQuestionList("title=" + val).then((data) => {
-          this.selectPofPFilterArr = data.data.data.data
+        selectVague("title=" + val).then((data) => {
+          this.selectPofPFilterArr = data.data
         }).catch((data) => {
 
         })
