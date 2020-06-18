@@ -228,7 +228,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="问题" :label-width="formLabelWidth">
-              <el-select v-model="Pof.ofqpid" filterable :filter-method="ProPFilter" @change="bangdingxuanxiang(Pof.ofqpid)"
+              <el-select v-model="Pof.ofqpid" filterable :filter-method="ProPFilter" @change="bangdingxuanxiang()"
                 placeholder="请选择">
                 <el-option v-for="item in selectPofPFilterArr" :key="item.id" :label="item.title" :value="item.id">
                 </el-option>
@@ -384,9 +384,9 @@
               </el-select>
             </el-form-item>
             <el-form-item label="问题" :label-width="formLabelWidth">
-              <el-select v-model="Pof.ofqpid" filterable :filter-method="ProPFilter" @change="bangdingxuanxiang(Pof.ofqpid)"
+              <el-select v-model="Pof.ofqpid" filterable :filter-method="ProPFilter" @change="bangdingxuanxiang()"
                 placeholder="请选择">
-                <el-option v-for="item in selectPofPFilterArr" :key="item.id" :label="item.qpTitle" :value="item.problemId">
+                <el-option v-for="item in selectPofPFilterArr" :key="item.id" :label="item.qpTitle" :value="item.id">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -596,6 +596,7 @@
           ofqpid: null,
           ofvalue: null
         },
+
         TiaoJianList: [{
             title: '等于',
             value: '1'
@@ -759,7 +760,14 @@
         })
         this.selectOnlyQuestion()
       },
-      bangdingxuanxiang (e) {
+      bangdingxuanxiang () {
+        let obj = {}
+        obj = this.selectPofPFilterArr.find(
+            item=>{
+                return item.processNode=this.Pof.ofqpid //筛选出对应数据
+            }
+        )
+        const e = obj.problemId
         localStorage.setItem('pid', e)
         selectOnlyQuestion().then((data) => {
           this.selectPropList = data.data.child
