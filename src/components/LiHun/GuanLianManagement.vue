@@ -763,8 +763,8 @@
       bangdingxuanxiang () {
         let obj = {}
         obj = this.selectPofPFilterArr.find(
-            item=>{
-                return item.processNode=this.Pof.ofqpid //筛选出对应数据
+            item => {
+                return item.processNode = this.Pof.ofqpid //筛选出对应数据
             }
         )
         const e = obj.problemId
