@@ -18,7 +18,7 @@
           <ul class="caichanul" v-if="this.ins ===3" >
             <li v-bind:class="{active:index+3 == CaiIns}" @click="caichanNavBtn(index)" v-for="(item, index) in caichanNavList" :key="index" >{{ item.title }}</li>
           </ul>
-          <div v-if="this.ins ===3" class="othercai">其他财产 <img src="../../assets/images/open.png" alt=""></div>
+          <div v-if="this.ins ===3" class="othercai">其他财产 <img src="../../assets/images/download.png" alt=""></div>
           <ul class="caichanul" style="right: 100px;" v-if="zhaiquanNav">
             <li v-bind:class="{active:index+16 == zhaiIns}" @click="zhaiquanNavBtn(index)" v-for="(item, index) in zhaiquanNavList" :key="index" >{{ item.title }}</li>
           </ul>

@@ -42,7 +42,7 @@ const apiUrl = {
   // 修改用户
   updateUser: baseURL + 'users/update_user',
   // 查找用户
-  selectUser: baseURL + 'users/select_user',
+  selectUser: baseURL + 'users/select_user/',
   // 查找用户角色
   selectUserRoles: baseURL + 'users/select_user_roles',
   // 查找用户基本信息

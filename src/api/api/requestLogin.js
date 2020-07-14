@@ -55,7 +55,7 @@ export const selectUser = params => {
   return axios({
     method: "get",
     dataType: 'json',
-    url: apiUrl.selectUser+'?page='+params.page,
+    url: apiUrl.selectUser+'?type=1&page='+params.page ,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
