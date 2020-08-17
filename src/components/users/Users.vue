@@ -38,7 +38,7 @@
                     @current-change="handleUserList"
                     :page-size="pagesize"
                     :current-page.sync="currentPage"
-                    :total="this.min.total">
+                    :total="this.min">
                 </el-pagination>
             </div>
             <el-dialog title="新增用户" :visible.sync="dialogUserAdd">
@@ -124,7 +124,7 @@
                 },
                 UserRole: [],
                 chooseUserRole: [],
-                min: '',
+                min: null,
                 dialogFormVisible: false,
                 dialogUserAdd: false,
                 formLabelWidth: '80px',
@@ -138,7 +138,7 @@
                 last_page: null,
                 userList: [],
                 currentPage:1, //初始页
-                pagesize:20,    //    每页的数据
+                pagesize:10,    //    每页的数据
                 area: '', // 擅长领域
                 pageNum: 1, // 第几页
             }
@@ -151,7 +151,8 @@
             handleUserList () { // 获取用户
                 selectUser({page:this.currentPage}).then((data)=>{
                     this.pageInfo = data.data.data.data
-                    this.min = data.data.data
+                    this.min = data.data.data.total
+                    console.log(this.min)
                 }).catch((data)=>{
                     this.$router.replace("/");
                 })
