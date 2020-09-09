@@ -608,32 +608,33 @@ export default {
     getTeShuYueDingMsg () { // 查询特殊约定模块数据
       returnQuestionnaireJson({'qpid': 332}).then((data) => { // 查询特殊约定模块数据
         this.aa.TeShuYueDing = data.data.data
-        if (this.aa.TeShuYueDing[0][0].questions[0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].answer == '') {
-          this.aa.TeShuYueDing[0][0].questions[0].answer = []
-        } else {
-          this.aa.TeShuYueDing[0][0].questions[0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].answer)
-        }
-        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer == '') {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer = []
-        } else {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[1][0].answer)
-        }
-        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer == '') {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer = []
-        } else {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[2][0].answer)
-        }
-        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer == '') {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer = []
-        } else {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[3][0].answer)
-        }
-        if (this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer == '') {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer = []
-        } else {
-          this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[0].childQuestion[4][0].answer)
-        }
         this.fullscreenLoading = false
+        if (this.aa.TeShuYueDing[0][0].questions[1].answer === 1 || this.aa.TeShuYueDing[0][0].questions[1].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[1].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[1].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[1].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[1].childQuestion[1][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[1].childQuestion[1][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[1][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[1][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[1].childQuestion[1][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[1].childQuestion[2][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[1].childQuestion[2][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[2][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[2][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[1].childQuestion[2][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[1].childQuestion[3][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[1].childQuestion[3][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[3][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[3][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[1].childQuestion[3][0].answer)
+        }
+        if (this.aa.TeShuYueDing[0][0].questions[1].childQuestion[4][0].answer === 1 || this.aa.TeShuYueDing[0][0].questions[1].childQuestion[4][0].answer == '') {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[4][0].answer = []
+        } else {
+          this.aa.TeShuYueDing[0][0].questions[1].childQuestion[4][0].answer = JSON.parse(this.aa.TeShuYueDing[0][0].questions[1].childQuestion[4][0].answer)
+        }
+        this.loading = false
       }).catch((data) => {
       })
     },
