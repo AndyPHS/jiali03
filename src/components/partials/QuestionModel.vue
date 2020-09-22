@@ -97,10 +97,10 @@
               <el-date-picker
                 v-model="$$item.answer"
                 type="datetime"
+                value-format="yyyy-MM-dd hh:mm:ss"
                 size="small"
                 placeholder="选择日期"
-                @change="userAddAnswerAction($$item)"
-                value-format="yyyy-MM-dd hh:mm:ss">
+                @change="userAddAnswerAction($$item)">
               </el-date-picker>
             </el-form-item>
           </div>
@@ -542,7 +542,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -572,7 +572,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -602,7 +602,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-								  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -635,7 +635,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -668,7 +668,7 @@
 						      <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
 						        <div slot="content">
 						          <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-						          <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+						          <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
 						        </div>
 						        <i class="el-icon-question"></i>
 						      </el-tooltip>
@@ -701,7 +701,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -734,7 +734,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -767,7 +767,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -797,7 +797,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -830,7 +830,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -863,7 +863,7 @@
                               <el-tooltip  v-if="$$$$$item.description !='' && $$$$$item.description !=undefined  && $$$$$item.description != null" placement="right" effect="light">
                                 <div slot="content">
                                   <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                  <div id="caseMsg" class="h-auto w-full" v-model="$$$$$item.description"></div>
+                                  <div id="caseMsg" class="h-auto w-full" v-html="$$$$$item.description"></div>
                                 </div>
                                 <i class="el-icon-question"></i>
                               </el-tooltip>
@@ -900,7 +900,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -934,7 +934,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -952,10 +952,10 @@
                     <el-date-picker
                       v-model="$$$item.answer"
                       type="datetime"
+                      value-format="yyyy-MM-dd hh:mm:ss"
                       size="small"
                       placeholder="选择日期"
-                      @change="userAddAnswerAction($$$item)"
-                      value-format="yyyy-MM-dd hh:mm:ss">
+                      @change="userAddAnswerAction($$$item)">
                     </el-date-picker>
                   </el-form-item>
                 </div>
@@ -967,7 +967,7 @@
                     <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                       <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                       <i class="el-icon-question"></i>
                     </el-tooltip>
@@ -1003,7 +1003,7 @@
                     <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                       <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                       <i class="el-icon-question"></i>
                     </el-tooltip>
@@ -1038,7 +1038,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -1067,7 +1067,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1100,7 +1100,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1133,7 +1133,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1166,7 +1166,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1199,7 +1199,7 @@
 					        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
 					          <div slot="content">
 					            <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-					            <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+					            <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
 					          </div>
 					          <i class="el-icon-question"></i>
 					        </el-tooltip>
@@ -1232,7 +1232,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1262,7 +1262,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1290,7 +1290,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1324,7 +1324,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1342,10 +1342,10 @@
                           <el-date-picker
                             v-model="$$$$item.answer"
                             type="datetime"
+                            value-format="yyyy-MM-dd hh:mm:ss"
                             size="small"
                             placeholder="选择日期"
-                            @change="userAddAnswerAction($$$$item)"
-                            value-format="yyyy-MM-dd hh:mm:ss">
+                            @change="userAddAnswerAction($$$$item)">
                           </el-date-picker>
                         </el-form-item>
                       </div>
@@ -1357,7 +1357,7 @@
                           <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                             <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                             <i class="el-icon-question"></i>
                           </el-tooltip>
@@ -1393,7 +1393,7 @@
                           <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                             <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                             <i class="el-icon-question"></i>
                           </el-tooltip>
@@ -1428,7 +1428,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1456,7 +1456,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1489,7 +1489,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1522,7 +1522,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1555,7 +1555,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1588,7 +1588,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1624,7 +1624,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -1658,7 +1658,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1691,7 +1691,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1724,7 +1724,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1757,7 +1757,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1790,7 +1790,7 @@
 					        <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
 					          <div slot="content">
 					            <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-					            <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+					            <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
 					          </div>
 					          <i class="el-icon-question"></i>
 					        </el-tooltip>
@@ -1823,7 +1823,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1853,7 +1853,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1881,7 +1881,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1915,7 +1915,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -1933,10 +1933,10 @@
                           <el-date-picker
                             v-model="$$$$item.answer"
                             type="datetime"
+                            value-format="yyyy-MM-dd hh:mm:ss"
                             size="small"
                             placeholder="选择日期"
-                            @change="userAddAnswerAction($$$$item)"
-                            value-format="yyyy-MM-dd hh:mm:ss">
+                            @change="userAddAnswerAction($$$$item)">
                           </el-date-picker>
                         </el-form-item>
                       </div>
@@ -1948,7 +1948,7 @@
                           <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                             <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                             <i class="el-icon-question"></i>
                           </el-tooltip>
@@ -1984,7 +1984,7 @@
                           <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                             <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                             <i class="el-icon-question"></i>
                           </el-tooltip>
@@ -2019,7 +2019,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -2047,7 +2047,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -2080,7 +2080,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -2113,7 +2113,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -2146,7 +2146,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -2179,7 +2179,7 @@
                             <el-tooltip  v-if="$$$$item.description !='' && $$$$item.description !=undefined  && $$$$item.description != null" placement="right" effect="light">
                               <div slot="content">
                                 <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                                <div id="caseMsg" class="h-auto w-full" v-model="$$$$item.description"></div>
+                                <div id="caseMsg" class="h-auto w-full" v-html="$$$$item.description"></div>
                               </div>
                               <i class="el-icon-question"></i>
                             </el-tooltip>
@@ -2215,7 +2215,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -2248,7 +2248,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -2281,7 +2281,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -2314,7 +2314,7 @@
                       <el-tooltip  v-if="$$$item.description !='' && $$$item.description !=undefined  && $$$item.description != null" placement="right" effect="light">
                         <div slot="content">
                           <h3 style="color:#ff3f68" class="text-center text-base w-full font-bold">小贴士</h3><br/>
-                          <div id="caseMsg" class="h-auto w-full" v-model="$$$item.description"></div>
+                          <div id="caseMsg" class="h-auto w-full" v-html="$$$item.description"></div>
                         </div>
                         <i class="el-icon-question"></i>
                       </el-tooltip>
@@ -4212,10 +4212,10 @@
                     <el-date-picker
                       v-model="$$$item.answer"
                       type="datetime"
+                      value-format="yyyy-MM-dd hh:mm:ss"
                       size="small"
                       placeholder="选择日期"
-                      @change="userAddAnswerAction($$$item)"
-                      value-format="yyyy-MM-dd hh:mm:ss">
+                      @change="userAddAnswerAction($$$item)">
                     </el-date-picker>
                   </el-form-item>
                 </div>
@@ -4604,9 +4604,8 @@
                             type="datetime"
                             size="small"
                             placeholder="选择日期"
-                            format="yyyy 年 MM 月 dd 日"
-                            @change="userAddAnswerAction($$$$item)"
-                            value-format="yyyy-MM-dd hh:mm:ss">
+                            value-format="yyyy-MM-dd hh:mm:ss"
+                            @change="userAddAnswerAction($$$$item)">
                           </el-date-picker>
                         </el-form-item>
                       </div>
@@ -5194,10 +5193,10 @@
                           <el-date-picker
                             v-model="$$$$item.answer"
                             type="datetime"
+                            value-format="yyyy-MM-dd hh:mm:ss"
                             size="small"
                             placeholder="选择日期"
-                            @change="userAddAnswerAction($$$$item)"
-                            value-format="yyyy-MM-dd hh:mm:ss">
+                            @change="userAddAnswerAction($$$$item)">
                           </el-date-picker>
                         </el-form-item>
                       </div>
@@ -6789,10 +6788,10 @@
                     <el-date-picker
                        v-model="$$$item.answer"
                        type="datetime"
+                       value-format="yyyy-MM-dd hh:mm:ss"
                        size="small"
                        placeholder="选择日期"
-                       @change="userAddAnswerAction($$$item)"
-                       value-format="yyyy-MM-dd hh:mm:ss">
+                       @change="userAddAnswerAction($$$item)">
                     </el-date-picker>
                    </el-form-item>
                   </div>
@@ -7770,10 +7769,10 @@
                             <el-date-picker
                               v-model="$$$$item.answer"
                               type="datetime"
+                              value-format="yyyy-MM-dd hh:mm:ss"
                               size="small"
                                @change="userAddAnswerAction($$$$item)"
-                              placeholder="选择日期"
-                              value-format="yyyy-MM-dd hh:mm:ss">
+                              placeholder="选择日期">
                             </el-date-picker>
                           </el-form-item>
                         </div>
@@ -8388,7 +8387,7 @@
 </template>
 
 <script>
-   import {userAddAnswer} from '@/api/api/AgreementRequest.js'    // 用户添加问卷的内容
+   import {userAddAnswer} from '@/api/api/requestLogin.js'    // 用户添加问卷的内容
    import { regionData, CodeToText,TextToCode  } from 'element-china-area-data'    // 省市联动信息
   export default {
     props: {
@@ -8445,7 +8444,7 @@
               } else if (e.input_type == 'IdCard' ) {
 				alert(1)
 				var idCard = e.answer
-				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;	
+				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 				if (regIdCard.test(idCard)) {
 					if(idCard.length==18){
 						var idCardWi=new Array( 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ); //将前17位加权因子保存在数组里
@@ -8560,7 +8559,7 @@
                 })
               } else if (e.input_type == 'IdCard' ) {
 				var idCard = e.answer
-				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;	
+				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 				if (regIdCard.test(idCard)) {
 					if(idCard.length==18){
 						var idCardWi=new Array( 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ); //将前17位加权因子保存在数组里
@@ -8684,7 +8683,7 @@
               })
             } else if (e.input_type == 'IdCard' ) {
 				var idCard = e.answer
-				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;	
+				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 				if (regIdCard.test(idCard)) {
 					if(idCard.length==18){
 						var idCardWi=new Array( 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ); //将前17位加权因子保存在数组里
@@ -8790,7 +8789,7 @@
               })
             } else if (e.input_type == 'IdCard' ) {
 				var idCard = e.answer
-				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;	
+				var regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 				if (regIdCard.test(idCard)) {
 					if(idCard.length==18){
 						var idCardWi=new Array( 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2 ); //将前17位加权因子保存在数组里
