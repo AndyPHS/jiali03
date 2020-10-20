@@ -61,6 +61,9 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
+			  <el-button
+			    size="mini"
+			    @click="CopyWenJuan(scope.$index, scope.row)">复制</el-button>
               <el-button
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">编辑</el-button>
@@ -164,6 +167,8 @@ import {addQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {updateQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
 import {selectTree} from '@/api/api/requestLogin.js'    // 查询关系
+import {copyQuestionnaire} from '@/api/api/requestLogin.js'  // 复制问卷
+
 
 // import {answer} from '@/api/api/requestLogin.js'
 export default {
@@ -288,6 +293,13 @@ export default {
       localStorage.setItem('qid',row.id)
       this.$router.replace("/LabelManagement");
     },
+	CopyWenJuan(index, row) { // 复制问卷
+	  copyQuestionnaire({id: row.id}).then((data)=>{
+      if(data.data.status_code==200){
+        this.getQuestionnaireSelect()   // 查询问卷
+      }
+    })
+	},
     EditWenJuan(index, row) {   // 点击修改问卷
       this.dialogEditWenJuan = true
       this.addMsg.title = row.title;

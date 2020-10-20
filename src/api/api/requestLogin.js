@@ -816,6 +816,16 @@ export const questionnaireSelect = params => {
     data: params
   });
 };
+// 复制文件
+export const copyQuestionnaire = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.copyQuestionnaire + params.id,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 通过类型查询问卷
 export const questionnaireSelectAll = params => {
   return axios({

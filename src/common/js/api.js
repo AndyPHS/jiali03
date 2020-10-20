@@ -213,6 +213,8 @@ const apiUrl = {
   questionnaire: baseLiHunURL + 'questionnaire/created',
   // 查询问卷
   questionnaireSelect: baseLiHunURL + 'questionnaire/select',
+  // 复制问卷
+  copyQuestionnaire: baseLiHunURL + 'questionnaire/copy_questionnaire/',
   // 新增问卷
   addQuestionnaire: baseLiHunURL + 'questionnaire/add',
   // 修改问卷
