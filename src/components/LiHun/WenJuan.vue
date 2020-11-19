@@ -61,9 +61,9 @@
           </el-table-column>
           <el-table-column label="操作">
             <template slot-scope="scope">
-			  <el-button
-			    size="mini"
-			    @click="CopyWenJuan(scope.$index, scope.row)">复制</el-button>
+              <el-button
+                size="mini"
+                @click="CopyWenJuan(scope.$index, scope.row)">复制</el-button>
               <el-button
                 size="mini"
                 @click="EditWenJuan(scope.$index, scope.row)">编辑</el-button>
@@ -160,22 +160,21 @@
 
 </template>
 <script>
-import HeadMenu from '@/components/HeadMenu'    // 添加公共头部
+import HeadMenu from '@/components/HeadMenu' // 添加公共头部
 import {questionnaire} from '@/api/api/requestLogin.js' // 获取问卷类型
 import {questionnaireSelectAll} from '@/api/api/requestLogin.js' // 查询问卷
 import {addQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {updateQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
-import {selectTree} from '@/api/api/requestLogin.js'    // 查询关系
-import {copyQuestionnaire} from '@/api/api/requestLogin.js'  // 复制问卷
-
+import {selectTree} from '@/api/api/requestLogin.js' // 查询关系
+import {copyQuestionnaire} from '@/api/api/requestLogin.js' // 复制问卷
 
 // import {answer} from '@/api/api/requestLogin.js'
 export default {
   data () {
-    return{
-      questionnaireType: {},   // 问卷数组类型
-      QuestionnaireSelectArr: [  // 获取问卷
+    return {
+      questionnaireType: {}, // 问卷数组类型
+      QuestionnaireSelectArr: [ // 获取问卷
         {
           // "id": 3,
           // "title": "离婚协议书",
@@ -190,193 +189,192 @@ export default {
           // "wid": null
         }
       ],
-      formLabelWidth: '80px',   // 表单标签宽度
-      dialogNewWenJuan: false,  // 新增问卷弹框
-      dialogEditWenJuan: false,  // 编辑问卷弹框
-      OfqpListData: [],  // 获取问卷所有的关联
-      addMsg: {  // 新增问卷字段
-        title: '',  // 标题
-        type: null,  // 问卷类型
+      formLabelWidth: '80px', // 表单标签宽度
+      dialogNewWenJuan: false, // 新增问卷弹框
+      dialogEditWenJuan: false, // 编辑问卷弹框
+      OfqpListData: [], // 获取问卷所有的关联
+      addMsg: { // 新增问卷字段
+        title: '', // 标题
+        type: null, // 问卷类型
         description: '', // 备注
         purpose: '', // 用途
-        status: null,  // 是否禁止访问
-        Ofqp: []   // 问卷默认加载一个内容
+        status: null, // 是否禁止访问
+        Ofqp: [] // 问卷默认加载一个内容
       }
     }
   },
   name: 'WenJuan',
   components: {
-    HeadMenu,
+    HeadMenu
   },
   mounted () {
     this.getQuestionnaire() // 获取问卷类型
-    this.getQuestionnaireSelect()   // 查询问卷
+    this.getQuestionnaireSelect() // 查询问卷
   },
   methods: {
-    getQuestionnaireSelect(){  // 查询问卷
-      questionnaireSelectAll().then((data)=>{
-        if(data.data.status_code == 200 ){
+    getQuestionnaireSelect () { // 查询问卷
+      questionnaireSelectAll().then((data) => {
+        if (data.data.status_code === 200) {
           this.QuestionnaireSelectArr = data.data.data
           // console.log(this.QuestionnaireSelectArr)
-        }else{
+        } else {
           this.$message({
             message: '问卷获取失败',
             type: 'error'
-          });
+          })
         }
-      }).catch((data)=>{
+      }).catch((data) => {
 
       })
     },
-    getQuestionnaire(){   // 获取问卷类型
-      questionnaire().then((data)=>{
-        if(data.data.status_code == 200 ){
+    getQuestionnaire () { // 获取问卷类型
+      questionnaire().then((data) => {
+        if (data.data.status_code === 200) {
           this.questionnaireType = data.data.data.questionnaireType
           // console.log(this.questionnaireType)
-        }else{
+        } else {
           this.$message({
             message: '问卷类型获取失败',
             type: 'error'
-          });
+          })
         }
         // console.log(data.data.data.questionnaireType)
-      }).catch((data)=>{
+      }).catch((data) => {
 
       })
     },
-    addNewWenJuan(){   // 新增问卷
-      this.dialogNewWenJuan = true;
-      this.addMsg.title = '';
-      this.addMsg.type = null;
-      this.addMsg.description = '';
-      this.addMsg.purpose = '';
-      this.addMsg.status = null;
+    addNewWenJuan () { // 新增问卷
+      this.dialogNewWenJuan = true
+      this.addMsg.title = ''
+      this.addMsg.type = null
+      this.addMsg.description = ''
+      this.addMsg.purpose = ''
+      this.addMsg.status = null
     },
-    addQuestionnaireOk(){  // 点击新增确定按钮
+    addQuestionnaireOk () { // 点击新增确定按钮
       addQuestionnaire({
         title: this.addMsg.title,
         type: this.addMsg.type,
         description: this.addMsg.description,
         purpose: this.addMsg.purpose,
         status: this.addMsg.status
-      }).then((data)=>{
-          if(data.data.status_code == 200 ){
-            this.dialogNewWenJuan = false;
-            this.getQuestionnaireSelect()
-            this.$message({
-              message: '添加成功',
-              type: 'success'
-            });
-          }else{
-            this.$message({
-              message: '新增失败，请联系管理员',
-              type: 'error'
-            });
-          }
-      }).catch((data)=>{
+      }).then((data) => {
+        if (data.data.status_code === 200) {
+          this.dialogNewWenJuan = false
+          this.getQuestionnaireSelect()
+          this.$message({
+            message: '添加成功',
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: '新增失败，请联系管理员',
+            type: 'error'
+          })
+        }
+      }).catch((data) => {
 
       })
     },
-    cancelAddQuestionnaire(){  // 点击新增取消按钮
-      this.dialogNewWenJuan = false;
+    cancelAddQuestionnaire () { // 点击新增取消按钮
+      this.dialogNewWenJuan = false
     },
-    checkGuanLian(index, row){ // 点击查看关联
-      localStorage.setItem('qid',row.id)
-      this.$router.replace("/GuanLianManagement");
+    checkGuanLian (index, row) { // 点击查看关联
+      localStorage.setItem('qid', row.id)
+      this.$router.replace('/GuanLianManagement')
     },
-    checkModel(index, row){  // 点击查看模板
-      localStorage.setItem('wid',row.wid)
-      localStorage.setItem('qid',row.id)
-      this.$router.replace("/DisplayRule");
+    checkModel (index, row) { // 点击查看模板
+      localStorage.setItem('wid', row.wid)
+      localStorage.setItem('qid', row.id)
+      this.$router.replace('/DisplayRule')
     },
-    checkLabel(index, row){  // 点击标签池
-      localStorage.setItem('qid',row.id)
-      this.$router.replace("/LabelManagement");
+    checkLabel (index, row) { // 点击标签池
+      localStorage.setItem('qid', row.id)
+      this.$router.replace('/LabelManagement')
     },
-	CopyWenJuan(index, row) { // 复制问卷
-	  copyQuestionnaire({id: row.id}).then((data)=>{
-      if(data.data.status_code==200){
-        this.getQuestionnaireSelect()   // 查询问卷
-      }
-    })
-	},
-    EditWenJuan(index, row) {   // 点击修改问卷
-      this.dialogEditWenJuan = true
-      this.addMsg.title = row.title;
-      this.addMsg.type = row.type;
-      this.addMsg.description = row.description;
-      this.addMsg.purpose = row.purpose;
-      this.addMsg.status = row.status;
-      this.addMsg.Ofqp = row.Ofqp;
-      localStorage.setItem('qid',row.id)
-      selectTree().then((data)=>{
-          this.OfqpListData = data.data.data.data
-      }).catch((data)=>{
-          console.log("请求失败")
+    CopyWenJuan (index, row) { // 复制问卷
+      copyQuestionnaire({id: row.id}).then((data) => {
+        if (data.data.status_code === 200) {
+          this.getQuestionnaireSelect() // 查询问卷
+        }
       })
     },
-    EditQuestionnaireOk(){  // 点击修改问卷确定按钮
+    EditWenJuan (index, row) { // 点击修改问卷
+      this.dialogEditWenJuan = true
+      this.addMsg.title = row.title
+      this.addMsg.type = row.type
+      this.addMsg.description = row.description
+      this.addMsg.purpose = row.purpose
+      this.addMsg.status = row.status
+      this.addMsg.Ofqp = row.Ofqp
+      localStorage.setItem('qid', row.id)
+      selectTree().then((data) => {
+        this.OfqpListData = data.data.data.data
+      }).catch((data) => {
+        console.log('请求失败')
+      })
+    },
+    EditQuestionnaireOk () { // 点击修改问卷确定按钮
       var form = {}
-      form.title = this.addMsg.title;
-      form.type = this.addMsg.type;
-      form.description = this.addMsg.description;
-      form.purpose = this.addMsg.purpose;
-      form.status = this.addMsg.status;
-      if(this.addMsg.Ofqp.length>0 && this.addMsg.Ofqp !=null && this.addMsg.Ofqp !='null'){
+      form.title = this.addMsg.title
+      form.type = this.addMsg.type
+      form.description = this.addMsg.description
+      form.purpose = this.addMsg.purpose
+      form.status = this.addMsg.status
+      if (this.addMsg.Ofqp.length > 0 && this.addMsg.Ofqp != null && this.addMsg.Ofqp != 'null') {
         form.Ofqp = JSON.stringify(this.addMsg.Ofqp)
       }
-      updateQuestionnaire(form).then((data)=>{
-        if(data.data.status_code == 200 ){
-          localStorage.removeItem('qid');
-          this.dialogNewWenJuan = false;
+      updateQuestionnaire(form).then((data) => {
+        if (data.data.status_code === 200) {
+          localStorage.removeItem('qid')
+          this.dialogNewWenJuan = false
           this.getQuestionnaireSelect()
           this.$message({
             message: '修改成功',
             type: 'success'
-          });
+          })
           this.dialogEditWenJuan = false
-        }else{
+        } else {
           this.$message({
             message: '修改失败，请联系管理员',
             type: 'error'
-          });
+          })
         }
-      }).catch((data)=>{
+      }).catch((data) => {
 
       })
     },
-    cancelEditQuestionnaire(){  // 点击修改问卷取消按钮
+    cancelEditQuestionnaire () { // 点击修改问卷取消按钮
       this.dialogEditWenJuan = false
     },
-    DeleteWenJuan(index, row) {  // 删除问卷
-      localStorage.setItem('qid',row.id)
+    DeleteWenJuan (index, row) { // 删除问卷
+      localStorage.setItem('qid', row.id)
       this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-          deleteQuestionnaire().then((data)=>{
-            if(data.data.status_code == 200 ){
-              localStorage.removeItem('qid');
-              this.getQuestionnaireSelect()
-              this.$message({
-                message: '删除成功',
-                type: 'success',
-                duration: 1000
-              });
-            }else{
-              this.$message.error('删除失败，请联系管理员');
-            }
-
-          }).catch((data)=>{
-            this.$message.error('删除失败，请联系管理员');
-          })
+        deleteQuestionnaire().then((data) => {
+          if (data.data.status_code === 200) {
+            localStorage.removeItem('qid')
+            this.getQuestionnaireSelect()
+            this.$message({
+              message: '删除成功',
+              type: 'success',
+              duration: 1000
+            })
+          } else {
+            this.$message.error('删除失败，请联系管理员')
+          }
+        }).catch((data) => {
+          this.$message.error('删除失败，请联系管理员')
+        })
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消删除'
-        });
-      });
+        })
+      })
     }
   }
 }
