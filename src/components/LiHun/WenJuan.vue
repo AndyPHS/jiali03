@@ -316,14 +316,16 @@ export default {
       })
     },
     EditQuestionnaireOk(){  // 点击修改问卷确定按钮
-      updateQuestionnaire({
-        title: this.addMsg.title,
-        type: this.addMsg.type,
-        description: this.addMsg.description,
-        purpose: this.addMsg.purpose,
-        status: this.addMsg.status,
-        Ofqp: JSON.stringify(this.addMsg.Ofqp)
-      }).then((data)=>{
+      var form = {}
+      form.title = this.addMsg.title;
+      form.type = this.addMsg.type;
+      form.description = this.addMsg.description;
+      form.purpose = this.addMsg.purpose;
+      form.status = this.addMsg.status;
+      if(this.addMsg.Ofqp.length>0 && this.addMsg.Ofqp !=null && this.addMsg.Ofqp !='null'){
+        form.Ofqp = JSON.stringify(this.addMsg.Ofqp)
+      }
+      updateQuestionnaire(form).then((data)=>{
         if(data.data.status_code == 200 ){
           localStorage.removeItem('qid');
           this.dialogNewWenJuan = false;
