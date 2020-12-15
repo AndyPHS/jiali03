@@ -5,8 +5,8 @@
             <el-collapse-item title="婚姻关系" name="1">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
-                   v-for="(item, index) in lessonFor"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hover:text-white cursor-pointer"
+                   v-for="item in lessonFor"
                    :key="item.id"
                    @click="addLabelarr(item.title, item.id)"
                    >
@@ -17,8 +17,8 @@
             <el-collapse-item title="子女关系" name="2">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
-                   v-for="(item, index) in lessonSec"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hover:text-white cursor-pointer"
+                   v-for="item in lessonSec"
                    :key="item.id"
                    @click="addLabelarr(item.title, item.id)"
                    >
@@ -29,8 +29,8 @@
             <el-collapse-item title="财产关系" name="3">
               <div class="text-left">
                 <el-tag
-                  class="mx-1 my-1 hover:bg-green-500 bg-white hidden hover:text-white cursor-pointer"
-                   v-for="(item, index) in lessonThi"
+                  class="mx-1 my-1 hover:bg-green-500 bg-white hover:text-white cursor-pointer"
+                   v-for="item in lessonThi"
                    :key="item.id"
                    @click="addLabelarr(item.title, item.id)"
                    >
@@ -112,24 +112,19 @@
       // },
 
       getCaseLable () {    // 获取标签池标签
+        var that = this;
         selectCaseLable().then((data) =>{
           this.oldlabel = data.data.data;
-          console.log()
-          for (var i = 0; i <this.oldlabel.length -1; i++) {
-            // console.log(this.oldlabel[i])
-            switch(this.oldlabel[i].tid) {
-              case 0:
-              this.lessonOne.push(this.oldlabel[i])
-              break;
-            case 10:
-              this.lessonFor.push(this.oldlabel[i])
-              break;
-            case 11:
-              this.lessonSec.push(this.oldlabel[i])
-              break;
-            case 12:
-              this.lessonThi.push(this.oldlabel[i])
-              break
+          var laball = data.data.data;
+          for (var i = 0; i <laball.length; i++) {
+            if(laball[i].tid==0){
+              that.lessonOne.push(laball[i])
+            } else if(laball[i].tid==10){
+              that.lessonFor.push(laball[i])
+            } else if (laball[i].tid==11){
+              that.lessonSec.push(laball[i])
+            } else if (laball[i].tid==12){
+              that.lessonThi.push(laball[i])
             }
           }
         })
