@@ -140,7 +140,7 @@
       addLabelarr (t, id) {   // 从标签池选择添加标签
         this.labelarr.push({title:t,id: id});
         this.label_case.push({title:t,id: id});
-        updateCaseData({json_label:id,type: 1}).then((data) =>{
+        updateCaseData({json_label:id,type: 1,json_label_weight:0}).then((data) =>{
           // console.log(JSON.parse(data.config.data))
         })
       },

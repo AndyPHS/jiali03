@@ -491,19 +491,23 @@
           description: '',         // 案情概述
           description_spot: null,  // 案情看点
           case_epitome: null,    // 案件缩影
-          case_evidence: null,  // 证据摘要
+          case_evidence: {
+              y: [
+                {
+                  evidence: '',
+                  f: null
+                }
+              ],
+              b: []
+            },  // 证据摘要
           legal_basis: null,   //法律依据
           cid: 2,
           content: '',       // 判决书内容
           imgs: '',          // 判决书图片
           json_content: '',
           label_case: '[{\"lid\":6}]',   // 标签
-          lawyer: '',
-          legal_basis: [],     //法律依据
+          lawyer: [],
           plaintiff: ''
-        },
-        case_action: {
-          name:''
         },
         court: null,
         showFlag: false,
@@ -553,53 +557,53 @@
       }
     },
     mounted(){
-      this.getInfo(); // 获取页面信息
-      this.getCaseCourtMsg ();  // 获取法院信息
-      this.selectCaseAction ();  // 获取案由
-      this.getCourt();
+      this.getInfo() // 获取页面信息
+      this.getCaseCourtMsg()  // 获取法院信息
+      this.selectCaseAction()  // 获取案由
+      this.getCourt()
     },
-    created(){
+    created () {
 
     },
-    watch:{
-     searchVal:function(){    //法院人员模糊搜索
-        this.focus();
+    watch: {
+     searchVal:function () {    //法院人员模糊搜索
+        this.focus()
      }
     },
     updated () {
-      this.highlightMsg ()  // 高亮显示关键字
-      this.changeLegal_basis_type () //将法律依据转换为文字
+      this.highlightMsg()  // 高亮显示关键字
+      this.changeLegal_basis_type() //将法律依据转换为文字
       // this.parts ()   // 判决书首行缩
     },
     methods: {
-      handleClick(tab, event) {
+      handleClick (tab, event) {
       },
       goArrangementCase () {
-        this.$router.replace("/ArrangementCase");
+        this.$router.replace("/ArrangementCase")
       },
-      addCourtPersonnelsSuccess(mes) {    // 法院人员添加成功提醒
+      addCourtPersonnelsSuccess (mes) {    // 法院人员添加成功提醒
         this.$message({
           message: mes,
           type: 'success'
-        });
+        })
       },
       errorMesAlert (e) {
-        this.$message.error(e);
+        this.$message.error(e)
       },
       getInfo () {
         selectCaseData().then((data) => {
           this.pageInfo = data.data;
           this.getCourtPersonnel();  //获取法院人员信息
-          this.court_personnel1=[]
-          this.court_personnel2=[]
-          this.court_personnel3=[]
-          this.court_personnel4=[]
-          this.court_personnel5=[]
-          this.court_personnel6=[]
-          this.court_personnel7=[]
-          this.pageInfo.courtPersonnel=JSON.parse( this.pageInfo.courtPersonnel )
-          this.pageInfo.lawyer=JSON.parse( this.pageInfo.lawyer )
-          for(var v in this.pageInfo.courtPersonnel) {
+          this.court_personnel1 = []
+          this.court_personnel2 = []
+          this.court_personnel3 = []
+          this.court_personnel4 = []
+          this.court_personnel5 = []
+          this.court_personnel6 = []
+          this.court_personnel7 = []
+          this.pageInfo.courtPersonnel = JSON.parse(data.data.courtPersonnel)
+          this.pageInfo.lawyer = JSON.parse(data.data.lawyer)
+          for (var v in this.pageInfo.courtPersonnel) {
             // this.pageInfo.courtPersonnel[v].oldcpid=this.pageInfo.courtPersonnel[v].cpid
             switch (this.pageInfo.courtPersonnel[v].status) {
               case 1:
@@ -630,7 +634,7 @@
           // console.log(this.court_personnel3,this.court_personnel2,this.court_personnel1)
           this.pageInfo.imgs = JSON.parse(data.data.imgs)
           this.pageInfo.case_epitome = JSON.parse(data.data.case_epitome)
-          if(data.data.case_epitome == null) {
+          if (data.data.case_epitome == null) {
             this.pageInfo.case_epitome = [{  // 案件缩影格式定义
               title: '',
               data: {
