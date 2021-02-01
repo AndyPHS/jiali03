@@ -38,6 +38,11 @@
 
                   <!-- <el-menu-item index="BasicInformation"><router-link to="BasicInformation">填写问卷</router-link></el-menu-item> -->
                 </el-submenu>
+                <el-submenu index="3-3">
+                  <template slot="title">问卷捆绑</template>
+                  <el-menu-item index="KunbangList" v-if="this.wenjuan.questionnaireAdmin"><router-link to="KunbangList">捆绑列表</router-link></el-menu-item>
+                  <!-- <el-menu-item index="KunbangCon" v-if="this.wenjuan.questionnaire"><router-link to="KunbangCon">捆绑详情</router-link></el-menu-item> -->
+                </el-submenu>
             </el-submenu>
         </el-menu>
         <div class="text-right text-white pr-10">
@@ -49,86 +54,90 @@
 </template>
 
 <script>
-  import {usersSelect} from '@/api/api/requestLogin.js'  // 查询角色
+import {usersSelect} from '@/api/api/requestLogin.js' // 查询角色
 
-  export default {
-    name: 'HeadMenu.vue',
-    data() {
-      return {
-        activeIndex: '1',
-        permissions: [], // 用户权限
-        permissionsId: [], // 用户权限id
-        roles: [],
-        rolesId: [],
-        permissionHead: {    // 用户管理
-            guanliyuan: false,  // 管理员
-            quanxian: false,   // 权限
-            juese: false,      // 角色
-        },
-        caseHead: {  // 案例管理
-            caseManagement: false  // 案例管理
-        },
-        wenjuan: {   // 问卷模块
-            questionnaire: false,   // 问卷管理
-            questionnaireAdmin: false  // 问卷问题等修改
-        },
-        user: localStorage.getItem('name')
-      };
-    },
-    mounted(){
-      this.getUserSelect()   // 查找用户基本信息
-    },
-    methods: {
-      handleSelect(key, keyPath) {
-        // console.log(key, keyPath);
+export default {
+  name: 'HeadMenu.vue',
+  data () {
+    return {
+      activeIndex: '1',
+      permissions: [], // 用户权限
+      permissionsId: [], // 用户权限id
+      roles: [],
+      rolesId: [],
+      permissionHead: { // 用户管理
+        guanliyuan: false, // 管理员
+        quanxian: false, // 权限
+        juese: false // 角色
       },
-      getUserSelect () { // 获取前用户拥有的权限
-        usersSelect().then((data)=>{
-            this.permissions = data.data.permissions
-            this.roles = data.data.roles;
-            // this.roles.forEach((item)=>{
-            //   this.rolesId.push(item.name)
-            // })
-            // this.objOfValueToArr(this.rolesId)
-            if(this.permissions !== []){
-                this.permissions.forEach((item)=>{
-                  this.permissionsId.push(item.id)
-                    if(item.id==11){
-                        this.permissionHead.juese = true
-                    }else if(item.id == 12){
-                        this.permissionHead.quanxian = true
-                    }else if(item.id == 13){
-                        this.permissionHead.guanliyuan = true
-                    }else if(item.id == 67){
-                        this.caseHead.caseManagement = true
-                    }else if(item.id == 68){
-                        this.wenjuan.questionnaireAdmin = true
-                    }else if(item.id == 69){
-                        this.wenjuan.questionnaire = true
-                    }
-                })
+      caseHead: { // 案例管理
+        caseManagement: false // 案例管理
+      },
+      wenjuan: { // 问卷模块
+        questionnaire: false, // 问卷管理
+        questionnaireAdmin: false // 问卷问题等修改
+      },
+      kunbang: { // 问卷捆绑
+        kunbanglist: false, // 捆绑列表
+        kunbangcon: false // 捆绑详情
+      },
+      user: localStorage.getItem('name')
+    }
+  },
+  mounted () {
+    this.getUserSelect() // 查找用户基本信息
+  },
+  methods: {
+    handleSelect (key, keyPath) {
+      // console.log(key, keyPath);
+    },
+    getUserSelect () { // 获取前用户拥有的权限
+      usersSelect().then((data) => {
+        this.permissions = data.data.permissions
+        this.roles = data.data.roles
+        // this.roles.forEach((item)=>{
+        //   this.rolesId.push(item.name)
+        // })
+        // this.objOfValueToArr(this.rolesId)
+        if (this.permissions !== []) {
+          this.permissions.forEach((item) => {
+            this.permissionsId.push(item.id)
+            if (item.id === 11) {
+              this.permissionHead.juese = true
+            } else if (item.id === 12) {
+              this.permissionHead.quanxian = true
+            } else if (item.id === 13) {
+              this.permissionHead.guanliyuan = true
+            } else if (item.id === 67) {
+              this.caseHead.caseManagement = true
+            } else if (item.id === 68) {
+              this.wenjuan.questionnaireAdmin = true
+            } else if (item.id === 69) {
+              this.wenjuan.questionnaire = true
             }
-          // console.log(data.data.permissions)
-        }).catch((data)=>{
+          })
+        }
+        // console.log(data.data.permissions)
+      }).catch((data) => {
 
-        })
-      },
-      // objOfValueToArr(object) {
-      //     var arr = [];
-      //     var i = 0;
-      //     for (var item in object) {
-      //         arr[i] = object[item];
-      //         i++;
-      //     }
-      //     return arr;
-      // },
-      Exit(){
-        this.$router.replace("/");
-        localStorage.removeItem('token')
-        localStorage.removeItem('roleType')
-      }
+      })
+    },
+    // objOfValueToArr(object) {
+    //     var arr = [];
+    //     var i = 0;
+    //     for (var item in object) {
+    //         arr[i] = object[item];
+    //         i++;
+    //     }
+    //     return arr;
+    // },
+    Exit () {
+      this.$router.replace('/')
+      localStorage.removeItem('token')
+      localStorage.removeItem('roleType')
     }
   }
+}
 </script>
 
 <style scoped>

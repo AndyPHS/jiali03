@@ -22,6 +22,7 @@
                             <div class="flex justify-around py-2 w-2/3 mx-auto">
                                 <el-button type="primary" icon="el-icon-edit" circle @click="handleClick(item.id)"></el-button>
                                 <el-button icon="el-icon-search" circle @click="checkMsg(item.id)"></el-button>
+                                <el-button @click="deleteOne(item.id)" v-if="rolesSelect == 'AdminOne'" type="danger" icon="el-icon-delete" circle></el-button>
                             </div>
                         </td>
                     </tr>
@@ -63,10 +64,12 @@
 </template>
 
 <script>
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import HeadMenu from '@/components/HeadMenu'
-import {fileList} from '@/api/api/requestLogin.js' // 获取案件列表
+import {fileList, deleteCase} from '@/api/api/requestLogin.js' // 获取案件列表
 import {selectCaseData} from '@/api/api/requestLogin.js' // 查询案件
+import {usersSelect} from '@/api/api/requestLogin.js' // 查询角色
+
 export default {
   components: {
     HeadMenu
@@ -124,14 +127,34 @@ export default {
       currentPage: 1, // 初始页
       pagesize: 20, //    每页的数据
       total: 0, // 总页数
-      isloading: false
+      isloading: false,
 
+      // 权限
+      roles: [],
+      permissions: [],
+      rolesSelect: null
     }
   },
   mounted () {
-    this.handleUserList()
+    this.handleUserList();
+    this.getUserSelect() // 查找用户基本信息
   },
   methods: {
+    getUserSelect () { // 获取前用户拥有的权限
+      var that = this;
+      usersSelect().then((data) => {
+        this.permissions = data.data.permissions
+        this.roles = data.data.roles
+        var ro = data.data.roles;
+        for(var i=0; i<ro.length; i++){
+          if(ro[i].name == 'AdminOne'){
+            that.rolesSelect = 'AdminOne';
+          }
+        }
+      }).catch((data) => {
+
+      })
+    },
     handleUserList () {
       fileList({page: this.currentPage}).then((data) => {
         this.minlist = data.data.data
@@ -183,6 +206,29 @@ export default {
     // },
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage// 点击第几页
+    },
+    deleteOne (e) { // 删除
+      this.$confirm('是否删除该案件?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() =>{
+        deleteCase(e).then((data) =>{
+          if(data.data.status_code == 200){
+            this.$message({
+              message: '删除成功',
+              type: 'success',
+              duration: 1000
+            })
+            this.handleUserList();
+          }
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     }
   }
 }

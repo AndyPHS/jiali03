@@ -72,6 +72,8 @@ const apiUrl = {
   creatCase: baseURL + 'case/add',
   // 查询案件
   selectCase: baseURL + 'case/select_case',
+  // 删除案件
+  deleteCase: baseURL + 'case/delete_case/',
   // 查询案件列表
   selectCaseList: baseURL + 'case/select_case_list',
   // 修改案件基本信息
@@ -296,7 +298,32 @@ const apiUrl = {
   // 登录
   frontLogin: baseLiHunURL + 'front_user/front_login',
   // 邮件修改密码
-  updatePasswordEmail: baseLiHunURL + 'front_user/update_password_email'
+  updatePasswordEmail: baseLiHunURL + 'front_user/update_password_email',
+
+
+  // 新增问卷类型
+  addQType: baseLiHunURL + 'qpgroup/add_q_type',
+  // 查询问卷类型
+  selectQType: baseLiHunURL + 'qpgroup/select_q_type/',
+  // 修改问卷类型
+  updateQType: baseLiHunURL + 'qpgroup/update_q_type/',
+  // 删除问卷类型
+  deleteQType: baseLiHunURL + 'qpgroup/delete_q_type/',
+  // 新增问卷类型分组
+  addQTypeGroup: baseLiHunURL + 'qpgroup/add_q_type_group',
+  // 查询问卷类型分组
+  selectQTypeGroup: baseLiHunURL + 'qpgroup/select_q_type_group/',
+  // 删除问卷类型分组
+  deleteQTypeGroup: baseLiHunURL + 'qpgroup/delete_q_type_group/',
+  // 修改问卷类型分组
+  updateQTypeGroup: baseLiHunURL + 'qpgroup/update_q_type_group/',
+
+  // 查询分类下关联
+  getQtypeQuestionaire: baseLiHunURL + 'qpgroup/get_q_type_questionaire/',
+  // 新增问卷类型分组关联
+  addQTypeGroupQp: baseLiHunURL + 'qpgroup/add_q_type_group_qp/',
+  // 删除问卷类型分组关联
+  deleteQTypeGroupQp: baseLiHunURL + 'qpgroup/delete_q_type_group_qp/',
 }
 export{
   apiUrl

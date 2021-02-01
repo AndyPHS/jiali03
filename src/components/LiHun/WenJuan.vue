@@ -35,7 +35,18 @@
             label="问卷类型"
             width="150">
             <template slot-scope="scope">
-              <span style="margin-left: 10px;">{{questionnaireType[scope.row.type]}}</span>
+              <el-select
+                v-model="scope.row.type"
+                disabled
+                placeholder="请选择">
+                <el-option
+                  v-for="item in tableData"
+                  :key="item.id"
+                  :label="item.title"
+                  :value="item.id">
+                </el-option>
+              </el-select>
+              <!-- <span style="margin-left: 10px;">{{questionnaireType[scope.row.type]}}</span> -->
             </template>
           </el-table-column>
           <el-table-column
@@ -85,10 +96,10 @@
         <el-form-item label="问卷类型" :label-width="formLabelWidth" class="mb-1">
           <el-select v-model="addMsg.type" placeholder="请选择">
               <el-option
-                v-for="(item, index) in questionnaireType"
-                :key="index"
-                :label="item"
-                :value="index">
+                v-for="item in tableData"
+                :key="item.id"
+                :label="item.title"
+                :value="item.id">
               </el-option>
             </el-select>
         </el-form-item>
@@ -118,13 +129,13 @@
         </el-form-item>
         <el-form-item label="问卷类型" :label-width="formLabelWidth" class="mb-1">
           <el-select v-model="addMsg.type" placeholder="请选择">
-              <el-option
-                v-for="(item, index) in questionnaireType"
-                :key="index"
-                :label="item"
-                :value="index">
-              </el-option>
-            </el-select>
+            <el-option
+              v-for="item in tableData"
+              :key="item.id"
+              :label="item.title"
+              :value="item.id">
+            </el-option>
+          </el-select>
         </el-form-item>
         <el-form-item label="备注" :label-width="formLabelWidth" class="mb-1">
           <el-input v-model="addMsg.description" class="w-1/2" autocomplete="off"></el-input>
@@ -168,12 +179,14 @@ import {updateQuestionnaire} from '@/api/api/requestLogin.js' // 新增问卷
 import {deleteQuestionnaire} from '@/api/api/requestLogin.js' // 删除问卷
 import {selectTree} from '@/api/api/requestLogin.js' // 查询关系
 import {copyQuestionnaire} from '@/api/api/requestLogin.js' // 复制问卷
+import {selectQType} from '@/api/api/requestLogin.js' // 获取问卷类型新接口
 
 // import {answer} from '@/api/api/requestLogin.js'
 export default {
   data () {
     return {
       questionnaireType: {}, // 问卷数组类型
+      tableData: [], // 问卷类型新数组
       QuestionnaireSelectArr: [ // 获取问卷
         {
           // "id": 3,
@@ -209,9 +222,32 @@ export default {
   },
   mounted () {
     this.getQuestionnaire() // 获取问卷类型
+    this.selectQTypeall() // 获取问卷类型
     this.getQuestionnaireSelect() // 查询问卷
   },
   methods: {
+    selectQTypeall () { // 查询问卷类型
+      var that = this
+      selectQType().then((data) => {
+        if (data.data.status_code === 200) {
+          var tableData = data.data.data
+          // for(var i=0; i<tableData.length; i++) {
+          //   if(tableData[i].type == 1) {
+          //     tableData[i].newtype = '蜗牛家事';
+          //   } else if(tableData[i].type === 2) {
+          //     tableData[i].newtype = 'sop';
+          //   }
+          // }
+          that.tableData = tableData
+        } else {
+          this.$message({
+            showClose: true,
+            message: '问卷获取失败，请联系后台人员',
+            type: 'error'
+          })
+        }
+      })
+    },
     getQuestionnaireSelect () { // 查询问卷
       questionnaireSelectAll().then((data) => {
         if (data.data.status_code === 200) {
@@ -321,7 +357,7 @@ export default {
       form.description = this.addMsg.description
       form.purpose = this.addMsg.purpose
       form.status = this.addMsg.status
-      if (this.addMsg.Ofqp.length > 0 && this.addMsg.Ofqp != null && this.addMsg.Ofqp != 'null') {
+      if (this.addMsg.Ofqp != null) {
         form.Ofqp = JSON.stringify(this.addMsg.Ofqp)
       }
       updateQuestionnaire(form).then((data) => {

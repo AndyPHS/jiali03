@@ -203,6 +203,16 @@ export const selectCaseData = params => {
     data: params
   });
 };
+// 删除案件
+export const deleteCase = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteCase + params,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
 // 查询案件列表s
 export const selectCaseList = params => {
   return axios({
@@ -1155,6 +1165,118 @@ export const selectFaIDNews = params => {
     method: "get",
     dataType: 'json',
     url: apiUrl.selectNews + '?status=' + params.status + '&faID=' + params.faID,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 新增问卷类型
+export const addQType = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addQType,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+
+// 查询问卷类型
+export const selectQType = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectQType,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改问卷类型
+export const updateQType = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateQType + localStorage.getItem('qType'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除问卷类型
+export const deleteQType = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteQType + localStorage.getItem('qType'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增问卷类型分组
+export const addQTypeGroup = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addQTypeGroup,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询问卷类型分组
+export const selectQTypeGroup = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.selectQTypeGroup + localStorage.getItem('qType'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除问卷类型分组
+export const deleteQTypeGroup = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteQTypeGroup + localStorage.getItem('qTGroup'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 修改问卷类型分组
+export const updateQTypeGroup = params => {
+  return axios({
+    method: "put",
+    dataType: 'json',
+    url: apiUrl.updateQTypeGroup + localStorage.getItem('qTGroup'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 查询分类下关联
+export const getQtypeQuestionaire = params => {
+  return axios({
+    method: "get",
+    dataType: 'json',
+    url: apiUrl.getQtypeQuestionaire + localStorage.getItem('qType'),
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 新增问卷类型分组关联
+export const addQTypeGroupQp = params => {
+  return axios({
+    method: "post",
+    dataType: 'json',
+    url: apiUrl.addQTypeGroupQp,
+    headers: {Authorization:'bearer ' + localStorage.getItem('token')},
+    data: params
+  });
+};
+// 删除问卷类型分组关联
+export const deleteQTypeGroupQp = params => {
+  return axios({
+    method: "delete",
+    dataType: 'json',
+    url: apiUrl.deleteQTypeGroupQp,
     headers: {Authorization:'bearer ' + localStorage.getItem('token')},
     data: params
   });
