@@ -594,7 +594,7 @@
           value: null,
           type: null,
           ofqpid: null,
-          ofvalue: null
+          ofvalue: ''
         },
 
         TiaoJianList: [{
@@ -624,6 +624,10 @@
           {
             title: '包含',
             value: '7'
+          },
+          {
+            title: '等于空',
+            value: '8'
           }
         ],
         whereType: { // 条件类型
@@ -633,7 +637,8 @@
           '4': '大于等于',
           '5': '小于等于',
           '6': '不等于',
-          '7': '包含'
+          '7': '包含',
+          '8': '等于空'
         },
         defaultProps: {
           children: 'child',
