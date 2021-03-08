@@ -431,6 +431,7 @@
     height: 500px;
     border-radius: 5px;
     padding: 15px;
+    overflow: scroll;
   }
   .con .common:first-of-type{
     margin-right: 10px;
