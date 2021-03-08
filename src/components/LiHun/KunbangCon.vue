@@ -2,15 +2,18 @@
   <div>
     <head-menu></head-menu>
     <div class="flex justify-end">
-      <el-button class="mx-5 my-5">
-        <router-link to="KunbangList">返回</router-link>
-      </el-button>
+      <div class="w-1/2 text-right">
+        <el-button  @click="addAc" class="">新建</el-button>
+      </div>
+      <div class="w-1/2 text-right">
+        <el-button class="mx-5 my-5">
+          <router-link to="KunbangList">返回</router-link>
+        </el-button>
+      </div>
     </div>
     <div class="w-5/6 mx-auto mb-5 flex con ">
       <div class="w-1/2 common">
-        <div class="w-full text-right">
-          <el-button  @click="addAc" class="">新建</el-button>
-        </div>
+
         <div class="flex items-center my-3">
           <div class="w-1/2">名称</div>
           <div class="w-1/2">绑定内容</div>
